@@ -21,7 +21,7 @@
       <span class="error">*<?php echo $emailError; ?></span><br><br>
     Confirm Email: <input type="email" name="confirmEmail">
       <span class="error">*<?php echo $emailError; ?></span><br><br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Sign up">
   </form>
 
   <?php
@@ -40,8 +40,9 @@
   $userTypeError = "";
 
   $db = mysqli_connect("localhost", "root", "root", "golocalapp");
-  if( !$db )
-    echo "Unable to connect to MySQL.".PHP_EOL;
+  //Check connection
+  if( mysql_errno() )
+    echo "Unable to connect to MySQL: ".mysql_error();
   else
   {
     if( $_SERVER["REQUEST_METHOD"] == "POST" )
@@ -96,9 +97,33 @@
           $passwordHashed = password_hash($_POST['password'], PASSWORD_BCRYPT);
           $email = $_POST["email"];
 
-          $query = "INSERT INTO $userType (username, password, email)
-                    VALUES ( '$username', '$passwordHashed', '$email' )";          
+          $existingUser = false;
+
+          $query = "SELECT username FROM $userType WHERE username='".$username."'";
           $result = mysqli_query($db, $query);
+          //echo "number of rows: ".mysqli_num_rows($result);
+
+          if( mysqli_num_rows($result) != 0 )
+          {
+            $existingUser = true;
+            echo "Username is already in use";
+          }
+
+          $query = "SELECT email FROM $userType WHERE email='".$email."'";
+          $result = mysqli_query($db, $query);
+
+          if( mysqli_num_rows($result) != 0 )
+          {
+            $existingUser = true;
+            echo "Email is already registered";
+          }
+
+          if( !$existingUser )
+          {
+            $query = "INSERT INTO $userType (username, password, email)
+                      VALUES ( '$username', '$passwordHashed', '$email' )";          
+            $result = mysqli_query($db, $query);
+          }
 
           $to = $email;
           $subject = "GoLocalApp email verification";
