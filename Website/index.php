@@ -39,7 +39,7 @@
   $userType = "";
   $userTypeError = "";
 
-  $db = mysqli_connect("localhost", "root", "root", "golocalapp");
+  $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
   //Check connection
   if( mysql_errno() )
     echo "Unable to connect to MySQL: ".mysql_error();
