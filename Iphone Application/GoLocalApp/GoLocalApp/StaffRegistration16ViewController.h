@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *agreeTermsSwitch;
 - (IBAction)agreeTermsValueChanged:(id)sender;
 
-- (IBAction)submitForm:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
 

@@ -73,9 +73,24 @@ $testing = false;
     );
   }
 
-  // $encoded = json_encode  ($decoded);//testing
-
   $encoded = json_encode  ($response);
+
+    /*saves the json list to a local json file*/
+          $file = 'StaffRegistrationSampleIncomingData.json';
+
+          // Open the file to get existing content
+          $current = file_get_contents($file);
+
+          // Append a json list to the file
+          $current .= $encoded;
+
+          // Write the contents back to the file
+          $writeResult = file_put_contents($file, $encoded);
+          if($writeResult === FALSE){
+            echo "error writing json list to json file";
+          }
+  
+
   header  ('Content-type: application/json');
   exit  ($encoded);
 
