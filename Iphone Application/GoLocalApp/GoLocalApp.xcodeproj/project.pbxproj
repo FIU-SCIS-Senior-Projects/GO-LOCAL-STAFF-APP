@@ -1,0 +1,697 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DE6722B41B968CC600599039 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B31B968CC600599039 /* main.m */; };
+		DE6722B71B968CC600599039 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B61B968CC600599039 /* AppDelegate.m */; };
+		DE6722BA1B968CC600599039 /* GoLocalApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B81B968CC600599039 /* GoLocalApp.xcdatamodeld */; };
+		DE6722BD1B968CC600599039 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722BC1B968CC600599039 /* LogInViewController.m */; };
+		DE6722C01B968CC600599039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE6722BE1B968CC600599039 /* Main.storyboard */; };
+		DE6722C21B968CC600599039 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE6722C11B968CC600599039 /* Images.xcassets */; };
+		DE6722C51B968CC600599039 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6722C31B968CC600599039 /* LaunchScreen.xib */; };
+		DE6722D11B968CC600599039 /* GoLocalAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722D01B968CC600599039 /* GoLocalAppTests.m */; };
+		DE6722DF1B968D4500599039 /* EmployerHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722DE1B968D4500599039 /* EmployerHomeViewController.m */; };
+		DE6722E21B968D5500599039 /* StaffHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722E11B968D5500599039 /* StaffHomeViewController.m */; };
+		DE6722E61B968D8700599039 /* PreRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722E51B968D8700599039 /* PreRegistrationViewController.m */; };
+		DE6722E91B968D9F00599039 /* StaffRegistration1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722E81B968D9F00599039 /* StaffRegistration1ViewController.m */; };
+		DE6722EC1B968DB900599039 /* EmployerRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722EB1B968DB900599039 /* EmployerRegistrationViewController.m */; };
+		DE8444A91B9F75060085DA73 /* StaffRegistration14ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8444A81B9F75060085DA73 /* StaffRegistration14ViewController.m */; };
+		DE8444AC1B9F7C970085DA73 /* StaffRegistration15ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8444AB1B9F7C970085DA73 /* StaffRegistration15ViewController.m */; };
+		DE8444AF1B9FAB570085DA73 /* StaffRegistration16ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8444AE1B9FAB570085DA73 /* StaffRegistration16ViewController.m */; };
+		DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DED49C461B97CA0A0091B986 /* ForgotPasswordViewController.m */; };
+		DEE6B8441B9941C200912541 /* StaffRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8431B9941C200912541 /* StaffRegistration2ViewController.m */; };
+		DEE6B8471B9942BF00912541 /* StaffRegistration3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8461B9942BF00912541 /* StaffRegistration3ViewController.m */; };
+		DEE6B84A1B9942CA00912541 /* StaffRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8491B9942CA00912541 /* StaffRegistration4ViewController.m */; };
+		DEE6B84D1B9942DA00912541 /* StaffRegistration5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B84C1B9942DA00912541 /* StaffRegistration5ViewController.m */; };
+		DEE6B8501B9942E500912541 /* StaffRegistration6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B84F1B9942E500912541 /* StaffRegistration6ViewController.m */; };
+		DEF0BAB91B9D56C8001C6D84 /* StaffRegistration7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BAB81B9D56C8001C6D84 /* StaffRegistration7ViewController.m */; };
+		DEF0BABC1B9D56D8001C6D84 /* StaffRegistration8ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BABB1B9D56D8001C6D84 /* StaffRegistration8ViewController.m */; };
+		DEF0BABF1B9D56E9001C6D84 /* StaffRegistration9ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BABE1B9D56E9001C6D84 /* StaffRegistration9ViewController.m */; };
+		DEF0BAC71B9E5025001C6D84 /* StaffRegistration10ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BAC61B9E5025001C6D84 /* StaffRegistration10ViewController.m */; };
+		DEF0BACA1B9E5042001C6D84 /* StaffRegistration11ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BAC91B9E5042001C6D84 /* StaffRegistration11ViewController.m */; };
+		DEF0BACD1B9E5051001C6D84 /* StaffRegistration12ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BACC1B9E5051001C6D84 /* StaffRegistration12ViewController.m */; };
+		DEF0BAD11B9EB2FA001C6D84 /* StaffRegistration13ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BAD01B9EB2FA001C6D84 /* StaffRegistration13ViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DE6722CB1B968CC600599039 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE6722A61B968CC600599039 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE6722AD1B968CC600599039;
+			remoteInfo = GoLocalApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DE6722AE1B968CC600599039 /* GoLocalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoLocalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE6722B21B968CC600599039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE6722B31B968CC600599039 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DE6722B51B968CC600599039 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DE6722B61B968CC600599039 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DE6722B91B968CC600599039 /* GoLocalApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoLocalApp.xcdatamodel; sourceTree = "<group>"; };
+		DE6722BB1B968CC600599039 /* LogInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
+		DE6722BC1B968CC600599039 /* LogInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
+		DE6722BF1B968CC600599039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DE6722C11B968CC600599039 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DE6722C41B968CC600599039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		DE6722CA1B968CC600599039 /* GoLocalAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoLocalAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE6722CF1B968CC600599039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE6722D01B968CC600599039 /* GoLocalAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoLocalAppTests.m; sourceTree = "<group>"; };
+		DE6722DD1B968D4500599039 /* EmployerHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerHomeViewController.h; sourceTree = "<group>"; };
+		DE6722DE1B968D4500599039 /* EmployerHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerHomeViewController.m; sourceTree = "<group>"; };
+		DE6722E01B968D5500599039 /* StaffHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffHomeViewController.h; sourceTree = "<group>"; };
+		DE6722E11B968D5500599039 /* StaffHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffHomeViewController.m; sourceTree = "<group>"; };
+		DE6722E41B968D8700599039 /* PreRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreRegistrationViewController.h; sourceTree = "<group>"; };
+		DE6722E51B968D8700599039 /* PreRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreRegistrationViewController.m; sourceTree = "<group>"; };
+		DE6722E71B968D9F00599039 /* StaffRegistration1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration1ViewController.h; sourceTree = "<group>"; };
+		DE6722E81B968D9F00599039 /* StaffRegistration1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration1ViewController.m; sourceTree = "<group>"; };
+		DE6722EA1B968DB900599039 /* EmployerRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistrationViewController.h; sourceTree = "<group>"; };
+		DE6722EB1B968DB900599039 /* EmployerRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistrationViewController.m; sourceTree = "<group>"; };
+		DE8444A71B9F75060085DA73 /* StaffRegistration14ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration14ViewController.h; sourceTree = "<group>"; };
+		DE8444A81B9F75060085DA73 /* StaffRegistration14ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration14ViewController.m; sourceTree = "<group>"; };
+		DE8444AA1B9F7C970085DA73 /* StaffRegistration15ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration15ViewController.h; sourceTree = "<group>"; };
+		DE8444AB1B9F7C970085DA73 /* StaffRegistration15ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration15ViewController.m; sourceTree = "<group>"; };
+		DE8444AD1B9FAB570085DA73 /* StaffRegistration16ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration16ViewController.h; sourceTree = "<group>"; };
+		DE8444AE1B9FAB570085DA73 /* StaffRegistration16ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration16ViewController.m; sourceTree = "<group>"; };
+		DE8444E91B9FE94E0085DA73 /* notes.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = notes.playground; sourceTree = "<group>"; };
+		DED49C451B97CA0A0091B986 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
+		DED49C461B97CA0A0091B986 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
+		DEE6B8421B9941C200912541 /* StaffRegistration2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration2ViewController.h; sourceTree = "<group>"; };
+		DEE6B8431B9941C200912541 /* StaffRegistration2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration2ViewController.m; sourceTree = "<group>"; };
+		DEE6B8451B9942BF00912541 /* StaffRegistration3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration3ViewController.h; sourceTree = "<group>"; };
+		DEE6B8461B9942BF00912541 /* StaffRegistration3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration3ViewController.m; sourceTree = "<group>"; };
+		DEE6B8481B9942CA00912541 /* StaffRegistration4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration4ViewController.h; sourceTree = "<group>"; };
+		DEE6B8491B9942CA00912541 /* StaffRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration4ViewController.m; sourceTree = "<group>"; };
+		DEE6B84B1B9942DA00912541 /* StaffRegistration5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration5ViewController.h; sourceTree = "<group>"; };
+		DEE6B84C1B9942DA00912541 /* StaffRegistration5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration5ViewController.m; sourceTree = "<group>"; };
+		DEE6B84E1B9942E500912541 /* StaffRegistration6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration6ViewController.h; sourceTree = "<group>"; };
+		DEE6B84F1B9942E500912541 /* StaffRegistration6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration6ViewController.m; sourceTree = "<group>"; };
+		DEF0BAB71B9D56C8001C6D84 /* StaffRegistration7ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration7ViewController.h; sourceTree = "<group>"; };
+		DEF0BAB81B9D56C8001C6D84 /* StaffRegistration7ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration7ViewController.m; sourceTree = "<group>"; };
+		DEF0BABA1B9D56D8001C6D84 /* StaffRegistration8ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration8ViewController.h; sourceTree = "<group>"; };
+		DEF0BABB1B9D56D8001C6D84 /* StaffRegistration8ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration8ViewController.m; sourceTree = "<group>"; };
+		DEF0BABD1B9D56E9001C6D84 /* StaffRegistration9ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration9ViewController.h; sourceTree = "<group>"; };
+		DEF0BABE1B9D56E9001C6D84 /* StaffRegistration9ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration9ViewController.m; sourceTree = "<group>"; };
+		DEF0BAC51B9E5025001C6D84 /* StaffRegistration10ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration10ViewController.h; sourceTree = "<group>"; };
+		DEF0BAC61B9E5025001C6D84 /* StaffRegistration10ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration10ViewController.m; sourceTree = "<group>"; };
+		DEF0BAC81B9E5042001C6D84 /* StaffRegistration11ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration11ViewController.h; sourceTree = "<group>"; };
+		DEF0BAC91B9E5042001C6D84 /* StaffRegistration11ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration11ViewController.m; sourceTree = "<group>"; };
+		DEF0BACB1B9E5051001C6D84 /* StaffRegistration12ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration12ViewController.h; sourceTree = "<group>"; };
+		DEF0BACC1B9E5051001C6D84 /* StaffRegistration12ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration12ViewController.m; sourceTree = "<group>"; };
+		DEF0BACF1B9EB2FA001C6D84 /* StaffRegistration13ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration13ViewController.h; sourceTree = "<group>"; };
+		DEF0BAD01B9EB2FA001C6D84 /* StaffRegistration13ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration13ViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DE6722AB1B968CC600599039 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE6722C71B968CC600599039 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DE6722A51B968CC600599039 = {
+			isa = PBXGroup;
+			children = (
+				DE6722B01B968CC600599039 /* GoLocalApp */,
+				DE6722CD1B968CC600599039 /* GoLocalAppTests */,
+				DE6722AF1B968CC600599039 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DE6722AF1B968CC600599039 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722AE1B968CC600599039 /* GoLocalApp.app */,
+				DE6722CA1B968CC600599039 /* GoLocalAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DE6722B01B968CC600599039 /* GoLocalApp */ = {
+			isa = PBXGroup;
+			children = (
+				DED49C481B97CA1B0091B986 /* ForgotPassword */,
+				DE6722E31B968D6900599039 /* Registration */,
+				DE6722DC1B968D2A00599039 /* Employer Home */,
+				DE6722DB1B968D1B00599039 /* Staff Home */,
+				DE6722DA1B968D0800599039 /* Log In */,
+				DE6722B51B968CC600599039 /* AppDelegate.h */,
+				DE6722B61B968CC600599039 /* AppDelegate.m */,
+				DE6722BE1B968CC600599039 /* Main.storyboard */,
+				DE6722C11B968CC600599039 /* Images.xcassets */,
+				DE6722C31B968CC600599039 /* LaunchScreen.xib */,
+				DE8444E91B9FE94E0085DA73 /* notes.playground */,
+				DE6722B81B968CC600599039 /* GoLocalApp.xcdatamodeld */,
+				DE6722B11B968CC600599039 /* Supporting Files */,
+			);
+			path = GoLocalApp;
+			sourceTree = "<group>";
+		};
+		DE6722B11B968CC600599039 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722B21B968CC600599039 /* Info.plist */,
+				DE6722B31B968CC600599039 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DE6722CD1B968CC600599039 /* GoLocalAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722D01B968CC600599039 /* GoLocalAppTests.m */,
+				DE6722CE1B968CC600599039 /* Supporting Files */,
+			);
+			path = GoLocalAppTests;
+			sourceTree = "<group>";
+		};
+		DE6722CE1B968CC600599039 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722CF1B968CC600599039 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DE6722DA1B968D0800599039 /* Log In */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722BB1B968CC600599039 /* LogInViewController.h */,
+				DE6722BC1B968CC600599039 /* LogInViewController.m */,
+			);
+			name = "Log In";
+			sourceTree = "<group>";
+		};
+		DE6722DB1B968D1B00599039 /* Staff Home */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722E01B968D5500599039 /* StaffHomeViewController.h */,
+				DE6722E11B968D5500599039 /* StaffHomeViewController.m */,
+			);
+			name = "Staff Home";
+			sourceTree = "<group>";
+		};
+		DE6722DC1B968D2A00599039 /* Employer Home */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722DD1B968D4500599039 /* EmployerHomeViewController.h */,
+				DE6722DE1B968D4500599039 /* EmployerHomeViewController.m */,
+			);
+			name = "Employer Home";
+			sourceTree = "<group>";
+		};
+		DE6722E31B968D6900599039 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722E41B968D8700599039 /* PreRegistrationViewController.h */,
+				DE6722E51B968D8700599039 /* PreRegistrationViewController.m */,
+				DE6722EE1B968DD300599039 /* Staff Registration */,
+				DE6722ED1B968DC000599039 /* Employer Registration */,
+			);
+			name = Registration;
+			sourceTree = "<group>";
+		};
+		DE6722ED1B968DC000599039 /* Employer Registration */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722EA1B968DB900599039 /* EmployerRegistrationViewController.h */,
+				DE6722EB1B968DB900599039 /* EmployerRegistrationViewController.m */,
+			);
+			name = "Employer Registration";
+			sourceTree = "<group>";
+		};
+		DE6722EE1B968DD300599039 /* Staff Registration */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722E71B968D9F00599039 /* StaffRegistration1ViewController.h */,
+				DE6722E81B968D9F00599039 /* StaffRegistration1ViewController.m */,
+				DEE6B8421B9941C200912541 /* StaffRegistration2ViewController.h */,
+				DEE6B8431B9941C200912541 /* StaffRegistration2ViewController.m */,
+				DEF0BAC01B9D6DB5001C6D84 /* DJ */,
+				DEF0BAC21B9D6DD4001C6D84 /* LiveBand */,
+				DEF0BAC11B9D6DBF001C6D84 /* CateringCompany */,
+				DEF0BAC31B9D6DEC001C6D84 /* otherService */,
+				DEF0BAB71B9D56C8001C6D84 /* StaffRegistration7ViewController.h */,
+				DEF0BAB81B9D56C8001C6D84 /* StaffRegistration7ViewController.m */,
+				DEF0BABA1B9D56D8001C6D84 /* StaffRegistration8ViewController.h */,
+				DEF0BABB1B9D56D8001C6D84 /* StaffRegistration8ViewController.m */,
+				DEF0BABD1B9D56E9001C6D84 /* StaffRegistration9ViewController.h */,
+				DEF0BABE1B9D56E9001C6D84 /* StaffRegistration9ViewController.m */,
+				DEF0BAC41B9E4FE9001C6D84 /* female only */,
+				DEF0BAC81B9E5042001C6D84 /* StaffRegistration11ViewController.h */,
+				DEF0BAC91B9E5042001C6D84 /* StaffRegistration11ViewController.m */,
+				DEF0BACE1B9EB2A6001C6D84 /* photo Uploads */,
+				DE8444A71B9F75060085DA73 /* StaffRegistration14ViewController.h */,
+				DE8444A81B9F75060085DA73 /* StaffRegistration14ViewController.m */,
+				DE8444AA1B9F7C970085DA73 /* StaffRegistration15ViewController.h */,
+				DE8444AB1B9F7C970085DA73 /* StaffRegistration15ViewController.m */,
+				DE8444B01B9FAB5C0085DA73 /* terms and agreements */,
+			);
+			name = "Staff Registration";
+			sourceTree = "<group>";
+		};
+		DE8444B01B9FAB5C0085DA73 /* terms and agreements */ = {
+			isa = PBXGroup;
+			children = (
+				DE8444AD1B9FAB570085DA73 /* StaffRegistration16ViewController.h */,
+				DE8444AE1B9FAB570085DA73 /* StaffRegistration16ViewController.m */,
+			);
+			name = "terms and agreements";
+			sourceTree = "<group>";
+		};
+		DED49C481B97CA1B0091B986 /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				DED49C451B97CA0A0091B986 /* ForgotPasswordViewController.h */,
+				DED49C461B97CA0A0091B986 /* ForgotPasswordViewController.m */,
+			);
+			name = ForgotPassword;
+			sourceTree = "<group>";
+		};
+		DEF0BAC01B9D6DB5001C6D84 /* DJ */ = {
+			isa = PBXGroup;
+			children = (
+				DEE6B8451B9942BF00912541 /* StaffRegistration3ViewController.h */,
+				DEE6B8461B9942BF00912541 /* StaffRegistration3ViewController.m */,
+			);
+			name = DJ;
+			sourceTree = "<group>";
+		};
+		DEF0BAC11B9D6DBF001C6D84 /* CateringCompany */ = {
+			isa = PBXGroup;
+			children = (
+				DEE6B84B1B9942DA00912541 /* StaffRegistration5ViewController.h */,
+				DEE6B84C1B9942DA00912541 /* StaffRegistration5ViewController.m */,
+			);
+			name = CateringCompany;
+			sourceTree = "<group>";
+		};
+		DEF0BAC21B9D6DD4001C6D84 /* LiveBand */ = {
+			isa = PBXGroup;
+			children = (
+				DEE6B8481B9942CA00912541 /* StaffRegistration4ViewController.h */,
+				DEE6B8491B9942CA00912541 /* StaffRegistration4ViewController.m */,
+			);
+			name = LiveBand;
+			sourceTree = "<group>";
+		};
+		DEF0BAC31B9D6DEC001C6D84 /* otherService */ = {
+			isa = PBXGroup;
+			children = (
+				DEE6B84E1B9942E500912541 /* StaffRegistration6ViewController.h */,
+				DEE6B84F1B9942E500912541 /* StaffRegistration6ViewController.m */,
+			);
+			name = otherService;
+			sourceTree = "<group>";
+		};
+		DEF0BAC41B9E4FE9001C6D84 /* female only */ = {
+			isa = PBXGroup;
+			children = (
+				DEF0BAC51B9E5025001C6D84 /* StaffRegistration10ViewController.h */,
+				DEF0BAC61B9E5025001C6D84 /* StaffRegistration10ViewController.m */,
+			);
+			name = "female only";
+			sourceTree = "<group>";
+		};
+		DEF0BACE1B9EB2A6001C6D84 /* photo Uploads */ = {
+			isa = PBXGroup;
+			children = (
+				DEF0BACB1B9E5051001C6D84 /* StaffRegistration12ViewController.h */,
+				DEF0BACC1B9E5051001C6D84 /* StaffRegistration12ViewController.m */,
+				DEF0BACF1B9EB2FA001C6D84 /* StaffRegistration13ViewController.h */,
+				DEF0BAD01B9EB2FA001C6D84 /* StaffRegistration13ViewController.m */,
+			);
+			name = "photo Uploads";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DE6722AD1B968CC600599039 /* GoLocalApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE6722D41B968CC600599039 /* Build configuration list for PBXNativeTarget "GoLocalApp" */;
+			buildPhases = (
+				DE6722AA1B968CC600599039 /* Sources */,
+				DE6722AB1B968CC600599039 /* Frameworks */,
+				DE6722AC1B968CC600599039 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GoLocalApp;
+			productName = GoLocalApp;
+			productReference = DE6722AE1B968CC600599039 /* GoLocalApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DE6722C91B968CC600599039 /* GoLocalAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE6722D71B968CC600599039 /* Build configuration list for PBXNativeTarget "GoLocalAppTests" */;
+			buildPhases = (
+				DE6722C61B968CC600599039 /* Sources */,
+				DE6722C71B968CC600599039 /* Frameworks */,
+				DE6722C81B968CC600599039 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE6722CC1B968CC600599039 /* PBXTargetDependency */,
+			);
+			name = GoLocalAppTests;
+			productName = GoLocalAppTests;
+			productReference = DE6722CA1B968CC600599039 /* GoLocalAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DE6722A61B968CC600599039 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = FIU;
+				TargetAttributes = {
+					DE6722AD1B968CC600599039 = {
+						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 225L9WJRG8;
+					};
+					DE6722C91B968CC600599039 = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = DE6722AD1B968CC600599039;
+					};
+				};
+			};
+			buildConfigurationList = DE6722A91B968CC600599039 /* Build configuration list for PBXProject "GoLocalApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DE6722A51B968CC600599039;
+			productRefGroup = DE6722AF1B968CC600599039 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DE6722AD1B968CC600599039 /* GoLocalApp */,
+				DE6722C91B968CC600599039 /* GoLocalAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DE6722AC1B968CC600599039 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE6722C01B968CC600599039 /* Main.storyboard in Resources */,
+				DE6722C51B968CC600599039 /* LaunchScreen.xib in Resources */,
+				DE6722C21B968CC600599039 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE6722C81B968CC600599039 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DE6722AA1B968CC600599039 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEF0BACD1B9E5051001C6D84 /* StaffRegistration12ViewController.m in Sources */,
+				DE6722DF1B968D4500599039 /* EmployerHomeViewController.m in Sources */,
+				DE6722EC1B968DB900599039 /* EmployerRegistrationViewController.m in Sources */,
+				DEF0BABC1B9D56D8001C6D84 /* StaffRegistration8ViewController.m in Sources */,
+				DEF0BAC71B9E5025001C6D84 /* StaffRegistration10ViewController.m in Sources */,
+				DE6722B71B968CC600599039 /* AppDelegate.m in Sources */,
+				DE6722E21B968D5500599039 /* StaffHomeViewController.m in Sources */,
+				DE6722E61B968D8700599039 /* PreRegistrationViewController.m in Sources */,
+				DE6722BA1B968CC600599039 /* GoLocalApp.xcdatamodeld in Sources */,
+				DEE6B8471B9942BF00912541 /* StaffRegistration3ViewController.m in Sources */,
+				DEF0BABF1B9D56E9001C6D84 /* StaffRegistration9ViewController.m in Sources */,
+				DEF0BACA1B9E5042001C6D84 /* StaffRegistration11ViewController.m in Sources */,
+				DEE6B84A1B9942CA00912541 /* StaffRegistration4ViewController.m in Sources */,
+				DE6722BD1B968CC600599039 /* LogInViewController.m in Sources */,
+				DE6722E91B968D9F00599039 /* StaffRegistration1ViewController.m in Sources */,
+				DEF0BAB91B9D56C8001C6D84 /* StaffRegistration7ViewController.m in Sources */,
+				DE8444A91B9F75060085DA73 /* StaffRegistration14ViewController.m in Sources */,
+				DEE6B84D1B9942DA00912541 /* StaffRegistration5ViewController.m in Sources */,
+				DE8444AC1B9F7C970085DA73 /* StaffRegistration15ViewController.m in Sources */,
+				DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */,
+				DE8444AF1B9FAB570085DA73 /* StaffRegistration16ViewController.m in Sources */,
+				DEF0BAD11B9EB2FA001C6D84 /* StaffRegistration13ViewController.m in Sources */,
+				DEE6B8501B9942E500912541 /* StaffRegistration6ViewController.m in Sources */,
+				DE6722B41B968CC600599039 /* main.m in Sources */,
+				DEE6B8441B9941C200912541 /* StaffRegistration2ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE6722C61B968CC600599039 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE6722D11B968CC600599039 /* GoLocalAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE6722CC1B968CC600599039 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE6722AD1B968CC600599039 /* GoLocalApp */;
+			targetProxy = DE6722CB1B968CC600599039 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DE6722BE1B968CC600599039 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE6722BF1B968CC600599039 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DE6722C31B968CC600599039 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE6722C41B968CC600599039 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DE6722D21B968CC600599039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DE6722D31B968CC600599039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DE6722D51B968CC600599039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = GoLocalApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		DE6722D61B968CC600599039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = GoLocalApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		DE6722D81B968CC600599039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GoLocalAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoLocalApp.app/GoLocalApp";
+			};
+			name = Debug;
+		};
+		DE6722D91B968CC600599039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GoLocalAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoLocalApp.app/GoLocalApp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DE6722A91B968CC600599039 /* Build configuration list for PBXProject "GoLocalApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE6722D21B968CC600599039 /* Debug */,
+				DE6722D31B968CC600599039 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE6722D41B968CC600599039 /* Build configuration list for PBXNativeTarget "GoLocalApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE6722D51B968CC600599039 /* Debug */,
+				DE6722D61B968CC600599039 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE6722D71B968CC600599039 /* Build configuration list for PBXNativeTarget "GoLocalAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE6722D81B968CC600599039 /* Debug */,
+				DE6722D91B968CC600599039 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DE6722B81B968CC600599039 /* GoLocalApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DE6722B91B968CC600599039 /* GoLocalApp.xcdatamodel */,
+			);
+			currentVersion = DE6722B91B968CC600599039 /* GoLocalApp.xcdatamodel */;
+			path = GoLocalApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = DE6722A61B968CC600599039 /* Project object */;
+}
