@@ -49,7 +49,7 @@
         $emailMatchError = "Emails do not match<br>";
       else
       {
-        $db = mysqli_connect("localhost", "root", "root", "golocalapp");
+        $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
         //Check connection
         if( mysqli_connect_errno() )
           echo "Unable to connect to MySQL: ".mysqli_connect_error();
