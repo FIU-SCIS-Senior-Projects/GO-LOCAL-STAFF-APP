@@ -49,48 +49,48 @@
         $emailMatchError = "Emails do not match<br>";
       else
       {
-        $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
+        $db = mysqli_connect("localhost", "root", "root", "golocalapp");
         //Check connection
         if( mysqli_connect_errno() )
           echo "Unable to connect to MySQL: ".mysqli_connect_error();
         else
         {
-          // $passwordHashed = password_hash($_POST['password'], PASSWORD_BCRYPT);
-          // $email = $_POST["email"];
+          $passwordHashed = password_hash($_POST['password'], PASSWORD_BCRYPT);
+          $email = $_POST["email"];
 
-          // $existingUser = false;
+          $existingUser = false;
 
-          // $query = "SELECT username FROM $userType WHERE username='".$username."'";
-          // $result = mysqli_query($db, $query);
-          // //echo "number of rows: ".mysqli_num_rows($result);
+          $query = "SELECT username FROM $userType WHERE username='".$username."'";
+          $result = mysqli_query($db, $query);
+          //echo "number of rows: ".mysqli_num_rows($result);
 
-          // if( mysqli_num_rows($result) != 0 )
-          // {
-          //   $existingUser = true;
-          //   echo "Username is already in use";
-          // }
+          if( mysqli_num_rows($result) != 0 )
+          {
+            $existingUser = true;
+            echo "Username is already in use";
+          }
 
-          // $query = "SELECT email FROM $userType WHERE email='".$email."'";
-          // $result = mysqli_query($db, $query);
+          $query = "SELECT email FROM $userType WHERE email='".$email."'";
+          $result = mysqli_query($db, $query);
 
-          // if( mysqli_num_rows($result) != 0 )
-          // {
-          //   $existingUser = true;
-          //   echo "Email is already registered";
-          // }
+          if( mysqli_num_rows($result) != 0 )
+          {
+            $existingUser = true;
+            echo "Email is already registered";
+          }
 
-          // if( !$existingUser )
-          // {
-          //   $query = "INSERT INTO $userType (username, password, email)
-          //             VALUES ( '$username', '$passwordHashed', '$email' )";          
-          //   $result = mysqli_query($db, $query);
-          // }
+          if( !$existingUser )
+          {
+            $query = "INSERT INTO $userType (username, password, email)
+                      VALUES ( '$username', '$passwordHashed', '$email' )";          
+            $result = mysqli_query($db, $query);
+          }
 
-          // $to = $email;
-          // $subject = "GoLocalApp email verification";
-          // $message = "Thanks for signing up!";
-          // $from = "noreply@golocalpromos.com";
-          // mail( $to, $subject, $message );
+          $to = $email;
+          $subject = "GoLocalApp email verification";
+          $message = "Thanks for signing up!";
+          $headers = "From:noreply@golocalpromos.com"."\r\n";
+          mail( $to, $subject, $message );
 
           if( $userType == "registeredstaff")
             header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/staff_register.php");
