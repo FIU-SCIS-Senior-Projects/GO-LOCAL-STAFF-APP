@@ -93,9 +93,9 @@
           mail( $to, $subject, $message, $headers );
 
           if( $userType == "registeredstaff")
-            header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/staff_register.php");
+            header("Location: http://45.55.208.175/GO-LOCAL-STAFF-APP/Website/staff_register.php");
           else
-            header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/company_register.php");
+            header("Location: http://45.55.208.175/GO-LOCAL-STAFF-APP/Website/company_register.php");
         }
       }
     }
