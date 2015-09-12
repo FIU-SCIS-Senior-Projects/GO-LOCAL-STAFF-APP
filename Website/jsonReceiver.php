@@ -9,20 +9,45 @@ $testing = false;
     $jsondata = file_get_contents('php://input');
     if ($jsondata) {
   
-      //cleaing json data
-      $cleanJSONData = stripslashes($jsondata);
+      //cleaning json data
+      // $cleanJSONData = stripslashes($jsondata);
 
       //converting json to php array
-      $decoded = json_decode($cleanJSONData, true);
-      
+      $decoded = json_decode($jsondata, true);
+        switch (json_last_error()) //
+        {
+          case JSON_ERROR_NONE:
+              $jsonError = ' - No errors';
+          break;
+          case JSON_ERROR_DEPTH:
+              $jsonError = ' - Maximum stack depth exceeded';
+          break;
+          case JSON_ERROR_STATE_MISMATCH:
+              $jsonError = ' - Underflow or the modes mismatch';
+          break;
+          case JSON_ERROR_CTRL_CHAR:
+              $jsonError = ' - Unexpected control character found';
+          break;
+          case JSON_ERROR_SYNTAX:
+              $jsonError = ' - Syntax error, malformed JSON';
+          break;
+          case JSON_ERROR_UTF8:
+              $jsonError = ' - Malformed UTF-8 characters, possibly incorrectly encoded';
+          break;
+          default:
+              $jsonError = ' - Unknown error';
+          break;
+      }
+
       //not a valid json value found
       if (is_null ($decoded)) 
       {
         $response['status'] = array  (
           'type' => 'error',
           'value' => 'Invalid JSON value found',
+          'error' => $jsonError
         );
-        $response['request'] = $jsondata;
+        // $response['request'] = $jsondata;
       }
       else  //valid json values found
       {
@@ -48,49 +73,28 @@ $testing = false;
     }
 
 
-    if($testing)
-    {
-      echo "<p>POST data:</p>";//testing  
-      print_r($_SERVER);//testing
-      echo "<p></p>";//testing
-      echo "<p>POST body:</p>";//testing
-      echo $jsondata;//testing
-      echo "<p></p>";//testing
-      echo "<p>POST body clean data</p>";//testing
-      echo $cleanJSONData;
-      echo "<p></p>";
-      echo "<p>JSON data decoded</p>";//testing
-      print_r($decoded);
-      echo "<p></p>";
-    }
+    // if($testing)
+    // {
+    //   echo "<p>POST data:</p>";//testing  
+    //   print_r($_SERVER);//testing
+    //   echo "<p></p>";//testing
+    //   echo "<p>POST body:</p>";//testing
+    //   echo $jsondata;//testing
+    //   echo "<p></p>";
+    //   echo "<p>JSON data decoded</p>";//testing
+    //   print_r($decoded);
+    //   echo "<p></p>";
+    // }
 
   }
   else {
-    $response['sta
-    tus'] = array  (
-      'type' => 'error',
-      'value' => 'No JSON value set',
+    $response['status'] = array (
+        'type' => 'error',
+        'value' => 'No JSON value set',
     );
   }
 
   $encoded = json_encode  ($response);
-
-    /*saves the json list to a local json file*/
-          $file = 'StaffRegistrationSampleIncomingData.json';
-
-          // Open the file to get existing content
-          $current = file_get_contents($file);
-
-          // Append a json list to the file
-          $current .= $encoded;
-
-          // Write the contents back to the file
-          $writeResult = file_put_contents($file, $encoded);
-          if($writeResult === FALSE){
-            echo "error writing json list to json file";
-          }
-  
-
   header  ('Content-type: application/json');
   exit  ($encoded);
 

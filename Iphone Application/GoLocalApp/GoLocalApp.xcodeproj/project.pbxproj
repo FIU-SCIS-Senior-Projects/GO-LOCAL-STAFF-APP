@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE1D82E11BA33469005671DB /* ToggleAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */; };
 		DE6722B41B968CC600599039 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B31B968CC600599039 /* main.m */; };
 		DE6722B71B968CC600599039 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B61B968CC600599039 /* AppDelegate.m */; };
 		DE6722BA1B968CC600599039 /* GoLocalApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B81B968CC600599039 /* GoLocalApp.xcdatamodeld */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE1D82DF1BA33469005671DB /* ToggleAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleAccountViewController.h; sourceTree = "<group>"; };
+		DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleAccountViewController.m; sourceTree = "<group>"; };
 		DE6722AE1B968CC600599039 /* GoLocalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoLocalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE6722B21B968CC600599039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE6722B31B968CC600599039 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 			children = (
 				DE6722BB1B968CC600599039 /* LogInViewController.h */,
 				DE6722BC1B968CC600599039 /* LogInViewController.m */,
+				DE1D82DF1BA33469005671DB /* ToggleAccountViewController.h */,
+				DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */,
 			);
 			name = "Log In";
 			sourceTree = "<group>";
@@ -442,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE1D82E11BA33469005671DB /* ToggleAccountViewController.m in Sources */,
 				DEF0BACD1B9E5051001C6D84 /* StaffRegistration12ViewController.m in Sources */,
 				DE6722DF1B968D4500599039 /* EmployerHomeViewController.m in Sources */,
 				DE6722EC1B968DB900599039 /* EmployerRegistrationViewController.m in Sources */,

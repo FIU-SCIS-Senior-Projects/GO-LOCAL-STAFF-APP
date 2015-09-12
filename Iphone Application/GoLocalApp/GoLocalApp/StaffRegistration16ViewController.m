@@ -178,145 +178,168 @@ isModel, isBrandAmbassador, isFlyerDistributor, isFieldMarketingManager, isDance
         NSString *serverAddress = @"http://45.55.208.175/Website/jsonReceiver.php";//hard coding website
     
         /*** preparing data to be sent ***/
-//        //data sending
-//        NSString *DBfirstName           = self.firstName;
-//        NSString *DBmiddleName          = self.middleName;
-//        NSString *DBlastName            = self.lastName ;
-//        NSString *DBnickName            = self.nickName ;
-//        NSString *DBemail               = self.email ;
-//        NSString *DBpassword            = self.password ;
-//        NSString *DBcellphone           = self.cellphone ;
-//        NSString *DBaddress                     = self.address ;
-//        NSString *DBcity                        = self.city ;
-//        NSString *DBzipcode                     = self.zipcode ;
-//        NSString *DBstateSelected               = self.stateSelected ;
-//        NSString *DBdjSelected                  = [NSString stringWithFormat:@"%d",self.djSelected];
-//        NSString *DBliveBandSelected            = [NSString stringWithFormat:@"%d",self.liveBandSelected];
-//        NSString *DBcateringCompanySelected     = [NSString stringWithFormat:@"%d",self.cateringCompanySelected];
-//        NSString *DBotherServicesSelected       = [NSString stringWithFormat:@"%d",self.otherServicesSelected];
-//        NSString *DBdjDescription       = self.djDescription ;
-//        NSString *DBdjWebsite           = self.djWebsite ;
-//        NSString *DBdjSocialMedia       = self.djSocialMedia ;
-//        NSString *DBliveBandDescription     = self.liveBandDescription ;
-//        NSString *DBliveBandWebsite         = self.liveBandWebsite ;
-//        NSString *DBliveBandSocialMedia     = self.liveBandSocialMedia ;
-//        NSString *DBcateringCompanyDescription      = self.cateringCompanyDescription ;
-//        NSString *DBcateringCompanyWebsite          = self.cateringCompanyWebsite ;
-//        NSString *DBcateringCompanySocialMedia      = self.cateringCompanySocialMedia ;
-//        NSString *DBotherServicesDescription    = self.otherServicesDescription ;
-//        NSString *DBotherServicesWebsite        = self.otherServicesWebsite ;
-//        NSString *DBotherServicesSocialMedia    = self.otherServicesSocialMedia ;
-//        NSString *DBdob                                 = self.dob ;
-//        NSString *DBgender                              = [NSString stringWithFormat:@"%d",self.gender];
-//        NSString *DBlanguages                           = self.languages ;
-//        NSString *DBethnicity       = [NSString stringWithFormat:@"%d",self.ethnicity];
-//        NSString *DBtypeOfLicense   = [NSString stringWithFormat:@"%d",self.typeOfLicense];
-//        NSString *DBheight              = self.height ;
-//        NSString *DBweight              = self.weight ;
-//        NSString *DBhairColor           = self.hairColor ;
-//        NSString *DBeyeColor            = self.eyeColor ;
-//        NSString *DBpantSize            = self.pantSize ;
-//        NSString *DBshoeSize            = self.shoeSize ;
-//        NSString *DBtshirtSize          = self.tshirtSize ;
-//        NSString *DBdesiredHourlyRate   = self.desiredHourlyRate ;
-//        NSString *DBdesiredWeeklyRate   = self.desiredWeeklyRate ;
-//        NSString *DBtattoos             = [NSString stringWithFormat:@"%d",self.tattoos];
-//        NSString *DBpiercings           = [NSString stringWithFormat:@"%d",self.piercings];
-////        NSString *DBchestSize       = self.chestSize ;
-////        NSString *DBwaistSize       = self.waistSize ;
-////        NSString *DBhipsSize        = self.hipsSize ;
-////        NSString *DBdressSize       = self.dressSize ;
-////        NSString *DBtypeCorporated          = [NSString stringWithFormat:@"%d",self.typeCorporated];
-////        NSString *DBssn                     = self.ssn ;
-////        NSString *DBein                     = self.ein ;
-////        NSString *DBbusinessName            = self.businessName ;
-////        NSString *DBcitiesWillingToWork     = self.citiesWillingToWork ;
-////        NSString *DBtravel                  = [NSString stringWithFormat:@"%d",self.travel];
-////        NSString *DBprofessionalInsurance   = [NSString stringWithFormat:@"%d",self.professionalInsurance];
-////        NSString *DBdirectDepositDesired        = [NSString stringWithFormat:@"%d",self.directDepositDesired];
-
     
-        //converting items to be send as Dictionary items
-        NSDictionary *tmp = [[NSDictionary alloc] initWithObjectsAndKeys:
-             self.firstName,  @"firstName",
-             self.middleName, @"middleName",
-             self.lastName, @"lastName",
-             self.nickName, @"nickName",
-             self.email, @"email",
-             self.password, @"password",
-             self.cellphone, @"cellphone",
-                             
-             self.city, @"city",
-             self.zipcode, @"zipcode",
-             self.stateSelected, @"stateSelected",
-             [NSString stringWithFormat:@"%d",self.djSelected], @"djSelected",
-             [NSString stringWithFormat:@"%d",self.liveBandSelected], @"liveBandSelected",
-             [NSString stringWithFormat:@"%d",self.cateringCompanySelected], @"cateringCompanySelected",
-             [NSString stringWithFormat:@"%d",self.otherServicesSelected], @"otherServicesSelected",
+        NSDictionary *tmp = [[NSDictionary alloc] initWithObjectsAndKeys: //converting items to be send as Dictionary items
+         @"Luis",  @"firstName",
+         @"Andres", @"middleName",
+         @"Castillo", @"lastName",
+         @"Lu", @"nickName",
+         @"luoandre29@hotmail.com", @"email",
+         @"2987Andres", @"password",
+         @"3056099250", @"cellphone",
+         
+         @"Miami", @"city",
+         @"33016", @"zipcode",
+         @"FL", @"stateSelected",
+         @"0", @"djSelected",
+         @"0", @"liveBandSelected",
+         @"0", @"cateringCompanySelected",
+         @"0", @"otherServicesSelected",
+         
+         
+         @"",  @"djDescription",
+         @"", @"djWebsite",
+         @"", @"djSocialMedia",
+         
+         @"", @"liveBandDescription",
+         @"", @"liveBandWebsite",
+         @"", @"liveBandSocialMedia",
+         
+         @"", @"cateringCompanyDescription",
+         @"", @"cateringCompanyWebsite",
+         @"", @"cateringCompanySocialMedia",
+         
+         @"", @"otherServicesDescription",
+         @"", @"otherServicesWebsite",
+         @"", @"otherServicesSocialMedia",
+         
+         @"11/29/1987", @"dob",
+         @"male", @"gender",
+         @"english,spanish", @"languages",
+         
+         @"3", @"ethnicity",
+         @"0", @"typeOfLicense",
+         
+         
+         @"5'1", @"height",
+         @"150", @"weight",
+         @"black", @"hairColor",
+         @"brown", @"eyeColor",
+         @"30", @"pantSize",
+         @"8", @"shoeSize",
+         @"M", @"tshirtSize",
+         @"30", @"desiredHourlyRate",
+         @"3000", @"desiredWeeklyRate",
+         @"0", @"tattoos",
+         @"0", @"piercings",
+         
+         @"", @"chestSize",
+         @"", @"waistSize",
+         @"", @"hipsSize",
+         @"", @"dressSize",
+         
+         @"0", @"typeCorporated",
+         @"898347922", @"ssn",
+         @"", @"ein",
+         @"", @"businessName",
+         @"miami, kendall", @"citiesWillingToWork",
+         @"0", @"travel",
+         @"0", @"professionalInsurance",
+         
+         @"1", @"directDepositDesired",
+         @"898847731032837", @"DirectDepositRoutingNumber",
+         @"99899837782982333", @"DirectDepositAccountNumber",
+         
+         @"0", @"isModel",
+         @"0", @"isBrandAmbassador",
+         @"0", @"isFlyerDistributor",
+         @"0", @"isFieldMarketingManager",
+         @"0", @"isDancer",
+         @"0", @"iswaiterOrWaitress",
+         @"0", @"isProductionAssistant",
+         @"0", @"isSalesExecutive",
+         nil];
 
-                             
-             self.djDescription,  @"djDescription",
-             self.djWebsite, @"djWebsite",
-             self.djSocialMedia, @"djSocialMedia",
-                             
-             self.liveBandDescription, @"liveBandDescription",
-             self.liveBandWebsite, @"liveBandWebsite",
-             self.liveBandSocialMedia, @"liveBandSocialMedia",
-                             
-             self.cateringCompanyDescription, @"cateringCompanyDescription",
-             self.cateringCompanyWebsite, @"cateringCompanyWebsite",
-             self.cateringCompanySocialMedia, @"cateringCompanySocialMedia",
-                             
-             self.otherServicesDescription, @"otherServicesDescription",
-             self.otherServicesWebsite, @"otherServicesWebsite",
-             self.otherServicesSocialMedia, @"otherServicesSocialMedia",
-                             
-            self.dob, @"dob",
-            [NSString stringWithFormat:@"%d",self.gender], @"gender",
-            self.languages, @"languages",
-                             
-             [NSString stringWithFormat:@"%d",self.ethnicity], @"ethnicity",
-             [NSString stringWithFormat:@"%d",self.typeOfLicense], @"typeOfLicense",
-
-                             
-             self.height, @"height",
-             self.weight, @"weight",
-             self.hairColor, @"hairColor",
-             self.eyeColor, @"eyeColor",
-             self.pantSize, @"pantSize",
-             self.shoeSize, @"shoeSize",
-             self.tshirtSize, @"tshirtSize",
-             self.desiredHourlyRate, @"desiredHourlyRate",
-             self.desiredWeeklyRate, @"desiredWeeklyRate",
-             [NSString stringWithFormat:@"%d",self.tattoos], @"firstName",
-             [NSString stringWithFormat:@"%d",self.piercings], @"middleName",
-                             
-             self.chestSize, @"chestSize",
-             self.waistSize, @"waistSize",
-             self.hipsSize, @"hipsSize",
-             self.dressSize, @"dressSize",
-                             
-             [NSString stringWithFormat:@"%d",self.typeCorporated], @"typeCorporated",
-             self.ssn, @"ssn",
-             self.ein, @"ein",
-             self.businessName, @"businessName",
-             self.citiesWillingToWork, @"citiesWillingToWork",
-             [NSString stringWithFormat:@"%d",self.travel], @"travel",
-             [NSString stringWithFormat:@"%d",self.professionalInsurance], @"professionalInsurance",
-                             
-             [NSString stringWithFormat:@"%d",self.directDepositDesired], @"directDepositDesired",
-             self.DirectDepositRoutingNumber, @"DirectDepositRoutingNumber",
-             self.DirectDepositAccountNumber, @"DirectDepositAccountNumber",
-                             
-             [NSString stringWithFormat:@"%d",self.isModel], @"isModel",
-             [NSString stringWithFormat:@"%d",self.isBrandAmbassador], @"isBrandAmbassador",
-             [NSString stringWithFormat:@"%d",self.isFlyerDistributor], @"isFlyerDistributor",
-             [NSString stringWithFormat:@"%d",self.isFieldMarketingManager], @"isFieldMarketingManager",
-             [NSString stringWithFormat:@"%d",self.isDancer], @"isDancer",
-             [NSString stringWithFormat:@"%d",self.iswaiterOrWaitress], @"iswaiterOrWaitress",
-             [NSString stringWithFormat:@"%d",self.isProductionAssistant], @"isProductionAssistant",
-             [NSString stringWithFormat:@"%d",self.isSalesExecutive], @"isSalesExecutive",
-             nil];
+//        NSDictionary *tmp = [[NSDictionary alloc] initWithObjectsAndKeys: //converting items to be send as Dictionary items
+//             self.firstName,  @"firstName",
+//             self.middleName, @"middleName",
+//             self.lastName, @"lastName",
+//             self.nickName, @"nickName",
+//             self.email, @"email",
+//             self.password, @"password",
+//             self.cellphone, @"cellphone",
+//                             
+//             self.city, @"city",
+//             self.zipcode, @"zipcode",
+//             self.stateSelected, @"stateSelected",
+//             [NSString stringWithFormat:@"%d",self.djSelected], @"djSelected",
+//             [NSString stringWithFormat:@"%d",self.liveBandSelected], @"liveBandSelected",
+//             [NSString stringWithFormat:@"%d",self.cateringCompanySelected], @"cateringCompanySelected",
+//             [NSString stringWithFormat:@"%d",self.otherServicesSelected], @"otherServicesSelected",
+//
+//                             
+//             self.djDescription,  @"djDescription",
+//             self.djWebsite, @"djWebsite",
+//             self.djSocialMedia, @"djSocialMedia",
+//                             
+//             self.liveBandDescription, @"liveBandDescription",
+//             self.liveBandWebsite, @"liveBandWebsite",
+//             self.liveBandSocialMedia, @"liveBandSocialMedia",
+//                             
+//             self.cateringCompanyDescription, @"cateringCompanyDescription",
+//             self.cateringCompanyWebsite, @"cateringCompanyWebsite",
+//             self.cateringCompanySocialMedia, @"cateringCompanySocialMedia",
+//                             
+//             self.otherServicesDescription, @"otherServicesDescription",
+//             self.otherServicesWebsite, @"otherServicesWebsite",
+//             self.otherServicesSocialMedia, @"otherServicesSocialMedia",
+//                             
+//            self.dob, @"dob",
+//            [NSString stringWithFormat:@"%d",self.gender], @"gender",
+//            self.languages, @"languages",
+//                             
+//             [NSString stringWithFormat:@"%d",self.ethnicity], @"ethnicity",
+//             [NSString stringWithFormat:@"%d",self.typeOfLicense], @"typeOfLicense",
+//
+//                             
+//             self.height, @"height",
+//             self.weight, @"weight",
+//             self.hairColor, @"hairColor",
+//             self.eyeColor, @"eyeColor",
+//             self.pantSize, @"pantSize",
+//             self.shoeSize, @"shoeSize",
+//             self.tshirtSize, @"tshirtSize",
+//             self.desiredHourlyRate, @"desiredHourlyRate",
+//             self.desiredWeeklyRate, @"desiredWeeklyRate",
+//             [NSString stringWithFormat:@"%d",self.tattoos], @"firstName",
+//             [NSString stringWithFormat:@"%d",self.piercings], @"middleName",
+//                             
+//             self.chestSize, @"chestSize",
+//             self.waistSize, @"waistSize",
+//             self.hipsSize, @"hipsSize",
+//             self.dressSize, @"dressSize",
+//                             
+//             [NSString stringWithFormat:@"%d",self.typeCorporated], @"typeCorporated",
+//             self.ssn, @"ssn",
+//             self.ein, @"ein",
+//             self.businessName, @"businessName",
+//             self.citiesWillingToWork, @"citiesWillingToWork",
+//             [NSString stringWithFormat:@"%d",self.travel], @"travel",
+//             [NSString stringWithFormat:@"%d",self.professionalInsurance], @"professionalInsurance",
+//                             
+//             [NSString stringWithFormat:@"%d",self.directDepositDesired], @"directDepositDesired",
+//             self.DirectDepositRoutingNumber, @"DirectDepositRoutingNumber",
+//             self.DirectDepositAccountNumber, @"DirectDepositAccountNumber",
+//                             
+//             [NSString stringWithFormat:@"%d",self.isModel], @"isModel",
+//             [NSString stringWithFormat:@"%d",self.isBrandAmbassador], @"isBrandAmbassador",
+//             [NSString stringWithFormat:@"%d",self.isFlyerDistributor], @"isFlyerDistributor",
+//             [NSString stringWithFormat:@"%d",self.isFieldMarketingManager], @"isFieldMarketingManager",
+//             [NSString stringWithFormat:@"%d",self.isDancer], @"isDancer",
+//             [NSString stringWithFormat:@"%d",self.iswaiterOrWaitress], @"iswaiterOrWaitress",
+//             [NSString stringWithFormat:@"%d",self.isProductionAssistant], @"isProductionAssistant",
+//             [NSString stringWithFormat:@"%d",self.isSalesExecutive], @"isSalesExecutive",
+//             nil];
     
         /*** Sending data ***/
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
