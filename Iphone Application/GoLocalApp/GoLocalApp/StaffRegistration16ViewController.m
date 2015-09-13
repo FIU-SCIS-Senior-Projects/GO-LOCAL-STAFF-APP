@@ -33,7 +33,7 @@ isModel, isBrandAmbassador, isFlyerDistributor, isFieldMarketingManager, isDance
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self testDataPassed];//testing
+//    [self testDataPassed];//testing
     
     [self sendDataToServer];
 }//eom

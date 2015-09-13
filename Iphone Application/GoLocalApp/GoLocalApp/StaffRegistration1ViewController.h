@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *middleName;
 @property (weak, nonatomic) IBOutlet UITextField *lastName;
 @property (weak, nonatomic) IBOutlet UITextField *nickName;
+@property (weak, nonatomic) IBOutlet UITextField *username;
 
 @property (weak, nonatomic) IBOutlet UITextField *email;
 @property (weak, nonatomic) IBOutlet UITextField *confirmEmail;     /*DO NOT SAVE TO DB*/

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Sep 07, 2015 at 06:52 AM
+-- Generation Time: Sep 10, 2015 at 03:19 AM
 -- Server version: 5.5.41-log
 -- PHP Version: 5.6.8
 
@@ -37,14 +37,9 @@ CREATE TABLE IF NOT EXISTS `company` (
   `termsAndAgreements` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `company`
---
-
-INSERT INTO `company` (`companyID`, `companyName`, `typeOfCompany`, `phoneNumber`, `address`, `insurance`, `insuranceDocuments`, `termsAndAgreements`) VALUES
-(0, 'WILLY LLC', 'Software', '786-294-8736', '1 MS way, Redmond, Washington', 1, '', 'I agree');
-
 -- --------------------------------------------------------
+
+
 
 --
 -- Table structure for table `company_job`
@@ -133,17 +128,12 @@ CREATE TABLE IF NOT EXISTS `people` (
 --
 
 CREATE TABLE IF NOT EXISTS `registeredcompany` (
-  `companyID` int(11) NOT NULL,
+`companyID` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `registeredcompany`
---
-
-INSERT INTO `registeredcompany` (`companyID`, `username`, `password`) VALUES
-(0, 'dummy', '123');
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `emailValidated` int(11) DEFAULT '0'
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -152,10 +142,12 @@ INSERT INTO `registeredcompany` (`companyID`, `username`, `password`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `registeredstaff` (
-  `peopleID` int(11) NOT NULL,
+`peopleID` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `emailValidated` int(11) DEFAULT '0'
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -208,6 +200,23 @@ ALTER TABLE `registeredstaff`
 ALTER TABLE `stafftype`
  ADD PRIMARY KEY (`staffID`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `registeredcompany`
+--
+ALTER TABLE `registeredcompany`
+MODIFY `companyID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `registeredstaff`
+--
+ALTER TABLE `registeredstaff`
+MODIFY `peopleID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
