@@ -5,9 +5,9 @@
 if [ $1 ]
 then
   git pull
-  git add .
+  git add --all
   git commit -m "$*"
-  git push
+  git push -u origin master
   # echo "valid args"
   # cmdvar=1
 else  

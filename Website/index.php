@@ -18,6 +18,7 @@
   $emailMatchError = "";
   $userType = "";
   $userTypeError = "";
+  $existingUser = false;
 
   if( $_SERVER["REQUEST_METHOD"] == "POST" )
   {
@@ -58,11 +59,8 @@
           $passwordHashed = password_hash($_POST['password'], PASSWORD_BCRYPT);
           $email = $_POST["email"];
 
-          $existingUser = false;
-
           $query = "SELECT username FROM $userType WHERE username='".$username."'";
           $result = mysqli_query($db, $query);
-          //echo "number of rows: ".mysqli_num_rows($result);
 
           if( mysqli_num_rows($result) != 0 )
           {
@@ -84,18 +82,21 @@
             $query = "INSERT INTO $userType (username, password, email)
                       VALUES ( '$username', '$passwordHashed', '$email' )";          
             $result = mysqli_query($db, $query);
+
+            $to = $email;
+            $subject = "GoLocalApp email verification";
+            $message = "Thanks for signing up!";
+            $headers = "From:noreply@golocalpromos.com"."\r\n";
+            mail( $to, $subject, $message, $headers );
+
+
+            if( $userType == "registeredstaff")
+	      header("Location: http://45.55.208.175/Website/staff_register.php");
+            else
+              header("Location: http://45.55.208.175/Website/company_register.php");
+
+
           }
-
-          $to = $email;
-          $subject = "GoLocalApp email verification";
-          $message = "Thanks for signing up!";
-          $headers = "From:noreply@golocalpromos.com"."\r\n";
-          mail( $to, $subject, $message, $headers );
-
-          if( $userType == "registeredstaff")
-            header("Location: http://45.55.208.175/GO-LOCAL-STAFF-APP/Website/staff_register.php");
-          else
-            header("Location: http://45.55.208.175/GO-LOCAL-STAFF-APP/Website/company_register.php");
         }
       }
     }
