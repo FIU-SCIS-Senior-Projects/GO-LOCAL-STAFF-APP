@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Sep 10, 2015 at 03:19 AM
+-- Generation Time: Sep 14, 2015 at 09:53 PM
 -- Server version: 5.5.41-log
 -- PHP Version: 5.6.8
 
@@ -38,8 +38,6 @@ CREATE TABLE IF NOT EXISTS `company` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
-
-
 
 --
 -- Table structure for table `company_job`
@@ -113,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `people` (
   `piercings` int(11) NOT NULL,
   `desiredPayRate` int(11) NOT NULL,
   `ssnOrEin` varchar(30) NOT NULL,
+  `businessName` varchar(255) DEFAULT NULL,
   `travel` int(11) NOT NULL,
   `insurance` int(11) NOT NULL,
   `insuranceDocuments` varchar(30) NOT NULL,
@@ -132,6 +131,7 @@ CREATE TABLE IF NOT EXISTS `registeredcompany` (
   `username` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `hash` varchar(255) DEFAULT NULL,
   `emailValidated` int(11) DEFAULT '0'
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -146,8 +146,9 @@ CREATE TABLE IF NOT EXISTS `registeredstaff` (
   `username` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `hash` varchar(255) DEFAULT NULL,
   `emailValidated` int(11) DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 -- --------------------------------------------------------
 
@@ -213,10 +214,7 @@ MODIFY `companyID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `registeredstaff`
 --
 ALTER TABLE `registeredstaff`
-MODIFY `peopleID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `peopleID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-
