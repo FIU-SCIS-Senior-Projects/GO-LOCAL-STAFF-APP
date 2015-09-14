@@ -50,7 +50,7 @@
         $emailMatchError = "Emails do not match<br>";
       else
       {
-        $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
+        $db = mysqli_connect("localhost", "root", "root", "golocalapp");
         //Check connection
         if( mysqli_connect_errno() )
           echo "Unable to connect to MySQL: ".mysqli_connect_error();
@@ -80,28 +80,30 @@
           if( !$existingUser )
           {
             $hash = md5( rand(0, 1000) );
-            $query = "INSERT INTO ".mysqli_real_escape_string($db, $userType)." (username, password, email, hash)
+            $query = "INSERT INTO ".mysqli_real_escape_string($db, $userType). " (username, password, email, hash)
                       VALUES (
-                        ".mysqli_real_escape_string($db, $username).",
-                        ".mysqli_real_escape_string($db, $passwordHashed).",
-                        ".mysqli_real_escape_string($db, $email).",
-                        ".mysqli_real_escape_string($db, $hash).")";          
+                        '".mysqli_real_escape_string($db, $username)."',
+                        '".mysqli_real_escape_string($db, $passwordHashed)."',
+                        '".mysqli_real_escape_string($db, $email)."',
+                        '".mysqli_real_escape_string($db, $hash)."');";  
             $result = mysqli_query($db, $query);
 
             $to = $email;
             $subject = "GoLocalApp email verification";
+            //message to be sent to verify the email address.
             $message = "            
  
               Thanks for signing up!
               Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
                
               ------------------------
-              Username: '.$name.'
-              Password: '.$password.'
+              Username: ".$username."
               ------------------------
                
               Please click this link to activate your account:
-              http://www.45.55.208.175.com/Website/verify.php?email='.$email.'&hash='.$hash.'
+              http://www.45.55.208.175.com/Website/verify.php?type=".$userType."&email=".$email."&hash=".$hash."
+
+              or http://localhost/GO-LOCAL-STAFF-APP/website/verify.php?type=".$userType."&email=".$email."&hash=".$hash."
                
               ";
 
@@ -109,9 +111,15 @@
             mail( $to, $subject, $message, $headers );
 
             if( $userType == "registeredstaff")
-              header("Location: http://45.55.208.175/Website/staff_register.php");
+            {
+              //header("Location: http://45.55.208.175/Website/staff_register.php");
+              header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/staff_register.php");
+            }
             else
-              header("Location: http://45.55.208.175/Website/company_register.php");
+            {
+              //header("Location: http://45.55.208.175/Website/company_register.php");
+              header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/company_register.php");
+            }
 
           }
         }
