@@ -79,22 +79,39 @@
 
           if( !$existingUser )
           {
-            $query = "INSERT INTO $userType (username, password, email)
-                      VALUES ( '$username', '$passwordHashed', '$email' )";          
+            $hash = md5( rand(0, 1000) );
+            $query = "INSERT INTO ".mysqli_real_escape_string($db, $userType)." (username, password, email, hash)
+                      VALUES (
+                        ".mysqli_real_escape_string($db, $username).",
+                        ".mysqli_real_escape_string($db, $passwordHashed).",
+                        ".mysqli_real_escape_string($db, $email).",
+                        ".mysqli_real_escape_string($db, $hash).")";          
             $result = mysqli_query($db, $query);
 
             $to = $email;
             $subject = "GoLocalApp email verification";
-            $message = "Thanks for signing up!";
+            $message = "            
+ 
+              Thanks for signing up!
+              Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+               
+              ------------------------
+              Username: '.$name.'
+              Password: '.$password.'
+              ------------------------
+               
+              Please click this link to activate your account:
+              http://www.45.55.208.175.com/Website/verify.php?email='.$email.'&hash='.$hash.'
+               
+              ";
+
             $headers = "From:noreply@golocalpromos.com"."\r\n";
             mail( $to, $subject, $message, $headers );
 
-
             if( $userType == "registeredstaff")
-	      header("Location: http://45.55.208.175/Website/staff_register.php");
+              header("Location: http://45.55.208.175/Website/staff_register.php");
             else
               header("Location: http://45.55.208.175/Website/company_register.php");
-
 
           }
         }
