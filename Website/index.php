@@ -101,11 +101,7 @@
               ------------------------
                
               Please click this link to activate your account:
-              http://www.45.55.208.175/Website/verify.php?type=".$userType."&email=".$email."&hash=".$hash."
-
-              or 
-
-              http://localhost/GO-LOCAL-STAFF-APP/website/verify.php?type=".$userType."&email=".$email."&hash=".$hash."
+              http://45.55.208.175/Website/verify.php?type=".$userType."&email=".$email."&hash=".$hash."
                
               ";
 
