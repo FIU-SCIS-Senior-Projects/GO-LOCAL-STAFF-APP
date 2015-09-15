@@ -2,7 +2,7 @@
 
 function authenticateEmail( $type, $email, $hash )
 {
-	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "Unable to connect to MySQL: ".mysqli_connect_error();
@@ -16,26 +16,28 @@ function authenticateEmail( $type, $email, $hash )
 			 AND hash='".$hashRevised."' 
 			 AND emailValidated='0'";
 
-	if( !$result = mysqli_query( $db, $query ) )
-		echo "BAD QUERY!";
-
-	$rows = mysqli_num_rows($result);
-
-	if( $rows > 0 )
+	if( $result = mysqli_query( $db, $query ) )
 	{
-		$query = "UPDATE ".$userType." 
-				  SET emailValidated = 1 
-				  WHERE email='".$emailRevised."' 
-				  AND hash='".$hashRevised."' 
-				  AND emailValidated='0'";
+		$rows = mysqli_num_rows($result);
 
-		$result = mysqli_query( $db, $query );
-		echo "Your email has been verified!";
+		if( $rows > 0 )
+		{
+			$query = "UPDATE ".$userType." 
+					  SET emailValidated = 1 
+					  WHERE email='".$emailRevised."' 
+					  AND hash='".$hashRevised."' 
+					  AND emailValidated='0'";
+
+			$result = mysqli_query( $db, $query );
+			echo "Your email has been verified!";
+		}
+		else
+		{
+			echo "We're sorry but we weren't able to verify your email";
+		}
 	}
 	else
-	{
-		echo "We're sorry but we weren't able to verify your email";
-	}
+		echo "Unable to execute the query";
 }
 
 ?>
