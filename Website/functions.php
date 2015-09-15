@@ -2,7 +2,7 @@
 
 function authenticateEmail( $type, $email, $hash )
 {
-	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "Unable to connect to MySQL: ".mysqli_connect_error();
