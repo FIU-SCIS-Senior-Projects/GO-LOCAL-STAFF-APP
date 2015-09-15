@@ -7,19 +7,21 @@ function authenticateEmail( $type, $email, $hash )
 	if( mysqli_connect_errno() )
 		echo "Unable to connect to MySQL: ".mysqli_connect_error();
 
-	$userType = mysqli_real_escape_string($type);
-	$emailRevised = mysqli_real_escape_string($email);
-	$hashRevised = mysqli_real_escape_string($hash);
+	$userType = mysqli_real_escape_string($db, $type);
+	$emailRevised = mysqli_real_escape_string($db, $email);
+	$hashRevised = mysqli_real_escape_string($db, $hash);
 
-	$query = "SELECT email, hash, emailValidated
-			  FROM ".$userType." 
-			  WHERE email='".$emailRevised."'
-			  AND hash='".$hashRevised."'
-			  AND emailValidated='0'";
+	$query = "SELECT email, hash, emailValidated FROM ".$userType." 
+			 WHERE email='".$emailRevised."' 
+			 AND hash='".$hashRevised."' 
+			 AND emailValidated='0'";
 
-	$result = mysqli_query( $db, $query )
+	if( !$result = mysqli_query( $db, $query ) )
+		echo "BAD QUERY!";
 
-	if( mysqli_num_rows > 0 )
+	$rows = mysqli_num_rows($result);
+
+	if( $rows > 0 )
 	{
 		$query = "UPDATE ".$userType." 
 				  SET emailValidated = 1 
