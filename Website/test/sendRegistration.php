@@ -127,8 +127,6 @@ $jsonData = array(
             "message" => "user successfully registered",
             "usertype"    => "1",
         );
-
-
     }
     else if($uniqueResults == -1)//user already registered
     {

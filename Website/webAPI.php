@@ -61,7 +61,6 @@
           $password = $registrationData['password'];
           $email    = $registrationData['email'];
         
-
           //hash password for security
           // $password = "";
           $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
@@ -70,26 +69,90 @@
             echo "<p>failure hashing password $password</p>";
             return -2;
           }
-          //prepare query for registeredstaff
+          
+            // query for 'registeredstaff' table
             $query = "INSERT INTO registeredstaff (username, password, email)
                       VALUES ( '$username', '$passwordHashed', '$email' )";  
 
             //perform query
             $result = mysqli_query($dbConnection, $query);
             echo "<p> registeredstaff results ".$result."</p>";
-            printf ("New Record has id %d.\n", $dbConnection->insert_id);
+            if($result)
+            {
+                //data
+                $resultkey    = $dbConnection->insert_id;
+                $firstName    = $registrationData['firstName'];
+                $middleName   = $registrationData['middleName'];
+                $lastName     = $registrationData['lastName'];
+                $nickname     = $registrationData['nickname'];
+                $email        = $registrationData['email'];
+                $password     = $registrationData['password'];
+                $cellphone    = $registrationData['cellphone'];
+                $address      = $registrationData['address'];
+                $city         = $registrationData['city'];
+                $state        = $registrationData['state'];
+                $address      = "$address $city, $state";
+                $djSelected                     = $registrationData['djSelected'];//
+                $liveBandSelected               = $registrationData['liveBandSelected'];//
+                $cateringCompanySelected        = $registrationData['cateringCompanySelected'];//
+                $otherServices                  = $registrationData['otherServices'];//
+                $djDescription                  = $registrationData['djDescription'];//
+                $djWebsite                      = $registrationData['djWebsite'];//
+                $djSocialMedia                  = $registrationData['djSocialMedia'];//
+                $liveBandDescription            = $registrationData['liveBandDescription'];//
+                $liveBandWebsite                = $registrationData['liveBandWebsite'];//
+                $liveBandSocialMedia            = $registrationData['liveBandSocialMedia'];//
+                $cateringCompanyDescription     = $registrationData['cateringCompanyDescription'];//
+                $cateringCompanyWebsite         = $registrationData['cateringCompanyWebsite'];//
+                $cateringCompanySocialMedia     = $registrationData['cateringCompanySocialMedia'];//
+                $otherServicesDescription       = $registrationData['otherServicesDescription'];//
+                $otherServicesBandWebsite       = $registrationData['otherServicesBandWebsite'];//
+                $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
+                $dob              = $registrationData['dob'];
+                $email            = $registrationData['email'];
+                $gender           = $registrationData['gender'];
+                $languages        = $registrationData['languages'];
+                $typeOfLicense    = $registrationData['typeOfLicense'];
+                $ethnicity        = $registrationData['ethnicity'];
+                $height           = $registrationData['height'];
+                $weight           = $registrationData['weight'];
+                $hairColor        = $registrationData['hairColor'];
+                $eyeColor         = $registrationData['eyeColor'];
+                $tshirtSize       = $registrationData['tshirtSize'];
+                $pantSize         = $registrationData['pantSize'];
+                $chestSize        = $registrationData['chestSize'];
+                $waistSize        = $registrationData['waistSize'];
+                $hipSize          = $registrationData['hipSize'];
+                $dressSize        = $registrationData['dressSize'];
+                $shoeSize         = $registrationData['shoeSize'];
 
-            // return $result;
+                $tattoos            = $registrationData['tattoos'];
+                $piercings          = $registrationData['piercings'];
+                $ssn          = $registrationData['ssn'];
+                $ein          = $registrationData['ein'];
+                $ssnOrEin = $ein;
+                if(  is_null($ssnOrEin) )
+                {
+                  $ssnOrEin = $ssn;
+                }
+                
+                $business_name      = $registrationData['business_name']; //missing in database!!!
+                $desiredHourlyRate  = $registrationData['desiredHourlyRate'];//?
+                $desiredWeeklyRate  = $registrationData['desiredWeeklyRate'];//?
+                $travel              = $registrationData['travel'];
 
-            //  //prepare query for registeredstaff
-            // $query = "INSERT INTO registeredstaff (username, password, email)
-            //           VALUES ( '$username', '$passwordHashed', '$email' )";  
+                $DirectDepositRoutingNumber   = $registrationData['DirectDepositRoutingNumber'];
+                $DirectDepositAccountNumber   = $registrationData['DirectDepositAccountNumber'];
 
-            // //perform query
-            // $result = mysqli_query($dbConnection, $query);
-            // echo "<p> registeredstaff results ".$result."</p>";
-            // return $result;
+            // query for 'people' table
+            $query1 = "INSERT INTO people ( peopleID, companyID, staffType, firstName , middleInitial, lastName, nickname, email,address,phone,profession,website,socialMedia, pictures, dateOfBirth,gender,languages,typeDL,ethnicity,height,weight,hairColor, eyeColor,shirtSize,pantSize,chestSize,waistSize,hipSize,dressSize,shoeSize, tattoos,piercings,desiredPayRate,ssnOrEin,travel,insurance,insuranceDocuments, bankRouting, accountNumber, resume )
+                      VALUES ( $resultkey, 0, 0, '$firstName', '$middleName', '$lastName', '$nickname', '$email','$address', '$cellphone', 0,'website','social media', 'pictures', '$dob','$gender','$languages', $typeOfLicense, $ethnicity, $height, $weight, '$hairColor', '$eyeColor','$tshirtSize', $pantSize, $chestSize, $waistSize, $hipSize, $dressSize, $shoeSize, $tattoos, $piercings , 30, $ssnOrEin, $travel,0,'insuranceDocuments', '$DirectDepositRoutingNumber', '$DirectDepositAccountNumber', 'resume' ) "; 
 
+            echo "<p>$query1</p>";
+            //perform query
+            $result2 = mysqli_query($dbConnection, $query1);
+            echo "<p> people results ".$result2." with id $dbConnection->insert_id</p>";
+            }
 
             /*emailing user */
             $emailResult  = emailStaff($email);

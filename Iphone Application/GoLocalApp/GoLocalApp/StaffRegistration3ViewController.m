@@ -2,217 +2,224 @@
 //  StaffRegistration3ViewController.m
 //  GoLocalApp
 //
-//  Created by Luis Andres Castillo Hernandez on 9/3/15.
+//  Created by Luis Andres Castillo Hernandez on 9/16/15.
 //  Copyright (c) 2015 FIU. All rights reserved.
 //
 
 #import "StaffRegistration3ViewController.h"
-#import "StaffRegistration4ViewController.h"
-#import "StaffRegistration5ViewController.h"
-#import "StaffRegistration6ViewController.h"
-#import "StaffRegistration11ViewController.h"
+#import "StaffRegistration8ViewController.h"
 
 @interface StaffRegistration3ViewController ()
+{
+     NSMutableArray *staffTypeExperience;
+}
+
+@property (weak, nonatomic) IBOutlet UISwitch *modelSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *djSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *dancerSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *liveBandSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *brandAmbassadorSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *flyerDistributorSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *fieldMarketingDistributorSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *salesExecutiveSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *waiterOrWaitressSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *productionAssistantSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *cateringCompanySwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *otherServicesSwitch;
+
 
 @end
 
 @implementation StaffRegistration3ViewController
 
-@synthesize djDescription, djWebsite, djSocialMedia, ScrollView,
-            djSelected, liveBandSelected, cateringCompanySelected, otherServicesSelected,
-            address, city, zipcode, stateSelected,
-            firstName, middleName, lastName, nickName, email, password, cellphone;
+@synthesize djSelected, liveBandSelected, cateringCompanySelected, otherServicesSelected,
+cellphone, completeAddress, gender, languages,
+accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self setupTextFields];
-    [self setUpTapGesture];
-    
-//    if(djSelected == false){
-//        [self determineWhereToGo];
-//    }
-
-    
-    [self testDataPassed];//testing
+  
 }//eom
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+}//eom
 
-/* verify required fields */
+/* verifying the below input fileds were filled:
+ */
 - (BOOL)verifyDataEnter
 {
-    BOOL djDescriptionFilled        = false;
-    BOOL djWebsiteFilled            = false;
-    BOOL djSocialMediaFilled        = false;
+    //clearing list just incase
+    staffTypeExperience = [[NSMutableArray alloc] init]; //creating array
     
-    if(djDescription.hasText){
-        djDescriptionFilled = true;
-    }
-    else {
-        [self showAlert:@"Registration Field" withMessage:@"Missing the description field" and:@"Okay"];
-        return 0;
-    }
+    BOOL somethingSelected  = FALSE;
     
-    if(djWebsite.hasText){
-        djWebsiteFilled = true;
-    }
-    else {
-        [self showAlert:@"Registration Field" withMessage:@"Missing the website field" and:@"Okay"];
-        return 0;
+    if(self.modelSwitch.on)
+    {
+        [staffTypeExperience addObject:@"Model"];
+        somethingSelected = TRUE;
     }
     
-    if(djSocialMedia.hasText){
-        djSocialMediaFilled = true;
+    if(self.djSwitch.on)
+    {
+        [staffTypeExperience addObject:@"Dj"];
+        self.djSelected= true;
+        somethingSelected = TRUE;
     }
-    else {
-        [self showAlert:@"Registration Field" withMessage:@"Missing the social media field" and:@"Okay"];
-        return 0;
+    
+    if(self.dancerSwitch.on)
+    {
+        [staffTypeExperience addObject:@"Dancer"];
+        somethingSelected = TRUE;
     }
+    
+    
+    if(self.liveBandSwitch.on)
+    {
+        [staffTypeExperience addObject:@"Live Band"];
+        self.liveBandSelected = true;
+        somethingSelected = TRUE;
+    }
+    
+    
+    if(self.brandAmbassadorSwitch.on)
+    {
+        [staffTypeExperience addObject:@"Brand Ambassador"];
+        somethingSelected = TRUE;
+    }
+    
+    
+    if(self.flyerDistributorSwitch.on)
+    {
+        [staffTypeExperience addObject:@"Flyer Distributor"];
+        somethingSelected = TRUE;
+    }
+    
+    
+    if(self.fieldMarketingDistributorSwitch.on)
+    {
+        [staffTypeExperience addObject:@"Field Marketing Distributor"];
+        somethingSelected = TRUE;
+    }
+    
+    
+    if(self.salesExecutiveSwitch.on)
+    {
+        [staffTypeExperience addObject:@"Sales Executive"];
+        somethingSelected = TRUE;
+    }
+
+    if(self.waiterOrWaitressSwitch.on)
+    {
+        [staffTypeExperience addObject:@"Waiter Waitress"];
+        somethingSelected = TRUE;
+    }
+
+    
+    if(self.productionAssistantSwitch.on)
+    {
+        [staffTypeExperience addObject:@"Production"];
+        somethingSelected = TRUE;
+    }
+
+    
+    if(self.cateringCompanySwitch.on)
+    {
+         [staffTypeExperience addObject:@"Cateing Company"];
+        self.cateringCompanySelected = true;
+        somethingSelected = TRUE;
+    }
+    
+    if(self.otherServicesSwitch.on)
+    {
+         [staffTypeExperience addObject:@"Other Services"];
+        self.otherServicesSelected = true;
+        somethingSelected = TRUE;
+    }
+
+//    NSLog(@" staff experience %@", self->staffTypeExperience.description);
+
+//    if(somethingSelected == FALSE)
+//    {
+//        [self showAlert:@"Registration Field" withMessage:@"Please select atleast one field" and:@"Okay"];
+//        return 0;
+//    }
     
     return 1;
-}//eom
-
-/*submitting form*/
-- (IBAction)submitForm:(id)sender {
-    bool results = [self verifyDataEnter];
-    if( results)
-    {
-        [self determineWhereToGo];
-    }
-}//eom
-
+}//EOM
 
 /* */
--(void)determineWhereToGo
+- (IBAction)submitForm:(id)sender
 {
-    if(liveBandSelected)
+    bool result = [self verifyDataEnter];
+    if(result)
     {
-        //moving to the next controller
-        [self performSegueWithIdentifier:@"djToLiveBand" sender:self];
-    }
-    //catering company
-    else if(cateringCompanySelected)
-    {
-        //skipping to catering company controller
-        [self performSegueWithIdentifier:@"djToCateringCompany" sender:self];
-    }
-    //other services
-    else if(otherServicesSelected)
-    {
-        //skipping to Other services controller
-        [self performSegueWithIdentifier:@"djToOtherServices" sender:self];
+        
+        [self routeToProperController];
     }
     else
     {
-        //skipping to staff registration 11 controller
-        [self performSegueWithIdentifier:@"djToStaffRegistration11" sender:self];
+        NSLog(@"missing some/all required fields on staffRegistration3");
     }
+
+}//eoa
+
+/* route to proper controllers */
+-(void) routeToProperController
+{
+//    if(self.djSelected){
+//        [self performSegueWithIdentifier:@"toDj" sender:self];
+//    }
+//    else if(self.liveBandSelected){
+//        [self performSegueWithIdentifier:@"toLiveBand" sender:self];
+//    }
+//    else if(self.cateringCompanySelected){
+//        [self performSegueWithIdentifier:@"toCateringCompany" sender:self];
+//    }
+//    else if(self.otherServicesSelected){
+//        [self performSegueWithIdentifier:@"toOtherServices" sender:self];
+//    }
+//    else{
+        //moving to the next controller
+            [self performSegueWithIdentifier:@"goToStaffRegister4" sender:self];
+//    }
 
 }//eom
 
 /* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"djToLiveBand"]){
-        StaffRegistration4ViewController *controller = (StaffRegistration4ViewController *)segue.destinationViewController;
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    //        controller.djSelected                   =self.djSelected;
+    //        controller.liveBandSelected             =self.liveBandSelected;
+    //        controller.cateringCompanySelected      =self.cateringCompanySelected;
+    //        controller.otherServicesSelected        =self.otherServicesSelected;
+    
+ 
+    if([segue.identifier isEqualToString:@"goToStaffRegister8"]){
+        StaffRegistration8ViewController *controller = (StaffRegistration8ViewController *)segue.destinationViewController;
         
-        controller.firstName                = self.firstName;                //view controller 1
-        controller.middleName               = self.middleName;
-        controller.lastName                 = self.lastName;
-        controller.nickName                 = self.nickName;
-        controller.email                    = self.email;
-        controller.password                 = self.password;                 //view controller 2
+        //view controller 1 data
+        controller.accountType  = self.accountType;
+        controller.firstName    = self.firstName;
+        controller.middleName   = self.middleName;
+        controller.lastName     = self.lastName;
+        controller.nickName     = self.nickName;
+        controller.email        = self.email;
+        controller.password     = self.password;
+        controller.dateOfBirth  = self.dateOfBirth;
+        
+        //view controller 2 data
         controller.cellphone                = self.cellphone;
-        controller.address                  = self.address;
-        controller.city                     = self.city;
-        controller.zipcode                  = self.zipcode;
-        controller.stateSelected            = self.stateSelected;
+        controller.completeAddress          = self->completeAddress;
+        controller.gender                   = self->gender;
+        controller.languages                = self->languages;
         
-        
-        controller.djDescription            = self.djDescription.text;       //view controller 3
-        controller.djWebsite                = self.djWebsite.text;
-        controller.djSocialMedia            = self.djSocialMedia.text;
-        
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
+        //view controller 3 data
+        controller.staffTypeExperience      = self->staffTypeExperience;
     }
-    else if([segue.identifier isEqualToString:@"djToCateringCompany"]){
-        StaffRegistration5ViewController *controller = (StaffRegistration5ViewController *)segue.destinationViewController;
-        
-        controller.firstName                = self.firstName;                //view controller 1
-        controller.middleName               = self.middleName;
-        controller.lastName                 = self.lastName;
-        controller.nickName                 = self.nickName;
-        controller.email                    = self.email;
-        controller.password                 = self.password;                 //view controller 2
-        controller.cellphone                = self.cellphone;
-        controller.address                  = self.address;
-        controller.city                     = self.city;
-        controller.zipcode                  = self.zipcode;
-        controller.stateSelected            = self.stateSelected;
-        
-        
-        controller.djDescription            = self.djDescription.text;       //view controller 3
-        controller.djWebsite                = self.djWebsite.text;
-        controller.djSocialMedia            = self.djSocialMedia.text;
-        
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-    }
-    else if([segue.identifier isEqualToString:@"djToOtherServices"]){
-        StaffRegistration6ViewController *controller = (StaffRegistration6ViewController *)segue.destinationViewController;
-        
-        controller.firstName                = self.firstName;                //view controller 1
-        controller.middleName               = self.middleName;
-        controller.lastName                 = self.lastName;
-        controller.nickName                 = self.nickName;
-        controller.email                    = self.email;
-        controller.password                 = self.password;                 //view controller 2
-        controller.cellphone                = self.cellphone;
-        controller.address                  = self.address;
-        controller.city                     = self.city;
-        controller.zipcode                  = self.zipcode;
-        controller.stateSelected            = self.stateSelected;
-        
-        
-        controller.djDescription            = self.djDescription.text;       //view controller 3
-        controller.djWebsite                = self.djWebsite.text;
-        controller.djSocialMedia            = self.djSocialMedia.text;
-        
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-    }
-    else if([segue.identifier isEqualToString:@"djToStaffRegistration11"]){
-        StaffRegistration11ViewController *controller = (StaffRegistration11ViewController *)segue.destinationViewController;
-        
-        controller.firstName                = self.firstName;                //view controller 1
-        controller.middleName               = self.middleName;
-        controller.lastName                 = self.lastName;
-        controller.nickName                 = self.nickName;
-        controller.email                    = self.email;
-        controller.password                 = self.password;                 //view controller 2
-        controller.cellphone                = self.cellphone;
-        controller.address                  = self.address;
-        controller.city                     = self.city;
-        controller.zipcode                  = self.zipcode;
-        controller.stateSelected            = self.stateSelected;
-        
-        
-        controller.djDescription            = self.djDescription.text;       //view controller 3
-        controller.djWebsite                = self.djWebsite.text;
-        controller.djSocialMedia            = self.djSocialMedia.text;
-        
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-    }
-}//eom
+}//EOM
 
 /* create UIAlert*/
 -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
@@ -226,96 +233,6 @@
                                           otherButtonTitles: nil];
     [alert show];//display alert
 }//eom
-/********* tap gestures functions *******/
-        /*sets up taps gesture*/
-        -(void)setUpTapGesture
-        {
-            //to dismiss keyboard when a tap is done outside the textfield
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard:)];
-            [self.view addGestureRecognizer:tap];
-            
-        }//eom
-
-        /* dimisses keyboard upon touching background */
-        - (void)dismissKeyboard:(UITapGestureRecognizer *)recognizer {
-            [self.view endEditing:YES];
-        }//eom
-
-/******** textfields  functions********/
-        /* setup textfields */
-        -(void) setupTextFields
-        {
-            //setup of texfields
-            self.djDescription.delegate         = self;
-            self.djWebsite.delegate             = self;
-            self.djSocialMedia.delegate         = self;
-        }//eom
-
-//        /* dimmisses UITextField as soon the background is touched - this will not work with UiScrollview*/
-//        -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//        {
-//            [djDescription resignFirstResponder];
-//            [djWebsite resignFirstResponder];
-//            [djSocialMedia resignFirstResponder];
-//        }//eom
-
-        /* dimisses UITextField as soon the return key is pressed */
-        -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-            
-            if(textField == self.djWebsite){
-                [self.djWebsite resignFirstResponder];
-                [self.djSocialMedia becomeFirstResponder];
-            }
-            else{
-                NSLog(@"none are the same");
-            }
-            
-            return YES;
-        }//eom
-
-        /* dimisses UITextField as soon the return key is pressed */
-        -(BOOL)textViewShouldReturn:(UITextView *)textView {
-            
-            if(textView == self.djDescription){
-                [self.djDescription resignFirstResponder];
-                [self.djWebsite becomeFirstResponder];
-            }
-            else if(textView == self.djSocialMedia){
-                [self.djSocialMedia resignFirstResponder];
-            }
-            else{
-                NSLog(@"none are the same");
-            }
-            
-            return YES;
-        }//eom
-
-        /********* scrollview functions **********/
-        - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
-        {
-            CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);
-            [ScrollView setContentOffset:point animated:YES];
-        }
-
-        - (void) scrollVievEditingFinished:(UITextField*)textField
-        {
-            CGPoint point = CGPointMake(0, 0);
-            [ScrollView setContentOffset:point animated:YES];
-        }
-
-        /* textfield */
-        - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
-        {
-            [self scrollViewAdaptToStartEditingTextField:textField];
-            return YES;
-        }
-
-        /* textview */
-        - (BOOL) textViewShouldBeginEditing:(UITextField *)textView
-        {
-            [self scrollViewAdaptToStartEditingTextField:textView];
-            return YES;
-        }
 
 
 -(void)testDataPassed
@@ -325,110 +242,23 @@
     NSLog(@" ");
     NSLog(@" *****  Staff Registration| View controller #3 ******");
     //view controller 1
+    NSLog(@" account type:    %@", self.accountType);
     NSLog(@" firstName:       %@", self.firstName);
     NSLog(@" middleName:      %@", self.middleName);
     NSLog(@" lastName:        %@", self.lastName);
     NSLog(@" nickName:        %@", self.nickName);
     NSLog(@" email:           %@", self.email);
     NSLog(@" password:        %@", self.password);
-    NSLog(@" cellphone:       %@", self.cellphone);
-    
+    NSLog(@" dob:             %@", self.dateOfBirth);
     //view controller 2
-    NSLog(@" address:                   %@", self.address);
-    NSLog(@" city:                      %@", self.city);
-    NSLog(@" zipcode:                   %@", self.zipcode);
-    NSLog(@" stateSelected:             %@", self.stateSelected);
-    NSLog(@" djSelected:                %d", self.djSelected);
-    NSLog(@" liveBandSelected:          %d", self.liveBandSelected);
-    NSLog(@" djSelected:                %d", self.djSelected);
-    NSLog(@" cateringCompanySelected:   %d", self.cateringCompanySelected);
-    NSLog(@" otherServicesSelected:     %d", self.otherServicesSelected);
+    NSLog(@" cellphone:       %@", self.cellphone);
+    NSLog(@" address:         %@", self.completeAddress);
+    NSLog(@" gender:          %d", self.gender);//0 female 1 male
+    NSLog(@" languages:       %@", self.languages);
     
-//    //view controller 3 - DJ only
-//    
-//    NSLog(@" djDescription:     %@", self.djDescription);
-//    NSLog(@" djWebsite:         %@", self.djWebsite);
-//    NSLog(@" djSocialMedia:     %@", self.djSocialMedia);
-//    
-//    //view controller 4 - Live Band Only
-//    
-//    NSLog(@" liveBandDescription:   %@", self.liveBandDescription);
-//    NSLog(@" liveBandWebsite:       %@", self.liveBandWebsite);
-//    NSLog(@" liveBandSocialMedia:   %@", self.liveBandSocialMedia);
-//    
-//    //view controller 5 - Catering Company Only
-//    NSLog(@" cateringCompanyDescription:    %@", self.cateringCompanyDescription);
-//    NSLog(@" cateringCompanyWebsite:        %@", self.cateringCompanyWebsite);
-//    NSLog(@" cateringCompanySocialMedia:    %@", self.cateringCompanySocialMedia);
-//    
-//    //view controller 6
-//    NSLog(@" otherServicesDescription:  %@", self.otherServicesDescription);
-//    NSLog(@" otherServicesWebsite:      %@", self.otherServicesWebsite);
-//    NSLog(@" otherServicesSocialMedia:  %@", self.otherServicesSocialMedia);
-//    
-//    //view controller 7
-//    NSLog(@" dob:       %@", self.dob);
-//    NSLog(@" gender:    %d", self.gender);// 0-female 1-male
-//    NSLog(@" languages: %@", self.languages);
-//    
-//    //view controller 8
-//    NSLog(@" ethnicity:     %d", self.ethnicity);//see db legend
-//    NSLog(@" typeOfLicense: %d", self.typeOfLicense);//0-driver 1-commercial
-//    
-//    //view controller 9
-//    NSLog(@" height:            %@", self.height);
-//    NSLog(@" weight:            %@", self.weight);
-//    NSLog(@" hairColor:         %@", self.hairColor);
-//    NSLog(@" eyeColor:          %@", self.eyeColor);
-//    NSLog(@" pantSize:          %@", self.pantSize);
-//    NSLog(@" shoeSize:          %@", self.shoeSize);
-//    NSLog(@" tshirtSize:        %@", self.tshirtSize);
-//    NSLog(@" desiredHourlyRate: %@", self.desiredHourlyRate);
-//    NSLog(@" desiredWeeklyRate: %@", self.desiredWeeklyRate);
-//    NSLog(@" tattoos:           %d", self.tattoos);//0 - no | 1 - yes
-//    NSLog(@" piercings:         %d", self.piercings);//0 - no | 1 - yes
-//    
-//    //view controller 10 - females ONLY
-//    NSLog(@" chestSize: %@", self.chestSize);
-//    NSLog(@" waistSize: %@", self.waistSize);
-//    NSLog(@" hipsSize: %@", self.hipsSize);
-//    NSLog(@" dressSize: %@", self.dressSize);
-//    
-//    //view controller 11
-//    NSLog(@" typeCorporated:        %d", self.typeCorporated);//0-not incorporated| 1- corporated
-//    NSLog(@" ssn:                   %@", self.ssn);//NotIncorporated field
-//    NSLog(@" ein:                   %@", self.ein);         //incorporated field
-//    NSLog(@" businessName:          %@", self.businessName);//incorporated field
-//    NSLog(@" citiesWillingToWork:   %@", self.citiesWillingToWork);
-//    NSLog(@" travel:                %d", self.travel);
-//    NSLog(@" professionalInsurance: %d", self.professionalInsurance);
-//    
-//    
-//    //view controller 14
-//    NSLog(@" directDepositDesired:          %d", self.directDepositDesired);
-//    NSLog(@" DirectDepositRoutingNumber:    %@", self.DirectDepositRoutingNumber);
-//    NSLog(@" DirectDepositAccountNumber:    %@", self.DirectDepositAccountNumber);
-//    
-//    //view controller 15
-//    NSLog(@" isModel:                   %d", self.isModel);
-//    NSLog(@" isBrandAmbassador:         %d", self.isBrandAmbassador);
-//    NSLog(@" isFlyerDistributor:        %d", self.isFlyerDistributor);
-//    NSLog(@" isFieldMarketingManager:   %d", self.isFieldMarketingManager);
-//    NSLog(@" isDancer:                  %d", self.isDancer);
-//    NSLog(@" iswaiterOrWaitress:        %d", self.iswaiterOrWaitress);
-//    NSLog(@" isProductionAssistant:     %d", self.isProductionAssistant);
-//    NSLog(@" isSalesExecutive:          %d", self.isSalesExecutive);
-//    
+    
     NSLog(@" - - - - - - - - - - - - - ");
 }//eom
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

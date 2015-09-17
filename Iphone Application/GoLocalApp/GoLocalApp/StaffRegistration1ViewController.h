@@ -22,10 +22,14 @@
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPassword; /*DO NOT SAVE TO DB*/
 
-@property (weak, nonatomic) IBOutlet UITextField *cellphone;
+@property (weak, nonatomic) IBOutlet UITextField *dateOfBirth;
+@property (nonatomic)  NSString * dateOfBirthSelected; //saved value of date of birth
 
 @property (weak, nonatomic) IBOutlet UIScrollView *textInputScrollView;
 
 - (IBAction)submit:(id)sender;
+
+- (IBAction)textFieldValuesChanged:(UITextField *)sender;
+
 
 @end

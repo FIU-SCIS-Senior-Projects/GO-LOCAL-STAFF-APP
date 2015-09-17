@@ -1,5 +1,5 @@
 //
-//  StaffRegistration12ViewController.h
+//  StaffRegistration11ViewController.h
 //  GoLocalApp
 //
 //  Created by Luis Andres Castillo Hernandez on 9/7/15.
@@ -8,19 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StaffRegistration11ViewController : UIViewController<UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface StaffRegistration11ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-
-@property (strong, nonatomic) IBOutlet UIImageView *headshotImageView;
-
-- (IBAction)takePhoto:(id)sender;
-
-- (IBAction)selectExistingPhoto:(id)sender;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)submitForm:(id)sender;
 
-//PASSED VALUES FROM PREVIOUS CONTROLLER
+
+
+
+
+//PASSED VALUEs FROM PREVIOUS CONTROLLER
 @property (nonatomic)  NSString *accountType;                   //view controller 1
 @property (nonatomic)  NSString *firstName;
 @property (nonatomic)  NSString *middleName;
@@ -50,23 +48,8 @@
 @property (nonatomic)  NSString *shoeSize;
 @property (nonatomic)  NSString *tshirtSize;
 
-@property (nonatomic)  NSString *chestSize;                     //view controller 9
-@property (nonatomic)  NSString *waistSize;
-@property (nonatomic)  NSString *hipsSize;
-@property (nonatomic)  NSString *dressSize;
 
-@property (nonatomic)  BOOL isIncorporated;                     //view controller 10
-@property (nonatomic)  NSString *ssn;
-@property (nonatomic)  NSString *ein;
-@property (nonatomic)  NSString *businessName;
-@property (nonatomic)  NSString *desiredHourlyRate;
-@property (nonatomic)  NSString *desiredWeeklyRate;
-@property (nonatomic)  NSString *travelPercentage;
-
-
-
-
-///* these may be Null */
+/* these may be Null */
 //@property (nonatomic)  BOOL djSelected;                         //view controller 3
 //@property (nonatomic)  NSString *djDescription;
 //@property (nonatomic)  NSString *djWebsite;

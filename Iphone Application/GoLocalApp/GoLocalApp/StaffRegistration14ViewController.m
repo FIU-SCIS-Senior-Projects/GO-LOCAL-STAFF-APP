@@ -1,5 +1,5 @@
 //
-//  StaffRegistration14ViewController.m
+//  StaffRegistration16ViewController.m
 //  GoLocalApp
 //
 //  Created by Luis Andres Castillo Hernandez on 9/8/15.
@@ -7,184 +7,273 @@
 //
 
 #import "StaffRegistration14ViewController.h"
-#import "StaffRegistration15ViewController.h"
+//#import "LogInViewController.h"
 
 @interface StaffRegistration14ViewController ()
 
 @end
 
 @implementation StaffRegistration14ViewController
-@synthesize wantsDirectDeposit, DirectDepositRoutingNumber, DirectDepositAccountNumber, scrollView,
-            firstName, middleName, lastName, nickName, email, cellphone,
-            password, address, city, zipcode, stateSelected,
-            djSelected, djDescription, djWebsite, djSocialMedia,
-            liveBandSelected, liveBandDescription, liveBandWebsite, liveBandSocialMedia,
-            cateringCompanySelected, cateringCompanyDescription, cateringCompanyWebsite, cateringCompanySocialMedia,
-            otherServicesSelected, otherServicesDescription, otherServicesWebsite, otherServicesSocialMedia,
-            dob, gender, languages,
-            ethnicity, typeOfLicense,
-            height, weight, hairColor, eyeColor, pantSize, shoeSize, tshirtSize, desiredHourlyRate, desiredWeeklyRate, piercings, tattoos,
-            chestSize, waistSize, hipsSize, dressSize,
-            typeCorporated, ssn, ein, businessName, citiesWillingToWork, travel, professionalInsurance;
+
+@synthesize scrollView,
+wantsDirectDeposit, DirectDepositRoutingNumber, DirectDepositAccountNumber,
+isIncorporated, ssn, ein, businessName,
+chestSize, waistSize, hipsSize, dressSize, desiredHourlyRate, desiredWeeklyRate, travelPercentage,
+hasDriverLicense, hasCommercialLicense, hasTattos, hasPiercings, ethnicity, height, weight, hairColor, pantSize, shoeSize, tshirtSize,
+staffTypeExperience,
+cellphone, completeAddress, gender, languages,
+accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setUpTapGesture];
-    [self setupTextFields];
-    [self testDataPassed];//testing
+//    [self testDataPassed];//testing
+    
+    [self sendDataToServer];
 }//eom
-
-/* */
-- (IBAction)directDepositSelectionChanged:(id)sender {
-    if(!self.wantsDirectDeposit.on){
-        [self showAlert:@"Registration Field" withMessage:@"Our Apologies but at the moment we only support direct deposit. More options and features coming soon!" and:@"Okay"];
-        [self.wantsDirectDeposit setOn:true];
-    }
-}//eo-action
-
 
 /* verifying the required input fileds */
 - (BOOL)verifyDataEnter
 {
-    //checking for valid input
-    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
-    NSString * testing;
-    NSString *trimmedString;
-
-    //checking direct deposit fields are NOT empty
-        if(self.wantsDirectDeposit.on){
-                testing = self.DirectDepositRoutingNumber.text;
-                trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-                if ([trimmedString isEqualToString:@""]) {
-                    [self scrollVievEditingFinished:DirectDepositRoutingNumber]; //take scroll to textfield so user can see their error
-                    self.DirectDepositRoutingNumber.text =@""; //clearing field
-                    // it's empty or contains only white spaces
-                    [self showAlert:@"Registration Field" withMessage:@"Missing the 'Routing Number' field" and:@"Okay"];
-                    return 0;
-                }
-
-                testing = self.DirectDepositAccountNumber.text;
-                trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-                if ([trimmedString isEqualToString:@""]) {
-                    self.DirectDepositAccountNumber.text =@""; //clearing field
-                    // it's empty or contains only white spaces
-                    [self showAlert:@"Registration Field" withMessage:@"Missing the 'Account Number' field" and:@"Okay"];
-                    return 0;
-                }
-        }//eo-direct deposit
-
-    
-    return 1;
-}
-
-
-- (IBAction)submitForm:(id)sender
-{
-    //verifying the data enter
-    bool result = [self verifyDataEnter];
-    if(result)
+    if(!self.agreeTermsSwitch.on)
     {
-        [self performSegueWithIdentifier:@"staffRegistration15" sender:self];
+        [self showAlert:@"Registration Field" withMessage:@"Please" and:@"Okay"];
+    }
+
+    return 1;
+}//eom
+
+
+/* terms and agreements */
+- (IBAction)agreeTermsValueChanged:(id)sender
+{
+    
+    if(self.agreeTermsSwitch.on)
+    {
+        bool result = [self verifyDataEnter];
+        if(result)
+        {
+            //since user to terms, display 'submit registration' button
+            self.submitButton.hidden = NO;
+        }
     }
     else
     {
-        NSLog(@"missing some/all required fields");
+        self.submitButton.hidden = YES;
     }
     
 }//eo-action
 
-
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"staffRegistration15"]){
-        StaffRegistration15ViewController *controller = (StaffRegistration15ViewController *)segue.destinationViewController;
-        
-        //view controller 1
-        controller.firstName                = self.firstName;
-        controller.middleName               = self.middleName;
-        controller.lastName                 = self.lastName;
-        controller.nickName                 = self.nickName;
-        controller.email                    = self.email;
-        controller.password                 = self.password;
-        controller.cellphone                = self.cellphone;
-        
-        //view controller 2
-        controller.address                      = self.address;
-        controller.city                         = self.city;
-        controller.zipcode                      = self.zipcode;
-        controller.stateSelected                = self.stateSelected;
-        controller.djSelected                   = self.djSelected;
-        controller.liveBandSelected             = self.liveBandSelected;
-        controller.cateringCompanySelected      = self.cateringCompanySelected;
-        controller.otherServicesSelected        = self.otherServicesSelected;
-
-        
-        //view controller 3
-        controller.djDescription                = self.djDescription;
-        controller.djWebsite                    = self.djWebsite;
-        controller.djSocialMedia                = self.djSocialMedia;
-        
-        //view controller 4
-        controller.liveBandDescription          = self.liveBandDescription;
-        controller.liveBandWebsite              = self.liveBandWebsite;
-        controller.liveBandSocialMedia          = self.liveBandSocialMedia;
-        
-        //view controller 5
-        controller.cateringCompanyDescription   = self.cateringCompanyDescription;
-        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite;
-        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia;
-        
-        //view controller 6
-        controller.otherServicesDescription     = self.otherServicesDescription;
-        controller.otherServicesWebsite         = self.otherServicesWebsite;
-        controller.otherServicesSocialMedia     = self.otherServicesSocialMedia;
-        
-        //view controller 7
-        controller.dob                      = self.dob;
-        controller.gender                   = self.gender;
-        controller.languages                = self.languages;
-        
-        //view controller 8
-        controller.ethnicity                = self.ethnicity;
-        controller.typeOfLicense            = self.typeOfLicense;
-        
-        //view controller 9
-        controller.height                   = self.height;
-        controller.weight                   = self.weight;
-        controller.hairColor                = self.hairColor;
-        controller.eyeColor                 = self.eyeColor;
-        controller.pantSize                 = self.pantSize;
-        controller.shoeSize                 = self.shoeSize;
-        controller.tshirtSize               = self.tshirtSize;
-        controller.desiredHourlyRate        = self.desiredHourlyRate;
-        controller.desiredWeeklyRate        = self.desiredWeeklyRate;
-        controller.tattoos                  = self.tattoos;
-        controller.piercings                = self.piercings;
-        
-        //view controller 10 - females ONLY
-        controller.chestSize                = self.chestSize;
-        controller.waistSize                = self.waistSize;
-        controller.hipsSize                 = self.hipsSize;
-        controller.dressSize                = self.dressSize;
-        
-        //view controller 11
-        controller.typeCorporated           = self.typeCorporated; //0-not incorporated | 1-corporated
-        controller.ssn                      = self.ssn;
-        controller.ein                      = self.ein;
-        controller.businessName             = self.businessName;
-        controller.citiesWillingToWork      = self.citiesWillingToWork;
-        controller.travel                   = self.travel; // 0 - not traveling | 1 - traveling
-        controller.professionalInsurance    = self.professionalInsurance; // 0 - not prof insurance | 1 - prof insurance
-        
-        
-        //view controller 14
-        controller.directDepositDesired         = self.wantsDirectDeposit.on;
-        controller.DirectDepositRoutingNumber   = self.DirectDepositRoutingNumber.text;
-        controller.DirectDepositAccountNumber   = self.DirectDepositAccountNumber.text;
+/* sends data to server */
+-(void)sendDataToServer
+{
+        NSString *serverAddress = @"http://45.55.208.175/Website/jsonReceiver.php";//hard coding website
     
-    }
+        /*** preparing data to be sent ***/
+    
+        NSDictionary *tmp = [[NSDictionary alloc] initWithObjectsAndKeys: //converting items to be send as Dictionary items
+         @"Luis",  @"firstName",
+         @"Andres", @"middleName",
+         @"Castillo", @"lastName",
+         @"Lu", @"nickName",
+         @"luoandre29@hotmail.com", @"email",
+         @"2987Andres", @"password",
+         @"3056099250", @"cellphone",
+         
+         @"Miami", @"city",
+         @"33016", @"zipcode",
+         @"FL", @"stateSelected",
+         @"0", @"djSelected",
+         @"0", @"liveBandSelected",
+         @"0", @"cateringCompanySelected",
+         @"0", @"otherServicesSelected",
+         
+         
+         @"",  @"djDescription",
+         @"", @"djWebsite",
+         @"", @"djSocialMedia",
+         
+         @"", @"liveBandDescription",
+         @"", @"liveBandWebsite",
+         @"", @"liveBandSocialMedia",
+         
+         @"", @"cateringCompanyDescription",
+         @"", @"cateringCompanyWebsite",
+         @"", @"cateringCompanySocialMedia",
+         
+         @"", @"otherServicesDescription",
+         @"", @"otherServicesWebsite",
+         @"", @"otherServicesSocialMedia",
+         
+         @"11/29/1987", @"dob",
+         @"male", @"gender",
+         @"english,spanish", @"languages",
+         
+         @"3", @"ethnicity",
+         @"0", @"typeOfLicense",
+         
+         
+         @"5'1", @"height",
+         @"150", @"weight",
+         @"black", @"hairColor",
+         @"brown", @"eyeColor",
+         @"30", @"pantSize",
+         @"8", @"shoeSize",
+         @"M", @"tshirtSize",
+         @"30", @"desiredHourlyRate",
+         @"3000", @"desiredWeeklyRate",
+         @"0", @"tattoos",
+         @"0", @"piercings",
+         
+         @"", @"chestSize",
+         @"", @"waistSize",
+         @"", @"hipsSize",
+         @"", @"dressSize",
+         
+         @"0", @"typeCorporated",
+         @"898347922", @"ssn",
+         @"", @"ein",
+         @"", @"businessName",
+         @"miami, kendall", @"citiesWillingToWork",
+         @"0", @"travel",
+         @"0", @"professionalInsurance",
+         
+         @"1", @"directDepositDesired",
+         @"898847731032837", @"DirectDepositRoutingNumber",
+         @"99899837782982333", @"DirectDepositAccountNumber",
+         
+         @"0", @"isModel",
+         @"0", @"isBrandAmbassador",
+         @"0", @"isFlyerDistributor",
+         @"0", @"isFieldMarketingManager",
+         @"0", @"isDancer",
+         @"0", @"iswaiterOrWaitress",
+         @"0", @"isProductionAssistant",
+         @"0", @"isSalesExecutive",
+         nil];
+
+//        NSDictionary *tmp = [[NSDictionary alloc] initWithObjectsAndKeys: //converting items to be send as Dictionary items
+//             self.firstName,  @"firstName",
+//             self.middleName, @"middleName",
+//             self.lastName, @"lastName",
+//             self.nickName, @"nickName",
+//             self.email, @"email",
+//             self.password, @"password",
+//             self.cellphone, @"cellphone",
+//                             
+//             self.city, @"city",
+//             self.zipcode, @"zipcode",
+//             self.stateSelected, @"stateSelected",
+//             [NSString stringWithFormat:@"%d",self.djSelected], @"djSelected",
+//             [NSString stringWithFormat:@"%d",self.liveBandSelected], @"liveBandSelected",
+//             [NSString stringWithFormat:@"%d",self.cateringCompanySelected], @"cateringCompanySelected",
+//             [NSString stringWithFormat:@"%d",self.otherServicesSelected], @"otherServicesSelected",
+//
+//                             
+//             self.djDescription,  @"djDescription",
+//             self.djWebsite, @"djWebsite",
+//             self.djSocialMedia, @"djSocialMedia",
+//                             
+//             self.liveBandDescription, @"liveBandDescription",
+//             self.liveBandWebsite, @"liveBandWebsite",
+//             self.liveBandSocialMedia, @"liveBandSocialMedia",
+//                             
+//             self.cateringCompanyDescription, @"cateringCompanyDescription",
+//             self.cateringCompanyWebsite, @"cateringCompanyWebsite",
+//             self.cateringCompanySocialMedia, @"cateringCompanySocialMedia",
+//                             
+//             self.otherServicesDescription, @"otherServicesDescription",
+//             self.otherServicesWebsite, @"otherServicesWebsite",
+//             self.otherServicesSocialMedia, @"otherServicesSocialMedia",
+//                             
+//            self.dob, @"dob",
+//            [NSString stringWithFormat:@"%d",self.gender], @"gender",
+//            self.languages, @"languages",
+//                             
+//             [NSString stringWithFormat:@"%d",self.ethnicity], @"ethnicity",
+//             [NSString stringWithFormat:@"%d",self.typeOfLicense], @"typeOfLicense",
+//
+//                             
+//             self.height, @"height",
+//             self.weight, @"weight",
+//             self.hairColor, @"hairColor",
+//             self.eyeColor, @"eyeColor",
+//             self.pantSize, @"pantSize",
+//             self.shoeSize, @"shoeSize",
+//             self.tshirtSize, @"tshirtSize",
+//             self.desiredHourlyRate, @"desiredHourlyRate",
+//             self.desiredWeeklyRate, @"desiredWeeklyRate",
+//             [NSString stringWithFormat:@"%d",self.tattoos], @"firstName",
+//             [NSString stringWithFormat:@"%d",self.piercings], @"middleName",
+//                             
+//             self.chestSize, @"chestSize",
+//             self.waistSize, @"waistSize",
+//             self.hipsSize, @"hipsSize",
+//             self.dressSize, @"dressSize",
+//                             
+//             [NSString stringWithFormat:@"%d",self.typeCorporated], @"typeCorporated",
+//             self.ssn, @"ssn",
+//             self.ein, @"ein",
+//             self.businessName, @"businessName",
+//             self.citiesWillingToWork, @"citiesWillingToWork",
+//             [NSString stringWithFormat:@"%d",self.travel], @"travel",
+//             [NSString stringWithFormat:@"%d",self.professionalInsurance], @"professionalInsurance",
+//                             
+//             [NSString stringWithFormat:@"%d",self.directDepositDesired], @"directDepositDesired",
+//             self.DirectDepositRoutingNumber, @"DirectDepositRoutingNumber",
+//             self.DirectDepositAccountNumber, @"DirectDepositAccountNumber",
+//                             
+//             [NSString stringWithFormat:@"%d",self.isModel], @"isModel",
+//             [NSString stringWithFormat:@"%d",self.isBrandAmbassador], @"isBrandAmbassador",
+//             [NSString stringWithFormat:@"%d",self.isFlyerDistributor], @"isFlyerDistributor",
+//             [NSString stringWithFormat:@"%d",self.isFieldMarketingManager], @"isFieldMarketingManager",
+//             [NSString stringWithFormat:@"%d",self.isDancer], @"isDancer",
+//             [NSString stringWithFormat:@"%d",self.iswaiterOrWaitress], @"iswaiterOrWaitress",
+//             [NSString stringWithFormat:@"%d",self.isProductionAssistant], @"isProductionAssistant",
+//             [NSString stringWithFormat:@"%d",self.isSalesExecutive], @"isSalesExecutive",
+//             nil];
+    
+        /*** Sending data ***/
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+                                        initWithURL:[NSURL URLWithString:  serverAddress ]];
+    
+        [request setHTTPMethod:@"POST"]; //request type
+        
+        //sending data
+        NSError *error;
+        NSData *postdata = [NSJSONSerialization dataWithJSONObject:tmp options:0 error:&error];
+        [request setHTTPBody:postdata];
+    
+//        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+//        NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+        [NSURLConnection connectionWithRequest:request delegate:self];
+}//eo-action
+
+/* responce from server */
+- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    
+    NSLog(@" responce: %@", httpResponse.description);
+    
+    NSInteger statusCode = httpResponse.statusCode;
+    
+    NSLog(@" status Code: %ld", (long)statusCode);
+//    NSString *string = [NSString stringWithFormat:@"%ld", (long)statusCode];
+    
+}//eo-action
+
+/* data received from server */
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)theData{
+    NSString *dataResponce = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
+    NSLog(@" responce from server %@",dataResponce);
+}
+
+/* error occurred sending data to server */
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@" Failed with error '%@'", error);
 }//eom
 
 
@@ -202,205 +291,68 @@
 }//eom
 
 
-/********* tap gestures functions *******/
-        /*sets up taps gesture*/
-        -(void)setUpTapGesture
-        {
-            //to dismiss keyboard when a tap is done outside the textfield
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard:)];
-            [self.view addGestureRecognizer:tap];
-            
-        }//eoom
-
-        /* dimisses keyboard upon touching background */
-        - (void)dismissKeyboard:(UITapGestureRecognizer *)recognizer {
-            [self.view endEditing:YES];
-        }
-
-
-/******** textfields  functions********/
-
-        /* setup textfields */
-        -(void) setupTextFields
-        {
-            //setup of texfields
-            self.DirectDepositRoutingNumber.delegate        = self;
-            self.DirectDepositAccountNumber.delegate        = self;
-        }//eom
-
-
-        //        /* dimmisses UITextField as soon the background is touched - this will not work with UiScrollview*/
-        //        -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-        //        {
-        //            [firstName resignFirstResponder];
-        //            [middleName resignFirstResponder];
-        //            [lastName resignFirstResponder];
-        //            [nickName resignFirstResponder];
-        //            [email resignFirstResponder];
-        //            [confirmEmail resignFirstResponder];
-        //            [password resignFirstResponder];
-        //            [confirmPassword resignFirstResponder];
-        //            [cellphone resignFirstResponder];
-        //        }//eom
-
-        /* dimisses UITextField as soon the return key is pressed */
-        -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-            
-            if(textField == self.DirectDepositRoutingNumber){
-                [self.DirectDepositRoutingNumber resignFirstResponder];
-                [self.DirectDepositAccountNumber becomeFirstResponder];
-            }
-            else if(textField == self.DirectDepositAccountNumber){
-                [self.DirectDepositAccountNumber resignFirstResponder];
-            }
-            else{
-                NSLog(@"none are the same");
-            }
-            
-            return YES;
-        }//eom
-
-
-/********* scrollview functions **********/
-        - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
-        {
-            CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);
-            [scrollView setContentOffset:point animated:YES];
-        }
-
-        - (void) scrollVievEditingFinished:(UITextField*)textField
-        {
-            CGPoint point = CGPointMake(0, 0);
-            [scrollView setContentOffset:point animated:YES];
-        }
-
-        - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
-        {
-            [self scrollViewAdaptToStartEditingTextField:textField];
-            return YES;
-        }
-
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 -(void)testDataPassed
 {
-    
     NSLog(@" ");
     NSLog(@" ");
-    NSLog(@" *****  Staff Registration| View controller #14 ******");
+    NSLog(@" *****  Staff Registration| View controller #11 ******");
     //view controller 1
+    NSLog(@" account type:    %@", self.accountType);
     NSLog(@" firstName:       %@", self.firstName);
     NSLog(@" middleName:      %@", self.middleName);
     NSLog(@" lastName:        %@", self.lastName);
     NSLog(@" nickName:        %@", self.nickName);
     NSLog(@" email:           %@", self.email);
     NSLog(@" password:        %@", self.password);
-    NSLog(@" cellphone:       %@", self.cellphone);
-    
+    NSLog(@" dob:             %@", self.dateOfBirth);
     //view controller 2
-    NSLog(@" address:                   %@", self.address);
-    NSLog(@" city:                      %@", self.city);
-    NSLog(@" zipcode:                   %@", self.zipcode);
-    NSLog(@" stateSelected:             %@", self.stateSelected);
-    NSLog(@" djSelected:                %d", self.djSelected);
-    NSLog(@" liveBandSelected:          %d", self.liveBandSelected);
-    NSLog(@" djSelected:                %d", self.djSelected);
-    NSLog(@" cateringCompanySelected:   %d", self.cateringCompanySelected);
-    NSLog(@" otherServicesSelected:     %d", self.otherServicesSelected);
+    NSLog(@" cellphone:       %@", self.cellphone);
+    NSLog(@" address:         %@", self.completeAddress);
+    NSLog(@" gender:          %d", self.gender);//0 female 1 male
+    NSLog(@" languages:       %@", self.languages);
     
-    //view controller 3 - DJ only
-    
-    NSLog(@" djDescription:     %@", self.djDescription);
-    NSLog(@" djWebsite:         %@", self.djWebsite);
-    NSLog(@" djSocialMedia:     %@", self.djSocialMedia);
-    
-    //view controller 4 - Live Band Only
-    
-    NSLog(@" liveBandDescription:   %@", self.liveBandDescription);
-    NSLog(@" liveBandWebsite:       %@", self.liveBandWebsite);
-    NSLog(@" liveBandSocialMedia:   %@", self.liveBandSocialMedia);
-    
-    //view controller 5 - Catering Company Only
-    NSLog(@" cateringCompanyDescription:    %@", self.cateringCompanyDescription);
-    NSLog(@" cateringCompanyWebsite:        %@", self.cateringCompanyWebsite);
-    NSLog(@" cateringCompanySocialMedia:    %@", self.cateringCompanySocialMedia);
-    
-    //view controller 6
-    NSLog(@" otherServicesDescription:  %@", self.otherServicesDescription);
-    NSLog(@" otherServicesWebsite:      %@", self.otherServicesWebsite);
-    NSLog(@" otherServicesSocialMedia:  %@", self.otherServicesSocialMedia);
-    
-    //view controller 7
-    NSLog(@" dob:       %@", self.dob);
-    NSLog(@" gender:    %d", self.gender);// 0-female 1-male
-    NSLog(@" languages: %@", self.languages);
+    //view controller 3
+    NSLog(@" staff experience:      %@", self.staffTypeExperience);
     
     //view controller 8
-    NSLog(@" ethnicity:     %d", self.ethnicity);//see db legend
-    NSLog(@" typeOfLicense: %d", self.typeOfLicense);//0-driver 1-commercial
+    NSLog(@" driver license?        %d", self.hasDriverLicense);
+    NSLog(@" commercial license?    %d", self.hasCommercialLicense);
+    NSLog(@" tattoos?               %d", self.hasTattos);
+    NSLog(@" piercings?             %d", self.hasPiercings);
+    NSLog(@" ethnicity              %@", self.ethnicity);
+    NSLog(@" height                 %@", self.height);
+    NSLog(@" weight                 %@", self.weight);
+    NSLog(@" hairColor              %@", self.hairColor);
+    NSLog(@" pantSize               %@", self.pantSize);
+    NSLog(@" shoeSize               %@", self.shoeSize);
+    NSLog(@" tshirtSize             %@", self.tshirtSize);
     
     //view controller 9
-    NSLog(@" height:            %@", self.height);
-    NSLog(@" weight:            %@", self.weight);
-    NSLog(@" hairColor:         %@", self.hairColor);
-    NSLog(@" eyeColor:          %@", self.eyeColor);
-    NSLog(@" pantSize:          %@", self.pantSize);
-    NSLog(@" shoeSize:          %@", self.shoeSize);
-    NSLog(@" tshirtSize:        %@", self.tshirtSize);
-    NSLog(@" desiredHourlyRate: %@", self.desiredHourlyRate);
-    NSLog(@" desiredWeeklyRate: %@", self.desiredWeeklyRate);
-    NSLog(@" tattoos:           %d", self.tattoos);//0 - no | 1 - yes
-    NSLog(@" piercings:         %d", self.piercings);//0 - no | 1 - yes
+    NSLog(@" chestSize              %@", self.chestSize);
+    NSLog(@" waistSize              %@", self.waistSize);
+    NSLog(@" hipsSize               %@", self.hipsSize);
+    NSLog(@" dressSize              %@", self.dressSize);
     
-    //view controller 10 - females ONLY
-    NSLog(@" chestSize: %@", self.chestSize);
-    NSLog(@" waistSize: %@", self.waistSize);
-    NSLog(@" hipsSize: %@", self.hipsSize);
-    NSLog(@" dressSize: %@", self.dressSize);
+    //view controller 10
+    NSLog(@" is Incorporated ?      %d", self.isIncorporated);
+    NSLog(@" ssn                    %@", self.ssn);
+    NSLog(@" ein                    %@", self.ein);
+    NSLog(@" business Name          %@", self.businessName);
+    NSLog(@" desired Hourly Rate    %@", self.desiredHourlyRate);
+    NSLog(@" desired Weekly Rate    %@", self.desiredWeeklyRate);
+    NSLog(@" travel Percentage      %@", self.travelPercentage);
     
-    //view controller 11
-    NSLog(@" typeCorporated:        %d", self.typeCorporated);//0-not incorporated| 1- corporated
-    NSLog(@" ssn:                   %@", self.ssn);//NotIncorporated field
-    NSLog(@" ein:                   %@", self.ein);         //incorporated field
-    NSLog(@" businessName:          %@", self.businessName);//incorporated field
-    NSLog(@" citiesWillingToWork:   %@", self.citiesWillingToWork);
-    NSLog(@" travel:                %d", self.travel);
-    NSLog(@" professionalInsurance: %d", self.professionalInsurance);
+    //view controller 13
+    NSLog(@" direct deposit selected    %@", self.directDepositDesired);
+    NSLog(@" direct deposit routing     %@", self.DirectDepositRoutingNumber);
+    NSLog(@" direct deposit account     %@", self.DirectDepositAccountNumber);
     
-    
-    //view controller 14
-//    NSLog(@" directDepositDesired:          %d", self.);
-//    NSLog(@" DirectDepositRoutingNumber:    %@", self.DirectDepositRoutingNumber);
-//    NSLog(@" DirectDepositAccountNumber:    %@", self.DirectDepositAccountNumber);
-    
-//    //view controller 15
-//    NSLog(@" isModel:                   %d", self.isModel);
-//    NSLog(@" isBrandAmbassador:         %d", self.isBrandAmbassador);
-//    NSLog(@" isFlyerDistributor:        %d", self.isFlyerDistributor);
-//    NSLog(@" isFieldMarketingManager:   %d", self.isFieldMarketingManager);
-//    NSLog(@" isDancer:                  %d", self.isDancer);
-//    NSLog(@" iswaiterOrWaitress:        %d", self.iswaiterOrWaitress);
-//    NSLog(@" isProductionAssistant:     %d", self.isProductionAssistant);
-//    NSLog(@" isSalesExecutive:          %d", self.isSalesExecutive);
     
     NSLog(@" - - - - - - - - - - - - - ");
 }//eom
+
+
 
 @end

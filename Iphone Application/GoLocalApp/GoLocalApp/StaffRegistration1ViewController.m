@@ -10,29 +10,49 @@
 #import "StaffRegistration2ViewController.h"
 
 @interface StaffRegistration1ViewController ()
+{
+    UIDatePicker * dobPickerView;
+    
+    __weak IBOutlet UILabel *firstNameLabel;
+    __weak IBOutlet UILabel *MiddleNameLabel;
+    __weak IBOutlet UILabel *LastNameLabel;
+    __weak IBOutlet UILabel *UsernameLabel;
+    __weak IBOutlet UILabel *NicknameLabel;
+    __weak IBOutlet UILabel *EmailLabel;
+    __weak IBOutlet UILabel *ConfirmEmailLabel;
+    __weak IBOutlet UILabel *PasswordLabel;
+    __weak IBOutlet UILabel *ConfirmPasswordLabel;
+    __weak IBOutlet UILabel *DateOfBirthLabel;
+}
 
 @end
 
 @implementation StaffRegistration1ViewController
 
 
-@synthesize firstName, middleName, lastName, nickName, email, confirmEmail, password, confirmPassword, cellphone, textInputScrollView;
+@synthesize firstName, middleName, lastName, nickName, username, email, confirmEmail, password, confirmPassword, dateOfBirth, dateOfBirthSelected, textInputScrollView;
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-   
-    [self setupTextFields];
+    
 }//eom
 
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self setUpTapGesture];
+    
+    [self createDatePickerForDOB];
+}//eom
 
 /* verifying the required input fileds */
 - (BOOL)verifyDataEnter
 {
     BOOL emailFilled       = false;
     BOOL passwordFilled    = false;
-    BOOL cellphoneFilled   = false;
+    BOOL dateofBirthFilled = false;
     BOOL validEmailFormat  = false;
     
     //checking for valid input
@@ -44,7 +64,7 @@
             [self scrollVievEditingFinished:firstName]; //take scroll to textfield so user can see their error
             firstName.text =@""; //clearing field
             // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Missing the first Name field" and:@"Okay"];
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your first name" and:@"Okay"];
             return 0;
         }
         
@@ -53,6 +73,11 @@
         if ([trimmedString isEqualToString:@""]) {
             middleName.text =@""; //clearing field
         }
+        else if( self.middleName.text.length > 1)
+        {
+            [self showAlert:@"Registration Field" withMessage:@"Please enter only your middle initial" and:@"Okay"];
+            return 0;
+        }
     
         testing = lastName.text;
         trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
@@ -60,7 +85,17 @@
             [self scrollVievEditingFinished:lastName]; //take scroll to textfield so user can see their error
             lastName.text =@""; //clearing field
             // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Missing the last Name field" and:@"Okay"];
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your  last name" and:@"Okay"];
+            return 0;
+        }
+    
+        testing = username.text; 
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:username]; //take scroll to textfield so user can see their error
+            username.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your desired username" and:@"Okay"];
             return 0;
         }
     
@@ -76,7 +111,7 @@
             [self scrollVievEditingFinished:email]; //take scroll to textfield so user can see their error
             email.text =@""; //clearing field
             // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Missing the last email field" and:@"Okay"];
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your email" and:@"Okay"];
             return 0;
         }
 
@@ -86,7 +121,7 @@
             [self scrollVievEditingFinished:password]; //take scroll to textfield so user can see their error
             password.text =@""; //clearing field
             // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Missing the last password field" and:@"Okay"];
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your desired password" and:@"Okay"];
             return 0;
         }
 
@@ -111,7 +146,7 @@
 
         }
         else {
-            [self showAlert:@"Registration Field" withMessage:@"Emails do not match" and:@"Okay"];
+            [self showAlert:@"Registration Field" withMessage:@"Email and confirm do not match" and:@"Okay"];
             return 0;
         }
 
@@ -134,12 +169,12 @@
             return 0;
         }
     
-    if(cellphone.hasText){
-        cellphoneFilled = true;
+    if(self.dateOfBirth.hasText){
+        dateofBirthFilled = true;
     }
     else {
-        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
-        [self showAlert:@"Registration Field" withMessage:@"Missing the Cell Phone field" and:@"Okay"];
+        [self scrollVievEditingFinished:dateOfBirth]; //take scroll to textfield so user can see their error
+        [self showAlert:@"Registration Field" withMessage:@"Please enter your Date of Birth" and:@"Okay"];
         return 0;
     }
     
@@ -154,26 +189,28 @@
     if(result)
     {
         //moving to the next controller
-        [self performSegueWithIdentifier:@"staffRegistration2" sender:self];
+        [self performSegueWithIdentifier:@"goToStaffRegister2" sender:self];
     }
     else
     {
-        NSLog(@"missing some/all required fields");
+        NSLog(@"missing some/all required fields on staffRegistration1");
     }
 }//eom
 
 
 /* preparing the data to sent to the next view controller */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"staffRegistration2"]){
+    if([segue.identifier isEqualToString:@"goToStaffRegister2"]){
         StaffRegistration2ViewController *controller = (StaffRegistration2ViewController *)segue.destinationViewController;
+        controller.accountType  = @"STAFF";
         controller.firstName    = self.firstName.text;
         controller.middleName   = self.middleName.text;
         controller.lastName     = self.lastName.text;
         controller.nickName     = self.nickName.text;
+        controller.username     = self.username.text;
         controller.email        = self.email.text;
         controller.password     = self.password.text;
-        controller.cellphone    = self.cellphone.text;
+        controller.dateOfBirth  = self.dateOfBirth.text;
     }
 }//eom
 
@@ -199,33 +236,130 @@
             [alert show];//display alert
         }//eom
 
-
-/******** textfields  functions********/
-
-        /* setup textfields */
-        -(void) setupTextFields
+/********* tap gestures functions *******/
+        /*sets up taps gesture*/
+        -(void)setUpTapGesture
         {
-            //setup of texfields
-            self.firstName.delegate         = self;
-            self.middleName.delegate        = self;
-            self.lastName.delegate          = self;
-            self.nickName.delegate          = self;
-            self.email.delegate             = self;
-            self.confirmEmail.delegate      = self;
-            self.password.delegate          = self;
-            self.confirmPassword.delegate   = self;
-            self.cellphone.delegate         = self;
-            
             //to dismiss keyboard when a tap is done outside the textfield
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard:)];
             [self.view addGestureRecognizer:tap];
             
-        }//eom
+        }//eoom
 
         /* dimisses keyboard upon touching background */
         - (void)dismissKeyboard:(UITapGestureRecognizer *)recognizer {
             [self.view endEditing:YES];
         }
+
+/****** UIDatePicker Methods ********/
+
+         /* creating a UiDatePicker for date of birth textfiled*/
+        -(void)createDatePickerForDOB
+        {
+            //calculating starting date for datepicker
+            NSDate *now = [NSDate date];
+            NSDateComponents *minusYears = [NSDateComponents new];
+            minusYears.year = -18;
+            NSDate *calculatedDate = [[NSCalendar currentCalendar] dateByAddingComponents:minusYears
+                                                                                   toDate:now
+                                                                                  options:0];
+            
+            // create a UIPicker view as a custom keyboard view
+            dobPickerView = [[UIDatePicker alloc] init];
+            [dobPickerView sizeToFit];
+            dobPickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+            [dobPickerView setDatePickerMode:UIDatePickerModeDate];
+            [dobPickerView setDate:calculatedDate];//setting starting date
+            self.dateOfBirth.inputView = dobPickerView;
+            
+            // creating toolbar for 'Cancel' and 'Done' actions
+            UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+            keyboardDoneButtonView.barStyle = UIBarStyleBlack;
+            keyboardDoneButtonView.translucent = YES;
+            keyboardDoneButtonView.tintColor = nil;
+            [keyboardDoneButtonView sizeToFit];
+            
+            //creating empty UIBarItem to force first item to the right
+            UIBarButtonItem* empty1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            
+            //creating 'Done' UIBarItem to be the exit point for the picker
+            UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                           style:UIBarButtonItemStyleBordered
+                                                                          target:self
+                                                                          action:@selector(cancelClicked:)];
+            
+            
+            //creating 'Done' UIBarItem to be the exit point for the picker
+            UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                style:UIBarButtonItemStyleBordered
+                                                                          target:self
+                                                                    action:@selector(doneClicked:)];
+            
+            //adding UIBarItems to the Keyboard/DatePicker
+            [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
+            
+            // Plug the keyboardDoneButtonView into the text field
+            self.dateOfBirth.inputAccessoryView = keyboardDoneButtonView;
+        }//eom
+
+        //makes the date of birth first responder upon touching the uitextfield
+        - (void)setDateClicked:(id)sender
+        {
+            [self.dateOfBirth becomeFirstResponder];
+        }
+
+        //process the date selected after the user click cancel
+        //   and resign being the first reponsder
+        - (void)cancelClicked:(id)sender
+        {
+             [self.dateOfBirth resignFirstResponder];
+            
+            //update dob hidden field
+            if(self.dateOfBirth.text.length == 0)
+            {
+                [self->DateOfBirthLabel setHidden:YES];
+            }
+            else
+            {
+                [self->DateOfBirthLabel setHidden:NO];
+            }
+        }//eom
+
+        //process the date selected after the user click done
+        //   and resign being the first reponsder
+        - (void)doneClicked:(id)sender
+        {
+            [self.dateOfBirth resignFirstResponder];
+            
+            //converted needed for nsstring
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"MM-dd-yyyy"];
+            
+            //Optionally for time zone conversions
+            [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
+            
+            NSDate *selectedDate = [self->dobPickerView date]; //getting date from datepicker
+            
+            //updating dob NSstring to be sent to the next controller
+            self.dateOfBirthSelected = [formatter stringFromDate:selectedDate];
+            
+            //updating the texfield so the user can see the date selected
+            self.dateOfBirth.text = [formatter stringFromDate:selectedDate];
+            
+            
+            //update dob hidden field
+            if(self.dateOfBirth.text.length == 0)
+            {
+                [self->DateOfBirthLabel setHidden:YES];
+            }
+            else
+            {
+                [self->DateOfBirthLabel setHidden:NO];
+            }
+        }//eom
+
+
+/******** textfields  functions********/
 
 //        /* dimmisses UITextField as soon the background is touched - this will not work with UiScrollview*/
 //        -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -248,37 +382,151 @@
                 [self.firstName resignFirstResponder];
                 [self.middleName becomeFirstResponder];
             }
-            else if(textField == self.middleName){
+            else if(textField == self.middleName)
+            {
                 [self.middleName resignFirstResponder];
                 [self.lastName becomeFirstResponder];
             }
             else if(textField == self.lastName){
+                [self.lastName resignFirstResponder];
+                [self.username becomeFirstResponder];
+            }
+            else if(textField == self.username){
+                [self.username resignFirstResponder];
                 [self.nickName becomeFirstResponder];
             }
             else if(textField == self.nickName){
+                [self.nickName resignFirstResponder];
                 [self.email becomeFirstResponder];
             }
             else if(textField == self.email){
+                [self.email resignFirstResponder];
                 [self.confirmEmail becomeFirstResponder];
             }
             else if(textField == self.confirmEmail){
+                [self.confirmEmail resignFirstResponder];
                 [self.password becomeFirstResponder];
             }
             else if(textField == self.password){
+                [self.password resignFirstResponder];
                 [self.confirmPassword becomeFirstResponder];
             }
             else if(textField == self.confirmPassword){
-                [self.cellphone becomeFirstResponder];
+                [self.confirmPassword resignFirstResponder];
+                [self.dateOfBirth becomeFirstResponder];
             }
-            else if(textField == self.cellphone){
-                [self.cellphone resignFirstResponder];
-            }
-            else{
-                NSLog(@"none are the same");
-            }
+//            else if(textField == self.dateOfBirth){
+//                [self.dateOfBirth resignFirstResponder];
+//            }
 
             return YES;
         }//eom
+
+        /* shows and hides the label above the textfield depending if the textfield is blank or filled */
+        - (IBAction)textFieldValuesChanged:(UITextField *)sender {
+            
+            int labelID = (int)sender.tag;
+            
+            if(labelID == 0)//first name
+            {
+                if(self.firstName.text.length == 0)
+                {
+                    [self->firstNameLabel setHidden:YES];
+                }
+                else
+                {
+                    [self->firstNameLabel setHidden:NO];
+                }
+            }
+            else if(labelID == 1)//middle name
+            {
+                if(self.middleName.text.length == 0)
+                {
+                    [self->MiddleNameLabel setHidden:YES];
+                }
+                else
+                {
+                    [self->MiddleNameLabel setHidden:NO];
+                }
+            }
+            else if(labelID == 2)//last name
+            {
+                if(self.lastName.text.length == 0)
+                {
+                    [self->LastNameLabel setHidden:YES];
+                }
+                else
+                {
+                    [self->LastNameLabel setHidden:NO];
+                }
+            }
+            else if(labelID == 3)//username
+            {
+                if(self.username.text.length == 0)
+                {
+                    [self->UsernameLabel setHidden:YES];
+                }
+                else
+                {
+                    [self->UsernameLabel setHidden:NO];
+                }
+            }
+            else if(labelID == 4)//nickname
+            {
+                if(self.nickName.text.length == 0)
+                {
+                    [self->NicknameLabel setHidden:YES];
+                }
+                else
+                {
+                    [self->NicknameLabel setHidden:NO];
+                }
+            }
+            else if(labelID == 5)//email
+            {
+                if(self.email.text.length == 0)
+                {
+                    [self->EmailLabel setHidden:YES];
+                }
+                else
+                {
+                    [self->EmailLabel setHidden:NO];
+                }
+            }
+            else if(labelID == 6)//confirm email
+            {
+                if(self.confirmEmail.text.length == 0)
+                {
+                    [self->ConfirmEmailLabel setHidden:YES];
+                }
+                else
+                {
+                    [self->ConfirmEmailLabel setHidden:NO];
+                }
+            }
+            else if(labelID == 7)//password
+            {
+                if(self.password.text.length == 0)
+                {
+                    [self->PasswordLabel setHidden:YES];
+                }
+                else
+                {
+                    [self->PasswordLabel setHidden:NO];
+                }
+            }
+            else if(labelID == 8)//confirm password
+            {
+                if(self.confirmPassword.text.length == 0)
+                {
+                    [self->ConfirmPasswordLabel setHidden:YES];
+                }
+                else
+                {
+                    [self->ConfirmPasswordLabel setHidden:NO];
+                }
+            }
+        }//eo-action
 
 
     /********* scrollview functions **********/
@@ -294,21 +542,7 @@
             [textInputScrollView setContentOffset:point animated:YES];
         }
 
-        - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
-        {
-            [self scrollViewAdaptToStartEditingTextField:textField];
-            return YES;
-        }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
 

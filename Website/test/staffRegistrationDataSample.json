@@ -33,37 +33,45 @@
       "dob":"11\\/29\\/87",
       "gender":"male",
       "languages":"english,spanish",
-      "ethnicity":"3",
       "typeOfLicense":"0",
+      "ethnicity":"3",
       "height":"5.4",
       "weight":"150",
       "hairColor":"black",
       "eyeColor":"brown",
-      "pantSize":"30",
-      "shoeSize":"7",
       "tshirtSize":"M",
-      "desiredHourlyRate":"25",
-      "desiredWeeklyRate":"2500",
-      "tattoos":"0",
-      "piercings":"0",
+      "pantSize":"30",
       "chestSize":"null",
       "waistSize":"null",
+      "hipSize":"null",
       "dressSize":"null",
+      "shoeSize":"7",
+
+      "desiredHourlyRate":"25",  //check these values?
+      "desiredWeeklyRate":"2500", //check these values?
+
+
+      "tattoos":"0",
+      "piercings":"0",
       "ssn":"67988433",
-      "ein":"null",
-      "citiesWillingToWork":"Miami, Kendall",
+      "ein":"",
+      "business_name": "null",
+      "citiesWillingToWork":"Miami, Kendall", //?????
+
       "travel":"1",
-      "professionalInsurance":"0",
-      "directDepositDesired":"1",
+      "professionalInsurance":"0",//?????
+      "directDepositDesired":"1",//?????
+      
       "DirectDepositRoutingNumber":"777899231",
       "DirectDepositAccountNumber":"998763229938",
-      "isModel":"0",
-      "isBrandAmbassador":"0",
-      "isFlyerDistributor":"0",
-      "isFieldMarketingManager":"0",
-      "isDancer":"0",
-      "iswaiterOrWaitress":"0",
-      "isProductionAssistant":"0",
-      "isSalesExecutive":"1"
+
+      "isModel":"0",//?????
+      "isBrandAmbassador":"0",//?????
+      "isFlyerDistributor":"0",//?????
+      "isFieldMarketingManager":"0",//?????
+      "isDancer":"0",//?????
+      "iswaiterOrWaitress":"0",//?????
+      "isProductionAssistant":"0",//?????
+      "isSalesExecutive":"1"//?????
    }
 }

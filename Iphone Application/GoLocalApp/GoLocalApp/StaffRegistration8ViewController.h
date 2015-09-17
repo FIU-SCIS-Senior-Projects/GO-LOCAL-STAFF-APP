@@ -1,5 +1,5 @@
 //
-//  StaffRegistration8ViewController.h
+//  StaffRegistration7ViewController.h
 //  GoLocalApp
 //
 //  Created by Luis Andres Castillo Hernandez on 9/7/15.
@@ -8,73 +8,45 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StaffRegistration8ViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate>
+@interface StaffRegistration8ViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate, UIAlertViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UISwitch *validDriverLicenseSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *validCommercialDriverLicenseSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *hasTattoosSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *hasPiercingsSwitch;
 
-@property (weak, nonatomic) IBOutlet UISwitch *driverLicense;
-@property (weak, nonatomic) IBOutlet UISwitch *commercialLicense;
-@property (nonatomic)  bool typeOfLicense;
-
-
-@property (nonatomic, strong) NSArray *ethnicitiesOptions;    //array to hold ethnicities
-@property (weak, nonatomic) IBOutlet UIPickerView *ethnicityPicker;
-@property (nonatomic)  int ethnicity;
+@property (weak, nonatomic) IBOutlet UITextField *ethnicityTextField;
+@property (weak, nonatomic) IBOutlet UITextField *heightTextField;
+@property (weak, nonatomic) IBOutlet UITextField *weightTextField;
+@property (weak, nonatomic) IBOutlet UITextField *hairColorTextField;
+@property (weak, nonatomic) IBOutlet UITextField *eyeColorTextField;
+@property (weak, nonatomic) IBOutlet UITextField *pantSizeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *shoeSizeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *tshirtSizeTextField;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-
 - (IBAction)submitForm:(id)sender;
 
-- (IBAction)driverLicenseChanged:(id)sender;
-- (IBAction)commercialLicenseChanged:(id)sender;
+- (IBAction)textFieldValueChanged:(id)sender;
 
-
-//PASSED VALUEs FROM PREVIOUS CONTROLLER
-
-//view controller 1
+//PASSED VALUES FROM PREVIOUS CONTROLLER
+@property (nonatomic)  NSString *accountType;                   //view controller 1
 @property (nonatomic)  NSString *firstName;
 @property (nonatomic)  NSString *middleName;
 @property (nonatomic)  NSString *lastName;
 @property (nonatomic)  NSString *nickName;
 @property (nonatomic)  NSString *email;
+@property (nonatomic)  NSString *username;
 @property (nonatomic)  NSString *password;
-@property (nonatomic)  NSString *cellphone;
+@property (nonatomic)  NSString *dateOfBirth;
 
-//view controller 2
-@property (nonatomic)  NSString *address;
-@property (nonatomic)  NSString *city;
-@property (nonatomic)  NSString *zipcode;
-@property (nonatomic)  NSString *stateSelected;
-@property (nonatomic)  BOOL djSelected;
-@property (nonatomic)  BOOL liveBandSelected;
-@property (nonatomic)  BOOL cateringCompanySelected;
-@property (nonatomic)  BOOL otherServicesSelected;
-
-//view controller 3 - DJ only
-@property (nonatomic)  NSString *djDescription;
-@property (nonatomic)  NSString *djWebsite;
-@property (nonatomic)  NSString *djSocialMedia;
-
-//view controller 4 - Live Band Only
-@property (nonatomic)  NSString *liveBandDescription;
-@property (nonatomic)  NSString *liveBandWebsite;
-@property (nonatomic)  NSString *liveBandSocialMedia;
-
-
-//view controller 5 - Catering Company Only
-@property (nonatomic)  NSString *cateringCompanyDescription;
-@property (nonatomic)  NSString *cateringCompanyWebsite;
-@property (nonatomic)  NSString *cateringCompanySocialMedia;
-
-//view controller 6
-@property (nonatomic)  NSString *otherServicesDescription;
-@property (nonatomic)  NSString *otherServicesWebsite;
-@property (nonatomic)  NSString *otherServicesSocialMedia;
-
-//view controller 7
-@property (nonatomic)  NSString *dob;
-@property (nonatomic)  bool gender;// 0-female 1-male
+@property (nonatomic)  NSString *cellphone;                     //view controller 2
+@property (nonatomic)  NSString *completeAddress;
+@property (nonatomic)  bool gender; //0-female | 1 -male
 @property (nonatomic)  NSString *languages;
+
+@property (nonatomic) NSMutableArray * staffTypeExperience;     //view controller 3
 
 
 @end
