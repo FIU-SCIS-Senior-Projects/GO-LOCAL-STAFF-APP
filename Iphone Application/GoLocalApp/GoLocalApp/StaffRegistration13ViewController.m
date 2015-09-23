@@ -16,10 +16,11 @@
 @implementation StaffRegistration13ViewController
 
 @synthesize scrollView, wantsDirectDeposit, DirectDepositRoutingNumber, DirectDepositAccountNumber,
-isIncorporated, ssn, ein, businessName, travelPercentage, desiredHourlyRate, desiredWeeklyRate,
+hasProfessionalInsurance, isIncorporated, ssn, ein, businessName, travelPercentage, desiredHourlyRate, desiredWeeklyRate,
 chestSize, waistSize, hipsSize, dressSize,
-hasDriverLicense, hasCommercialLicense, hasTattos, hasPiercings, ethnicity, height, weight, hairColor, pantSize, shoeSize, tshirtSize,
-staffTypeExperience,
+hasDriverLicense, hasCommercialLicense, hasTattos, hasPiercings, ethnicity, height, weight, hairColor,eyeColor, pantSize, shoeSize, tshirtSize,
+djCostOfService, liveBandCostOfService, cateringCompanyCostOfService, otherServicesCostOfService,
+staffTypeExperience, djSelected, liveBandSelected, cateringCompanySelected, otherServicesSelected,
 cellphone, completeAddress, gender, languages,
 accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
 
@@ -33,16 +34,17 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 -(void)viewDidAppear:(BOOL)animated
 {
     [self setUpTapGesture];
+    
     [self testDataPassed];//testing
 }//eom
 
 /* */
 - (IBAction)directDepositSelectionChanged:(id)sender
 {
-    if(!self.wantsDirectDeposit.on){
-        [self showAlert:@"Registration Field" withMessage:@"Our Apologies but at the moment we only support direct deposit. More options and features coming soon!" and:@"Okay"];
-        [self.wantsDirectDeposit setOn:true];
-    }
+//    if(!self.wantsDirectDeposit.on){
+//        [self showAlert:@"Registration Field" withMessage:@"Our Apologies but at the moment we only support direct deposit. More options and features coming soon!" and:@"Okay"];
+//        [self.wantsDirectDeposit setOn:true];
+//    }
 }//eo-action
 
 
@@ -120,6 +122,34 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         
         //view controller 3 data
         controller.staffTypeExperience      = self.staffTypeExperience;
+        controller.djSelected               = self.djSelected;
+        controller.liveBandSelected         = self.liveBandSelected;
+        controller.cateringCompanySelected  = self.cateringCompanySelected;
+        controller.otherServicesSelected    = self.otherServicesSelected;
+        
+        //view controller 4
+        controller.djDescription            = self.djDescription;
+        controller.djWebsite                = self.djWebsite;
+        controller.djSocialMedia            = self.djSocialMedia;
+        controller.djCostOfService          = self.djCostOfService;
+        
+        //view controller 5
+        controller.liveBandDescription      = self.liveBandDescription;
+        controller.liveBandWebsite          = self.liveBandWebsite;
+        controller.liveBandSocialMedia      = self.liveBandSocialMedia;
+        controller.liveBandCostOfService    = self.liveBandCostOfService;
+        
+        //view controller 6
+        controller.cateringCompanyDescription   = self.cateringCompanyDescription;
+        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite;
+        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia;
+        controller.cateringCompanyCostOfService = self.cateringCompanyCostOfService;
+        
+        //view controller 7
+        controller.otherServicesDescription     = self.otherServicesDescription;
+        controller.otherServicesWebsite         = self.otherServicesWebsite;
+        controller.otherServicesSocialMedia     = self.otherServicesSocialMedia;
+        controller.otherServicesCostOfService   = self.otherServicesCostOfService;
         
         //view controller 8 data
         controller.hasDriverLicense         = self.hasDriverLicense;
@@ -130,6 +160,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         controller.height                   = self.height;
         controller.weight                   = self.weight;
         controller.hairColor                = self.hairColor;
+        controller.eyeColor                 = self.eyeColor;
         controller.pantSize                 = self.pantSize;
         controller.shoeSize                 = self.shoeSize;
         controller.tshirtSize               = self.tshirtSize;
@@ -141,6 +172,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         controller.dressSize                = self.dressSize;
         
         //view controller 10 data
+        controller.hasProfessionalInsurance = self.hasProfessionalInsurance;
         controller.isIncorporated           = self.isIncorporated;
         controller.ssn                      = self.ssn;
         controller.ein                      = self.ein;
@@ -149,33 +181,11 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         controller.desiredWeeklyRate        = self.desiredWeeklyRate;
         controller.travelPercentage         = self.travelPercentage;
         
-        
-        //        controller.djDescription                = self.djDescription;               //view controller 3
-        //        controller.djWebsite                    = self.djWebsite;
-        //        controller.djSocialMedia                = self.djSocialMedia;
-        //
-        //        controller.liveBandDescription          = self.liveBandDescription;         //view controller 4
-        //        controller.liveBandWebsite              = self.liveBandWebsite;
-        //        controller.liveBandSocialMedia          = self.liveBandSocialMedia;
-        //
-        //        controller.cateringCompanyDescription   = self.cateringCompanyDescription;  //view controller 5
-        //        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite;
-        //        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia;
-        //
-        //        controller.otherServicesDescription     = self.otherServicesDescription;    //view controller 6
-        //        controller.otherServicesWebsite         = self.otherServicesWebsite;
-        //        controller.otherServicesSocialMedia     = self.otherServicesSocialMedia;
-        //
-        //        controller.djSelected                   = self.djSelected;
-        //        controller.liveBandSelected             = self.liveBandSelected;
-        //        controller.cateringCompanySelected      = self.cateringCompanySelected;
-        //        controller.otherServicesSelected        = self.otherServicesSelected;
- 
-        
         //view controller 13
         controller.directDepositDesired         = self.wantsDirectDeposit.on;
-        controller.DirectDepositRoutingNumber   = self.DirectDepositRoutingNumber.text;
-        controller.DirectDepositAccountNumber   = self.DirectDepositAccountNumber.text;
+        controller.directDepositRoutingNumber   = self.DirectDepositRoutingNumber.text;
+        controller.directDepositAccountNumber   = self.DirectDepositAccountNumber.text;
+        
     }
 }//eom
 
@@ -212,22 +222,6 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 
 /******** textfields  functions********/
 
-
-
-        //        /* dimmisses UITextField as soon the background is touched - this will not work with UiScrollview*/
-        //        -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-        //        {
-        //            [firstName resignFirstResponder];
-        //            [middleName resignFirstResponder];
-        //            [lastName resignFirstResponder];
-        //            [nickName resignFirstResponder];
-        //            [email resignFirstResponder];
-        //            [confirmEmail resignFirstResponder];
-        //            [password resignFirstResponder];
-        //            [confirmPassword resignFirstResponder];
-        //            [cellphone resignFirstResponder];
-        //        }//eom
-
         /* dimisses UITextField as soon the return key is pressed */
         -(BOOL)textFieldShouldReturn:(UITextField *)textField {
             
@@ -238,13 +232,17 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
             else if(textField == self.DirectDepositAccountNumber){
                 [self.DirectDepositAccountNumber resignFirstResponder];
             }
-            else{
-                NSLog(@"none are the same");
-            }
             
             return YES;
         }//eom
 
+
+        /* uitextfield is about to be edit*/
+        - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+        {
+            [self scrollViewAdaptToStartEditingTextField:textField];
+            return YES;
+        }
 
 /********* scrollview functions **********/
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
@@ -257,12 +255,6 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         {
             CGPoint point = CGPointMake(0, 0);
             [scrollView setContentOffset:point animated:YES];
-        }
-
-        - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
-        {
-            [self scrollViewAdaptToStartEditingTextField:textField];
-            return YES;
         }
 
 
@@ -289,7 +281,35 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     NSLog(@" languages:       %@", self.languages);
     
     //view controller 3
-    NSLog(@" staff experience:      %@", self.staffTypeExperience);
+    NSLog(@" staff experience:          %@", self.staffTypeExperience);
+    NSLog(@" Dj Selected?               %d", self.djSelected);
+    NSLog(@" Live Band Selected?        %d", self.liveBandSelected);
+    NSLog(@" Catering Company Selected? %d", self.cateringCompanySelected);
+    NSLog(@" Other Services Selected?   %d", self.otherServicesSelected);
+    
+    //view controller 4
+    NSLog(@" djDescription:      %@", self.djDescription);
+    NSLog(@" djWebsite:          %@", self.djWebsite);
+    NSLog(@" djSocialMedia:      %@", self.djSocialMedia);
+    NSLog(@" djCostOfService:    %@", self.djCostOfService);
+    
+    //view controller 5
+    NSLog(@" liveBandDescription:      %@", self.liveBandDescription);
+    NSLog(@" liveBandWebsite:          %@", self.liveBandWebsite);
+    NSLog(@" liveBandSocialMedia:      %@", self.liveBandSocialMedia);
+    NSLog(@" liveBandCostOfService:    %@", self.liveBandCostOfService);
+    
+    //view controller 6
+    NSLog(@" cateringCompanyDescription:      %@", self.cateringCompanyDescription);
+    NSLog(@" cateringCompanyWebsite:          %@", self.cateringCompanyWebsite);
+    NSLog(@" cateringCompanySocialMedia:      %@", self.cateringCompanySocialMedia);
+    NSLog(@" cateringCompanyCostOfService:    %@", self.cateringCompanyCostOfService);
+    
+    //view controller 7
+    NSLog(@" otherServicesDescription:      %@", self.otherServicesDescription);
+    NSLog(@" otherServicesWebsite:          %@", self.otherServicesWebsite);
+    NSLog(@" otherServicesSocialMedia:      %@", self.otherServicesSocialMedia);
+    NSLog(@" otherServicesCostOfService:    %@", self.otherServicesCostOfService);
     
     //view controller 8
     NSLog(@" driver license?        %d", self.hasDriverLicense);
@@ -300,6 +320,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     NSLog(@" height                 %@", self.height);
     NSLog(@" weight                 %@", self.weight);
     NSLog(@" hairColor              %@", self.hairColor);
+    NSLog(@" eyeColor               %@", self.eyeColor);
     NSLog(@" pantSize               %@", self.pantSize);
     NSLog(@" shoeSize               %@", self.shoeSize);
     NSLog(@" tshirtSize             %@", self.tshirtSize);
@@ -311,13 +332,14 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     NSLog(@" dressSize              %@", self.dressSize);
     
     //view controller 10
-    NSLog(@" is Incorporated ?      %d", self.isIncorporated);
-    NSLog(@" ssn                    %@", self.ssn);
-    NSLog(@" ein                    %@", self.ein);
-    NSLog(@" business Name          %@", self.businessName);
-    NSLog(@" desired Hourly Rate    %@", self.desiredHourlyRate);
-    NSLog(@" desired Weekly Rate    %@", self.desiredWeeklyRate);
-    NSLog(@" travel Percentage      %@", self.travelPercentage);
+    NSLog(@" has professional insurance?    %d", self.hasProfessionalInsurance);
+    NSLog(@" is Incorporated ?              %d", self.isIncorporated);
+    NSLog(@" ssn                            %@", self.ssn);
+    NSLog(@" ein                            %@", self.ein);
+    NSLog(@" business Name                  %@", self.businessName);
+    NSLog(@" desired Hourly Rate            %@", self.desiredHourlyRate);
+    NSLog(@" desired Weekly Rate            %@", self.desiredWeeklyRate);
+    NSLog(@" travel Percentage              %@", self.travelPercentage);
     
     NSLog(@" - - - - - - - - - - - - - ");
 }//eom

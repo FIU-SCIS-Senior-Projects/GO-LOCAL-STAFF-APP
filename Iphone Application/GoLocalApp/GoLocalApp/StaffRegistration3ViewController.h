@@ -15,6 +15,7 @@
 @property (nonatomic)  BOOL cateringCompanySelected;
 @property (nonatomic)  BOOL otherServicesSelected;             
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)submitForm:(id)sender;
 

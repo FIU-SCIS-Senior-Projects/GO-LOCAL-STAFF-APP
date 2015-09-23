@@ -9,17 +9,23 @@
 #import "StaffRegistration12ViewController.h"
 #import "StaffRegistration13ViewController.h"
 
-@interface StaffRegistration12ViewController ()
+#import "StaffDatabase.h" //needed for Core Data
 
+@interface StaffRegistration12ViewController ()
+{
+    UIImage *imageSelected;
+     StaffDatabase *staffDB;
+}
 @end
 
 @implementation StaffRegistration12ViewController
 
-@synthesize scrollView,
-isIncorporated, ssn, ein, businessName, travelPercentage, desiredHourlyRate, desiredWeeklyRate,
+@synthesize scrollView, bodyImageView,
+hasProfessionalInsurance, isIncorporated, ssn, ein, businessName, travelPercentage, desiredHourlyRate, desiredWeeklyRate,
 chestSize, waistSize, hipsSize, dressSize,
-hasDriverLicense, hasCommercialLicense, hasTattos, hasPiercings, ethnicity, height, weight, hairColor, pantSize, shoeSize, tshirtSize,
-staffTypeExperience,
+hasDriverLicense, hasCommercialLicense, hasTattos, hasPiercings, ethnicity, height, weight, hairColor, eyeColor, pantSize, shoeSize, tshirtSize,
+djCostOfService, liveBandCostOfService, cateringCompanyCostOfService, otherServicesCostOfService,
+staffTypeExperience, djSelected, liveBandSelected, cateringCompanySelected, otherServicesSelected,
 cellphone, completeAddress, gender, languages,
 accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
 
@@ -37,7 +43,11 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 
 -(void)viewDidAppear:(BOOL)animated
 {
-     [self testDataPassed];//testing
+//     [self testDataPassed];//testing
+    
+    //creating db helper
+    staffDB = [[StaffDatabase alloc] init];
+    
 }//eom
 
 /* create UIAlert*/
@@ -54,14 +64,23 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 }//eom
 
 
-/* verifying the required input fileds */
+/* verifying the required input fields */
 - (BOOL)verifyDataEnter
 {
-    
-    NSLog(@"Image needs to be checked");
+    //checking a image was selected
+    if(self->imageSelected == NULL)
+    {
+        NSLog(@"NO IMAGE WAS SELECTED");
+    }
+    else
+    {
+        //saving photo on database
+        BOOL imageSavedResults = [staffDB saveBodyImage:self->imageSelected];
+        NSLog(@"body image succesfully saved? %d", imageSavedResults);
+    }
     
     return 1;
-}
+}//eom
 
 
 - (IBAction)submitForm:(id)sender
@@ -70,7 +89,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     bool result = [self verifyDataEnter];
     if(result)
     {
-        [self performSegueWithIdentifier:@"staffRegistration13" sender:self];
+        [self performSegueWithIdentifier:@"goToStaffRegister13" sender:self];
     }
     else
     {
@@ -81,7 +100,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 
 /* preparing the data to sent to the next view controller */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"staffRegistration13"])
+    if([segue.identifier isEqualToString:@"goToStaffRegister13"])
     {
         StaffRegistration13ViewController *controller = (StaffRegistration13ViewController *)segue.destinationViewController;
         
@@ -103,6 +122,34 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         
         //view controller 3 data
         controller.staffTypeExperience      = self.staffTypeExperience;
+        controller.djSelected               = self.djSelected;
+        controller.liveBandSelected         = self.liveBandSelected;
+        controller.cateringCompanySelected  = self.cateringCompanySelected;
+        controller.otherServicesSelected    = self.otherServicesSelected;
+        
+        //view controller 4
+        controller.djDescription            = self.djDescription;
+        controller.djWebsite                = self.djWebsite;
+        controller.djSocialMedia            = self.djSocialMedia;
+        controller.djCostOfService          = self.djCostOfService;
+        
+        //view controller 5
+        controller.liveBandDescription      = self.liveBandDescription;
+        controller.liveBandWebsite          = self.liveBandWebsite;
+        controller.liveBandSocialMedia      = self.liveBandSocialMedia;
+        controller.liveBandCostOfService    = self.liveBandCostOfService;
+        
+        //view controller 6
+        controller.cateringCompanyDescription   = self.cateringCompanyDescription;
+        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite;
+        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia;
+        controller.cateringCompanyCostOfService = self.cateringCompanyCostOfService;
+        
+        //view controller 7
+        controller.otherServicesDescription     = self.otherServicesDescription;
+        controller.otherServicesWebsite         = self.otherServicesWebsite;
+        controller.otherServicesSocialMedia     = self.otherServicesSocialMedia;
+        controller.otherServicesCostOfService   = self.otherServicesCostOfService;
         
         //view controller 8 data
         controller.hasDriverLicense         = self.hasDriverLicense;
@@ -113,6 +160,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         controller.height                   = self.height;
         controller.weight                   = self.weight;
         controller.hairColor                = self.hairColor;
+        controller.eyeColor                 = self.eyeColor;
         controller.pantSize                 = self.pantSize;
         controller.shoeSize                 = self.shoeSize;
         controller.tshirtSize               = self.tshirtSize;
@@ -124,6 +172,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         controller.dressSize                = self.dressSize;
         
         //view controller 10 data
+        controller.hasProfessionalInsurance = self.hasProfessionalInsurance;
         controller.isIncorporated           = self.isIncorporated;
         controller.ssn                      = self.ssn;
         controller.ein                      = self.ein;
@@ -131,28 +180,6 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         controller.desiredHourlyRate        = self.desiredHourlyRate;
         controller.desiredWeeklyRate        = self.desiredWeeklyRate;
         controller.travelPercentage         = self.travelPercentage;
-        
-    
-//        controller.djDescription                = self.djDescription;               //view controller 3
-//        controller.djWebsite                    = self.djWebsite;
-//        controller.djSocialMedia                = self.djSocialMedia;
-//        
-//        controller.liveBandDescription          = self.liveBandDescription;         //view controller 4
-//        controller.liveBandWebsite              = self.liveBandWebsite;
-//        controller.liveBandSocialMedia          = self.liveBandSocialMedia;
-//        
-//        controller.cateringCompanyDescription   = self.cateringCompanyDescription;  //view controller 5
-//        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite;
-//        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia;
-//        
-//        controller.otherServicesDescription     = self.otherServicesDescription;    //view controller 6
-//        controller.otherServicesWebsite         = self.otherServicesWebsite;
-//        controller.otherServicesSocialMedia     = self.otherServicesSocialMedia;
-//        
-//        controller.djSelected                   = self.djSelected;
-//        controller.liveBandSelected             = self.liveBandSelected;
-//        controller.cateringCompanySelected      = self.cateringCompanySelected;
-//        controller.otherServicesSelected        = self.otherServicesSelected;
     }
 }//eom
 /********* photo functions ******/
@@ -181,9 +208,15 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    self.headshotImageView.image = chosenImage;
     
+    //updating image view with image
+    self.bodyImageView.image = chosenImage;
+    
+    //saving image to local uiimage to be later stored in Core data
+    self->imageSelected = chosenImage;
+
     [picker dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -191,7 +224,6 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
-
 
 
 -(void)testDataPassed
@@ -216,7 +248,35 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     NSLog(@" languages:       %@", self.languages);
     
     //view controller 3
-    NSLog(@" staff experience:      %@", self.staffTypeExperience);
+    NSLog(@" staff experience:          %@", self.staffTypeExperience);
+    NSLog(@" Dj Selected?               %d", self.djSelected);
+    NSLog(@" Live Band Selected?        %d", self.liveBandSelected);
+    NSLog(@" Catering Company Selected? %d", self.cateringCompanySelected);
+    NSLog(@" Other Services Selected?   %d", self.otherServicesSelected);
+    
+    //view controller 4
+    NSLog(@" djDescription:      %@", self.djDescription);
+    NSLog(@" djWebsite:          %@", self.djWebsite);
+    NSLog(@" djSocialMedia:      %@", self.djSocialMedia);
+    NSLog(@" djCostOfService:    %@", self.djCostOfService);
+    
+    //view controller 5
+    NSLog(@" liveBandDescription:      %@", self.liveBandDescription);
+    NSLog(@" liveBandWebsite:          %@", self.liveBandWebsite);
+    NSLog(@" liveBandSocialMedia:      %@", self.liveBandSocialMedia);
+    NSLog(@" liveBandCostOfService:    %@", self.liveBandCostOfService);
+    
+    //view controller 6
+    NSLog(@" cateringCompanyDescription:      %@", self.cateringCompanyDescription);
+    NSLog(@" cateringCompanyWebsite:          %@", self.cateringCompanyWebsite);
+    NSLog(@" cateringCompanySocialMedia:      %@", self.cateringCompanySocialMedia);
+    NSLog(@" cateringCompanyCostOfService:    %@", self.cateringCompanyCostOfService);
+    
+    //view controller 7
+    NSLog(@" otherServicesDescription:      %@", self.otherServicesDescription);
+    NSLog(@" otherServicesWebsite:          %@", self.otherServicesWebsite);
+    NSLog(@" otherServicesSocialMedia:      %@", self.otherServicesSocialMedia);
+    NSLog(@" otherServicesCostOfService:    %@", self.otherServicesCostOfService);
     
     //view controller 8
     NSLog(@" driver license?        %d", self.hasDriverLicense);
@@ -227,6 +287,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     NSLog(@" height                 %@", self.height);
     NSLog(@" weight                 %@", self.weight);
     NSLog(@" hairColor              %@", self.hairColor);
+    NSLog(@" eyeColor              %@", self.eyeColor);
     NSLog(@" pantSize               %@", self.pantSize);
     NSLog(@" shoeSize               %@", self.shoeSize);
     NSLog(@" tshirtSize             %@", self.tshirtSize);
@@ -238,13 +299,14 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     NSLog(@" dressSize              %@", self.dressSize);
     
     //view controller 10
-    NSLog(@" is Incorporated ?      %d", self.isIncorporated);
-    NSLog(@" ssn                    %@", self.ssn);
-    NSLog(@" ein                    %@", self.ein);
-    NSLog(@" business Name          %@", self.businessName);
-    NSLog(@" desired Hourly Rate    %@", self.desiredHourlyRate);
-    NSLog(@" desired Weekly Rate    %@", self.desiredWeeklyRate);
-    NSLog(@" travel Percentage      %@", self.travelPercentage);
+    NSLog(@" has professional insurance?    %d", self.hasProfessionalInsurance);
+    NSLog(@" is Incorporated ?              %d", self.isIncorporated);
+    NSLog(@" ssn                            %@", self.ssn);
+    NSLog(@" ein                            %@", self.ein);
+    NSLog(@" business Name                  %@", self.businessName);
+    NSLog(@" desired Hourly Rate            %@", self.desiredHourlyRate);
+    NSLog(@" desired Weekly Rate            %@", self.desiredWeeklyRate);
+    NSLog(@" travel Percentage              %@", self.travelPercentage);
     
     NSLog(@" - - - - - - - - - - - - - ");}//eom
 

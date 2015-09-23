@@ -27,12 +27,13 @@
 		DE8C2E5B1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C2E5A1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m */; };
 		DE8C2E5E1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C2E5D1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m */; };
 		DE8C2E611BA9E16600AA0BB6 /* StaffRegistration10ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C2E601BA9E16600AA0BB6 /* StaffRegistration10ViewController.m */; };
+		DEC6532E1BB25B73001A8655 /* StaffDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC6532D1BB25B73001A8655 /* StaffDatabase.m */; settings = {ASSET_TAGS = (); }; };
 		DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DED49C461B97CA0A0091B986 /* ForgotPasswordViewController.m */; };
 		DEE6B8441B9941C200912541 /* OLDStaffRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8431B9941C200912541 /* OLDStaffRegistration2ViewController.m */; };
-		DEE6B8471B9942BF00912541 /* OLDStaffRegistration3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8461B9942BF00912541 /* OLDStaffRegistration3ViewController.m */; };
-		DEE6B84A1B9942CA00912541 /* OLDStaffRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8491B9942CA00912541 /* OLDStaffRegistration4ViewController.m */; };
-		DEE6B84D1B9942DA00912541 /* OLDStaffRegistration5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B84C1B9942DA00912541 /* OLDStaffRegistration5ViewController.m */; };
-		DEE6B8501B9942E500912541 /* OLDStaffRegistration6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B84F1B9942E500912541 /* OLDStaffRegistration6ViewController.m */; };
+		DEE6B8471B9942BF00912541 /* StaffRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8461B9942BF00912541 /* StaffRegistration4ViewController.m */; };
+		DEE6B84A1B9942CA00912541 /* StaffRegistration5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8491B9942CA00912541 /* StaffRegistration5ViewController.m */; };
+		DEE6B84D1B9942DA00912541 /* StaffRegistration6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B84C1B9942DA00912541 /* StaffRegistration6ViewController.m */; };
+		DEE6B8501B9942E500912541 /* StaffRegistration7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B84F1B9942E500912541 /* StaffRegistration7ViewController.m */; };
 		DEF0BAB91B9D56C8001C6D84 /* StaffRegistration8ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BAB81B9D56C8001C6D84 /* StaffRegistration8ViewController.m */; };
 		DEF0BABC1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BABB1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.m */; };
 		DEF0BABF1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BABE1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.m */; };
@@ -91,18 +92,20 @@
 		DE8C2E5D1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration3ViewController.m; sourceTree = "<group>"; };
 		DE8C2E5F1BA9E16600AA0BB6 /* StaffRegistration10ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration10ViewController.h; sourceTree = "<group>"; };
 		DE8C2E601BA9E16600AA0BB6 /* StaffRegistration10ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration10ViewController.m; sourceTree = "<group>"; };
+		DEC6532C1BB25B73001A8655 /* StaffDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffDatabase.h; sourceTree = "<group>"; };
+		DEC6532D1BB25B73001A8655 /* StaffDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffDatabase.m; sourceTree = "<group>"; };
 		DED49C451B97CA0A0091B986 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		DED49C461B97CA0A0091B986 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		DEE6B8421B9941C200912541 /* StaffRegistration2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration2ViewController.h; sourceTree = "<group>"; };
 		DEE6B8431B9941C200912541 /* OLDStaffRegistration2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLDStaffRegistration2ViewController.m; sourceTree = "<group>"; };
-		DEE6B8451B9942BF00912541 /* OLDStaffRegistration3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLDStaffRegistration3ViewController.h; sourceTree = "<group>"; };
-		DEE6B8461B9942BF00912541 /* OLDStaffRegistration3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLDStaffRegistration3ViewController.m; sourceTree = "<group>"; };
-		DEE6B8481B9942CA00912541 /* OLDStaffRegistration4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLDStaffRegistration4ViewController.h; sourceTree = "<group>"; };
-		DEE6B8491B9942CA00912541 /* OLDStaffRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLDStaffRegistration4ViewController.m; sourceTree = "<group>"; };
-		DEE6B84B1B9942DA00912541 /* OLDStaffRegistration5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLDStaffRegistration5ViewController.h; sourceTree = "<group>"; };
-		DEE6B84C1B9942DA00912541 /* OLDStaffRegistration5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLDStaffRegistration5ViewController.m; sourceTree = "<group>"; };
-		DEE6B84E1B9942E500912541 /* OLDStaffRegistration6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLDStaffRegistration6ViewController.h; sourceTree = "<group>"; };
-		DEE6B84F1B9942E500912541 /* OLDStaffRegistration6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLDStaffRegistration6ViewController.m; sourceTree = "<group>"; };
+		DEE6B8451B9942BF00912541 /* StaffRegistration4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration4ViewController.h; sourceTree = "<group>"; };
+		DEE6B8461B9942BF00912541 /* StaffRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration4ViewController.m; sourceTree = "<group>"; };
+		DEE6B8481B9942CA00912541 /* StaffRegistration5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration5ViewController.h; sourceTree = "<group>"; };
+		DEE6B8491B9942CA00912541 /* StaffRegistration5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration5ViewController.m; sourceTree = "<group>"; };
+		DEE6B84B1B9942DA00912541 /* StaffRegistration6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration6ViewController.h; sourceTree = "<group>"; };
+		DEE6B84C1B9942DA00912541 /* StaffRegistration6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration6ViewController.m; sourceTree = "<group>"; };
+		DEE6B84E1B9942E500912541 /* StaffRegistration7ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration7ViewController.h; sourceTree = "<group>"; };
+		DEE6B84F1B9942E500912541 /* StaffRegistration7ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration7ViewController.m; sourceTree = "<group>"; };
 		DEF0BAB71B9D56C8001C6D84 /* StaffRegistration8ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration8ViewController.h; sourceTree = "<group>"; };
 		DEF0BAB81B9D56C8001C6D84 /* StaffRegistration8ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration8ViewController.m; sourceTree = "<group>"; };
 		DEF0BABA1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLDStaffRegistration8ViewController.h; sourceTree = "<group>"; };
@@ -158,18 +161,11 @@
 		DE6722B01B968CC600599039 /* GoLocalApp */ = {
 			isa = PBXGroup;
 			children = (
-				DED49C481B97CA1B0091B986 /* ForgotPassword */,
-				DE6722E31B968D6900599039 /* Registration */,
-				DE6722DC1B968D2A00599039 /* Employer Home */,
-				DE6722DB1B968D1B00599039 /* Staff Home */,
-				DE6722DA1B968D0800599039 /* Log In */,
-				DE6722B51B968CC600599039 /* AppDelegate.h */,
-				DE6722B61B968CC600599039 /* AppDelegate.m */,
-				DE6722BE1B968CC600599039 /* Main.storyboard */,
-				DE6722C11B968CC600599039 /* Images.xcassets */,
-				DE6722C31B968CC600599039 /* LaunchScreen.xib */,
+				DEC653281BB25A94001A8655 /* Application */,
+				DEC653271BB25A81001A8655 /* CoreData */,
+				DEC653291BB25AA4001A8655 /* View */,
+				DEC6532A1BB25AE9001A8655 /* Controllers */,
 				DE8444E91B9FE94E0085DA73 /* notes.playground */,
-				DE6722B81B968CC600599039 /* GoLocalApp.xcdatamodeld */,
 				DE6722B11B968CC600599039 /* Supporting Files */,
 			);
 			path = GoLocalApp;
@@ -235,8 +231,8 @@
 			children = (
 				DE6722E41B968D8700599039 /* PreRegistrationViewController.h */,
 				DE6722E51B968D8700599039 /* PreRegistrationViewController.m */,
-				DE6722EE1B968DD300599039 /* Staff Registration */,
 				DE6722ED1B968DC000599039 /* Employer Registration */,
+				DE6722EE1B968DD300599039 /* Staff Registration */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
@@ -259,47 +255,81 @@
 				DE8C2E5A1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m */,
 				DE8C2E5C1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.h */,
 				DE8C2E5D1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m */,
+				DEF0BAC01B9D6DB5001C6D84 /* Services */,
 				DEF0BAB71B9D56C8001C6D84 /* StaffRegistration8ViewController.h */,
 				DEF0BAB81B9D56C8001C6D84 /* StaffRegistration8ViewController.m */,
-				DEF0BAC41B9E4FE9001C6D84 /* female only */,
+				DEF0BAC51B9E5025001C6D84 /* StaffRegistration9ViewController.h */,
+				DEF0BAC61B9E5025001C6D84 /* StaffRegistration9ViewController.m */,
 				DE8C2E5F1BA9E16600AA0BB6 /* StaffRegistration10ViewController.h */,
 				DE8C2E601BA9E16600AA0BB6 /* StaffRegistration10ViewController.m */,
-				DEF0BACE1B9EB2A6001C6D84 /* photo Uploads */,
+				DEF0BACB1B9E5051001C6D84 /* StaffRegistration11ViewController.h */,
+				DEF0BACC1B9E5051001C6D84 /* StaffRegistration11ViewController.m */,
+				DEF0BACF1B9EB2FA001C6D84 /* StaffRegistration12ViewController.h */,
+				DEF0BAD01B9EB2FA001C6D84 /* StaffRegistration12ViewController.m */,
 				DE8444A71B9F75060085DA73 /* StaffRegistration13ViewController.h */,
 				DE8444A81B9F75060085DA73 /* StaffRegistration13ViewController.m */,
-				DE8444B01B9FAB5C0085DA73 /* terms and agreements */,
-				DEF0BAC01B9D6DB5001C6D84 /* DJ */,
-				DEF0BAC21B9D6DD4001C6D84 /* LiveBand */,
-				DEF0BAC11B9D6DBF001C6D84 /* CateringCompany */,
-				DEF0BAC31B9D6DEC001C6D84 /* otherService */,
-				DEE6B8431B9941C200912541 /* OLDStaffRegistration2ViewController.m */,
+				DE8444AD1B9FAB570085DA73 /* StaffRegistration14ViewController.h */,
+				DE8444AE1B9FAB570085DA73 /* StaffRegistration14ViewController.m */,
 				DE8C2E621BA9EE8200AA0BB6 /* TRASH */,
 			);
 			name = "Staff Registration";
 			sourceTree = "<group>";
 		};
-		DE8444B01B9FAB5C0085DA73 /* terms and agreements */ = {
-			isa = PBXGroup;
-			children = (
-				DE8444AD1B9FAB570085DA73 /* StaffRegistration14ViewController.h */,
-				DE8444AE1B9FAB570085DA73 /* StaffRegistration14ViewController.m */,
-			);
-			name = "terms and agreements";
-			sourceTree = "<group>";
-		};
 		DE8C2E621BA9EE8200AA0BB6 /* TRASH */ = {
 			isa = PBXGroup;
 			children = (
-				DEF0BAC81B9E5042001C6D84 /* OLDStaffRegistration11ViewController.h */,
-				DEF0BAC91B9E5042001C6D84 /* OLDStaffRegistration11ViewController.m */,
+				DEE6B8431B9941C200912541 /* OLDStaffRegistration2ViewController.m */,
+				DEF0BABA1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.h */,
 				DEF0BABB1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.m */,
 				DEF0BABE1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.m */,
+				DEF0BABD1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.h */,
+				DEF0BAC81B9E5042001C6D84 /* OLDStaffRegistration11ViewController.h */,
+				DEF0BAC91B9E5042001C6D84 /* OLDStaffRegistration11ViewController.m */,
 				DE8444AA1B9F7C970085DA73 /* DELETEStaffRegistration15ViewController.h */,
 				DE8444AB1B9F7C970085DA73 /* DELETEStaffRegistration15ViewController.m */,
-				DEF0BABD1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.h */,
-				DEF0BABA1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.h */,
 			);
 			name = TRASH;
+			sourceTree = "<group>";
+		};
+		DEC653271BB25A81001A8655 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722B81B968CC600599039 /* GoLocalApp.xcdatamodeld */,
+				DEC6532C1BB25B73001A8655 /* StaffDatabase.h */,
+				DEC6532D1BB25B73001A8655 /* StaffDatabase.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		DEC653281BB25A94001A8655 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722B51B968CC600599039 /* AppDelegate.h */,
+				DE6722B61B968CC600599039 /* AppDelegate.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		DEC653291BB25AA4001A8655 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722BE1B968CC600599039 /* Main.storyboard */,
+				DE6722C11B968CC600599039 /* Images.xcassets */,
+				DE6722C31B968CC600599039 /* LaunchScreen.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		DEC6532A1BB25AE9001A8655 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722E31B968D6900599039 /* Registration */,
+				DED49C481B97CA1B0091B986 /* ForgotPassword */,
+				DE6722DC1B968D2A00599039 /* Employer Home */,
+				DE6722DB1B968D1B00599039 /* Staff Home */,
+				DE6722DA1B968D0800599039 /* Log In */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		DED49C481B97CA1B0091B986 /* ForgotPassword */ = {
@@ -311,60 +341,19 @@
 			name = ForgotPassword;
 			sourceTree = "<group>";
 		};
-		DEF0BAC01B9D6DB5001C6D84 /* DJ */ = {
+		DEF0BAC01B9D6DB5001C6D84 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				DEE6B8451B9942BF00912541 /* OLDStaffRegistration3ViewController.h */,
-				DEE6B8461B9942BF00912541 /* OLDStaffRegistration3ViewController.m */,
+				DEE6B8451B9942BF00912541 /* StaffRegistration4ViewController.h */,
+				DEE6B8461B9942BF00912541 /* StaffRegistration4ViewController.m */,
+				DEE6B8481B9942CA00912541 /* StaffRegistration5ViewController.h */,
+				DEE6B8491B9942CA00912541 /* StaffRegistration5ViewController.m */,
+				DEE6B84B1B9942DA00912541 /* StaffRegistration6ViewController.h */,
+				DEE6B84C1B9942DA00912541 /* StaffRegistration6ViewController.m */,
+				DEE6B84E1B9942E500912541 /* StaffRegistration7ViewController.h */,
+				DEE6B84F1B9942E500912541 /* StaffRegistration7ViewController.m */,
 			);
-			name = DJ;
-			sourceTree = "<group>";
-		};
-		DEF0BAC11B9D6DBF001C6D84 /* CateringCompany */ = {
-			isa = PBXGroup;
-			children = (
-				DEE6B84B1B9942DA00912541 /* OLDStaffRegistration5ViewController.h */,
-				DEE6B84C1B9942DA00912541 /* OLDStaffRegistration5ViewController.m */,
-			);
-			name = CateringCompany;
-			sourceTree = "<group>";
-		};
-		DEF0BAC21B9D6DD4001C6D84 /* LiveBand */ = {
-			isa = PBXGroup;
-			children = (
-				DEE6B8481B9942CA00912541 /* OLDStaffRegistration4ViewController.h */,
-				DEE6B8491B9942CA00912541 /* OLDStaffRegistration4ViewController.m */,
-			);
-			name = LiveBand;
-			sourceTree = "<group>";
-		};
-		DEF0BAC31B9D6DEC001C6D84 /* otherService */ = {
-			isa = PBXGroup;
-			children = (
-				DEE6B84E1B9942E500912541 /* OLDStaffRegistration6ViewController.h */,
-				DEE6B84F1B9942E500912541 /* OLDStaffRegistration6ViewController.m */,
-			);
-			name = otherService;
-			sourceTree = "<group>";
-		};
-		DEF0BAC41B9E4FE9001C6D84 /* female only */ = {
-			isa = PBXGroup;
-			children = (
-				DEF0BAC51B9E5025001C6D84 /* StaffRegistration9ViewController.h */,
-				DEF0BAC61B9E5025001C6D84 /* StaffRegistration9ViewController.m */,
-			);
-			name = "female only";
-			sourceTree = "<group>";
-		};
-		DEF0BACE1B9EB2A6001C6D84 /* photo Uploads */ = {
-			isa = PBXGroup;
-			children = (
-				DEF0BACB1B9E5051001C6D84 /* StaffRegistration11ViewController.h */,
-				DEF0BACC1B9E5051001C6D84 /* StaffRegistration11ViewController.m */,
-				DEF0BACF1B9EB2FA001C6D84 /* StaffRegistration12ViewController.h */,
-				DEF0BAD01B9EB2FA001C6D84 /* StaffRegistration12ViewController.m */,
-			);
-			name = "photo Uploads";
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -473,6 +462,7 @@
 				DEF0BACD1B9E5051001C6D84 /* StaffRegistration11ViewController.m in Sources */,
 				DE6722DF1B968D4500599039 /* EmployerHomeViewController.m in Sources */,
 				DE8C2E611BA9E16600AA0BB6 /* StaffRegistration10ViewController.m in Sources */,
+				DEC6532E1BB25B73001A8655 /* StaffDatabase.m in Sources */,
 				DE6722EC1B968DB900599039 /* EmployerRegistrationViewController.m in Sources */,
 				DEF0BABC1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.m in Sources */,
 				DEF0BAC71B9E5025001C6D84 /* StaffRegistration9ViewController.m in Sources */,
@@ -480,21 +470,21 @@
 				DE6722E21B968D5500599039 /* StaffHomeViewController.m in Sources */,
 				DE6722E61B968D8700599039 /* PreRegistrationViewController.m in Sources */,
 				DE6722BA1B968CC600599039 /* GoLocalApp.xcdatamodeld in Sources */,
-				DEE6B8471B9942BF00912541 /* OLDStaffRegistration3ViewController.m in Sources */,
+				DEE6B8471B9942BF00912541 /* StaffRegistration4ViewController.m in Sources */,
 				DEF0BABF1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.m in Sources */,
 				DEF0BACA1B9E5042001C6D84 /* OLDStaffRegistration11ViewController.m in Sources */,
-				DEE6B84A1B9942CA00912541 /* OLDStaffRegistration4ViewController.m in Sources */,
+				DEE6B84A1B9942CA00912541 /* StaffRegistration5ViewController.m in Sources */,
 				DE6722BD1B968CC600599039 /* LogInViewController.m in Sources */,
 				DE6722E91B968D9F00599039 /* StaffRegistration1ViewController.m in Sources */,
 				DEF0BAB91B9D56C8001C6D84 /* StaffRegistration8ViewController.m in Sources */,
 				DE8444A91B9F75060085DA73 /* StaffRegistration13ViewController.m in Sources */,
-				DEE6B84D1B9942DA00912541 /* OLDStaffRegistration5ViewController.m in Sources */,
+				DEE6B84D1B9942DA00912541 /* StaffRegistration6ViewController.m in Sources */,
 				DE8444AC1B9F7C970085DA73 /* DELETEStaffRegistration15ViewController.m in Sources */,
 				DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */,
 				DE8C2E5E1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m in Sources */,
 				DE8444AF1B9FAB570085DA73 /* StaffRegistration14ViewController.m in Sources */,
 				DEF0BAD11B9EB2FA001C6D84 /* StaffRegistration12ViewController.m in Sources */,
-				DEE6B8501B9942E500912541 /* OLDStaffRegistration6ViewController.m in Sources */,
+				DEE6B8501B9942E500912541 /* StaffRegistration7ViewController.m in Sources */,
 				DE6722B41B968CC600599039 /* main.m in Sources */,
 				DEE6B8441B9941C200912541 /* OLDStaffRegistration2ViewController.m in Sources */,
 			);

@@ -25,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *dateOfBirth;
 @property (nonatomic)  NSString * dateOfBirthSelected; //saved value of date of birth
 
-@property (weak, nonatomic) IBOutlet UIScrollView *textInputScrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)submit:(id)sender;
 

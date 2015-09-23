@@ -43,7 +43,7 @@
 @implementation StaffRegistration2ViewController
 
 
-@synthesize textInputScrollView, cellphone, address, city, zipcode, state, nativeLanguage, secondLanguage, thirdLanguage, nativeSelected, secondSelected, thirdSelected, maleButton, femaleButton,
+@synthesize scrollView, cellphone, address, city, zipcode, state, nativeLanguage, secondLanguage, thirdLanguage, nativeSelected, secondSelected, thirdSelected, maleButton, femaleButton,
             accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
 
 - (void)viewDidLoad {
@@ -59,6 +59,8 @@
     [self createPickerForState];
     [self createPickerForLanguages];
     genderSelected = FALSE;
+    
+     [self testDataPassed];
 
 }//eom
 
@@ -224,7 +226,7 @@
     bool result = [self verifyDataEnter];
     if(result)
     {
-//        [self performSegueWithIdentifier:@"goToStaffRegister3" sender:self];
+        [self performSegueWithIdentifier:@"goToStaffRegister3" sender:self];
     }
     else
     {
@@ -547,15 +549,6 @@
 
 /******** textfields  functions********/
 
-        /* dimmisses UITextField as soon the background is touched */
-        -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-        {
-            [cellphone resignFirstResponder];
-            [address resignFirstResponder];
-            [city resignFirstResponder];
-            [zipcode resignFirstResponder];
-        }//eom
-
         /* dimisses UITextField as soon the return key is pressed */
         -(BOOL)textFieldShouldReturn:(UITextField *)textField {
 
@@ -575,8 +568,19 @@
                 [self.zipcode resignFirstResponder];
             }
 
+            
+            [self scrollViewAdaptToStartEditingTextField:textField];//moving scrollview
+            
             return YES;
         }//eom
+
+
+        /* uitextfield is about to be edit*/
+        - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+        {
+            [self scrollViewAdaptToStartEditingTextField:textField];
+            return YES;
+        }
 
     /* shows and hides the label above the textfield depending if the textfield is blank or filled */
     - (IBAction)textFieldValuesChanged:(UITextField *)sender {
@@ -633,13 +637,13 @@
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);
-            [textInputScrollView setContentOffset:point animated:YES];
+            [scrollView setContentOffset:point animated:YES];
         }
 
         - (void) scrollVievEditingFinished:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, 0);
-            [textInputScrollView setContentOffset:point animated:YES];
+            [scrollView setContentOffset:point animated:YES];
         }
 
 

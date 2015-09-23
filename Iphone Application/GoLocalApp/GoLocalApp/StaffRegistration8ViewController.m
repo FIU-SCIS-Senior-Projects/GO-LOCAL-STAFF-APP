@@ -53,7 +53,8 @@
 @implementation StaffRegistration8ViewController
 
 @synthesize scrollView, validDriverLicenseSwitch, validCommercialDriverLicenseSwitch, hasTattoosSwitch, hasPiercingsSwitch, ethnicityTextField, heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSizeTextField, shoeSizeTextField, tshirtSizeTextField,
-staffTypeExperience,
+staffTypeExperience, djSelected, liveBandSelected, cateringCompanySelected, otherServicesSelected,
+djCostOfService, liveBandCostOfService, cateringCompanyCostOfService, otherServicesCostOfService,
 cellphone, completeAddress, gender, languages,
 accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
 
@@ -62,7 +63,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self testDataPassed];//testing
+    
 }//eom
 
 -(void)viewDidAppear:(BOOL)animated
@@ -75,6 +76,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     [self createTshirtSizePicker];
     [self createHeightPicker];
     
+    [self testDataPassed];//testing
 }//eom
 
 
@@ -244,18 +246,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         }
 }//eom
 
-/* shows/hides textfield depending if they are filled or empty*/
-- (IBAction)textFieldValueChanged:(id)sender {
-    //updating hidden label
-    if(self.shoeSizeTextField.text.length == 0)
-    {
-        [self->shoeSizeLabel setHidden:YES];
-    }
-    else
-    {
-        [self->shoeSizeLabel setHidden:NO];
-    }
-}//eom
+
 
 /* route to proper controllers */
 -(void) routeToProperController
@@ -293,7 +284,35 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         controller.languages                = self->languages;
         
         //view controller 3 data
-        controller.staffTypeExperience      = self->staffTypeExperience;
+        controller.staffTypeExperience      = self.staffTypeExperience;
+        controller.djSelected               = self.djSelected;
+        controller.liveBandSelected         = self.liveBandSelected;
+        controller.cateringCompanySelected  = self.cateringCompanySelected;
+        controller.otherServicesSelected    = self.otherServicesSelected;
+        
+        //view controller 4
+        controller.djDescription            = self.djDescription;
+        controller.djWebsite                = self.djWebsite;
+        controller.djSocialMedia            = self.djSocialMedia;
+        controller.djCostOfService          = self.djCostOfService;
+        
+        //view controller 5
+        controller.liveBandDescription      = self.liveBandDescription;
+        controller.liveBandWebsite          = self.liveBandWebsite;
+        controller.liveBandSocialMedia      = self.liveBandSocialMedia;
+        controller.liveBandCostOfService    = self.liveBandCostOfService;
+        
+        //view controller 6
+        controller.cateringCompanyDescription   = self.cateringCompanyDescription;
+        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite;
+        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia;
+        controller.cateringCompanyCostOfService = self.cateringCompanyCostOfService;
+        
+        //view controller 7
+        controller.otherServicesDescription     = self.otherServicesDescription;
+        controller.otherServicesWebsite         = self.otherServicesWebsite;
+        controller.otherServicesSocialMedia     = self.otherServicesSocialMedia;
+        controller.otherServicesCostOfService   = self.otherServicesCostOfService;
         
         //view controller 8 data
         controller.hasDriverLicense         = self->hasDriverLicense;
@@ -329,7 +348,35 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         controller.languages                = self->languages;
         
         //view controller 3 data
-        controller.staffTypeExperience      = self->staffTypeExperience;
+        controller.staffTypeExperience      = self.staffTypeExperience;
+        controller.djSelected               = self.djSelected;
+        controller.liveBandSelected         = self.liveBandSelected;
+        controller.cateringCompanySelected  = self.cateringCompanySelected;
+        controller.otherServicesSelected    = self.otherServicesSelected;
+        
+        //view controller 4
+        controller.djDescription               = self.djDescription;
+        controller.djWebsite                   = self.djWebsite;
+        controller.djSocialMedia               = self.djSocialMedia;
+        controller.djCostOfService             = self.djCostOfService;
+        
+        //view controller 5
+        controller.liveBandDescription         = self.liveBandDescription;
+        controller.liveBandWebsite             = self.liveBandWebsite;
+        controller.liveBandSocialMedia         = self.liveBandSocialMedia;
+        controller.liveBandCostOfService       = self.liveBandCostOfService;
+        
+        //view controller 6
+        controller.cateringCompanyDescription   = self.cateringCompanyDescription;
+        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite;
+        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia;
+        controller.cateringCompanyCostOfService = self.cateringCompanyCostOfService;
+        
+        //view controller 7
+        controller.otherServicesDescription    = self.otherServicesDescription;
+        controller.otherServicesWebsite        = self.otherServicesWebsite;
+        controller.otherServicesSocialMedia    = self.otherServicesSocialMedia;
+        controller.otherServicesCostOfService  = self.otherServicesCostOfService;
         
         //view controller 8 data
         controller.hasDriverLicense         = self->hasDriverLicense;
@@ -340,6 +387,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         controller.height                   = self.heightTextField.text;
         controller.weight                   = self.weightTextField.text;
         controller.hairColor                = self.hairColorTextField.text;
+        controller.eyeColor                 = self.eyeColorTextField.text;
         controller.pantSize                 = self.pantSizeTextField.text;
         controller.shoeSize                 = self.shoeSizeTextField.text;
         controller.tshirtSize               = self.tshirtSizeTextField.text;
@@ -598,7 +646,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
             [keyboardDoneButtonView sizeToFit];
             
             //creating empty UIBarItem to force first item to the right
-            UIBarButtonItem* empty1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            UIBarButtonItem* empty = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
@@ -611,7 +659,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
                                                                            style:UIBarButtonItemStyleBordered target:self
                                                                           action:@selector(doneClicked:)];
             //adding UIBarItems to the Keyboard/Picker
-            [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
+            [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty, cancelButton, doneButton, nil]];
             
             
             // Plug the keyboardDoneButtonView into the text field.
@@ -653,7 +701,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
             [keyboardDoneButtonView sizeToFit];
             
             //creating empty UIBarItem to force first item to the right
-            UIBarButtonItem* empty1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            UIBarButtonItem* empty = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
@@ -666,7 +714,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
                                                                            style:UIBarButtonItemStyleBordered target:self
                                                                           action:@selector(doneClicked:)] ;
             //adding UIBarItems to the Keyboard/Picker
-            [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
+            [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty, cancelButton, doneButton, nil]];
             
             
             // Plug the keyboardDoneButtonView into the text field.
@@ -719,7 +767,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
             [keyboardDoneButtonView sizeToFit];
             
             //creating empty UIBarItem to force first item to the right
-            UIBarButtonItem* empty1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            UIBarButtonItem* empty = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
@@ -732,7 +780,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
                                                                            style:UIBarButtonItemStyleBordered target:self
                                                                           action:@selector(doneClicked:)] ;
             //adding UIBarItems to the Keyboard/Picker
-            [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
+            [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty, cancelButton, doneButton, nil]];
             
             
             // Plug the keyboardDoneButtonView into the text field.
@@ -750,6 +798,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
             [self.eyeColorTextField resignFirstResponder];
             [self.pantSizeTextField resignFirstResponder];
             [self.tshirtSizeTextField resignFirstResponder];
+
         }//eom
 
         //process the date selected after the user click cancel
@@ -762,6 +811,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
             [self.eyeColorTextField resignFirstResponder];
             [self.pantSizeTextField resignFirstResponder];
             [self.tshirtSizeTextField resignFirstResponder];
+            
         }//eom
 
 
@@ -967,19 +1017,29 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 /******** textfields  functions********/
 
 
-    //        /* dimmisses UITextField as soon the background is touched - this will not work with UiScrollview*/
-    //        -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-    //        {
-    //            [firstName resignFirstResponder];
-    //            [middleName resignFirstResponder];
-    //            [lastName resignFirstResponder];
-    //            [nickName resignFirstResponder];
-    //            [email resignFirstResponder];
-    //            [confirmEmail resignFirstResponder];
-    //            [password resignFirstResponder];
-    //            [confirmPassword resignFirstResponder];
-    //            [cellphone resignFirstResponder];
-    //        }//eom
+    /* shows/hides textfield depending if they are filled or empty*/
+    - (IBAction)textFieldValueChanged:(id)sender {
+        //updating hidden label
+        if(self.shoeSizeTextField.text.length == 0)
+        {
+            [self->shoeSizeLabel setHidden:YES];
+        }
+        else
+        {
+            [self->shoeSizeLabel setHidden:NO];
+        }
+        
+        //weight
+        if(self.weightTextField.text.length == 0)
+        {
+            [self->weightLabel setHidden:YES];
+        }
+        else
+        {
+            [self->weightLabel setHidden:NO];
+        }
+        
+    }//eom
 
     /* dimisses UITextField as soon the return key is pressed */
     -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -1014,8 +1074,19 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         return YES;
     }//eom
 
+        /* uitextfield is about to be edit*/
+        - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+        {
+            [self scrollViewAdaptToStartEditingTextField:textField];
+            return YES;
+        }
+
+
+
 
 /********* scrollview functions **********/
+
+
     - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
     {
         CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);
@@ -1028,11 +1099,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         [scrollView setContentOffset:point animated:YES];
     }
 
-    - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
-    {
-        [self scrollViewAdaptToStartEditingTextField:textField];
-        return YES;
-    }
+
 
 
 -(void)testDataPassed
@@ -1057,9 +1124,36 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     NSLog(@" languages:       %@", self.languages);
     
     //view controller 3
-    NSLog(@" staff experience:%@", self.staffTypeExperience);
+    NSLog(@" staff experience:          %@", self.staffTypeExperience);
+    NSLog(@" Dj Selected?               %d", self.djSelected);
+    NSLog(@" Live Band Selected?        %d", self.liveBandSelected);
+    NSLog(@" Catering Company Selected? %d", self.cateringCompanySelected);
+    NSLog(@" Other Services Selected?   %d", self.otherServicesSelected);
     
-   
+    //view controller 4
+    NSLog(@" djDescription:      %@", self.djDescription);
+    NSLog(@" djWebsite:          %@", self.djWebsite);
+    NSLog(@" djSocialMedia:      %@", self.djSocialMedia);
+    NSLog(@" djCostOfService:    %@", self.djCostOfService);
+    
+    //view controller 5
+    NSLog(@" liveBandDescription:      %@", self.liveBandDescription);
+    NSLog(@" liveBandWebsite:          %@", self.liveBandWebsite);
+    NSLog(@" liveBandSocialMedia:      %@", self.liveBandSocialMedia);
+    NSLog(@" liveBandCostOfService:    %@", self.liveBandCostOfService);
+    
+    //view controller 6
+    NSLog(@" cateringCompanyDescription:      %@", self.cateringCompanyDescription);
+    NSLog(@" cateringCompanyWebsite:          %@", self.cateringCompanyWebsite);
+    NSLog(@" cateringCompanySocialMedia:      %@", self.cateringCompanySocialMedia);
+    NSLog(@" cateringCompanyCostOfService:    %@", self.cateringCompanyCostOfService);
+    
+    //view controller 7
+    NSLog(@" otherServicesDescription:      %@", self.otherServicesDescription);
+    NSLog(@" otherServicesWebsite:          %@", self.otherServicesWebsite);
+    NSLog(@" otherServicesSocialMedia:      %@", self.otherServicesSocialMedia);
+    NSLog(@" otherServicesCostOfService:    %@", self.otherServicesCostOfService);
+    
     NSLog(@" - - - - - - - - - - - - - ");
 }//eom
 

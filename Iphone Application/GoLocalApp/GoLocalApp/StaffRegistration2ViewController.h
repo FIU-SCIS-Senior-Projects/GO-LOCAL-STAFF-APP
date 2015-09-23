@@ -34,7 +34,7 @@
 - (IBAction)genderValueChanged:(UIButton *)sender;
 - (IBAction)textFieldValuesChanged:(UITextField *)sender;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *textInputScrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 //below will go to next view
 //@property (weak, nonatomic) IBOutlet UISwitch *djSwitch;

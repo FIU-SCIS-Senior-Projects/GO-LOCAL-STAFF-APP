@@ -1,29 +1,30 @@
 //
-//  StaffRegistration10ViewController.h
+//  StaffRegistration6ViewController.h
 //  GoLocalApp
 //
-//  Created by Luis Andres Castillo Hernandez on 9/7/15.
+//  Created by Luis Andres Castillo Hernandez on 9/3/15.
 //  Copyright (c) 2015 FIU. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface StaffRegistration9ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface StaffRegistration7ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate, UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *chestSize;
-@property (weak, nonatomic) IBOutlet UITextField *waistSize;
-@property (weak, nonatomic) IBOutlet UITextField *hipsSize;
-@property (weak, nonatomic) IBOutlet UITextField *dressSize;
+@property (weak, nonatomic) IBOutlet UITextView *otherServicesDescription;
+@property (weak, nonatomic) IBOutlet UITextField *otherServicesWebsite;
+@property (weak, nonatomic) IBOutlet UITextView *otherServicesSocialMedia;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-- (IBAction)textFieldValueChanged:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *costOfServiceTextField;
 
+
+- (IBAction)textFieldValuesChanged:(UITextField *)sender;
 
 - (IBAction)submitForm:(id)sender;
 
 
-//PASSED VALUEs FROM PREVIOUS CONTROLLER
+//PASSED VALUES FROM PREVIOUS CONTROLLER
 @property (nonatomic)  NSString *accountType;                   //view controller 1
 @property (nonatomic)  NSString *firstName;
 @property (nonatomic)  NSString *middleName;
@@ -45,12 +46,12 @@
 @property (nonatomic)  BOOL cateringCompanySelected;
 @property (nonatomic)  BOOL otherServicesSelected;
 
-@property (nonatomic)  NSString *djDescription;                     //view controller 4
+@property (nonatomic)  NSString *djDescription;                 //view controller 4
 @property (nonatomic)  NSString *djWebsite;
 @property (nonatomic)  NSString *djSocialMedia;
 @property (nonatomic)  NSString *djCostOfService;
 
-@property (nonatomic)  NSString *liveBandDescription;               //view controller 5
+@property (nonatomic)  NSString *liveBandDescription;           //view controller 5
 @property (nonatomic)  NSString *liveBandWebsite;
 @property (nonatomic)  NSString *liveBandSocialMedia;
 @property (nonatomic)  NSString *liveBandCostOfService;
@@ -59,23 +60,5 @@
 @property (nonatomic)  NSString *cateringCompanyWebsite;
 @property (nonatomic)  NSString *cateringCompanySocialMedia;
 @property (nonatomic)  NSString *cateringCompanyCostOfService;
-
-@property (nonatomic)  NSString *otherServicesDescription;          //view controller 7
-@property (nonatomic)  NSString *otherServicesWebsite;
-@property (nonatomic)  NSString *otherServicesSocialMedia;
-@property (nonatomic)  NSString *otherServicesCostOfService;
-
-@property (nonatomic)  BOOL hasDriverLicense;                   //view controller 8
-@property (nonatomic)  BOOL hasCommercialLicense;
-@property (nonatomic)  BOOL hasTattos;
-@property (nonatomic)  BOOL hasPiercings;
-@property (nonatomic)  NSString *ethnicity;
-@property (nonatomic)  NSString *height;
-@property (nonatomic)  NSString *weight;
-@property (nonatomic)  NSString *hairColor;
-@property (nonatomic)  NSString *eyeColor;
-@property (nonatomic)  NSString *pantSize;
-@property (nonatomic)  NSString *shoeSize;
-@property (nonatomic)  NSString *tshirtSize;
 
 @end

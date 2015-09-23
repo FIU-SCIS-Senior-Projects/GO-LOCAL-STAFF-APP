@@ -49,23 +49,18 @@
 @property (nonatomic)  NSString *tshirtSize;
 
 
-/* these may be Null */
-//@property (nonatomic)  BOOL djSelected;                         //view controller 3
 //@property (nonatomic)  NSString *djDescription;
 //@property (nonatomic)  NSString *djWebsite;
 //@property (nonatomic)  NSString *djSocialMedia;
 //
-//@property (nonatomic)  BOOL liveBandSelected;                   //view controller 4
 //@property (nonatomic)  NSString *liveBandDescription;
 //@property (nonatomic)  NSString *liveBandWebsite;
 //@property (nonatomic)  NSString *liveBandSocialMedia;
 //
-//@property (nonatomic)  BOOL cateringCompanySelected;            //view controller 5
 //@property (nonatomic)  NSString *cateringCompanyDescription;
 //@property (nonatomic)  NSString *cateringCompanyWebsite;
 //@property (nonatomic)  NSString *cateringCompanySocialMedia;
 //
-//@property (nonatomic)  BOOL otherServicesSelected;              //view controller 6
 //@property (nonatomic)  NSString *otherServicesDescription;
 //@property (nonatomic)  NSString *otherServicesWebsite;
 //@property (nonatomic)  NSString *otherServicesSocialMedia;

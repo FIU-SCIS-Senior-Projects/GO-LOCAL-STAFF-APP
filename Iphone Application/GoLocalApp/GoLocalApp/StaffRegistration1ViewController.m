@@ -30,7 +30,7 @@
 @implementation StaffRegistration1ViewController
 
 
-@synthesize firstName, middleName, lastName, nickName, username, email, confirmEmail, password, confirmPassword, dateOfBirth, dateOfBirthSelected, textInputScrollView;
+@synthesize firstName, middleName, lastName, nickName, username, email, confirmEmail, password, confirmPassword, dateOfBirth, dateOfBirthSelected, scrollView;
 
 
 - (void)viewDidLoad
@@ -375,55 +375,9 @@
 //            [cellphone resignFirstResponder];
 //        }//eom
 
-        /* dimisses UITextField as soon the return key is pressed */
-        -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-            
-            if(textField == self.firstName){
-                [self.firstName resignFirstResponder];
-                [self.middleName becomeFirstResponder];
-            }
-            else if(textField == self.middleName)
-            {
-                [self.middleName resignFirstResponder];
-                [self.lastName becomeFirstResponder];
-            }
-            else if(textField == self.lastName){
-                [self.lastName resignFirstResponder];
-                [self.username becomeFirstResponder];
-            }
-            else if(textField == self.username){
-                [self.username resignFirstResponder];
-                [self.nickName becomeFirstResponder];
-            }
-            else if(textField == self.nickName){
-                [self.nickName resignFirstResponder];
-                [self.email becomeFirstResponder];
-            }
-            else if(textField == self.email){
-                [self.email resignFirstResponder];
-                [self.confirmEmail becomeFirstResponder];
-            }
-            else if(textField == self.confirmEmail){
-                [self.confirmEmail resignFirstResponder];
-                [self.password becomeFirstResponder];
-            }
-            else if(textField == self.password){
-                [self.password resignFirstResponder];
-                [self.confirmPassword becomeFirstResponder];
-            }
-            else if(textField == self.confirmPassword){
-                [self.confirmPassword resignFirstResponder];
-                [self.dateOfBirth becomeFirstResponder];
-            }
-//            else if(textField == self.dateOfBirth){
-//                [self.dateOfBirth resignFirstResponder];
-//            }
-
-            return YES;
-        }//eom
-
         /* shows and hides the label above the textfield depending if the textfield is blank or filled */
-        - (IBAction)textFieldValuesChanged:(UITextField *)sender {
+        - (IBAction)textFieldValuesChanged:(UITextField *)sender
+        {
             
             int labelID = (int)sender.tag;
             
@@ -528,18 +482,74 @@
             }
         }//eo-action
 
+        /* uitextfield is about to be edit*/
+        - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+        {
+            [self scrollViewAdaptToStartEditingTextField:textField];
+            return YES;
+        }
+
+        /* dimisses UITextField as soon the return key is pressed */
+        -(BOOL)textFieldShouldReturn:(UITextField *)textField {
+            
+            if(textField == self.firstName){
+                [self.firstName resignFirstResponder];
+                [self.middleName becomeFirstResponder];
+            }
+            else if(textField == self.middleName)
+            {
+                [self.middleName resignFirstResponder];
+                [self.lastName becomeFirstResponder];
+            }
+            else if(textField == self.lastName){
+                [self.lastName resignFirstResponder];
+                [self.username becomeFirstResponder];
+            }
+            else if(textField == self.username){
+                [self.username resignFirstResponder];
+                [self.nickName becomeFirstResponder];
+            }
+            else if(textField == self.nickName){
+                [self.nickName resignFirstResponder];
+                [self.email becomeFirstResponder];
+            }
+            else if(textField == self.email){
+                [self.email resignFirstResponder];
+                [self.confirmEmail becomeFirstResponder];
+            }
+            else if(textField == self.confirmEmail){
+                [self.confirmEmail resignFirstResponder];
+                [self.password becomeFirstResponder];
+            }
+            else if(textField == self.password){
+                [self.password resignFirstResponder];
+                [self.confirmPassword becomeFirstResponder];
+            }
+            else if(textField == self.confirmPassword){
+                [self.confirmPassword resignFirstResponder];
+                [self.dateOfBirth becomeFirstResponder];
+            }
+            else if(textField == self.dateOfBirth){
+                [self.dateOfBirth resignFirstResponder];
+            }
+
+            return YES;
+        }//eom
+
+
+
 
     /********* scrollview functions **********/
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);
-            [textInputScrollView setContentOffset:point animated:YES];
+            [scrollView setContentOffset:point animated:YES];
         }
 
         - (void) scrollVievEditingFinished:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, 0);
-            [textInputScrollView setContentOffset:point animated:YES];
+            [scrollView setContentOffset:point animated:YES];
         }
 
 

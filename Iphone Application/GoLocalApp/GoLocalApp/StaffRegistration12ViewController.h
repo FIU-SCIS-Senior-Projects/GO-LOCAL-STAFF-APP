@@ -10,7 +10,7 @@
 
 @interface StaffRegistration12ViewController : UIViewController<UIAlertViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (strong, nonatomic) IBOutlet UIImageView *headshotImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *bodyImageView;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
@@ -39,6 +39,30 @@
 @property (nonatomic)  NSString *languages;
 
 @property (nonatomic) NSMutableArray * staffTypeExperience;     //view controller 3
+@property (nonatomic)  BOOL djSelected;
+@property (nonatomic)  BOOL liveBandSelected;
+@property (nonatomic)  BOOL cateringCompanySelected;
+@property (nonatomic)  BOOL otherServicesSelected;
+
+@property (nonatomic)  NSString *djDescription;                     //view controller 4
+@property (nonatomic)  NSString *djWebsite;
+@property (nonatomic)  NSString *djSocialMedia;
+@property (nonatomic)  NSString *djCostOfService;
+
+@property (nonatomic)  NSString *liveBandDescription;               //view controller 5
+@property (nonatomic)  NSString *liveBandWebsite;
+@property (nonatomic)  NSString *liveBandSocialMedia;
+@property (nonatomic)  NSString *liveBandCostOfService;
+
+@property (nonatomic)  NSString *cateringCompanyDescription;        //view controller 6
+@property (nonatomic)  NSString *cateringCompanyWebsite;
+@property (nonatomic)  NSString *cateringCompanySocialMedia;
+@property (nonatomic)  NSString *cateringCompanyCostOfService;
+
+@property (nonatomic)  NSString *otherServicesDescription;          //view controller 7
+@property (nonatomic)  NSString *otherServicesWebsite;
+@property (nonatomic)  NSString *otherServicesSocialMedia;
+@property (nonatomic)  NSString *otherServicesCostOfService;
 
 @property (nonatomic)  BOOL hasDriverLicense;                   //view controller 8
 @property (nonatomic)  BOOL hasCommercialLicense;
@@ -48,6 +72,7 @@
 @property (nonatomic)  NSString *height;
 @property (nonatomic)  NSString *weight;
 @property (nonatomic)  NSString *hairColor;
+@property (nonatomic)  NSString *eyeColor;
 @property (nonatomic)  NSString *pantSize;
 @property (nonatomic)  NSString *shoeSize;
 @property (nonatomic)  NSString *tshirtSize;
@@ -57,37 +82,14 @@
 @property (nonatomic)  NSString *hipsSize;
 @property (nonatomic)  NSString *dressSize;
 
-@property (nonatomic)  BOOL isIncorporated;                     //view controller 10
+@property (nonatomic)  BOOL hasProfessionalInsurance;           //view controller 10
+@property (nonatomic)  BOOL isIncorporated;
 @property (nonatomic)  NSString *ssn;
 @property (nonatomic)  NSString *ein;
 @property (nonatomic)  NSString *businessName;
 @property (nonatomic)  NSString *desiredHourlyRate;
 @property (nonatomic)  NSString *desiredWeeklyRate;
 @property (nonatomic)  NSString *travelPercentage;
-
-
-
-
-///* these may be Null */
-//@property (nonatomic)  BOOL djSelected;                         //view controller 3
-//@property (nonatomic)  NSString *djDescription;
-//@property (nonatomic)  NSString *djWebsite;
-//@property (nonatomic)  NSString *djSocialMedia;
-//
-//@property (nonatomic)  BOOL liveBandSelected;                   //view controller 4
-//@property (nonatomic)  NSString *liveBandDescription;
-//@property (nonatomic)  NSString *liveBandWebsite;
-//@property (nonatomic)  NSString *liveBandSocialMedia;
-//
-//@property (nonatomic)  BOOL cateringCompanySelected;            //view controller 5
-//@property (nonatomic)  NSString *cateringCompanyDescription;
-//@property (nonatomic)  NSString *cateringCompanyWebsite;
-//@property (nonatomic)  NSString *cateringCompanySocialMedia;
-//
-//@property (nonatomic)  BOOL otherServicesSelected;              //view controller 6
-//@property (nonatomic)  NSString *otherServicesDescription;
-//@property (nonatomic)  NSString *otherServicesWebsite;
-//@property (nonatomic)  NSString *otherServicesSocialMedia;
 
 
 
