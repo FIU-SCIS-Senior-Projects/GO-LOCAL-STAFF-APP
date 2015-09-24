@@ -11,6 +11,9 @@
 #import "StaffRegistration7ViewController.h"
 #import "StaffRegistration10ViewController.h"
 
+
+#import "RegisteredStaff.h" //needed for staff registration
+
 @interface StaffRegistration5ViewController ()
 {
     __weak IBOutlet UILabel *costOfServiceLabel;
@@ -19,12 +22,8 @@
 
 @implementation StaffRegistration5ViewController
 
-@synthesize scrollView,liveBandDescription, liveBandWebsite, liveBandSocialMedia, costOfServiceTextField,
-djCostOfService,
-djDescription, djWebsite, djSocialMedia,
-staffTypeExperience, djSelected, liveBandSelected, cateringCompanySelected, otherServicesSelected,
-cellphone, completeAddress, gender, languages,
-accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
+@synthesize scrollView, registeredStaff,
+liveBandDescription, liveBandWebsite, liveBandSocialMedia, costOfServiceTextField;
 
 
 - (void)viewDidLoad
@@ -40,7 +39,6 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 -(void)viewDidAppear:(BOOL)animated
 {
     [self setUpTapGesture];
-    [self testDataPassed];
     
 }//eom
 
@@ -76,6 +74,10 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         return 0;
     }
     
+    //updating files
+    [registeredStaff setLiveBandInfo:self.liveBandDescription.text withWebsite:self.liveBandWebsite.text withSocialMedia:self.liveBandSocialMedia.text andCostOfServices:self.costOfServiceTextField.text];
+
+    
     return 1;
 }//eom
 
@@ -94,13 +96,13 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 {
     
     //catering company
-    if(cateringCompanySelected)
+    if([registeredStaff isCateringCompany])
     {
         //skipping to catering company controller
         [self performSegueWithIdentifier:@"liveBandToCateringCompany" sender:self];
     }
     //other services
-    else if(otherServicesSelected)
+    else if([registeredStaff isOtherServices])
     {
         //skipping to Other services controller
         [self performSegueWithIdentifier:@"liveBandToOtherServices" sender:self];
@@ -118,119 +120,18 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     if([segue.identifier isEqualToString:@"liveBandToCateringCompany"]){
         StaffRegistration6ViewController *controller = (StaffRegistration6ViewController *)segue.destinationViewController;
         
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self.staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-        
-        //view controller 4
-        controller.djDescription            = self.djDescription;
-        controller.djWebsite                = self.djWebsite;
-        controller.djSocialMedia            = self.djSocialMedia;
-        controller.djCostOfService          = self.djCostOfService;
-        
-        //view controller 5
-        controller.liveBandDescription      = self.liveBandDescription.text;
-        controller.liveBandWebsite          = self.liveBandWebsite.text;
-        controller.liveBandSocialMedia      = self.liveBandSocialMedia.text;
-        controller.liveBandCostOfService    = self.costOfServiceTextField.text;
-       
+        controller.registeredStaff = registeredStaff;
     }
     else if([segue.identifier isEqualToString:@"liveBandToOtherServices"]){
         StaffRegistration7ViewController *controller = (StaffRegistration7ViewController *)segue.destinationViewController;
         
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self.staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-        
-        //view controller 4
-        controller.djDescription            = self.djDescription;
-        controller.djWebsite                = self.djWebsite;
-        controller.djSocialMedia            = self.djSocialMedia;
-        controller.djCostOfService          = self.djCostOfService;
-        
-        //view controller 5
-        controller.liveBandDescription      = self.liveBandDescription.text;
-        controller.liveBandWebsite          = self.liveBandWebsite.text;
-        controller.liveBandSocialMedia      = self.liveBandSocialMedia.text;
-        controller.liveBandCostOfService    = self.costOfServiceTextField.text;
-
+         controller.registeredStaff = registeredStaff;
         
     }
     else if([segue.identifier isEqualToString:@"liveBandToStaffRegistration10"]){
         StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
         
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self.staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-        
-        //view controller 4
-        controller.djDescription            = self.djDescription;
-        controller.djWebsite                = self.djWebsite;
-        controller.djSocialMedia            = self.djSocialMedia;
-        controller.djCostOfService          = self.djCostOfService;
-        
-        //view controller 5
-        controller.liveBandDescription      = self.liveBandDescription.text;
-        controller.liveBandWebsite          = self.liveBandWebsite.text;
-        controller.liveBandSocialMedia      = self.liveBandSocialMedia.text;
-        controller.liveBandCostOfService    = self.costOfServiceTextField.text;
+         controller.registeredStaff = registeredStaff;
     }
 }//eom
 
@@ -341,44 +242,6 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
             return YES;
         }
 
-
--(void)testDataPassed
-{
-    
-    NSLog(@" ");
-    NSLog(@" ");
-    NSLog(@" *****  Staff Registration| View controller #5 ******");
-    
-    //view controller 1
-    NSLog(@" account type:    %@", self.accountType);
-    NSLog(@" firstName:       %@", self.firstName);
-    NSLog(@" middleName:      %@", self.middleName);
-    NSLog(@" lastName:        %@", self.lastName);
-    NSLog(@" nickName:        %@", self.nickName);
-    NSLog(@" email:           %@", self.email);
-    NSLog(@" password:        %@", self.password);
-    NSLog(@" dob:             %@", self.dateOfBirth);
-    //view controller 2
-    NSLog(@" cellphone:       %@", self.cellphone);
-    NSLog(@" address:         %@", self.completeAddress);
-    NSLog(@" gender:          %d", self.gender);//0 female 1 male
-    NSLog(@" languages:       %@", self.languages);
-    
-    //view controller 3
-    NSLog(@" staff experience:          %@", self.staffTypeExperience);
-    NSLog(@" Dj Selected?               %d", self.djSelected);
-    NSLog(@" Live Band Selected?        %d", self.liveBandSelected);
-    NSLog(@" Catering Company Selected? %d", self.cateringCompanySelected);
-    NSLog(@" Other Services Selected?   %d", self.otherServicesSelected);
-    
-    //view controller 4
-    NSLog(@" djDescription:      %@", self.djDescription);
-    NSLog(@" djWebsite:          %@", self.djWebsite);
-    NSLog(@" djSocialMedia:      %@", self.djSocialMedia);
-    NSLog(@" djCostOfService:    %@", self.djCostOfService);
-    
-    NSLog(@" - - - - - - - - - - - - - ");
-}//eom
 
 
 

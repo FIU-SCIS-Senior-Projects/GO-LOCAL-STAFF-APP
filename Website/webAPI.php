@@ -250,8 +250,8 @@
     /* connect to database  */
     function connectToDB()
     {
-      // $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
-      $db = mysqli_connect("localhost", "root", "root", "golocalapp"); 
+      $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
+      // $db = mysqli_connect("localhost", "root", "root", "golocalapp"); 
       return $db;
     }//eom
 

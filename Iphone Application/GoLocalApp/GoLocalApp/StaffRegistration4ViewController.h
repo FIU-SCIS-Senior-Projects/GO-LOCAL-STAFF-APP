@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class RegisteredStaff;
 
 @interface StaffRegistration4ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate, UITextViewDelegate>
 
@@ -21,28 +22,6 @@
 
 - (IBAction)submitForm:(id)sender;
 
-
-//PASSED VALUES FROM PREVIOUS CONTROLLER
-@property (nonatomic)  NSString *accountType;                   //view controller 1
-@property (nonatomic)  NSString *firstName;
-@property (nonatomic)  NSString *middleName;
-@property (nonatomic)  NSString *lastName;
-@property (nonatomic)  NSString *nickName;
-@property (nonatomic)  NSString *email;
-@property (nonatomic)  NSString *username;
-@property (nonatomic)  NSString *password;
-@property (nonatomic)  NSString *dateOfBirth;
-
-@property (nonatomic)  NSString *cellphone;                     //view controller 2
-@property (nonatomic)  NSString *completeAddress;
-@property (nonatomic)  bool gender; //0-female | 1 -male
-@property (nonatomic)  NSString *languages;
-
-@property (nonatomic) NSMutableArray * staffTypeExperience;     //view controller 3
-@property (nonatomic)  BOOL djSelected;
-@property (nonatomic)  BOOL liveBandSelected;
-@property (nonatomic)  BOOL cateringCompanySelected;
-@property (nonatomic)  BOOL otherServicesSelected;
-
+@property (strong, nonatomic) RegisteredStaff *registeredStaff;
 
 @end

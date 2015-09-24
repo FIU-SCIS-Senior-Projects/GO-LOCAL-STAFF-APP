@@ -15,9 +15,17 @@
 #import "StaffRegistration6ViewController.h"
 #import "StaffRegistration7ViewController.h"
 
+
+#import "RegisteredStaff.h" //needed for staff registration
+
+
 @interface StaffRegistration3ViewController ()
 {
-     NSMutableArray *staffTypeExperience;
+    NSMutableArray *staffTypeExperience;
+    BOOL djSelected;
+    BOOL liveBandSelected;
+    BOOL cateringCompanySelected;
+    BOOL otherServicesSelected;
 }
 
 @property (weak, nonatomic) IBOutlet UISwitch *modelSwitch;
@@ -38,9 +46,7 @@
 
 @implementation StaffRegistration3ViewController
 
-@synthesize scrollView, djSelected, liveBandSelected, cateringCompanySelected, otherServicesSelected,
-cellphone, completeAddress, gender, languages,
-accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
+@synthesize scrollView,registeredStaff;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,7 +55,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self testDataPassed];
+    [registeredStaff printUserData];
     
 }//eom
 
@@ -71,12 +77,12 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     if(self.cateringCompanySwitch.on)
     {
         [self->staffTypeExperience addObject:@"Catering Company"];
-        self.cateringCompanySelected = true;
+        self->cateringCompanySelected = true;
         somethingSelected = TRUE;
     }
     else
     {
-        self.cateringCompanySelected= FALSE;
+        self->cateringCompanySelected= FALSE;
     }
     
     if(self.dancerSwitch.on)
@@ -88,12 +94,12 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     if(self.djSwitch.on)
     {
         [self->staffTypeExperience addObject:@"Dj"];
-        self.djSelected= true;
+        self->djSelected= true;
         somethingSelected = TRUE;
     }
     else
     {
-        self.djSelected= FALSE;
+        self->djSelected= FALSE;
     }
     
     if(self.fieldMarketingDistributorSwitch.on)
@@ -111,12 +117,12 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     if(self.liveBandSwitch.on)
     {
         [self->staffTypeExperience addObject:@"Live Band"];
-        self.liveBandSelected = true;
+        self->liveBandSelected = true;
         somethingSelected = TRUE;
     }
     else
     {
-        self.liveBandSelected = FALSE;
+        self->liveBandSelected = FALSE;
     }
 
     if(self.modelSwitch.on)
@@ -146,14 +152,15 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     if(self.otherServicesSwitch.on)
     {
         [self->staffTypeExperience addObject:@"Other Services"];
-        self.otherServicesSelected = true;
+        self->otherServicesSelected = true;
         somethingSelected = TRUE;
     }
     else
     {
-        self.otherServicesSelected= FALSE;
+        self->otherServicesSelected= FALSE;
     }
 
+    
 //    NSLog(@" staff experience %@", self->staffTypeExperience.description);//testing
 //
 //      //making sure atleast one experience is selected
@@ -162,6 +169,11 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 //        [self showAlert:@"Registration Field" withMessage:@"Please select atleast one field" and:@"Okay"];
 //        return 0;
 //    }
+    
+    //updating values
+    [registeredStaff setExperience:self->staffTypeExperience];
+    [registeredStaff setServicesSelected:self->djSelected liveBand:self->liveBandSelected cateringCompany:self->cateringCompanySelected otherServices:self->otherServicesSelected];
+    
     
     return 1;
 }//EOM
@@ -184,19 +196,19 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 /* route to proper controllers */
 -(void) routeToProperController
 {
-    if(self.djSelected)
+    if(self->djSelected)
     {
         [self performSegueWithIdentifier:@"goToDJ" sender:self];
     }
-    else if(self.liveBandSelected)
+    else if(self->liveBandSelected)
     {
         [self performSegueWithIdentifier:@"goToLiveBand" sender:self];
     }
-    else if(self.cateringCompanySelected)
+    else if(self->cateringCompanySelected)
     {
         [self performSegueWithIdentifier:@"goToCateringCompany" sender:self];
     }
-    else if(self.otherServicesSelected)
+    else if(self->otherServicesSelected)
     {
         [self performSegueWithIdentifier:@"goToOtherServices" sender:self];
     }
@@ -216,161 +228,32 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     {
         StaffRegistration8ViewController *controller = (StaffRegistration8ViewController *)segue.destinationViewController;
         
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self->staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-        
-        //view controller 4
-        controller.djDescription               = @"";
-        controller.djWebsite                   = @"";
-        controller.djSocialMedia               = @"";
-        controller.djCostOfService             = @"";
-        
-        //view controller 5
-        controller.liveBandDescription         = @"";
-        controller.liveBandWebsite             = @"";
-        controller.liveBandSocialMedia         = @"";
-        controller.liveBandCostOfService       = @"";
-        
-        //view controller 6
-        controller.cateringCompanyDescription   = @"";
-        controller.cateringCompanyWebsite       = @"";
-        controller.cateringCompanySocialMedia   = @"";
-        controller.cateringCompanyCostOfService = @"";
-        
-        //view controller 7
-        controller.otherServicesDescription    = @"";
-        controller.otherServicesWebsite        = @"";
-        controller.otherServicesSocialMedia    = @"";
-        controller.otherServicesCostOfService  = @"";
+        controller.registeredStaff = registeredStaff;
     }
     else if([segue.identifier isEqualToString:@"goToDJ"]) //DJ
     {
         StaffRegistration4ViewController *controller = (StaffRegistration4ViewController *)segue.destinationViewController;
         
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self->staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
+        controller.registeredStaff = registeredStaff;
         
     }
     else if([segue.identifier isEqualToString:@"goToLiveBand"]) //LIVE BAND
     {
         StaffRegistration5ViewController *controller = (StaffRegistration5ViewController *)segue.destinationViewController;
-        
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self->staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
+
+        controller.registeredStaff = registeredStaff;
     }
     else if([segue.identifier isEqualToString:@"goToCateringCompany"]) //CATERING COMPANY
     {
         StaffRegistration6ViewController *controller = (StaffRegistration6ViewController *)segue.destinationViewController;
-        
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self->staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
+
+        controller.registeredStaff = registeredStaff;
     }
     else if([segue.identifier isEqualToString:@"goToOtherServices"]) //OTHER SERVICES
     {
         StaffRegistration7ViewController *controller = (StaffRegistration7ViewController *)segue.destinationViewController;
-        
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self->staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
+       
+        controller.registeredStaff = registeredStaff;
     }
 }//EOM
 
@@ -388,30 +271,6 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 }//eom
 
 
--(void)testDataPassed
-{
-    
-    NSLog(@" ");
-    NSLog(@" ");
-    NSLog(@" *****  Staff Registration| View controller #3 ******");
-    //view controller 1
-    NSLog(@" account type:    %@", self.accountType);
-    NSLog(@" firstName:       %@", self.firstName);
-    NSLog(@" middleName:      %@", self.middleName);
-    NSLog(@" lastName:        %@", self.lastName);
-    NSLog(@" nickName:        %@", self.nickName);
-    NSLog(@" email:           %@", self.email);
-    NSLog(@" password:        %@", self.password);
-    NSLog(@" dob:             %@", self.dateOfBirth);
-    //view controller 2
-    NSLog(@" cellphone:       %@", self.cellphone);
-    NSLog(@" address:         %@", self.completeAddress);
-    NSLog(@" gender:          %d", self.gender);//0 female 1 male
-    NSLog(@" languages:       %@", self.languages);
-    
-    
-    NSLog(@" - - - - - - - - - - - - - ");
-}//eom
 
 
 @end

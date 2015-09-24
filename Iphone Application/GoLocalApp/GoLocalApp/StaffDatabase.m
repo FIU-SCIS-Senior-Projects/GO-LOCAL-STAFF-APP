@@ -11,7 +11,7 @@
 
 @implementation StaffDatabase
 
-/* constructor for Calculator */
+/* constructor*/
 -(id) init
 {
     self = [super init];

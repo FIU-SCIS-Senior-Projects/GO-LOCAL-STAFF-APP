@@ -10,8 +10,12 @@
 #import "StaffRegistration9ViewController.h"
 #import "StaffRegistration10ViewController.h"
 
+
+#import "RegisteredStaff.h" //needed for staff registration
+
 @interface StaffRegistration8ViewController ()
 {
+    BOOL male;
     
     //updating values
     NSString * heightFeet;      //temp
@@ -52,11 +56,8 @@
 
 @implementation StaffRegistration8ViewController
 
-@synthesize scrollView, validDriverLicenseSwitch, validCommercialDriverLicenseSwitch, hasTattoosSwitch, hasPiercingsSwitch, ethnicityTextField, heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSizeTextField, shoeSizeTextField, tshirtSizeTextField,
-staffTypeExperience, djSelected, liveBandSelected, cateringCompanySelected, otherServicesSelected,
-djCostOfService, liveBandCostOfService, cateringCompanyCostOfService, otherServicesCostOfService,
-cellphone, completeAddress, gender, languages,
-accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
+@synthesize scrollView, registeredStaff,
+    validDriverLicenseSwitch, validCommercialDriverLicenseSwitch, hasTattoosSwitch, hasPiercingsSwitch, ethnicityTextField, heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSizeTextField, shoeSizeTextField, tshirtSizeTextField;
 
 
 - (void)viewDidLoad {
@@ -68,6 +69,8 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    self->male = [registeredStaff isMale];
+    
     [self setUpTapGesture];
     [self createEthnicityPicker];
     [self createHairColorPicker];
@@ -76,7 +79,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     [self createTshirtSizePicker];
     [self createHeightPicker];
     
-    [self testDataPassed];//testing
+    [registeredStaff printUserData];//testing
 }//eom
 
 
@@ -227,6 +230,19 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         return 0;
     }
     
+    //updating values
+    [registeredStaff setLicenseInfo:self->hasDriverLicense hasCommercialLicense:self->hasCommercialLicense];
+    [registeredStaff setTattoos:self->hasTattos];
+    [registeredStaff setPiercings:self->hasPiercings];
+    [registeredStaff setEthnicity:self.ethnicityTextField.text];
+    [registeredStaff setHeight:self.heightTextField.text];
+    [registeredStaff setWeight:self.weightTextField.text];
+    [registeredStaff setHairColor:self.hairColorTextField.text];
+    [registeredStaff setEyeColor:self.eyeColorTextField.text];
+    [registeredStaff setPantSize:self.pantSizeTextField.text];
+    [registeredStaff setShoeSize:self.shoeSizeTextField.text];
+    [registeredStaff setTshirtSize:self.tshirtSizeTextField.text];
+    
     return 1;
 }//eom
 
@@ -251,7 +267,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 /* route to proper controllers */
 -(void) routeToProperController
 {
-    if(self.gender) //males are skipping females question
+    if(self->male) //males are skipping females question
     {
         [self performSegueWithIdentifier:@"goToStaffRegister10" sender:self];
     }
@@ -266,132 +282,13 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"goToStaffRegister9"]){
         StaffRegistration9ViewController *controller = (StaffRegistration9ViewController *)segue.destinationViewController;
-
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self.staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-        
-        //view controller 4
-        controller.djDescription            = self.djDescription;
-        controller.djWebsite                = self.djWebsite;
-        controller.djSocialMedia            = self.djSocialMedia;
-        controller.djCostOfService          = self.djCostOfService;
-        
-        //view controller 5
-        controller.liveBandDescription      = self.liveBandDescription;
-        controller.liveBandWebsite          = self.liveBandWebsite;
-        controller.liveBandSocialMedia      = self.liveBandSocialMedia;
-        controller.liveBandCostOfService    = self.liveBandCostOfService;
-        
-        //view controller 6
-        controller.cateringCompanyDescription   = self.cateringCompanyDescription;
-        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite;
-        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia;
-        controller.cateringCompanyCostOfService = self.cateringCompanyCostOfService;
-        
-        //view controller 7
-        controller.otherServicesDescription     = self.otherServicesDescription;
-        controller.otherServicesWebsite         = self.otherServicesWebsite;
-        controller.otherServicesSocialMedia     = self.otherServicesSocialMedia;
-        controller.otherServicesCostOfService   = self.otherServicesCostOfService;
-        
-        //view controller 8 data
-        controller.hasDriverLicense         = self->hasDriverLicense;
-        controller.hasCommercialLicense     = self->hasCommercialLicense;
-        controller.hasTattos                = self->hasTattos;
-        controller.hasPiercings             = self->hasPiercings;
-        controller.ethnicity                = self.ethnicityTextField.text;
-        controller.height                   = self.heightTextField.text;
-        controller.weight                   = self.weightTextField.text;
-        controller.hairColor                = self.hairColorTextField.text;
-        controller.pantSize                 = self.pantSizeTextField.text;
-        controller.shoeSize                 = self.shoeSizeTextField.text;
-        controller.tshirtSize               = self.tshirtSizeTextField.text;
+        controller.registeredStaff = registeredStaff;
         
     }
     else if([segue.identifier isEqualToString:@"goToStaffRegister10"]){
         StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
 
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self.staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-        
-        //view controller 4
-        controller.djDescription               = self.djDescription;
-        controller.djWebsite                   = self.djWebsite;
-        controller.djSocialMedia               = self.djSocialMedia;
-        controller.djCostOfService             = self.djCostOfService;
-        
-        //view controller 5
-        controller.liveBandDescription         = self.liveBandDescription;
-        controller.liveBandWebsite             = self.liveBandWebsite;
-        controller.liveBandSocialMedia         = self.liveBandSocialMedia;
-        controller.liveBandCostOfService       = self.liveBandCostOfService;
-        
-        //view controller 6
-        controller.cateringCompanyDescription   = self.cateringCompanyDescription;
-        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite;
-        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia;
-        controller.cateringCompanyCostOfService = self.cateringCompanyCostOfService;
-        
-        //view controller 7
-        controller.otherServicesDescription    = self.otherServicesDescription;
-        controller.otherServicesWebsite        = self.otherServicesWebsite;
-        controller.otherServicesSocialMedia    = self.otherServicesSocialMedia;
-        controller.otherServicesCostOfService  = self.otherServicesCostOfService;
-        
-        //view controller 8 data
-        controller.hasDriverLicense         = self->hasDriverLicense;
-        controller.hasCommercialLicense     = self->hasCommercialLicense;
-        controller.hasTattos                = self->hasTattos;
-        controller.hasPiercings             = self->hasPiercings;
-        controller.ethnicity                = self.ethnicityTextField.text;
-        controller.height                   = self.heightTextField.text;
-        controller.weight                   = self.weightTextField.text;
-        controller.hairColor                = self.hairColorTextField.text;
-        controller.eyeColor                 = self.eyeColorTextField.text;
-        controller.pantSize                 = self.pantSizeTextField.text;
-        controller.shoeSize                 = self.shoeSizeTextField.text;
-        controller.tshirtSize               = self.tshirtSizeTextField.text;
-        
+         controller.registeredStaff = registeredStaff;
     }
 }//eom
 
@@ -596,7 +493,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         -(void) createPantSizePicker
         {
             
-            if(self.gender)//males sizes
+            if(self->male)//males sizes
             {
                 //setting up options for UIpicker
                 pantSizeOptions = [[NSArray alloc]
@@ -1099,63 +996,6 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         [scrollView setContentOffset:point animated:YES];
     }
 
-
-
-
--(void)testDataPassed
-{
-    
-    NSLog(@" ");
-    NSLog(@" ");
-    NSLog(@" *****  Staff Registration| View controller #8 ******");
-    //view controller 1
-    NSLog(@" account type:    %@", self.accountType);
-    NSLog(@" firstName:       %@", self.firstName);
-    NSLog(@" middleName:      %@", self.middleName);
-    NSLog(@" lastName:        %@", self.lastName);
-    NSLog(@" nickName:        %@", self.nickName);
-    NSLog(@" email:           %@", self.email);
-    NSLog(@" password:        %@", self.password);
-    NSLog(@" dob:             %@", self.dateOfBirth);
-    //view controller 2
-    NSLog(@" cellphone:       %@", self.cellphone);
-    NSLog(@" address:         %@", self.completeAddress);
-    NSLog(@" gender:          %d", self.gender);//0 female 1 male
-    NSLog(@" languages:       %@", self.languages);
-    
-    //view controller 3
-    NSLog(@" staff experience:          %@", self.staffTypeExperience);
-    NSLog(@" Dj Selected?               %d", self.djSelected);
-    NSLog(@" Live Band Selected?        %d", self.liveBandSelected);
-    NSLog(@" Catering Company Selected? %d", self.cateringCompanySelected);
-    NSLog(@" Other Services Selected?   %d", self.otherServicesSelected);
-    
-    //view controller 4
-    NSLog(@" djDescription:      %@", self.djDescription);
-    NSLog(@" djWebsite:          %@", self.djWebsite);
-    NSLog(@" djSocialMedia:      %@", self.djSocialMedia);
-    NSLog(@" djCostOfService:    %@", self.djCostOfService);
-    
-    //view controller 5
-    NSLog(@" liveBandDescription:      %@", self.liveBandDescription);
-    NSLog(@" liveBandWebsite:          %@", self.liveBandWebsite);
-    NSLog(@" liveBandSocialMedia:      %@", self.liveBandSocialMedia);
-    NSLog(@" liveBandCostOfService:    %@", self.liveBandCostOfService);
-    
-    //view controller 6
-    NSLog(@" cateringCompanyDescription:      %@", self.cateringCompanyDescription);
-    NSLog(@" cateringCompanyWebsite:          %@", self.cateringCompanyWebsite);
-    NSLog(@" cateringCompanySocialMedia:      %@", self.cateringCompanySocialMedia);
-    NSLog(@" cateringCompanyCostOfService:    %@", self.cateringCompanyCostOfService);
-    
-    //view controller 7
-    NSLog(@" otherServicesDescription:      %@", self.otherServicesDescription);
-    NSLog(@" otherServicesWebsite:          %@", self.otherServicesWebsite);
-    NSLog(@" otherServicesSocialMedia:      %@", self.otherServicesSocialMedia);
-    NSLog(@" otherServicesCostOfService:    %@", self.otherServicesCostOfService);
-    
-    NSLog(@" - - - - - - - - - - - - - ");
-}//eom
 
 
 @end

@@ -9,6 +9,9 @@
 #import "StaffRegistration9ViewController.h"
 #import "StaffRegistration10ViewController.h"
 
+
+#import "RegisteredStaff.h" //needed for staff registration
+
 @interface StaffRegistration9ViewController ()
 {
     __weak IBOutlet UILabel *chestSizeLabel;
@@ -20,12 +23,8 @@
 
 @implementation StaffRegistration9ViewController
 
-@synthesize scrollView, chestSize, waistSize, hipsSize, dressSize,
-hasDriverLicense, hasCommercialLicense, hasTattos, hasPiercings, ethnicity, height, weight, hairColor, eyeColor, pantSize, shoeSize, tshirtSize,
-staffTypeExperience, djSelected, liveBandSelected, cateringCompanySelected, otherServicesSelected,
-djCostOfService, liveBandCostOfService, cateringCompanyCostOfService, otherServicesCostOfService,
-cellphone, completeAddress, gender, languages,
-accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
+@synthesize scrollView, registeredStaff,
+chestSize, waistSize, hipsSize, dressSize;
 
 
 - (void)viewDidLoad {
@@ -38,7 +37,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 {
     [self setUpTapGesture];
     
-    [self testDataPassed];//testing
+    [registeredStaff printUserData];//testing
 }//eom
 
 
@@ -91,6 +90,12 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         return 0;
     }
     
+    //updating values
+    [registeredStaff setChest:self.chestSize.text];
+    [registeredStaff setWaist:self.waistSize.text];
+    [registeredStaff setHipSize: self.hipsSize.text];
+    [registeredStaff setDressSize:self.dressSize.text];
+        
     return 1;
 }//eom
 
@@ -115,72 +120,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         if([segue.identifier isEqualToString:@"goToStaffRegister10a"]){
             StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
     
-            //view controller 1 data
-            controller.accountType  = self.accountType;
-            controller.firstName    = self.firstName;
-            controller.middleName   = self.middleName;
-            controller.lastName     = self.lastName;
-            controller.nickName     = self.nickName;
-            controller.email        = self.email;
-            controller.password     = self.password;
-            controller.dateOfBirth  = self.dateOfBirth;
-            
-            //view controller 2 data
-            controller.cellphone                = self.cellphone;
-            controller.completeAddress          = self->completeAddress;
-            controller.gender                   = self->gender;
-            controller.languages                = self->languages;
-            
-            //view controller 3 data
-            controller.staffTypeExperience      = self.staffTypeExperience;
-            controller.djSelected               = self.djSelected;
-            controller.liveBandSelected         = self.liveBandSelected;
-            controller.cateringCompanySelected  = self.cateringCompanySelected;
-            controller.otherServicesSelected    = self.otherServicesSelected;
-            
-            //view controller 4
-            controller.djDescription            = self.djDescription;
-            controller.djWebsite                = self.djWebsite;
-            controller.djSocialMedia            = self.djSocialMedia;
-            controller.djCostOfService          = self.djCostOfService;
-            
-            //view controller 5
-            controller.liveBandDescription      = self.liveBandDescription;
-            controller.liveBandWebsite          = self.liveBandWebsite;
-            controller.liveBandSocialMedia      = self.liveBandSocialMedia;
-            controller.liveBandCostOfService    = self.liveBandCostOfService;
-            
-            //view controller 6
-            controller.cateringCompanyDescription   = self.cateringCompanyDescription;
-            controller.cateringCompanyWebsite       = self.cateringCompanyWebsite;
-            controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia;
-            controller.cateringCompanyCostOfService = self.cateringCompanyCostOfService;
-            
-            //view controller 7
-            controller.otherServicesDescription     = self.otherServicesDescription;
-            controller.otherServicesWebsite         = self.otherServicesWebsite;
-            controller.otherServicesSocialMedia     = self.otherServicesSocialMedia;
-            controller.otherServicesCostOfService   = self.otherServicesCostOfService;
-            
-            //view controller 8 data
-            controller.hasDriverLicense         = self->hasDriverLicense;
-            controller.hasCommercialLicense     = self->hasCommercialLicense;
-            controller.hasTattos                = self->hasTattos;
-            controller.hasPiercings             = self->hasPiercings;
-            controller.ethnicity                = self.ethnicity;
-            controller.height                   = self.height;
-            controller.weight                   = self.weight;
-            controller.hairColor                = self.hairColor;
-            controller.eyeColor                 = self.eyeColor;
-            controller.pantSize                 = self.pantSize;
-            controller.shoeSize                 = self.shoeSize;
-            controller.tshirtSize               = self.tshirtSize;
-            
-            //view controller 9 data
-            controller.chestSize                = self.chestSize.text;
-            controller.waistSize                = self.waistSize.text;
-            controller.hipsSize                 = self.hipsSize.text;
-            controller.dressSize                = self.dressSize.text;
+           controller.registeredStaff = registeredStaff;
         }
 }//eom
 
@@ -307,75 +247,6 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         }
 
 
-
-
-
--(void)testDataPassed
-{
-    NSLog(@" ");
-    NSLog(@" ");
-    NSLog(@" *****  Staff Registration| View controller #9 ******");
-    //view controller 1
-    NSLog(@" account type:    %@", self.accountType);
-    NSLog(@" firstName:       %@", self.firstName);
-    NSLog(@" middleName:      %@", self.middleName);
-    NSLog(@" lastName:        %@", self.lastName);
-    NSLog(@" nickName:        %@", self.nickName);
-    NSLog(@" email:           %@", self.email);
-    NSLog(@" password:        %@", self.password);
-    NSLog(@" dob:             %@", self.dateOfBirth);
-    //view controller 2
-    NSLog(@" cellphone:       %@", self.cellphone);
-    NSLog(@" address:         %@", self.completeAddress);
-    NSLog(@" gender:          %d", self.gender);//0 female 1 male
-    NSLog(@" languages:       %@", self.languages);
-    
-    //view controller 3
-    NSLog(@" staff experience:          %@", self.staffTypeExperience);
-    NSLog(@" Dj Selected?               %d", self.djSelected);
-    NSLog(@" Live Band Selected?        %d", self.liveBandSelected);
-    NSLog(@" Catering Company Selected? %d", self.cateringCompanySelected);
-    NSLog(@" Other Services Selected?   %d", self.otherServicesSelected);
-    
-    //view controller 4
-    NSLog(@" djDescription:      %@", self.djDescription);
-    NSLog(@" djWebsite:          %@", self.djWebsite);
-    NSLog(@" djSocialMedia:      %@", self.djSocialMedia);
-    NSLog(@" djCostOfService:    %@", self.djCostOfService);
-    
-    //view controller 5
-    NSLog(@" liveBandDescription:      %@", self.liveBandDescription);
-    NSLog(@" liveBandWebsite:          %@", self.liveBandWebsite);
-    NSLog(@" liveBandSocialMedia:      %@", self.liveBandSocialMedia);
-    NSLog(@" liveBandCostOfService:    %@", self.liveBandCostOfService);
-    
-    //view controller 6
-    NSLog(@" cateringCompanyDescription:      %@", self.cateringCompanyDescription);
-    NSLog(@" cateringCompanyWebsite:          %@", self.cateringCompanyWebsite);
-    NSLog(@" cateringCompanySocialMedia:      %@", self.cateringCompanySocialMedia);
-    NSLog(@" cateringCompanyCostOfService:    %@", self.cateringCompanyCostOfService);
-    
-    //view controller 7
-    NSLog(@" otherServicesDescription:      %@", self.otherServicesDescription);
-    NSLog(@" otherServicesWebsite:          %@", self.otherServicesWebsite);
-    NSLog(@" otherServicesSocialMedia:      %@", self.otherServicesSocialMedia);
-    NSLog(@" otherServicesCostOfService:    %@", self.otherServicesCostOfService);
-    
-    //view controller 8
-    NSLog(@" driver license?        %d", self.hasDriverLicense);
-    NSLog(@" commercial license?    %d", self.hasCommercialLicense);
-    NSLog(@" tattoos?               %d", self.hasTattos);
-    NSLog(@" piercings?             %d", self.hasPiercings);
-    NSLog(@" ethnicity              %@", self.ethnicity);
-    NSLog(@" height                 %@", self.height);
-    NSLog(@" weight                 %@", self.weight);
-    NSLog(@" hairColor              %@", self.hairColor);
-    NSLog(@" pantSize               %@", self.pantSize);
-    NSLog(@" shoeSize               %@", self.shoeSize);
-    NSLog(@" tshirtSize             %@", self.tshirtSize);
-    
-    NSLog(@" - - - - - - - - - - - - - ");
-}//eom
 
 
 @end

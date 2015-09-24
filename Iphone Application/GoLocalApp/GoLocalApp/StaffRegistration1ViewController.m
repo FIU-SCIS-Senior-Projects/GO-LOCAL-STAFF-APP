@@ -9,8 +9,12 @@
 #import "StaffRegistration1ViewController.h"
 #import "StaffRegistration2ViewController.h"
 
+
+#import "RegisteredStaff.h" //needed for staff registration
+
 @interface StaffRegistration1ViewController ()
 {
+    RegisteredStaff *registeredStaff;
     UIDatePicker * dobPickerView;
     
     __weak IBOutlet UILabel *firstNameLabel;
@@ -42,6 +46,8 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    registeredStaff = [[RegisteredStaff alloc]init];
+    
     [self setUpTapGesture];
     
     [self createDatePickerForDOB];
@@ -178,6 +184,14 @@
         return 0;
     }
     
+    //updating values
+    [registeredStaff setName:self.firstName.text withMiddleInitial:self.middleName.text andLastName:self.lastName.text];
+    [registeredStaff setNickname: self.nickName.text];
+    [registeredStaff setEmail:self.email.text];
+    [registeredStaff setUserName:self.username.text];
+    [registeredStaff setPassword:self.password.text];
+    [registeredStaff setDOB:self.dateOfBirth.text];
+    
     return 1;
 }//eom
 
@@ -202,15 +216,8 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"goToStaffRegister2"]){
         StaffRegistration2ViewController *controller = (StaffRegistration2ViewController *)segue.destinationViewController;
-        controller.accountType  = @"STAFF";
-        controller.firstName    = self.firstName.text;
-        controller.middleName   = self.middleName.text;
-        controller.lastName     = self.lastName.text;
-        controller.nickName     = self.nickName.text;
-        controller.username     = self.username.text;
-        controller.email        = self.email.text;
-        controller.password     = self.password.text;
-        controller.dateOfBirth  = self.dateOfBirth.text;
+        
+        controller.registeredStaff = registeredStaff;
     }
 }//eom
 
@@ -535,8 +542,6 @@
 
             return YES;
         }//eom
-
-
 
 
     /********* scrollview functions **********/

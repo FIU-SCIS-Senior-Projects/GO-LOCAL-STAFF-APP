@@ -10,6 +10,9 @@
 #import "StaffRegistration7ViewController.h"
 #import "StaffRegistration10ViewController.h"
 
+
+#import "RegisteredStaff.h" //needed for staff registration
+
 @interface StaffRegistration6ViewController ()
 {
     __weak IBOutlet UILabel *costOfServiceLabel;
@@ -18,13 +21,8 @@
 
 @implementation StaffRegistration6ViewController
 
-@synthesize scrollView, cateringCompanyDescription, cateringCompanyWebsite, cateringCompanySocialMedia, costOfServiceTextField,
-liveBandDescription, liveBandWebsite, liveBandSocialMedia,
-djCostOfService, liveBandCostOfService,
-djDescription, djWebsite, djSocialMedia,
-staffTypeExperience, djSelected, liveBandSelected, cateringCompanySelected, otherServicesSelected,
-cellphone, completeAddress, gender, languages,
-accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
+@synthesize scrollView, registeredStaff,
+cateringCompanyDescription, cateringCompanyWebsite, cateringCompanySocialMedia, costOfServiceTextField;
 
 
 - (void)viewDidLoad {
@@ -39,9 +37,8 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self testDataPassed];
     [self setUpTapGesture];
-
+    [registeredStaff printUserData];
     
 }//eom
 
@@ -77,6 +74,9 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         return 0;
     }
     
+    //updating values
+    [registeredStaff setCateringCompanyInfo:self.cateringCompanyDescription.text withWebsite:self.cateringCompanyWebsite.text withSocialMedia:self.cateringCompanySocialMedia.text andCostOfServices:self.costOfServiceTextField.text];
+    
     return 1;
 }//eom
 
@@ -94,7 +94,7 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
 -(void)determineWhereToGo
 {
     //other services
-    if(otherServicesSelected)
+    if([registeredStaff isCateringCompany])
     {
         //skipping to Other services controller
         [self performSegueWithIdentifier:@"cateringCompanyToOtherServices" sender:self];
@@ -112,91 +112,13 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
     if([segue.identifier isEqualToString:@"cateringCompanyToOtherServices"]){
         StaffRegistration7ViewController *controller = (StaffRegistration7ViewController *)segue.destinationViewController;
         
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self.staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-        
-        //view controller 4
-        controller.djDescription            = self.djDescription;
-        controller.djWebsite                = self.djWebsite;
-        controller.djSocialMedia            = self.djSocialMedia;
-        controller.djCostOfService          = self.djCostOfService;
-        
-        //view controller 5
-        controller.liveBandDescription      = self.liveBandDescription;
-        controller.liveBandWebsite          = self.liveBandWebsite;
-        controller.liveBandSocialMedia      = self.liveBandSocialMedia;
-        controller.liveBandCostOfService    = self.liveBandCostOfService;
-        
-        //view controller 6
-        controller.cateringCompanyDescription   = self.cateringCompanyDescription.text;
-        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite.text;
-        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia.text;
-        controller.cateringCompanyCostOfService = self.costOfServiceTextField.text;
+         controller.registeredStaff = registeredStaff;
         
     }
     else if([segue.identifier isEqualToString:@"cateringCompanyToStaffRegistration10"]){
         StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
         
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-        
-        //view controller 2 data
-        controller.cellphone                = self.cellphone;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
-        
-        //view controller 3 data
-        controller.staffTypeExperience      = self.staffTypeExperience;
-        controller.djSelected               = self.djSelected;
-        controller.liveBandSelected         = self.liveBandSelected;
-        controller.cateringCompanySelected  = self.cateringCompanySelected;
-        controller.otherServicesSelected    = self.otherServicesSelected;
-        
-        //view controller 4
-        controller.djDescription            = self.djDescription;
-        controller.djWebsite                = self.djWebsite;
-        controller.djSocialMedia            = self.djSocialMedia;
-        controller.djCostOfService          = self.djCostOfService;
-        
-        //view controller 5
-        controller.liveBandDescription      = self.liveBandDescription;
-        controller.liveBandWebsite          = self.liveBandWebsite;
-        controller.liveBandSocialMedia      = self.liveBandSocialMedia;
-        controller.liveBandCostOfService    = self.liveBandCostOfService;
-
-        //view controller 6
-        controller.cateringCompanyDescription   = self.cateringCompanyDescription.text;
-        controller.cateringCompanyWebsite       = self.cateringCompanyWebsite.text;
-        controller.cateringCompanySocialMedia   = self.cateringCompanySocialMedia.text;
-        controller.cateringCompanyCostOfService = self.costOfServiceTextField.text;
+         controller.registeredStaff = registeredStaff;
     }
 }//eom
 
@@ -302,61 +224,6 @@ accountType, firstName, middleName, lastName, nickName, username, email, passwor
         }
 
 
--(void)testDataPassed
-{
-    
-    NSLog(@" ");
-    NSLog(@" ");
-    NSLog(@" *****  Staff Registration| View controller #6 ******");
-   
-    //view controller 1
-    NSLog(@" account type:    %@", self.accountType);
-    NSLog(@" firstName:       %@", self.firstName);
-    NSLog(@" middleName:      %@", self.middleName);
-    NSLog(@" lastName:        %@", self.lastName);
-    NSLog(@" nickName:        %@", self.nickName);
-    NSLog(@" email:           %@", self.email);
-    NSLog(@" password:        %@", self.password);
-    NSLog(@" dob:             %@", self.dateOfBirth);
-    //view controller 2
-    NSLog(@" cellphone:       %@", self.cellphone);
-    NSLog(@" address:         %@", self.completeAddress);
-    NSLog(@" gender:          %d", self.gender);//0 female 1 male
-    NSLog(@" languages:       %@", self.languages);
-    
-    //view controller 3
-    NSLog(@" staff experience:          %@", self.staffTypeExperience);
-    NSLog(@" Dj Selected?               %d", self.djSelected);
-    NSLog(@" Live Band Selected?        %d", self.liveBandSelected);
-    NSLog(@" Catering Company Selected? %d", self.cateringCompanySelected);
-    NSLog(@" Other Services Selected?   %d", self.otherServicesSelected);
-    
-    //view controller 4
-    NSLog(@" djDescription:      %@", self.djDescription);
-    NSLog(@" djWebsite:          %@", self.djWebsite);
-    NSLog(@" djSocialMedia:      %@", self.djSocialMedia);
-    NSLog(@" djCostOfService:    %@", self.djCostOfService);
-    
-    //view controller 5
-    NSLog(@" liveBandDescription:      %@", self.liveBandDescription);
-    NSLog(@" liveBandWebsite:          %@", self.liveBandWebsite);
-    NSLog(@" liveBandSocialMedia:      %@", self.liveBandSocialMedia);
-    NSLog(@" liveBandCostOfService:    %@", self.liveBandCostOfService);
-    
 
-    
-    NSLog(@" - - - - - - - - - - - - - ");
-}//eom
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

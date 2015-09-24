@@ -9,6 +9,8 @@
 #import "StaffRegistration2ViewController.h"
 #import "StaffRegistration3ViewController.h"
 
+#import "RegisteredStaff.h" //needed for staff registration
+
 @interface StaffRegistration2ViewController ()
 {
     NSString * languages; 
@@ -43,14 +45,12 @@
 @implementation StaffRegistration2ViewController
 
 
-@synthesize scrollView, cellphone, address, city, zipcode, state, nativeLanguage, secondLanguage, thirdLanguage, nativeSelected, secondSelected, thirdSelected, maleButton, femaleButton,
-            accountType, firstName, middleName, lastName, nickName, username, email, password, dateOfBirth;
+@synthesize scrollView, cellphone, address, city, zipcode, state, nativeLanguage, secondLanguage, thirdLanguage, nativeSelected, secondSelected, thirdSelected, maleButton, femaleButton, registeredStaff;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self testDataPassed];//testing
-
+    
 }//eom
 
 -(void)viewDidAppear:(BOOL)animated
@@ -60,7 +60,7 @@
     [self createPickerForLanguages];
     genderSelected = FALSE;
     
-     [self testDataPassed];
+    [registeredStaff printUserData];
 
 }//eom
 
@@ -216,7 +216,11 @@
         
            NSLog(@"languages are %@", self->languages);
     
-
+        //updating values
+        [registeredStaff setCellphone:self.cellphone.text withCarrer:@""];
+        [registeredStaff setAddress:self->completeAddress];
+        [registeredStaff setGender:self->gender];
+        [registeredStaff setLanguages:self->languages];
     
     return 1;
 }//eom
@@ -238,22 +242,8 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"goToStaffRegister3"]){
         StaffRegistration3ViewController *controller = (StaffRegistration3ViewController *)segue.destinationViewController;
-
-        //view controller 1 data
-        controller.accountType  = self.accountType;
-        controller.firstName    = self.firstName;
-        controller.middleName   = self.middleName;
-        controller.lastName     = self.lastName;
-        controller.nickName     = self.nickName;
-        controller.email        = self.email;
-        controller.password     = self.password;
-        controller.dateOfBirth  = self.dateOfBirth;
-
-        //view controller 2 data
-        controller.cellphone                = self.cellphone.text;
-        controller.completeAddress          = self->completeAddress;
-        controller.gender                   = self->gender;
-        controller.languages                = self->languages;
+        
+        controller.registeredStaff = registeredStaff;
 
     }
 }//eom
@@ -645,28 +635,6 @@
             CGPoint point = CGPointMake(0, 0);
             [scrollView setContentOffset:point animated:YES];
         }
-
-
-
--(void)testDataPassed
-{
-
-    NSLog(@" ");
-    NSLog(@" ");
-    NSLog(@" *****  Staff Registration| View controller #2 ******");
-    //view controller 1
-    NSLog(@" account type:    %@", self.accountType);
-    NSLog(@" firstName:       %@", self.firstName);
-    NSLog(@" middleName:      %@", self.middleName);
-    NSLog(@" lastName:        %@", self.lastName);
-    NSLog(@" nickName:        %@", self.nickName);
-    NSLog(@" email:           %@", self.email);
-    NSLog(@" password:        %@", self.password);
-    NSLog(@" dob:             %@", self.dateOfBirth);
-
-    NSLog(@" - - - - - - - - - - - - - ");
-}//eom
-
 
 
 
