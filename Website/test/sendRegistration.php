@@ -3,10 +3,10 @@
 //API Url
 // $url = 'http://localhost:8888/FIU%20CLASSES/Senior%20Project%20Stuff/Final%20Deliverables/GO-LOCAL-STAFF-APP/Website/jsonPOST_registration.php';
 
-// // $url = 'http://45.55.208.175/Website/jsonReceiver.php';
+$url = 'http://45.55.208.175/Website/jsonPOST_registration.php';
  
 // //Initiate cURL.
-// $ch = curl_init($url);
+$ch = curl_init($url);
  
 //The JSON data.
 $jsonData = array(
@@ -79,86 +79,86 @@ $jsonData = array(
     'isSalesExecutive' => '1'
 );
  
-// //Encode the array into JSON.
-// $jsonDataEncoded = json_encode($jsonData);
+//Encode the array into JSON.
+$jsonDataEncoded = json_encode($jsonData);
  
-// echo "<p>sending the following JSON:</p>";
-// print_r($jsonDataEncoded);
+echo "<p>sending the following JSON:</p>";
+print_r($jsonDataEncoded);
 
-// //Tell cURL that we want to send a POST request.
-// curl_setopt($ch, CURLOPT_POST, 1);
+//Tell cURL that we want to send a POST request.
+curl_setopt($ch, CURLOPT_POST, 1);
  
-// //Attach our encoded JSON string to the POST fields.
-// curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
+//Attach our encoded JSON string to the POST fields.
+curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
  
-// //Set the content type to application/json
-// curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
+//Set the content type to application/json
+curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
  
-// //Execute the request
-// echo "<p></p>";
-// echo "<p></p>";
-// echo "<p>JSON POST Response:</p>";
-// $result = curl_exec($ch);
+//Execute the request
+echo "<p></p>";
+echo "<p></p>";
+echo "<p>JSON POST Response:</p>";
+$result = curl_exec($ch);
 
 
-    $username = $jsonData['username'];
-    $email    = $jsonData['email'];
-    $password = $jsonData['password'];
+    // $username = $jsonData['username'];
+    // $email    = $jsonData['email'];
+    // $password = $jsonData['password'];
 
 
-// direct test
-/* communicate to database */
- include '../webAPI.php';
- $registrationType = $jsonData['registration_type'];
- if( $registrationType == 'staff')
- {
+// // direct test
+// /* communicate to database */
+//  include '../webAPI.php';
+//  $registrationType = $jsonData['registration_type'];
+//  if( $registrationType == 'staff')
+//  {
 
-    echo "<p> registering $registrationType </p>";
-    //check if unique user
-    $uniqueResults = isUniqueRegisteredStaff("luoandre29", "luoandre29@hotmail.com");
-     echo "<p>response '$uniqueResults' </p>";
-    if($uniqueResults ==  1)//unique user
-    {
-        echo "<p>unique user! lets start registration process </p>";
-        $registrationResults = registerStaff($jsonData);
-        echo "<p>registration results $registrationResults</p>";
+//     echo "<p> registering $registrationType </p>";
+//     //check if unique user
+//     $uniqueResults = isUniqueRegisteredStaff("luoandre29", "luoandre29@hotmail.com");
+//      echo "<p>response '$uniqueResults' </p>";
+//     if($uniqueResults ==  1)//unique user
+//     {
+//         echo "<p>unique user! lets start registration process </p>";
+//         $registrationResults = registerStaff($jsonData);
+//         echo "<p>registration results $registrationResults</p>";
 
-        $responseArray = array(
-            "message" => "user successfully registered",
-            "usertype"    => "1",
-        );
-    }
-    else if($uniqueResults == -1)//user already registered
-    {
-      echo "<p>user already registered</p>";
-      $responseArray = array(
-        "message" => "username and email is NOT unique",
-        "usertype"    => "-1",
-      );
-    }
-    else if($uniqueResults == 0)//database not responding
-    {
-      $responseArray = array(
-        "message" => "database not responding",
-        "usertype"    => "0",
-      );
-    }//eo-conditions
-
-
- }//eo staff registration
- else if( $registrationType == 'employer' )
- {
-    echo "<p>  registering '$registrationType' </p>";
- }//eo employer registration
+//         $responseArray = array(
+//             "message" => "user successfully registered",
+//             "usertype"    => "1",
+//         );
+//     }
+//     else if($uniqueResults == -1)//user already registered
+//     {
+//       echo "<p>user already registered</p>";
+//       $responseArray = array(
+//         "message" => "username and email is NOT unique",
+//         "usertype"    => "-1",
+//       );
+//     }
+//     else if($uniqueResults == 0)//database not responding
+//     {
+//       $responseArray = array(
+//         "message" => "database not responding",
+//         "usertype"    => "0",
+//       );
+//     }//eo-conditions
 
 
+//  }//eo staff registration
+//  else if( $registrationType == 'employer' )
+//  {
+//     echo "<p>  registering '$registrationType' </p>";
+//  }//eo employer registration
 
-    /*
-        reponse returns the following:
-            0   database not responding
-            -1  user already registered
-    */
-    $response['results'] = $responseArray; //sending reply
+
+
+//     /*
+//         reponse returns the following:
+//             0   database not responding
+//             -1  user already registered
+//     */
+//     $response['results'] = $responseArray; //sending reply
 
 
 

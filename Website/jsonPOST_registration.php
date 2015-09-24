@@ -46,20 +46,20 @@
       else  //valid json values found
       {
           /* communicate to database */
-         include '../webAPI.php';
+         require 'webAPI.php';
          $registrationType = $jsonData['registration_type'];
          if( $registrationType == 'staff') //staff registration
          {
 
-            echo "<p> registering $registrationType </p>";
-            //check if unique user
-            $uniqueResults = isUniqueRegisteredStaff("luoandre29", "luoandre29@hotmail.com");
-             echo "<p>response '$uniqueResults' </p>";
-            if($uniqueResults ==  1)//unique user
-            {
-                echo "<p>unique user! lets start registration process </p>";
-                $registrationResults = registerStaff($jsonData);
-                echo "<p>registration results $registrationResults</p>";
+            // echo "<p> registering $registrationType </p>";
+            // //check if unique user
+            // $uniqueResults = isUniqueRegisteredStaff("luoandre29", "luoandre29@hotmail.com");
+            //  echo "<p>response '$uniqueResults' </p>";
+            // if($uniqueResults ==  1)//unique user
+            // {
+            //     echo "<p>unique user! lets start registration process </p>";
+            //     $registrationResults = registerStaff($jsonData);
+            //     echo "<p>registration results $registrationResults</p>";
 
 
                 
@@ -69,22 +69,22 @@
                     "message" => "user successfully registered",
                     "usertype"    => "1",
                 );
-            }
-            else if($uniqueResults == -1)//user already registered
-            {
-              echo "<p>user already registered</p>";
-              $responseArray = array(
-                "message" => "username and email is NOT unique",
-                "usertype"    => "-1",
-              );
-            }
-            else if($uniqueResults == 0)//database not responding
-            {
-              $responseArray = array(
-                "message" => "database not responding",
-                "usertype"    => "0",
-              );
-            }//eo-conditions
+            // }
+            // else if($uniqueResults == -1)//user already registered
+            // {
+            //   echo "<p>user already registered</p>";
+            //   $responseArray = array(
+            //     "message" => "username and email is NOT unique",
+            //     "usertype"    => "-1",
+            //   );
+            // }
+            // else if($uniqueResults == 0)//database not responding
+            // {
+            //   $responseArray = array(
+            //     "message" => "database not responding",
+            //     "usertype"    => "0",
+            //   );
+            // }//eo-conditions
          }//eo staff registration
          else if( $registrationType == 'employer' )//employer registration
          {
