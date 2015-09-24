@@ -110,10 +110,10 @@
 
       /* saving incoming file */
         // Write the contents back to the file
-        $filename = '../incominRegistrationDataResponse.json';
+        $filename = 'test/incominRegistrationDataResponse.json';
         file_put_contents($filename, var_export($encoded, true));
 
-        $filename = '../incominRegistrationData.json';
+        $filename = 'test/incominRegistrationData.json';
         file_put_contents($filename, var_export($decoded, true));
 
 
