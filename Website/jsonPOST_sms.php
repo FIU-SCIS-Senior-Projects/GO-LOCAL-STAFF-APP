@@ -61,6 +61,8 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
         $username = $decoded["username"];
         $pasword = $decoded["password"];
         $dob = $decoded["dob"];
+        $carrier = $decoded["carrier"];
+        $phone = $decoded["phone"];
 
         if( peopleUserExists( $username, $email ) )
         {
@@ -88,17 +90,11 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
           }
         }
 
-        // $carrier = $decoded["carrier"];
-        // $phone = $decoded["phone"];
-
-        // $smsGateway = getGateway( $carrier );
-        // authenticatePhoneNumber( $phone, $smsGateway );
-
-        // $responseArray = [
-        //   "message"   => "text message sent",
-        //   "responseType"  => "1",
-        // ];
-
+        $smsGateway = getGateway( $carrier );
+        if( authenticatePhoneNumber( $phone, $smsGateway ) != null )
+          authenticatePhoneNumber( $phone, $smsGateway );
+        else
+          echo "There was a problem retrieving the carrier";
 
         /* 
           reponse returns the following:
