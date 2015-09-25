@@ -144,7 +144,7 @@ function authenticatePhoneNumber( $peopleID, $to, $smsGateway )
 		//		  VALUES ('".$to."', '".$code."')";
 
 		$query = "UPDATE people
-				  SET phone='".$phone."', phonecode='".$phonecode."'
+				  SET phone='".$phone."', phonecode='".$code."'
 				  WHERE peopleID=".$peopleID."";
 
 		if( !$result = mysqli_query( $db, $query ) )
