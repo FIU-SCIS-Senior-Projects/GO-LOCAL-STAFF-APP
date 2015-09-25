@@ -17,12 +17,15 @@
 
     if( $_SERVER["REQUEST_METHOD"] == "GET" )
     {
+        echo "GET SET!";
         if( !empty($_GET["type"]) && !empty($_GET["email"]) && !empty($_GET["hash"]) )
         {
             //verify data
             authenticateEmail( $_GET["type"], $_GET["email"], $_GET["hash"] );
         }
     }
+    else
+        echo "GET NOT SET!";
 
     ?>
 </body>

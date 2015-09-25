@@ -1,3 +1,8 @@
+<?php
+//Start Session
+session_start();
+?>
+
 <html>
 <header>
   <title>Go Local App</title>
@@ -5,6 +10,8 @@
 <body>
 
   <?php
+  require_once "functions.php";
+
   //define variables used in the form
   $username;
   $password;
@@ -50,7 +57,7 @@
         $emailMatchError = "Emails do not match<br>";
       else
       {
-        $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
+        $db = mysqli_connect("localhost", "root", "root", "golocalapp");
         //Check connection
         if( mysqli_connect_errno() )
           echo "Unable to connect to MySQL: ".mysqli_connect_error();
@@ -87,6 +94,7 @@
                         '".mysqli_real_escape_string($db, $email)."',
                         '".mysqli_real_escape_string($db, $hash)."');";  
             $result = mysqli_query($db, $query);
+            $_SESSION["username"] = mysqli_real_escape_string($db, $username);
 
             $to = $email;
             $subject = "GoLocalApp email verification";
@@ -110,27 +118,19 @@
 
             if( $userType == "registeredstaff")
             {
-              header("Location: http://45.55.208.175/Website/staff_register.php");
-              //header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/staff_register.php");
+              //header("Location: http://45.55.208.175/Website/staff_register.php");
+              header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/staff_register.php");
             }
             else
             {
-              header("Location: http://45.55.208.175/Website/company_register.php");
-              //header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/company_register.php");
+              //header("Location: http://45.55.208.175/Website/company_register.php");
+              header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/company_register.php");
             }
 
           }
         }
       }
     }
-  }
-
-  function test_input($data)
-  {
-    $data = trim($data);
-    $data = stripcslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
   }
   
   ?>
@@ -140,13 +140,13 @@
     User Type: 
     <input type="radio" name="userType" value="registeredstaff">Staff
     <input type="radio" name="userType" value="registeredcompany">Company
-    <span class="error">*
+    <span class="error" style="color:red">*
       <?php echo $userTypeError; ?>
     </span><br><br>
     
     Username: 
     <input type="text" name="username" value="<?php echo $username; ?>">
-    <span class="error">*
+    <span class="error" style="color:red">*
       <?php echo $usernameError; ?>
     </span><br><br>
     <span class="error">
@@ -155,13 +155,13 @@
     
     Password: 
     <input type="password" name="password">
-    <span class="error">*
+    <span class="error" style="color:red">*
       <?php echo $passwordError; ?>
     </span><br><br>
     
     Confirm Password: 
     <input type="password" name="confirmPass">
-    <span class="error">*
+    <span class="error" style="color:red">*
       <?php echo $passwordError; ?>
     </span><br><br>
     <span class="error">
@@ -170,13 +170,13 @@
     
     Email: 
     <input type="email" name="email">
-    <span class="error">*
+    <span class="error" style="color:red">*
       <?php echo $emailError; ?>
     </span><br><br>
     
     Confirm Email: 
     <input type="email" name="confirmEmail">
-    <span class="error">*
+    <span class="error" style="color:red">*
       <?php echo $emailError; ?>
     </span><br><br>
     
