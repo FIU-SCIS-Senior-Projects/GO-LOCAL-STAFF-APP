@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Sep 14, 2015 at 09:53 PM
+-- Generation Time: Sep 25, 2015 at 07:57 AM
 -- Server version: 5.5.41-log
 -- PHP Version: 5.6.8
 
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 
 CREATE TABLE IF NOT EXISTS `people` (
   `peopleID` int(11) NOT NULL,
-  `companyID` int(11) NOT NULL,
+  `companyID` int(11) DEFAULT NULL,
   `staffType` int(11) NOT NULL,
   `firstName` varchar(30) NOT NULL,
   `middleInitial` varchar(30) NOT NULL,
@@ -87,6 +87,8 @@ CREATE TABLE IF NOT EXISTS `people` (
   `email` varchar(30) NOT NULL,
   `address` varchar(255) NOT NULL,
   `phone` varchar(15) NOT NULL,
+  `phoneCode` int(11) DEFAULT NULL,
+  `phoneValidated` int(11) DEFAULT NULL,
   `profession` int(11) NOT NULL,
   `website` varchar(30) NOT NULL,
   `socialMedia` varchar(255) NOT NULL,
@@ -133,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `registeredcompany` (
   `email` varchar(255) DEFAULT NULL,
   `hash` varchar(255) DEFAULT NULL,
   `emailValidated` int(11) DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -148,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `registeredstaff` (
   `email` varchar(255) DEFAULT NULL,
   `hash` varchar(255) DEFAULT NULL,
   `emailValidated` int(11) DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -209,12 +211,12 @@ ALTER TABLE `stafftype`
 -- AUTO_INCREMENT for table `registeredcompany`
 --
 ALTER TABLE `registeredcompany`
-MODIFY `companyID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `companyID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `registeredstaff`
 --
 ALTER TABLE `registeredstaff`
-MODIFY `peopleID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+MODIFY `peopleID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
