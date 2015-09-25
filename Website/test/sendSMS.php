@@ -6,17 +6,21 @@
 
 //$url = 'http://45.55.208.175/Website/jsonPOST_sms.php';
 
-  $url = "http://localhost/GO-LOCAL-STAFF-APP/Website/test/jsonPOST_sms.php";
-
-  echo $url;
+  $url = "http://localhost/GO-LOCAL-STAFF-APP/Website/jsonPOST_sms.php";
  
 //Initiate cURL.
 $ch = curl_init($url);
 
     //valid staff user
     $jsonData = [
-      "phone" => "7862948736",
-      "carrier" => "att",
+      "firstName" => "Wilfredo",
+      "middleName" => "G",
+      "lastName" => "Gomez",
+      "nickName" => "watermelon",
+      "email" => "willyggh@outlook.com",
+      "username" => "willyggh",
+      "password" => "123",
+      "dob" => "04/16/1989",
       ];
 
 

@@ -48,23 +48,61 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
     {
         /* communicate to database */
         require 'webAPI.php';
-        
-        $carrier = $decoded["carrier"];
-        $phone = $decoded["phone"];
 
-        $smsGateway = getGateway( $carrier );
-        authenticatePhoneNumber( $phone, $smsGateway );
+        $peopleID;
+        $responseArray;
 
-        echo "Text sent succesfully";
-        
-        $responseArray = [
-          "message"   => "text message sent",
-          "responseType"  => "1",
-        ];
+
+        $fname = $decoded["firstName"];
+        $middleN = $decoded["middleName"];
+        $lname = $decoded["lastName"];
+        $nickname = $decoded["nickName"];
+        $email = $decoded["email"];
+        $username = $decoded["username"];
+        $pasword = $decoded["password"];
+        $dob = $decoded["dob"];
+
+        if( peopleUserExists( $username, $email ) )
+        {
+          //There is already a regisetred user with at least one of both credentials
+          $responseArray = [
+            "message" => "Username or Email already exist",
+            "responseType" => "3",
+            ];
+        }
+        else
+        {
+          //User doens't exist. Let's add him/her to the DB
+          $peopleID = storeStaffCredentials( $username, $password, $email );
+
+          if( $peopleID == "" )
+            echo "There was problem storing the staff information";
+          else
+          {
+            storePersonalInfo( $peopleID, $fname, $middleN, $lname, $nickname, "", "" );
+            storePersonalDOB( $peopleID, $dob );
+
+            $responseArray = [
+              "peopleID" => $peopleID,
+              ];
+          }
+        }
+
+        // $carrier = $decoded["carrier"];
+        // $phone = $decoded["phone"];
+
+        // $smsGateway = getGateway( $carrier );
+        // authenticatePhoneNumber( $phone, $smsGateway );
+
+        // $responseArray = [
+        //   "message"   => "text message sent",
+        //   "responseType"  => "1",
+        // ];
 
 
         /* 
           reponse returns the following:
+              3   user already exist
               2   valid employer user
               1   valid staff user
               0   database not responding

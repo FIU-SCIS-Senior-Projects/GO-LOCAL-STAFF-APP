@@ -1,0 +1,10 @@
+array (
+  'firstName' => 'Wilfredo',
+  'middleName' => 'G',
+  'lastName' => 'Gomez',
+  'nickName' => 'watermelon',
+  'email' => 'willyggh@outlook.com',
+  'username' => 'willyggh',
+  'password' => '123',
+  'dob' => '04/16/1989',
+)

@@ -57,7 +57,7 @@ session_start();
         $emailMatchError = "Emails do not match<br>";
       else
       {
-        $db = mysqli_connect("localhost", "root", "root", "golocalapp");
+        $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
         //Check connection
         if( mysqli_connect_errno() )
           echo "Unable to connect to MySQL: ".mysqli_connect_error();
@@ -118,13 +118,13 @@ session_start();
 
             if( $userType == "registeredstaff")
             {
-              //header("Location: http://45.55.208.175/Website/staff_register.php");
-              header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/staff_register.php");
+              header("Location: http://45.55.208.175/Website/staff_register.php");
+              //header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/staff_register.php");
             }
             else
             {
-              //header("Location: http://45.55.208.175/Website/company_register.php");
-              header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/company_register.php");
+              header("Location: http://45.55.208.175/Website/company_register.php");
+              //header("Location: http://localhost/GO-LOCAL-STAFF-APP/website/company_register.php");
             }
 
           }
