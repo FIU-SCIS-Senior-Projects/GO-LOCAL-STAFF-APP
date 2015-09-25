@@ -155,6 +155,54 @@ function authenticatePhoneNumber( $peopleID, $to, $smsGateway )
 	mail( $to.$smsGateway, $subject, $code );
 }
 
+function verifySmsCode( $peopleID, $code )
+{
+	$success = true;
+
+	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
+
+	if( mysqli_connect_errno() )
+		echo "unable to connect to MySQL: ".mysqli_connect_error();
+	else
+	{
+		$query = "SELECT phonecode
+				  FROM people
+				  WHERE peopleID='".$peopleID."'
+				  AND phoneCode='".$code."'";
+
+		if( !$result = mysqli_query($db, $query) )
+			$success = false;
+		else
+		{
+			if( mysqli_num_rows($result) <= 0 )
+			{
+				$success = false;
+				echo "There was a problem retrieving the code";
+			}
+			else
+			{
+				//Code has been verified
+				$query = "UPDATE people
+						  SET phoneValidated='1'
+						  WHERE peopleID='".$peopleID."'
+						  AND phonecode='".$code."'";
+
+				if( !$result = mysqli_query($db, $query) )
+				{
+					$success = false;
+					echo "Unable to update the phone validation field";
+				}
+				else
+				{
+					echo "Phone number has been validated!";
+				}
+			}
+		}
+	}
+
+	return $success;
+}
+
 function getGateway( $carrier )
 {
 	$gateway = "";
