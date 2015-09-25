@@ -236,6 +236,8 @@ function storeStaffCredentials( $username, $password, $email )
 			{
 				$row = mysqli_fetch_assoc($result);
 				$peopleID = $row["peopleID"];
+
+				sendEmail( $username, $email, "registeredstaff", $hashCodeEmail );
 			}
 			else
 				echo "Username doens't exists";
@@ -262,6 +264,29 @@ function storePersonalDOB( $peopleID, $dob )
 		if( !$result = mysqli_query($db, $query) )
 			echo "We couldn't update the DOB";
 	}
+}
+
+function sendEmail( $username, $email, $userType, $hash )
+{
+	$to = $email;
+    $subject = "GoLocalApp email verification";
+    //message to be sent to verify the email address.
+    $message = "            
+
+      Thanks for signing up!
+      Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+       
+      ------------------------
+      Username: ".$username."
+      ------------------------
+       
+      Please click this link to activate your account:
+      http://45.55.208.175/Website/verify.php?type=".$userType."&email=".$email."&hash=".$hash."
+       
+      ";
+
+    $headers = "From:noreply@golocalpromos.com"."\r\n";
+    mail( $to, $subject, $message, $headers );
 }
 
 ?>

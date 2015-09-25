@@ -81,7 +81,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
           {
             storePersonalInfo( $peopleID, $fname, $middleN, $lname, $nickname, "", "" );
             storePersonalDOB( $peopleID, $dob );
-
+            
             $responseArray = [
               "peopleID" => $peopleID,
               ];
