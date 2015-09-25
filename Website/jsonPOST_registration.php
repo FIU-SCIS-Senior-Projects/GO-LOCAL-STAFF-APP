@@ -108,6 +108,8 @@
   //responding back to sender
   $encoded = json_encode($response);
 
+	echo getcwd();
+
       /* saving incoming file */
         // Write the contents back to the file
         $filename = 'test/incominRegistrationDataResponse.json';
