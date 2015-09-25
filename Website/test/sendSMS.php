@@ -4,9 +4,9 @@
 // API Url
 // $url = 'http://localhost:8888/FIU%20CLASSES/Senior%20Project%20Stuff/Final%20Deliverables/GO-LOCAL-STAFF-APP/Website/jsonPOST_login.php';
 
-//$url = 'http://45.55.208.175/Website/jsonPOST_sms.php';
+$url = 'http://45.55.208.175/Website/jsonPOST_sms.php';
 
-  $url = "http://localhost/GO-LOCAL-STAFF-APP/Website/jsonPOST_sms.php";
+  //$url = "http://localhost/GO-LOCAL-STAFF-APP/Website/jsonPOST_sms.php";
  
 //Initiate cURL.
 $ch = curl_init($url);
