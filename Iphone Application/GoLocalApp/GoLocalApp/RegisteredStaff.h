@@ -36,29 +36,25 @@
     BOOL cateringCompanySelected;
     BOOL otherServicesSelected;
 
+    /* 
+     services have the following:
+        description
+        website
+        socialmedia
+        cost of service
+     */
     //view controller 4
-    NSString *djDescription;
-    NSString *djWebsite;
-    NSString *djSocialMedia;
-    NSString *djCostOfService;
-
+    NSMutableArray *djInfo;
+    
     //view controller 5
-    NSString *liveBandDescription;
-    NSString *liveBandWebsite;
-    NSString *liveBandSocialMedia;
-    NSString *liveBandCostOfService;
-
+    NSMutableArray *liveBandInfo;
+    
     //view controller 6
-    NSString *cateringCompanyDescription;
-    NSString *cateringCompanyWebsite;
-    NSString *cateringCompanySocialMedia;
-    NSString *cateringCompanyCostOfService;
-
+    NSMutableArray *cateringCompanyInfo;
+    
     //view controller 7
-    NSString *otherServicesDescription;
-    NSString *otherServicesWebsite;
-    NSString *otherServicesSocialMedia;
-    NSString *otherServicesCostOfService;
+    NSMutableArray *otherServicesInfo;
+ 
 
     //view controller 8
     BOOL hasDriverLicense;
@@ -94,6 +90,7 @@
     BOOL directDepositDesired;
     NSString *directDepositRoutingNumber;
     NSString *directDepositAccountNumber;
+    
 }
 
 /* get methods */
@@ -102,6 +99,53 @@
 -(BOOL) isCateringCompany;
 -(BOOL) isOtherServices;
 -(BOOL) isMale;
+-(NSString *) getAccountType;
+-(NSString *) getFirstName;
+-(NSString *) getMiddleName;
+-(NSString *) getLastName;
+-(NSString *) getNickName;
+-(NSString *) getEmail;
+-(NSString *) getUserName;
+-(NSString *) getPassword;
+-(NSString *) getDateOfBirth;
+-(NSString *) getCellPhone;
+-(NSString *) getCellPhoneCarrier;
+-(NSString *) getAddress;
+-(NSString *) getGender;
+-(NSString *) getLanguages;
+-(NSMutableArray *) getExperience;
+-(NSMutableArray *) getDJInfo;
+-(NSMutableArray *) getLiveBandInfo;
+-(NSMutableArray *) getCateringCompanyInfo;
+-(NSMutableArray *) getOtherServicesInfo;
+-(BOOL) hasDriverLicense;
+-(BOOL) hasCommercialDriverLicense;
+-(BOOL) hasTattoos;
+-(BOOL) hasPiercings;
+-(NSString *) getEthnicity;
+-(NSString *) getHeight;
+-(NSString *) getWeight;
+-(NSString *) getHairColor;
+-(NSString *) getEyeColor;
+-(NSString *) getPantSize;
+-(NSString *) getShoeSize;
+-(NSString *) getTshirtSize;
+-(NSString *) getChestSize;
+-(NSString *) getWaistSize;
+-(NSString *) getHipSize;
+-(NSString *) getDressSize;
+-(BOOL) hasProfessionalInsurance;
+-(BOOL) isCorporated;
+-(NSString *) getSSN;
+-(NSString *) getEIN;
+-(NSString *) getBusinessName;
+-(NSString *) getDesiredHourlyRate;
+-(NSString *) getDesiredWeeklyRate;
+-(NSString *) getTravelPercentage;
+-(BOOL) wantsDirectDeposit;
+-(NSString *) getdirectDepositRoutingNumber;
+-(NSString *) getdirectDepositAccountNumber;
+
 
 /**  set methods **/
     //controller 1
@@ -123,13 +167,13 @@
 -(void) setServicesSelected:(BOOL) isDj  liveBand:(BOOL) isLiveBand  cateringCompany:(BOOL) isCateringCompany  otherServices:(BOOL) isOtherServices;
 
     //controller 4 <-> 7
--(void) setDJInfo:(NSString *) description withWebsite:(NSString *) website withSocialMedia:(NSString *) socialMedia andCostOfServices:(NSString *) costOfService;
--(void) setLiveBandInfo:(NSString *) description withWebsite:(NSString *) website withSocialMedia:(NSString *) socialMedia andCostOfServices:(NSString *) costOfService;
--(void) setCateringCompanyInfo:(NSString *) description withWebsite:(NSString *) website withSocialMedia:(NSString *) socialMedia andCostOfServices:(NSString *) costOfService;
--(void) setOtherServicesInfo:(NSString *) description withWebsite:(NSString *) website withSocialMedia:(NSString *) socialMedia andCostOfServices:(NSString *) costOfService;
+-(void) setDJInfo:(NSMutableArray *) information;
+-(void) setLiveBandInfo:(NSMutableArray *) information;
+-(void) setCateringCompanyInfo:(NSMutableArray *) information;
+-(void) setOtherServicesInfo:(NSMutableArray *) information;
 
     //controller 8
--(void) setLicenseInfo:(BOOL) driverLicense hasCommercialLicense:(BOOL) commcercialLicense;
+-(void) setLicenseInfo:(BOOL) driverLicense hasCommercialLicense:(BOOL) commercialLicense;
 -(void) setTattoos:(BOOL) tattoosSelected;
 -(void) setPiercings:(BOOL) piercingsSelected;
 -(void) setEthnicity:(NSString *) ethnicitySelected;
@@ -157,8 +201,6 @@
     //controller 13
 -(void) setDirectDeposit:(BOOL) directDeposit withRouting:(NSString *) routingProvided andWithAccountNumber:(NSString *) accountNumberProvided;
 
-    //controller 14
--(NSDictionary *) getStaffInfo;
 
 -(void) printUserData;
 

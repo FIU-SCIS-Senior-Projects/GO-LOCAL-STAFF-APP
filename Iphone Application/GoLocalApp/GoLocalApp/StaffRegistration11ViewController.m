@@ -48,12 +48,15 @@ notRequireForRegistrationLabel, headshotImageView;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [registeredStaff printUserData];//testing
+//    [registeredStaff printUserData];//testing
+    
     self->djSelected                =   [registeredStaff isDJ];
     self->liveBandSelected          =   [registeredStaff isLiveBand];
     self->cateringCompanySelected   =   [registeredStaff isCateringCompany];
     self->otherServicesSelected     =   [registeredStaff isOtherServices];
     
+    
+    NSLog(@"services selection dj = %d | liveband = %d | catering = %d | other = %d", self->djSelected , self->liveBandSelected, self->cateringCompanySelected, self->otherServicesSelected);
     //creating db helper
     staffDB = [[StaffDatabase alloc] init];
     
@@ -90,10 +93,11 @@ notRequireForRegistrationLabel, headshotImageView;
         NSLog(@"NO IMAGE WAS SELECTED");
         
         //the only users allow not have a selfie photo
-        if( (self->djSelected == FALSE) &&
-           (self->liveBandSelected == FALSE) &&
-           ( self->cateringCompanySelected == FALSE) &&
-           ( self->otherServicesSelected == FALSE) )
+        if( !(self->djSelected) &&
+           !(self->liveBandSelected) &&
+           !(self->cateringCompanySelected) &&
+           !(self->otherServicesSelected)
+          )
         {
             
             [self showAlert:@"Registration Field" withMessage:@"Please take a Selfie or select a existing selfie (Headshot)  Image" and:@"Okay"];

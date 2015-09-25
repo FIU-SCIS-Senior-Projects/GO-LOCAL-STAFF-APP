@@ -35,6 +35,45 @@
 {
     [registeredStaff printUserData];//testing
     
+    
+//    //example 1
+//    NSMutableDictionary *req =[NSMutableDictionary  dictionaryWithObjectsAndKeys:@"feed/http://feeds.feedburner.com/design-milk", @"id", nil];
+//    req[@"title"] = @"Design Milk";
+//    
+//    NSLog(@" NSMutableDictionary = %@", req);
+//    
+//    NSDictionary *itemToAdd = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                               @"user/category/test", @"id", @"test", @"label", nil];
+//    
+//    NSMutableArray *listToAdd = [[NSMutableArray alloc] init];
+//    [listToAdd addObject:itemToAdd];
+//    
+//    [req setObject:listToAdd forKey:@"categories"];
+//    
+//    NSLog(@" final is %@", req);
+//    
+//    
+//    //example 2
+//    NSMutableDictionary *json= [[NSMutableDictionary alloc] init];
+//    [json setObject:@"4992" forKey:@"cat_id"];
+//    [json setObject:@"Toshiba" forKey:@"brand"];
+//    //create weight object
+//    NSMutableDictionary *weight= [[NSMutableDictionary alloc] init];
+//    [weight setObject:@"1000000" forKey:@"gte"];
+//    [weight setObject:@"1500000" forKey:@"lt"];
+//    //attach the object
+//    [json setObject:weight forKey:@"weight"];
+//    //create sitedetails objects
+//    NSMutableDictionary *sitedetails= [[NSMutableDictionary alloc] init];
+//    [sitedetails setObject:@"newegg.com" forKey:@"name"];
+//    //create latestoffers objects
+//    NSMutableDictionary *latestoffers= [[NSMutableDictionary alloc] init];
+//    [latestoffers setObject:@"USD" forKey:@"currency"];
+//    //new dictionary for price
+//    [sitedetails setObject:latestoffers forKey:@"latestoffers"];
+//    [json setObject:sitedetails forKey:@"sitedetails"];
+//    NSLog(@"%@",json);
+    
 }//eom
 
 
@@ -90,26 +129,31 @@
 {
         NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_registration.php";//hard coding website
     
-        /*** preparing data to be sent ***/
-        NSDictionary * staffInfo = [registeredStaff getStaffInfo];
+    /*** preparing data to be sent ***/
+    NSLog(@"");
+    NSLog(@" about to send the following data: %@", [self prepareData]);
+    NSLog(@"");
     
-        /*** Sending data ***/
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
-                                        initWithURL:[NSURL URLWithString:  serverAddress ]];
-    
-        [request setHTTPMethod:@"POST"]; //request type
-        
-        //sending data
-        NSError *error;
-        NSData *postdata = [NSJSONSerialization dataWithJSONObject:staffInfo options:0 error:&error];
-        [request setHTTPBody:postdata];
-    
-    
-        NSLog(@" sending post data: %@", postdata);
-    
-//        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-//        NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
-        [NSURLConnection connectionWithRequest:request delegate:self];
+
+//
+//        /*** Sending data ***/
+//        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+//                                        initWithURL:[NSURL URLWithString:  serverAddress ]];
+//    
+//        [request setHTTPMethod:@"POST"]; //request type
+//        
+//        //sending data
+//        NSError *error;
+//        NSData *postdata = [NSJSONSerialization dataWithJSONObject:staffInfo options:0 error:&error];
+//    
+//        [request setHTTPBody:postdata];
+//    
+//    
+//    
+//    
+////        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+////        NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+//        [NSURLConnection connectionWithRequest:request delegate:self];
 }//eo-action
 
 /* responce from server */
@@ -152,6 +196,219 @@
     [alert show];//display alert
 }//eom
 
+/*prepare staff data to json*/
+-(NSMutableDictionary *) prepareData
+{
+    //creating initial list
+    NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
+    
+    finalList[@"registrationType"]     = [registeredStaff getAccountType];
+
+    //adding view controller 0 info
+    finalList[@"cellphone"]             = [registeredStaff getCellPhone];
+//    finalList[@"cellphoneCarrier"]      = [registeredStaff getCellPhoneCarrier];
+    
+    
+    NSLog(@"After view controller 0");
+    NSLog(@" %@", finalList);
+    NSLog(@"");
+    
+    
+    //adding view controller 1 info
+    finalList[@"firstName"]     = [registeredStaff getFirstName];
+    finalList[@"middleName"]    = [registeredStaff getMiddleName];
+    finalList[@"lastName"]      = [registeredStaff getLastName];
+    finalList[@"nickName"]      = [registeredStaff getNickName];
+    finalList[@"email"]         = [registeredStaff getEmail];
+    finalList[@"username"]      = [registeredStaff getUserName];
+    finalList[@"password"]      = [registeredStaff getPassword];
+    finalList[@"dob"]           = [registeredStaff getDateOfBirth];
+
+    NSLog(@"After view controller 1");
+    NSLog(@" %@", finalList);
+    NSLog(@"");
+    
+    //adding view controller 2 info
+    finalList[@"address"]               = [registeredStaff getAddress];
+    finalList[@"gender"]                = [registeredStaff getGender];
+    finalList[@"genderType"]            = [NSString stringWithFormat:@"%d", [registeredStaff isMale]];
+    finalList[@"languages"]             = [registeredStaff getLanguages];
+
+    
+    NSLog(@"After view controller 2");
+    NSLog(@" %@", finalList);
+    NSLog(@"");
+    
+    //adding view controller 3 info
+
+    finalList[@"experience"]                    = [registeredStaff getExperience];
+    if( [registeredStaff isDJ] || [registeredStaff isLiveBand] || [registeredStaff isCateringCompany] || [registeredStaff isOtherServices] )
+    {
+    
+        if( [registeredStaff isDJ] )
+        {
+            finalList[@"selectedDJ"]                = [NSString stringWithFormat:@"%d", [registeredStaff isDJ] ];
+            finalList[@"djInfo"]                    = [registeredStaff getDJInfo];
+        }
+        if( [registeredStaff isLiveBand] )
+        {
+            finalList[@"selectedLiveBand"]          = [NSString stringWithFormat:@"%d", [registeredStaff isLiveBand] ];
+            finalList[@"liveBandInfo"]              = [registeredStaff getLiveBandInfo];
+        }
+        if( [registeredStaff isCateringCompany] )
+        {
+            finalList[@"selectedCateringCompany"]   = [NSString stringWithFormat:@"%d", [registeredStaff isCateringCompany] ];
+            finalList[@"cateringCompanyInfo"]       = [registeredStaff getCateringCompanyInfo];
+        }
+        if( [registeredStaff isOtherServices] )
+        {
+            finalList[@"selectedOtherServices"]     = [NSString stringWithFormat:@"%d", [registeredStaff isOtherServices] ];
+            finalList[@"otherServicesInfo"]         = [registeredStaff getOtherServicesInfo];
+        }
+    
+    
+        NSLog(@"After view controller 3");
+        NSLog(@" %@", finalList);
+        NSLog(@"");
+    }
+    else
+    {
+    
+        //adding view controller 8 info
+        finalList[@"driverLicense"]         =  [NSString stringWithFormat:@"%d",[registeredStaff hasDriverLicense]];
+        finalList[@"commercialLicense"]     =  [NSString stringWithFormat:@"%d",[registeredStaff hasCommercialDriverLicense]];
+        finalList[@"Tattoos"]               =  [NSString stringWithFormat:@"%d",[registeredStaff hasTattoos]];
+        finalList[@"Piercings"]             =  [NSString stringWithFormat:@"%d",[registeredStaff hasPiercings]];
+        finalList[@"ethnicity"]             = [registeredStaff getEthnicity];
+        finalList[@"height"]                = [registeredStaff getHeight];
+        finalList[@"weight"]                = [registeredStaff getWeight];
+        finalList[@"eyeColor"]              = [registeredStaff getEyeColor];
+        finalList[@"pantSize"]              = [registeredStaff getPantSize];
+        finalList[@"shoeSize"]              = [registeredStaff getShoeSize];
+        finalList[@"tshirtSize"]            = [registeredStaff getTshirtSize];
+
+        
+        NSLog(@"After view controller 8");
+        NSLog(@" %@", finalList);
+        NSLog(@"");
+        
+        //females only
+        if(![registeredStaff isMale])
+        {
+            //adding view controller 9 info
+            finalList[@"chestSize"]            = [registeredStaff getChestSize];
+            finalList[@"waistSize"]            = [registeredStaff getWaistSize];
+            finalList[@"hipsSize"]             = [registeredStaff getHipSize];
+            finalList[@"dressSize"]            = [registeredStaff getDressSize];
+            
+            NSLog(@"After view controller 9");
+            NSLog(@" %@", finalList);
+            NSLog(@"");
+        }
+    }//eo male or female (NON-SERVICE TALENT)
+ 
+
+    
+    //adding view controller 10 info
+    finalList[@"ProfessionalInsurance"] = [NSString stringWithFormat:@"%d",[registeredStaff hasProfessionalInsurance]];
+    finalList[@"Incorporated"] = [NSString stringWithFormat:@"%d",[registeredStaff isCorporated]];
+    if([registeredStaff isCorporated])
+    {
+        finalList[@"ein"]          = [registeredStaff getEIN];
+        finalList[@"businessName"] = [registeredStaff getBusinessName];
+    }
+    else
+    {
+        finalList[@"ssn"]          = [registeredStaff getSSN];
+    }
+    finalList[@"desiredHourlyRate"] = [registeredStaff getDesiredHourlyRate];
+    finalList[@"desiredWeeklyRate"] = [registeredStaff getDesiredWeeklyRate];
+    finalList[@"travelPercentage"]  = [registeredStaff getTravelPercentage];
+
+    
+    NSLog(@"After view controller 10");
+    NSLog(@" %@", finalList);
+    NSLog(@"");
+    
+    //adding view controller 13 info
+    finalList[@"DirectDeposit"]                 =  [NSString stringWithFormat:@"%d",[registeredStaff wantsDirectDeposit]];
+    finalList[@"DirectDepositRoutingNumber"]    = [registeredStaff getdirectDepositRoutingNumber];
+    finalList[@"DirectDepositAccountNumber"]    = [registeredStaff getdirectDepositAccountNumber];
+
+    
+    NSLog(@"After view controller 13");
+    NSLog(@" %@", finalList);
+    NSLog(@"");
+
+    return finalList;
+  
+}//eom
+
+ 
+ //    NSError *error;
+ //    NSData *postdata = [NSJSONSerialization dataWithJSONObject:req options:0 error:&error];
+ //
+ //prepare services selected
+ 
+ //    NSMutableDictionary *services =[NSMutableDictionary  dictionaryWithObjectsAndKeys:@"feed/http://feeds.feedburner.com/design-milk", @"id", nil];
+ 
+ 
+ 
+ //    NSDictionary *liveBandInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
+ //                            [NSString stringWithFormat:@"%d",liveBandSelected], @"selected",
+ //                            nil];
+ //
+ //    NSMutableArray *liveBandService = [[NSMutableArray alloc] init];
+ //    [liveBandService addObject:liveBandInfo];
+ //
+ //
+ //    NSLog(@"liveBand list = %@ ", liveBandService);
+ //    NSLog(@"");
+ //
+ //
+ //    NSDictionary *cateringCompanyInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
+ //                            [NSString stringWithFormat:@"%d",cateringCompanySelected], @"selected",
+ //                            nil];
+ //
+ //    NSMutableArray *cateringCompanyService = [[NSMutableArray alloc] init];
+ //    [cateringCompanyService addObject:cateringCompanyInfo];
+ //
+ //    NSLog(@"cateringCompany list = %@ ", cateringCompanyService);
+ //    NSLog(@"");
+ //
+ //
+ //    NSDictionary *otherServicesInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
+ //                            [NSString stringWithFormat:@"%d",otherServicesSelected], @"selected",
+ //                            nil];
+ //
+ //    NSMutableArray *otherServicesService = [[NSMutableArray alloc] init];
+ //    [otherServicesService addObject:otherServicesInfo];
+ //
+ //    NSLog(@"otherServices list = %@ ", otherServicesService);
+ //    NSLog(@"");
+ 
+ 
+ /*
+ djDescription, @"djDescription",
+ djWebsite, @"djWebsite",
+ djSocialMedia, @"djSocialMedia",
+ djCostOfService, @"djCostOfService",
+ 
+ liveBandDescription, @"liveBandDescription",
+ liveBandWebsite, @"liveBandWebsite",
+ liveBandSocialMedia, @"liveBandSocialMedia",
+ liveBandCostOfService, @"liveBandCostOfService",
+ 
+ cateringCompanyDescription, @"cateringCompanyDescription",
+ cateringCompanyWebsite, @"cateringCompanyWebsite",
+ cateringCompanySocialMedia, @"cateringCompanySocialMedia",
+ cateringCompanyCostOfService, @"cateringCompanyCostOfService",
+ 
+ otherServicesDescription, @"otherServicesDescription",
+ otherServicesWebsite, @"otherServicesWebsite",
+ otherServicesSocialMedia, @"otherServicesSocialMedia",
+ otherServicesCostOfService, @"otherServicesCostOfService",
+ */
 
 
 

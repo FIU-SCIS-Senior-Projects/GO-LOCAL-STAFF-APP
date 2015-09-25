@@ -55,7 +55,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [registeredStaff printUserData];
+//    [registeredStaff printUserData];
     
 }//eom
 
@@ -174,7 +174,7 @@
     [registeredStaff setExperience:self->staffTypeExperience];
     [registeredStaff setServicesSelected:self->djSelected liveBand:self->liveBandSelected cateringCompany:self->cateringCompanySelected otherServices:self->otherServicesSelected];
     
-    
+      NSLog(@"services selection dj = %d | liveband = %d | catering = %d | other = %d", self->djSelected , self->liveBandSelected, self->cateringCompanySelected, self->otherServicesSelected);
     return 1;
 }//EOM
 

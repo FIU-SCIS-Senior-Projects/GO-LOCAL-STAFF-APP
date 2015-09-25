@@ -11,7 +11,6 @@
 @implementation RegisteredStaff
 
 
-
 /* constructor*/
 -(id) init
 {
@@ -28,48 +27,49 @@
 
 -(void) updateAllWithBlankValues
 {
-    NSMutableArray * temp;
+    
+    NSMutableArray * temp= [[NSMutableArray alloc]init];
     
     accountType = @"Staff";
-    [self setName:@"" withMiddleInitial:@"" andLastName:@""];
-    [self setNickname:@""];
-    [self setEmail:@""];
-    [self setUserName:@""];
-    [self setPassword:@""];
-    [self setDOB:@""];
-    [self setCellphone:@"" withCarrer:@""];
-    [self setAddress:@""];
+    [self setName:@" " withMiddleInitial:@" " andLastName:@" "];
+    [self setNickname:@" "];
+    [self setEmail:@" "];
+    [self setUserName:@" "];
+    [self setPassword:@" "];
+    [self setDOB:@" "];
+    [self setCellphone:@" " withCarrer:@" "];
+    [self setAddress:@" "];
     [self setGender:0];
-    [self setLanguages:@""];
+    [self setLanguages:@" "];
     [self setExperience:temp];
     [self setServicesSelected:FALSE liveBand:FALSE cateringCompany:FALSE otherServices:FALSE];
-    [self setDJInfo:@"" withWebsite:@"" withSocialMedia:@"" andCostOfServices:@""];
-    [self setLiveBandInfo:@"" withWebsite:@"" withSocialMedia:@"" andCostOfServices:@""];
-    [self setCateringCompanyInfo:@"" withWebsite:@"" withSocialMedia:@"" andCostOfServices:@""];
-    [self setOtherServicesInfo:@"" withWebsite:@"" withSocialMedia:@"" andCostOfServices:@""];
+    [self setDJInfo:temp];
+    [self setLiveBandInfo:temp];
+    [self setCateringCompanyInfo:temp];
+    [self setOtherServicesInfo:temp];
     [self setLicenseInfo:FALSE hasCommercialLicense:FALSE];
     [self setTattoos:FALSE];
     [self setPiercings:FALSE];
-    [self setEthnicity:@""];
-    [self setHeight:@""];
-    [self setWeight:@""];
-    [self setHairColor:@""];
-    [self setEyeColor:@""];
-    [self setPantSize:@""];
-    [self setShoeSize:@""];
-    [self setTshirtSize:@""];
-    [self setChest:@""];
-    [self setWaist:@""];
-    [self setHipSize:@""];
-    [self setDressSize:@""];
+    [self setEthnicity:@" "];
+    [self setHeight:@" "];
+    [self setWeight:@" "];
+    [self setHairColor:@" "];
+    [self setEyeColor:@" "];
+    [self setPantSize:@" "];
+    [self setShoeSize:@" "];
+    [self setTshirtSize:@" "];
+    [self setChest:@" "];
+    [self setWaist:@" "];
+    [self setHipSize:@" "];
+    [self setDressSize:@" "];
     [self setProfessionalInsurance:FALSE];
-    [self setIncorporatedInfo:FALSE ssn:@"" ein:@"" businessName:@""];
-    [self setWageRate:@"" orDesiredWeeklyRate:@""];
-    [self setTravelPercentage:@""];
-    [self setDirectDeposit:FALSE withRouting:@"" andWithAccountNumber:@""];
+    [self setIncorporatedInfo:FALSE ssn:@" " ein:@" " businessName:@" "];
+    [self setWageRate:@" " orDesiredWeeklyRate:@" "];
+    [self setTravelPercentage:@" "];
+    [self setDirectDeposit:FALSE withRouting:@" " andWithAccountNumber:@" "];
     
     [self printUserData];
-
+  
 }//eom
 
     //view controller 1
@@ -154,54 +154,38 @@
 }//eom
 
     //view controller 4
--(void) setDJInfo:(NSString *) description withWebsite:(NSString *) website withSocialMedia:(NSString *) socialMedia andCostOfServices:(NSString *) costOfService
+-(void) setDJInfo:(NSMutableArray *) information
 {
-    
-    djDescription   = description;
-    djWebsite       = website;
-    djSocialMedia   = socialMedia;
-    djCostOfService = costOfService;
+    djInfo = information;
     
 }//eom
 
     //view controller 5
--(void) setLiveBandInfo:(NSString *) description withWebsite:(NSString *) website withSocialMedia:(NSString *) socialMedia andCostOfServices:(NSString *) costOfService
+-(void) setLiveBandInfo:(NSMutableArray *) information
 {
-    
-    liveBandDescription   = description;
-    liveBandWebsite       = website;
-    liveBandSocialMedia   = socialMedia;
-    liveBandCostOfService = costOfService;
+    liveBandInfo   = information;
     
 }//eom
 
     //view controller 6
--(void) setCateringCompanyInfo:(NSString *) description withWebsite:(NSString *) website withSocialMedia:(NSString *) socialMedia andCostOfServices:(NSString *) costOfService
+-(void) setCateringCompanyInfo:(NSMutableArray *) information
 {
-    
-    cateringCompanyDescription   = description;
-    cateringCompanyWebsite       = website;
-    cateringCompanySocialMedia   = socialMedia;
-    cateringCompanyCostOfService = costOfService;
+    cateringCompanyInfo   = information;
     
 }//eom
 
     //view controller 7
--(void) setOtherServicesInfo:(NSString *) description withWebsite:(NSString *) website withSocialMedia:(NSString *) socialMedia andCostOfServices:(NSString *) costOfService
+-(void) setOtherServicesInfo:(NSMutableArray *) information
 {
-    
-    otherServicesDescription   = description;
-    otherServicesWebsite       = website;
-    otherServicesSocialMedia   = socialMedia;
-    otherServicesCostOfService = costOfService;
+    otherServicesInfo   = information;
     
 }//eom
 
     //view controller 8
--(void) setLicenseInfo:(BOOL) driverLicense hasCommercialLicense:(BOOL) commcercialLicense
+-(void) setLicenseInfo:(BOOL) driverLicense hasCommercialLicense:(BOOL) commercialLicense
 {
     hasDriverLicense        =  driverLicense;
-    hasCommercialLicense    =   commcercialLicense;
+    hasCommercialLicense    =   commercialLicense;
     
 }//eom
 
@@ -362,87 +346,239 @@
     return NO;
 }//eom
 
--(NSDictionary *) getStaffInfo
+-(NSString *) getAccountType
 {
-    //converting items to be send as Dictionary items
-    NSDictionary *tmp = [[NSDictionary alloc] initWithObjectsAndKeys:
-        accountType,  @"registration_type",
-        firstName,  @"firstName",
-        middleName, @"middleName",
-        lastName, @"lastName",
-        nickName, @"nickName",
-        email, @"email",
-        username, @"username",
-        password, @"password",
-        dateOfBirth, @"dob",
-
-        cellphone, @"cellphone",
-        cellphoneCarrier, @"cellphone_carrier",
-        completeAddress, @"completeAddress",
-        gender, @"gender",
-        languages, @"languages",
-                         
-        staffTypeExperience, @"staffTypeExperience",
-        djSelected, @"djSelected",
-        liveBandSelected, @"liveBandSelected",
-        cateringCompanySelected, @"cateringCompanySelected",
-        otherServicesSelected, @"otherServicesSelected",
-
-        djDescription, @"djDescription",
-        djWebsite, @"djWebsite",
-        djSocialMedia, @"djSocialMedia",
-        djCostOfService, @"djCostOfService",
-                         
-        liveBandDescription, @"liveBandDescription",
-        liveBandWebsite, @"liveBandWebsite",
-        liveBandSocialMedia, @"liveBandSocialMedia",
-        liveBandCostOfService, @"liveBandCostOfService",
-                         
-        cateringCompanyDescription, @"cateringCompanyDescription",
-        cateringCompanyWebsite, @"cateringCompanyWebsite",
-        cateringCompanySocialMedia, @"cateringCompanySocialMedia",
-        cateringCompanyCostOfService, @"cateringCompanyCostOfService",
-                         
-        otherServicesDescription, @"otherServicesDescription",
-        otherServicesWebsite, @"otherServicesWebsite",
-        otherServicesSocialMedia, @"otherServicesSocialMedia",
-        otherServicesCostOfService, @"otherServicesCostOfService",
-             
-        hasDriverLicense, @"hasDriverLicense",
-        hasCommercialLicense, @"hasCommercialLicense",
-        hasTattoos, @"Tattoos",
-        hasPiercings, @"Piercings",
-        ethnicity, @"ethnicity",
-        height, @"height",
-        weight, @"weight",
-        hairColor, @"hairColor",
-        eyeColor, @"eyeColor",
-        pantSize, @"pantSize",
-        shoeSize, @"shoeSize",
-        tshirtSize, @"tshirtSize",
-                         
-        chestSize, @"chestSize",
-        waistSize, @"waistSize",
-        hipsSize, @"hipsSize",
-        dressSize, @"dressSize",
-                         
-        hasProfessionalInsurance, @"ProfessionalInsurance",
-        isIncorporated, @"Incorporated",
-        ssn, @"ssn",
-        ein, @"ein",
-        businessName, @"businessName",
-        desiredHourlyRate, @"desiredHourlyRate",
-        desiredWeeklyRate, @"desiredWeeklyRate",
-        travelPercentage, @"travelPercentage",
-                         
-        directDepositDesired, @"DirectDeposit",
-        directDepositRoutingNumber, @"DirectDepositRoutingNumber",
-        directDepositAccountNumber, @"DirectDepositAccountNumber",
-                         
-    nil];
-    
-    return tmp;
+    return accountType;
 }//eom
+
+-(NSString *) getFirstName
+{
+    return firstName;
+}//eom
+
+-(NSString *) getMiddleName
+{
+    return middleName;
+}//eom
+
+-(NSString *) getLastName
+{
+    return lastName;
+}//eom
+
+
+-(NSString *) getNickName
+{
+    return nickName;
+}//eom
+
+
+-(NSString *) getEmail
+{
+    return email;
+}//eom
+
+-(NSString *) getUserName
+{
+    return username;
+}//eom
+
+-(NSString *) getPassword
+{
+    return password;
+}//eom
+
+-(NSString *) getDateOfBirth
+{
+    return dateOfBirth;
+}//eom
+
+-(NSString *) getCellPhone
+{
+    return cellphone;
+}//eom
+
+-(NSString *) getCellPhoneCarrier
+{
+    return cellphoneCarrier;
+}//eom
+
+-(NSString *) getAddress
+{
+    return completeAddress;
+}//eom
+
+-(NSString *) getGender
+{
+    return gender;
+}//eom
+
+-(NSString *) getLanguages
+{
+    return languages;
+}//eom
+
+-(NSMutableArray *) getExperience
+{
+    return staffTypeExperience;
+}//eom
+
+-(NSMutableArray *) getDJInfo
+{
+    return djInfo;
+}//eom
+
+-(NSMutableArray *) getLiveBandInfo
+{
+    return liveBandInfo;
+}//eom
+
+-(NSMutableArray *) getCateringCompanyInfo
+{
+    return cateringCompanyInfo;
+}//eom
+
+-(NSMutableArray *) getOtherServicesInfo
+{
+    return otherServicesInfo;
+}//eom
+
+-(BOOL) hasDriverLicense
+{
+    return hasDriverLicense;
+}//eom
+
+-(BOOL) hasCommercialDriverLicense
+{
+    return hasCommercialLicense;
+}//eom
+
+-(BOOL) hasTattoos
+{
+    return hasTattoos;
+}//eom
+
+-(BOOL) hasPiercings
+{
+    return hasPiercings;
+}//eom
+
+-(NSString *) getEthnicity
+{
+    return ethnicity;
+}//eom
+
+-(NSString *) getHeight
+{
+    return height;
+}//eom
+
+-(NSString *) getWeight
+{
+    return weight;
+}//eom
+
+-(NSString *) getHairColor
+{
+    return hairColor;
+}//eom
+
+-(NSString *) getEyeColor
+{
+    return eyeColor;
+}//eom
+
+-(NSString *) getPantSize
+{
+    return pantSize;
+}//eom
+
+-(NSString *) getShoeSize
+{
+    return shoeSize;
+}//eom
+
+-(NSString *) getTshirtSize
+{
+    return tshirtSize;
+}//eom
+
+-(NSString *) getChestSize
+{
+    return chestSize;
+}//eom
+
+-(NSString *) getWaistSize
+{
+    return waistSize;
+}//eom
+
+-(NSString *) getHipSize
+{
+    return hipsSize;
+}//eom
+
+-(NSString *) getDressSize
+{
+    return dressSize;
+}//eom
+
+-(BOOL) hasProfessionalInsurance
+{
+    return hasProfessionalInsurance;
+}//eom
+
+-(BOOL) isCorporated
+{
+    return isIncorporated;
+}//eom
+
+-(NSString *) getSSN
+{
+    return ssn;
+}//eom
+
+-(NSString *) getEIN
+{
+    return ein;
+}//eom
+
+-(NSString *) getBusinessName
+{
+    return businessName;
+}//eom
+
+-(NSString *) getDesiredHourlyRate
+{
+    return desiredHourlyRate;
+}//eom
+
+-(NSString *) getDesiredWeeklyRate
+{
+    return desiredWeeklyRate;
+}//eom
+
+-(NSString *) getTravelPercentage
+{
+    return travelPercentage;
+}//eom
+
+-(BOOL) wantsDirectDeposit
+{
+    return directDepositDesired;
+}//eom
+
+-(NSString *) getdirectDepositRoutingNumber
+{
+    return directDepositRoutingNumber;
+}//eom
+
+-(NSString *) getdirectDepositAccountNumber
+{
+    return directDepositAccountNumber;
+}//eom
+
+
 
 -(void) printUserData
 {
@@ -473,28 +609,16 @@
     NSLog(@" Other Services Selected?   %d", otherServicesSelected);
     
     //view controller 4
-    NSLog(@" djDescription:      %@", djDescription);
-    NSLog(@" djWebsite:          %@", djWebsite);
-    NSLog(@" djSocialMedia:      %@", djSocialMedia);
-    NSLog(@" djCostOfService:    %@", djCostOfService);
+    NSLog(@" dj information:        %@", djInfo);
     
     //view controller 5
-    NSLog(@" liveBandDescription:      %@", liveBandDescription);
-    NSLog(@" liveBandWebsite:          %@", liveBandWebsite);
-    NSLog(@" liveBandSocialMedia:      %@", liveBandSocialMedia);
-    NSLog(@" liveBandCostOfService:    %@", liveBandCostOfService);
+    NSLog(@" liveBand information:   %@", liveBandInfo);
     
     //view controller 6
-    NSLog(@" cateringCompanyDescription:      %@", cateringCompanyDescription);
-    NSLog(@" cateringCompanyWebsite:          %@", cateringCompanyWebsite);
-    NSLog(@" cateringCompanySocialMedia:      %@", cateringCompanySocialMedia);
-    NSLog(@" cateringCompanyCostOfService:    %@", cateringCompanyCostOfService);
+    NSLog(@" cateringCompany information:      %@", cateringCompanyInfo);
     
     //view controller 7
-    NSLog(@" otherServicesDescription:      %@", otherServicesDescription);
-    NSLog(@" otherServicesWebsite:          %@", otherServicesWebsite);
-    NSLog(@" otherServicesSocialMedia:      %@", otherServicesSocialMedia);
-    NSLog(@" otherServicesCostOfService:    %@", otherServicesCostOfService);
+    NSLog(@" otherServices information:      %@", otherServicesInfo);
     
     //view controller 8
     NSLog(@" driver license?        %d", hasDriverLicense);
@@ -539,3 +663,82 @@
 
 
 @end
+
+
+
+//    NSDictionary *tmp;
+//         tmp= [[NSDictionary alloc] initWithObjectsAndKeys:
+//                             accountType,  @"registrationType",
+//                             firstName,  @"firstName",
+//                             middleName, @"middleName",
+//                             lastName, @"lastName",
+//                             nickName, @"nickName",
+//                             email, @"email",
+//                             username, @"username",
+//                             password, @"password",
+//                             dateOfBirth, @"dob",
+//
+//                             cellphone, @"cellphone",
+//                             cellphoneCarrier, @"cellphoneCarrier",
+//                             completeAddress, @"completeAddress",
+//                             gender, @"gender",
+//                             languages, @"languages",
+//
+//                             staffTypeExperience, @"staffTypeExperience",
+////                             djSelected, @"djSelected",
+////                             liveBandSelected, @"liveBandSelected",
+////                             cateringCompanySelected, @"cateringCompanySelected",
+////                             otherServicesSelected, @"otherServicesSelected",
+//
+//                             djDescription, @"djDescription",
+//                             djWebsite, @"djWebsite",
+//                             djSocialMedia, @"djSocialMedia",
+//                             djCostOfService, @"djCostOfService",
+//
+//                             liveBandDescription, @"liveBandDescription",
+//                             liveBandWebsite, @"liveBandWebsite",
+//                             liveBandSocialMedia, @"liveBandSocialMedia",
+//                             liveBandCostOfService, @"liveBandCostOfService",
+//
+//                             cateringCompanyDescription, @"cateringCompanyDescription",
+//                             cateringCompanyWebsite, @"cateringCompanyWebsite",
+//                             cateringCompanySocialMedia, @"cateringCompanySocialMedia",
+//                             cateringCompanyCostOfService, @"cateringCompanyCostOfService",
+//
+//                             otherServicesDescription, @"otherServicesDescription",
+//                             otherServicesWebsite, @"otherServicesWebsite",
+//                             otherServicesSocialMedia, @"otherServicesSocialMedia",
+//                             otherServicesCostOfService, @"otherServicesCostOfService",
+//
+//                             hasDriverLicense, @"hasDriverLicense",
+//                             hasCommercialLicense, @"hasCommercialLicense",
+//                             hasTattoos, @"Tattoos",
+//                             hasPiercings, @"Piercings",
+//                             ethnicity, @"ethnicity",
+//                             height, @"height",
+//                             weight, @"weight",
+//                             hairColor, @"hairColor",
+//                             eyeColor, @"eyeColor",
+//                             pantSize, @"pantSize",
+//                             shoeSize, @"shoeSize",
+//                             tshirtSize, @"tshirtSize",
+//
+//                             chestSize, @"chestSize",
+//                             waistSize, @"waistSize",
+//                             hipsSize, @"hipsSize",
+//                             dressSize, @"dressSize",
+//
+//                             hasProfessionalInsurance, @"ProfessionalInsurance",
+//                             isIncorporated, @"Incorporated",
+//                             ssn, @"ssn",
+//                             ein, @"ein",
+//                             businessName, @"businessName",
+//                             desiredHourlyRate, @"desiredHourlyRate",
+//                             desiredWeeklyRate, @"desiredWeeklyRate",
+//                             travelPercentage, @"travelPercentage",
+//
+//                             directDepositDesired, @"DirectDeposit",
+//                             directDepositRoutingNumber, @"DirectDepositRoutingNumber",
+//                             directDepositAccountNumber, @"DirectDepositAccountNumber",
+//
+//                             nil];
