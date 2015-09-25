@@ -91,10 +91,13 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
         }
 
         $smsGateway = getGateway( $carrier );
-        if( authenticatePhoneNumber( $phone, $smsGateway ) != null )
+
+        if( !empty($smsGateway) )
+        {
           authenticatePhoneNumber( $phone, $smsGateway );
+        }
         else
-          echo "There was a problem retrieving the carrier";
+          echo "There was problem retrieving the carrier";
 
         /* 
           reponse returns the following:

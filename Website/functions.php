@@ -153,6 +153,8 @@ function authenticatePhoneNumber( $to, $smsGateway )
 
 function getGateway( $carrier )
 {
+	$gateway = "";
+
 	$smsGateways = [
 		"aio" => "@mms.aiowireless.net",
 		"att" => "@text.att.net",
@@ -167,9 +169,9 @@ function getGateway( $carrier )
 	];
 
 	if( array_key_exists($carrier, $smsGateways) )
-		return $smsGateways["$carrier"];
-	else
-		return null;
+		$gateway = $smsGateways["$carrier"];
+	
+	return $gateway;
 
 }
 
