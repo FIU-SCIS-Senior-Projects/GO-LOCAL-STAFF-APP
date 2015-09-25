@@ -130,7 +130,7 @@ function storePersonalInfo( $peopleID, $fname, $middleInitial, $lname, $nickname
 	}
 }
 
-function authenticatePhoneNumber( $to, $smsGateway )
+function authenticatePhoneNumber( $peopleID, $to, $smsGateway )
 {
 	$code = mt_rand(1000, 9999);
 
@@ -140,8 +140,12 @@ function authenticatePhoneNumber( $to, $smsGateway )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
 	else
 	{
-		$query = "INSERT INTO people ( phone, phonecode )
-				  VALUES ('".$to."', '".$code."')";
+		//$query = "INSERT INTO people ( phone, phonecode )
+		//		  VALUES ('".$to."', '".$code."')";
+
+		$query = "UPDATE people
+				  SET phone='".$phone."', phonecode='".$phonecode."'
+				  WHERE peopleID=".$peopleID."";
 
 		if( !$result = mysqli_query( $db, $query ) )
 			echo "Unable to store the code to the Database";

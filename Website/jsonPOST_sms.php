@@ -94,7 +94,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
 
         if( !empty($smsGateway) )
         {
-          authenticatePhoneNumber( $phone, $smsGateway );
+          authenticatePhoneNumber( $peopleID, $phone, $smsGateway );
         }
         else
           echo "There was problem retrieving the carrier";
