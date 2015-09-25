@@ -296,6 +296,8 @@ session_start();
             $middleI = test_input($_POST["middleI"]);
             $nickname = test_input($_POST["nickname"]);
             storePersonalInfo( $_SESSION["peopleID"], $fname, $middleI, $lname, $nickname, $address, $phone);
+
+            header("Location: http://45.55.208.175/Website/registration_success.php");
         }
 
     }

@@ -17,7 +17,6 @@
 
     if( $_SERVER["REQUEST_METHOD"] == "GET" )
     {
-        echo "GET SET!";
         if( !empty($_GET["type"]) && !empty($_GET["email"]) && !empty($_GET["hash"]) )
         {
             //verify data
