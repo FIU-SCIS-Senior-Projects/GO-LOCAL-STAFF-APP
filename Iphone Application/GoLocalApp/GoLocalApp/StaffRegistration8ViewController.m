@@ -79,7 +79,7 @@
     [self createTshirtSizePicker];
     [self createHeightPicker];
     
-    [registeredStaff printUserData];//testing
+//    [registeredStaff printUserData];//testing
 }//eom
 
 

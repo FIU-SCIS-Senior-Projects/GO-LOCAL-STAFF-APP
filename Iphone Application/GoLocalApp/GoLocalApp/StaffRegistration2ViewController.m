@@ -30,7 +30,6 @@
     UIPickerView * thirdLanguagePickerView;
 
     //labels
-    __weak IBOutlet UILabel *cellphoneLabel;
     __weak IBOutlet UILabel *addressLabel;
     __weak IBOutlet UILabel *cityLabel;
     __weak IBOutlet UILabel *zipcodeLabel;
@@ -45,7 +44,7 @@
 @implementation StaffRegistration2ViewController
 
 
-@synthesize scrollView, cellphone, address, city, zipcode, state, nativeLanguage, secondLanguage, thirdLanguage, nativeSelected, secondSelected, thirdSelected, maleButton, femaleButton, registeredStaff;
+@synthesize scrollView, address, city, zipcode, state, nativeLanguage, secondLanguage, thirdLanguage, nativeSelected, secondSelected, thirdSelected, maleButton, femaleButton, registeredStaff;
 
 
 - (void)viewDidLoad {
@@ -60,7 +59,7 @@
     [self createPickerForLanguages];
     genderSelected = FALSE;
     
-    [registeredStaff printUserData];
+//    [registeredStaff printUserData];
 
 }//eom
 
@@ -100,7 +99,7 @@
     }
 }//EOA
 
-/* verifying the below input fileds were filled:
+/* verifying input fields
  */
 - (BOOL)verifyDataEnter
 {
@@ -109,22 +108,6 @@
     NSString * testing;
     NSString *trimmedString;
 
-        testing = self.cellphone.text;
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
-            self.cellphone.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter your cellphone number" and:@"Okay"];
-            return 0;
-        }
-        else if( self.cellphone.text.length < 10)
-        {
-            [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete cellphone number" and:@"Okay"];
-            return 0;
-        }
     
         testing = self.address.text;
         trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
@@ -217,7 +200,6 @@
            NSLog(@"languages are %@", self->languages);
     
         //updating values
-        [registeredStaff setCellphone:self.cellphone.text withCarrer:@""];
         [registeredStaff setAddress:self->completeAddress];
         [registeredStaff setGender:self->gender];
         [registeredStaff setLanguages:self->languages];
@@ -542,11 +524,7 @@
         /* dimisses UITextField as soon the return key is pressed */
         -(BOOL)textFieldShouldReturn:(UITextField *)textField {
 
-            if(textField == self.cellphone){
-                [self.cellphone resignFirstResponder];
-                [self.address becomeFirstResponder];
-            }
-            else if(textField == self.address){
+            if(textField == self.address){
                 [self.address resignFirstResponder];
                 [self.city becomeFirstResponder];
             }
@@ -577,18 +555,7 @@
 
         int labelID = (int)sender.tag;
 
-        if(labelID == 0)//cellphone
-        {
-            if(self.cellphone.text.length == 0)
-            {
-                [self->cellphoneLabel setHidden:YES];
-            }
-            else
-            {
-                [self->cellphoneLabel setHidden:NO];
-            }
-        }
-        else if(labelID == 1)//address
+        if(labelID == 1)//address
         {
             if(self.address.text.length == 0)
             {

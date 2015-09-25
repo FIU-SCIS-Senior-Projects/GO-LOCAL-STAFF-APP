@@ -17,6 +17,9 @@
 @interface StaffRegistration5ViewController ()
 {
     __weak IBOutlet UILabel *costOfServiceLabel;
+    
+    BOOL cateringCompanySelected;
+    BOOL otherServicesSelected;
 }
 @end
 
@@ -39,6 +42,12 @@ liveBandDescription, liveBandWebsite, liveBandSocialMedia, costOfServiceTextFiel
 -(void)viewDidAppear:(BOOL)animated
 {
     [self setUpTapGesture];
+    
+    //    [registeredStaff printUserData];
+    
+    self->cateringCompanySelected   =   [registeredStaff isCateringCompany];
+    self->otherServicesSelected     =   [registeredStaff isOtherServices];
+
     
 }//eom
 
@@ -74,10 +83,19 @@ liveBandDescription, liveBandWebsite, liveBandSocialMedia, costOfServiceTextFiel
         return 0;
     }
     
-    //updating files
-    [registeredStaff setLiveBandInfo:self.liveBandDescription.text withWebsite:self.liveBandWebsite.text withSocialMedia:self.liveBandSocialMedia.text andCostOfServices:self.costOfServiceTextField.text];
-
+    //updating values
+    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:
+                            self.liveBandDescription.text, @"description",
+                            self.liveBandWebsite.text, @"website",
+                            self.liveBandSocialMedia.text, @"socialMedia",
+                            self.costOfServiceTextField.text, @"costOfService",
+                            nil];
     
+    NSMutableArray *service = [[NSMutableArray alloc] init];
+    [service addObject:info];
+    [registeredStaff setLiveBandInfo:service];
+    
+
     return 1;
 }//eom
 
@@ -96,13 +114,13 @@ liveBandDescription, liveBandWebsite, liveBandSocialMedia, costOfServiceTextFiel
 {
     
     //catering company
-    if([registeredStaff isCateringCompany])
+    if(self->cateringCompanySelected)
     {
         //skipping to catering company controller
         [self performSegueWithIdentifier:@"liveBandToCateringCompany" sender:self];
     }
     //other services
-    else if([registeredStaff isOtherServices])
+    else if(self->otherServicesSelected)
     {
         //skipping to Other services controller
         [self performSegueWithIdentifier:@"liveBandToOtherServices" sender:self];

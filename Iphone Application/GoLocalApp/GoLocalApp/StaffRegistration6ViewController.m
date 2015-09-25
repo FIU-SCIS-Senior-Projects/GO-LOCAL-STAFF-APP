@@ -16,6 +16,7 @@
 @interface StaffRegistration6ViewController ()
 {
     __weak IBOutlet UILabel *costOfServiceLabel;
+    BOOL otherServicesSelected;
 }
 @end
 
@@ -38,7 +39,10 @@ cateringCompanyDescription, cateringCompanyWebsite, cateringCompanySocialMedia, 
 -(void)viewDidAppear:(BOOL)animated
 {
     [self setUpTapGesture];
-    [registeredStaff printUserData];
+//    [registeredStaff printUserData];
+    
+    self->otherServicesSelected     =   [registeredStaff isOtherServices];
+
     
 }//eom
 
@@ -75,7 +79,16 @@ cateringCompanyDescription, cateringCompanyWebsite, cateringCompanySocialMedia, 
     }
     
     //updating values
-    [registeredStaff setCateringCompanyInfo:self.cateringCompanyDescription.text withWebsite:self.cateringCompanyWebsite.text withSocialMedia:self.cateringCompanySocialMedia.text andCostOfServices:self.costOfServiceTextField.text];
+    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          self.cateringCompanyDescription.text, @"description",
+                          self.cateringCompanyWebsite.text, @"website",
+                          self.cateringCompanySocialMedia.text, @"socialMedia",
+                          self.costOfServiceTextField.text, @"costOfService",
+                          nil];
+    
+    NSMutableArray *service = [[NSMutableArray alloc] init];
+    [service addObject:info];
+    [registeredStaff setCateringCompanyInfo:service];
     
     return 1;
 }//eom
@@ -94,7 +107,7 @@ cateringCompanyDescription, cateringCompanyWebsite, cateringCompanySocialMedia, 
 -(void)determineWhereToGo
 {
     //other services
-    if([registeredStaff isCateringCompany])
+    if(self->otherServicesSelected)
     {
         //skipping to Other services controller
         [self performSegueWithIdentifier:@"cateringCompanyToOtherServices" sender:self];

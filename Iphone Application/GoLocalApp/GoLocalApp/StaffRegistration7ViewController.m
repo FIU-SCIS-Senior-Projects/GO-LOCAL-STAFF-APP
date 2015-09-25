@@ -38,7 +38,7 @@ otherServicesDescription, otherServicesWebsite, otherServicesSocialMedia, costOf
 -(void)viewDidAppear:(BOOL)animated
 {
     [self setUpTapGesture];
-    [registeredStaff printUserData];
+//    [registeredStaff printUserData];
     
 }//eom
 
@@ -72,10 +72,19 @@ otherServicesDescription, otherServicesWebsite, otherServicesSocialMedia, costOf
         [self showAlert:@"Registration Field" withMessage:@"Missing the social media field" and:@"Okay"];
         return 0;
     }
-    
+        
     //updating values
-    [registeredStaff setOtherServicesInfo:self.otherServicesDescription.text withWebsite:self.otherServicesWebsite.text withSocialMedia:self.otherServicesSocialMedia.text andCostOfServices:self.costOfServiceTextField.text];
+    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          self.otherServicesDescription.text, @"description",
+                          self.otherServicesWebsite.text, @"website",
+                          self.otherServicesSocialMedia.text, @"socialMedia",
+                          self.costOfServiceTextField.text, @"costOfService",
+                          nil];
     
+    NSMutableArray *service = [[NSMutableArray alloc] init];
+    [service addObject:info];
+    [registeredStaff setOtherServicesInfo:service];
+
     
     return 1;
 }//eom

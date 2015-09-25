@@ -32,7 +32,7 @@ wantsDirectDeposit, DirectDepositRoutingNumber, DirectDepositAccountNumber;
 {
     [self setUpTapGesture];
     
-    [registeredStaff printUserData];//testing
+//    [registeredStaff printUserData];//testing
 }//eom
 
 /* */

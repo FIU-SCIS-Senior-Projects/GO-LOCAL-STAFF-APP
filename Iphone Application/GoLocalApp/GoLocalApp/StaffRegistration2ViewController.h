@@ -12,7 +12,6 @@
 @interface StaffRegistration2ViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 
-@property (weak, nonatomic) IBOutlet UITextField *cellphone;
 @property (weak, nonatomic) IBOutlet UITextField *address;
 @property (weak, nonatomic) IBOutlet UITextField *city;
 @property (weak, nonatomic) IBOutlet UITextField *zipcode;
@@ -37,31 +36,8 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-//below will go to next view
-//@property (weak, nonatomic) IBOutlet UISwitch *djSwitch;
-//@property (nonatomic) BOOL djSelected; //DJ status
-//
-//@property (weak, nonatomic) IBOutlet UISwitch *liveBandSwitch;
-//@property (nonatomic) BOOL liveBandSelected; //live band status
-//
-//@property (weak, nonatomic) IBOutlet UISwitch *cateringCompanySwitch;
-//@property (nonatomic) BOOL cateringCompanySelected; //catering company status
-//
-//@property (weak, nonatomic) IBOutlet UISwitch *otherServicesSwitch;
-//@property (nonatomic) BOOL otherServicesSelected; //other services status
-
 - (IBAction)submitForm:(id)sender;
 
-////PASSED VALUEs FROM PREVIOUS CONTROLLER
-//@property (nonatomic)  NSString *accountType;                     //view controller 1
-//@property (nonatomic)  NSString *firstName;
-//@property (nonatomic)  NSString *middleName;
-//@property (nonatomic)  NSString *lastName;
-//@property (nonatomic)  NSString *nickName;
-//@property (nonatomic)  NSString *email;
-//@property (nonatomic)  NSString *username;
-//@property (nonatomic)  NSString *password;
-//@property (nonatomic)  NSString *dateOfBirth;
 
 
 @property (strong, nonatomic) RegisteredStaff *registeredStaff;

@@ -18,6 +18,11 @@
 @interface StaffRegistration4ViewController ()
 {
     __weak IBOutlet UILabel *costOfServiceLabel;
+    
+    NSMutableArray * serviceInfo;
+    BOOL liveBandSelected;
+    BOOL cateringCompanySelected;
+    BOOL otherServicesSelected;
 }
 @end
 
@@ -35,7 +40,11 @@
 {
     [self setUpTapGesture];
     
-    [registeredStaff printUserData];
+//    [registeredStaff printUserData];
+    
+    self->liveBandSelected          =   [registeredStaff isLiveBand];
+    self->cateringCompanySelected   =   [registeredStaff isCateringCompany];
+    self->otherServicesSelected     =   [registeredStaff isOtherServices];
 
 }//eom
 
@@ -80,9 +89,32 @@
         return 0;
     }
     
-    //updating values
-    [registeredStaff setDJInfo:self.djDescription.text withWebsite:self.djWebsite.text withSocialMedia:self.djSocialMedia.text andCostOfServices:self.costOfServiceTextField.text];
+//    //updating values
+//    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                            self.djDescription.text, @"description",
+//                            self.djWebsite.text, @"website",
+//                            self.djSocialMedia.text, @"socialMedia",
+//                            self.costOfServiceTextField.text, @"costOfService",
+//                            nil];
+//    
+//    NSMutableArray *service = [[NSMutableArray alloc] init];
+//    [service addObject:info];
+//    [registeredStaff setDJInfo:service];
+//    
+//    NSLog(@"service has : %@", service);
+//    NSLog(@"");
+//    NSLog(@" that was built from dic: %@ ", info);
 
+    self->serviceInfo = [[NSMutableArray alloc] init];
+    [self->serviceInfo addObject:self.djDescription.text];
+    [self->serviceInfo addObject:self.djWebsite.text];
+    [self->serviceInfo addObject:self.djSocialMedia.text];
+    [self->serviceInfo addObject:self.costOfServiceTextField.text];
+    [registeredStaff setDJInfo:self->serviceInfo];
+    
+    NSLog(@"service has : %@", self->serviceInfo);
+      
+    
     return 1;
 }//eom
 
@@ -99,19 +131,19 @@
 /* */
 -(void)determineWhereToGo
 {
-    if([registeredStaff isCateringCompany])
+    if(self->liveBandSelected)
     {
         //moving to the next controller
         [self performSegueWithIdentifier:@"djToLiveBand" sender:self];
     }
     //catering company
-    else if([registeredStaff isCateringCompany])
+    else if(self->cateringCompanySelected)
     {
         //skipping to catering company controller
         [self performSegueWithIdentifier:@"djToCateringCompany" sender:self];
     }
     //other services
-    else if([registeredStaff isOtherServices])
+    else if(self->otherServicesSelected)
     {
         //skipping to Other services controller
         [self performSegueWithIdentifier:@"djToOtherServices" sender:self];
