@@ -1,18 +1,18 @@
 //
-//  EmployerRegistrationViewController.m
+//  EmployerRegistration4ViewController.m
 //  GoLocalApp
 //
-//  Created by Luis Andres Castillo Hernandez on 9/1/15.
-//  Copyright (c) 2015 FIU. All rights reserved.
+//  Created by Luis Andres Castillo Hernandez on 9/26/15.
+//  Copyright © 2015 FIU. All rights reserved.
 //
 
-#import "EmployerRegistrationViewController.h"
+#import "EmployerRegistration4ViewController.h"
 
-@interface EmployerRegistrationViewController ()
+@interface EmployerRegistration4ViewController ()
 
 @end
 
-@implementation EmployerRegistrationViewController
+@implementation EmployerRegistration4ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

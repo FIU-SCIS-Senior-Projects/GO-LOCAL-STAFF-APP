@@ -18,8 +18,6 @@
 {
     __weak IBOutlet UILabel *costOfServiceLabel;
     
-    BOOL cateringCompanySelected;
-    BOOL otherServicesSelected;
 }
 @end
 
@@ -32,21 +30,16 @@ liveBandDescription, liveBandWebsite, liveBandSocialMedia, costOfServiceTextFiel
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    if(liveBandSelected == false){
-//        [self determineWhereToGo];
-//    }
-    
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    
+    [registeredStaff printUserData];//testing
+    
     [self setUpTapGesture];
     
-    //    [registeredStaff printUserData];
-    
-    self->cateringCompanySelected   =   [registeredStaff isCateringCompany];
-    self->otherServicesSelected     =   [registeredStaff isOtherServices];
 
     
 }//eom
@@ -114,13 +107,13 @@ liveBandDescription, liveBandWebsite, liveBandSocialMedia, costOfServiceTextFiel
 {
     
     //catering company
-    if(self->cateringCompanySelected)
+    if( [registeredStaff isCateringCompany] )
     {
         //skipping to catering company controller
         [self performSegueWithIdentifier:@"liveBandToCateringCompany" sender:self];
     }
     //other services
-    else if(self->otherServicesSelected)
+    else if( [registeredStaff isOtherServices])
     {
         //skipping to Other services controller
         [self performSegueWithIdentifier:@"liveBandToOtherServices" sender:self];

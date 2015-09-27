@@ -233,7 +233,7 @@
 
 
 /* retrieves photo from core data and returns the UIImage */
--(UIImage *) retrievePhoto:(NSString *) photoType fromTable:(NSString *) entityName
+-(UIImage *) retrievePhoto:(NSString *) photoType fromTable:(NSString *) entityProvided
 {
     
     UIImage * finalImage;
@@ -245,7 +245,7 @@
     NSFetchRequest *request = [[ NSFetchRequest alloc] init];
     
     //creating the entity name and updating request with entity
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:entityName inManagedObjectContext: context];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:entityProvided inManagedObjectContext: context];
     [request setEntity:entityDesc];
     
     //    //creating predicate and adding it to the request

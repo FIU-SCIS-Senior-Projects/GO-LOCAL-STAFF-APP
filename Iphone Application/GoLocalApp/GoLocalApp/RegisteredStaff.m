@@ -17,7 +17,7 @@
     self = [super init];
     if (self)
     {
-        [self updateAllWithBlankValues];
+//        [self updateAllWithBlankValues];
         
         //fetch back files from core data or receive user data from server
     }
@@ -37,7 +37,7 @@
     [self setUserName:@" "];
     [self setPassword:@" "];
     [self setDOB:@" "];
-    [self setCellphone:@" " withCarrer:@" "];
+    [self setCellphone:@" " withCarrier:@" "];
     [self setAddress:@" "];
     [self setGender:0];
     [self setLanguages:@" "];
@@ -68,11 +68,11 @@
     [self setTravelPercentage:@" "];
     [self setDirectDeposit:FALSE withRouting:@" " andWithAccountNumber:@" "];
     
-    [self printUserData];
+//    [self printUserData];
   
 }//eom
 
-    //view controller 1
+    //view controller 0
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName
 {
     firstName = fName;
@@ -107,14 +107,15 @@
     dateOfBirth = dobProvided;
 }//eom
 
-    //view controller 2
--(void)setCellphone:(NSString *) cellphoneProvided withCarrer:(NSString *) carrierProvided
+    //view controller 1
+-(void)setCellphone:(NSString *) cellphoneProvided withCarrier:(NSString *) carrierProvided
 {
     cellphoneCarrier = carrierProvided;
     cellphone = cellphoneProvided;
     
 }//eom
 
+    //view controller 2
 -(void) setAddress:(NSString *) addressProvided
 {
     completeAddress = addressProvided;
@@ -142,6 +143,12 @@
 -(void) setExperience:(NSMutableArray *) experienceProvided
 {
     staffTypeExperience = experienceProvided;
+}//eom
+
+-(void) setServiceExperience:(NSMutableArray *) servicesSelected
+{
+    staffServicesExperience = servicesSelected;
+
 }//eom
 
 -(void) setServicesSelected:(BOOL) isDj  liveBand:(BOOL) isLiveBand  cateringCompany:(BOOL) isCateringCompany  otherServices:(BOOL) isOtherServices
@@ -423,6 +430,11 @@
     return staffTypeExperience;
 }//eom
 
+-(NSMutableArray *) getServices
+{
+    return staffServicesExperience;
+}//eom
+
 -(NSMutableArray *) getDJInfo
 {
     return djInfo;
@@ -603,6 +615,7 @@
     
     //view controller 3
     NSLog(@" staff experience:          %@", staffTypeExperience);
+    NSLog(@" services:                  %@", staffServicesExperience);
     NSLog(@" Dj Selected?               %d", djSelected);
     NSLog(@" Live Band Selected?        %d", liveBandSelected);
     NSLog(@" Catering Company Selected? %d", cateringCompanySelected);

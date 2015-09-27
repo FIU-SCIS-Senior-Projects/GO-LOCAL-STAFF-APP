@@ -44,7 +44,7 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
 
 -(void)viewDidAppear:(BOOL)animated
 {
-//    [registeredStaff printUserData];//testing
+    [registeredStaff printUserData];//testing
     
     [self setUpTapGesture];
 }//eom
@@ -57,7 +57,7 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
         NSString * testing;
         NSString *trimmedString ;
     
-        if(self->isIncorporated)
+        if(self.incorporatedSwitch.on)
         {
             NSLog(@"checking for Incorporated");
             
@@ -100,7 +100,7 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
     
     //updating values
     [registeredStaff setProfessionalInsurance:self.hasProfessionalInsuranceSwitch.on];
-    [registeredStaff setIncorporatedInfo:self->isIncorporated ssn:self.ssnTextField.text ein:self.einTextField.text businessName:self.businessNameTextField.text];
+    [registeredStaff setIncorporatedInfo:self.incorporatedSwitch.on ssn:self.ssnTextField.text ein:self.einTextField.text businessName:self.businessNameTextField.text];
     [registeredStaff setWageRate:self.desiredHourlyRateTextField.text orDesiredWeeklyRate:self.desiredWeeklyRateTextField.text];
     [registeredStaff setTravelPercentage:self->travelDesired];
  

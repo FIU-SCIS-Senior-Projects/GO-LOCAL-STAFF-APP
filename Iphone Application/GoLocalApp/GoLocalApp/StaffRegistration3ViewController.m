@@ -22,6 +22,7 @@
 @interface StaffRegistration3ViewController ()
 {
     NSMutableArray *staffTypeExperience;
+    NSMutableArray *servicesExperience;
     BOOL djSelected;
     BOOL liveBandSelected;
     BOOL cateringCompanySelected;
@@ -64,7 +65,9 @@
 - (BOOL)verifyDataEnter
 {
     //clearing list just incase
-    self->staffTypeExperience = [[NSMutableArray alloc] init]; //creating array
+    self->staffTypeExperience = [[NSMutableArray alloc] init]; //creating
+    
+    self->servicesExperience = [[NSMutableArray alloc] init]; //creating array
     
     BOOL somethingSelected  = FALSE;
     
@@ -72,6 +75,7 @@
     {
         [self->staffTypeExperience addObject:@"Brand Ambassador"];
         somethingSelected = TRUE;
+        
     }
 
     if(self.cateringCompanySwitch.on)
@@ -79,6 +83,7 @@
         [self->staffTypeExperience addObject:@"Catering Company"];
         self->cateringCompanySelected = true;
         somethingSelected = TRUE;
+        [self->servicesExperience addObject:@"Catering Company"];
     }
     else
     {
@@ -96,6 +101,8 @@
         [self->staffTypeExperience addObject:@"Dj"];
         self->djSelected= true;
         somethingSelected = TRUE;
+        
+        [self->servicesExperience addObject:@"Dj"];
     }
     else
     {
@@ -119,6 +126,8 @@
         [self->staffTypeExperience addObject:@"Live Band"];
         self->liveBandSelected = true;
         somethingSelected = TRUE;
+        
+        [self->servicesExperience addObject:@"Live Band"];
     }
     else
     {
@@ -154,6 +163,8 @@
         [self->staffTypeExperience addObject:@"Other Services"];
         self->otherServicesSelected = true;
         somethingSelected = TRUE;
+        
+        [self->servicesExperience addObject:@"Other Services"];
     }
     else
     {
@@ -173,8 +184,9 @@
     //updating values
     [registeredStaff setExperience:self->staffTypeExperience];
     [registeredStaff setServicesSelected:self->djSelected liveBand:self->liveBandSelected cateringCompany:self->cateringCompanySelected otherServices:self->otherServicesSelected];
+    [registeredStaff setServiceExperience:self->servicesExperience];
     
-      NSLog(@"services selection dj = %d | liveband = %d | catering = %d | other = %d", self->djSelected , self->liveBandSelected, self->cateringCompanySelected, self->otherServicesSelected);
+      NSLog(@"final selection dj = %d | liveband = %d | catering = %d | other = %d", self->djSelected , self->liveBandSelected, self->cateringCompanySelected, self->otherServicesSelected);
     return 1;
 }//EOM
 

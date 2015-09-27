@@ -15,10 +15,17 @@
 @interface StaffRegistration1ViewController ()
 {
 
+      UIPickerView * carrierPickerView;
+    
+    
+    NSArray *carrierOptions;
     
     //labels
     __weak IBOutlet UILabel *cellphoneLabel;
-    
+    __weak IBOutlet UILabel *carrierLabel;
+    __weak IBOutlet UILabel *verificationCodeLabel;
+    __weak IBOutlet UILabel *verificationAsterisk;
+    __weak IBOutlet UILabel *verificationCodeIntroMessage;
     
 }
 
@@ -26,7 +33,7 @@
 
 @implementation StaffRegistration1ViewController
 
-@synthesize scrollView,cellphone, registeredStaff;
+@synthesize scrollView, cellphone, verificationCode, carrier, submitPhoneNumber, verifyCodeButton, registeredStaff;
 
 
 - (void)viewDidLoad {
@@ -36,9 +43,11 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self setUpTapGesture];
     
-    //    [registeredStaff printUserData];
+    [registeredStaff printUserData];//testing
+    
+    [self setUpTapGesture];
+    [self createPickerForCarrier];
     
 }//eom
 
@@ -70,14 +79,84 @@
     
     
     //updating values
-    [registeredStaff setCellphone:self.cellphone.text withCarrer:@""];
+    [registeredStaff setCellphone:self.cellphone.text withCarrier:@""];
     
      return 1;
 }//eom
 
-
+-(BOOL) verifyPhoneNumberDataEnter
+{
+    //checking for valid input
+    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+    NSString * testing;
+    NSString *trimmedString;
+    
+    
+    testing = self.cellphone.text;
+    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    if ([trimmedString isEqualToString:@""]) {
+        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
+        self.cellphone.text =@""; //clearing field
+        // it's empty or contains only white spaces
+        [self showAlert:@"Registration Field" withMessage:@"Please enter your cellphone number" and:@"Okay"];
+        return 0;
+    }
+    else if( self.cellphone.text.length < 10)
+    {
+        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
+        // it's empty or contains only white spaces
+        [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete cellphone number" and:@"Okay"];
+        return 0;
+    }
+    
+    testing = self.carrier.text;
+    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    if ([trimmedString isEqualToString:@""]) {
+        [self scrollVievEditingFinished:carrier]; //take scroll to textfield so user can see their error
+        self.carrier.text =@""; //clearing field
+        // it's empty or contains only white spaces
+        [self showAlert:@"Registration Field" withMessage:@"Please enter your cellphone carrier" and:@"Okay"];
+        return 0;
+    }
+    
+    return 1;
+}//eom
 
 /* */
+- (IBAction)phoneNumberSubmitted:(id)sender
+{
+    //verify
+    BOOL results = [self verifyPhoneNumberDataEnter ];
+    if(results)
+    {
+        //sending info to server
+        [self sendDataPhoneNumberToServer];
+        
+        //displaying instruction message
+        [self showAlert:@"Registration Field" withMessage:@"A verification code has been sent to your cellphone, Please enter the verification code" and:@"Okay"];
+        
+        //hiding submit phone number button
+        [submitPhoneNumber setHidden:YES];
+        
+        //displaying verification fields
+        [verificationCodeIntroMessage setHidden:NO];
+        [verificationCodeLabel setHidden:NO];
+        [verificationAsterisk setHidden:NO];
+        [verificationCode setHidden:NO];
+        [verifyCodeButton setHidden:NO];
+    }
+}//eom
+
+-(void) phoneNumberServerResponce:(NSString *) responce
+{
+    //
+    NSLog(@" %@", responce);
+
+}//eom
+
+- (IBAction)verifyCodeSubmitted:(id)sender {
+}
+
 - (IBAction)submitForm:(id)sender {
     bool result = [self verifyDataEnter];
     if(result)
@@ -138,6 +217,9 @@
             if(textField == self.cellphone){
                 [self.cellphone resignFirstResponder];
             }
+            if(textField == self.verificationCode){
+                [self.verificationCode resignFirstResponder];
+            }
             
             [self scrollViewAdaptToStartEditingTextField:textField];//moving scrollview
             
@@ -168,6 +250,17 @@
                     [self->cellphoneLabel setHidden:NO];
                 }
             }
+            else if(labelID == 2)//verification code
+            {
+                if(self.verificationCode.text.length == 0)
+                {
+                    [self->verificationCodeLabel setHidden:YES];
+                }
+                else
+                {
+                    [self->verificationCodeLabel setHidden:NO];
+                }
+            }
         }//eoa
 
 /********* scrollview functions **********/
@@ -183,5 +276,270 @@
             [scrollView setContentOffset:point animated:YES];
         }
 
+
+/****** UIPicker Methods ********/
+
+        /* creates the picker for 1st 2nd 3rd language selection */
+        -(void) createPickerForCarrier
+        {
+            //setting up UIpicker for states selection
+            carrierOptions = [[NSArray alloc] initWithObjects:@"",@"aio",@"att",@"bootstMobile",@"cricket", @"metropcs", @"sprint",@"straightTalk", @"tmobile", @"usCelular", @"verizon",nil];
+            
+            // creating toolbar for 'Cancel' and 'Done' actions
+            UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+            keyboardDoneButtonView.barStyle = UIBarStyleBlack;
+            keyboardDoneButtonView.translucent = YES;
+            keyboardDoneButtonView.tintColor = nil;
+            [keyboardDoneButtonView sizeToFit];
+            
+            //creating empty UIBarItem to force first item to the right
+            UIBarButtonItem* empty = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            
+            //creating 'Done' UIBarItem to be the exit point for the picker
+            UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                             style:UIBarButtonItemStyleBordered
+                                                                            target:self
+                                                                            action:@selector(cancelClicked:)];
+            
+            //creating 'Done' UIBarItem to be the exit point for the picker
+            UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                           style:UIBarButtonItemStyleBordered target:self
+                                                                          action:@selector(doneClicked:)] ;
+            
+            
+            //adding UIBarItems to the Keyboard/Picker
+            [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty, cancelButton, doneButton, nil]];
+            
+            /* native language */
+            // create a UIPicker view as a custom keyboard view
+            carrierPickerView = [[UIPickerView alloc] init];
+            [carrierPickerView sizeToFit];
+            carrierPickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+            carrierPickerView.delegate = self;
+            carrierPickerView.dataSource = self;
+            carrierPickerView.showsSelectionIndicator = YES;
+            
+            self.carrier.inputView = carrierPickerView;
+            
+            // Plug the keyboardDoneButtonView into the text field
+            self.carrier.inputAccessoryView = keyboardDoneButtonView;
+            
+        }//eom
+
+        //makes the date of birth first responder upon touching the uitextfield
+        - (void)setDateClicked:(id)sender
+        {
+            [self.carrier becomeFirstResponder];
+        }
+
+        //process the date selected after the user click cancel
+        //   and resign being the first reponsder
+        - (void)cancelClicked:(id)sender
+        {
+            [self.carrier resignFirstResponder];
+            
+            //update hidden field
+            if(self.carrier.text.length == 0)
+            {
+                [self->carrierLabel setHidden:YES];
+            }
+            else
+            {
+                [self->carrierLabel setHidden:NO];
+            }
+        }//eom
+
+        //process the date selected after the user click done
+        //   and resign being the first reponsder
+        - (void)doneClicked:(id)sender
+        {
+            [self.carrier resignFirstResponder];
+            
+        }//eom
+
+
+        // returns the number of 'columns' to display.
+        - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+        {
+            return 1;
+        }
+
+        // returns the # of rows in each component..
+        - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+        {
+            return [carrierOptions count];
+            
+        }//eom
+
+        #pragma mark - UIPickerView Delegate
+        - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+        {
+            return 30.0;
+        }
+
+        - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+        {
+            
+            return [carrierOptions objectAtIndex:row];
+            
+        }//eom
+
+        //If the user chooses from the pickerview, it calls this function;
+        - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+        {
+            //updating values
+            self.carrier.text = [carrierOptions objectAtIndex:row];
+            
+            //update hidden field
+            if(self.carrier.text.length == 0)
+            {
+                [self->carrierLabel setHidden:YES];
+            }
+            else
+            {
+                [self->carrierLabel setHidden:NO];
+            }
+        }//eom
+
+
+/***************** JSON POST functions *******************/
+
+        /* responce from server */
+        - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+        {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            
+            NSLog(@" responce: %@", httpResponse.description);
+            
+            NSInteger statusCode = httpResponse.statusCode;
+            
+            NSLog(@" status Code: %ld", (long)statusCode);
+            //    NSString *string = [NSString stringWithFormat:@"%ld", (long)statusCode];
+            
+        }//eo-action
+
+        /* data received from server */
+        - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)theData{
+            NSString *dataResponce = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
+            NSLog(@" responce from server %@",dataResponce);
+            
+            // Get JSON objects into initial array
+            NSArray *rawExhibits = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+            
+            NSLog(@" crazy here %@ ", rawExhibits);
+
+            //processing responce
+            [self phoneNumberServerResponce:dataResponce];
+        }
+
+        /* error occurred sending data to server */
+        -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+        {
+            NSLog(@" Failed with error '%@'", error);
+        }//eom
+
+        /* sends data to server */
+        -(void)sendDataPhoneNumberToServer
+        {
+            NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_sms.php";//hard coding website
+            
+            
+            /*** preparing data to be sent ***/
+            NSMutableDictionary * staffInfo = [self preparePhotoNumberData];
+            NSLog(@"");
+            NSLog(@" about to send the following data: %@", staffInfo);
+            NSLog(@"");
+            
+            /*** Sending data ***/
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+                                            initWithURL:[NSURL URLWithString:  serverAddress ]];
+            
+            [request setHTTPMethod:@"POST"]; //request type
+            
+            //sending data
+            NSError *error;
+            NSData *postdata = [NSJSONSerialization dataWithJSONObject:staffInfo options:0 error:&error];
+            
+            [request setHTTPBody:postdata];
+            
+            //        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            //        NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+            
+            [NSURLConnection connectionWithRequest:request delegate:self];
+            
+            
+            
+        }//eo-action
+
+
+        /* */
+        -(NSMutableDictionary *) preparePhotoNumberData
+        {
+            //creating initial list
+            NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
+            
+            finalList[@"registrationType"]     = [registeredStaff getAccountType];
+            
+            //adding view controller 0 info
+            finalList[@"firstName"]     = [registeredStaff getFirstName];
+            finalList[@"middleName"]    = [registeredStaff getMiddleName];
+            finalList[@"lastName"]      = [registeredStaff getLastName];
+            finalList[@"nickName"]      = [registeredStaff getNickName];
+            finalList[@"email"]         = [registeredStaff getEmail];
+            finalList[@"username"]      = [registeredStaff getUserName];
+            finalList[@"password"]      = [registeredStaff getPassword];
+            finalList[@"dob"]           = [registeredStaff getDateOfBirth];
+            
+            //adding view controller 1 info
+            finalList[@"phone"]             = self.cellphone.text;
+            finalList[@"carrier"]      = self.carrier.text;
+            
+            return finalList;
+        }//eom
+
+        /* sends data to server */
+        -(void)sendDataVerificationNumberToServer
+        {
+            NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_smsCode.php";//hard coding website
+            
+            
+            /*** preparing data to be sent ***/
+            NSMutableDictionary * staffInfo = [self prepareVerificationNumberData];
+            NSLog(@"");
+            NSLog(@" about to send the following data: %@", staffInfo);
+            NSLog(@"");
+            
+            /*** Sending data ***/
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+                                            initWithURL:[NSURL URLWithString:  serverAddress ]];
+            
+            [request setHTTPMethod:@"POST"]; //request type
+            
+            //sending data
+            NSError *error;
+            NSData *postdata = [NSJSONSerialization dataWithJSONObject:staffInfo options:0 error:&error];
+            
+            [request setHTTPBody:postdata];
+            
+            //        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            //        NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+            
+            [NSURLConnection connectionWithRequest:request delegate:self];
+            
+        }//eo-action
+
+
+
+        -(NSMutableDictionary *) prepareVerificationNumberData
+        {
+            //creating initial list
+            NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
+            
+//            finalList[@"peopleID"]     = [registeredStaff getAccountType];
+            
+//            finalList[@"code"]     = [registeredStaff getAccountType];
+            
+            return finalList;
+        }//eom
 
 @end

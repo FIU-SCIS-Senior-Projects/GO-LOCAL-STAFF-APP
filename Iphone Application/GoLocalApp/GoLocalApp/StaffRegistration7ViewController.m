@@ -28,17 +28,13 @@ otherServicesDescription, otherServicesWebsite, otherServicesSocialMedia, costOf
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    if(otherServicesSelected == false){
-//        [self determineWhereToGo];
-//    }
 
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [self setUpTapGesture];
-//    [registeredStaff printUserData];
+    [registeredStaff printUserData];
     
 }//eom
 

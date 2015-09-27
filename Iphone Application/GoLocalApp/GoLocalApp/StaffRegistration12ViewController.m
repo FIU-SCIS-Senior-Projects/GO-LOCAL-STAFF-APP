@@ -41,7 +41,7 @@ bodyImageView;
 -(void)viewDidAppear:(BOOL)animated
 {
     
-//    [registeredStaff printUserData];//testing
+    [registeredStaff printUserData];//testing
     
     //creating db helper
     staffDB = [[StaffDatabase alloc] init];

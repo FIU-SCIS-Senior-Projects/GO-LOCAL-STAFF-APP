@@ -10,8 +10,9 @@
 
 @interface RegisteredStaff : NSObject
 {
-    //view controller 1
     NSString *accountType;
+    
+    //view controller 0
     NSString *firstName;
     NSString *middleName;
     NSString *lastName;
@@ -31,6 +32,7 @@
 
     //view controller 3
     NSMutableArray * staffTypeExperience;
+    NSMutableArray * staffServicesExperience;
     BOOL djSelected;
     BOOL liveBandSelected;
     BOOL cateringCompanySelected;
@@ -114,6 +116,7 @@
 -(NSString *) getGender;
 -(NSString *) getLanguages;
 -(NSMutableArray *) getExperience;
+-(NSMutableArray *) getServices;
 -(NSMutableArray *) getDJInfo;
 -(NSMutableArray *) getLiveBandInfo;
 -(NSMutableArray *) getCateringCompanyInfo;
@@ -148,7 +151,7 @@
 
 
 /**  set methods **/
-    //controller 1
+    //controller 0
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName;
 -(void) setNickname:(NSString *) nicknameProvided;
 -(void) setEmail:(NSString *) emailProvided;
@@ -156,14 +159,17 @@
 -(void) setPassword:(NSString *) passwordProvided;
 -(void) setDOB:(NSString *) dobProvided;
 
+    //controller 1
+-(void) setCellphone:(NSString *) cellphoneProvided withCarrier:(NSString *) carrierProvided;
+
     //controller 2
--(void) setCellphone:(NSString *) cellphoneProvided withCarrer:(NSString *) carrierProvided;
 -(void) setAddress:(NSString *) addressProvided;
 -(void) setGender:(bool) genderProvided;
 -(void) setLanguages:(NSString *) languagesProvided;
 
     //controller 3
 -(void) setExperience:(NSMutableArray *) experienceProvided;
+-(void) setServiceExperience:(NSMutableArray *) servicesSelected;
 -(void) setServicesSelected:(BOOL) isDj  liveBand:(BOOL) isLiveBand  cateringCompany:(BOOL) isCateringCompany  otherServices:(BOOL) isOtherServices;
 
     //controller 4 <-> 7

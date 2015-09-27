@@ -1,20 +1,22 @@
 //
-//  StaffRegistrationViewController.m
+//  EmployerRegistration0ViewController.m
 //  GoLocalApp
 //
-//  Created by Luis Andres Castillo Hernandez on 9/1/15.
-//  Copyright (c) 2015 FIU. All rights reserved.
+//  Created by Luis Andres Castillo Hernandez on 9/26/15.
+//  Copyright © 2015 FIU. All rights reserved.
 //
 
-#import "StaffRegistration0ViewController.h"
-#import "StaffRegistration1ViewController.h"
+#import "EmployerRegistration0ViewController.h"
+
+#import "EmployerRegistration1ViewController.h" //need this for the prepare for segue!!
 
 
-#import "RegisteredStaff.h" //needed this to use the registration model
+#import "RegisteredEmployer.h" //needed this to use the registration model
 
-@interface StaffRegistration0ViewController ()
+
+@interface EmployerRegistration0ViewController ()
 {
-    RegisteredStaff *registeredStaff;
+    RegisteredEmployer *registeredEmployer;
     UIDatePicker * dobPickerView;
     
     __weak IBOutlet UILabel *firstNameLabel;
@@ -28,30 +30,26 @@
     __weak IBOutlet UILabel *ConfirmPasswordLabel;
     __weak IBOutlet UILabel *DateOfBirthLabel;
 }
-
 @end
 
-@implementation StaffRegistration0ViewController
-
+@implementation EmployerRegistration0ViewController
 
 @synthesize firstName, middleName, lastName, nickName, username, email, confirmEmail, password, confirmPassword, dateOfBirth, dateOfBirthSelected, scrollView;
 
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-}//eom
-
+    // Do any additional setup after loading the view.
+}
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    registeredStaff = [[RegisteredStaff alloc]init];
+    registeredEmployer = [[RegisteredEmployer alloc]init];
     
     [self setUpTapGesture];
     
     [self createDatePickerForDOB];
 }//eom
+
 
 /* verifying the required input fileds */
 - (BOOL)verifyDataEnter
@@ -64,116 +62,116 @@
     //checking for valid input
     NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
     
-        NSString * testing = firstName.text;
-        NSString *trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:firstName]; //take scroll to textfield so user can see their error
-            firstName.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter your first name" and:@"Okay"];
+    NSString * testing = firstName.text;
+    NSString *trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    if ([trimmedString isEqualToString:@""]) {
+        [self scrollVievEditingFinished:firstName]; //take scroll to textfield so user can see their error
+        firstName.text =@""; //clearing field
+        // it's empty or contains only white spaces
+        [self showAlert:@"Registration Field" withMessage:@"Please enter your first name" and:@"Okay"];
+        return 0;
+    }
+    
+    testing = middleName.text; //not required
+    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    if ([trimmedString isEqualToString:@""]) {
+        middleName.text =@""; //clearing field
+    }
+    else if( self.middleName.text.length > 1)
+    {
+        [self showAlert:@"Registration Field" withMessage:@"Please enter only your middle initial" and:@"Okay"];
+        return 0;
+    }
+    
+    testing = lastName.text;
+    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    if ([trimmedString isEqualToString:@""]) {
+        [self scrollVievEditingFinished:lastName]; //take scroll to textfield so user can see their error
+        lastName.text =@""; //clearing field
+        // it's empty or contains only white spaces
+        [self showAlert:@"Registration Field" withMessage:@"Please enter your  last name" and:@"Okay"];
+        return 0;
+    }
+    
+    testing = username.text;
+    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    if ([trimmedString isEqualToString:@""]) {
+        [self scrollVievEditingFinished:username]; //take scroll to textfield so user can see their error
+        username.text =@""; //clearing field
+        // it's empty or contains only white spaces
+        [self showAlert:@"Registration Field" withMessage:@"Please enter your desired username" and:@"Okay"];
+        return 0;
+    }
+    
+    testing = nickName.text; //not required
+    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    if ([trimmedString isEqualToString:@""]) {
+        nickName.text =@""; //clearing field
+    }
+    
+    testing = email.text;
+    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    if ([trimmedString isEqualToString:@""]) {
+        [self scrollVievEditingFinished:email]; //take scroll to textfield so user can see their error
+        email.text =@""; //clearing field
+        // it's empty or contains only white spaces
+        [self showAlert:@"Registration Field" withMessage:@"Please enter your email" and:@"Okay"];
+        return 0;
+    }
+    
+    testing = password.text;
+    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    if ([trimmedString isEqualToString:@""]) {
+        [self scrollVievEditingFinished:password]; //take scroll to textfield so user can see their error
+        password.text =@""; //clearing field
+        // it's empty or contains only white spaces
+        [self showAlert:@"Registration Field" withMessage:@"Please enter your desired password" and:@"Okay"];
+        return 0;
+    }
+    
+    
+    
+    /* checking email are the same */
+    if( [email.text isEqualToString: confirmEmail.text])
+    {
+        emailFilled = true;
+        
+        /*making sure email has the correct format*/
+        bool emailQuality = [self validateEmail:email.text];
+        if(emailQuality)
+        {
+            validEmailFormat = true;
+        }
+        else {
+            [self scrollVievEditingFinished:email]; //take scroll to textfield so user can see their error
+            [self showAlert:@"Registration Field" withMessage:@"Email is not in the correct format." and:@"Okay"];
             return 0;
         }
         
-        testing = middleName.text; //not required
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            middleName.text =@""; //clearing field
-        }
-        else if( self.middleName.text.length > 1)
-        {
-            [self showAlert:@"Registration Field" withMessage:@"Please enter only your middle initial" and:@"Okay"];
-            return 0;
-        }
+    }
+    else {
+        [self showAlert:@"Registration Field" withMessage:@"Email and confirm do not match" and:@"Okay"];
+        return 0;
+    }
     
-        testing = lastName.text;
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:lastName]; //take scroll to textfield so user can see their error
-            lastName.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter your  last name" and:@"Okay"];
-            return 0;
-        }
-    
-        testing = username.text; 
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:username]; //take scroll to textfield so user can see their error
-            username.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter your desired username" and:@"Okay"];
-            return 0;
-        }
-    
-        testing = nickName.text; //not required
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            nickName.text =@""; //clearing field
-        }
-    
-        testing = email.text;
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:email]; //take scroll to textfield so user can see their error
-            email.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter your email" and:@"Okay"];
-            return 0;
-        }
-
-        testing = password.text;
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:password]; //take scroll to textfield so user can see their error
-            password.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter your desired password" and:@"Okay"];
-            return 0;
-        }
-
-    
-
-     /* checking email are the same */
-        if( [email.text isEqualToString: confirmEmail.text])
-        {
-            emailFilled = true;
-            
-            /*making sure email has the correct format*/
-            bool emailQuality = [self validateEmail:email.text];
-            if(emailQuality)
-            {
-                validEmailFormat = true;
-            }
-            else {
-                [self scrollVievEditingFinished:email]; //take scroll to textfield so user can see their error
-                [self showAlert:@"Registration Field" withMessage:@"Email is not in the correct format." and:@"Okay"];
-                return 0;
-            }
-
-        }
-        else {
-            [self showAlert:@"Registration Field" withMessage:@"Email and confirm do not match" and:@"Okay"];
-            return 0;
-        }
-
     
     /* checking password are the same */
-        if([password.text length] > 6 ){
-                if( [password.text isEqualToString:confirmPassword.text] )
-                {
-                    passwordFilled = true;
-                }
-                else {
-                    [self scrollVievEditingFinished:password]; //take scroll to textfield so user can see their error
-                    [self showAlert:@"Registration Field" withMessage:@"password do not match" and:@"Okay"];
-                    return 0;
-                }
-        }
-        else
+    if([password.text length] > 6 ){
+        if( [password.text isEqualToString:confirmPassword.text] )
         {
-            [self showAlert:@"Registration Field" withMessage:@"minimum password length must be atleast 7 characters" and:@"Okay"];
+            passwordFilled = true;
+        }
+        else {
+            [self scrollVievEditingFinished:password]; //take scroll to textfield so user can see their error
+            [self showAlert:@"Registration Field" withMessage:@"password do not match" and:@"Okay"];
             return 0;
         }
+    }
+    else
+    {
+        [self showAlert:@"Registration Field" withMessage:@"minimum password length must be atleast 7 characters" and:@"Okay"];
+        return 0;
+    }
     
     if(self.dateOfBirth.hasText){
         dateofBirthFilled = true;
@@ -208,39 +206,40 @@
     }
     
     //updating values
-    [registeredStaff setName:self.firstName.text withMiddleInitial:self.middleName.text andLastName:self.lastName.text];
-    [registeredStaff setNickname: self.nickName.text];
-    [registeredStaff setEmail:self.email.text];
-    [registeredStaff setUserName:self.username.text];
-    [registeredStaff setPassword:self.password.text];
-    [registeredStaff setDOB:self.dateOfBirth.text];
+    [registeredEmployer setName:self.firstName.text withMiddleInitial:self.middleName.text andLastName:self.lastName.text];
+    [registeredEmployer setNickname: self.nickName.text];
+    [registeredEmployer setEmail:self.email.text];
+    [registeredEmployer setUserName:self.username.text];
+    [registeredEmployer setPassword:self.password.text];
+    [registeredEmployer setDOB:self.dateOfBirth.text];
     
     return 1;
 }//eom
 
+
 /* submmitting form */
 - (IBAction)submit:(id)sender {
-
+    
     //verifying the data enter
     bool result = [self verifyDataEnter];
     if(result)
     {
         //moving to the next controller
-        [self performSegueWithIdentifier:@"goToStaffRegister1" sender:self];
+        [self performSegueWithIdentifier:@"goToEmployerRegister1" sender:self];
     }
     else
     {
-        NSLog(@"missing some/all required fields on staffRegistration1");
+        NSLog(@"missing some/all required fields on Employer Register 0");
     }
 }//eom
 
 
 /* preparing the data to sent to the next view controller */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"goToStaffRegister1"]){
-        StaffRegistration1ViewController *controller = (StaffRegistration1ViewController *)segue.destinationViewController;
+    if([segue.identifier isEqualToString:@"goToEmployerRegister1"]){
+        EmployerRegistration1ViewController *controller = (EmployerRegistration1ViewController *)segue.destinationViewController;
         
-        controller.registeredStaff = registeredStaff;
+        controller.registeredEmployer = registeredEmployer;
     }
 }//eom
 
@@ -260,9 +259,9 @@
             //creating UIAlert
             UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
                                                             message:message
-                                                            delegate:self
-                                                   cancelButtonTitle:cancelTitle
-                                                   otherButtonTitles: nil];
+                                                           delegate:self
+                                                  cancelButtonTitle:cancelTitle
+                                                  otherButtonTitles: nil];
             [alert show];//display alert
         }//eom
 
@@ -283,7 +282,7 @@
 
 /****** UIDatePicker Methods ********/
 
-         /* creating a UiDatePicker for date of birth textfiled*/
+        /* creating a UiDatePicker for date of birth textfiled*/
         -(void)createDatePickerForDOB
         {
             //calculating starting date for datepicker
@@ -314,16 +313,16 @@
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                           style:UIBarButtonItemStyleBordered
-                                                                          target:self
-                                                                          action:@selector(cancelClicked:)];
+                                                                             style:UIBarButtonItemStyleBordered
+                                                                            target:self
+                                                                            action:@selector(cancelClicked:)];
             
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                style:UIBarButtonItemStyleBordered
+                                                                           style:UIBarButtonItemStyleBordered
                                                                           target:self
-                                                                    action:@selector(doneClicked:)];
+                                                                          action:@selector(doneClicked:)];
             
             //adding UIBarItems to the Keyboard/DatePicker
             [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
@@ -342,7 +341,7 @@
         //   and resign being the first reponsder
         - (void)cancelClicked:(id)sender
         {
-             [self.dateOfBirth resignFirstResponder];
+            [self.dateOfBirth resignFirstResponder];
             
             //update dob hidden field
             if(self.dateOfBirth.text.length == 0)
@@ -405,7 +404,7 @@
 //            [cellphone resignFirstResponder];
 //        }//eom
 
-        /* shows and hides the label above the textfield depending if the textfield is blank or filled */
+/* shows and hides the label above the textfield depending if the textfield is blank or filled */
         - (IBAction)textFieldValuesChanged:(UITextField *)sender
         {
             
@@ -562,12 +561,12 @@
             else if(textField == self.dateOfBirth){
                 [self.dateOfBirth resignFirstResponder];
             }
-
+            
             return YES;
         }//eom
 
 
-    /********* scrollview functions **********/
+/********* scrollview functions **********/
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);
@@ -582,6 +581,5 @@
 
 
 
+
 @end
-
-

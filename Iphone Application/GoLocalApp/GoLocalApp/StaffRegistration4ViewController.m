@@ -1,8 +1,9 @@
+
 //
-//  StaffRegistration3ViewController.m
+//  StaffRegistration4ViewController.m
 //  GoLocalApp
 //
-//  Created by Luis Andres Castillo Hernandez on 9/3/15.
+//  Created by Luis Andres Castillo Hernandez on 9/25/15.
 //  Copyright (c) 2015 FIU. All rights reserved.
 //
 
@@ -18,102 +19,75 @@
 @interface StaffRegistration4ViewController ()
 {
     __weak IBOutlet UILabel *costOfServiceLabel;
-    
-    NSMutableArray * serviceInfo;
-    BOOL liveBandSelected;
-    BOOL cateringCompanySelected;
-    BOOL otherServicesSelected;
 }
 @end
 
 @implementation StaffRegistration4ViewController
 
 
-@synthesize scrollView, djDescription, djWebsite, djSocialMedia, costOfServiceTextField, registeredStaff;
+@synthesize scrollView, registeredStaff,
+djDescription, djWebsite, djSocialMedia, costOfServiceTextField;
 
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-}//eom
+}
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    
+    [registeredStaff printUserData];//testing
+    
     [self setUpTapGesture];
     
-//    [registeredStaff printUserData];
-    
-    self->liveBandSelected          =   [registeredStaff isLiveBand];
-    self->cateringCompanySelected   =   [registeredStaff isCateringCompany];
-    self->otherServicesSelected     =   [registeredStaff isOtherServices];
-
 }//eom
 
 
 /* verify required fields */
 - (BOOL)verifyDataEnter
 {
-    BOOL djDescriptionFilled        = false;
-    BOOL djWebsiteFilled            = false;
-    BOOL djSocialMediaFilled        = false;
-    BOOL djCostofServiceFilled      = false;
+    BOOL liveBandDescriptionFilled        = false;
+    BOOL liveBandWebsiteFilled            = false;
+    BOOL liveBandSocialMediaFilled        = false;
     
-    if(self.djDescription.hasText){
-        djDescriptionFilled = true;
+    if(djDescription.hasText){
+        liveBandDescriptionFilled = true;
     }
     else {
-        [self showAlert:@"Registration Field" withMessage:@"Please describe the DJ genre" and:@"Okay"];
+        [self showAlert:@"Registration Field" withMessage:@"Missing the description field" and:@"Okay"];
         return 0;
     }
     
-    if(self.djWebsite.hasText){
-        djWebsiteFilled = true;
+    if(djWebsite.hasText){
+        liveBandWebsiteFilled = true;
     }
     else {
-        [self showAlert:@"Registration Field" withMessage:@"Please describe your DJ website" and:@"Okay"];
+        [self showAlert:@"Registration Field" withMessage:@"Missing the website field" and:@"Okay"];
         return 0;
     }
     
-    if(self.djSocialMedia.hasText){
-        djSocialMediaFilled = true;
+    if(djSocialMedia.hasText){
+        liveBandSocialMediaFilled = true;
     }
     else {
-        [self showAlert:@"Registration Field" withMessage:@"Please describe your DJ social media" and:@"Okay"];
+        [self showAlert:@"Registration Field" withMessage:@"Missing the social media field" and:@"Okay"];
         return 0;
     }
     
-    if(self.costOfServiceTextField.hasText){
-        djCostofServiceFilled = true;
-    }
-    else {
-        [self showAlert:@"Registration Field" withMessage:@"Please state your cost of service" and:@"Okay"];
-        return 0;
-    }
+    //updating values
+    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          self.djDescription.text, @"description",
+                          self.djWebsite.text, @"website",
+                          self.djSocialMedia.text, @"socialMedia",
+                          self.costOfServiceTextField.text, @"costOfService",
+                          nil];
     
-//    //updating values
-//    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                            self.djDescription.text, @"description",
-//                            self.djWebsite.text, @"website",
-//                            self.djSocialMedia.text, @"socialMedia",
-//                            self.costOfServiceTextField.text, @"costOfService",
-//                            nil];
-//    
-//    NSMutableArray *service = [[NSMutableArray alloc] init];
-//    [service addObject:info];
-//    [registeredStaff setDJInfo:service];
-//    
-//    NSLog(@"service has : %@", service);
-//    NSLog(@"");
-//    NSLog(@" that was built from dic: %@ ", info);
-
-    self->serviceInfo = [[NSMutableArray alloc] init];
-    [self->serviceInfo addObject:self.djDescription.text];
-    [self->serviceInfo addObject:self.djWebsite.text];
-    [self->serviceInfo addObject:self.djSocialMedia.text];
-    [self->serviceInfo addObject:self.costOfServiceTextField.text];
-    [registeredStaff setDJInfo:self->serviceInfo];
+    NSMutableArray *service = [[NSMutableArray alloc] init];
+    [service addObject:info];
+    [registeredStaff setDJInfo:service];
     
-    NSLog(@"service has : %@", self->serviceInfo);
-      
     
     return 1;
 }//eom
@@ -131,19 +105,20 @@
 /* */
 -(void)determineWhereToGo
 {
-    if(self->liveBandSelected)
+    //catering company
+    if( [registeredStaff isLiveBand] )
     {
-        //moving to the next controller
+        //skipping to catering company controller
         [self performSegueWithIdentifier:@"djToLiveBand" sender:self];
     }
     //catering company
-    else if(self->cateringCompanySelected)
+    else if( [registeredStaff isCateringCompany] )
     {
         //skipping to catering company controller
         [self performSegueWithIdentifier:@"djToCateringCompany" sender:self];
     }
     //other services
-    else if(self->otherServicesSelected)
+    else if( [registeredStaff isOtherServices])
     {
         //skipping to Other services controller
         [self performSegueWithIdentifier:@"djToOtherServices" sender:self];
@@ -153,30 +128,23 @@
         //skipping to staff registration 11 controller
         [self performSegueWithIdentifier:@"djToStaffRegistration10" sender:self];
     }
-
+    
 }//eom
 
 /* preparing the data to sent to the next view controller */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"djToLiveBand"]){
-        StaffRegistration5ViewController *controller = (StaffRegistration5ViewController *)segue.destinationViewController;
-        
-        controller.registeredStaff = registeredStaff;
-        
-    }
-    else if([segue.identifier isEqualToString:@"djToCateringCompany"]){
+    if([segue.identifier isEqualToString:@"liveBandToCateringCompany"]){
         StaffRegistration6ViewController *controller = (StaffRegistration6ViewController *)segue.destinationViewController;
         
         controller.registeredStaff = registeredStaff;
-    
     }
-    else if([segue.identifier isEqualToString:@"djToOtherServices"]){
+    else if([segue.identifier isEqualToString:@"liveBandToOtherServices"]){
         StaffRegistration7ViewController *controller = (StaffRegistration7ViewController *)segue.destinationViewController;
         
         controller.registeredStaff = registeredStaff;
         
     }
-    else if([segue.identifier isEqualToString:@"djToStaffRegistration11"]){
+    else if([segue.identifier isEqualToString:@"liveBandToStaffRegistration10"]){
         StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
         
         controller.registeredStaff = registeredStaff;
@@ -217,7 +185,7 @@
         {
             int labelID = (int)sender.tag;
             
-            if(labelID == 1)
+            if(labelID == 2)
             {
                 if(self.costOfServiceTextField.text.length == 0)
                 {
@@ -228,8 +196,9 @@
                     [self->costOfServiceLabel setHidden:NO];
                 }
             }
-
+            
         }//eom
+
 
         /* dimisses UITextField as soon the return key is pressed */
         -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -237,6 +206,9 @@
             if(textField == self.djWebsite){
                 [self.djWebsite resignFirstResponder];
                 [self.djSocialMedia becomeFirstResponder];
+            }
+            else{
+                NSLog(@"none are the same");
             }
             
             return YES;
@@ -252,23 +224,12 @@
             else if(textView == self.djSocialMedia){
                 [self.djSocialMedia resignFirstResponder];
             }
+            else{
+                NSLog(@"none are the same");
+            }
+            
             return YES;
         }//eom
-
-        /* textfield */
-        - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
-        {
-            [self scrollViewAdaptToStartEditingTextField:textField];//moving scrollview
-            return YES;
-        }
-
-        /* textview */
-        - (BOOL) textViewShouldBeginEditing:(UITextField *)textView
-        {
-            [self scrollViewAdaptToStartEditingTextField:textView];//moving scrollview
-            return YES;
-        }
-
 
 /********* scrollview functions **********/
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
@@ -283,7 +244,19 @@
             [scrollView setContentOffset:point animated:YES];
         }
 
+        /* textfield */
+        - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+        {
+            [self scrollViewAdaptToStartEditingTextField:textField];
+            return YES;
+        }
 
+        /* textview */
+        - (BOOL) textViewShouldBeginEditing:(UITextField *)textView
+        {
+            [self scrollViewAdaptToStartEditingTextField:textView];
+            return YES;
+        }
 
 
 

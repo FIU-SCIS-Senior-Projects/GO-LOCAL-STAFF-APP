@@ -16,7 +16,6 @@
 @interface StaffRegistration6ViewController ()
 {
     __weak IBOutlet UILabel *costOfServiceLabel;
-    BOOL otherServicesSelected;
 }
 @end
 
@@ -28,20 +27,15 @@ cateringCompanyDescription, cateringCompanyWebsite, cateringCompanySocialMedia, 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-//    if(cateringCompanySelected == false){
-//        [self determineWhereToGo];
-//    }
-    
+
 }//eom
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self setUpTapGesture];
-//    [registeredStaff printUserData];
     
-    self->otherServicesSelected     =   [registeredStaff isOtherServices];
+    [registeredStaff printUserData];//testing
+    
+    [self setUpTapGesture];
 
     
 }//eom
@@ -107,7 +101,7 @@ cateringCompanyDescription, cateringCompanyWebsite, cateringCompanySocialMedia, 
 -(void)determineWhereToGo
 {
     //other services
-    if(self->otherServicesSelected)
+    if([registeredStaff isOtherServices])
     {
         //skipping to Other services controller
         [self performSegueWithIdentifier:@"cateringCompanyToOtherServices" sender:self];

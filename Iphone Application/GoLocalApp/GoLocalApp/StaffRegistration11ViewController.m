@@ -48,15 +48,18 @@ notRequireForRegistrationLabel, headshotImageView;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-//    [registeredStaff printUserData];//testing
+    [registeredStaff printUserData];//testing
     
-    self->djSelected                =   [registeredStaff isDJ];
-    self->liveBandSelected          =   [registeredStaff isLiveBand];
-    self->cateringCompanySelected   =   [registeredStaff isCateringCompany];
-    self->otherServicesSelected     =   [registeredStaff isOtherServices];
+    djSelected                =   [registeredStaff isDJ];
+    liveBandSelected          =   [registeredStaff isLiveBand];
+    cateringCompanySelected   =   [registeredStaff isCateringCompany];
+    otherServicesSelected     =   [registeredStaff isOtherServices];
     
     
     NSLog(@"services selection dj = %d | liveband = %d | catering = %d | other = %d", self->djSelected , self->liveBandSelected, self->cateringCompanySelected, self->otherServicesSelected);
+    
+    
+    NSLog(@"ACTUAL services selection dj = %d | liveband = %d | catering = %d | other = %d", [registeredStaff isDJ] , [registeredStaff isLiveBand], [registeredStaff isCateringCompany], [registeredStaff isOtherServices] );
     //creating db helper
     staffDB = [[StaffDatabase alloc] init];
     

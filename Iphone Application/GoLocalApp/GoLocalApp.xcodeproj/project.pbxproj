@@ -8,7 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		DE0452D91BB51251008D747C /* StaffRegistration1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0452D81BB51251008D747C /* StaffRegistration1ViewController.m */; };
+		DE0452DC1BB53944008D747C /* StaffRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0452DB1BB53944008D747C /* StaffRegistration4ViewController.m */; };
 		DE1D82E11BA33469005671DB /* ToggleAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */; };
+		DE4AC3F01BB75FA50071D7E2 /* EmployerRegistration0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3EF1BB75FA50071D7E2 /* EmployerRegistration0ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		DE4AC3F31BB75FD90071D7E2 /* EmployerRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3F21BB75FD90071D7E2 /* EmployerRegistration2ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		DE4AC3F61BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3F51BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		DE4AC3F91BB760770071D7E2 /* EmployerRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3F81BB760770071D7E2 /* EmployerRegistration4ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		DE4AC3FC1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3FB1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		DE4AC3FF1BB760A40071D7E2 /* EmployerRegistration6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3FE1BB760A40071D7E2 /* EmployerRegistration6ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		DE4AC4021BB761620071D7E2 /* RegisteredEmployer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC4011BB761620071D7E2 /* RegisteredEmployer.m */; settings = {ASSET_TAGS = (); }; };
 		DE6722B41B968CC600599039 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B31B968CC600599039 /* main.m */; };
 		DE6722B71B968CC600599039 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B61B968CC600599039 /* AppDelegate.m */; };
 		DE6722BA1B968CC600599039 /* GoLocalApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B81B968CC600599039 /* GoLocalApp.xcdatamodeld */; };
@@ -21,9 +29,8 @@
 		DE6722E21B968D5500599039 /* StaffHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722E11B968D5500599039 /* StaffHomeViewController.m */; };
 		DE6722E61B968D8700599039 /* PreRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722E51B968D8700599039 /* PreRegistrationViewController.m */; };
 		DE6722E91B968D9F00599039 /* StaffRegistration0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722E81B968D9F00599039 /* StaffRegistration0ViewController.m */; };
-		DE6722EC1B968DB900599039 /* EmployerRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722EB1B968DB900599039 /* EmployerRegistrationViewController.m */; };
+		DE6722EC1B968DB900599039 /* EmployerRegistration1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722EB1B968DB900599039 /* EmployerRegistration1ViewController.m */; };
 		DE8444A91B9F75060085DA73 /* StaffRegistration13ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8444A81B9F75060085DA73 /* StaffRegistration13ViewController.m */; };
-		DE8444AC1B9F7C970085DA73 /* DELETEStaffRegistration15ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8444AB1B9F7C970085DA73 /* DELETEStaffRegistration15ViewController.m */; };
 		DE8444AF1B9FAB570085DA73 /* StaffRegistration14ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8444AE1B9FAB570085DA73 /* StaffRegistration14ViewController.m */; };
 		DE8C2E5B1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C2E5A1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m */; };
 		DE8C2E5E1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C2E5D1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m */; };
@@ -31,16 +38,12 @@
 		DEC6532E1BB25B73001A8655 /* StaffDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC6532D1BB25B73001A8655 /* StaffDatabase.m */; };
 		DEC653321BB39930001A8655 /* RegisteredStaff.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC653311BB3992F001A8655 /* RegisteredStaff.m */; };
 		DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DED49C461B97CA0A0091B986 /* ForgotPasswordViewController.m */; };
-		DEE6B8441B9941C200912541 /* OLDStaffRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8431B9941C200912541 /* OLDStaffRegistration2ViewController.m */; };
-		DEE6B8471B9942BF00912541 /* StaffRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8461B9942BF00912541 /* StaffRegistration4ViewController.m */; };
+		DEE6B8471B9942BF00912541 /* TRASHStaffRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8461B9942BF00912541 /* TRASHStaffRegistration4ViewController.m */; };
 		DEE6B84A1B9942CA00912541 /* StaffRegistration5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8491B9942CA00912541 /* StaffRegistration5ViewController.m */; };
 		DEE6B84D1B9942DA00912541 /* StaffRegistration6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B84C1B9942DA00912541 /* StaffRegistration6ViewController.m */; };
 		DEE6B8501B9942E500912541 /* StaffRegistration7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B84F1B9942E500912541 /* StaffRegistration7ViewController.m */; };
 		DEF0BAB91B9D56C8001C6D84 /* StaffRegistration8ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BAB81B9D56C8001C6D84 /* StaffRegistration8ViewController.m */; };
-		DEF0BABC1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BABB1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.m */; };
-		DEF0BABF1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BABE1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.m */; };
 		DEF0BAC71B9E5025001C6D84 /* StaffRegistration9ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BAC61B9E5025001C6D84 /* StaffRegistration9ViewController.m */; };
-		DEF0BACA1B9E5042001C6D84 /* OLDStaffRegistration11ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BAC91B9E5042001C6D84 /* OLDStaffRegistration11ViewController.m */; };
 		DEF0BACD1B9E5051001C6D84 /* StaffRegistration11ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BACC1B9E5051001C6D84 /* StaffRegistration11ViewController.m */; };
 		DEF0BAD11B9EB2FA001C6D84 /* StaffRegistration12ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF0BAD01B9EB2FA001C6D84 /* StaffRegistration12ViewController.m */; };
 /* End PBXBuildFile section */
@@ -58,8 +61,24 @@
 /* Begin PBXFileReference section */
 		DE0452D71BB51251008D747C /* StaffRegistration1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration1ViewController.h; sourceTree = "<group>"; };
 		DE0452D81BB51251008D747C /* StaffRegistration1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration1ViewController.m; sourceTree = "<group>"; };
+		DE0452DA1BB53944008D747C /* StaffRegistration4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration4ViewController.h; sourceTree = "<group>"; };
+		DE0452DB1BB53944008D747C /* StaffRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration4ViewController.m; sourceTree = "<group>"; };
 		DE1D82DF1BA33469005671DB /* ToggleAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleAccountViewController.h; sourceTree = "<group>"; };
 		DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleAccountViewController.m; sourceTree = "<group>"; };
+		DE4AC3EE1BB75FA50071D7E2 /* EmployerRegistration0ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration0ViewController.h; sourceTree = "<group>"; };
+		DE4AC3EF1BB75FA50071D7E2 /* EmployerRegistration0ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration0ViewController.m; sourceTree = "<group>"; };
+		DE4AC3F11BB75FD90071D7E2 /* EmployerRegistration2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration2ViewController.h; sourceTree = "<group>"; };
+		DE4AC3F21BB75FD90071D7E2 /* EmployerRegistration2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration2ViewController.m; sourceTree = "<group>"; };
+		DE4AC3F41BB75FFD0071D7E2 /* EmployerRegistration3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration3ViewController.h; sourceTree = "<group>"; };
+		DE4AC3F51BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration3ViewController.m; sourceTree = "<group>"; };
+		DE4AC3F71BB760770071D7E2 /* EmployerRegistration4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration4ViewController.h; sourceTree = "<group>"; };
+		DE4AC3F81BB760770071D7E2 /* EmployerRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration4ViewController.m; sourceTree = "<group>"; };
+		DE4AC3FA1BB7608E0071D7E2 /* EmployerRegistration5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration5ViewController.h; sourceTree = "<group>"; };
+		DE4AC3FB1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration5ViewController.m; sourceTree = "<group>"; };
+		DE4AC3FD1BB760A40071D7E2 /* EmployerRegistration6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration6ViewController.h; sourceTree = "<group>"; };
+		DE4AC3FE1BB760A40071D7E2 /* EmployerRegistration6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration6ViewController.m; sourceTree = "<group>"; };
+		DE4AC4001BB761620071D7E2 /* RegisteredEmployer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredEmployer.h; sourceTree = "<group>"; };
+		DE4AC4011BB761620071D7E2 /* RegisteredEmployer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredEmployer.m; sourceTree = "<group>"; };
 		DE6722AE1B968CC600599039 /* GoLocalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoLocalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE6722B21B968CC600599039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE6722B31B968CC600599039 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -82,12 +101,10 @@
 		DE6722E51B968D8700599039 /* PreRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreRegistrationViewController.m; sourceTree = "<group>"; };
 		DE6722E71B968D9F00599039 /* StaffRegistration0ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration0ViewController.h; sourceTree = "<group>"; };
 		DE6722E81B968D9F00599039 /* StaffRegistration0ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration0ViewController.m; sourceTree = "<group>"; };
-		DE6722EA1B968DB900599039 /* EmployerRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistrationViewController.h; sourceTree = "<group>"; };
-		DE6722EB1B968DB900599039 /* EmployerRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistrationViewController.m; sourceTree = "<group>"; };
+		DE6722EA1B968DB900599039 /* EmployerRegistration1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration1ViewController.h; sourceTree = "<group>"; };
+		DE6722EB1B968DB900599039 /* EmployerRegistration1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration1ViewController.m; sourceTree = "<group>"; };
 		DE8444A71B9F75060085DA73 /* StaffRegistration13ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration13ViewController.h; sourceTree = "<group>"; };
 		DE8444A81B9F75060085DA73 /* StaffRegistration13ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration13ViewController.m; sourceTree = "<group>"; };
-		DE8444AA1B9F7C970085DA73 /* DELETEStaffRegistration15ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELETEStaffRegistration15ViewController.h; sourceTree = "<group>"; };
-		DE8444AB1B9F7C970085DA73 /* DELETEStaffRegistration15ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELETEStaffRegistration15ViewController.m; sourceTree = "<group>"; };
 		DE8444AD1B9FAB570085DA73 /* StaffRegistration14ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration14ViewController.h; sourceTree = "<group>"; };
 		DE8444AE1B9FAB570085DA73 /* StaffRegistration14ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration14ViewController.m; sourceTree = "<group>"; };
 		DE8444E91B9FE94E0085DA73 /* notes.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = notes.playground; sourceTree = "<group>"; };
@@ -103,9 +120,8 @@
 		DED49C451B97CA0A0091B986 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		DED49C461B97CA0A0091B986 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		DEE6B8421B9941C200912541 /* StaffRegistration2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration2ViewController.h; sourceTree = "<group>"; };
-		DEE6B8431B9941C200912541 /* OLDStaffRegistration2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLDStaffRegistration2ViewController.m; sourceTree = "<group>"; };
-		DEE6B8451B9942BF00912541 /* StaffRegistration4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration4ViewController.h; sourceTree = "<group>"; };
-		DEE6B8461B9942BF00912541 /* StaffRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration4ViewController.m; sourceTree = "<group>"; };
+		DEE6B8451B9942BF00912541 /* TRASHStaffRegistration4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRASHStaffRegistration4ViewController.h; sourceTree = "<group>"; };
+		DEE6B8461B9942BF00912541 /* TRASHStaffRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRASHStaffRegistration4ViewController.m; sourceTree = "<group>"; };
 		DEE6B8481B9942CA00912541 /* StaffRegistration5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration5ViewController.h; sourceTree = "<group>"; };
 		DEE6B8491B9942CA00912541 /* StaffRegistration5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration5ViewController.m; sourceTree = "<group>"; };
 		DEE6B84B1B9942DA00912541 /* StaffRegistration6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration6ViewController.h; sourceTree = "<group>"; };
@@ -114,14 +130,8 @@
 		DEE6B84F1B9942E500912541 /* StaffRegistration7ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration7ViewController.m; sourceTree = "<group>"; };
 		DEF0BAB71B9D56C8001C6D84 /* StaffRegistration8ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration8ViewController.h; sourceTree = "<group>"; };
 		DEF0BAB81B9D56C8001C6D84 /* StaffRegistration8ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration8ViewController.m; sourceTree = "<group>"; };
-		DEF0BABA1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLDStaffRegistration8ViewController.h; sourceTree = "<group>"; };
-		DEF0BABB1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLDStaffRegistration8ViewController.m; sourceTree = "<group>"; };
-		DEF0BABD1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLDStaffRegistration9ViewController.h; sourceTree = "<group>"; };
-		DEF0BABE1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLDStaffRegistration9ViewController.m; sourceTree = "<group>"; };
 		DEF0BAC51B9E5025001C6D84 /* StaffRegistration9ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration9ViewController.h; sourceTree = "<group>"; };
 		DEF0BAC61B9E5025001C6D84 /* StaffRegistration9ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration9ViewController.m; sourceTree = "<group>"; };
-		DEF0BAC81B9E5042001C6D84 /* OLDStaffRegistration11ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLDStaffRegistration11ViewController.h; sourceTree = "<group>"; };
-		DEF0BAC91B9E5042001C6D84 /* OLDStaffRegistration11ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLDStaffRegistration11ViewController.m; sourceTree = "<group>"; };
 		DEF0BACB1B9E5051001C6D84 /* StaffRegistration11ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration11ViewController.h; sourceTree = "<group>"; };
 		DEF0BACC1B9E5051001C6D84 /* StaffRegistration11ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration11ViewController.m; sourceTree = "<group>"; };
 		DEF0BACF1B9EB2FA001C6D84 /* StaffRegistration12ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration12ViewController.h; sourceTree = "<group>"; };
@@ -247,8 +257,20 @@
 		DE6722ED1B968DC000599039 /* Employer Registration */ = {
 			isa = PBXGroup;
 			children = (
-				DE6722EA1B968DB900599039 /* EmployerRegistrationViewController.h */,
-				DE6722EB1B968DB900599039 /* EmployerRegistrationViewController.m */,
+				DE4AC3EE1BB75FA50071D7E2 /* EmployerRegistration0ViewController.h */,
+				DE4AC3EF1BB75FA50071D7E2 /* EmployerRegistration0ViewController.m */,
+				DE6722EA1B968DB900599039 /* EmployerRegistration1ViewController.h */,
+				DE6722EB1B968DB900599039 /* EmployerRegistration1ViewController.m */,
+				DE4AC3F11BB75FD90071D7E2 /* EmployerRegistration2ViewController.h */,
+				DE4AC3F21BB75FD90071D7E2 /* EmployerRegistration2ViewController.m */,
+				DE4AC3F41BB75FFD0071D7E2 /* EmployerRegistration3ViewController.h */,
+				DE4AC3F51BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m */,
+				DE4AC3F71BB760770071D7E2 /* EmployerRegistration4ViewController.h */,
+				DE4AC3F81BB760770071D7E2 /* EmployerRegistration4ViewController.m */,
+				DE4AC3FA1BB7608E0071D7E2 /* EmployerRegistration5ViewController.h */,
+				DE4AC3FB1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m */,
+				DE4AC3FD1BB760A40071D7E2 /* EmployerRegistration6ViewController.h */,
+				DE4AC3FE1BB760A40071D7E2 /* EmployerRegistration6ViewController.m */,
 			);
 			name = "Employer Registration";
 			sourceTree = "<group>";
@@ -287,15 +309,8 @@
 		DE8C2E621BA9EE8200AA0BB6 /* TRASH */ = {
 			isa = PBXGroup;
 			children = (
-				DEE6B8431B9941C200912541 /* OLDStaffRegistration2ViewController.m */,
-				DEF0BABA1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.h */,
-				DEF0BABB1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.m */,
-				DEF0BABE1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.m */,
-				DEF0BABD1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.h */,
-				DEF0BAC81B9E5042001C6D84 /* OLDStaffRegistration11ViewController.h */,
-				DEF0BAC91B9E5042001C6D84 /* OLDStaffRegistration11ViewController.m */,
-				DE8444AA1B9F7C970085DA73 /* DELETEStaffRegistration15ViewController.h */,
-				DE8444AB1B9F7C970085DA73 /* DELETEStaffRegistration15ViewController.m */,
+				DEE6B8451B9942BF00912541 /* TRASHStaffRegistration4ViewController.h */,
+				DEE6B8461B9942BF00912541 /* TRASHStaffRegistration4ViewController.m */,
 			);
 			name = TRASH;
 			sourceTree = "<group>";
@@ -346,6 +361,8 @@
 			children = (
 				DEC653301BB3992F001A8655 /* RegisteredStaff.h */,
 				DEC653311BB3992F001A8655 /* RegisteredStaff.m */,
+				DE4AC4001BB761620071D7E2 /* RegisteredEmployer.h */,
+				DE4AC4011BB761620071D7E2 /* RegisteredEmployer.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -362,8 +379,8 @@
 		DEF0BAC01B9D6DB5001C6D84 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				DEE6B8451B9942BF00912541 /* StaffRegistration4ViewController.h */,
-				DEE6B8461B9942BF00912541 /* StaffRegistration4ViewController.m */,
+				DE0452DA1BB53944008D747C /* StaffRegistration4ViewController.h */,
+				DE0452DB1BB53944008D747C /* StaffRegistration4ViewController.m */,
 				DEE6B8481B9942CA00912541 /* StaffRegistration5ViewController.h */,
 				DEE6B8491B9942CA00912541 /* StaffRegistration5ViewController.m */,
 				DEE6B84B1B9942DA00912541 /* StaffRegistration6ViewController.h */,
@@ -476,37 +493,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE8C2E5B1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m in Sources */,
+				DE4AC3F01BB75FA50071D7E2 /* EmployerRegistration0ViewController.m in Sources */,
 				DE1D82E11BA33469005671DB /* ToggleAccountViewController.m in Sources */,
 				DEF0BACD1B9E5051001C6D84 /* StaffRegistration11ViewController.m in Sources */,
 				DE6722DF1B968D4500599039 /* EmployerHomeViewController.m in Sources */,
+				DE4AC3F31BB75FD90071D7E2 /* EmployerRegistration2ViewController.m in Sources */,
 				DE8C2E611BA9E16600AA0BB6 /* StaffRegistration10ViewController.m in Sources */,
+				DE4AC3FC1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m in Sources */,
 				DEC6532E1BB25B73001A8655 /* StaffDatabase.m in Sources */,
 				DEC653321BB39930001A8655 /* RegisteredStaff.m in Sources */,
-				DE6722EC1B968DB900599039 /* EmployerRegistrationViewController.m in Sources */,
-				DEF0BABC1B9D56D8001C6D84 /* OLDStaffRegistration8ViewController.m in Sources */,
+				DE4AC4021BB761620071D7E2 /* RegisteredEmployer.m in Sources */,
+				DE6722EC1B968DB900599039 /* EmployerRegistration1ViewController.m in Sources */,
 				DEF0BAC71B9E5025001C6D84 /* StaffRegistration9ViewController.m in Sources */,
 				DE6722B71B968CC600599039 /* AppDelegate.m in Sources */,
 				DE6722E21B968D5500599039 /* StaffHomeViewController.m in Sources */,
 				DE0452D91BB51251008D747C /* StaffRegistration1ViewController.m in Sources */,
 				DE6722E61B968D8700599039 /* PreRegistrationViewController.m in Sources */,
+				DE4AC3F61BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m in Sources */,
 				DE6722BA1B968CC600599039 /* GoLocalApp.xcdatamodeld in Sources */,
-				DEE6B8471B9942BF00912541 /* StaffRegistration4ViewController.m in Sources */,
-				DEF0BABF1B9D56E9001C6D84 /* OLDStaffRegistration9ViewController.m in Sources */,
-				DEF0BACA1B9E5042001C6D84 /* OLDStaffRegistration11ViewController.m in Sources */,
+				DE0452DC1BB53944008D747C /* StaffRegistration4ViewController.m in Sources */,
+				DEE6B8471B9942BF00912541 /* TRASHStaffRegistration4ViewController.m in Sources */,
 				DEE6B84A1B9942CA00912541 /* StaffRegistration5ViewController.m in Sources */,
 				DE6722BD1B968CC600599039 /* LogInViewController.m in Sources */,
 				DE6722E91B968D9F00599039 /* StaffRegistration0ViewController.m in Sources */,
 				DEF0BAB91B9D56C8001C6D84 /* StaffRegistration8ViewController.m in Sources */,
 				DE8444A91B9F75060085DA73 /* StaffRegistration13ViewController.m in Sources */,
 				DEE6B84D1B9942DA00912541 /* StaffRegistration6ViewController.m in Sources */,
-				DE8444AC1B9F7C970085DA73 /* DELETEStaffRegistration15ViewController.m in Sources */,
 				DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */,
 				DE8C2E5E1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m in Sources */,
+				DE4AC3F91BB760770071D7E2 /* EmployerRegistration4ViewController.m in Sources */,
+				DE4AC3FF1BB760A40071D7E2 /* EmployerRegistration6ViewController.m in Sources */,
 				DE8444AF1B9FAB570085DA73 /* StaffRegistration14ViewController.m in Sources */,
 				DEF0BAD11B9EB2FA001C6D84 /* StaffRegistration12ViewController.m in Sources */,
 				DEE6B8501B9942E500912541 /* StaffRegistration7ViewController.m in Sources */,
 				DE6722B41B968CC600599039 /* main.m in Sources */,
-				DEE6B8441B9941C200912541 /* OLDStaffRegistration2ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
