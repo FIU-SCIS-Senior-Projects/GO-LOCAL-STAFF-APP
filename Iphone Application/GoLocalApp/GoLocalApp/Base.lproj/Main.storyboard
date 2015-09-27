@@ -3566,8 +3566,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="phoneNumberSubmitted:" destination="8ku-2u-JgN" eventType="touchUpInside" id="d1C-98-Do2"/>
-                                            <action selector="verifyCodeSubmitted:" destination="8ku-2u-JgN" eventType="touchUpInside" id="eyh-xD-nr0"/>
+                                            <action selector="verifyCodeSubmitted:" destination="8ku-2u-JgN" eventType="touchUpInside" id="tsF-yQ-fws"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3587,7 +3586,7 @@
                         <outlet property="verificationCode" destination="qAS-dt-K3U" id="5aE-a1-zJA"/>
                         <outlet property="verificationCodeIntroMessage" destination="PDH-7T-0qA" id="3Wz-N7-7Ft"/>
                         <outlet property="verificationCodeLabel" destination="apK-6z-IHe" id="Gzg-re-lVB"/>
-                        <outlet property="verifyCodeButton" destination="KsF-4m-6wb" id="fzT-ti-LhM"/>
+                        <outlet property="verifyCodeButton" destination="KsF-4m-6wb" id="Dkj-RU-hpY"/>
                         <segue destination="WCn-SM-b7m" kind="push" identifier="goToStaffRegister2" id="Sbe-cd-4gZ"/>
                     </connections>
                 </viewController>

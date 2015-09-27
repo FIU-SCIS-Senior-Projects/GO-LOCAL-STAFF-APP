@@ -15,10 +15,13 @@
 @interface StaffRegistration1ViewController ()
 {
 
-      UIPickerView * carrierPickerView;
-    
-    
+    // carrier items
+    UIPickerView * carrierPickerView;
     NSArray *carrierOptions;
+    
+    // registered user ID on server
+    NSString * peopleID;
+    BOOL waitingOnVerificationResponce;
     
     //labels
     __weak IBOutlet UILabel *cellphoneLabel;
@@ -43,7 +46,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    
+    waitingOnVerificationResponce = FALSE;
     [registeredStaff printUserData];//testing
     
     [self setUpTapGesture];
@@ -122,6 +125,35 @@
     return 1;
 }//eom
 
+-(BOOL) verifyVerificationCodeEnter
+{
+    //checking for valid input
+    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+    NSString * testing;
+    NSString *trimmedString;
+    
+    
+    testing = self.verificationCode.text;
+    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    if ([trimmedString isEqualToString:@""]) {
+        [self scrollVievEditingFinished:verificationCode]; //take scroll to textfield so user can see their error
+        self.verificationCode.text =@""; //clearing field
+        // it's empty or contains only white spaces
+        [self showAlert:@"Registration Field" withMessage:@"Please enter the verification Code" and:@"Okay"];
+        return 0;
+    }
+//    else if( self.verificationCode.text.length < 10)
+//    {
+//        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
+//        // it's empty or contains only white spaces
+//        [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete cellphone number" and:@"Okay"];
+//        return 0;
+//    }
+
+    
+    return 1;
+}//eom
+
 /* */
 - (IBAction)phoneNumberSubmitted:(id)sender
 {
@@ -135,9 +167,6 @@
         //displaying instruction message
         [self showAlert:@"Registration Field" withMessage:@"A verification code has been sent to your cellphone, Please enter the verification code" and:@"Okay"];
         
-        //hiding submit phone number button
-        [submitPhoneNumber setHidden:YES];
-        
         //displaying verification fields
         [verificationCodeIntroMessage setHidden:NO];
         [verificationCodeLabel setHidden:NO];
@@ -147,15 +176,58 @@
     }
 }//eom
 
--(void) phoneNumberServerResponce:(NSString *) responce
+/* processing server response about the phone number */
+-(void) phoneNumberServerResponce:(NSDictionary *) responce
+{
+    NSLog(@" responce: %@", responce);
+    NSDictionary * peopleIDResults = [responce objectForKey:@"results"];
+    
+    NSLog(@" results is %@", peopleIDResults);
+    
+    peopleID = [peopleIDResults objectForKey:@"peopleID"];
+    NSLog(@" people ID is %@", peopleID);
+    
+    
+    if(peopleID)
+    {
+        //hiding submit phone number button
+        [submitPhoneNumber setHidden:YES];
+        
+        //updating json receiver flag
+        waitingOnVerificationResponce = true;
+    }
+}//eom
+
+/* processing server response about the verification code number */
+-(void) verificationCodeResponce:(NSDictionary *) responce
 {
     //
     NSLog(@" %@", responce);
-
+    NSString * serverResponce = [responce objectForKey:@"peopleID"];
+    NSLog(@" server responce %@", serverResponce);
+//
+//    if(peopleID)
+//    {
+//        //hiding submit phone number button
+//        [submitPhoneNumber setHidden:YES];
+//        
+//        //updating json receiver flag
+//        waitingOnVerificationResponce = true;
+//    }
 }//eom
 
-- (IBAction)verifyCodeSubmitted:(id)sender {
-}
+/* sending verification code to server */
+- (IBAction)verifyCodeSubmitted:(id)sender
+{
+    //verify
+    BOOL results = [self verifyVerificationCodeEnter ];
+    if(results)
+    {
+        //sending info to server
+        [self sendDataVerificationNumberToServer];
+    }
+    
+}//eom
 
 - (IBAction)submitForm:(id)sender {
     bool result = [self verifyDataEnter];
@@ -418,20 +490,46 @@
             
         }//eo-action
 
-        /* data received from server */
-        - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)theData{
-            NSString *dataResponce = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
-            NSLog(@" responce from server %@",dataResponce);
-            
-            // Get JSON objects into initial array
-            NSArray *rawExhibits = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
-            
-            NSLog(@" crazy here %@ ", rawExhibits);
 
-            //processing responce
-            [self phoneNumberServerResponce:dataResponce];
+    /* data received from server */
+    - (void)connection:(NSURLConnection *)connection didReceiveData:(nonnull NSData *)data
+    {
+        
+        NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        NSLog(@" from server replied: %@",rawExhibits);
+        
+        
+        //            NSString *dataResponce = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
+        //            NSLog(@" responce from server %@",dataResponce);
+        
+        //            // Get JSON objects into initial array
+        //            NSArray *rawExhibits = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+        
+        //waiting on verification responce
+        if(waitingOnVerificationResponce)
+        {
+            [self verificationCodeResponce: rawExhibits];
         }
+        else //waiting on phone number responce
+        {
+            //processing responce
+            [self phoneNumberServerResponce:rawExhibits];
+        }
+    }//eom
 
+/*
+ - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+ {
+ data = [[NSMutableData alloc] init];
+ NSLog(@"Data Data , %@", data);
+ }
+ 
+ - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)theData
+ {
+ [data appendData:theData];
+ }
+ 
+ */
         /* error occurred sending data to server */
         -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
         {
@@ -535,9 +633,8 @@
             //creating initial list
             NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
             
-//            finalList[@"peopleID"]     = [registeredStaff getAccountType];
-            
-//            finalList[@"code"]     = [registeredStaff getAccountType];
+            finalList[@"peopleID"]     = peopleID;
+            finalList[@"code"]     = verificationCode.text;
             
             return finalList;
         }//eom
