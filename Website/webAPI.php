@@ -178,8 +178,35 @@
       return $result;
     }//eom
 
+    /* gets all staff*/
+    function getAllStaff()
+    {
 
+      $finalList = array();
 
+      //connecting to db
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+        echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
+
+      //gettting all staff
+      $query = "SELECT * FROM registeredstaff";
+      $result = mysqli_query($dbConnection, $query);
+
+      $totalRows = mysqli_num_rows($result);
+      if($totalRows > 0)
+      {
+        while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
+        {
+          array_push($finalList, $row);
+        }
+      }
+
+      return $finalList;
+    }//eom
 
 
 
@@ -244,6 +271,36 @@
         echo $result;
     }//eom
 
+    /* gets all staff*/
+    function getAllEmployers()
+    {
+
+      $finalList = array();
+
+      //connecting to db
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+        echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
+
+      //gettting all staff
+      $query = "SELECT * FROM registeredcompany";
+      $result = mysqli_query($dbConnection, $query);
+
+      $totalRows = mysqli_num_rows($result);
+      if($totalRows > 0)
+      {
+        while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
+        {
+          array_push($finalList, $row);
+        }
+      }
+
+      return $finalList;
+    }//eom
+
 /************************** ACTION methods **********************/
   
 
@@ -251,7 +308,6 @@
     function connectToDB()
     {
       $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
-      // $db = mysqli_connect("localhost", "root", "root", "golocalapp"); 
       return $db;
     }//eom
 
