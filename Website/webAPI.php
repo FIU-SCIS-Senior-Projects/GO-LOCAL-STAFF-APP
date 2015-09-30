@@ -192,16 +192,37 @@
         return 0;
       }
 
-      //gettting all staff
+      //gettting all registered staff
       $query = "SELECT * FROM registeredstaff";
       $result = mysqli_query($dbConnection, $query);
 
       $totalRows = mysqli_num_rows($result);
       if($totalRows > 0)
       {
-        while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
+        while( $registeredStaffResults = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
         {
-          array_push($finalList, $row);
+          //attempting to get more info on user
+            $currentPeopleID = $registeredStaffResults['peopleID'];//getting current People ID
+            //query people table for registeredstaff info
+            $query1 = "SELECT * FROM people WHERE peopleID ='".$currentPeopleID."'";
+            $result1 = mysqli_query($dbConnection, $query1);
+            $totalRows1 = mysqli_num_rows($result1);
+            if($totalRows1 > 0)
+            {
+              //getting info from 'people' table
+              $peopleResults = mysqli_fetch_array( $result1, MYSQLI_ASSOC );
+  
+              //combining information from both tables 'registeredstaff' & 'people'
+              $registeredStaffResults = array_merge($registeredStaffResults, $peopleResults);
+
+              //adding only info from registeredStaff and people table
+              array_push($finalList, $registeredStaffResults);
+            }
+            else 
+            {
+              //adding ONLY info from registeredStaff table
+              array_push($finalList, $registeredStaffResults);
+            }
         }
       }
 
@@ -301,6 +322,8 @@
       return $finalList;
     }//eom
 
+
+
 /************************** ACTION methods **********************/
   
 
@@ -392,5 +415,63 @@
               return -3; //no account found
               
     }//eom
+
+    /*
+      deletes registered user from people tables and from their respective user type table
+      returns 
+              1   delete from people and registered table
+              0   database not responding
+              -1  unable to delete from people table
+                     
+    */
+    function deleteRegisteredUser($id, $type)
+    {
+      $errorOccured = 1;
+        //connecting to db
+        $dbConnection = connectToDB();
+        if(!$dbConnection)
+        {
+          echo "Unable to connect to MySQL.".PHP_EOL;
+          return 0;
+        }
+
+        if($type == "staff")
+        {
+          $sql = "DELETE FROM people WHERE peopleID=$id";
+        }
+        else if($type == "employer")
+        {
+          $sql = "DELETE FROM people WHERE companyID=$id";
+        }
+        
+        if ($dbConnection->query($sql) === TRUE) {
+            echo "<p>Record deleted successfully from peopleID </p>";
+            
+             // sql to delete a record
+            if($type == "staff")
+            {
+              $sql2 = "DELETE FROM registeredstaff WHERE peopleID=$id";
+            }
+            else if($type == "employer")
+            {
+              $sql2 = "DELETE FROM registeredcompany WHERE companyID=$id";
+            }
+
+            if ($dbConnection->query($sql2) === TRUE) 
+            {
+              echo "<p>Record deleted successfully from peopleID </p>";
+            }
+            else {
+              echo "<p>Error deleting record: ".$dbConnection->error." </p>";
+              $errorOccured = -2;
+            }
+        } 
+        else 
+        {
+            echo "<p>Error deleting record: ".$dbConnection->error." </p>";
+            $errorOccured = -1;
+        }
+
+    }
 
 ?>
