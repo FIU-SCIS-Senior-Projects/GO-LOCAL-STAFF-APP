@@ -3,7 +3,7 @@
 //Verifies email addressed from the link previously sent
 function authenticateEmail( $type, $email, $hash )
 {
-	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "Unable to connect to MySQL: ".mysqli_connect_error();
@@ -53,7 +53,7 @@ function retrievePeopleID( $username )
 {
 	$peopleID;
 
-	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
 
 	$type = mysqli_real_escape_string( $db, $_GET["type"] );
     // $username = mysqli_real_escape_string( $db, $_GET["username"] );	
@@ -85,7 +85,7 @@ function retrievePeopleID( $username )
 
 function queryDB( $query )
 {
-	$db = mysqli_connect( "locahot", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "locahot", "root", "root", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
@@ -100,7 +100,7 @@ function queryDB( $query )
 
 function storePersonalInfo( $peopleID, $fname, $middleInitial, $lname, $nickname, $address, $phone)
 {
-	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
@@ -134,7 +134,7 @@ function authenticatePhoneNumber( $peopleID, $to, $smsGateway )
 {
 	$code = mt_rand(1000, 9999);
 
-	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
@@ -159,7 +159,7 @@ function verifySmsCode( $peopleID, $code )
 {
 	$success = true;
 
-	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
@@ -230,7 +230,7 @@ function getGateway( $carrier )
 function peopleUserExists( $username, $email )
 {
 
-	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "Unable to connect to MySQL: ".mysqli_connect_error();
@@ -260,7 +260,7 @@ function peopleUserExists( $username, $email )
 	and returns the peopleID 					*/
 function storeStaffCredentials( $username, $password, $email )
 {
-	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
 
 	$peopleID = "";
 	$username = mysqli_real_escape_string($db, $username);
@@ -303,7 +303,7 @@ function storeStaffCredentials( $username, $password, $email )
 
 function storePersonalDOB( $peopleID, $dob )
 {
-	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
 
 	$dob = mysqli_real_escape_string($db, $dob);
 

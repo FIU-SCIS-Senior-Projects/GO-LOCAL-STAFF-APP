@@ -274,6 +274,13 @@ session_start();
         // else
         //     $insurance = $_POST["insurance"];
 
+        $target_dir = "Uploads/";
+        $target_file = $target_dir.basename($_FILES["headshot"]["name"]);
+        //$uploadOk = 1;
+        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+        move_uploaded_file($_FILES["headshot"]["tmp_name"], $target_file);
+
         // if( empty($_POST["resume"]) )
         // {
         //     $resumeError = "You must upload a resume";
@@ -305,7 +312,7 @@ session_start();
     ?>
 
     <!-- Create the form -->
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
         1. Name: 
         <input type="text" name="fname">
         <span class="error" style="color:red">*<?php echo $fnameError; ?></span><br><br>
@@ -462,7 +469,7 @@ session_start();
         <input type="file" name="insuranceDocs"><br><br>
         34. Upload Pictures:<br><br>
         Headshot
-        <input type="file" name="headshot"><br><br>
+        <input type="file" name="headshot" id="headshot"><br><br>
         Full Body 
         <input type="file" name="headshot"><br><br>
         35. Bank Rounting Number:
