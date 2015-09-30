@@ -306,8 +306,16 @@
                         <td><?php echo $currentRow['piercings']; ?> </td> 
                       </tr>   
                       <tr>    
-                        <td><b>desiredPayRate</b></td>  
-                        <td><?php echo $currentRow['desiredPayRate']; ?> </td> 
+                        <td><b>desiredHourlyRate</b></td>  
+                        <td><?php echo $currentRow['desiredHourlyRate']; ?> </td> 
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>desiredWeeklyRate</b></td>   
+                        <td><?php echo $currentRow['desiredWeeklyRate']; ?> </td> 
                       </tr>
                       <tr>   
                         <td><b>ssnOrEin</b></td> 
