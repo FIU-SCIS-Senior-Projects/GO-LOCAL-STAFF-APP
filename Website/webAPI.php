@@ -188,7 +188,7 @@
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-        echo "Unable to connect to MySQL.".PHP_EOL;
+        print "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 

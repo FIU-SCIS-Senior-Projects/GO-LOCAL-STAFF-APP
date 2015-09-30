@@ -1,14 +1,13 @@
-<?php
-  require '../webAPI.php';
-?>
-
+<html>
+<head>
 <!-- Adding BOOTSTRAP -->
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
+<head>
+<body>
 
 <div class="row">
  <div class="col-md-1"></div>
@@ -25,12 +24,10 @@
             <th>Email</th> 
           </tr>
           <?php
-          
+   		require '../webAPI.php';          
           $registerStaff = getAllStaff();
           $totalStaff = count($registerStaff);
           
-          // print_r($registerStaff);//testing
-
             //iterating thru all staff
             for( $iter = 0; $iter < $totalStaff; $iter++ )
             {
@@ -469,5 +466,8 @@
   </div>
   <div class="col-md-1"></div>
   </div>
+</body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</html>
