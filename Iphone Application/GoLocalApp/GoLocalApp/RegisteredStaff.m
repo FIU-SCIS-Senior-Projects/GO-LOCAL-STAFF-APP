@@ -17,7 +17,7 @@
     self = [super init];
     if (self)
     {
-//        [self updateAllWithBlankValues];
+        [self updateAllWithBlankValues];
         
         //fetch back files from core data or receive user data from server
     }
@@ -68,7 +68,7 @@
     [self setTravelPercentage:@" "];
     [self setDirectDeposit:FALSE withRouting:@" " andWithAccountNumber:@" "];
     
-//    [self printUserData];
+    [self printUserData];
   
 }//eom
 

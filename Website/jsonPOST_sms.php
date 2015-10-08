@@ -204,6 +204,13 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
               ];
             }        
         }
+        else
+        {
+              $responseArray = [
+                "message" => "not a valid registration type",
+                "responseType" => "-10",
+              ];
+        }
 
 
         //     storePersonalInfo( $peopleID, $fname, $middleN, $lname, $nickname, "", "" );
@@ -218,6 +225,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
               -2  no registered user found
               -3  Unable to retrieve peopleID
               -4  Unable to store the code to the Database
+              -10 not a valid registration type
         */
         $response['results'] = $responseArray; //sending reply
 
