@@ -1,5 +1,5 @@
 array (
-  'registrationType' => 'staff',
+  'registrationType' => 'Staff',
   'firstName' => 'Luis',
   'middleName' => 'A',
   'lastName' => 'Castillo',
@@ -9,5 +9,5 @@ array (
   'password' => '0987654321',
   'dob' => '11/29/1987',
   'phone' => '3056099250',
-  'carrier' => 'att',
+  'carrier' => 'aoi',
 )

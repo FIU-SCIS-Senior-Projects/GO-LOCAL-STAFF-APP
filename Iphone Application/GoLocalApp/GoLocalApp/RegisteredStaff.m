@@ -68,7 +68,7 @@
     [self setTravelPercentage:@" "];
     [self setDirectDeposit:FALSE withRouting:@" " andWithAccountNumber:@" "];
     
-    [self printUserData];
+//    [self printUserData];
   
 }//eom
 

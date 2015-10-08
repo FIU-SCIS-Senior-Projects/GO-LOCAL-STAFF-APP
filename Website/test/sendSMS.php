@@ -30,7 +30,7 @@ $ch = curl_init($url);
 
       //valid staff user
     $jsonData = [
-      "registrationType" => "staff",
+      "registrationType" => "Staff",
       "firstName" => "Luis",
       "middleName" => "A",
       "lastName" => "Castillo",
@@ -40,7 +40,7 @@ $ch = curl_init($url);
       "password" => "0987654321",
       "dob" => "11/29/1987",
       "phone" => "3056099250",
-      "carrier" => "att",
+      "carrier" => "aoi",
       ];
 
  

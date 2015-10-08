@@ -9,214 +9,147 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
   {
     //converting json to php array
     $decoded = json_decode($jsondata, true);
-      switch (json_last_error())
-      {
-        case JSON_ERROR_NONE:
-            $jsonError = ' - No errors';
-        break;
-        case JSON_ERROR_DEPTH:
-            $jsonError = ' - Maximum stack depth exceeded';
-        break;
-        case JSON_ERROR_STATE_MISMATCH:
-            $jsonError = ' - Underflow or the modes mismatch';
-        break;
-        case JSON_ERROR_CTRL_CHAR:
-            $jsonError = ' - Unexpected control character found';
-        break;
-        case JSON_ERROR_SYNTAX:
-            $jsonError = ' - Syntax error, malformed JSON';
-        break;
-        case JSON_ERROR_UTF8:
-            $jsonError = ' - Malformed UTF-8 characters, possibly incorrectly encoded';
-        break;
-        default:
-            $jsonError = ' - Unknown error';
-        break;
-      }
+    switch (json_last_error())
+    {
+      case JSON_ERROR_NONE:
+      $jsonError = ' - No errors';
+      break;
+      case JSON_ERROR_DEPTH:
+      $jsonError = ' - Maximum stack depth exceeded';
+      break;
+      case JSON_ERROR_STATE_MISMATCH:
+      $jsonError = ' - Underflow or the modes mismatch';
+      break;
+      case JSON_ERROR_CTRL_CHAR:
+      $jsonError = ' - Unexpected control character found';
+      break;
+      case JSON_ERROR_SYNTAX:
+      $jsonError = ' - Syntax error, malformed JSON';
+      break;
+      case JSON_ERROR_UTF8:
+      $jsonError = ' - Malformed UTF-8 characters, possibly incorrectly encoded';
+      break;
+      default:
+      $jsonError = ' - Unknown error';
+      break;
+    }
 
     //not a valid json value found
     if (is_null ($decoded)) 
     {
       $response['status'] = array(
-      'type' => 'error',
-      'value' => 'Invalid JSON value found',
-      'error' => $jsonError
-      );
+        'type' => 'error',
+        'value' => 'Invalid JSON value found',
+        'error' => $jsonError
+        );
     }
     else  //valid json values found
     {
-       require 'API.php';/* adding API */
+     require 'API.php';/* adding API */
 
-        $peopleID;
-        $responseArray;
+     $peopleID;
+     $responseArray;
 
-        $registrationType = $decoded["registrationType"];
-        $fname            = $decoded["firstName"];
-        $middleN          = $decoded["middleName"];
-        $lname            = $decoded["lastName"];
-        $nickname         = $decoded["nickName"];
-        $email            = $decoded["email"];
-        $username         = $decoded["username"];
-        $pasword          = $decoded["password"];
-        $dob              = $decoded["dob"];
-        $carrier          = $decoded["carrier"];
-        $phone            = $decoded["phone"];
+     $registrationType = $decoded["registrationType"];
+     $fname            = $decoded["firstName"];
+     $middleN          = $decoded["middleName"];
+     $lname            = $decoded["lastName"];
+     $nickname         = $decoded["nickName"];
+     $email            = $decoded["email"];
+     $username         = $decoded["username"];
+     $pasword          = $decoded["password"];
+     $dob              = $decoded["dob"];
+     $carrier          = $decoded["carrier"];
+     $phone            = $decoded["phone"];
 
-        if( $registrationType == "Staff")
+     echo "<p>registration Type: $registrationType</p>";
+
+      //verify user is unique
+     $uniqueResult = isUserRegistrationUnique($registrationType, $username, $email);
+     echo "<p>should we register this user? $uniqueResult</p>";
+     if($uniqueResult == 1)
+     {
+      //saving user initial information
+        $userID = storeUserCredentials( $registrationType, $decoded );
+        echo "<p> userID: $userID</p>";
+        if($userID > 0)
         {
-            //verify user is unique
-            $uniqueResult = isUniqueRegisteredStaff($username,$email);
-            if($uniqueResult == 1)
-            {
-                //User doens't exist. Let's add him/her to the DB
-                $peopleID = storeStaffCredentials( $username, $password, $email );
-                echo "<p> peopleID: $peopleID</p>";
-                if($peopleID > 0)
-                {
-                   $phoneResult = authenticateStaffPhoneNumber( $peopleID, $phone );
-                   if($phoneResult > 0)
-                   {
-                      $responseArray = [
-                        "message" => "phone number code successfully sent",
-                        "responseType" => $phoneResult,
-                      ];
-                   }
-                   else if($phoneResult == 0)
-                   {
-                      $responseArray = [
-                        "message" => "database not responding",
-                        "responseType" => $phoneResult,
-                      ];
-                   }
-                   else if($phoneResult == -4)
-                   {
-                      $responseArray = [
-                        "message" => "Unable to store the code to the Database",
-                        "responseType" => $phoneResult,
-                      ];
-                   }
-                }
-                else if($peopleID == 0)
-                {
-                  $responseArray = [
-                    "message" => "database not responding",
-                    "responseType" => $peopleID,
-                  ];
-                }
-                else if($peopleID == -2)
-                {
-                  $responseArray = [
-                    "message" => "Unable to store staff credentials",
-                    "responseType" => $peopleID,
-                  ];
-                }
-                else if($peopleID == -3)
-                {
-                  $responseArray = [
-                    "message" => "Unable to retrieve peopleID",
-                    "responseType" => $peopleID,
-                  ];
-                }
-            }
-            else if($uniqueResult == 0)
-            {
-              $responseArray = [
-                "message" => "database not responding",
-                "responseType" => "0",
-              ];
-            }
-            else if($uniqueResult == -1)
-            {
-              $responseArray = [
-                "message" => "Username or Email already exist",
-                "responseType" => "-1",
-              ];
-            }
+                    //authenticating phone number
+         $phoneResult = authenticateUserPhoneNumber($registrationType, $userID, $phone );
+         echo "<p> authentication results $phoneResult</p>";
+         if($phoneResult > 0)
+         {
+          $responseArray = [ 
+          "message" => "phone number code successfully sent",
+          "responseType" => $phoneResult,
+          ];
         }
-        else if( $registrationType == "Employer")
+        else if($phoneResult == 0)
         {
-            //verify user is unique
-            $uniqueResult = isUniqueRegisteredEmployer($username,$email);
-            if($uniqueResult == 1)
-            {
-              //User doens't exist. Let's add him/her to the DB
-              $peopleID = storeStaffCredentials($username,$password,$email);
-              echo "<p> peopleID: $peopleID</p>";
-              if($peopleID > 0)
-              {
-                $phoneResult = authenticateStaffPhoneNumber( $peopleID, $phone );
-                if($phoneResult > 0)
-               {
-                  $responseArray = [
-                    "message" => "phone number code successfully sent",
-                    "responseType" => $phoneResult,
-                  ];
-               }
-               else if($phoneResult == 0)
-               {
-                  $responseArray = [
-                    "message" => "database not responding",
-                    "responseType" => $phoneResult,
-                  ];
-               }
-               else if($phoneResult == -4)
-               {
-                  $responseArray = [
-                    "message" => "Unable to store the code to the Database",
-                    "responseType" => $phoneResult,
-                  ];
-               }
-              }
-              else if($peopleID == 0)
-              {
-                $responseArray = [
-                  "message" => "database not responding",
-                  "responseType" => $peopleID,
-                ];
-              }
-              else if($peopleID == -2)
-              {
-                $responseArray = [
-                  "message" => "Unable to store staff credentials",
-                  "responseType" => $peopleID,
-                ];
-              }
-              else if($peopleID == -3)
-              {
-                $responseArray = [
-                  "message" => "Unable to retrieve peopleID",
-                  "responseType" => $peopleID,
-                ];
-              }
-            }
-            else if($uniqueResult == 0)
-            {
-              $responseArray = [
-                "message" => "database not responding",
-                "responseType" => "0",
-              ];
-            }
-            else if($uniqueResult == -1)
-            {
-              $responseArray = [
-                "message" => "Username or Email already exist",
-                "responseType" => "-1",
-              ];
-            }        
+          $responseArray = [
+          "message" => "database not responding",
+          "responseType" => $phoneResult,
+          ];
         }
-        else
+        else if($phoneResult == -4)
         {
-              $responseArray = [
-                "message" => "not a valid registration type",
-                "responseType" => "-10",
-              ];
+          $responseArray = [
+          "message" => "Unable to store the code to the Database",
+          "responseType" => $phoneResult,
+          ];
         }
+      }
+      else if($userID == 0)
+      {
+        $responseArray = [
+        "message" => "database not responding",
+        "responseType" => $userID,
+        ];
+      }
+      else if($userID == -2)
+      {
+        $responseArray = [
+        "message" => "Unable to store staff credentials",
+        "responseType" => $userID,
+        ];
+      }
+      else if($userID == -3)
+      {
+        $responseArray = [
+        "message" => "Unable to retrieve userID",
+        "responseType" => $userID,
+        ];
+      }
+  }
+  else if($uniqueResult == 0)
+  {
+    $responseArray = [
+    "message" => "database not responding",
+    "responseType" => $uniqueResult,
+    ];
+  }
+  else if($uniqueResult == -1)
+  {
+    $responseArray = [
+    "message" => "Username or Email already exist",
+    "responseType" => $uniqueResult,
+    ];
+  }
+  else if($uniqueResult == -10)
+  {
+    $responseArray = [
+    "message" => "not a valid registration type",
+    "responseType" => $uniqueResult,
+    ];
+  }    
+
+  
 
 
         //     storePersonalInfo( $peopleID, $fname, $middleN, $lname, $nickname, "", "" );
         //     storePersonalDOB( $peopleID, $dob );
-     
-      
+
+
         /* 
           reponse returns the following:
               1   phone number code successfully sent
@@ -235,21 +168,21 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
 else 
 {
   $response['status'] = array(
-      'type' => 'error',
-      'value' => 'No JSON value set',
-  );
+    'type' => 'error',
+    'value' => 'No JSON value set',
+    );
 } 
 
 //responding back to sender
 $encoded = json_encode($response);
 
-      /* saving incoming file */
+/* saving incoming file */
       // Write the contents back to the file
-      $filename = 'test/SMSDataResponse.json';
-      file_put_contents($filename, var_export($encoded, true));
+$filename = 'test/SMSDataResponse.json';
+file_put_contents($filename, var_export($encoded, true));
 
-      $filename = 'test/SMSDataincoming.json';
-      file_put_contents($filename, var_export($decoded, true));
+$filename = 'test/SMSDataincoming.json';
+file_put_contents($filename, var_export($decoded, true));
 
 
 header  ('Content-type: application/json');

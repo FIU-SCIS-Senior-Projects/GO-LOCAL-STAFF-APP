@@ -2,41 +2,6 @@
 
 /************************** Staff methods **********************/
 
-    /* checks the user provided is unique - doesnt exist in database
-      returns
-             1  username is unique
-             0  database not responding
-            -1  username is not unique    
-    */
-    function isUniqueRegisteredStaff( $username, $email )
-    {
-          $dbConnection = connectToDB();
-          if(!$dbConnection)
-          {
-            echo "Unable to connect to MySQL.".PHP_EOL;
-            return 0;
-          }
-
-          //making sure user is a unique registration
-          $query = "SELECT * FROM registeredstaff WHERE username='".$username."' or email='".$email."'";
-          
-          $result = mysqli_query($dbConnection, $query);
-          $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-          $rowResult = array_filter($row);
-          if (empty($rowResult))
-          {
-            print_r($row);
-            echo "<p>username and email is unique</p>";
-            return 1;
-          }
-          else
-          {
-            print_r($row);
-            echo "<p>username and email is NOT unique</p>";
-            return -1;
-          }
-    }//eom
-
     /* register a staff 
       returns 
             1   successfully register
@@ -67,13 +32,13 @@
             return -2;
           }
           
-            // attempting to save user as a 'registeredstaff'
-            $query = "INSERT INTO registeredstaff (username, password, email)
+            // attempting to save user as a 'registered_staff'
+            $query = "INSERT INTO registered_staff (username, password, email)
                       VALUES ( '$username', '$passwordHashed', '$email' )";  
 
             //perform query
             $result = mysqli_query($dbConnection, $query);
-            echo "<p> registeredstaff results ".$result."</p>";
+            echo "<p> registered_staff results ".$result."</p>";
             if($result)
             {
                 //data
@@ -191,7 +156,7 @@
       }
 
       //gettting all registered staff
-      $query = "SELECT * FROM registeredstaff";
+      $query = "SELECT * FROM registered_staff";
       $result = mysqli_query($dbConnection, $query);
 
       $totalRows = mysqli_num_rows($result);
@@ -199,28 +164,28 @@
       {
         while( $registeredStaffResults = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
         {
-          //attempting to get more info on user
-            $currentPeopleID = $registeredStaffResults['peopleID'];//getting current People ID
-            //query people table for registeredstaff info
-            $query1 = "SELECT * FROM people WHERE peopleID ='".$currentPeopleID."'";
-            $result1 = mysqli_query($dbConnection, $query1);
-            $totalRows1 = mysqli_num_rows($result1);
-            if($totalRows1 > 0)
-            {
-              //getting info from 'people' table
-              $peopleResults = mysqli_fetch_array( $result1, MYSQLI_ASSOC );
+          // //attempting to get more info on user
+          //   $currentPeopleID = $registeredStaffResults['staffID'];//getting current People ID
+          //   //query people table for registered_staff info
+          //   $query1 = "SELECT * FROM people WHERE staffID ='".$currentPeopleID."'";
+          //   $result1 = mysqli_query($dbConnection, $query1);
+          //   $totalRows1 = mysqli_num_rows($result1);
+          //   if($totalRows1 > 0)
+          //   {
+          //     //getting info from 'people' table
+          //     $peopleResults = mysqli_fetch_array( $result1, MYSQLI_ASSOC );
   
-              //combining information from both tables 'registeredstaff' & 'people'
-              $registeredStaffResults = array_merge($registeredStaffResults, $peopleResults);
+          //     //combining information from both tables 'registered_staff' & 'people'
+          //     $registeredStaffResults = array_merge($registeredStaffResults, $peopleResults);
 
-              //adding only info from registeredStaff and people table
+          //     //adding only info from registeredStaff and people table
+          //     array_push($finalList, $registeredStaffResults);
+          //   }
+          //   else 
+          //   {
+              //adding ONLY info from registered_staff table
               array_push($finalList, $registeredStaffResults);
-            }
-            else 
-            {
-              //adding ONLY info from registeredStaff table
-              array_push($finalList, $registeredStaffResults);
-            }
+            // }
         }
       }
 
@@ -228,14 +193,14 @@
     }//eom
 
   /*
-    Stores the credentials of user in the registeredstaff table
+    Stores the credentials of user in the registered_staff table
     returns 
-        peopleID
+        staffID
         0   database not responding
         -2  Unable to store staff credentials
-        -3  Unable to retrieve peopleID
+        -3  Unable to retrieve staffID
     */
-  function storeStaffCredentials( $username, $password, $email )
+  function storeStaffCredentials( $staffInfo )
   {
       $dbConnection = connectToDB();
       if(!$dbConnection)
@@ -244,33 +209,36 @@
         return 0;
       }
 
-      $peopleID       = "";
-      $username       = mysqli_real_escape_string($dbConnection, $username);
-      $email          = mysqli_real_escape_string($dbConnection, $email);
+      $fname            = $staffInfo["firstName"];
+      $middleN          = $staffInfo["middleName"];
+      $lname            = $staffInfo["lastName"];
+      $nickname         = $staffInfo["nickName"];
+      $emailProvided    = $staffInfo["email"];
+      $usernameProvided = $staffInfo["username"];
+      $pasword          = $staffInfo["password"];
+      $dob              = $staffInfo["dob"];
+      $carrier          = $staffInfo["carrier"];
+      $phone            = $staffInfo["phone"];
+      $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
+      $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
       $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
       $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
 
-      $query = "INSERT INTO registeredstaff ( username, password, email, hash )
-            VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' )";
-
+      $query = "INSERT INTO registered_staff ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, address, phone)
+            VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$address."', '".$phone."')";
+  
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {
-        $query2 = "SELECT peopleID
-            FROM registeredstaff
-            WHERE username='".$username."'";
-        $result2 = mysqli_query($dbConnection, $query2); 
-        $totRows = mysqli_num_rows($result2);      
-        if($totRows > 0)
+        $staffID  = $dbConnection->insert_id;
+        if( isset($staffID) )
         {
-          $row = mysqli_fetch_assoc($result2);
-          $peopleID = $row["peopleID"];
-          sendEmail( $username, $email, "registeredstaff", $hashCodeEmail );
-          return $peopleID; 
+          echo "<p>staff saved with id $staffID</p>";
+          return $staffID; 
         }
         else
         {
-          echo "Unable to retrieve peopleID";
+          echo "Unable to retrieve staff ID";
           return -3;
         }
       }
@@ -288,10 +256,10 @@
     0   unable to connect to DB
     -4  Unable to store the code to the Database
 */
-function authenticateStaffPhoneNumber( $peopleID, $to )
+function authenticateStaffPhoneNumber( $staffID, $to )
 {
     $code = mt_rand(1000, 9999);
-    $subject = "Your code you is:\r\n";
+    $subject = "GoLocalApp code authentication, Your code you is:\r\n";
     $smsCarriers = [
       "@mms.aiowireless.net",
       "@text.att.net",
@@ -312,9 +280,9 @@ function authenticateStaffPhoneNumber( $peopleID, $to )
       return 0;
     }
 
-    $query = "UPDATE people
+    $query = "UPDATE registered_staff
           SET phone='".$to."', phonecode='".$code."'
-          WHERE peopleID=".$peopleID."";
+          WHERE staffID=".$staffID."";
 
     $result = mysqli_query( $dbConnection, $query );
     echo "<p> result: $result</p>";

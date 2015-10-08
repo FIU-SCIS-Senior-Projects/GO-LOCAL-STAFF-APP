@@ -18,7 +18,7 @@
           }
 
           //making sure user is a unique registration
-          $query = "SELECT * from registeredcompany WHERE username='".$username."' or email='".$email."'";
+          $query = "SELECT * from registered_employer WHERE username='".$username."' or email='".$email."'";
 
           // echo "<p>".$query."</p>";
 
@@ -49,7 +49,7 @@
           $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
 
           //prepare query
-          $query = "INSERT INTO registeredcompany (username, password, email)
+          $query = "INSERT INTO registered_employer (username, password, email)
                     VALUES ( '$username', '$passwordHashed', '$email' )";  
 
           //perform query
@@ -85,7 +85,7 @@
       }
 
       //gettting all staff
-      $query = "SELECT * FROM registeredcompany";
+      $query = "SELECT * FROM registered_employer";
       $result = mysqli_query($dbConnection, $query);
 
       $totalRows = mysqli_num_rows($result);
@@ -99,4 +99,63 @@
 
       return $finalList;
     }//eom
+
+
+     /*
+    Stores the credentials of user in the registered_staff table
+    returns 
+        staffID
+        0   database not responding
+        -2  Unable to store staff credentials
+        -3  Unable to retrieve staffID
+    */
+  function storeEmployerCredentials( $employerInfo )
+  {
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+        echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
+
+
+      // $fname            = $staffInfo["firstName"];
+      // $middleN          = $staffInfo["middleName"];
+      // $lname            = $staffInfo["lastName"];
+      // $nickname         = $staffInfo["nickName"];
+      // $emailProvided    = $staffInfo["email"];
+      // $usernameProvided = $staffInfo["username"];
+      // $pasword          = $staffInfo["password"];
+      // $dob              = $staffInfo["dob"];
+      // $carrier          = $staffInfo["carrier"];
+      // $phone            = $staffInfo["phone"];
+
+      // $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
+      // $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
+      // $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
+      // $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
+
+      // $query = "INSERT INTO registered_staff ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, address, phone)
+      //       VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$address."', '".$phone."')";
+  
+      // $result = mysqli_query($dbConnection, $query);
+      // if($result)
+      // {
+      //   $staffID  = $dbConnection->insert_id;
+      //   if( isset($staffID) )
+      //   {
+      //     echo "<p>staff saved with id $staffID</p>";
+      //     return $staffID; 
+      //   }
+      //   else
+      //   {
+      //     echo "Unable to retrieve staff ID";
+      //     return -3;
+      //   }
+      // }
+
+      // echo "Unable to store staff credentials";  
+      // return -2;
+      
+  }//eom
 ?>

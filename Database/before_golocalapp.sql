@@ -17,11 +17,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employer_job`
+-- Table structure for table `company`
 --
 
-CREATE TABLE `employer_job` (
-  `employerID` int(11) NOT NULL,
+CREATE TABLE `company` (
+  `companyID` int(11) NOT NULL,
+  `companyName` varchar(30) NOT NULL,
+  `typeOfCompany` varchar(30) NOT NULL,
+  `phoneNumber` varchar(15) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `insurance` int(11) NOT NULL,
+  `insuranceDocuments` varchar(255) NOT NULL,
+  `termsAndAgreements` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `company_job`
+--
+
+CREATE TABLE `company_job` (
+  `companyID` int(11) NOT NULL,
   `jobID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -50,48 +67,18 @@ CREATE TABLE `jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `registered_employer`
+-- Table structure for table `people`
 --
 
-CREATE TABLE `registered_employer` (
-  `employerID` int(11) NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `hashEmail` varchar(255) DEFAULT NULL,
-  `emailValidated` int(11) DEFAULT '0',
-  `employerName` varchar(30) NOT NULL,
-  `typeOfEmployer` varchar(30) NOT NULL,
-  `firstName` varchar(30) NOT NULL,
-  `middleInitial` varchar(30) NOT NULL,
-  `lastName` varchar(30) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  `phoneCode` int(11) DEFAULT NULL,
-  `phoneValidated` int(11) DEFAULT NULL,
-  `insurance` int(11) NOT NULL,
-  `insuranceDocuments` varchar(255) NOT NULL,
-  `termsAndAgreements` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `registered_staff`
---
-
-CREATE TABLE `registered_staff` (
-  `username` varchar(30) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `hashEmail` varchar(255) DEFAULT NULL,
-  `emailValidated` int(11) DEFAULT '0',
-  `staffID` int(11) NOT NULL,
+CREATE TABLE `people` (
+  `peopleID` int(11) NOT NULL,
+  `companyID` int(11) DEFAULT NULL,
   `staffType` int(11) NOT NULL,
   `firstName` varchar(30) NOT NULL,
   `middleInitial` varchar(30) NOT NULL,
   `lastName` varchar(30) NOT NULL,
   `nickname` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL,
   `address` varchar(255) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `phoneCode` int(11) DEFAULT NULL,
@@ -127,8 +114,37 @@ CREATE TABLE `registered_staff` (
   `insuranceDocuments` varchar(30) NOT NULL,
   `bankRouting` varchar(30) NOT NULL,
   `accountNumber` varchar(30) NOT NULL,
-  `resume` varchar(30) NOT NULL,
-  `TermsAndAgreements` varchar(255) NOT NULL
+  `resume` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `registeredcompany`
+--
+
+CREATE TABLE `registeredcompany` (
+  `companyID` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `hash` varchar(255) DEFAULT NULL,
+  `emailValidated` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `registeredstaff`
+--
+
+CREATE TABLE `registeredstaff` (
+  `peopleID` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `hash` varchar(255) DEFAULT NULL,
+  `emailValidated` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -137,18 +153,20 @@ CREATE TABLE `registered_staff` (
 -- Table structure for table `stafftype`
 --
 
-CREATE TABLE `staff_type` (
+CREATE TABLE `stafftype` (
   `staffID` int(11) NOT NULL,
   `jobTitle` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+--
+-- Indexes for dumped tables
+--
 
 --
--- Indexes for table `employer_job`
+-- Indexes for table `company`
 --
-ALTER TABLE `employer_job`
-  ADD PRIMARY KEY (`employerID`);
+ALTER TABLE `company`
+  ADD PRIMARY KEY (`companyID`);
 
 --
 -- Indexes for table `jobs`
@@ -157,21 +175,27 @@ ALTER TABLE `jobs`
   ADD PRIMARY KEY (`jobID`);
 
 --
--- Indexes for table `registered_employer`
+-- Indexes for table `people`
 --
-ALTER TABLE `registered_employer`
-  ADD PRIMARY KEY (`employerID`);
+ALTER TABLE `people`
+  ADD PRIMARY KEY (`peopleID`);
 
 --
--- Indexes for table `registered_staff`
+-- Indexes for table `registeredcompany`
 --
-ALTER TABLE `registered_staff`
-  ADD PRIMARY KEY (`staffID`);
+ALTER TABLE `registeredcompany`
+  ADD PRIMARY KEY (`companyID`);
 
 --
--- Indexes for table `staff_type`
+-- Indexes for table `registeredstaff`
 --
-ALTER TABLE `staff_type`
+ALTER TABLE `registeredstaff`
+  ADD PRIMARY KEY (`peopleID`);
+
+--
+-- Indexes for table `stafftype`
+--
+ALTER TABLE `stafftype`
   ADD PRIMARY KEY (`staffID`);
 
 --
@@ -179,12 +203,12 @@ ALTER TABLE `staff_type`
 --
 
 --
--- AUTO_INCREMENT for table `registered_employer`
+-- AUTO_INCREMENT for table `registeredcompany`
 --
-ALTER TABLE `registered_employer`
-  MODIFY `employerID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `registeredcompany`
+  MODIFY `companyID` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `registered_staff`
+-- AUTO_INCREMENT for table `registeredstaff`
 --
-ALTER TABLE `registered_staff`
-  MODIFY `staffID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `registeredstaff`
+  MODIFY `peopleID` int(11) NOT NULL AUTO_INCREMENT;

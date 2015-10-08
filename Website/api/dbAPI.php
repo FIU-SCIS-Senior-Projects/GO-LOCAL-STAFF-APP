@@ -37,7 +37,7 @@
           }
          
             //staff account lookup
-              $query = "SELECT * FROM registeredstaff WHERE username='".$username."' or email='".$email."'";
+              $query = "SELECT * FROM registered_staff WHERE username='".$username."' or email='".$email."'";
               
               $result     = mysqli_query($dbConnection, $query);
               $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
@@ -66,7 +66,7 @@
               $dbHashedPassword = null;
 
               //employer account look up
-              $query = "SELECT * FROM registeredcompany WHERE username='".$username."' or email='".$email."'";
+              $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
               
               $result = mysqli_query($dbConnection, $query);
               $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
@@ -103,7 +103,6 @@
     */
     function deleteRegisteredUser($id, $type)
     {
-      $errorOccured = 1;
         //connecting to db
         $dbConnection = connectToDB();
         if(!$dbConnection)
@@ -111,45 +110,125 @@
           echo "Unable to connect to MySQL.".PHP_EOL;
           return 0;
         }
-
+            
+         // sql to delete a record
         if($type == "staff")
         {
-          $sql = "DELETE FROM people WHERE peopleID=$id";
+          $sql2 = "DELETE FROM registered_staff WHERE staffID=$id";
         }
         else if($type == "employer")
         {
-          $sql = "DELETE FROM people WHERE companyID=$id";
+          $sql2 = "DELETE FROM registered_employer WHERE employerID=$id";
         }
-        
-        if ($dbConnection->query($sql) === TRUE) {
-            echo "<p>Record deleted successfully from peopleID </p>";
-            
-             // sql to delete a record
-            if($type == "staff")
-            {
-              $sql2 = "DELETE FROM registeredstaff WHERE peopleID=$id";
-            }
-            else if($type == "employer")
-            {
-              $sql2 = "DELETE FROM registeredcompany WHERE companyID=$id";
-            }
 
-            if ($dbConnection->query($sql2) === TRUE) 
-            {
-              echo "<p>Record deleted successfully from peopleID </p>";
-            }
-            else {
-              echo "<p>Error deleting record: ".$dbConnection->error." </p>";
-              $errorOccured = -2;
-            }
-        } 
-        else 
+        // echo "<p>id = $id| type = $type| query: $sql2</p>";
+
+        $results = $dbConnection->query($sql2);
+        if ($results) 
         {
-            echo "<p>Error deleting record: ".$dbConnection->error." </p>";
-            $errorOccured = -1;
+          echo "<p>Record deleted successfully from staffID </p>";
+          return 1;
         }
+        else {
+          echo "<p>Error deleting record: ".$dbConnection->error." </p>";
+          $return -1;
+        }
+    }//eom
 
-    }
+  /* checks the user provided is unique - doesnt exist in database
+      returns
+             1  username is unique
+             0  database not responding
+            -1  username is not unique  
+            -10  not a valid registration type   
+    */
+    function isUserRegistrationUnique( $registrationType, $usernameProvided, $emailProvided )
+    {
+          $dbConnection = connectToDB();
+          if(!$dbConnection)
+          {
+            echo "Unable to connect to MySQL.".PHP_EOL;
+            return 0;
+          }
+
+          $username  = mysqli_real_escape_string($dbConnection, $usernameProvided);
+          $email     = mysqli_real_escape_string($dbConnection, $emailProvided);
+
+        //making sure user is a unique registration
+         if( $registrationType == "Staff")
+         {
+          $query = "SELECT * FROM registered_staff WHERE username='".$username."' or email='".$email."'";
+         }
+         else if( $registrationType == "Employer" )
+         {
+          $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
+         } 
+         else
+         {
+            return -10;
+         }
+
+          $result = mysqli_query($dbConnection, $query);
+          $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+          $rowResult = array_filter($row);
+          if (empty($rowResult))
+          {
+            print_r($row);
+            echo "<p>username and email is unique</p>";
+            return 1;
+          }
+          else
+          {
+            print_r($row);
+            echo "<p>username and email is NOT unique</p>";
+            return -1;
+          }
+    }//eom
+
+
+/*
+   Stores the credentials of user in the registered_staff table
+    returns 
+        userID
+        0   database not responding
+        -2  Unable to store user credentials
+        -3  Unable to retrieve userID
+*/
+function authenticateUserPhoneNumber( $registrationType, $userID, $phone)
+{
+  if( $registrationType == "Staff")
+  {
+    $staffResults = authenticateStaffPhoneNumber($userID, $phone);
+    return $staffResults;
+  }
+  else if( $registrationType == "Employer" )
+  {
+
+  }
+}//eom
+
+
+/*
+   Stores the credentials of user in the registered_staff table
+    returns 
+        userID
+        0   database not responding
+        -2  Unable to store user credentials
+        -3  Unable to retrieve userID
+*/
+function storeUserCredentials( $registrationType, $userInfo)
+{
+  if( $registrationType == "Staff")
+  {
+    $staffResults = storeStaffCredentials($userInfo);
+    return $staffResults;
+  }
+  else if( $registrationType == "Employer" )
+  {
+    $employerResults = storeEmployerCredentials($userInfo);
+    return $employerResults;
+  }
+}//eom
 
 
 /* 

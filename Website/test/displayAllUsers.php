@@ -24,7 +24,7 @@
             <th>Email</th> 
           </tr>
           <?php
-   		require '../webAPI.php';          
+   		require '../API.php';          
           $registerStaff = getAllStaff();
           $totalStaff = count($registerStaff);
           
@@ -32,7 +32,8 @@
             for( $iter = 0; $iter < $totalStaff; $iter++ )
             {
               $currentRow = $registerStaff[$iter];
-              $peopleID = $currentRow['peopleID'];
+              // print_r($currentRow);
+              $peopleID = $currentRow['staffID'];
           ?>
               <tr>
                 <td> 
@@ -78,14 +79,6 @@
                         <td> <?php echo $currentRow['password']; ?> </td>  
                       </tr>
                        <tr>
-                       <td><b>companyID</b></td> 
-                        <td> <?php echo $currentRow['companyID']; ?> </td> 
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                         <td><b>email</b></td> 
                         <td> <?php echo $currentRow['email']; ?> </td> 
                         <td></td>
@@ -95,7 +88,14 @@
                         <td></td>
                         <td></td>
                         <td><b>emailValidated</b></td> 
-                        <td> <?php echo $currentRow['emailValidated']; ?> </td>  
+                        <td> <?php echo $currentRow['emailValidated']; ?> </td>                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>hashEmail</b></td> 
+                        <td> <?php echo $currentRow['hashEmail']; ?> </td>    
                       </tr>
                       <tr>                        
                         <td><b>firstName</b></td> 
@@ -441,7 +441,7 @@
                     if($currentType != "employer" || $currentType != "staff" )
                     {
                       $deleteResult = deleteRegisteredUser($currentID, $currentType);
-
+                      // echo "<p>delete result: $deleteResult</p>";
                       if($deleteResult > 0)
                       {
                         echo "<p>Registered $currentType with ID#$currentID successfully delete</p>";
@@ -459,8 +459,8 @@
             </div>
 
             <?php
-                //refreshing page
-                // print '<meta http-equiv="refresh" content="0">';
+                //refreshing page after a few seconds
+                print '<meta http-equiv="refresh" content="3">';
           }
     ?>
   </div>
