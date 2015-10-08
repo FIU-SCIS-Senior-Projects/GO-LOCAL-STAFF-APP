@@ -233,60 +233,6 @@ function sendEmail( $username, $email, $userType, $hash )
     mail( $to, $subject, $message, $headers );
 }
 
-/*
-  authenticates Phone Number
-
-  returns 
-    1   phone number code successfully sent
-    0   unable to connect to DB
-    -4  Unable to store the code to the Database
-*/
-function authenticatePhoneNumber( $peopleID, $to )
-{
-    $code = mt_rand(1000, 9999);
-    $subject = "Your code you is:\r\n";
-    $smsCarriers = [
-      "@mms.aiowireless.net",
-      "@text.att.net",
-      "@myboostmobile.com",
-      "@mms.cricketwireless.net",
-      "@mymetropcs.com",
-      "@pm.sprint.com",
-      "@vtext.com",
-      "@tmomail.net",
-      "@email.uscc.net",
-      "@vtext.com",
-    ];
-
-    $dbConnection = connectToDB();
-    if(!$dbConnection)
-    {
-      echo "Unable to connect to MySQL.".PHP_EOL;
-      return 0;
-    }
-
-    $query = "UPDATE people
-          SET phone='".$to."', phonecode='".$code."'
-          WHERE peopleID=".$peopleID."";
-
-    $result = mysqli_query( $dbConnection, $query );
-    echo "<p> result: $result</p>";
-    if(!$result)
-    {
-      echo "Unable to store the code to the Database";
-      return -4;
-    }  
-
-    for($iter = 0; $iter < count($smsCarriers); $iter++)
-    {
-      $currentCarrier = $smsCarriers[$iter];
-      $currentAddress = $to.$currentCarrier;
-      echo "<p>currentCarrier: $currentCarrier | current address: $currentAddress</p>";
-      mail( $currentAddress, $subject, $code );      
-    }//eofl
-
-    return 1;
-}//eom
 
 
 

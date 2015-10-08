@@ -182,11 +182,11 @@
     NSLog(@" responce: %@", responce);
     NSDictionary * peopleIDResults = [responce objectForKey:@"results"];
     
-    NSLog(@" results is %@", peopleIDResults);
-    
-    peopleID = [peopleIDResults objectForKey:@"peopleID"];
-    NSLog(@" people ID is %@", peopleID);
-    
+//    NSLog(@" results is %@", peopleIDResults);
+//    
+//    peopleID = [peopleIDResults objectForKey:@"peopleID"];
+//    NSLog(@" people ID is %@", peopleID);
+//    
     
     if(peopleID)
     {
