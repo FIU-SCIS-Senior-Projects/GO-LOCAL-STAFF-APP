@@ -3,7 +3,7 @@
 //Verifies email addressed from the link previously sent
 function authenticateEmail( $type, $email, $hash )
 {
-	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "Unable to connect to MySQL: ".mysqli_connect_error();
@@ -53,7 +53,7 @@ function retrievePeopleID( $username )
 {
 	$peopleID;
 
-	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
 
 	$type = mysqli_real_escape_string( $db, $_GET["type"] );
     // $username = mysqli_real_escape_string( $db, $_GET["username"] );	
@@ -85,7 +85,7 @@ function retrievePeopleID( $username )
 
 function queryDB( $query )
 {
-	$db = mysqli_connect( "locahot", "root", "root", "golocalapp" );
+	$db = mysqli_connect( "locahot", "root", "fall2015", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
@@ -100,7 +100,7 @@ function queryDB( $query )
 
 function storePersonalInfo( $peopleID, $fname, $middleInitial, $lname, $nickname, $address, $phone)
 {
-	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
@@ -134,7 +134,7 @@ function authenticatePhoneNumber( $peopleID, $to, $smsGateway )
 {
 	$code = mt_rand(1000, 9999);
 
-	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
@@ -155,54 +155,6 @@ function authenticatePhoneNumber( $peopleID, $to, $smsGateway )
 	mail( $to.$smsGateway, $subject, $code );
 }
 
-function verifySmsCode( $peopleID, $code )
-{
-	$success = true;
-
-	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
-
-	if( mysqli_connect_errno() )
-		echo "unable to connect to MySQL: ".mysqli_connect_error();
-	else
-	{
-		$query = "SELECT phonecode
-				  FROM people
-				  WHERE peopleID='".$peopleID."'
-				  AND phoneCode='".$code."'";
-
-		if( !$result = mysqli_query($db, $query) )
-			$success = false;
-		else
-		{
-			if( mysqli_num_rows($result) <= 0 )
-			{
-				$success = false;
-				echo "There was a problem retrieving the code";
-			}
-			else
-			{
-				//Code has been verified
-				$query = "UPDATE people
-						  SET phoneValidated='1'
-						  WHERE peopleID='".$peopleID."'
-						  AND phonecode='".$code."'";
-
-				if( !$result = mysqli_query($db, $query) )
-				{
-					$success = false;
-					echo "Unable to update the phone validation field";
-				}
-				else
-				{
-					echo "Phone number has been validated!";
-				}
-			}
-		}
-	}
-
-	return $success;
-}
-
 function getGateway( $carrier )
 {
 	$gateway = "";
@@ -221,16 +173,21 @@ function getGateway( $carrier )
 	];
 
 	if( array_key_exists($carrier, $smsGateways) )
+	{
 		$gateway = $smsGateways["$carrier"];
+	}
 	
 	return $gateway;
 
 }
 
+/*
+	
+*/
 function peopleUserExists( $username, $email )
 {
 
-	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "Unable to connect to MySQL: ".mysqli_connect_error();
@@ -256,54 +213,57 @@ function peopleUserExists( $username, $email )
 	}
 }
 
-/*	Stores the credentials of user in the registeredstaff table
-	and returns the peopleID 					*/
-function storeStaffCredentials( $username, $password, $email )
-{
-	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
+// /*
+// 	Stores the credentials of user in the registeredstaff table
+// 	returns 
+// 		 peopleID 					
+// 	*/
+// function storeStaffCredentials( $username, $password, $email )
+// {
+// 	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
 
-	$peopleID = "";
-	$username = mysqli_real_escape_string($db, $username);
-	$email = mysqli_real_escape_string($db, $email);
-	$hashCodeEmail = mysqli_real_escape_string($db, md5( rand(0, 1000) ));
-	$passwordHashed = password_hash($password, PASSWORD_BCRYPT);
+// 	$peopleID = "";
+// 	$username = mysqli_real_escape_string($db, $username);
+// 	$email = mysqli_real_escape_string($db, $email);
+// 	$hashCodeEmail = mysqli_real_escape_string($db, md5( rand(0, 1000) ));
+// 	$passwordHashed = password_hash($password, PASSWORD_BCRYPT);
 
-	if( mysqli_connect_errno() )
-		echo "Unable to connect to MySQL: ".mysqli_connect_error();
-	else
-	{
-		$query = "INSERT INTO registeredstaff ( username, password, email, hash )
-				  VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' )";
+// 	if( mysqli_connect_errno() )
+// 		echo "Unable to connect to MySQL: ".mysqli_connect_error();
+// 	else
+// 	{
+// 		$query = "INSERT INTO registeredstaff ( username, password, email, hash )
+// 				  VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' )";
 
-		if( !$result = mysqli_query($db, $query) )
-			echo "Unable to store staff credentials";
+// 		if( !$result = mysqli_query($db, $query) )
+// 			echo "Unable to store staff credentials";
 
-		$query = "SELECT peopleID
-				  FROM registeredstaff
-				  WHERE username='".$username."'";
+// 		$query = "SELECT peopleID
+// 				  FROM registeredstaff
+// 				  WHERE username='".$username."'";
 
-		if( !$result = mysqli_query($db, $query) )
-			echo "Unable to retrieve peopleID";
-		else
-		{
-			if( mysqli_num_rows($result) > 0 )
-			{
-				$row = mysqli_fetch_assoc($result);
-				$peopleID = $row["peopleID"];
+// 		if( !$result = mysqli_query($db, $query) )
+// 			echo "Unable to retrieve peopleID";
+// 		else
+// 		{
+// 			if( mysqli_num_rows($result) > 0 )
+// 			{
+// 				$row = mysqli_fetch_assoc($result);
+// 				$peopleID = $row["peopleID"];
 
-				sendEmail( $username, $email, "registeredstaff", $hashCodeEmail );
-			}
-			else
-				echo "Username doens't exists";
-		}
-	}
+// 				sendEmail( $username, $email, "registeredstaff", $hashCodeEmail );
+// 			}
+// 			else
+// 				echo "Username doens't exists";
+// 		}
+// 	}
 
-	return $peopleID;
-}
+// 	return $peopleID;
+// }
 
 function storePersonalDOB( $peopleID, $dob )
 {
-	$db = mysqli_connect( "localhost", "root", "root", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
 
 	$dob = mysqli_real_escape_string($db, $dob);
 

@@ -45,8 +45,7 @@
       }
       else  //valid json values found
       {
-          /* communicate to database */
-          require 'webAPI.php';
+          require 'API.php';/* adding API */
           
           $username = $decoded['username'];
           $email    = $decoded['email'];
@@ -120,10 +119,10 @@
 
         /* saving incoming file */
         // Write the contents back to the file
-        $filename = 'test/incominLoginDataResponse.json';
+        $filename = 'test/LoginDataResponse.json';
         file_put_contents($filename, var_export($encoded, true));
 
-        $filename = 'test/incominLoginData.json';
+        $filename = 'test/LoginDataIncoming.json';
         file_put_contents($filename, var_export($decoded, true));
 
 

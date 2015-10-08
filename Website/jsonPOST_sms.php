@@ -1,5 +1,4 @@
 <?php
-require "functions.php";
 
 //making sure its  valid POST request
 if( $_SERVER["REQUEST_METHOD"] == "POST" )
@@ -46,67 +45,179 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
     }
     else  //valid json values found
     {
-        /* communicate to database */
-        require 'webAPI.php';
+       require 'API.php';/* adding API */
 
         $peopleID;
         $responseArray;
 
+        $registrationType = $decoded['registrationType'];
+        $fname            = $decoded["firstName"];
+        $middleN          = $decoded["middleName"];
+        $lname            = $decoded["lastName"];
+        $nickname         = $decoded["nickName"];
+        $email            = $decoded["email"];
+        $username         = $decoded["username"];
+        $pasword          = $decoded["password"];
+        $dob              = $decoded["dob"];
+        $carrier          = $decoded["carrier"];
+        $phone            = $decoded["phone"];
 
-        $fname = $decoded["firstName"];
-        $middleN = $decoded["middleName"];
-        $lname = $decoded["lastName"];
-        $nickname = $decoded["nickName"];
-        $email = $decoded["email"];
-        $username = $decoded["username"];
-        $pasword = $decoded["password"];
-        $dob = $decoded["dob"];
-        $carrier = $decoded["carrier"];
-        $phone = $decoded["phone"];
-
-        if( peopleUserExists( $username, $email ) )
+        if( $registrationType == "staff")
         {
-          //There is already a regisetred user with at least one of both credentials
-          $responseArray = [
-            "message" => "Username or Email already exist",
-            "responseType" => "3",
-            ];
-        }
-        else
-        {
-          //User doens't exist. Let's add him/her to the DB
-          $peopleID = storeStaffCredentials( $username, $password, $email );
-
-          if( $peopleID == "" )
-            echo "There was problem storing the staff information";
-          else
-          {
-            storePersonalInfo( $peopleID, $fname, $middleN, $lname, $nickname, "", "" );
-            storePersonalDOB( $peopleID, $dob );
-            
-            $responseArray = [
-              "peopleID" => $peopleID,
+            //verify user is unique
+            $uniqueResult = isUniqueRegisteredStaff($username,$email);
+            if($uniqueResult == 1)
+            {
+                //User doens't exist. Let's add him/her to the DB
+                $peopleID = storeStaffCredentials( $username, $password, $email );
+                echo "<p> peopleID: $peopleID</p>";
+                if($peopleID > 0)
+                {
+                   $phoneResult = authenticateStaffPhoneNumber( $peopleID, $phone );
+                   if($phoneResult > 0)
+                   {
+                      $responseArray = [
+                        "message" => "phone number code successfully sent",
+                        "responseType" => $phoneResult,
+                      ];
+                   }
+                   else if($phoneResult == 0)
+                   {
+                      $responseArray = [
+                        "message" => "database not responding",
+                        "responseType" => $phoneResult,
+                      ];
+                   }
+                   else if($phoneResult == -4)
+                   {
+                      $responseArray = [
+                        "message" => "Unable to store the code to the Database",
+                        "responseType" => $phoneResult,
+                      ];
+                   }
+                }
+                else if($peopleID == 0)
+                {
+                  $responseArray = [
+                    "message" => "database not responding",
+                    "responseType" => $peopleID,
+                  ];
+                }
+                else if($peopleID == -2)
+                {
+                  $responseArray = [
+                    "message" => "Unable to store staff credentials",
+                    "responseType" => $peopleID,
+                  ];
+                }
+                else if($peopleID == -3)
+                {
+                  $responseArray = [
+                    "message" => "Unable to retrieve peopleID",
+                    "responseType" => $peopleID,
+                  ];
+                }
+            }
+            else if($uniqueResult == 0)
+            {
+              $responseArray = [
+                "message" => "database not responding",
+                "responseType" => "0",
               ];
-          }
+            }
+            else if($uniqueResult == -1)
+            {
+              $responseArray = [
+                "message" => "Username or Email already exist",
+                "responseType" => "-1",
+              ];
+            }
         }
-
-        $smsGateway = getGateway( $carrier );
-
-        if( !empty($smsGateway) )
+        else if( $registrationType == "employer")
         {
-          authenticatePhoneNumber( $peopleID, $phone, $smsGateway );
+            //verify user is unique
+            $uniqueResult = isUniqueRegisteredEmployer($username,$email);
+            if($uniqueResult == 1)
+            {
+              //User doens't exist. Let's add him/her to the DB
+              $peopleID = storeStaffCredentials($username,$password,$email);
+              echo "<p> peopleID: $peopleID</p>";
+              if($peopleID > 0)
+              {
+                $phoneResult = authenticateStaffPhoneNumber( $peopleID, $phone );
+                if($phoneResult > 0)
+               {
+                  $responseArray = [
+                    "message" => "phone number code successfully sent",
+                    "responseType" => $phoneResult,
+                  ];
+               }
+               else if($phoneResult == 0)
+               {
+                  $responseArray = [
+                    "message" => "database not responding",
+                    "responseType" => $phoneResult,
+                  ];
+               }
+               else if($phoneResult == -4)
+               {
+                  $responseArray = [
+                    "message" => "Unable to store the code to the Database",
+                    "responseType" => $phoneResult,
+                  ];
+               }
+              }
+              else if($peopleID == 0)
+              {
+                $responseArray = [
+                  "message" => "database not responding",
+                  "responseType" => $peopleID,
+                ];
+              }
+              else if($peopleID == -2)
+              {
+                $responseArray = [
+                  "message" => "Unable to store staff credentials",
+                  "responseType" => $peopleID,
+                ];
+              }
+              else if($peopleID == -3)
+              {
+                $responseArray = [
+                  "message" => "Unable to retrieve peopleID",
+                  "responseType" => $peopleID,
+                ];
+              }
+            }
+            else if($uniqueResult == 0)
+            {
+              $responseArray = [
+                "message" => "database not responding",
+                "responseType" => "0",
+              ];
+            }
+            else if($uniqueResult == -1)
+            {
+              $responseArray = [
+                "message" => "Username or Email already exist",
+                "responseType" => "-1",
+              ];
+            }        
         }
-        else
-          echo "There was problem retrieving the carrier";
 
+
+        //     storePersonalInfo( $peopleID, $fname, $middleN, $lname, $nickname, "", "" );
+        //     storePersonalDOB( $peopleID, $dob );
+     
+      
         /* 
           reponse returns the following:
-              3   user already exist
-              2   valid employer user
-              1   valid staff user
+              1   phone number code successfully sent
               0   database not responding
-              -2  valid user with INCORRECT Credentials
-              -3  no registered user found
+              -1  Username or Email already exist
+              -2  no registered user found
+              -3  Unable to retrieve peopleID
+              -4  Unable to store the code to the Database
         */
         $response['results'] = $responseArray; //sending reply
 
@@ -129,7 +240,7 @@ $encoded = json_encode($response);
       $filename = 'test/SMSDataResponse.json';
       file_put_contents($filename, var_export($encoded, true));
 
-      $filename = 'test/incominSMSData.json';
+      $filename = 'test/SMSDataincoming.json';
       file_put_contents($filename, var_export($decoded, true));
 
 

@@ -44,22 +44,25 @@
         );
       }
       else  //valid json values found
-      {
-          /* communicate to database */
-         require 'webAPI.php';
-         $registrationType = $jsonData['registration_type'];
+      { 
+         require 'API.php';/* adding API */
+
+         $registrationType = $decoded['registration_type'];
+
          if( $registrationType == 'staff') //staff registration
          {
+            echo "<p> registering $registrationType </p>";
 
-            // echo "<p> registering $registrationType </p>";
-            // //check if unique user
-            // $uniqueResults = isUniqueRegisteredStaff("luoandre29", "luoandre29@hotmail.com");
-            //  echo "<p>response '$uniqueResults' </p>";
-            // if($uniqueResults ==  1)//unique user
-            // {
-            //     echo "<p>unique user! lets start registration process </p>";
-            //     $registrationResults = registerStaff($jsonData);
-            //     echo "<p>registration results $registrationResults</p>";
+            //check if unique user
+            $username = $decoded['username'];
+            $email    = $decoded['email'];
+            $uniqueResults = isUniqueRegisteredStaff($username, $email);
+             echo "<p>response '$uniqueResults' </p>";
+            if($uniqueResults ==  1)//unique user
+            {
+                echo "<p>unique user! lets start registration process </p>";
+                $registrationResults = registerStaff($decoded);
+                echo "<p>registration results $registrationResults</p>";
 
 
                 
@@ -69,27 +72,40 @@
                     "message" => "user successfully registered",
                     "usertype"    => "1",
                 );
-            // }
-            // else if($uniqueResults == -1)//user already registered
-            // {
-            //   echo "<p>user already registered</p>";
-            //   $responseArray = array(
-            //     "message" => "username and email is NOT unique",
-            //     "usertype"    => "-1",
-            //   );
-            // }
-            // else if($uniqueResults == 0)//database not responding
-            // {
-            //   $responseArray = array(
-            //     "message" => "database not responding",
-            //     "usertype"    => "0",
-            //   );
-            // }//eo-conditions
+            }
+            else if($uniqueResults == -1)//user already registered
+            {
+              $responseArray = array(
+                "message" => "username and email is NOT unique",
+                "usertype"    => "-1",
+              );
+            }
+            else if($uniqueResults == 0)//database not responding
+            {
+              $responseArray = array(
+                "message" => "database not responding",
+                "usertype"    => "0",
+              );
+            }//eo-conditions
          }//eo staff registration
          else if( $registrationType == 'employer' )//employer registration
          {
             echo "<p>  registering '$registrationType' </p>";
+            
+             //updating responce
+            $responseArray = array(
+            "message" => "user successfully registered",
+            "usertype"    => "1",
+            );
          }//eo employer registration
+         else
+         {
+            //updating responce
+            $responseArray = array(
+                "message" => "Not a Valid Registration Type",
+                "usertype"    => "-10",
+            );
+         }
 
         //reponding back to sender
         $response['results'] = $responseArray;
@@ -115,7 +131,7 @@
         $filename = 'test/RegistrationDataResponse.json';
         file_put_contents($filename, var_export($encoded, true));
 
-        $filename = 'test/incominRegistrationData.json';
+        $filename = 'test/RegistrationDataIncoming.json';
         file_put_contents($filename, var_export($decoded, true));
 
 

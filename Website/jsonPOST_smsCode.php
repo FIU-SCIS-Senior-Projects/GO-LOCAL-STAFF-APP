@@ -1,5 +1,4 @@
 <?php
-require "functions.php";
 
 //making sure its  valid POST request
 if( $_SERVER["REQUEST_METHOD"] == "POST" )
@@ -46,41 +45,62 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
     }
     else  //valid json values found
     {
-        /* communicate to database */
-        require 'webAPI.php';
+        require 'API.php';/* adding API */
 
         $responseArray;
 
         $peopleID = $decoded["peopleID"];
         $codeFromUser = $decoded["code"];
 
-        if( verifySmsCode($peopleID, $codeFromUser) )
+        $results = verifySmsCode($peopleID, $codeFromUser);
+        echo "<p>results: $results</p>";
+        if( $results == 1) //phone has been verified
         {
-          //phone has been verified
           $responseArray = [
-            "message" => "Phone number has been verified",
-            "responseType" => "4",
+            "message" => "verification code verified & db updated",
+            "responseType" => $results,
             ];
         }
-        else
+        else if( $results == 0)
         {
           //unable to verify the phone.
           $responseArray = [
-            "message" => "Invalid code",
-            "responseType" => "-4",
+            "message" => "unable to connect to DB",
+            "responseType" => $results,
+            ];
+        }
+        else if($results == -1)
+        {
+          //unable to verify the phone.
+          $responseArray = [
+            "message" => "no such user with info provided",
+            "responseType" => $results,
+            ];
+        }
+         else if($results == -2)
+        {
+          //unable to verify the phone.
+          $responseArray = [
+            "message" => "user exist with info provided BUT error occurred while update DB",
+            "responseType" => $results,
+            ];
+        }
+        else if($results == -3)
+        {
+          //unable to verify the phone.
+          $responseArray = [
+            "message" => "user exist with info provided BUT error occurred while update DB",
+            "responseType" => $results,
             ];
         }
 
         /* 
           reponse returns the following:
-              4   valid phone number
-              3   user already exist
-              2   valid employer user
-              1   valid staff user
-              0   database not responding
-              -2  valid user with INCORRECT Credentials
-              -3  no registered user found
-              -4  invalid phone number
+            1   verification code verified & db updated
+            0   unable to connect to DB
+            -1  no such user with info provided
+            -2  user exist with info provided BUT error occurred while update DB
+            -3  verification process previously performed, ignoring this request
         */
         $response['results'] = $responseArray; //sending reply
 
@@ -103,7 +123,7 @@ $encoded = json_encode($response);
       $filename = 'test/SMSCodeDataResponse.json';
       file_put_contents($filename, var_export($encoded, true));
 
-      $filename = 'test/incominSMSCodeData.json';
+      $filename = 'test/SMSCodeDataincoming.json';
       file_put_contents($filename, var_export($decoded, true));
 
 

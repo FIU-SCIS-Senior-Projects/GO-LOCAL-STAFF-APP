@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 
 /************************** Staff methods **********************/
 
@@ -7,8 +6,7 @@
       returns
              1  username is unique
              0  database not responding
-            -1  username is not unique
-            
+            -1  username is not unique    
     */
     function isUniqueRegisteredStaff( $username, $email )
     {
@@ -62,7 +60,6 @@
           $email    = $registrationData['email'];
         
           //hash password for security
-          // $password = "";
           $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
           if(!$passwordHashed)
           {
@@ -70,7 +67,7 @@
             return -2;
           }
           
-            // query for 'registeredstaff' table
+            // attempting to save user as a 'registeredstaff'
             $query = "INSERT INTO registeredstaff (username, password, email)
                       VALUES ( '$username', '$passwordHashed', '$email' )";  
 
@@ -139,19 +136,21 @@
                 $business_name      = $registrationData['business_name']; //missing in database!!!
                 $desiredHourlyRate  = $registrationData['desiredHourlyRate'];//?
                 $desiredWeeklyRate  = $registrationData['desiredWeeklyRate'];//?
-                $travel              = $registrationData['travel'];
+                $travel             = $registrationData['travel'];
+
+                $experience         = $registrationData['experience'];//?  staffType
 
                 $DirectDepositRoutingNumber   = $registrationData['DirectDepositRoutingNumber'];
                 $DirectDepositAccountNumber   = $registrationData['DirectDepositAccountNumber'];
 
             // query for 'people' table
-            $query1 = "INSERT INTO people ( peopleID, companyID, staffType, firstName , middleInitial, lastName, nickname, email,address,phone,profession,website,socialMedia, pictures, dateOfBirth,gender,languages,typeDL,ethnicity,height,weight,hairColor, eyeColor,shirtSize,pantSize,chestSize,waistSize,hipSize,dressSize,shoeSize, tattoos,piercings,desiredPayRate,ssnOrEin,travel,insurance,insuranceDocuments, bankRouting, accountNumber, resume )
-                      VALUES ( $resultkey, 0, 0, '$firstName', '$middleName', '$lastName', '$nickname', '$email','$address', '$cellphone', 0,'website','social media', 'pictures', '$dob','$gender','$languages', $typeOfLicense, $ethnicity, $height, $weight, '$hairColor', '$eyeColor','$tshirtSize', $pantSize, $chestSize, $waistSize, $hipSize, $dressSize, $shoeSize, $tattoos, $piercings , 30, $ssnOrEin, $travel,0,'insuranceDocuments', '$DirectDepositRoutingNumber', '$DirectDepositAccountNumber', 'resume' ) "; 
+            $query1 = "INSERT INTO people ( peopleID, staffType, firstName , middleInitial, lastName, nickname, email,address,phone,profession,website,socialMedia, pictures, dateOfBirth,gender,languages,typeDL,ethnicity,height,weight,hairColor,eyeColor,shirtSize,pantSize,chestSize,waistSize,hipSize,dressSize,shoeSize,tattoos,piercings,desiredHourlyRate,desiredWeeklyRate,ssnOrEin,travel,insurance,insuranceDocuments, bankRouting, accountNumber, resume )
+                      VALUES ( $resultkey, 0, '$firstName', '$middleName', '$lastName', '$nickname', '$email','$address', '$cellphone', 0,'website','social media', 'pictures', '$dob','$gender','$languages', $typeOfLicense, $ethnicity, $height, $weight, '$hairColor', '$eyeColor','$tshirtSize', $pantSize, $chestSize, $waistSize, $hipSize, $dressSize, $shoeSize, $tattoos, $piercings , 30, 3000, $ssnOrEin, $travel,0,'insuranceDocuments', '$DirectDepositRoutingNumber', '$DirectDepositAccountNumber', 'resume' ) "; 
 
             echo "<p>$query1</p>";
             //perform query
             $result2 = mysqli_query($dbConnection, $query1);
-            echo "<p> people results ".$result2." with id $dbConnection->insert_id</p>";
+              echo "<p> people results ".$result2." with id $dbConnection->insert_id</p>";
             }
 
             /*emailing user */
@@ -181,7 +180,6 @@
     /* gets all staff*/
     function getAllStaff()
     {
-
       $finalList = array();
 
       //connecting to db
@@ -229,76 +227,16 @@
       return $finalList;
     }//eom
 
-
-
-
-/************************** Employer methods **********************/
-
-    /* checks the employer provided is unique - doesnt exist in database*/
-    function isUniqueRegisteredEmployer( $username, $email )
-    {
-          $dbConnection = connectToDB();
-
-          //making sure user is a unique registration
-          $query = "select * from registeredcompany where username='".$username."' or email='".$email."'";
-          
-          // echo "<p>".$query."</p>";
-
-          $result = mysqli_query($dbConnection, $query);
-          $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-          $rowResult = array_filter($row);
-          if (empty($rowResult))
-          {
-            // echo "<p>employer is unique</p>";
-            return 0;
-          }
-          else
-          {
-            print_r($row);
-            // echo "<p>employer is NOT unique</p>";
-            return -1;
-          }
-    }//eom
-
-    /* register a staff 
-      returns 0 database not responding 
+  /*
+    Stores the credentials of user in the registeredstaff table
+    returns 
+        peopleID
+        0   database not responding
+        -2  Unable to store staff credentials
+        -3  Unable to retrieve peopleID
     */
-    function registerEmployer($username, $email, $password)
-    {
-          $dbConnection = connectToDB();
-
-          //hash password for security
-          $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
-
-          //prepare query
-          $query = "INSERT INTO registeredcompany (username, password, email)
-                    VALUES ( '$username', '$passwordHashed', '$email' )";  
-
-          //perform query
-          $result = mysqli_query($dbConnection, $query);
-          echo "<p>".$result."</p>";
-          return $result;
-
-    }//eom
-
-    /* emails employer */
-    function emailEmployer($email)
-    {
-        $to = $email;
-        $subject = "GoLocalApp email verification";
-        $message = "Thanks for signing up!";
-        $headers = "From:noreply@golocalpromos.com"."\r\n";
-        $result = mail( $to, $subject, $message, $headers );
-        echo $result;
-    }//eom
-
-    /* gets all staff*/
-    function getAllEmployers()
-    {
-
-      $finalList = array();
-
-      //connecting to db
+  function storeStaffCredentials( $username, $password, $email )
+  {
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
@@ -306,172 +244,95 @@
         return 0;
       }
 
-      //gettting all staff
-      $query = "SELECT * FROM registeredcompany";
-      $result = mysqli_query($dbConnection, $query);
+      $peopleID       = "";
+      $username       = mysqli_real_escape_string($dbConnection, $username);
+      $email          = mysqli_real_escape_string($dbConnection, $email);
+      $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
+      $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
 
-      $totalRows = mysqli_num_rows($result);
-      if($totalRows > 0)
+      $query = "INSERT INTO registeredstaff ( username, password, email, hash )
+            VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' )";
+
+      $result = mysqli_query($dbConnection, $query);
+      if($result)
       {
-        while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
+        $query2 = "SELECT peopleID
+            FROM registeredstaff
+            WHERE username='".$username."'";
+        $result2 = mysqli_query($dbConnection, $query2); 
+        $totRows = mysqli_num_rows($result2);      
+        if($totRows > 0)
         {
-          array_push($finalList, $row);
+          $row = mysqli_fetch_assoc($result2);
+          $peopleID = $row["peopleID"];
+          sendEmail( $username, $email, "registeredstaff", $hashCodeEmail );
+          return $peopleID; 
+        }
+        else
+        {
+          echo "Unable to retrieve peopleID";
+          return -3;
         }
       }
 
-      return $finalList;
-    }//eom
+      echo "Unable to store staff credentials";  
+      return -2;
+      
+  }//eom
 
+/*
+  authenticates Phone Number
 
+  returns 
+    1   phone number code successfully sent
+    0   unable to connect to DB
+    -4  Unable to store the code to the Database
+*/
+function authenticateStaffPhoneNumber( $peopleID, $to )
+{
+    $code = mt_rand(1000, 9999);
+    $subject = "Your code you is:\r\n";
+    $smsCarriers = [
+      "@mms.aiowireless.net",
+      "@text.att.net",
+      "@myboostmobile.com",
+      "@mms.cricketwireless.net",
+      "@mymetropcs.com",
+      "@pm.sprint.com",
+      "@vtext.com",
+      "@tmomail.net",
+      "@email.uscc.net",
+      "@vtext.com",
+    ];
 
-/************************** ACTION methods **********************/
-  
-
-    /* connect to database  */
-    function connectToDB()
+    $dbConnection = connectToDB();
+    if(!$dbConnection)
     {
-      $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
-      return $db;
-    }//eom
-
-    /* close connection to database  */
-    function closeDB($link)
-    {
-      mysqli_close($link);
-    }//eom
-
-      /* verifies the user credentials are valid credentials 
-          returns 
-              2   employer account found  - valid credentials provided
-              1   staff account found     - valid credentials provided
-              0   database not responding
-              -1  staff account found     - invalid credentials 
-              -2  employer account found  - invalid credentials 
-              -3  no user found           - employer or staff
-      */
-    function loginRegisteredUser($username, $email , $password )
-    {
-
-          $dbConnection = connectToDB();
-          if(!$dbConnection)
-          {
-            echo "Unable to connect to MySQL.".PHP_EOL;
-            return 0;
-          }
-         
-            //staff account lookup
-              $query = "SELECT * FROM registeredstaff WHERE username='".$username."' or email='".$email."'";
-              
-              $result     = mysqli_query($dbConnection, $query);
-              $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-              $rowResult  = array_filter($row);
-              
-              if( !empty($rowResult) )
-              {                
-                // print_r($row);//testing
-                $dbHashedPassword = $row['password'];
-                if ( password_verify($password, $dbHashedPassword) ) 
-                {
-                    // echo '<p>staff Password is valid!</p>';//testing
-                    return 1;
-                } 
-                else 
-                {
-                    // echo '<p> staff Invalid password.</p>';//testing
-                    return -1;
-                }
-              }//eo-staff look up
-
-              //freeing vars
-              $query = null;
-              $result = null;
-              $rowResult = null;
-              $dbHashedPassword = null;
-
-              //employer account look up
-              $query = "SELECT * FROM registeredcompany WHERE username='".$username."' or email='".$email."'";
-              
-              $result = mysqli_query($dbConnection, $query);
-              $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-              $rowResult = array_filter($row);
-              
-              if ( $rowResult )
-              {
-                // print_r($row);//testing
-                $dbHashedPassword = $row['password'];
-
-                if ( password_verify($password, $dbHashedPassword) ) 
-                {
-                    // echo '<p>employer Password is valid!</p>';//testing
-                    return 2;
-                } else {
-                    // echo '<p>employer Invalid password.</p>';//testing
-                    return -2;
-                }
-              }//eo-employer look up
-
-
-              // echo "<p>no account found</p>";
-              return -3; //no account found
-              
-    }//eom
-
-    /*
-      deletes registered user from people tables and from their respective user type table
-      returns 
-              1   delete from people and registered table
-              0   database not responding
-              -1  unable to delete from people table
-                     
-    */
-    function deleteRegisteredUser($id, $type)
-    {
-      $errorOccured = 1;
-        //connecting to db
-        $dbConnection = connectToDB();
-        if(!$dbConnection)
-        {
-          echo "Unable to connect to MySQL.".PHP_EOL;
-          return 0;
-        }
-
-        if($type == "staff")
-        {
-          $sql = "DELETE FROM people WHERE peopleID=$id";
-        }
-        else if($type == "employer")
-        {
-          $sql = "DELETE FROM people WHERE companyID=$id";
-        }
-        
-        if ($dbConnection->query($sql) === TRUE) {
-            echo "<p>Record deleted successfully from peopleID </p>";
-            
-             // sql to delete a record
-            if($type == "staff")
-            {
-              $sql2 = "DELETE FROM registeredstaff WHERE peopleID=$id";
-            }
-            else if($type == "employer")
-            {
-              $sql2 = "DELETE FROM registeredcompany WHERE companyID=$id";
-            }
-
-            if ($dbConnection->query($sql2) === TRUE) 
-            {
-              echo "<p>Record deleted successfully from peopleID </p>";
-            }
-            else {
-              echo "<p>Error deleting record: ".$dbConnection->error." </p>";
-              $errorOccured = -2;
-            }
-        } 
-        else 
-        {
-            echo "<p>Error deleting record: ".$dbConnection->error." </p>";
-            $errorOccured = -1;
-        }
-
+      echo "Unable to connect to MySQL.".PHP_EOL;
+      return 0;
     }
+
+    $query = "UPDATE people
+          SET phone='".$to."', phonecode='".$code."'
+          WHERE peopleID=".$peopleID."";
+
+    $result = mysqli_query( $dbConnection, $query );
+    echo "<p> result: $result</p>";
+    if(!$result)
+    {
+      echo "Unable to store the code to the Database";
+      return -4;
+    }  
+
+    for($iter = 0; $iter < count($smsCarriers); $iter++)
+    {
+      $currentCarrier = $smsCarriers[$iter];
+      $currentAddress = $to.$currentCarrier;
+      // echo "<p>currentCarrier: $currentCarrier | current address: $currentAddress</p>";
+      mail( $currentAddress, $subject, $code );      
+    }//eofl
+
+    return 1;
+}//eom
 
 ?>

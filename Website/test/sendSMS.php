@@ -1,45 +1,48 @@
 <?php  
 
-
 // API Url
-// $url = 'http://localhost:8888/FIU%20CLASSES/Senior%20Project%20Stuff/Final%20Deliverables/GO-LOCAL-STAFF-APP/Website/jsonPOST_login.php';
 
-$url = 'http://45.55.208.175/Website/jsonPOST_sms.php';
+//LOCAL
+$url = 'http://localhost:8888/FIU%20CLASSES/Senior%20Project%20Stuff/Final%20Deliverables/GO-LOCAL-STAFF-APP/Website/jsonPOST_sms.php';
 
-  //$url = "http://localhost/GO-LOCAL-STAFF-APP/Website/jsonPOST_sms.php";
- 
+
+//LIVE
+// $url = 'http://45.55.208.175/Website/jsonPOST_sms.php';
+
+
 //Initiate cURL.
 $ch = curl_init($url);
 
-    //valid staff user
+    // //valid staff user
+    // $jsonData = [
+    //   "firstName" => "Wilfredo",
+    //   "middleName" => "G",
+    //   "lastName" => "Gomez",
+    //   "nickName" => "watermelon",
+    //   "email" => "willyggh@outlook.com",
+    //   "username" => "willyggh",
+    //   "password" => "123",
+    //   "dob" => "04/16/1989",
+    //   "phone" => "7862948736",
+    //   "carrier" => "att",
+    //   ];
+
+
+      //valid staff user
     $jsonData = [
-      "firstName" => "Wilfredo",
-      "middleName" => "G",
-      "lastName" => "Gomez",
-      "nickName" => "watermelon",
-      "email" => "willyggh@outlook.com",
-      "username" => "willyggh",
-      "password" => "123",
-      "dob" => "04/16/1989",
-      "phone" => "7862948736",
+      "registrationType" => "staff",
+      "firstName" => "Luis",
+      "middleName" => "A",
+      "lastName" => "Castillo",
+      "nickName" => "Lu",
+      "email" => "luoandre29@outlook.com",
+      "username" => "luoandre29",
+      "password" => "0987654321",
+      "dob" => "11/29/1987",
+      "phone" => "3056099250",
       "carrier" => "att",
       ];
 
-
-   // valid invalid employer user
-   //  $jsonData = array(
-   //      'username' => 'Luoandre29Dos',
-   //      'email' => 'lcast03@fiu.edu',
-   //      'password' => 'password'
-   //  );
-
-
-   // //valid employer user
-   //  $jsonData = array(
-   //      'username' => 'Luoandre29Dos',
-   //      'email' => 'lcast03@fiu.edu',
-   //      'password' => 'passwordDos'
-   //  );
  
 //Encode the array into JSON.
 $jsonDataEncoded = json_encode($jsonData);
