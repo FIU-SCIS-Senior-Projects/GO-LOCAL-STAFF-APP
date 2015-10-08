@@ -50,7 +50,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
         $peopleID;
         $responseArray;
 
-        $registrationType = $decoded['registrationType'];
+        $registrationType = $decoded["registrationType"];
         $fname            = $decoded["firstName"];
         $middleN          = $decoded["middleName"];
         $lname            = $decoded["lastName"];
@@ -62,7 +62,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
         $carrier          = $decoded["carrier"];
         $phone            = $decoded["phone"];
 
-        if( $registrationType == "staff")
+        if( $registrationType == "Staff")
         {
             //verify user is unique
             $uniqueResult = isUniqueRegisteredStaff($username,$email);
@@ -133,7 +133,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
               ];
             }
         }
-        else if( $registrationType == "employer")
+        else if( $registrationType == "Employer")
         {
             //verify user is unique
             $uniqueResult = isUniqueRegisteredEmployer($username,$email);
