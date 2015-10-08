@@ -460,8 +460,12 @@
 
             <?php
                 //refreshing page after a few seconds
-                print '<meta http-equiv="refresh" content="3">';
-          }
+                // print '<meta http-equiv="refresh" content="3">';
+          }//eo-delete request
+
+          //refreshing page every minute
+          print '<meta http-equiv="refresh" content="30">';
+
     ?>
   </div>
   <div class="col-md-1"></div>

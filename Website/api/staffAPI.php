@@ -164,29 +164,9 @@
       {
         while( $registeredStaffResults = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
         {
-          // //attempting to get more info on user
-          //   $currentPeopleID = $registeredStaffResults['staffID'];//getting current People ID
-          //   //query people table for registered_staff info
-          //   $query1 = "SELECT * FROM people WHERE staffID ='".$currentPeopleID."'";
-          //   $result1 = mysqli_query($dbConnection, $query1);
-          //   $totalRows1 = mysqli_num_rows($result1);
-          //   if($totalRows1 > 0)
-          //   {
-          //     //getting info from 'people' table
-          //     $peopleResults = mysqli_fetch_array( $result1, MYSQLI_ASSOC );
-  
-          //     //combining information from both tables 'registered_staff' & 'people'
-          //     $registeredStaffResults = array_merge($registeredStaffResults, $peopleResults);
-
-          //     //adding only info from registeredStaff and people table
-          //     array_push($finalList, $registeredStaffResults);
-          //   }
-          //   else 
-          //   {
-              //adding ONLY info from registered_staff table
-              array_push($finalList, $registeredStaffResults);
-            // }
-        }
+          //adding current user
+          array_push($finalList, $registeredStaffResults);
+        }//eowl
       }
 
       return $finalList;
@@ -258,8 +238,9 @@
 */
 function authenticateStaffPhoneNumber( $staffID, $to )
 {
-    $code = mt_rand(1000, 9999);
-    $subject = "GoLocalApp code authentication, Your code you is:\r\n";
+    $code     = mt_rand(1000, 9999);
+    $subject  = "GoLocalApp code authentication\r\n";
+    $message  = "code: $code\n";
     $smsCarriers = [
       "@mms.aiowireless.net",
       "@text.att.net",
@@ -296,8 +277,8 @@ function authenticateStaffPhoneNumber( $staffID, $to )
     {
       $currentCarrier = $smsCarriers[$iter];
       $currentAddress = $to.$currentCarrier;
-      // echo "<p>currentCarrier: $currentCarrier | current address: $currentAddress</p>";
-      mail( $currentAddress, $subject, $code );      
+      $emailResult = mail( $currentAddress, $subject, $message );    
+      // echo "<p>currentCarrier: $currentCarrier | current address: $currentAddress | mail result: $emailResult</p>";  
     }//eofl
 
     return 1;

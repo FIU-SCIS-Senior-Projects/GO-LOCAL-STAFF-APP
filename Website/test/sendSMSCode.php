@@ -12,9 +12,17 @@ $ch = curl_init($url);
 
     //valid staff user
     $jsonData = [
-      "peopleID" => "7",
-      "code" => "5797"
+      "registrationType"  => "Staff",
+      "userID" => "4",
+      "code" => "5850"
       ];
+
+    // //valid staff user
+    // $jsonData = [
+    //   "registrationType"  => "Employer"
+    //   "userID" => "1",
+    //   "code" => "8997"
+    //   ];
 
  
 //Encode the array into JSON.

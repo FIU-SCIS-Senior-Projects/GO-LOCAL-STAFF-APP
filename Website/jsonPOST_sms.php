@@ -51,15 +51,8 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
      $responseArray;
 
      $registrationType = $decoded["registrationType"];
-     $fname            = $decoded["firstName"];
-     $middleN          = $decoded["middleName"];
-     $lname            = $decoded["lastName"];
-     $nickname         = $decoded["nickName"];
-     $email            = $decoded["email"];
      $username         = $decoded["username"];
-     $pasword          = $decoded["password"];
-     $dob              = $decoded["dob"];
-     $carrier          = $decoded["carrier"];
+     $email            = $decoded["email"];
      $phone            = $decoded["phone"];
 
      echo "<p>registration Type: $registrationType</p>";

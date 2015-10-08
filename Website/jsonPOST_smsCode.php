@@ -49,50 +49,60 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
 
         $responseArray;
 
-        $peopleID = $decoded["peopleID"];
-        $codeFromUser = $decoded["code"];
+        $registrationType = $decoded["registrationType"];
+        $userID         = $decoded["userID"];
+        $codeFromUser     = $decoded["code"];
 
-        $results = verifySmsCode($peopleID, $codeFromUser);
-        echo "<p>results: $results</p>";
-        if( $results == 1) //phone has been verified
+        $smsResults = verifySmsCode($registrationType, $userID, $codeFromUser);
+        echo "<p>results: $smsResults</p>";
+        if( $smsResults == 1) //phone has been verified
         {
           $responseArray = [
             "message" => "verification code verified & db updated",
-            "responseType" => $results,
+            "responseType" => $smsResults,
             ];
         }
-        else if( $results == 0)
+        else if( $smsResults == 0)
         {
           //unable to verify the phone.
           $responseArray = [
             "message" => "unable to connect to DB",
-            "responseType" => $results,
+            "responseType" => $smsResults,
             ];
         }
-        else if($results == -1)
+        else if($smsResults == -1)
         {
           //unable to verify the phone.
           $responseArray = [
             "message" => "no such user with info provided",
-            "responseType" => $results,
+            "responseType" => $smsResults,
             ];
         }
-         else if($results == -2)
+         else if($smsResults == -2)
         {
           //unable to verify the phone.
           $responseArray = [
             "message" => "user exist with info provided BUT error occurred while update DB",
-            "responseType" => $results,
+            "responseType" => $smsResults,
             ];
         }
-        else if($results == -3)
+        else if($smsResults == -3)
         {
           //unable to verify the phone.
           $responseArray = [
             "message" => "user exist with info provided BUT error occurred while update DB",
-            "responseType" => $results,
+            "responseType" => $smsResults,
             ];
         }
+        else if($smsResults == -10)
+        {
+          //unable to verify the phone.
+          $responseArray = [
+            "message" => "not a valid registration Type",
+            "responseType" => $smsResults,
+            ];
+        }
+
 
         /* 
           reponse returns the following:
@@ -101,6 +111,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
             -1  no such user with info provided
             -2  user exist with info provided BUT error occurred while update DB
             -3  verification process previously performed, ignoring this request
+            -10 not a valid registration Type
         */
         $response['results'] = $responseArray; //sending reply
 

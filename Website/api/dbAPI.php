@@ -1,189 +1,187 @@
 <?php 
 
+/************************** DB methods **********************/  
 
-/************************** ACTION methods **********************/
-  
+/* connect to database  */
+function connectToDB()
+{
+  $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
+  return $db;
+}//eom
 
-    /* connect to database  */
-    function connectToDB()
-    {
-      $db = mysqli_connect("localhost", "root", "fall2015", "golocalapp");
-      return $db;
-    }//eom
+/* close connection to database  */
+function closeDB($link)
+{
+    mysqli_close($link);
+}//eom
 
-    /* close connection to database  */
-    function closeDB($link)
-    {
-      mysqli_close($link);
-    }//eom
-
-      /* verifies the user credentials are valid credentials 
-          returns 
-              2   employer account found  - valid credentials provided
-              1   staff account found     - valid credentials provided
-              0   database not responding
-              -1  staff account found     - invalid credentials 
-              -2  employer account found  - invalid credentials 
-              -3  no user found           - employer or staff
-      */
-    function loginRegisteredUser($username, $email , $password )
-    {
-
-          $dbConnection = connectToDB();
-          if(!$dbConnection)
-          {
-            echo "Unable to connect to MySQL.".PHP_EOL;
-            return 0;
-          }
-         
-            //staff account lookup
-              $query = "SELECT * FROM registered_staff WHERE username='".$username."' or email='".$email."'";
-              
-              $result     = mysqli_query($dbConnection, $query);
-              $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-              $rowResult  = array_filter($row);
-              
-              if( !empty($rowResult) )
-              {                
-                // print_r($row);//testing
-                $dbHashedPassword = $row['password'];
-                if ( password_verify($password, $dbHashedPassword) ) 
-                {
-                    // echo '<p>staff Password is valid!</p>';//testing
-                    return 1;
-                } 
-                else 
-                {
-                    // echo '<p> staff Invalid password.</p>';//testing
-                    return -1;
-                }
-              }//eo-staff look up
-
-              //freeing vars
-              $query = null;
-              $result = null;
-              $rowResult = null;
-              $dbHashedPassword = null;
-
-              //employer account look up
-              $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
-              
-              $result = mysqli_query($dbConnection, $query);
-              $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-              $rowResult = array_filter($row);
-              
-              if ( $rowResult )
-              {
-                // print_r($row);//testing
-                $dbHashedPassword = $row['password'];
-
-                if ( password_verify($password, $dbHashedPassword) ) 
-                {
-                    // echo '<p>employer Password is valid!</p>';//testing
-                    return 2;
-                } else {
-                    // echo '<p>employer Invalid password.</p>';//testing
-                    return -2;
-                }
-              }//eo-employer look up
-
-
-              // echo "<p>no account found</p>";
-              return -3; //no account found
-              
-    }//eom
-
-    /*
-      deletes registered user from people tables and from their respective user type table
+  /* verifies the user credentials are valid credentials 
       returns 
-              1   delete from people and registered table
-              0   database not responding
-              -1  unable to delete from people table
-                     
-    */
-    function deleteRegisteredUser($id, $type)
-    {
-        //connecting to db
-        $dbConnection = connectToDB();
-        if(!$dbConnection)
-        {
-          echo "Unable to connect to MySQL.".PHP_EOL;
-          return 0;
-        }
-            
-         // sql to delete a record
-        if($type == "staff")
-        {
-          $sql2 = "DELETE FROM registered_staff WHERE staffID=$id";
-        }
-        else if($type == "employer")
-        {
-          $sql2 = "DELETE FROM registered_employer WHERE employerID=$id";
-        }
+          2   employer account found  - valid credentials provided
+          1   staff account found     - valid credentials provided
+          0   database not responding
+          -1  staff account found     - invalid credentials 
+          -2  employer account found  - invalid credentials 
+          -3  no user found           - employer or staff
+  */
+function loginRegisteredUser($username, $email , $password )
+{
 
-        // echo "<p>id = $id| type = $type| query: $sql2</p>";
-
-        $results = $dbConnection->query($sql2);
-        if ($results) 
-        {
-          echo "<p>Record deleted successfully from staffID </p>";
-          return 1;
-        }
-        else {
-          echo "<p>Error deleting record: ".$dbConnection->error." </p>";
-          $return -1;
-        }
-    }//eom
-
-  /* checks the user provided is unique - doesnt exist in database
-      returns
-             1  username is unique
-             0  database not responding
-            -1  username is not unique  
-            -10  not a valid registration type   
-    */
-    function isUserRegistrationUnique( $registrationType, $usernameProvided, $emailProvided )
-    {
-          $dbConnection = connectToDB();
-          if(!$dbConnection)
-          {
-            echo "Unable to connect to MySQL.".PHP_EOL;
-            return 0;
-          }
-
-          $username  = mysqli_real_escape_string($dbConnection, $usernameProvided);
-          $email     = mysqli_real_escape_string($dbConnection, $emailProvided);
-
-        //making sure user is a unique registration
-         if( $registrationType == "Staff")
-         {
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+        echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
+     
+        //staff account lookup
           $query = "SELECT * FROM registered_staff WHERE username='".$username."' or email='".$email."'";
-         }
-         else if( $registrationType == "Employer" )
-         {
-          $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
-         } 
-         else
-         {
-            return -10;
-         }
+          
+          $result     = mysqli_query($dbConnection, $query);
+          $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+          $rowResult  = array_filter($row);
+          
+          if( !empty($rowResult) )
+          {                
+            // print_r($row);//testing
+            $dbHashedPassword = $row['password'];
+            if ( password_verify($password, $dbHashedPassword) ) 
+            {
+                // echo '<p>staff Password is valid!</p>';//testing
+                return 1;
+            } 
+            else 
+            {
+                // echo '<p> staff Invalid password.</p>';//testing
+                return -1;
+            }
+          }//eo-staff look up
 
+          //freeing vars
+          $query = null;
+          $result = null;
+          $rowResult = null;
+          $dbHashedPassword = null;
+
+          //employer account look up
+          $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
+          
           $result = mysqli_query($dbConnection, $query);
           $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
           $rowResult = array_filter($row);
-          if (empty($rowResult))
+          
+          if ( $rowResult )
           {
-            print_r($row);
-            echo "<p>username and email is unique</p>";
-            return 1;
-          }
-          else
-          {
-            print_r($row);
-            echo "<p>username and email is NOT unique</p>";
-            return -1;
-          }
-    }//eom
+            // print_r($row);//testing
+            $dbHashedPassword = $row['password'];
+
+            if ( password_verify($password, $dbHashedPassword) ) 
+            {
+                // echo '<p>employer Password is valid!</p>';//testing
+                return 2;
+            } else {
+                // echo '<p>employer Invalid password.</p>';//testing
+                return -2;
+            }
+          }//eo-employer look up
+
+
+          // echo "<p>no account found</p>";
+          return -3; //no account found
+          
+}//eom
+
+/*
+  deletes registered user from people tables and from their respective user type table
+  returns 
+          1   delete from people and registered table
+          0   database not responding
+          -1  unable to delete from people table
+                 
+*/
+function deleteRegisteredUser($id, $type)
+{
+    //connecting to db
+    $dbConnection = connectToDB();
+    if(!$dbConnection)
+    {
+      echo "Unable to connect to MySQL.".PHP_EOL;
+      return 0;
+    }
+        
+     // sql to delete a record
+    if($type == "staff")
+    {
+      $sql2 = "DELETE FROM registered_staff WHERE staffID=$id";
+    }
+    else if($type == "employer")
+    {
+      $sql2 = "DELETE FROM registered_employer WHERE employerID=$id";
+    }
+
+    // echo "<p>id = $id| type = $type| query: $sql2</p>";
+
+    $results = $dbConnection->query($sql2);
+    if ($results) 
+    {
+      echo "<p>Record deleted successfully from staffID </p>";
+      return 1;
+    }
+    else {
+      echo "<p>Error deleting record: ".$dbConnection->error." </p>";
+      $return -1;
+    }
+}//eom
+
+/* checks the user provided is unique - doesnt exist in database
+  returns
+         1  username is unique
+         0  database not responding
+        -1  username is not unique  
+        -10  not a valid registration type   
+*/
+function isUserRegistrationUnique( $registrationType, $usernameProvided, $emailProvided )
+{
+    $dbConnection = connectToDB();
+    if(!$dbConnection)
+    {
+      echo "Unable to connect to MySQL.".PHP_EOL;
+      return 0;
+    }
+
+    $username  = mysqli_real_escape_string($dbConnection, $usernameProvided);
+    $email     = mysqli_real_escape_string($dbConnection, $emailProvided);
+
+    //making sure user is a unique registration
+   if( $registrationType == "Staff")
+   {
+    $query = "SELECT * FROM registered_staff WHERE username='".$username."' or email='".$email."'";
+   }
+   else if( $registrationType == "Employer" )
+   {
+    $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
+   } 
+   else
+   {
+      return -10;
+   }
+
+    $result = mysqli_query($dbConnection, $query);
+    $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+    $rowResult = array_filter($row);
+    if (empty($rowResult))
+    {
+      print_r($row);
+      echo "<p>username and email is unique</p>";
+      return 1;
+    }
+    else
+    {
+      print_r($row);
+      echo "<p>username and email is NOT unique</p>";
+      return -1;
+    }
+}//eom
 
 
 /*
@@ -241,8 +239,9 @@ function storeUserCredentials( $registrationType, $userInfo)
     -1  no such user with info provided
     -2  user exist with info provided BUT error occurred while update DB
     -3  verification process previously performed, ignoring this request
+    -10 not a valid registration Type
 */
-function verifySmsCode( $peopleID, $code )
+function verifySmsCode($registrationType, $userID, $code )
 {
     $dbConnection = connectToDB();
     if(!$dbConnection)
@@ -251,41 +250,57 @@ function verifySmsCode( $peopleID, $code )
       return 0;
     }
 
-    //verifying if such person exist with that phonenumber and verification code 
-    $query = "SELECT phoneCode, phoneValidated
-              FROM people
-              WHERE peopleID='".$peopleID."'
-              AND phoneCode='".$code."'";
-
-    $result = mysqli_query($dbConnection, $query);
-    $totRows = mysqli_num_rows($result);      
-    if($totRows > 0)
+    //updating sql table Name to the appropiate user
+    if( $registrationType == "Staff")
     {
-       //verify code has not been verified already
-      $userInfo = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-       if( $userInfo['phoneValidated'] == 1 )
-       {
-          return -3; //verification process previously performed, ignoring this request
-       }
-
-        //Code verified, updating table
-        $query = "UPDATE people
-              SET phoneValidated='1'
-              WHERE peopleID='".$peopleID."'
-              AND phonecode='".$code."'";
-
-        $saveResult = mysqli_query($dbConnection, $query);
-        if($saveResult)
-        {
-          return 1; // verification code verified & db updated
-        }
-        else
-        {
-          return -2; //user exist with info provided BUT error occurred while update DB
-        }
+       $tableName =  "registered_staff";
+       $userKey   = "staffID";
+    }
+    else if( $registrationType == "Employer")
+    {
+        $tableName  =  "registered_employer";
+        $userKey    = "employerID";
+    }
+    else
+    {
+      return -10;
     }
 
-  return -1;  //no such user with info provided
+        //verifying if such person exist with that phonenumber and verification code 
+        $query = "SELECT phoneCode, phoneValidated
+                  FROM $tableName
+                  WHERE $userKey='".$userID."'
+                  AND phoneCode='".$code."'";
+
+        $result = mysqli_query($dbConnection, $query);
+        $totRows = mysqli_num_rows($result);      
+        if($totRows > 0)
+        {
+           //verify code has not been verified already
+          $userInfo = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+           if( $userInfo['phoneValidated'] == 1 )
+           {
+              return -3; //verification process previously performed, ignoring this request
+           }
+
+            //Code verified, updating table
+            $query = "UPDATE $tableName
+                  SET phoneValidated='1'
+                  WHERE $userKey='".$userID."'
+                  AND phonecode='".$code."'";
+
+            $saveResult = mysqli_query($dbConnection, $query);
+            if($saveResult)
+            {
+              return 1; // verification code verified & db updated
+            }
+            else
+            {
+              return -2; //user exist with info provided BUT error occurred while update DB
+            }
+        }
+
+      return -1;  //no such user with info provided
 }//eom
 
 /* sends an email to the user */
