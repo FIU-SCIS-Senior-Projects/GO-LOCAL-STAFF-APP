@@ -185,14 +185,6 @@ function isUserRegistrationUnique( $registrationType, $usernameProvided, $emailP
 
 
 /*
-   Stores the credentials of user in the registered_staff table
-    returns 
-        userID
-        0   database not responding
-        -2  Unable to store user credentials
-        -3  Unable to retrieve userID
-*/
-/*
   authenticates Phone Number
 
   SMS AUTHENTICATION PART 1

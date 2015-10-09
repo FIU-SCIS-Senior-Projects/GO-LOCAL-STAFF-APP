@@ -49,66 +49,66 @@
 
          $registrationType = $decoded['registration_type'];
 
-         if( $registrationType == 'staff') //staff registration
-         {
-            echo "<p> registering $registrationType </p>";
+         // if( $registrationType == 'staff') //staff registration
+         // {
+         //    echo "<p> registering $registrationType </p>";
 
-            //check if unique user
-            $username = $decoded['username'];
-            $email    = $decoded['email'];
-            $uniqueResults = isUniqueRegisteredStaff($username, $email);
-             echo "<p>response '$uniqueResults' </p>";
-            if($uniqueResults ==  1)//unique user
-            {
-                echo "<p>unique user! lets start registration process </p>";
-                $registrationResults = registerStaff($decoded);
-                echo "<p>registration results $registrationResults</p>";
+         //    //check if unique user
+         //    $username = $decoded['username'];
+         //    $email    = $decoded['email'];
+         //    $uniqueResults = isUniqueRegisteredStaff($username, $email);
+         //     echo "<p>response '$uniqueResults' </p>";
+         //    if($uniqueResults ==  1)//unique user
+         //    {
+         //        echo "<p>unique user! lets start registration process </p>";
+         //        $registrationResults = registerStaff($decoded);
+         //        echo "<p>registration results $registrationResults</p>";
 
 
                 
 
-                //updating responce
-                $responseArray = array(
-                    "message" => "user successfully registered",
-                    "usertype"    => "1",
-                );
-            }
-            else if($uniqueResults == -1)//user already registered
-            {
-              $responseArray = array(
-                "message" => "username and email is NOT unique",
-                "usertype"    => "-1",
-              );
-            }
-            else if($uniqueResults == 0)//database not responding
-            {
-              $responseArray = array(
-                "message" => "database not responding",
-                "usertype"    => "0",
-              );
-            }//eo-conditions
-         }//eo staff registration
-         else if( $registrationType == 'employer' )//employer registration
-         {
-            echo "<p>  registering '$registrationType' </p>";
+         //        //updating responce
+         //        $responseArray = array(
+         //            "message" => "user successfully registered",
+         //            "usertype"    => "1",
+         //        );
+         //    }
+         //    else if($uniqueResults == -1)//user already registered
+         //    {
+         //      $responseArray = array(
+         //        "message" => "username and email is NOT unique",
+         //        "usertype"    => "-1",
+         //      );
+         //    }
+         //    else if($uniqueResults == 0)//database not responding
+         //    {
+         //      $responseArray = array(
+         //        "message" => "database not responding",
+         //        "usertype"    => "0",
+         //      );
+         //    }//eo-conditions
+         // }//eo staff registration
+         // else if( $registrationType == 'employer' )//employer registration
+         // {
+         //    echo "<p>  registering '$registrationType' </p>";
             
-             //updating responce
-            $responseArray = array(
-            "message" => "user successfully registered",
-            "usertype"    => "1",
-            );
-         }//eo employer registration
-         else
-         {
-            //updating responce
-            $responseArray = array(
-                "message" => "Not a Valid Registration Type",
-                "usertype"    => "-10",
-            );
-         }
+         //     //updating responce
+         //    $responseArray = array(
+         //    "message" => "user successfully registered",
+         //    "usertype"    => "1",
+         //    );
+         // }//eo employer registration
+         // else
+         // {
+         //    //updating responce
+         //    $responseArray = array(
+         //        "message" => "Not a Valid Registration Type",
+         //        "usertype"    => "-10",
+         //    );
+         // }
 
         //reponding back to sender
-        $response['results'] = $responseArray;
+        $response['results'] = $decoded;
 
       }//eo valid-json
     }//eo valid-data

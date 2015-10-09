@@ -3740,7 +3740,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LjY-au-XxU">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LjY-au-XxU">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7G-Dw-HcQ">
@@ -3833,7 +3833,7 @@
                                 </subviews>
                                 <animations/>
                                 <connections>
-                                    <outlet property="delegate" destination="8ku-2u-JgN" id="AVF-NM-dc4"/>
+                                    <outlet property="delegate" destination="8ku-2u-JgN" id="b2J-10-EHH"/>
                                 </connections>
                             </scrollView>
                         </subviews>
@@ -3844,7 +3844,7 @@
                     <connections>
                         <outlet property="cellphone" destination="Wew-Bz-qyp" id="SFL-Pv-d5r"/>
                         <outlet property="cellphoneLabel" destination="goC-ka-dHD" id="FxO-qR-xEF"/>
-                        <outlet property="scrollView" destination="LjY-au-XxU" id="Thy-rP-EtY"/>
+                        <outlet property="scrollView" destination="LjY-au-XxU" id="Lfo-Wj-Twm"/>
                         <outlet property="submitButton" destination="b7G-Dw-HcQ" id="o9d-gY-wM7"/>
                         <outlet property="submitPhoneNumber" destination="Wo4-JQ-Q78" id="qg9-ge-ylh"/>
                         <outlet property="verificationAsterisk" destination="J3j-Xf-PhB" id="4s4-61-hDa"/>

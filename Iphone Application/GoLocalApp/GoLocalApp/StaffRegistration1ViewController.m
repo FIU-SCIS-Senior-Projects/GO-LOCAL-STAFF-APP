@@ -41,7 +41,8 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     waitingOnVerificationResponce = FALSE;
-    [registeredStaff printUserData];//testing
+    
+//    [registeredStaff printUserData];//testing
     
     [self setUpTapGesture];
     
@@ -186,17 +187,19 @@
  */
 -(void) verificationCodeResponce:(NSDictionary *) responce
 {
-    //
-    NSLog(@" %@", responce);
+//    NSLog(@" %@", responce);
     NSDictionary * responceType = [responce objectForKey:@"results"];
     NSLog(@" responce Type: %@", responceType);
     
-    
     if(responceType)
     {
-        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
-        // it's empty or contains only white spaces
+        
+        [self.verificationCode resignFirstResponder];   //resign verififcation code
+        
+        //notifying user code was accepted
         [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];
+        
+        [self scrollVievEditingFinished:cellphone];     //moving scroll view so user can see submit button on bottom
         
         //showing submit
         [submitButton setHidden:NO];
@@ -204,6 +207,7 @@
         //updating json receiver flag
         waitingOnVerificationResponce = false;
     }
+    
 }//eom
 
 /* sending verification code to server */
