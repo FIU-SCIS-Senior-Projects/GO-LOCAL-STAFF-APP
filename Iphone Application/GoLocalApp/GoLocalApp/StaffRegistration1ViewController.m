@@ -20,7 +20,7 @@
     NSArray *carrierOptions;
     
     // registered user ID on server
-    NSString * peopleID;
+    NSString * userID;
     BOOL waitingOnVerificationResponce;
     
     //labels
@@ -182,13 +182,13 @@
     NSLog(@" responce: %@", responce);
     NSDictionary * peopleIDResults = [responce objectForKey:@"results"];
     
-//    NSLog(@" results is %@", peopleIDResults);
-//    
-//    peopleID = [peopleIDResults objectForKey:@"peopleID"];
-//    NSLog(@" people ID is %@", peopleID);
-//    
+    NSLog(@" results is %@", peopleIDResults);
+//
+    userID = [peopleIDResults objectForKey:@"responseType"];
+    NSLog(@" userID ID is %@", userID);
+//
     
-    if(peopleID)
+    if(userID)
     {
         //hiding submit phone number button
         [submitPhoneNumber setHidden:YES];
@@ -203,9 +203,9 @@
 {
     //
     NSLog(@" %@", responce);
-    NSString * serverResponce = [responce objectForKey:@"peopleID"];
-    NSLog(@" server responce %@", serverResponce);
-//
+//    NSString * serverResponce = [responce objectForKey:@"responseType"];
+//    NSLog(@" server responce %@", serverResponce);
+////
 //    if(peopleID)
 //    {
 //        //hiding submit phone number button
@@ -496,22 +496,26 @@
     {
         
         NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        NSLog(@" from server replied: %@",rawExhibits);
+        NSLog(@"[1] from server replied: %@",rawExhibits);
         
         
-        //            NSString *dataResponce = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
-        //            NSLog(@" responce from server %@",dataResponce);
+                    NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    NSLog(@"[2] responce from server %@",dataResponce);
         
         //            // Get JSON objects into initial array
-        //            NSArray *rawExhibits = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+                    NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+        NSLog(@"[3] responce from server %@",rawExhibits2);
         
         //waiting on verification responce
         if(waitingOnVerificationResponce)
         {
+            NSLog(@"waiting on verification responce.....");
             [self verificationCodeResponce: rawExhibits];
         }
         else //waiting on phone number responce
         {
+            
+            NSLog(@"waiting on phone number responce.....");
             //processing responce
             [self phoneNumberServerResponce:rawExhibits];
         }
@@ -633,8 +637,8 @@
             //creating initial list
             NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
             
-            finalList[@"peopleID"]     = peopleID;
-            finalList[@"code"]     = verificationCode.text;
+            finalList[@"userID"]        = userID;
+            finalList[@"code"]          = verificationCode.text;
             
             return finalList;
         }//eom

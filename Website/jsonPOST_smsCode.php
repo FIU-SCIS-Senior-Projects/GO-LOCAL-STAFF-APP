@@ -48,13 +48,12 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
         require 'API.php';/* adding API */
 
         $responseArray;
-
         $registrationType = $decoded["registrationType"];
-        $userID         = $decoded["userID"];
+        $userID           = $decoded["userID"];
         $codeFromUser     = $decoded["code"];
 
         $smsResults = verifySmsCode($registrationType, $userID, $codeFromUser);
-//        echo "<p>results: $smsResults</p>";
+        // echo "<p>results: $smsResults</p>";
         if( $smsResults == 1) //phone has been verified
         {
           $responseArray = [

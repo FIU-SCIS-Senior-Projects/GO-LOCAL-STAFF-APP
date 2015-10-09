@@ -152,7 +152,7 @@
 
         }
         else {
-            [self showAlert:@"Registration Field" withMessage:@"Email and confirm do not match" and:@"Okay"];
+            [self showAlert:@"Registration Field" withMessage:@"Emails do not match" and:@"Okay"];
             return 0;
         }
 
@@ -165,7 +165,7 @@
                 }
                 else {
                     [self scrollVievEditingFinished:password]; //take scroll to textfield so user can see their error
-                    [self showAlert:@"Registration Field" withMessage:@"password do not match" and:@"Okay"];
+                    [self showAlert:@"Registration Field" withMessage:@"passwords do not match" and:@"Okay"];
                     return 0;
                 }
         }

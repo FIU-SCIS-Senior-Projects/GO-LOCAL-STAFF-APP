@@ -1,10 +1,10 @@
 <?php  
 
 
-//$url = 'http://localhost:8888/FIU%20CLASSES/Senior%20Project%20Stuff/Final%20Deliverables/GO-LOCAL-STAFF-APP/Website/jsonPOST_smsCode.php';
+// $url = 'http://localhost:8888/FIU%20CLASSES/Senior%20Project%20Stuff/Final%20Deliverables/GO-LOCAL-STAFF-APP/Website/jsonPOST_smsCode.php';
 
 //LIVE
- $url = 'http://45.55.208.175/Website/jsonPOST_smsCode.php';
+$url = 'http://45.55.208.175/Website/jsonPOST_smsCode.php';
 
 
 //Initiate cURL.

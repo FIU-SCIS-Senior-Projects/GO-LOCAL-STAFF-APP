@@ -88,7 +88,8 @@
                         <td></td>
                         <td></td>
                         <td><b>emailValidated</b></td> 
-                        <td> <?php echo $currentRow['emailValidated']; ?> </td>                        <td></td>
+                        <td> <?php echo $currentRow['emailValidated']; ?> </td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
