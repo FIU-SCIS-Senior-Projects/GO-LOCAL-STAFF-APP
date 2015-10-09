@@ -71,12 +71,21 @@
 //    NSString * testing = firstName.text;
 //    NSString *trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
     
+    
+    //updating values
+    [registeredEmployer setEmployerName:employerNameField.text];
+    [registeredEmployer setTypeOfEmployer:typeOfEmployerField.text];
+    [registeredEmployer setAddress:addressField.text];
+    [registeredEmployer setCity:cityField.text];
+    [registeredEmployer setState:stateField.text];
+    [registeredEmployer setZipCode:zipCodeField.text];
+    
     if( insuranceSwitch.on )
         [registeredEmployer setIsuranceStatus:YES];
     else
         [registeredEmployer setIsuranceStatus:NO];
     
-    //updating values
+    [registeredEmployer printUserData];
     
     return 1;
 }//eom

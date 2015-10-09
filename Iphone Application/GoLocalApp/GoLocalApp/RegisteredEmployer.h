@@ -17,11 +17,9 @@
     NSString *firstName;
     NSString *middleName;
     NSString *lastName;
-    NSString *nickName;
     NSString *email;
     NSString *username;
     NSString *password;
-    NSString *dateOfBirth;
     
     //view controller 1
     NSString *phoneNumber;
@@ -35,6 +33,9 @@
     NSString *zipCode;
     BOOL employerhasInsurance;
     
+    //view controller 3
+    NSMutableArray *EmployeesInterested;
+    
 }
 
 //accessors
@@ -42,11 +43,9 @@
 -(NSString *) getFirstName;
 -(NSString *) getMiddleName;
 -(NSString *) getLastName;
--(NSString *) getNickName;
 -(NSString *) getEmail;
 -(NSString *) getUserName;
 -(NSString *) getPassword;
--(NSString *) getDateOfBirth;
 -(NSString *) getPhoneNumber;
 -(NSString *) getEmployerName;
 -(NSString *) getTypeOfEmployer;
@@ -58,11 +57,9 @@
 
 //mutators
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName;
--(void) setNickname:(NSString *) nicknameProvided;
 -(void) setEmail:(NSString *) emailProvided;
 -(void) setUserName:(NSString *) usernameProvided;
 -(void) setPassword:(NSString *) passwordProvided;
--(void) setDOB:(NSString *) dobProvided;
 -(void) setPhoneNumber:(NSString *) phoneProvided;
 -(void) setEmployerName:(NSString *) employerNameProvided;
 -(void) setTypeOfEmployer:(NSString *) typeOfEmployerProvided;

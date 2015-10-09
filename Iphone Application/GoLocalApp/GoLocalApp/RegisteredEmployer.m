@@ -27,11 +27,9 @@
 {
     accountType = @"Employer";
     [self setName:@" " withMiddleInitial:@" " andLastName:@" "];
-    [self setNickname:@" "];
     [self setEmail:@" "];
     [self setUserName:@" "];
     [self setPassword:@" "];
-    [self setDOB:@" "];
     [self setPhoneNumber:@" "];
     [self setTypeOfEmployer:@" "];
     [self setAddress:@" "];
@@ -53,11 +51,6 @@
     
 }//eom
 
--(void) setNickname:(NSString *) nicknameProvided
-{
-    nickName = nicknameProvided;
-}//eom
-
 -(void) setEmail:(NSString *) emailProvided
 {
     email = emailProvided;
@@ -71,12 +64,6 @@
 -(void) setPassword:(NSString *) passwordProvided
 {
     password = passwordProvided;
-}//eom
-
-
--(void) setDOB:(NSString *) dobProvided
-{
-    dateOfBirth = dobProvided;
 }//eom
 
     //view controller 1
@@ -145,12 +132,6 @@
 }//eom
 
 
--(NSString *) getNickName
-{
-    return nickName;
-}//eom
-
-
 -(NSString *) getEmail
 {
     return email;
@@ -164,11 +145,6 @@
 -(NSString *) getPassword
 {
     return password;
-}//eom
-
--(NSString *) getDateOfBirth
-{
-    return dateOfBirth;
 }//eom
 
 -(NSString *) getPhoneNumber
@@ -223,10 +199,16 @@
     NSLog(@" firstName:       %@", firstName);
     NSLog(@" middleName:      %@", middleName);
     NSLog(@" lastName:        %@", lastName);
-    NSLog(@" nickName:        %@", nickName);
     NSLog(@" email:           %@", email);
     NSLog(@" password:        %@", password);
-    NSLog(@" dob:             %@", dateOfBirth);
+    NSLog(@" phoneNumber:     %@", phoneNumber);
+    NSLog(@" employerName:    %@", employerName);
+    NSLog(@" typeOfEmployer:  %@", typeOfEmployer);
+    NSLog(@" address:         %@", address);
+    NSLog(@" city:            %@", city);
+    NSLog(@" zipCode:         %@", zipCode);
+    NSLog(@" state:           %@", state);
+    NSLog(@" hasInsurance:    %d", employerhasInsurance);
   
     
     NSLog(@" - - - - - - - - - - - - - ");
