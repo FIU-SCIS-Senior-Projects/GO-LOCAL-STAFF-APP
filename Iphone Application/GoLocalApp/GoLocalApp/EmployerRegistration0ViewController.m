@@ -17,24 +17,21 @@
 @interface EmployerRegistration0ViewController ()
 {
     RegisteredEmployer *registeredEmployer;
-    UIDatePicker * dobPickerView;
     
     __weak IBOutlet UILabel *firstNameLabel;
     __weak IBOutlet UILabel *MiddleNameLabel;
     __weak IBOutlet UILabel *LastNameLabel;
     __weak IBOutlet UILabel *UsernameLabel;
-    __weak IBOutlet UILabel *NicknameLabel;
     __weak IBOutlet UILabel *EmailLabel;
     __weak IBOutlet UILabel *ConfirmEmailLabel;
     __weak IBOutlet UILabel *PasswordLabel;
     __weak IBOutlet UILabel *ConfirmPasswordLabel;
-    __weak IBOutlet UILabel *DateOfBirthLabel;
 }
 @end
 
 @implementation EmployerRegistration0ViewController
 
-@synthesize firstName, middleName, lastName, nickName, username, email, confirmEmail, password, confirmPassword, dateOfBirth, dateOfBirthSelected, scrollView;
+@synthesize firstName, middleName, lastName, username, email, confirmEmail, password, confirmPassword, scrollView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,7 +44,6 @@
     
     [self setUpTapGesture];
     
-    [self createDatePickerForDOB];
 }//eom
 
 
@@ -56,7 +52,6 @@
 {
     BOOL emailFilled       = false;
     BOOL passwordFilled    = false;
-    BOOL dateofBirthFilled = false;
     BOOL validEmailFormat  = false;
     
     //checking for valid input
@@ -101,12 +96,6 @@
         // it's empty or contains only white spaces
         [self showAlert:@"Registration Field" withMessage:@"Please enter your desired username" and:@"Okay"];
         return 0;
-    }
-    
-    testing = nickName.text; //not required
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        nickName.text =@""; //clearing field
     }
     
     testing = email.text;
@@ -173,45 +162,11 @@
         return 0;
     }
     
-    if(self.dateOfBirth.hasText){
-        dateofBirthFilled = true;
-        
-        
-        NSString *currentDateString = self.dateOfBirth.text;
-        NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
-        [dateFormater setDateFormat:@"yyyy-MM-DD HH:mm:ss"];
-        NSDate *selectDate = [dateFormater dateFromString:currentDateString];
-        NSLog(@" selectDate %@", selectDate);
-        
-        //converted needed for nsstring
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MM-dd-yyyy"];
-        
-        //Optionally for time zone conversions
-        [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
-        
-        NSDate *selectedDate = [NSDate date]; //getting date from datepicker
-        
-        //updating dob NSstring to be sent to the next controller
-        NSString *todayCleanDate = [formatter stringFromDate:selectedDate];
-        
-        NSLog(@" today date is %@ and selected date is %@" ,todayCleanDate, self.dateOfBirth.text);
-        
-        
-    }
-    else {
-        [self scrollVievEditingFinished:dateOfBirth]; //take scroll to textfield so user can see their error
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your Date of Birth" and:@"Okay"];
-        return 0;
-    }
-    
     //updating values
     [registeredEmployer setName:self.firstName.text withMiddleInitial:self.middleName.text andLastName:self.lastName.text];
-    [registeredEmployer setNickname: self.nickName.text];
     [registeredEmployer setEmail:self.email.text];
     [registeredEmployer setUserName:self.username.text];
     [registeredEmployer setPassword:self.password.text];
-    [registeredEmployer setDOB:self.dateOfBirth.text];
     
     return 1;
 }//eom
@@ -243,7 +198,7 @@
     }
 }//eom
 
-/* Helper Methods */
+/********** Helper Methods **********/
         /* validating email */
         - (BOOL) validateEmail: (NSString *) candidate {
             NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
@@ -279,114 +234,6 @@
         - (void)dismissKeyboard:(UITapGestureRecognizer *)recognizer {
             [self.view endEditing:YES];
         }
-
-/****** UIDatePicker Methods ********/
-
-        /* creating a UiDatePicker for date of birth textfiled*/
-        -(void)createDatePickerForDOB
-        {
-            //calculating starting date for datepicker
-            NSDate *now = [NSDate date];
-            NSDateComponents *minusYears = [NSDateComponents new];
-            minusYears.year = -21;
-            NSDate *calculatedDate = [[NSCalendar currentCalendar] dateByAddingComponents:minusYears
-                                                                                   toDate:now
-                                                                                  options:0];
-            
-            // create a UIPicker view as a custom keyboard view
-            dobPickerView = [[UIDatePicker alloc] init];
-            [dobPickerView sizeToFit];
-            dobPickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-            [dobPickerView setDatePickerMode:UIDatePickerModeDate];
-            [dobPickerView setDate:calculatedDate];//setting starting date
-            self.dateOfBirth.inputView = dobPickerView;
-            
-            // creating toolbar for 'Cancel' and 'Done' actions
-            UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
-            keyboardDoneButtonView.barStyle = UIBarStyleBlack;
-            keyboardDoneButtonView.translucent = YES;
-            keyboardDoneButtonView.tintColor = nil;
-            [keyboardDoneButtonView sizeToFit];
-            
-            //creating empty UIBarItem to force first item to the right
-            UIBarButtonItem* empty1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-            
-            //creating 'Done' UIBarItem to be the exit point for the picker
-            UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                             style:UIBarButtonItemStyleBordered
-                                                                            target:self
-                                                                            action:@selector(cancelClicked:)];
-            
-            
-            //creating 'Done' UIBarItem to be the exit point for the picker
-            UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                           style:UIBarButtonItemStyleBordered
-                                                                          target:self
-                                                                          action:@selector(doneClicked:)];
-            
-            //adding UIBarItems to the Keyboard/DatePicker
-            [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
-            
-            // Plug the keyboardDoneButtonView into the text field
-            self.dateOfBirth.inputAccessoryView = keyboardDoneButtonView;
-        }//eom
-
-        //makes the date of birth first responder upon touching the uitextfield
-        - (void)setDateClicked:(id)sender
-        {
-            [self.dateOfBirth becomeFirstResponder];
-        }
-
-        //process the date selected after the user click cancel
-        //   and resign being the first reponsder
-        - (void)cancelClicked:(id)sender
-        {
-            [self.dateOfBirth resignFirstResponder];
-            
-            //update dob hidden field
-            if(self.dateOfBirth.text.length == 0)
-            {
-                [self->DateOfBirthLabel setHidden:YES];
-            }
-            else
-            {
-                [self->DateOfBirthLabel setHidden:NO];
-            }
-        }//eom
-
-        //process the date selected after the user click done
-        //   and resign being the first reponsder
-        - (void)doneClicked:(id)sender
-        {
-            [self.dateOfBirth resignFirstResponder];
-            
-            //converted needed for nsstring
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"MM-dd-yyyy"];
-            
-            //Optionally for time zone conversions
-            [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
-            
-            NSDate *selectedDate = [self->dobPickerView date]; //getting date from datepicker
-            
-            //updating dob NSstring to be sent to the next controller
-            self.dateOfBirthSelected = [formatter stringFromDate:selectedDate];
-            
-            //updating the texfield so the user can see the date selected
-            self.dateOfBirth.text = [formatter stringFromDate:selectedDate];
-            
-            
-            //update dob hidden field
-            if(self.dateOfBirth.text.length == 0)
-            {
-                [self->DateOfBirthLabel setHidden:YES];
-            }
-            else
-            {
-                [self->DateOfBirthLabel setHidden:NO];
-            }
-        }//eom
-
 
 /******** textfields  functions********/
 
@@ -452,17 +299,6 @@
                 else
                 {
                     [self->UsernameLabel setHidden:NO];
-                }
-            }
-            else if(labelID == 4)//nickname
-            {
-                if(self.nickName.text.length == 0)
-                {
-                    [self->NicknameLabel setHidden:YES];
-                }
-                else
-                {
-                    [self->NicknameLabel setHidden:NO];
                 }
             }
             else if(labelID == 5)//email
@@ -537,10 +373,6 @@
             else if(textField == self.username){
                 [self.username resignFirstResponder];
                 [self.nickName becomeFirstResponder];
-            }
-            else if(textField == self.nickName){
-                [self.nickName resignFirstResponder];
-                [self.email becomeFirstResponder];
             }
             else if(textField == self.email){
                 [self.email resignFirstResponder];

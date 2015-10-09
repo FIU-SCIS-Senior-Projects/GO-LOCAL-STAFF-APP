@@ -51,7 +51,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
         $registrationType = $decoded["registrationType"];
         $userID           = $decoded["userID"];
         $codeFromUser     = $decoded["code"];
-        $phone     = $decoded["phone"];
+        $phone            = $decoded["phone"];
 
         $smsResults = verifySmsCode($registrationType, $userID, $codeFromUser, $phone);
         // echo "<p>results: $smsResults</p>";
