@@ -389,6 +389,7 @@
             else if(textField == self.confirmPassword){
                 [self.confirmPassword resignFirstResponder];
             }
+
             return YES;
         }//eom
 
