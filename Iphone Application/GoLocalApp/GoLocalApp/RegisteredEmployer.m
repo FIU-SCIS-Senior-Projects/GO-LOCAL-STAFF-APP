@@ -32,6 +32,7 @@
     [self setUserName:@" "];
     [self setPassword:@" "];
     [self setDOB:@" "];
+    [self setPhoneNumber:@" "];
 
 }
 
@@ -70,6 +71,12 @@
 {
     dateOfBirth = dobProvided;
 }//eom
+
+    //view controller 1
+-(void) setPhoneNumber:(NSString *)phoneProvided
+{
+    phoneNumber = phoneProvided;
+}
 
 
 
@@ -122,6 +129,11 @@
 {
     return dateOfBirth;
 }//eom
+
+-(NSString *) getPhoneNumber
+{
+    return phoneNumber;
+}
 
 
 

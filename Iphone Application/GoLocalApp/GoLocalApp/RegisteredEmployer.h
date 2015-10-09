@@ -23,6 +23,12 @@
     NSString *password;
     NSString *dateOfBirth;
     
+    //view controller 1
+    NSString *phoneNumber;
+    
+    //view controller 2
+    NSString *employerName;
+    
 }
 
 //accessors
@@ -35,6 +41,7 @@
 -(NSString *) getUserName;
 -(NSString *) getPassword;
 -(NSString *) getDateOfBirth;
+-(NSString *) getPhoneNumber;
 
 //mutators
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName;
@@ -43,6 +50,7 @@
 -(void) setUserName:(NSString *) usernameProvided;
 -(void) setPassword:(NSString *) passwordProvided;
 -(void) setDOB:(NSString *) dobProvided;
+-(void) setPhoneNumber:(NSString *) phoneProvided;
 
 -(void) printUserData;
 @end

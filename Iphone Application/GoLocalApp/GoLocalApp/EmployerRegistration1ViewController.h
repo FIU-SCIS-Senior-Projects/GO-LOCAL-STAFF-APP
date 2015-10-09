@@ -16,6 +16,16 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
+@property (weak, nonatomic) IBOutlet UILabel *verificationCodeMessage;
+@property (weak, nonatomic) IBOutlet UILabel *verificationCodeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *verificationCodeAsterisk;
+@property (weak, nonatomic) IBOutlet UITextField *cellphoneField;
+@property (weak, nonatomic) IBOutlet UITextField *verificationCodeField;
+@property (weak, nonatomic) IBOutlet UIButton *verificationCodeButton;
+
 - (IBAction)submit:(id)sender;
+- (IBAction)verifyNumber:(id)sender;
+- (IBAction)verifyCode:(id)sender;
 
 @end

@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class RegisteredEmployer;
 
 @interface EmployerRegistration2ViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (strong, nonatomic) RegisteredEmployer *registeredEmployer;
+
 
 - (IBAction)submit:(id)sender;
 
