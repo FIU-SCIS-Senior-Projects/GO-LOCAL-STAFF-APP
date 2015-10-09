@@ -394,14 +394,11 @@
 
     /* SMS Authentication, part 1 :
      sends:
-     registrationType = Staff;
-     carrier = usCelular;
-     dob = "09-08-1994";
+     registrationType = Employer;
      email = "Luoandre29@yahoo.com";
      firstName = Luis;
      lastName = Castillo;
      middleName = a;
-     nickName = Lu;
      password = poiuytrewq;
      phone = 3056099250;
      username = Luandre28;
@@ -412,9 +409,9 @@
         
         
         /*** preparing data to be sent ***/
-        NSMutableDictionary * staffInfo = [self preparePhotoNumberData];
+        NSMutableDictionary * employerInfo = [self preparePhotoNumberData];
         NSLog(@"");
-        NSLog(@" about to send the following data: %@", staffInfo);
+        NSLog(@" about to send the following data: %@", employerInfo);
         NSLog(@"");
         
         /*** Sending data ***/
@@ -425,7 +422,7 @@
         
         //sending data
         NSError *error;
-        NSData *postdata = [NSJSONSerialization dataWithJSONObject:staffInfo options:0 error:&error];
+        NSData *postdata = [NSJSONSerialization dataWithJSONObject:employerInfo options:0 error:&error];
         
         [request setHTTPBody:postdata];
         
@@ -508,9 +505,11 @@
         finalList[@"registrationType"]      = [registeredEmployer getAccountType];
         finalList[@"userID"]                = userID;
         finalList[@"code"]                  = self.verificationCodeField.text;
+        finalList[@"phone"]                 = self.cellphoneField.text;
         
         return finalList;
     }//eom
+
 
 
 
