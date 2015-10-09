@@ -471,8 +471,8 @@
             finalList[@"middleName"]    = [registeredStaff getMiddleName];
             finalList[@"lastName"]      = [registeredStaff getLastName];
             finalList[@"nickName"]      = [registeredStaff getNickName];
-            finalList[@"email"]         = [registeredStaff getEmail];
             finalList[@"username"]      = [registeredStaff getUserName];
+            finalList[@"email"]         = [registeredStaff getEmail];
             finalList[@"password"]      = [registeredStaff getPassword];
             finalList[@"dob"]           = [registeredStaff getDateOfBirth];
             

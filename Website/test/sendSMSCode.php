@@ -1,20 +1,17 @@
 <?php  
 
 
-// $url = 'http://localhost:8888/FIU%20CLASSES/Senior%20Project%20Stuff/Final%20Deliverables/GO-LOCAL-STAFF-APP/Website/jsonPOST_smsCode.php';
-
-//LIVE
-$url = 'http://45.55.208.175/Website/jsonPOST_smsCode.php';
+include 'urlsettings.php';
 
 
 //Initiate cURL.
-$ch = curl_init($url);
+$ch = curl_init($url_sendSMSCode);
 
     //valid staff user
     $jsonData = [
       "registrationType"  => "Staff",
-      "userID" => "13",
-      "code" => "4035"
+      "userID" => "1",
+      "code" => "1044"
       ];
 
     // //valid staff user

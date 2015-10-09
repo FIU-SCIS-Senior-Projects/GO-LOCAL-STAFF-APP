@@ -200,7 +200,7 @@
            NSLog(@"languages are %@", self->languages);
     
         //updating values
-        [registeredStaff setAddress:self->completeAddress];
+        [registeredStaff setAddress:self->completeAddress withCity:self.city.text withZipcode:self.zipcode.text andState:self.state.text];
         [registeredStaff setGender:self->gender];
         [registeredStaff setLanguages:self->languages];
     

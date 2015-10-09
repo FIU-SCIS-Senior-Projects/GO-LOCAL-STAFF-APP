@@ -192,6 +192,9 @@
             
             //adding view controller 2 info
             finalList[@"address"]               = [registeredStaff getAddress];
+            finalList[@"city"]               = [registeredStaff getAddressCity];
+            finalList[@"state"]               = [registeredStaff getAddressState];
+            finalList[@"zipcode"]               = [registeredStaff getAddressZipcode];
             finalList[@"gender"]                = [registeredStaff getGender];
             finalList[@"genderType"]            = [NSString stringWithFormat:@"%d", [registeredStaff isMale]];
             finalList[@"languages"]             = [registeredStaff getLanguages];
@@ -257,6 +260,7 @@
                 if([registeredStaff getEthnicity])
                 {
                     finalList[@"ethnicity"]             = [registeredStaff getEthnicity];
+                    finalList[@"ethnicityCode"]         = [registeredStaff getEthnicityCode];
                 }
                 
                 if([registeredStaff getHeight])
@@ -270,6 +274,7 @@
                 }
                 
                 finalList[@"eyeColor"]              = [registeredStaff getEyeColor];
+                finalList[@"hairColor"]             = [registeredStaff getHairColor];
                 finalList[@"pantSize"]              = [registeredStaff getPantSize];
                 finalList[@"shoeSize"]              = [registeredStaff getShoeSize];
                 finalList[@"tshirtSize"]            = [registeredStaff getTshirtSize];

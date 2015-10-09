@@ -1,14 +1,9 @@
 <?php  
 
-//$url = 'http://localhost:8888/FIU%20CLASSES/Senior%20Project%20Stuff/Final%20Deliverables/GO-LOCAL-STAFF-APP/Website/jsonPOST_sms.php';
-
-
-//LIVE
- $url = 'http://45.55.208.175/Website/jsonPOST_sms.php';
-
+include 'urlsettings.php';
 
 //Initiate cURL.
-$ch = curl_init($url);
+$ch = curl_init($url_sendSMS);
 
     // //valid staff user
     // $jsonData = [
@@ -36,8 +31,7 @@ $ch = curl_init($url);
       "username" => "luoandre29",
       "password" => "0987654321",
       "dob" => "11/29/1987",
-      "phone" => "3056099250",
-      "carrier" => "aoi",
+      "phone" => "3056099250"
       ];
 
  

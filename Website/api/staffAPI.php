@@ -2,134 +2,6 @@
 
 /************************** Staff methods **********************/
 
-    /* register a staff 
-      returns 
-            1   successfully register
-            0   database not responding
-            -2  unsuccessfully register   - unable to hash password
-            -3  unsuccessfully register   -
-            -6  successfully register   - unable to email user
-    */
-    function registerStaff($registrationData)
-    {
-          $dbConnection = connectToDB();
-          if(!$dbConnection)
-          {
-    //        echo "Unable to connect to MySQL.".PHP_EOL;
-            return 0;
-          }
-
-          //data
-          $username = $registrationData['username'];
-          $password = $registrationData['password'];
-          $email    = $registrationData['email'];
-        
-          //hash password for security
-          $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
-          if(!$passwordHashed)
-          {
-  //          echo "<p>failure hashing password $password</p>";
-            return -2;
-          }
-          
-            // attempting to save user as a 'registered_staff'
-            $query = "INSERT INTO registered_staff (username, password, email)
-                      VALUES ( '$username', '$passwordHashed', '$email' )";  
-
-            //perform query
-            $result = mysqli_query($dbConnection, $query);
-//            echo "<p> registered_staff results ".$result."</p>";
-            if($result)
-            {
-                //data
-                $resultkey    = $dbConnection->insert_id;
-                $firstName    = $registrationData['firstName'];
-                $middleName   = $registrationData['middleName'];
-                $lastName     = $registrationData['lastName'];
-                $nickname     = $registrationData['nickname'];
-                $email        = $registrationData['email'];
-                $password     = $registrationData['password'];
-                $cellphone    = $registrationData['cellphone'];
-                $address      = $registrationData['address'];
-                $city         = $registrationData['city'];
-                $state        = $registrationData['state'];
-                $address      = "$address $city, $state";
-                $djSelected                     = $registrationData['djSelected'];//
-                $liveBandSelected               = $registrationData['liveBandSelected'];//
-                $cateringCompanySelected        = $registrationData['cateringCompanySelected'];//
-                $otherServices                  = $registrationData['otherServices'];//
-                $djDescription                  = $registrationData['djDescription'];//
-                $djWebsite                      = $registrationData['djWebsite'];//
-                $djSocialMedia                  = $registrationData['djSocialMedia'];//
-                $liveBandDescription            = $registrationData['liveBandDescription'];//
-                $liveBandWebsite                = $registrationData['liveBandWebsite'];//
-                $liveBandSocialMedia            = $registrationData['liveBandSocialMedia'];//
-                $cateringCompanyDescription     = $registrationData['cateringCompanyDescription'];//
-                $cateringCompanyWebsite         = $registrationData['cateringCompanyWebsite'];//
-                $cateringCompanySocialMedia     = $registrationData['cateringCompanySocialMedia'];//
-                $otherServicesDescription       = $registrationData['otherServicesDescription'];//
-                $otherServicesBandWebsite       = $registrationData['otherServicesBandWebsite'];//
-                $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
-                $dob              = $registrationData['dob'];
-                $email            = $registrationData['email'];
-                $gender           = $registrationData['gender'];
-                $languages        = $registrationData['languages'];
-                $typeOfLicense    = $registrationData['typeOfLicense'];
-                $ethnicity        = $registrationData['ethnicity'];
-                $height           = $registrationData['height'];
-                $weight           = $registrationData['weight'];
-                $hairColor        = $registrationData['hairColor'];
-                $eyeColor         = $registrationData['eyeColor'];
-                $tshirtSize       = $registrationData['tshirtSize'];
-                $pantSize         = $registrationData['pantSize'];
-                $chestSize        = $registrationData['chestSize'];
-                $waistSize        = $registrationData['waistSize'];
-                $hipSize          = $registrationData['hipSize'];
-                $dressSize        = $registrationData['dressSize'];
-                $shoeSize         = $registrationData['shoeSize'];
-
-                $tattoos            = $registrationData['tattoos'];
-                $piercings          = $registrationData['piercings'];
-                $ssn          = $registrationData['ssn'];
-                $ein          = $registrationData['ein'];
-                $ssnOrEin = $ein;
-                if(  is_null($ssnOrEin) )
-                {
-                  $ssnOrEin = $ssn;
-                }
-                
-                $business_name      = $registrationData['business_name']; //missing in database!!!
-                $desiredHourlyRate  = $registrationData['desiredHourlyRate'];//?
-                $desiredWeeklyRate  = $registrationData['desiredWeeklyRate'];//?
-                $travel             = $registrationData['travel'];
-
-                $experience         = $registrationData['experience'];//?  staffType
-
-                $DirectDepositRoutingNumber   = $registrationData['DirectDepositRoutingNumber'];
-                $DirectDepositAccountNumber   = $registrationData['DirectDepositAccountNumber'];
-
-            // query for 'people' table
-            $query1 = "INSERT INTO people ( peopleID, staffType, firstName , middleInitial, lastName, nickname, email,address,phone,profession,website,socialMedia, pictures, dateOfBirth,gender,languages,typeDL,ethnicity,height,weight,hairColor,eyeColor,shirtSize,pantSize,chestSize,waistSize,hipSize,dressSize,shoeSize,tattoos,piercings,desiredHourlyRate,desiredWeeklyRate,ssnOrEin,travel,insurance,insuranceDocuments, bankRouting, accountNumber, resume )
-                      VALUES ( $resultkey, 0, '$firstName', '$middleName', '$lastName', '$nickname', '$email','$address', '$cellphone', 0,'website','social media', 'pictures', '$dob','$gender','$languages', $typeOfLicense, $ethnicity, $height, $weight, '$hairColor', '$eyeColor','$tshirtSize', $pantSize, $chestSize, $waistSize, $hipSize, $dressSize, $shoeSize, $tattoos, $piercings , 30, 3000, $ssnOrEin, $travel,0,'insuranceDocuments', '$DirectDepositRoutingNumber', '$DirectDepositAccountNumber', 'resume' ) "; 
-
-            echo "<p>$query1</p>";
-            //perform query
-            $result2 = mysqli_query($dbConnection, $query1);
-              echo "<p> people results ".$result2." with id $dbConnection->insert_id</p>";
-            }
-
-            /*emailing user */
-            $emailResult  = emailStaff($email);
-            echo "<p>email results $emailResult</p>";
-            if($emailResult != 1)
-            {
-              echo "email failed";
-              return -6;
-            }
-
-          return 1; //successfully register
-    }//eom
-
     /* emails staff */
     function emailStaff($email)
     {
@@ -189,23 +61,22 @@
         return 0;
       }
 
-      $fname            = $staffInfo["firstName"];
-      $middleN          = $staffInfo["middleName"];
-      $lname            = $staffInfo["lastName"];
-      $nickname         = $staffInfo["nickName"];
-      $emailProvided    = $staffInfo["email"];
-      $usernameProvided = $staffInfo["username"];
-      $pasword          = $staffInfo["password"];
-      $dob              = $staffInfo["dob"];
-      $carrier          = $staffInfo["carrier"];
-      $phone            = $staffInfo["phone"];
+      $fname            = $staffInfo["firstName"];//
+      $middleInitial    = $staffInfo["middleName"];//
+      $lname            = $staffInfo["lastName"];//
+      $nickname         = $staffInfo["nickName"];//
+      $usernameProvided = $staffInfo["username"];//
+      $emailProvided    = $staffInfo["email"];//
+      $pasword          = $staffInfo["password"];//
+      $dob              = $staffInfo["dob"];//
+      $phone            = $staffInfo["phone"];//
       $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
       $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
       $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
       $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
 
-      $query = "INSERT INTO registered_staff ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, address, phone)
-            VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$address."', '".$phone."')";
+      $query = "INSERT INTO registered_staff ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, phone, dateOfBirth)
+            VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$phone."', '".$dob."')";
   
       $result = mysqli_query($dbConnection, $query);
       if($result)
@@ -230,7 +101,10 @@
 
   /* registers staff user info 
       returns:
-        0 database not responding
+        1   successfully register
+        0   database not responding
+        -1  Unable to register user
+        -10 invalid registration type
     */
   function registerStaffUser($staffInfo)
   {
@@ -241,7 +115,116 @@
         return 0;
       }
 
-      //checking that user already exist
+      //these fields were already saved
+      $firstName                      = $registrationData['firstName'];
+      $middleName                     = $registrationData['middleName'];
+      $lastName                       = $registrationData['lastName'];
+      $nickname                       = $registrationData['nickname'];
+      $email                          = $registrationData['email'];
+      $password                       = $registrationData['password'];
+      $cellphone                      = $registrationData['phone'];
+      $dob                            = $registrationData['dob'];
+
+      //gathering fields to save
+      $address                        = $registrationData['address'];
+      $city                           = $registrationData['city'];
+      $state                          = $registrationData['state'];
+      $zipcode                        = $registrationData['zipcode'];
+      $ethnicity                      = $registrationData['ethnicity'];
+      $ethnicityCode                  = $registrationData['ethnicityCode'];
+      $languages                      = $registrationData['languages'];
+      $tshirtSize                     = $registrationData['tshirtSize'];
+      $tattoos                        = $registrationData['tattoos'];
+      $eyeColor                       = $registrationData['eyeColor'];
+      $hairColor                      = $registrationData['hairColor'];
+      $piercings                      = $registrationData['piercings'];     
+      $height                         = $registrationData['height'];
+      $weight                         = $registrationData['weight'];
+      $gender                         = $registrationData['genderType'];//0 female | 1 male
+      if($gender == 0) //females only
+      {
+        $chestSize                      = $registrationData['chestSize'];
+        $waistSize                      = $registrationData['waistSize'];
+        $hipSize                        = $registrationData['hipSize'];
+        $dressSize                      = $registrationData['dressSize'];
+      }
+
+      $pantSize                       = $registrationData['pantSize'];
+      $shoeSize                       = $registrationData['shoeSize'];
+
+      $hasCommercialLicense           = $registrationData['commercialLicense']; 
+      $hasDriverLicense               = $registrationData['driverLicense']; 
+      if( $hasCommercialLicense == 0 && $hasDriverLicense == 0 )
+      {
+        $typeOfLicense = -1; //no license
+      }
+      else if( $hasCommercialLicense == 1 && $hasDriverLicense == 0 )
+      {
+        $typeOfLicense = 1; //commercial License
+      }
+      else if( $hasCommercialLicense == 1 && $hasDriverLicense == 1 )
+      {
+        $typeOfLicense = 1; //commercial License
+      }
+      else if( $hasCommercialLicense == 0 && $hasDriverLicense == 1 )
+      {
+        $typeOfLicense = 0; //regular driver License
+      }
+
+
+
+      $travel                  = $registrationData['travelPercentage'];
+      $Incorporated                      = $registrationData['Incorporated'];
+      if($Incorporated)
+      {
+        $ssnOrEin                        = $registrationData['ein'];
+        $business_name                   = $registrationData['business_name'];
+      }
+      else
+      {
+        $ssnOrEin                        = $registrationData['ssn'];
+        $business_name                   = " ";
+      }
+
+      $hasProfessionalInsurance          = $registrationData['ProfessionalInsurance'];
+
+
+      $desiredHourlyRate              = $registrationData['desiredHourlyRate'];
+      $desiredWeeklyRate              = $registrationData['desiredWeeklyRate'];
+
+      $DirectDeposit                  = $registrationData['DirectDeposit'];
+      if($DirectDeposit)
+      {
+        $DirectDepositRoutingNumber     = $registrationData['DirectDepositRoutingNumber'];
+        $DirectDepositAccountNumber     = $registrationData['DirectDepositAccountNumber'];
+      }
+      else
+      {
+        $DirectDepositRoutingNumber     = " ";
+        $DirectDepositAccountNumber     = " ";
+      }
+
+      //experiences
+      // $experience                      = $registrationData['experience'];//???????
+
+
+      // $djSelected                     = $registrationData['djSelected'];//
+      // $liveBandSelected               = $registrationData['liveBandSelected'];//
+      // $cateringCompanySelected        = $registrationData['cateringCompanySelected'];//
+      // $otherServices                  = $registrationData['otherServices'];//
+      // $djDescription                  = $registrationData['djDescription'];//
+      // $djWebsite                      = $registrationData['djWebsite'];//
+      // $djSocialMedia                  = $registrationData['djSocialMedia'];//
+      // $liveBandDescription            = $registrationData['liveBandDescription'];//
+      // $liveBandWebsite                = $registrationData['liveBandWebsite'];//
+      // $liveBandSocialMedia            = $registrationData['liveBandSocialMedia'];//
+      // $cateringCompanyDescription     = $registrationData['cateringCompanyDescription'];//
+      // $cateringCompanyWebsite         = $registrationData['cateringCompanyWebsite'];//
+      // $cateringCompanySocialMedia     = $registrationData['cateringCompanySocialMedia'];//
+      // $otherServicesDescription       = $registrationData['otherServicesDescription'];//
+      // $otherServicesBandWebsite       = $registrationData['otherServicesBandWebsite'];//
+      // $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
+      
 
   }//eom
 

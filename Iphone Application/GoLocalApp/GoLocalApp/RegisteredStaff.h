@@ -25,6 +25,9 @@
     //view controller 2
     NSString *cellphone;
     NSString *completeAddress;
+    NSString *addressState;
+    NSString *addressCity;
+    NSString *addressZipcode;
     bool genderType; //0-female | 1 -male
     NSString *gender;
     NSString *languages;
@@ -63,6 +66,7 @@
     BOOL hasTattoos;
     BOOL hasPiercings;
     NSString *ethnicity;
+    NSString *ethnicityCode;
     NSString *height;
     NSString *weight;
     NSString *hairColor;
@@ -111,6 +115,9 @@
 -(NSString *) getDateOfBirth;
 -(NSString *) getCellPhone;
 -(NSString *) getAddress;
+-(NSString *) getAddressCity;
+-(NSString *) getAddressZipcode;
+-(NSString *) getAddressState;
 -(NSString *) getGender;
 -(NSString *) getLanguages;
 -(NSMutableArray *) getExperience;
@@ -124,6 +131,7 @@
 -(BOOL) hasTattoos;
 -(BOOL) hasPiercings;
 -(NSString *) getEthnicity;
+-(NSString *) getEthnicityCode;
 -(NSString *) getHeight;
 -(NSString *) getWeight;
 -(NSString *) getHairColor;
@@ -161,7 +169,7 @@
 -(void) setCellphone:(NSString *) cellphoneProvided;
 
     //controller 2
--(void) setAddress:(NSString *) addressProvided;
+-(void) setAddress:(NSString *) address withCity:(NSString*)cityReceived withZipcode:(NSString*)zipcodeReceived andState:(NSString *)stateReceived;
 -(void) setGender:(bool) genderProvided;
 -(void) setLanguages:(NSString *) languagesProvided;
 
@@ -180,7 +188,7 @@
 -(void) setLicenseInfo:(BOOL) driverLicense hasCommercialLicense:(BOOL) commercialLicense;
 -(void) setTattoos:(BOOL) tattoosSelected;
 -(void) setPiercings:(BOOL) piercingsSelected;
--(void) setEthnicity:(NSString *) ethnicitySelected;
+-(void) setEthnicity:(NSString *) ethnicitySelected withCode:(NSString *) ethnicityCodeProvided;
 -(void) setHeight:(NSString *) heightProvided;
 -(void) setWeight:(NSString *) weightProvided;
 -(void) setHairColor:(NSString *) hairColorProvided;

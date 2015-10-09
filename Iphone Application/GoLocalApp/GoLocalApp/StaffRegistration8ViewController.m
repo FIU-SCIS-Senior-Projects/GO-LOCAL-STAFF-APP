@@ -16,6 +16,7 @@
 @interface StaffRegistration8ViewController ()
 {
     BOOL male;
+    NSString * ethinicityCode;
     
     //updating values
     NSString * heightFeet;      //temp
@@ -79,7 +80,7 @@
     [self createTshirtSizePicker];
     [self createHeightPicker];
     
-    [registeredStaff printUserData];//testing
+//    [registeredStaff printUserData];//testing
 }//eom
 
 
@@ -234,7 +235,7 @@
     [registeredStaff setLicenseInfo:self->hasDriverLicense hasCommercialLicense:self->hasCommercialLicense];
     [registeredStaff setTattoos:self->hasTattos];
     [registeredStaff setPiercings:self->hasPiercings];
-    [registeredStaff setEthnicity:self.ethnicityTextField.text];
+    [registeredStaff setEthnicity:self.ethnicityTextField.text withCode:self->ethinicityCode];
     [registeredStaff setHeight:self.heightTextField.text];
     [registeredStaff setWeight:self.weightTextField.text];
     [registeredStaff setHairColor:self.hairColorTextField.text];
@@ -808,6 +809,7 @@
             {
                 //updating values
                 self->ethnicityTextField.text = [ethnicityOptions objectAtIndex:row];
+                self->ethinicityCode = [NSString stringWithFormat:@"%ld",(long)row];
                 
                 //updating hidden label
                 if(self.ethnicityTextField.text.length == 0)

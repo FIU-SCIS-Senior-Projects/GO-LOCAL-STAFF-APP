@@ -300,7 +300,7 @@ function registerUser( $registrationType, $userInfo)
   }
   else 
   {
-    return -10
+    return -10;
   }
 }//eom
 
