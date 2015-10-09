@@ -13,8 +13,8 @@ $ch = curl_init($url);
     //valid staff user
     $jsonData = [
       "registrationType"  => "Staff",
-      "userID" => "3",
-      "code" => "5273"
+      "userID" => "13",
+      "code" => "4035"
       ];
 
     // //valid staff user

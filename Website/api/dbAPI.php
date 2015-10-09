@@ -171,13 +171,13 @@ function isUserRegistrationUnique( $registrationType, $usernameProvided, $emailP
     $rowResult = array_filter($row);
     if (empty($rowResult))
     {
-      print_r($row);
+      // print_r($row);
     //  echo "<p>username and email is unique</p>";
       return 1;
     }
     else
     {
-      print_r($row);
+      // print_r($row);
       //echo "<p>username and email is NOT unique</p>";
       return -1;
     }
