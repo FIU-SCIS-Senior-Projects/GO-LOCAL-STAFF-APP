@@ -37,7 +37,7 @@
     [self setUserName:@" "];
     [self setPassword:@" "];
     [self setDOB:@" "];
-    [self setCellphone:@" " withCarrier:@" "];
+    [self setCellphone:@" "];
     [self setAddress:@" "];
     [self setGender:0];
     [self setLanguages:@" "];
@@ -108,11 +108,9 @@
 }//eom
 
     //view controller 1
--(void)setCellphone:(NSString *) cellphoneProvided withCarrier:(NSString *) carrierProvided
+-(void)setCellphone:(NSString *) cellphoneProvided
 {
-    cellphoneCarrier = carrierProvided;
     cellphone = cellphoneProvided;
-    
 }//eom
 
     //view controller 2
@@ -403,11 +401,6 @@
 -(NSString *) getCellPhone
 {
     return cellphone;
-}//eom
-
--(NSString *) getCellPhoneCarrier
-{
-    return cellphoneCarrier;
 }//eom
 
 -(NSString *) getAddress

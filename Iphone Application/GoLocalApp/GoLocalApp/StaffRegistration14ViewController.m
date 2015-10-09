@@ -183,7 +183,6 @@
             
             //adding view controller 1 info
             finalList[@"cellphone"]             = [registeredStaff getCellPhone];
-            finalList[@"cellphoneCarrier"]      = [registeredStaff getCellPhoneCarrier];
             
             
             NSLog(@"After view controller 1");

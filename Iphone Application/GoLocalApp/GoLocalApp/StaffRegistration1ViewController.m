@@ -365,7 +365,7 @@
     {
         
         NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        NSLog(@"[1] from server replied: %@",rawExhibits);
+//        NSLog(@"[1] from server replied: %@",rawExhibits);
         
 //        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 //        NSLog(@"[2] responce from server %@",dataResponce);

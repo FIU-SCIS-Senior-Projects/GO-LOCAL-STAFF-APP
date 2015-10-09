@@ -24,7 +24,6 @@
 
     //view controller 2
     NSString *cellphone;
-    NSString *cellphoneCarrier;
     NSString *completeAddress;
     bool genderType; //0-female | 1 -male
     NSString *gender;
@@ -111,7 +110,6 @@
 -(NSString *) getPassword;
 -(NSString *) getDateOfBirth;
 -(NSString *) getCellPhone;
--(NSString *) getCellPhoneCarrier;
 -(NSString *) getAddress;
 -(NSString *) getGender;
 -(NSString *) getLanguages;
@@ -160,7 +158,7 @@
 -(void) setDOB:(NSString *) dobProvided;
 
     //controller 1
--(void) setCellphone:(NSString *) cellphoneProvided withCarrier:(NSString *) carrierProvided;
+-(void) setCellphone:(NSString *) cellphoneProvided;
 
     //controller 2
 -(void) setAddress:(NSString *) addressProvided;
