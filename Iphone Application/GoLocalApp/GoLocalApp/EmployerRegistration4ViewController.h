@@ -11,9 +11,8 @@
 
 @interface EmployerRegistration4ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (strong, nonatomic) RegisteredEmployer *registeredEmployer;
+@property (weak, nonatomic) IBOutlet UISwitch *termsSwitch;
 
 - (IBAction)submit:(id)sender;
 
