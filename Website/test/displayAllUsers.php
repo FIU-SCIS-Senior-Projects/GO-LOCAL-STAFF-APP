@@ -25,7 +25,8 @@
           </tr>
           <?php
    		     
-           require '../API.php';          
+          require '../API.php';/* adding API */  
+
           $registerStaff = getAllStaff();
           $totalStaff = count($registerStaff);
           
@@ -388,19 +389,19 @@
             for( $iter = 0; $iter < $totalEmployers; $iter++ )
             {
               $currentRow = $registerEmployers[$iter];
-              $companyID = $currentRow['companyID'];
+              $employerID = $currentRow['employerID'];
           ?>
               <tr>
                 <td> 
-                  <?php print '<div id="registeredStaffCollapse_'.$companyID.'">'; ?>
-                  <?php print '<a class="btn btn-primary" href="#registeredStaff'.$companyID.'" data-toggle="collapse">'; ?> 
-                      <?php echo $companyID; ?> 
+                  <?php print '<div id="registeredStaffCollapse_'.$employerID.'">'; ?>
+                  <?php print '<a class="btn btn-primary" href="#registeredStaff'.$employerID.'" data-toggle="collapse">'; ?> 
+                      <?php echo $employerID; ?> 
                     </a>
                   </div>
                 </td>
                 <td>  
                   <label class="radio-inline">
-                    <?php print '<input type="radio"  name="employer" value ="'.$companyID.'" >'; ?>
+                    <?php print '<input type="radio"  name="employer" value ="'.$employerID.'" >'; ?>
                   </label>
                 </td>            
                 <td> <?php echo $currentRow['username']; ?> </td> 

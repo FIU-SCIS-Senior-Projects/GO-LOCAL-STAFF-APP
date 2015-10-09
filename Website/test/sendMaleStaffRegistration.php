@@ -1,12 +1,10 @@
 <?php
  
-//API Url
-$url = 'http://localhost:8888/FIU%20CLASSES/Senior%20Project%20Stuff/Final%20Deliverables/GO-LOCAL-STAFF-APP/Website/jsonPOST_registration.php';
+include 'urlsettings.php';
 
-// $url = 'http://45.55.208.175/Website/jsonPOST_registration.php';
  
 // //Initiate cURL.
-$ch = curl_init($url);
+$ch = curl_init($url_sendMaleRegistration);
  
 // //The JSON data.
 // $jsonData = array(
@@ -91,7 +89,11 @@ $jsonData = array (
     'dob' => '08-09-1994',
     'cellphone' => '3056099250',
     'address' => '2710 W 64 PL Miami FL 33016',
+    'city' => 'Miami',
+    'state' => 'FL',
+    'zipcode' => '33016',
     'ethnicity' => 'Latino or Hispanic American',
+    'ethnicityCode' => '2',
     'languages' => 'English Spanish ',
     'experience' => 
     array (
@@ -99,11 +101,12 @@ $jsonData = array (
     'tshirtSize' => 'M',
     'Tattoos' => '0',
     'eyeColor' => 'Brown',
+    'hairColor' => 'Black',
     'Piercings' => '0',
     'height' => '5\'5"',
+    'weight' => '150',  
     'gender' => 'Male',
     'genderType' => '1',
-    'weight' => '150',  
     'pantSize' => '30',
     'shoeSize' => '9.5',
     'commercialLicense' => '0',
