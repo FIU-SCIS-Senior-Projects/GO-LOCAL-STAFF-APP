@@ -30,7 +30,7 @@ function loginRegisteredUser($username, $email , $password )
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-        echo "Unable to connect to MySQL.".PHP_EOL;
+//        echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
      
@@ -145,7 +145,7 @@ function isUserRegistrationUnique( $registrationType, $usernameProvided, $emailP
     $dbConnection = connectToDB();
     if(!$dbConnection)
     {
-      echo "Unable to connect to MySQL.".PHP_EOL;
+  //    echo "Unable to connect to MySQL.".PHP_EOL;
       return 0;
     }
 
@@ -172,13 +172,13 @@ function isUserRegistrationUnique( $registrationType, $usernameProvided, $emailP
     if (empty($rowResult))
     {
       print_r($row);
-      echo "<p>username and email is unique</p>";
+    //  echo "<p>username and email is unique</p>";
       return 1;
     }
     else
     {
       print_r($row);
-      echo "<p>username and email is NOT unique</p>";
+      //echo "<p>username and email is NOT unique</p>";
       return -1;
     }
 }//eom
@@ -246,7 +246,7 @@ function verifySmsCode($registrationType, $userID, $code )
     $dbConnection = connectToDB();
     if(!$dbConnection)
     {
-      echo "Unable to connect to MySQL.".PHP_EOL;
+      //echo "Unable to connect to MySQL.".PHP_EOL;
       return 0;
     }
 

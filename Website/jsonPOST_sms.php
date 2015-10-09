@@ -55,21 +55,21 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
      $email            = $decoded["email"];
      $phone            = $decoded["phone"];
 
-     echo "<p>registration Type: $registrationType</p>";
+//     echo "<p>registration Type: $registrationType</p>";
 
       //verify user is unique
      $uniqueResult = isUserRegistrationUnique($registrationType, $username, $email);
-     echo "<p>should we register this user? $uniqueResult</p>";
+   //  echo "<p>should we register this user? $uniqueResult</p>";
      if($uniqueResult == 1)
      {
       //saving user initial information
         $userID = storeUserCredentials( $registrationType, $decoded );
-        echo "<p> userID: $userID</p>";
+ //       echo "<p> userID: $userID</p>";
         if($userID > 0)
         {
                     //authenticating phone number
          $phoneResult = authenticateUserPhoneNumber($registrationType, $userID, $phone );
-         echo "<p> authentication results $phoneResult</p>";
+     //    echo "<p> authentication results $phoneResult</p>";
          if($phoneResult > 0)
          {
           $responseArray = [ 

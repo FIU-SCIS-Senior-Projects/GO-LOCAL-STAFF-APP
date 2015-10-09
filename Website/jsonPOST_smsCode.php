@@ -54,7 +54,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
         $codeFromUser     = $decoded["code"];
 
         $smsResults = verifySmsCode($registrationType, $userID, $codeFromUser);
-        echo "<p>results: $smsResults</p>";
+//        echo "<p>results: $smsResults</p>";
         if( $smsResults == 1) //phone has been verified
         {
           $responseArray = [

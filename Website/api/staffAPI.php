@@ -15,7 +15,7 @@
           $dbConnection = connectToDB();
           if(!$dbConnection)
           {
-            echo "Unable to connect to MySQL.".PHP_EOL;
+    //        echo "Unable to connect to MySQL.".PHP_EOL;
             return 0;
           }
 
@@ -28,7 +28,7 @@
           $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
           if(!$passwordHashed)
           {
-            echo "<p>failure hashing password $password</p>";
+  //          echo "<p>failure hashing password $password</p>";
             return -2;
           }
           
@@ -38,7 +38,7 @@
 
             //perform query
             $result = mysqli_query($dbConnection, $query);
-            echo "<p> registered_staff results ".$result."</p>";
+//            echo "<p> registered_staff results ".$result."</p>";
             if($result)
             {
                 //data
@@ -151,7 +151,7 @@
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-        print "Unable to connect to MySQL.".PHP_EOL;
+      //  print "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -185,7 +185,7 @@
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-        echo "Unable to connect to MySQL.".PHP_EOL;
+        //echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -213,17 +213,17 @@
         $staffID  = $dbConnection->insert_id;
         if( isset($staffID) )
         {
-          echo "<p>staff saved with id $staffID</p>";
+          //echo "<p>staff saved with id $staffID</p>";
           return $staffID; 
         }
         else
         {
-          echo "Unable to retrieve staff ID";
+         // echo "Unable to retrieve staff ID";
           return -3;
         }
       }
 
-      echo "Unable to store staff credentials";  
+     // echo "Unable to store staff credentials";  
       return -2;
       
   }//eom
@@ -257,7 +257,7 @@ function authenticateStaffPhoneNumber( $staffID, $to )
     $dbConnection = connectToDB();
     if(!$dbConnection)
     {
-      echo "Unable to connect to MySQL.".PHP_EOL;
+     // echo "Unable to connect to MySQL.".PHP_EOL;
       return 0;
     }
 
@@ -266,10 +266,10 @@ function authenticateStaffPhoneNumber( $staffID, $to )
           WHERE staffID=".$staffID."";
 
     $result = mysqli_query( $dbConnection, $query );
-    echo "<p> result: $result</p>";
+    //echo "<p> result: $result</p>";
     if(!$result)
     {
-      echo "Unable to store the code to the Database";
+     // echo "Unable to store the code to the Database";
       return -4;
     }  
 
