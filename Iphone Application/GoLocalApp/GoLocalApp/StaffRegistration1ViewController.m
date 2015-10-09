@@ -80,172 +80,6 @@
      return 1;
 }//eom
 
--(BOOL) verifyPhoneNumberDataEnter
-{
-    //checking for valid input
-    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
-    NSString * testing;
-    NSString *trimmedString;
-    
-    
-    testing = self.cellphone.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
-        self.cellphone.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your cellphone number" and:@"Okay"];
-        return 0;
-    }
-    else if( self.cellphone.text.length < 10)
-    {
-        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete cellphone number" and:@"Okay"];
-        return 0;
-    }
-    
-    return 1;
-}//eom
-
--(BOOL) verifyVerificationCodeEnter
-{
-    //checking for valid input
-    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
-    NSString * testing;
-    NSString *trimmedString;
-    
-    
-    testing = self.verificationCode.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:verificationCode]; //take scroll to textfield so user can see their error
-        self.verificationCode.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter the verification Code" and:@"Okay"];
-        return 0;
-    }
-//    else if( self.verificationCode.text.length < 10)
-//    {
-//        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
-//        // it's empty or contains only white spaces
-//        [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete cellphone number" and:@"Okay"];
-//        return 0;
-//    }
-
-    
-    return 1;
-}//eom
-
-/* */
-- (IBAction)phoneNumberSubmitted:(id)sender
-{
-    //verify
-    BOOL results = [self verifyPhoneNumberDataEnter ];
-    if(results)
-    {
-        //sending info to server
-        [self sendDataPhoneNumberToServer];
-        
-        //displaying instruction message
-        [self showAlert:@"Registration Field" withMessage:@"A verification code has been sent to your cellphone, Please enter the verification code" and:@"Okay"];
-        
-        //displaying verification fields
-        [verificationCodeIntroMessage setHidden:NO];
-        [verificationCodeLabel setHidden:NO];
-        [verificationAsterisk setHidden:NO];
-        [verificationCode setHidden:NO];
-        [verifyCodeButton setHidden:NO];
-    }
-}//eom
-
-/* processing server response about the phone number
- part 1 of SMS Authentication
- */
--(void) phoneNumberServerResponce:(NSDictionary *) responce
-{
-//    NSLog(@"[1] responce: %@", responce);
-    
-    NSDictionary * userResults = [responce objectForKey:@"results"];
-    int responceType = [[userResults objectForKey:@"responseType"] intValue];
-    NSDictionary * responceMessage = [userResults objectForKey:@"message"];
-    NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
-    
-    NSLog(@"[1] results is %@", userResults);
-    NSLog(@"[1] responceType is %d", responceType);
-    if(responceType > 0) //responce was good
-    {
-        self->userID = [userResults objectForKey:@"userID"];
-        //sms part 1
-        if(userID)
-        {
-            NSLog(@"[1] userID ID is %@  (which means we are ready for part 2)", userID);
-            
-//            //hiding submit phone number button
-//            [submitPhoneNumber setHidden:YES];
-        }
-        //sms part 2
-        else
-        {
-            [self.verificationCode resignFirstResponder];   //resign verififcation code
-    
-            //notifying user code was accepted
-            [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];
-    
-            [self scrollVievEditingFinished:cellphone];     //moving scroll view so user can see submit button on bottom
-    
-            //showing submit
-            [submitButton setHidden:NO];
-        }
-    }
-    else //invalid response
-    {
-        //notifying user code was accepted
-        [self showAlert:@"SMS Authentication" withMessage:message and:@"Okay"];
-    }
-}//eom
-
-///* processing server response about the verification code number 
-//    part 2 of SMS Authentication
-// */
-//-(void) verificationCodeResponce:(NSDictionary *) responce
-//{
-////    NSLog(@" %@", responce);
-//    NSDictionary * responceType = [responce objectForKey:@"results"];
-//    NSLog(@"[2] responce Type: %@", responceType);
-//    
-//    if(responceType)
-//    {
-//        
-//        [self.verificationCode resignFirstResponder];   //resign verififcation code
-//        
-//        //notifying user code was accepted
-//        [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];
-//        
-//        [self scrollVievEditingFinished:cellphone];     //moving scroll view so user can see submit button on bottom
-//        
-//        //showing submit
-//        [submitButton setHidden:NO];
-//        
-//        //updating json receiver flag
-//        waitingOnVerificationResponce = false;
-//    }
-//    
-//}//eom
-
-/* sending verification code to server */
-- (IBAction)verifyCodeSubmitted:(id)sender
-{
-    //verify
-    BOOL results = [self verifyVerificationCodeEnter ];
-    if(results)
-    {
-        //sending info to server
-        [self sendDataVerificationNumberToServer];
-    }
-    
-}//eom
-
 - (IBAction)submitForm:(id)sender {
     bool result = [self verifyDataEnter];
     if(result)
@@ -269,18 +103,19 @@
 }//eom
 
 
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-    
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
+/********* helper functions *******/
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
+    {
+        
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
 
 /********* tap gestures functions *******/
         /*sets up taps gesture*/
@@ -366,7 +201,148 @@
         }
 
 
+/******** SMS Authentication ********/
+
+    /* sending verification code to server */
+    - (IBAction)verifyCodeSubmitted:(id)sender
+    {
+        //verify
+        BOOL results = [self verifyVerificationCodeEnter ];
+        if(results)
+        {
+            //sending info to server
+            [self sendDataVerificationNumberToServer];
+        }
+        
+    }//eom
+
+    -(BOOL) verifyPhoneNumberDataEnter
+    {
+        //checking for valid input
+        NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+        NSString * testing;
+        NSString *trimmedString;
+        
+        
+        testing = self.cellphone.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
+            self.cellphone.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your cellphone number" and:@"Okay"];
+            return 0;
+        }
+        else if( self.cellphone.text.length < 10)
+        {
+            [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete cellphone number" and:@"Okay"];
+            return 0;
+        }
+        
+        return 1;
+    }//eom
+
+    -(BOOL) verifyVerificationCodeEnter
+    {
+        //checking for valid input
+        NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+        NSString * testing;
+        NSString *trimmedString;
+        
+        
+        testing = self.verificationCode.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:verificationCode]; //take scroll to textfield so user can see their error
+            self.verificationCode.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter the verification Code" and:@"Okay"];
+            return 0;
+        }
+        //    else if( self.verificationCode.text.length < 10)
+        //    {
+        //        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
+        //        // it's empty or contains only white spaces
+        //        [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete cellphone number" and:@"Okay"];
+        //        return 0;
+        //    }
+        
+        
+        return 1;
+    }//eom
+
+    /* */
+    - (IBAction)phoneNumberSubmitted:(id)sender
+    {
+        //verify
+        BOOL results = [self verifyPhoneNumberDataEnter ];
+        if(results)
+        {
+            //sending info to server
+            [self sendDataPhoneNumberToServer];
+            
+            //displaying instruction message
+            [self showAlert:@"Registration Field" withMessage:@"A verification code has been sent to your cellphone, Please enter the verification code" and:@"Okay"];
+            
+            //displaying verification fields
+            [verificationCodeIntroMessage setHidden:NO];
+            [verificationCodeLabel setHidden:NO];
+            [verificationAsterisk setHidden:NO];
+            [verificationCode setHidden:NO];
+            [verifyCodeButton setHidden:NO];
+        }
+    }//eom
+
+    /* processing server response about the phone number
+     part 1 of SMS Authentication
+     */
+    -(void) phoneNumberServerResponce:(NSDictionary *) responce
+    {
+        //    NSLog(@"[1] responce: %@", responce);
+        
+        NSDictionary * userResults = [responce objectForKey:@"results"];
+        int responceType = [[userResults objectForKey:@"responseType"] intValue];
+        NSDictionary * responceMessage = [userResults objectForKey:@"message"];
+        NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
+        
+        NSLog(@"[1] results is %@", userResults);
+        NSLog(@"[1] responceType is %d", responceType);
+        if(responceType > 0) //responce was good
+        {
+            self->userID = [userResults objectForKey:@"userID"];
+            //sms part 1
+            if(userID)
+            {
+                NSLog(@"[1] userID ID is %@  (which means we are ready for part 2)", userID);
+                
+                //            //hiding submit phone number button
+                //            [submitPhoneNumber setHidden:YES];
+            }
+            //sms part 2
+            else
+            {
+                [self.verificationCode resignFirstResponder];   //resign verififcation code
+                
+                //notifying user code was accepted
+                [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];
+                
+                [self scrollVievEditingFinished:cellphone];     //moving scroll view so user can see submit button on bottom
+                
+                //showing submit
+                [submitButton setHidden:NO];
+            }
+        }
+        else //invalid response
+        {
+            //notifying user code was accepted
+            [self showAlert:@"SMS Authentication" withMessage:message and:@"Okay"];
+        }
+    }//eom
+
 /***************** JSON POST functions *******************/
+
 
         /* responce from server */
         - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
