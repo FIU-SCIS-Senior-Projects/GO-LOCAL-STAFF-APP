@@ -118,22 +118,20 @@
         return 0;
       }
 
-      $fname            = $staffInfo["firstName"];//
-      $middleInitial    = $staffInfo["middleName"];//
-      $lname            = $staffInfo["lastName"];//
-      $nickname         = $staffInfo["nickName"];//
-      $usernameProvided = $staffInfo["username"];//
-      $emailProvided    = $staffInfo["email"];//
-      $pasword          = $staffInfo["password"];//
-      $dob              = $staffInfo["dob"];//
-      $phone            = $staffInfo["phone"];//
+      $fname            = $employerInfo["firstName"];//
+      $middleInitial    = $employerInfo["middleName"];//
+      $lname            = $employerInfo["lastName"];//
+      $usernameProvided = $employerInfo["username"];//
+      $emailProvided    = $employerInfo["email"];//
+      $pasword          = $employerInfo["password"];//
+      $phone            = $employerInfo["phone"];//
       $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
       $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
       $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
       $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
 
-      $query = "INSERT INTO registered_employer ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, phone, dateOfBirth)
-            VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$phone."', '".$dob."')";
+      $query = "INSERT INTO registered_employer ( username, password, email, hashEmail, firstName, middleInitial, lastName, phone)
+            VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$phone."')";
   
       $result = mysqli_query($dbConnection, $query);
       if($result)

@@ -284,6 +284,7 @@
             [verificationCodeLabel setHidden:NO];
             [verificationCodeAsterisk setHidden:NO];
             [verificationCodeField setHidden:NO];
+            [verificationCodeButton setHidden:NO];
         }
     }//eom
 
@@ -355,7 +356,7 @@
     {
         
         NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                NSLog(@"[1] from server replied: %@",rawExhibits);
+        //        NSLog(@"[1] from server replied: %@",rawExhibits);
         
         //        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         //        NSLog(@"[2] responce from server %@",dataResponce);
@@ -364,19 +365,12 @@
         //        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
         //        NSLog(@"[3] responce from server %@",rawExhibits2);
         
-        //waiting on verification responce, part 2 of SMS Authentication
-//        if(waitingOnVerificationResponce)
-//        {
-//            NSLog(@"waiting on verification responce.....");
-//            [self verificationCodeResponce: rawExhibits];
-//        }
-//        else //waiting on phone number responce,  part 1 of SMS Authentication
-//        {
-//            NSLog(@"waiting on phone number responce.....");
-//            //processing responce
-//            [self phoneNumberServerResponce:rawExhibits];
-//        }
+        //processing responce
+        [self phoneNumberServerResponce:rawExhibits];
+        
+        //        }
     }//eom
+
 
     /*
      - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response

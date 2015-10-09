@@ -223,6 +223,22 @@
       // $otherServicesBandWebsite       = $registrationData['otherServicesBandWebsite'];//
       // $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
       
+/*
+  `staffID` int(11) NOT NULL,  //PRIMARY KEY
+  
+
+  `staffType` int(11) NOT NULL,
+  
+
+
+  `pictures` varchar(30) NOT NULL,
+
+
+  `insuranceDocuments` varchar(30) NOT NULL,
+  `resume` varchar(30) NOT NULL,
+  `TermsAndAgreements` varchar(255) NOT NULL
+  */
+
       $query = "UPDATE registered_staff
                 SET address='".$code."',city='".$code."',zipcode='".$code."',state='".$code."',gender='".$code."',languages='".$code."',typeDL='".$code."',ethnicity='".$code."',ethnicityCode='".$code."',weight='".$code."',hairColor='".$code."',eyeColor='".$code."',shirtSize='".$code."',chestSize='".$code."',waistSize='".$code."',hipSize='".$code."',dressSize='".$code."',shoeSize='".$code."',piercings='".$code."',desiredHourlyRate='".$code."',desiredWeeklyRate='".$code."',ssnOrEin='".$code."',businessName='".$code."',travel='".$code."',insurance='".$code."',bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'
                 WHERE phone='".$phone."'";

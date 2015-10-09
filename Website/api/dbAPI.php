@@ -165,7 +165,7 @@ function isUserRegistrationUnique( $registrationType, $usernameProvided, $emailP
    {
       return -10;
    }
-
+   
     $result = mysqli_query($dbConnection, $query);
     $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
     $rowResult = array_filter($row);
