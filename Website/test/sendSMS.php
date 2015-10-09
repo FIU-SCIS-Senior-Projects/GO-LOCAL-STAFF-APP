@@ -5,21 +5,8 @@ include 'urlsettings.php';
 //Initiate cURL.
 $ch = curl_init($url_sendSMS);
 
-    // //valid staff user
-    // $jsonData = [
-    //   "firstName" => "Wilfredo",
-    //   "middleName" => "G",
-    //   "lastName" => "Gomez",
-    //   "nickName" => "watermelon",
-    //   "email" => "willyggh@outlook.com",
-    //   "username" => "willyggh",
-    //   "password" => "123",
-    //   "dob" => "04/16/1989",
-    //   "phone" => "7862948736",
-    //   "carrier" => "att",
-    //   ];
-
-
+if($testingStaffUser)
+{
       //valid staff user
     $jsonData = [
       "registrationType" => "Staff",
@@ -33,6 +20,23 @@ $ch = curl_init($url_sendSMS);
       "dob" => "11/29/1987",
       "phone" => "3056099250"
       ];
+}
+else
+{
+        //valid employer user
+    $jsonData = [
+      "registrationType" => "Employer",
+      "firstName" => "Luis",
+      "middleName" => "A",
+      "lastName" => "Castillo",
+      "email" => "luoandre29@outlook.com",
+      "username" => "luoandre29",
+      "password" => "0987654321",
+      "phone" => "3056099250"
+      ];
+
+
+}
 
  
 //Encode the array into JSON.

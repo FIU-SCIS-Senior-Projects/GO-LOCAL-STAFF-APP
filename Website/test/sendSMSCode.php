@@ -7,6 +7,8 @@ include 'urlsettings.php';
 //Initiate cURL.
 $ch = curl_init($url_sendSMSCode);
 
+if($testingStaffUser)
+{
     //valid staff user
     $jsonData = [
       "registrationType"  => "Staff",
@@ -14,13 +16,17 @@ $ch = curl_init($url_sendSMSCode);
       "code" => "4140",
       "phone" => "3056099250"
       ];
-
-    // //valid staff user
-    // $jsonData = [
-    //   "registrationType"  => "Employer"
-    //   "userID" => "1",
-    //   "code" => "8997"
-    //   ];
+}
+else
+{
+    //valid employer user
+    $jsonData = [
+      "registrationType"  => "Employer",
+      "userID" => "1",
+      "code" => "4140",
+      "phone" => "3056099250"
+      ];
+}
 
  
 //Encode the array into JSON.

@@ -1,12 +1,10 @@
 array (
-  'registrationType' => 'Staff',
+  'registrationType' => 'Employer',
   'firstName' => 'Luis',
   'middleName' => 'A',
   'lastName' => 'Castillo',
-  'nickName' => 'Lu',
   'email' => 'luoandre29@outlook.com',
   'username' => 'luoandre29',
   'password' => '0987654321',
-  'dob' => '11/29/1987',
   'phone' => '3056099250',
 )
