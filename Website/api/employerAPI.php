@@ -118,44 +118,41 @@
         return 0;
       }
 
+      $fname            = $staffInfo["firstName"];//
+      $middleInitial    = $staffInfo["middleName"];//
+      $lname            = $staffInfo["lastName"];//
+      $nickname         = $staffInfo["nickName"];//
+      $usernameProvided = $staffInfo["username"];//
+      $emailProvided    = $staffInfo["email"];//
+      $pasword          = $staffInfo["password"];//
+      $dob              = $staffInfo["dob"];//
+      $phone            = $staffInfo["phone"];//
+      $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
+      $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
+      $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
+      $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
 
-      // $fname            = $staffInfo["firstName"];
-      // $middleN          = $staffInfo["middleName"];
-      // $lname            = $staffInfo["lastName"];
-      // $nickname         = $staffInfo["nickName"];
-      // $emailProvided    = $staffInfo["email"];
-      // $usernameProvided = $staffInfo["username"];
-      // $pasword          = $staffInfo["password"];
-      // $dob              = $staffInfo["dob"];
-      // $carrier          = $staffInfo["carrier"];
-      // $phone            = $staffInfo["phone"];
-
-      // $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
-      // $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
-      // $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
-      // $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
-
-      // $query = "INSERT INTO registered_staff ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, address, phone)
-      //       VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$address."', '".$phone."')";
+      $query = "INSERT INTO registered_employer ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, phone, dateOfBirth)
+            VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$phone."', '".$dob."')";
   
-      // $result = mysqli_query($dbConnection, $query);
-      // if($result)
-      // {
-      //   $staffID  = $dbConnection->insert_id;
-      //   if( isset($staffID) )
-      //   {
-      //     echo "<p>staff saved with id $staffID</p>";
-      //     return $staffID; 
-      //   }
-      //   else
-      //   {
-      //     echo "Unable to retrieve staff ID";
-      //     return -3;
-      //   }
-      // }
+      $result = mysqli_query($dbConnection, $query);
+      if($result)
+      {
+        $staffID  = $dbConnection->insert_id;
+        if( isset($staffID) )
+        {
+          //echo "<p>staff saved with id $staffID</p>";
+          return $staffID; 
+        }
+        else
+        {
+         // echo "Unable to retrieve staff ID";
+          return -3;
+        }
+      }
 
-      // echo "Unable to store staff credentials";  
-      // return -2;
+     // echo "Unable to store staff credentials";  
+      return -2;
       
   }//eom
 ?>

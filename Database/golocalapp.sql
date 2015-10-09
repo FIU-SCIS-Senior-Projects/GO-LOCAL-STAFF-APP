@@ -102,9 +102,6 @@ CREATE TABLE `registered_staff` (
   `phone` varchar(15) NOT NULL,
   `phoneCode` int(11) DEFAULT NULL,
   `phoneValidated` int(11) DEFAULT NULL,
-  `profession` int(11) NOT NULL,
-  `website` varchar(30) NOT NULL,
-  `socialMedia` varchar(255) NOT NULL,
   `pictures` varchar(30) NOT NULL,
   `dateOfBirth` varchar(10) NOT NULL,
   `gender` int(11) NOT NULL,
@@ -146,7 +143,9 @@ CREATE TABLE `registered_staff` (
 
 CREATE TABLE `staff_type` (
   `staffID` int(11) NOT NULL,
-  `jobTitle` varchar(255) NOT NULL
+  `jobTitle` varchar(255) NOT NULL,
+  `website` varchar(30) NOT NULL,
+  `socialMedia` varchar(255) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

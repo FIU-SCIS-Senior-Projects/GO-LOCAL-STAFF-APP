@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *firstName;
 @property (weak, nonatomic) IBOutlet UITextField *middleName;
 @property (weak, nonatomic) IBOutlet UITextField *lastName;
-@property (weak, nonatomic) IBOutlet UITextField *nickName;
 @property (weak, nonatomic) IBOutlet UITextField *username;
 
 @property (weak, nonatomic) IBOutlet UITextField *email;
@@ -22,8 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPassword; /*DO NOT SAVE TO DB*/
 
-@property (weak, nonatomic) IBOutlet UITextField *dateOfBirth;
-@property (nonatomic)  NSString * dateOfBirthSelected; //saved value of date of birth
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 

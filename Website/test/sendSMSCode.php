@@ -11,7 +11,8 @@ $ch = curl_init($url_sendSMSCode);
     $jsonData = [
       "registrationType"  => "Staff",
       "userID" => "1",
-      "code" => "1044"
+      "code" => "4140",
+      "phone" => "3056099250"
       ];
 
     // //valid staff user
