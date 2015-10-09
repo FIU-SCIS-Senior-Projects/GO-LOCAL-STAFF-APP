@@ -230,7 +230,10 @@
 
   /* registers staff user info 
       returns:
-        0 database not responding
+        1   successfully register
+        0   database not responding
+        -1  Unable to register user
+        -10 invalid registration type
     */
   function registerStaffUser($staffInfo)
   {

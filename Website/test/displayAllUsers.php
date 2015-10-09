@@ -24,7 +24,8 @@
             <th>Email</th> 
           </tr>
           <?php
-   		require '../API.php';          
+   		     
+           require '../API.php';          
           $registerStaff = getAllStaff();
           $totalStaff = count($registerStaff);
           

@@ -45,104 +45,97 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
     }
     else  //valid json values found
     {
-     require 'API.php';/* adding API */
+      require 'API.php';/* adding API */
 
-     $peopleID;
-     $responseArray;
+      $peopleID;
+      $responseArray;
 
-     $registrationType = $decoded["registrationType"];
-     $username         = $decoded["username"];
-     $email            = $decoded["email"];
-     $phone            = $decoded["phone"];
+      $registrationType = $decoded["registrationType"];
+      $username         = $decoded["username"];
+      $email            = $decoded["email"];
+      $phone            = $decoded["phone"];
 
-     // echo "<p>registration Type: $registrationType</p>";//testing
+        // echo "<p>registration Type: $registrationType</p>";//testing
 
-      //verify user is unique
-     $uniqueResult = isUserRegistrationUnique($registrationType, $username, $email);
-     // echo "<p>should we register this user? $uniqueResult</p>";//testing
-     if($uniqueResult == 1)
-     {
-      //saving user initial information
+        //verify user is unique
+      $uniqueResult = isUserRegistrationUnique($registrationType, $username, $email);
+        // echo "<p>should we register this user? $uniqueResult</p>";//testing
+      if($uniqueResult == 1)
+      {
+        //saving user initial information
         $userID = storeUserCredentials( $registrationType, $decoded );
         // echo "<p> userID: $userID</p>";//testing
         if($userID > 0)
         {
-                    //authenticating phone number
-         $phoneResult = authenticateUserPhoneNumber($registrationType, $userID, $phone );
-         // echo "<p> authentication results $phoneResult</p>";//testing
-         if($phoneResult > 0)
-         {
-          $responseArray = [ 
-          "message" => "phone number code successfully sent",
-          "responseType" => $phoneResult,
-          "userID" => $userID,
-          ];
+        //authenticating phone number
+          $phoneResult = authenticateUserPhoneNumber($registrationType, $userID, $phone );
+        // echo "<p> authentication results $phoneResult</p>";//testing
+          if($phoneResult > 0)
+          {
+            $responseArray = [ 
+            "message" => "phone number code successfully sent",
+            "responseType" => $phoneResult,
+            "userID" => $userID,
+            ];
+          }
+          else if($phoneResult == 0)
+          {
+            $responseArray = [
+            "message" => "database not responding",
+            "responseType" => $phoneResult,
+            ];
+          }
+          else if($phoneResult == -4)
+          {
+            $responseArray = [
+            "message" => "Unable to store the code to the Database",
+            "responseType" => $phoneResult,
+            ];
+          }
         }
-        else if($phoneResult == 0)
+        else if($userID == 0)
         {
           $responseArray = [
           "message" => "database not responding",
-          "responseType" => $phoneResult,
+          "responseType" => $userID,
           ];
         }
-        else if($phoneResult == -4)
+        else if($userID == -2)
         {
           $responseArray = [
-          "message" => "Unable to store the code to the Database",
-          "responseType" => $phoneResult,
+          "message" => "Unable to store staff credentials",
+          "responseType" => $userID,
+          ];
+        }
+        else if($userID == -3)
+        {
+          $responseArray = [
+          "message" => "Unable to retrieve userID",
+          "responseType" => $userID,
           ];
         }
       }
-      else if($userID == 0)
+      else if($uniqueResult == 0)
       {
         $responseArray = [
         "message" => "database not responding",
-        "responseType" => $userID,
+        "responseType" => $uniqueResult,
         ];
       }
-      else if($userID == -2)
+      else if($uniqueResult == -1)
       {
         $responseArray = [
-        "message" => "Unable to store staff credentials",
-        "responseType" => $userID,
+        "message" => "Username or Email already exist",
+        "responseType" => $uniqueResult,
         ];
       }
-      else if($userID == -3)
+      else if($uniqueResult == -10)
       {
         $responseArray = [
-        "message" => "Unable to retrieve userID",
-        "responseType" => $userID,
+        "message" => "not a valid registration type",
+        "responseType" => $uniqueResult,
         ];
-      }
-  }
-  else if($uniqueResult == 0)
-  {
-    $responseArray = [
-    "message" => "database not responding",
-    "responseType" => $uniqueResult,
-    ];
-  }
-  else if($uniqueResult == -1)
-  {
-    $responseArray = [
-    "message" => "Username or Email already exist",
-    "responseType" => $uniqueResult,
-    ];
-  }
-  else if($uniqueResult == -10)
-  {
-    $responseArray = [
-    "message" => "not a valid registration type",
-    "responseType" => $uniqueResult,
-    ];
-  }    
-
-  
-
-
-        //     storePersonalInfo( $peopleID, $fname, $middleN, $lname, $nickname, "", "" );
-        //     storePersonalDOB( $peopleID, $dob );
-
+      }    
 
         /* 
           reponse returns the following:
