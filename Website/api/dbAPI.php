@@ -278,6 +278,33 @@ function storeUserCredentials( $registrationType, $userInfo)
   }
 }//eom
 
+/*
+  register the user into the database
+  returns:
+        1   successfully register
+        0   database not responding
+        -1  Unable to register user
+        -10 invalid registration type
+*/
+function registerUser( $registrationType, $userInfo)
+{
+  if( $registrationType == "Staff")
+  {
+    $staffResults = registerStaffUser($userInfo);
+    return $staffResults;
+  }
+  else if( $registrationType == "Employer" )
+  {
+    $employerResults = registerEmployerUser($userInfo);
+    return $employerResults;
+  }
+  else 
+  {
+    return -10
+  }
+}//eom
+
+
 
 /*   
 SMS AUTHENTICATION PART 2

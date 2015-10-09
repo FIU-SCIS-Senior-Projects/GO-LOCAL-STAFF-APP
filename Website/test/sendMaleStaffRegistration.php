@@ -8,76 +8,117 @@ $url = 'http://localhost:8888/FIU%20CLASSES/Senior%20Project%20Stuff/Final%20Del
 // //Initiate cURL.
 $ch = curl_init($url);
  
-//The JSON data.
-$jsonData = array(
-    'registrationType' => 'staff',
+// //The JSON data.
+// $jsonData = array(
+//     'registrationType' => 'staff',
+//     'firstName' => 'Luis',
+//     'middleName' => 'Andres',
+//     'lastName' => 'Castillo',
+//     'nickname' => 'Lu',
+//     'username' => 'Luoandre29',
+//     'email' => 'luoandre29@hotmail.com',
+//     'password' => 'password123',
+//     'cellphone' => '3056099250',
+//     'address' => '2710 W 64 PL',
+//     'city' => 'Miami',
+//     'state' => 'FL',
+//     'djSelected' => '1',
+//     'liveBandSelected' => '0',
+//     'djSelected' => '0',
+//     'cateringCompanySelected' => '0',
+//     'otherServices' => '0',
+//     'djDescription' => 'djDescription',
+//     'djWebsite' => 'url',
+//     'djSocialMedia' => 'MyPassword',
+//     'djDescription' => 'Description',
+//     'djWebsite' => 'url',
+//     'djSocialMedia' => 'social media',
+//     'liveBandDescription' => 'Description',
+//     'liveBandWebsite' => 'url',
+//     'liveBandSocialMedia' => 'social media',
+//     'cateringCompanyDescription' => 'Description',
+//     'cateringCompanyWebsite' => 'url',
+//     'cateringCompanySocialMedia' => 'social media',
+//     'otherServicesDescription' => 'Description',
+//     'otherServicesBandWebsite' => 'url',
+//     'otherServicesBandSocialMedia' => 'social media',
+//     'dob' => '11/29/87',
+//     'gender' => 'male',
+//     'languages' => 'english,spanish',
+//     'ethnicity' => '3',
+//     'typeOfLicense' => '0',
+//     'height' => '5.4',
+//     'weight' => '150',
+//     'hairColor' => 'black',
+//     'eyeColor' => 'brown',
+//     'pantSize' => '30',
+//     'shoeSize' => '7',
+//     'tshirtSize' => 'M',
+//     'desiredHourlyRate' => '25',
+//     'desiredWeeklyRate' => '2500',
+//     'tattoos' => '0',
+//     'piercings' => '0',
+//     'chestSize' => 'null',
+//     'waistSize' => 'null',
+//     'dressSize' => 'null',
+//     'ssn' => '67988433',
+//     'ein' => 'null',
+//     'citiesWillingToWork' => 'Miami, Kendall',
+//     'travel' => '1',
+//     'professionalInsurance' => '0',
+//     'directDepositDesired' => '1',
+//     'DirectDepositRoutingNumber' => '777899231',
+//     'DirectDepositAccountNumber' => '998763229938',
+//     'isModel' => '0',
+//     'isBrandAmbassador' => '0',
+//     'isFlyerDistributor' => '0',
+//     'isFieldMarketingManager' => '0',
+//     'isDancer' => '0',
+//     'iswaiterOrWaitress' => '0',
+//     'isProductionAssistant' => '0',
+//     'isSalesExecutive' => '1'
+// );
+ 
+$jsonData = array (
+    'registrationType' => 'Staff',
     'firstName' => 'Luis',
-    'middleName' => 'Andres',
+    'middleName' => 'a', 
     'lastName' => 'Castillo',
-    'nickname' => 'Lu',
+    'nickName' => 'Lu',
     'username' => 'Luoandre29',
-    'email' => 'luoandre29@hotmail.com',
-    'password' => 'password123',
+    'password' => 'poiuytrewq',
+    'email' => 'Luoandre29@yahoo.com',
+    'dob' => '08-09-1994',
     'cellphone' => '3056099250',
-    'address' => '2710 W 64 PL',
-    'city' => 'Miami',
-    'state' => 'FL',
-    'djSelected' => '1',
-    'liveBandSelected' => '0',
-    'djSelected' => '0',
-    'cateringCompanySelected' => '0',
-    'otherServices' => '0',
-    'djDescription' => 'djDescription',
-    'djWebsite' => 'url',
-    'djSocialMedia' => 'MyPassword',
-    'djDescription' => 'Description',
-    'djWebsite' => 'url',
-    'djSocialMedia' => 'social media',
-    'liveBandDescription' => 'Description',
-    'liveBandWebsite' => 'url',
-    'liveBandSocialMedia' => 'social media',
-    'cateringCompanyDescription' => 'Description',
-    'cateringCompanyWebsite' => 'url',
-    'cateringCompanySocialMedia' => 'social media',
-    'otherServicesDescription' => 'Description',
-    'otherServicesBandWebsite' => 'url',
-    'otherServicesBandSocialMedia' => 'social media',
-    'dob' => '11/29/87',
-    'gender' => 'male',
-    'languages' => 'english,spanish',
-    'ethnicity' => '3',
-    'typeOfLicense' => '0',
-    'height' => '5.4',
-    'weight' => '150',
-    'hairColor' => 'black',
-    'eyeColor' => 'brown',
-    'pantSize' => '30',
-    'shoeSize' => '7',
+    'address' => '2710 W 64 PL Miami FL 33016',
+    'ethnicity' => 'Latino or Hispanic American',
+    'languages' => 'English Spanish ',
+    'experience' => 
+    array (
+    ),
     'tshirtSize' => 'M',
-    'desiredHourlyRate' => '25',
-    'desiredWeeklyRate' => '2500',
-    'tattoos' => '0',
-    'piercings' => '0',
-    'chestSize' => 'null',
-    'waistSize' => 'null',
-    'dressSize' => 'null',
-    'ssn' => '67988433',
-    'ein' => 'null',
-    'citiesWillingToWork' => 'Miami, Kendall',
-    'travel' => '1',
-    'professionalInsurance' => '0',
-    'directDepositDesired' => '1',
-    'DirectDepositRoutingNumber' => '777899231',
-    'DirectDepositAccountNumber' => '998763229938',
-    'isModel' => '0',
-    'isBrandAmbassador' => '0',
-    'isFlyerDistributor' => '0',
-    'isFieldMarketingManager' => '0',
-    'isDancer' => '0',
-    'iswaiterOrWaitress' => '0',
-    'isProductionAssistant' => '0',
-    'isSalesExecutive' => '1'
+    'Tattoos' => '0',
+    'eyeColor' => 'Brown',
+    'Piercings' => '0',
+    'height' => '5\'5"',
+    'gender' => 'Male',
+    'genderType' => '1',
+    'weight' => '150',  
+    'pantSize' => '30',
+    'shoeSize' => '9.5',
+    'commercialLicense' => '0',
+    'driverLicense' => '0',
+    'travelPercentage' => '25',
+    'Incorporated' => '0',
+    'ssn' => '1234567890', 
+    'ProfessionalInsurance' => '0',  
+    'desiredHourlyRate' => '30',
+    'desiredWeeklyRate' => '3000',
+    'DirectDeposit' => '0',
+    'DirectDepositRoutingNumber' => ' ',
+    'DirectDepositAccountNumber' => ' ',
 );
+
  
 //Encode the array into JSON.
 $jsonDataEncoded = json_encode($jsonData);
@@ -99,67 +140,5 @@ echo "<p></p>";
 echo "<p></p>";
 echo "<p>JSON POST Response:</p>";
 $result = curl_exec($ch);
-
-
-    // $username = $jsonData['username'];
-    // $email    = $jsonData['email'];
-    // $password = $jsonData['password'];
-
-
-// // direct test
-// /* communicate to database */
-//  include '../webAPI.php';
-//  $registrationType = $jsonData['registration_type'];
-//  if( $registrationType == 'staff')
-//  {
-
-//     echo "<p> registering $registrationType </p>";
-//     //check if unique user
-//     $uniqueResults = isUniqueRegisteredStaff("luoandre29", "luoandre29@hotmail.com");
-//      echo "<p>response '$uniqueResults' </p>";
-//     if($uniqueResults ==  1)//unique user
-//     {
-//         echo "<p>unique user! lets start registration process </p>";
-//         $registrationResults = registerStaff($jsonData);
-//         echo "<p>registration results $registrationResults</p>";
-
-//         $responseArray = array(
-//             "message" => "user successfully registered",
-//             "usertype"    => "1",
-//         );
-//     }
-//     else if($uniqueResults == -1)//user already registered
-//     {
-//       echo "<p>user already registered</p>";
-//       $responseArray = array(
-//         "message" => "username and email is NOT unique",
-//         "usertype"    => "-1",
-//       );
-//     }
-//     else if($uniqueResults == 0)//database not responding
-//     {
-//       $responseArray = array(
-//         "message" => "database not responding",
-//         "usertype"    => "0",
-//       );
-//     }//eo-conditions
-
-
-//  }//eo staff registration
-//  else if( $registrationType == 'employer' )
-//  {
-//     echo "<p>  registering '$registrationType' </p>";
-//  }//eo employer registration
-
-
-
-//     /*
-//         reponse returns the following:
-//             0   database not responding
-//             -1  user already registered
-//     */
-//     $response['results'] = $responseArray; //sending reply
-
-
 
 ?>

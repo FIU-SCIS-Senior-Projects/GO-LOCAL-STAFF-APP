@@ -75,7 +75,7 @@
     }
     
     //updating values
-    [registeredStaff setCellphone:self.cellphone.text withCarrier:@""];
+    [registeredStaff setCellphone:self.cellphone.text];
     
      return 1;
 }//eom
@@ -164,13 +164,17 @@
  */
 -(void) phoneNumberServerResponce:(NSDictionary *) responce
 {
-    NSLog(@" responce: %@", responce);
-    NSDictionary * peopleIDResults = [responce objectForKey:@"results"];
+    NSLog(@"[1] responce: %@", responce);
     
-    NSLog(@" results is %@", peopleIDResults);
+    NSDictionary * userResults = [responce objectForKey:@"results"];
+    
+    NSLog(@"[1] results is %@", userResults);
+    
+    NSDictionary * responceType = [userResults objectForKey:@"responceType"];
+    NSLog(@"[1] responceType is %@", responceType);
 //
-    userID = [peopleIDResults objectForKey:@"responseType"];
-    NSLog(@" userID ID is %@", userID);
+    userID = [userResults objectForKey:@"userID"];
+    NSLog(@"[1] userID ID is %@  (which means we are ready for part 2)", userID);
     
     if(userID)
     {
@@ -189,7 +193,7 @@
 {
 //    NSLog(@" %@", responce);
     NSDictionary * responceType = [responce objectForKey:@"results"];
-    NSLog(@" responce Type: %@", responceType);
+    NSLog(@"[2] responce Type: %@", responceType);
     
     if(responceType)
     {

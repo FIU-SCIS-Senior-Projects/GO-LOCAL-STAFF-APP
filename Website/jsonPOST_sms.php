@@ -74,7 +74,8 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
          {
           $responseArray = [ 
           "message" => "phone number code successfully sent",
-          "responseType" => $userID,
+          "responseType" => $phoneResult,
+          "userID" => $userID,
           ];
         }
         else if($phoneResult == 0)

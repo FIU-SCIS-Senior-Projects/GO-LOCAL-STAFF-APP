@@ -228,60 +228,21 @@
       
   }//eom
 
-/*
-  authenticates Phone Number
+  /* registers staff user info 
+      returns:
+        0 database not responding
+    */
+  function registerStaffUser($staffInfo)
+  {
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+        //echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
 
-  returns 
-    1   phone number code successfully sent
-    0   unable to connect to DB
-    -4  Unable to store the code to the Database
-*/
-function authenticateStaffPhoneNumber( $staffID, $to )
-{
-    $code     = mt_rand(1000, 9999);
-    $subject  = "GoLocalApp code authentication\r\n";
-    $message  = "code: $code\n";
-    $smsCarriers = [
-      "@mms.aiowireless.net",
-      "@text.att.net",
-      "@myboostmobile.com",
-      "@mms.cricketwireless.net",
-      "@mymetropcs.com",
-      "@pm.sprint.com",
-      "@vtext.com",
-      "@tmomail.net",
-      "@email.uscc.net",
-      "@vtext.com",
-    ];
+      //checking that user already exist
 
-    $dbConnection = connectToDB();
-    if(!$dbConnection)
-    {
-     // echo "Unable to connect to MySQL.".PHP_EOL;
-      return 0;
-    }
-
-    $query = "UPDATE registered_staff
-          SET phone='".$to."', phonecode='".$code."'
-          WHERE staffID=".$staffID."";
-
-    $result = mysqli_query( $dbConnection, $query );
-    //echo "<p> result: $result</p>";
-    if(!$result)
-    {
-     // echo "Unable to store the code to the Database";
-      return -4;
-    }  
-
-    for($iter = 0; $iter < count($smsCarriers); $iter++)
-    {
-      $currentCarrier = $smsCarriers[$iter];
-      $currentAddress = $to.$currentCarrier;
-      $emailResult = mail( $currentAddress, $subject, $message );    
-      // echo "<p>currentCarrier: $currentCarrier | current address: $currentAddress | mail result: $emailResult</p>";  
-    }//eofl
-
-    return 1;
-}//eom
+  }//eom
 
 ?>
