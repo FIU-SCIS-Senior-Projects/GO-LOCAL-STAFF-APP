@@ -16,7 +16,7 @@
 {
     // registered user ID on server
     NSString * userID;
-    BOOL waitingOnVerificationResponce;
+//    BOOL waitingOnVerificationResponce;
     
     //labels
     __weak IBOutlet UILabel *cellphoneLabel;
@@ -40,7 +40,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    waitingOnVerificationResponce = FALSE;
+//    waitingOnVerificationResponce = FALSE;
     
 //    [registeredStaff printUserData];//testing
     
@@ -159,60 +159,79 @@
     }
 }//eom
 
-/* processing server response about the phone number 
+/* processing server response about the phone number
  part 1 of SMS Authentication
  */
 -(void) phoneNumberServerResponce:(NSDictionary *) responce
 {
-    NSLog(@"[1] responce: %@", responce);
+//    NSLog(@"[1] responce: %@", responce);
     
     NSDictionary * userResults = [responce objectForKey:@"results"];
+    int responceType = [[userResults objectForKey:@"responseType"] intValue];
+    NSDictionary * responceMessage = [userResults objectForKey:@"message"];
+    NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
     
     NSLog(@"[1] results is %@", userResults);
-    
-    NSDictionary * responceType = [userResults objectForKey:@"responceType"];
-    NSLog(@"[1] responceType is %@", responceType);
-//
-    userID = [userResults objectForKey:@"userID"];
-    NSLog(@"[1] userID ID is %@  (which means we are ready for part 2)", userID);
-    
-    if(userID)
+    NSLog(@"[1] responceType is %d", responceType);
+    if(responceType > 0) //responce was good
     {
-        //hiding submit phone number button
-        [submitPhoneNumber setHidden:YES];
-        
-        //updating json receiver flag
-        waitingOnVerificationResponce = true;
+        userID = [userResults objectForKey:@"userID"];
+        //sms part 1
+        if(userID)
+        {
+            NSLog(@"[1] userID ID is %@  (which means we are ready for part 2)", userID);
+            
+//            //hiding submit phone number button
+//            [submitPhoneNumber setHidden:YES];
+        }
+        //sms part 2
+        else
+        {
+            [self.verificationCode resignFirstResponder];   //resign verififcation code
+    
+            //notifying user code was accepted
+            [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];
+    
+            [self scrollVievEditingFinished:cellphone];     //moving scroll view so user can see submit button on bottom
+    
+            //showing submit
+            [submitButton setHidden:NO];
+        }
+    }
+    else //invalid response
+    {
+        //notifying user code was accepted
+        [self showAlert:@"SMS Authentication" withMessage:message and:@"Okay"];
     }
 }//eom
 
-/* processing server response about the verification code number 
-    part 2 of SMS Authentication
- */
--(void) verificationCodeResponce:(NSDictionary *) responce
-{
-//    NSLog(@" %@", responce);
-    NSDictionary * responceType = [responce objectForKey:@"results"];
-    NSLog(@"[2] responce Type: %@", responceType);
-    
-    if(responceType)
-    {
-        
-        [self.verificationCode resignFirstResponder];   //resign verififcation code
-        
-        //notifying user code was accepted
-        [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];
-        
-        [self scrollVievEditingFinished:cellphone];     //moving scroll view so user can see submit button on bottom
-        
-        //showing submit
-        [submitButton setHidden:NO];
-        
-        //updating json receiver flag
-        waitingOnVerificationResponce = false;
-    }
-    
-}//eom
+///* processing server response about the verification code number 
+//    part 2 of SMS Authentication
+// */
+//-(void) verificationCodeResponce:(NSDictionary *) responce
+//{
+////    NSLog(@" %@", responce);
+//    NSDictionary * responceType = [responce objectForKey:@"results"];
+//    NSLog(@"[2] responce Type: %@", responceType);
+//    
+//    if(responceType)
+//    {
+//        
+//        [self.verificationCode resignFirstResponder];   //resign verififcation code
+//        
+//        //notifying user code was accepted
+//        [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];
+//        
+//        [self scrollVievEditingFinished:cellphone];     //moving scroll view so user can see submit button on bottom
+//        
+//        //showing submit
+//        [submitButton setHidden:NO];
+//        
+//        //updating json receiver flag
+//        waitingOnVerificationResponce = false;
+//    }
+//    
+//}//eom
 
 /* sending verification code to server */
 - (IBAction)verifyCodeSubmitted:(id)sender
@@ -377,19 +396,11 @@
 //        // Get JSON objects into initial array
 //        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
 //        NSLog(@"[3] responce from server %@",rawExhibits2);
-        
-        //waiting on verification responce, part 2 of SMS Authentication
-        if(waitingOnVerificationResponce)
-        {
-            NSLog(@"waiting on verification responce.....");
-            [self verificationCodeResponce: rawExhibits];
-        }
-        else //waiting on phone number responce,  part 1 of SMS Authentication
-        {
-            NSLog(@"waiting on phone number responce.....");
+
             //processing responce
             [self phoneNumberServerResponce:rawExhibits];
-        }
+        
+//        }
     }//eom
 
 /*
@@ -398,12 +409,6 @@
  data = [[NSMutableData alloc] init];
  NSLog(@"Data Data , %@", data);
  }
- 
- - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)theData
- {
- [data appendData:theData];
- }
- 
  */
         /* error occurred sending data to server */
         -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error

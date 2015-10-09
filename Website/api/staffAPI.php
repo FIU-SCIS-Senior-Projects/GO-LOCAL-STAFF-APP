@@ -116,13 +116,14 @@
       }
 
       //these fields were already saved
+      $username                       = $registrationData['username'];
       $firstName                      = $registrationData['firstName'];
       $middleName                     = $registrationData['middleName'];
       $lastName                       = $registrationData['lastName'];
       $nickname                       = $registrationData['nickname'];
       $email                          = $registrationData['email'];
       $password                       = $registrationData['password'];
-      $cellphone                      = $registrationData['phone'];
+      $phone                          = $registrationData['phone'];
       $dob                            = $registrationData['dob'];
 
       //gathering fields to save
@@ -171,9 +172,7 @@
         $typeOfLicense = 0; //regular driver License
       }
 
-
-
-      $travel                  = $registrationData['travelPercentage'];
+      $travel                            = $registrationData['travelPercentage'];
       $Incorporated                      = $registrationData['Incorporated'];
       if($Incorporated)
       {
@@ -188,11 +187,10 @@
 
       $hasProfessionalInsurance          = $registrationData['ProfessionalInsurance'];
 
+      $desiredHourlyRate                = $registrationData['desiredHourlyRate'];
+      $desiredWeeklyRate                = $registrationData['desiredWeeklyRate'];
 
-      $desiredHourlyRate              = $registrationData['desiredHourlyRate'];
-      $desiredWeeklyRate              = $registrationData['desiredWeeklyRate'];
-
-      $DirectDeposit                  = $registrationData['DirectDeposit'];
+      $DirectDeposit                    = $registrationData['DirectDeposit'];
       if($DirectDeposit)
       {
         $DirectDepositRoutingNumber     = $registrationData['DirectDepositRoutingNumber'];
@@ -205,7 +203,7 @@
       }
 
       //experiences
-      // $experience                      = $registrationData['experience'];//???????
+      $experience                      = $registrationData['experience'];//???????
 
 
       // $djSelected                     = $registrationData['djSelected'];//
@@ -225,6 +223,9 @@
       // $otherServicesBandWebsite       = $registrationData['otherServicesBandWebsite'];//
       // $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
       
+      $query = "UPDATE registered_staff
+                SET address='".$code."',city='".$code."',zipcode='".$code."',state='".$code."',gender='".$code."',languages='".$code."',typeDL='".$code."',ethnicity='".$code."',ethnicityCode='".$code."',weight='".$code."',hairColor='".$code."',eyeColor='".$code."',shirtSize='".$code."',chestSize='".$code."',waistSize='".$code."',hipSize='".$code."',dressSize='".$code."',shoeSize='".$code."',piercings='".$code."',desiredHourlyRate='".$code."',desiredWeeklyRate='".$code."',ssnOrEin='".$code."',businessName='".$code."',travel='".$code."',insurance='".$code."',bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'
+                WHERE phone='".$phone."'";
 
   }//eom
 

@@ -357,7 +357,10 @@ function verifySmsCode($registrationType, $userID, $code )
         {
            //verify code has not been verified already
           $userInfo = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-           if( $userInfo['phoneValidated'] == 1 )
+          $phoneAlreadyValidated  = $userInfo['phoneValidated'];
+          print_r($userInfo);
+          echo $phoneAlreadyValidated;
+           if( $phoneAlreadyValidated == 1 )
            {
               return -3; //verification process previously performed, ignoring this request
            }
