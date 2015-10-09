@@ -33,6 +33,13 @@
     [self setPassword:@" "];
     [self setDOB:@" "];
     [self setPhoneNumber:@" "];
+    [self setTypeOfEmployer:@" "];
+    [self setAddress:@" "];
+    [self setCity:@" "];
+    [self setState:@" "];
+    [self setZipCode:@" "];
+    [self setIsuranceStatus: NO];
+    
 
 }
 
@@ -78,7 +85,41 @@
     phoneNumber = phoneProvided;
 }
 
+    //view controller 2
+-(void) setEmployerName:(NSString *)employerNameProvided
+{
+    employerName = employerNameProvided;
+}
 
+-(void) setAddress:(NSString *)addressProvided
+{
+    address = addressProvided;
+}
+
+-(void) setCity:(NSString *)cityProvided
+{
+    city = cityProvided;
+}
+
+-(void) setState:(NSString *)stateProvided
+{
+    state = stateProvided;
+}
+
+-(void) setZipCode:(NSString *)zipCodeProvided
+{
+    zipCode = zipCodeProvided;
+}
+
+-(void) setTypeOfEmployer:(NSString *)typeOfEmployerProvided
+{
+    typeOfEmployer = typeOfEmployerProvided;
+}
+
+-(void) setIsuranceStatus:(BOOL)insuranceStatus
+{
+    employerhasInsurance = insuranceStatus;
+}
 
 
 //accessors
@@ -133,6 +174,41 @@
 -(NSString *) getPhoneNumber
 {
     return phoneNumber;
+}
+
+-(NSString *) getEmployerName
+{
+    return employerName;
+}
+
+-(NSString *) getTypeOfEmployer
+{
+    return typeOfEmployer;
+}
+
+-(NSString *) getAddress
+{
+    return address;
+}
+
+-(NSString *) getCity
+{
+    return city;
+}
+
+-(NSString *) getState
+{
+    return state;
+}
+
+-(NSString *) getZipCode
+{
+    return zipCode;
+}
+
+-(BOOL) hasInsurance
+{
+    return employerhasInsurance;
 }
 
 

@@ -32,7 +32,7 @@
 {
     //waitingOnVerificationResponce = FALSE;
     
-    //    [registeredStaff printUserData];//testing
+    [registeredEmployer printUserData];//testing
     
     [self setUpTapGesture];
     

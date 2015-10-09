@@ -28,6 +28,12 @@
     
     //view controller 2
     NSString *employerName;
+    NSString *typeOfEmployer;
+    NSString *address;
+    NSString *city;
+    NSString *state;
+    NSString *zipCode;
+    BOOL employerhasInsurance;
     
 }
 
@@ -42,6 +48,13 @@
 -(NSString *) getPassword;
 -(NSString *) getDateOfBirth;
 -(NSString *) getPhoneNumber;
+-(NSString *) getEmployerName;
+-(NSString *) getTypeOfEmployer;
+-(NSString *) getAddress;
+-(NSString *) getCity;
+-(NSString *) getState;
+-(NSString *) getZipCode;
+-(BOOL) hasInsurance;
 
 //mutators
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName;
@@ -51,6 +64,13 @@
 -(void) setPassword:(NSString *) passwordProvided;
 -(void) setDOB:(NSString *) dobProvided;
 -(void) setPhoneNumber:(NSString *) phoneProvided;
+-(void) setEmployerName:(NSString *) employerNameProvided;
+-(void) setTypeOfEmployer:(NSString *) typeOfEmployerProvided;
+-(void) setAddress:(NSString *) addressProvided;
+-(void) setCity:(NSString *) cityProvided;
+-(void) setState:(NSString *) stateProvided;
+-(void) setZipCode:(NSString *) zipCodeProvided;
+-(void) setIsuranceStatus:(BOOL) insuranceStatus;
 
 -(void) printUserData;
 @end

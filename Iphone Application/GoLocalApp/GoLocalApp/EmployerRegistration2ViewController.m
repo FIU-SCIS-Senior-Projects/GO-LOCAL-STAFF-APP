@@ -7,31 +7,271 @@
 //
 
 #import "EmployerRegistration2ViewController.h"
+#import "EmployerRegistration3ViewController.h"
+
+#import "RegisteredEmployer.h"//needed this to use the registration model
 
 @interface EmployerRegistration2ViewController ()
 
 @end
 
 @implementation EmployerRegistration2ViewController
+{
+    //arrays
+    NSArray *stateOptions;
+    NSString * stateSelected; //state selected
+    
+    //pickers
+    UIPickerView * statePickerView;
+    
+    
+    __weak IBOutlet UILabel *stateLabel;
+
+
+}
+@synthesize registeredEmployer, employerNameField, typeOfEmployerField, addressField, zipCodeField, stateField, cityField, insuranceSwitch, scrollView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewDidAppear:(BOOL)animated
+{
+    //waitingOnVerificationResponce = FALSE;
+    
+    [registeredEmployer printUserData];//testing
+    
+    [self setUpTapGesture];
+    
+    [self createPickerForState];
+    
+}//eom
+
+-(void)setUpTapGesture
+{
+    //to dismiss keyboard when a tap is done outside the textfield
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard:)];
+    [self.view addGestureRecognizer:tap];
+    
+}//eom
+
+/* dimisses keyboard upon touching background */
+- (void)dismissKeyboard:(UITapGestureRecognizer *)recognizer
+{
+    [self.view endEditing:YES];
 }
 
-/*
-#pragma mark - Navigation
+/* verifying the required input fileds */
+- (BOOL)verifyDataEnter
+{
+    //checking for valid input
+//    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+//    
+//    NSString * testing = firstName.text;
+//    NSString *trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+    
+    if( insuranceSwitch.on )
+        [registeredEmployer setIsuranceStatus:YES];
+    else
+        [registeredEmployer setIsuranceStatus:NO];
+    
+    //updating values
+    
+    return 1;
+}//eom
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+-(IBAction)submit:(id)sender
+{
+    if( [self verifyDataEnter] )
+    {
+        [self performSegueWithIdentifier:@"goToEmployerRegister3" sender:self];
+    }
 }
-*/
+
+/* preparing the data to sent to the next view controller */
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"goToEmployerRegister3"]){
+        EmployerRegistration3ViewController *controller = (EmployerRegistration3ViewController *)segue.destinationViewController;
+        
+        controller.registeredEmployer = registeredEmployer;
+    }
+}//eom
+
+
+
+/****** UIPicker Methods ********/
+
+    /* creates the picker for state selection*/
+    -(void) createPickerForState
+    {
+        //setting up UIpicker for states selection
+        stateOptions = [[NSArray alloc] initWithObjects:@"",@"AL", @"AK", @"AZ", @"AR", @"CA", @"CO", @"CT", @"DE", @"FL",@"GA", @"HI", @"ID", @"IL", @"IN", @"IA", @"KS", @"KY", @"LA", @"ME", @"MD", @"MA", @"MI", @"MN", @"MS", @"MO", @"MT", @"NE", @"NV", @"NH", @"NJ", @"NM", @"NY", @"NC", @"ND", @"OH", @"OK", @"PA", @"RI", @"SC", @"SD", @"TN", @"TX", @"UT", @"VT", @"VA", @"WA", @"WV", @"WI", @"WY", nil];
+        
+        // create a UIPicker view as a custom keyboard view
+        statePickerView = [[UIPickerView alloc] init];
+        [statePickerView sizeToFit];
+        statePickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+        statePickerView.delegate = self;
+        statePickerView.dataSource = self;
+        statePickerView.showsSelectionIndicator = YES;
+        
+        //updating keyboard
+        self.stateField.inputView = statePickerView;
+        
+        // creating toolbar for 'Cancel' and 'Done' actions
+        UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+        keyboardDoneButtonView.barStyle = UIBarStyleBlack;
+        keyboardDoneButtonView.translucent = YES;
+        keyboardDoneButtonView.tintColor = nil;
+        [keyboardDoneButtonView sizeToFit];
+        
+        //creating empty UIBarItem to force first item to the right
+        UIBarButtonItem* empty1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        
+        //creating 'Done' UIBarItem to be the exit point for the picker
+        UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(cancelClicked:)];
+        
+        //creating 'Done' UIBarItem to be the exit point for the picker
+        UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                      action:@selector(doneClicked:)] ;
+        //adding UIBarItems to the Keyboard/Picker
+        [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
+        
+        
+        // Plug the keyboardDoneButtonView into the text field...
+        self.stateField.inputAccessoryView = keyboardDoneButtonView;
+        
+    }//eom
+
+    //process the data after the user click done on the uipicker
+    //   and resign being the first reponsder
+    - (void)doneClicked:(id)sender
+    {
+        [self.stateField resignFirstResponder];
+    }//eom
+
+    //process the date selected after the user click cancel
+    //   and resign being the first reponsder
+    - (void)cancelClicked:(id)sender
+    {
+        [self.stateField resignFirstResponder];
+    }//eom
+
+
+    // returns the number of 'columns' to display.
+    - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+    {
+        return 1;
+    }
+
+    // returns the # of rows in each component..
+    - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+    {
+            return [stateOptions count];
+
+    }//wom
+
+    #pragma mark - UIPickerView Delegate
+    - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+    {
+        return 30.0;
+    }
+
+    - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+    {
+
+        //states
+        return [stateOptions objectAtIndex:row];
+        
+    }//eom
+
+    //If the user chooses from the pickerview, it calls this function;
+    - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+    {
+        //state options
+        if(pickerView == statePickerView)
+        {
+            //updating values
+            stateField.text = [stateOptions objectAtIndex:row];
+            stateSelected = [stateOptions objectAtIndex:row];
+            
+            //updating hidden label
+            if(self.stateField.text.length == 0)
+            {
+                [self->stateLabel setHidden:YES];
+            }
+            else
+            {
+                [self->stateLabel setHidden:NO];
+            }
+        }
+     
+    }//eom
+
+
+/******** textfields  functions********/
+
+/* dimisses UITextField as soon the return key is pressed */
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+//    if(textField == self.address){
+//        [self.address resignFirstResponder];
+//        [self.city becomeFirstResponder];
+//    }
+//    
+    
+    [self scrollViewAdaptToStartEditingTextField:textField];//moving scrollview
+    
+    return YES;
+}//eom
+
+
+/* uitextfield is about to be edit*/
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [self scrollViewAdaptToStartEditingTextField:textField];
+    return YES;
+}
+
+/* shows and hides the label above the textfield depending if the textfield is blank or filled */
+- (IBAction)textFieldValuesChanged:(UITextField *)sender {
+    
+    int labelID = (int)sender.tag;
+    
+    if(labelID == 6)//state
+    {
+        if(self.stateField.text.length == 0)
+        {
+            [self->stateLabel setHidden:YES];
+        }
+        else
+        {
+            [self->stateLabel setHidden:NO];
+        }
+    }
+
+}//eoa
+
+/********* scrollview functions **********/
+    - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
+    {
+        CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);
+        [scrollView setContentOffset:point animated:YES];
+    }
+
+    - (void) scrollVievEditingFinished:(UITextField*)textField
+    {
+        CGPoint point = CGPointMake(0, 0);
+        [scrollView setContentOffset:point animated:YES];
+    }
+
+
 
 @end
