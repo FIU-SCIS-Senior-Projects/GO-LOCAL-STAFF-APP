@@ -320,7 +320,7 @@ SMS AUTHENTICATION PART 2
     -3  verification process previously performed, ignoring this request
     -10 not a valid registration Type
 */
-function verifySmsCode($registrationType, $userID, $code )
+function verifySmsCode($registrationType, $userID, $code , $phone)
 {
     $dbConnection = connectToDB();
     if(!$dbConnection)
@@ -348,7 +348,7 @@ function verifySmsCode($registrationType, $userID, $code )
         //verifying if such person exist with that phonenumber and verification code 
         $query = "SELECT phoneCode, phoneValidated
                   FROM $tableName
-                  WHERE $userKey='".$userID."'
+                  WHERE phone='".$phone."'
                   AND phoneCode='".$code."'";
 
         $result = mysqli_query($dbConnection, $query);

@@ -175,7 +175,7 @@
     NSLog(@"[1] responceType is %d", responceType);
     if(responceType > 0) //responce was good
     {
-        userID = [userResults objectForKey:@"userID"];
+        self->userID = [userResults objectForKey:@"userID"];
         //sms part 1
         if(userID)
         {
@@ -535,6 +535,7 @@
             finalList[@"registrationType"]      = [registeredStaff getAccountType];
             finalList[@"userID"]                = userID;
             finalList[@"code"]                  = verificationCode.text;
+            finalList[@"phone"]                 = self.cellphone.text;
             
             return finalList;
         }//eom
