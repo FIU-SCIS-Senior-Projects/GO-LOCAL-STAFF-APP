@@ -118,13 +118,13 @@
         return 0;
       }
 
-      $fname            = $staffInfo["firstName"];//
-      $middleInitial    = $staffInfo["middleName"];//
-      $lname            = $staffInfo["lastName"];//
-      $usernameProvided = $staffInfo["username"];//
-      $emailProvided    = $staffInfo["email"];//
-      $pasword          = $staffInfo["password"];//
-      $phone            = $staffInfo["phone"];//
+      $fname            = $employerInfo["firstName"];//
+      $middleInitial    = $employerInfo["middleName"];//
+      $lname            = $employerInfo["lastName"];//
+      $usernameProvided = $employerInfo["username"];//
+      $emailProvided    = $employerInfo["email"];//
+      $pasword          = $employerInfo["password"];//
+      $phone            = $employerInfo["phone"];//
       $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
       $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
       $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
