@@ -194,7 +194,11 @@
     
     if(responceType)
     {
-        //showing submit 
+        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
+        // it's empty or contains only white spaces
+        [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];
+        
+        //showing submit
         [submitButton setHidden:NO];
         
         //updating json receiver flag

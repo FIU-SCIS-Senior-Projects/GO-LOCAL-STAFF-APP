@@ -3832,6 +3832,9 @@
                                     </label>
                                 </subviews>
                                 <animations/>
+                                <connections>
+                                    <outlet property="delegate" destination="8ku-2u-JgN" id="AVF-NM-dc4"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <animations/>
