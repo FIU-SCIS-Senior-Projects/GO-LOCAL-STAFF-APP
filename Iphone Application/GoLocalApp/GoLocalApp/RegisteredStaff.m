@@ -38,7 +38,7 @@
     [self setPassword:@" "];
     [self setDOB:@" "];
     [self setCellphone:@" "];
-    [self setAddress:@" "];
+    [self setAddress:@" " withCity:@" " withZipcode:@" " andState:@" "];
     [self setGender:0];
     [self setLanguages:@" "];
     [self setExperience:temp];
@@ -50,7 +50,7 @@
     [self setLicenseInfo:FALSE hasCommercialLicense:FALSE];
     [self setTattoos:FALSE];
     [self setPiercings:FALSE];
-    [self setEthnicity:@" "];
+    [self setEthnicity:@" " withCode:@" "];
     [self setHeight:@" "];
     [self setWeight:@" "];
     [self setHairColor:@" "];
@@ -114,9 +114,13 @@
 }//eom
 
     //view controller 2
--(void) setAddress:(NSString *) addressProvided
+-(void) setAddress:(NSString *) address withCity:(NSString*)cityReceived withZipcode:(NSString*)zipcodeReceived andState:(NSString *)stateReceived;
 {
-    completeAddress = addressProvided;
+    completeAddress = address;
+    addressCity = cityReceived;
+    addressZipcode = zipcodeReceived;
+    addressState = stateReceived;
+    
 }//eom
 
 -(void) setGender:(bool) genderProvided
@@ -206,9 +210,10 @@
     hasPiercings    =   piercingsSelected;
 }//eom
 
--(void) setEthnicity:(NSString *) ethnicitySelected
+-(void) setEthnicity:(NSString *) ethnicitySelected withCode:(NSString *) ethnicityCodeProvided
 {
-    ethnicity = ethnicitySelected;
+    ethnicity       =   ethnicitySelected;
+    ethnicityCode   =   ethnicityCodeProvided;
 }//eom
 
 
@@ -408,6 +413,22 @@
     return completeAddress;
 }//eom
 
+-(NSString *) getAddressCity
+{
+    return addressCity;
+}//eom
+
+-(NSString *) getAddressZipcode
+{
+    return addressZipcode;
+}//eom
+
+
+-(NSString *) getAddressState
+{
+    return addressState;
+}//eom
+
 -(NSString *) getGender
 {
     return gender;
@@ -471,6 +492,11 @@
 -(NSString *) getEthnicity
 {
     return ethnicity;
+}//eom
+
+-(NSString *) getEthnicityCode
+{
+    return ethnicityCode;
 }//eom
 
 -(NSString *) getHeight
@@ -599,9 +625,13 @@
     NSLog(@" email:           %@", email);
     NSLog(@" password:        %@", password);
     NSLog(@" dob:             %@", dateOfBirth);
+    
     //view controller 2
     NSLog(@" cellphone:       %@", cellphone);
     NSLog(@" address:         %@", completeAddress);
+    NSLog(@" state:           %@", addressState);
+    NSLog(@" city:            %@", addressCity);
+    NSLog(@" zipcode:         %@", addressZipcode);
     NSLog(@" gender type:     %d", genderType);//0 female 1 male
     NSLog(@" gender:          %@", gender);//0 female 1 male
     NSLog(@" languages:       %@", languages);
@@ -632,6 +662,7 @@
     NSLog(@" tattoos?               %d", hasTattoos);
     NSLog(@" piercings?             %d", hasPiercings);
     NSLog(@" ethnicity              %@", ethnicity);
+    NSLog(@" ethnicity Code:        %@", ethnicityCode);
     NSLog(@" height                 %@", height);
     NSLog(@" weight                 %@", weight);
     NSLog(@" hairColor              %@", hairColor);
@@ -669,82 +700,3 @@
 
 
 @end
-
-
-
-//    NSDictionary *tmp;
-//         tmp= [[NSDictionary alloc] initWithObjectsAndKeys:
-//                             accountType,  @"registrationType",
-//                             firstName,  @"firstName",
-//                             middleName, @"middleName",
-//                             lastName, @"lastName",
-//                             nickName, @"nickName",
-//                             email, @"email",
-//                             username, @"username",
-//                             password, @"password",
-//                             dateOfBirth, @"dob",
-//
-//                             cellphone, @"cellphone",
-//                             cellphoneCarrier, @"cellphoneCarrier",
-//                             completeAddress, @"completeAddress",
-//                             gender, @"gender",
-//                             languages, @"languages",
-//
-//                             staffTypeExperience, @"staffTypeExperience",
-////                             djSelected, @"djSelected",
-////                             liveBandSelected, @"liveBandSelected",
-////                             cateringCompanySelected, @"cateringCompanySelected",
-////                             otherServicesSelected, @"otherServicesSelected",
-//
-//                             djDescription, @"djDescription",
-//                             djWebsite, @"djWebsite",
-//                             djSocialMedia, @"djSocialMedia",
-//                             djCostOfService, @"djCostOfService",
-//
-//                             liveBandDescription, @"liveBandDescription",
-//                             liveBandWebsite, @"liveBandWebsite",
-//                             liveBandSocialMedia, @"liveBandSocialMedia",
-//                             liveBandCostOfService, @"liveBandCostOfService",
-//
-//                             cateringCompanyDescription, @"cateringCompanyDescription",
-//                             cateringCompanyWebsite, @"cateringCompanyWebsite",
-//                             cateringCompanySocialMedia, @"cateringCompanySocialMedia",
-//                             cateringCompanyCostOfService, @"cateringCompanyCostOfService",
-//
-//                             otherServicesDescription, @"otherServicesDescription",
-//                             otherServicesWebsite, @"otherServicesWebsite",
-//                             otherServicesSocialMedia, @"otherServicesSocialMedia",
-//                             otherServicesCostOfService, @"otherServicesCostOfService",
-//
-//                             hasDriverLicense, @"hasDriverLicense",
-//                             hasCommercialLicense, @"hasCommercialLicense",
-//                             hasTattoos, @"Tattoos",
-//                             hasPiercings, @"Piercings",
-//                             ethnicity, @"ethnicity",
-//                             height, @"height",
-//                             weight, @"weight",
-//                             hairColor, @"hairColor",
-//                             eyeColor, @"eyeColor",
-//                             pantSize, @"pantSize",
-//                             shoeSize, @"shoeSize",
-//                             tshirtSize, @"tshirtSize",
-//
-//                             chestSize, @"chestSize",
-//                             waistSize, @"waistSize",
-//                             hipsSize, @"hipsSize",
-//                             dressSize, @"dressSize",
-//
-//                             hasProfessionalInsurance, @"ProfessionalInsurance",
-//                             isIncorporated, @"Incorporated",
-//                             ssn, @"ssn",
-//                             ein, @"ein",
-//                             businessName, @"businessName",
-//                             desiredHourlyRate, @"desiredHourlyRate",
-//                             desiredWeeklyRate, @"desiredWeeklyRate",
-//                             travelPercentage, @"travelPercentage",
-//
-//                             directDepositDesired, @"DirectDeposit",
-//                             directDepositRoutingNumber, @"DirectDepositRoutingNumber",
-//                             directDepositAccountNumber, @"DirectDepositAccountNumber",
-//
-//                             nil];
