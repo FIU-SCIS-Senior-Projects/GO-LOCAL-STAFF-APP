@@ -456,11 +456,9 @@
         finalList[@"firstName"]     = [registeredEmployer getFirstName];
         finalList[@"middleName"]    = [registeredEmployer getMiddleName];
         finalList[@"lastName"]      = [registeredEmployer getLastName];
-        finalList[@"nickName"]      = [registeredEmployer getNickName];
         finalList[@"username"]      = [registeredEmployer getUserName];
         finalList[@"email"]         = [registeredEmployer getEmail];
         finalList[@"password"]      = [registeredEmployer getPassword];
-        finalList[@"dob"]           = [registeredEmployer getDateOfBirth];
         
         //adding view controller 1 info
         finalList[@"phone"]             = self.cellphoneField.text;

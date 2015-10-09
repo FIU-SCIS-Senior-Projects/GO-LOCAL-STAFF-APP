@@ -372,7 +372,7 @@
             }
             else if(textField == self.username){
                 [self.username resignFirstResponder];
-                [self.nickName becomeFirstResponder];
+                [self.email becomeFirstResponder];
             }
             else if(textField == self.email){
                 [self.email resignFirstResponder];
@@ -388,12 +388,7 @@
             }
             else if(textField == self.confirmPassword){
                 [self.confirmPassword resignFirstResponder];
-                [self.dateOfBirth becomeFirstResponder];
             }
-            else if(textField == self.dateOfBirth){
-                [self.dateOfBirth resignFirstResponder];
-            }
-            
             return YES;
         }//eom
 
