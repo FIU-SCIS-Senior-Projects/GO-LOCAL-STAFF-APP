@@ -26,68 +26,77 @@ function closeDB($link)
   */
 function loginRegisteredUser($username, $email , $password )
 {
+    $dbConnection = connectToDB();
+    if(!$dbConnection)
+    {
+    //        echo "Unable to connect to MySQL.".PHP_EOL;
+      return 0;
+    }
 
-      $dbConnection = connectToDB();
-      if(!$dbConnection)
-      {
-//        echo "Unable to connect to MySQL.".PHP_EOL;
-        return 0;
+    //staff account lookup
+    $query = "SELECT * FROM registered_staff WHERE username='".$username."' or email='".$email."'";
+    
+    $result     = mysqli_query($dbConnection, $query);
+    $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+    $rowResult  = array_filter($row);
+    
+    if( $rowResult )
+    {                
+      // print_r($row);//testing
+      $dbHashedPassword = $row['password'];
+
+      echo "<p>provided pass $password | server pass = $dbHashedPassword </p>";
+      $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+      echo "<p>provided pass hashed is : $passwordHashed</p>";
+      if (password_verify($dbHashedPassword, $password)) {
+          echo 'Password is valid!';
+      } else {
+          echo 'Invalid password.';
       }
-     
-        //staff account lookup
-          $query = "SELECT * FROM registered_staff WHERE username='".$username."' or email='".$email."'";
-          
-          $result     = mysqli_query($dbConnection, $query);
-          $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-          $rowResult  = array_filter($row);
-          
-          if( !empty($rowResult) )
-          {                
-            // print_r($row);//testing
-            $dbHashedPassword = $row['password'];
-            if ( password_verify($password, $dbHashedPassword) ) 
-            {
-                // echo '<p>staff Password is valid!</p>';//testing
-                return 1;
-            } 
-            else 
-            {
-                // echo '<p> staff Invalid password.</p>';//testing
-                return -1;
-            }
-          }//eo-staff look up
-
-          //freeing vars
-          $query = null;
-          $result = null;
-          $rowResult = null;
-          $dbHashedPassword = null;
-
-          //employer account look up
-          $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
-          
-          $result = mysqli_query($dbConnection, $query);
-          $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-          $rowResult = array_filter($row);
-          
-          if ( $rowResult )
-          {
-            // print_r($row);//testing
-            $dbHashedPassword = $row['password'];
-
-            if ( password_verify($password, $dbHashedPassword) ) 
-            {
-                // echo '<p>employer Password is valid!</p>';//testing
-                return 2;
-            } else {
-                // echo '<p>employer Invalid password.</p>';//testing
-                return -2;
-            }
-          }//eo-employer look up
 
 
-          // echo "<p>no account found</p>";
-          return -3; //no account found
+      // if ( password_verify($password, $dbHashedPassword) ) 
+      // {
+      //     echo '<p>staff Password is valid!</p>';//testing
+      //     return 1;
+      // } 
+      // else 
+      // {
+      //     echo '<p> staff Invalid password.</p>';//testing
+      //     return -1;
+      // }
+    }//eo-staff look up
+
+    //freeing vars
+    $query = null;
+    $result = null;
+    $rowResult = null;
+    $dbHashedPassword = null;
+
+    //employer account look up
+    $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
+    
+    $result = mysqli_query($dbConnection, $query);
+    $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+    $rowResult = array_filter($row);
+    
+    if( $rowResult )
+    {
+      // print_r($row);//testing
+      $dbHashedPassword = $row['password'];
+
+      if ( password_verify($password, $dbHashedPassword) ) 
+      {
+          echo '<p>employer Password is valid!</p>';//testing
+          return 2;
+      } else {
+          echo '<p>employer Invalid password.</p>';//testing
+          return -2;
+      }
+    }//eo-employer look up
+
+    echo "<p>no account found</p>";
+    return -3; //no account found
           
 }//eom
 
@@ -152,28 +161,36 @@ function isUserRegistrationUnique( $registrationType, $usernameProvided, $emailP
     $username  = mysqli_real_escape_string($dbConnection, $usernameProvided);
     $email     = mysqli_real_escape_string($dbConnection, $emailProvided);
 
-    //making sure user is a unique registration
-   if( $registrationType == "Staff")
-   {
-    $query = "SELECT * FROM registered_staff WHERE username='".$username."' or email='".$email."'";
-   }
-   else if( $registrationType == "Employer" )
-   {
-    $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
-   } 
-   else
+    //checking for invalid type 
+   if( ($registrationType != "Staff") && ($registrationType != "Employer") )
    {
       return -10;
    }
-   
+
+   // making sure user is a unique registration
+    $query = "SELECT * FROM registered_staff WHERE username='".$username."' or email='".$email."'";
     $result = mysqli_query($dbConnection, $query);
     $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
     $rowResult = array_filter($row);
     if (empty($rowResult))
     {
-      // print_r($row);
-    //  echo "<p>username and email is unique</p>";
-      return 1;
+             // echo "<p>username and email is unique so far (NOT a registered_staff).....</p>";
+            $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
+            $result = mysqli_query($dbConnection, $query);
+            $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+            $rowResult = array_filter($row);
+            if (empty($rowResult))
+            {
+              // print_r($row);
+             // echo "<p>username and email is unique (NOT a registered_employer or registered_staff).....</p>";
+              return 1;
+            }
+            else
+            {
+              // print_r($row);
+              //echo "<p>username and email is NOT unique</p>";
+              return -1;
+            }
     }
     else
     {

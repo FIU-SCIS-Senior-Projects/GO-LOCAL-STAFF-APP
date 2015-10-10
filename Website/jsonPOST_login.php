@@ -44,55 +44,49 @@
         );
       }
       else  //valid json values found
-      {
-          require 'API.php';/* adding API */
+      { 
+    require 'API.php';/* adding API */
           
           $username = $decoded['username'];
           $email    = $decoded['email'];
           $password = $decoded['password'];
-
           //check if valid user and return type of user
           $typeUser = loginRegisteredUser($username, $email, $password);
           if($typeUser == 1) //valid staff user
           {
             $responseArray = array(
                 "message" => "staff user",
-                "usertype"    => "1",
+                "usertype"    => $typeUser,
               );
           }
           else if($typeUser == 2)//valid employer user
           {
               $responseArray = array(
                 "message"   => "employer user",
-                "usertype"  => "2",
+                "usertype"  => $typeUser,
               );
-
           }
           else if( ($typeUser == -1) || ($typeUser == -2)  )//valid user with INCORRECT Credentials
           {
               $responseArray = array(
                 "message"   => "invalid credentials",
-                "usertype"  => "-1",
+                "usertype"  => $typeUser,
               );
-
           }
           else if($typeUser == -3) //no registered user found
           {
               $responseArray = array(
                 "message"   => "no registered user found",
-                "usertype"  => "-3",
+                "usertype"  => $typeUser,
               );
-
           }
           else if($typeUser == 0) //database not responding
           {
               $responseArray = array(
                 "message"   => "database not responding",
-                "usertype"  => "0",
+                "usertype"  => $typeUser,
               );
-
           }
-
           /* 
             reponse returns the following:
                 2   valid employer user
@@ -117,12 +111,14 @@
   //responding back to sender
   $encoded = json_encode($response);
 
-        /* saving incoming file */
+  echo getcwd();
+
+      /* saving incoming file */
         // Write the contents back to the file
         $filename = 'test/LoginDataResponse.json';
         file_put_contents($filename, var_export($encoded, true));
 
-        $filename = 'test/LoginDataIncoming.json';
+        $filename = 'test/LoginIncomingData.json';
         file_put_contents($filename, var_export($decoded, true));
 
 

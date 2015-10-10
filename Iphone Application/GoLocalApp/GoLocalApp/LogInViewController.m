@@ -20,78 +20,44 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    [self setupTextFields];
+   
 }//eom
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+}//eom
+
+/* */
+- (IBAction)unwoundStaff:(UIStoryboardSegue *)segue
+{
+    // No need to do anything here...
+}
 
 
 /* */
 - (IBAction)submitLogIn:(id)sender
 {
-    int loginResults = [self LogInUser];
-    NSLog(@"results are %d", loginResults);
-    if(loginResults > 0)
+    [self sendDataLoginDataToServer];
+}//eom
+
+
+/******** helper functions ********/
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
     {
-        if(loginResults == 1)
-        {
-             [self performSegueWithIdentifier:@"staffHome" sender:self];
-        }
-        else if(loginResults == 2)
-        {
-             [self performSegueWithIdentifier:@"employerHome" sender:self];
-        }
         
-    }
-    else
-    {
-        [self showAlert:@"Unable to signin" withMessage: @"login credentials invalid" and:@"Okay"];
-    }
-    
-}//eom
-
-
-/* Log in user in the database 
-    return 1 - staff
-    return 2 - employer
-    return -1 - not valid user
- */
--(int)LogInUser
-{
-
-//    NSString *uname = self.username.text;
-//    NSString *pass = self.password.text;
-    
-//    NSString *uname = @"luoandre29";
-//    NSString *pass = @"2987Andres";
-//    if( ( uname == self.username.text) && (pass == self.password.text) )
-//    {
-        return 1;
-//    }
-    
-//    return -1;
-}//eom
-
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-    
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
-
-/******** textfields  functions********/
-    /* setup textfields */
-    -(void) setupTextFields
-    {
-        //setup of texfields
-        self.username.delegate           = self;
-        self.password.delegate           = self;
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
     }//eom
+
+
+/******** textfields  functions ********/
 
     /* dimmisses UITextField as soon the background is touched */
     -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -110,25 +76,162 @@
         else if(textField == self.password){
             [self.password resignFirstResponder];
         }
-        else{
-            NSLog(@"none are the same");
-        }
         
         return YES;
     }//eom
 
 
-/* */
-- (IBAction)unwoundStaff:(UIStoryboardSegue *)segue
+/******** Log in  functions ********/
+
+/*
+    process Server Responce
+ */
+-(void) processServerResponce:(NSDictionary *) responce
 {
-    // No need to do anything here...
-}
+    //    NSLog(@"[1] responce: %@", responce);
+    
+    NSDictionary * userResults = [responce objectForKey:@"results"];
+    int responceType = [[userResults objectForKey:@"responseType"] intValue];
+    NSDictionary * responceMessage = [userResults objectForKey:@"message"];
+    NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
+    
+    NSLog(@"[1] results is %@", userResults);
+    NSLog(@"[1] responceType is %d", responceType);
+    if(responceType > 0) //responce was good
+    {
+
+    }
+    else //invalid response
+    {
+        //notifying user code was accepted
+        [self showAlert:@"SMS Authentication" withMessage:message and:@"Okay"];
+    }
+    
+    /*
+     
+     
+    Log in user in the database
+     return 1 - staff
+     return 2 - employer
+     return -1 - not valid user
+    
+     int loginResults = [self LogInUser];
+     NSLog(@"results are %d", loginResults);
+     if(loginResults > 0)
+     {
+     if(loginResults == 1)
+     {
+     [self performSegueWithIdentifier:@"staffHome" sender:self];
+     }
+     else if(loginResults == 2)
+     {
+     [self performSegueWithIdentifier:@"employerHome" sender:self];
+     }
+     
+     }
+     else
+     {
+     [self showAlert:@"Unable to signin" withMessage: @"login credentials invalid" and:@"Okay"];
+     }
+     */
+}//eom
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
+/***************** JSON POST functions *******************/
+
+
+    /* responce from server */
+    - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+    {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        
+        NSLog(@" responce: %@", httpResponse.description);
+        
+    }//eo-action
+
+
+    /* data received from server */
+    - (void)connection:(NSURLConnection *)connection didReceiveData:(nonnull NSData *)data
+    {
+        
+        NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        NSLog(@"[1] from server replied: %@",rawExhibits);
+
+        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"[2] responce from server %@",dataResponce);
+
+        // Get JSON objects into initial array
+        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+        NSLog(@"[3] responce from server %@",rawExhibits2);
+        
+        //processing responce
+        [self processServerResponce:rawExhibits];
+    }//eom
+
+    /*
+     - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+     {
+         data = [[NSMutableData alloc] init];
+         NSLog(@"Data Data , %@", data);
+     }
+     */
+
+    /* error occurred sending data to server */
+    -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+    {
+        NSLog(@" Failed with error '%@'", error);
+    }//eom
+
+
+    /* 
+     
+     */
+    -(void)sendDataLoginDataToServer
+    {
+        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_login.php";
+        
+        /*** preparing data to be sent ***/
+        NSMutableDictionary * logInfo = [self prepareLogInData];
+        NSLog(@"");
+        NSLog(@" about to send the following data: %@", logInfo);
+        NSLog(@"");
+        
+        /*** Sending data ***/
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+                                        initWithURL:[NSURL URLWithString:  serverAddress ]];
+        
+        [request setHTTPMethod:@"POST"]; //request type
+        
+        //sending data
+        NSError *error;
+        NSData *postdata = [NSJSONSerialization dataWithJSONObject:logInfo options:0 error:&error];
+        
+        [request setHTTPBody:postdata];
+        
+        //        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        //        NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+        
+        [NSURLConnection connectionWithRequest:request delegate:self];
+        
+    }//eo-action
+
+
+    /* 
+        prepare log in data
+     */
+    -(NSMutableDictionary *) prepareLogInData
+    {
+        //creating initial list
+        NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
+        
+        finalList[@"username"]     = self.username.text;
+        finalList[@"password"]     = self.password.text;
+        
+        return finalList;
+    }//eom
+
+
+   
 @end

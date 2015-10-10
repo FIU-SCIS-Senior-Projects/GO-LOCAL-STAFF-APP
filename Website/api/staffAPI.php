@@ -73,7 +73,7 @@
       $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
       $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
       $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
-      $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
+      $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
 
       $query = "INSERT INTO registered_staff ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, phone, dateOfBirth)
             VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$phone."', '".$dob."')";
