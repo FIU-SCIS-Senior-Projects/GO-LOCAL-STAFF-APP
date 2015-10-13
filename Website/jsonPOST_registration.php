@@ -102,14 +102,14 @@
   //responding back to sender
   $encoded = json_encode($response);
 
-	echo getcwd();
+	// echo getcwd();
 
       /* saving incoming file */
         // Write the contents back to the file
-        $filename = 'test/RegistrationDataResponse.json';
+        $filename = 'test/registration/RegistrationDataResponse.json';
         file_put_contents($filename, var_export($encoded, true));
 
-        $filename = 'test/RegistrationDataIncoming.json';
+        $filename = 'test/registration/RegistrationDataIncoming.json';
         file_put_contents($filename, var_export($decoded, true));
 
 

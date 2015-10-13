@@ -165,10 +165,10 @@ $encoded = json_encode($response);
 
 /* saving incoming file */
       // Write the contents back to the file
-$filename = 'test/SMSDataResponse.json';
+$filename = 'test/sms/SMSDataResponse.json';
 file_put_contents($filename, var_export($encoded, true));
 
-$filename = 'test/SMSDataincoming.json';
+$filename = 'test/sms/SMSDataincoming.json';
 file_put_contents($filename, var_export($decoded, true));
 
 

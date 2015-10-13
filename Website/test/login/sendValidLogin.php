@@ -1,18 +1,19 @@
 <?php  
 
-
-include 'urlsettings.php';
+include '../urlsettings.php';
 
 //Initiate cURL.
 $ch = curl_init($url_sendLogin);
  
 /*The JSON data */
-    //valid invalid staff user w/ WRONG password
+
+    //valid staff user
     $jsonData = array(
         'username' => 'luoandre29',
-        'email'    => 'luoandre29@yahoo.com',
-        'password' => 'password'
+        'email' => 'luoandre29@outlook.com',
+        'password' => '0987654321',
     );
+
  
 //Encode the array into JSON.
 $jsonDataEncoded = json_encode($jsonData);

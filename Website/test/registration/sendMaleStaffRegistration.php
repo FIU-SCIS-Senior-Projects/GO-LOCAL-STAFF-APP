@@ -1,6 +1,6 @@
 <?php
  
-include 'urlsettings.php';
+include '../urlsettings.php';
 
  
 // //Initiate cURL.

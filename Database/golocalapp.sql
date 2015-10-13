@@ -145,7 +145,7 @@ CREATE TABLE `staff_type` (
   `staffID` int(11) NOT NULL,
   `jobTitle` varchar(255) NOT NULL,
   `website` varchar(30) NOT NULL,
-  `socialMedia` varchar(255) NOT NULL,
+  `socialMedia` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

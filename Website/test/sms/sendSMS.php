@@ -1,6 +1,6 @@
 <?php  
 
-include 'urlsettings.php';
+include '../urlsettings.php';
 
 //Initiate cURL.
 $ch = curl_init($url_sendSMS);

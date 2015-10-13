@@ -67,13 +67,19 @@
       $nickname         = $staffInfo["nickName"];//
       $usernameProvided = $staffInfo["username"];//
       $emailProvided    = $staffInfo["email"];//
-      $pasword          = $staffInfo["password"];//
+      $password         = $staffInfo["password"];//
       $dob              = $staffInfo["dob"];//
       $phone            = $staffInfo["phone"];//
+
+      //Cleaning data (prevent SQL injections)
       $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
       $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
       $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
-      $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+      $cleanPassword  = mysqli_real_escape_string($dbConnection, $password);
+
+      //hashing password
+      $options= array('cost' => 10);
+      $passwordHashed = password_hash($cleanPassword, PASSWORD_BCRYPT, $options);
 
       $query = "INSERT INTO registered_staff ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, phone, dateOfBirth)
             VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$phone."', '".$dob."')";

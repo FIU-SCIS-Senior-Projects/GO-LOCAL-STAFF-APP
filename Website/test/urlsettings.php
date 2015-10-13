@@ -1,7 +1,7 @@
 <?php
 
-$localTesting = true;
-$testingStaffUser = true;
+$localTesting = false;
+$testingStaffUser = false;
 
 if($localTesting)
 {

@@ -34,68 +34,66 @@ function loginRegisteredUser($username, $email , $password )
     }
 
     //staff account lookup
-    $query = "SELECT * FROM registered_staff WHERE username='".$username."' or email='".$email."'";
+    $query = "SELECT password FROM registered_staff WHERE username='".$username."' or email='".$email."'";
     
     $result     = mysqli_query($dbConnection, $query);
+
+    //cleaning provided password
+    $cleanpass  = mysqli_real_escape_string($dbConnection, $password);
+
     $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
     $rowResult  = array_filter($row);
     
     if( $rowResult )
     {                
       // print_r($row);//testing
-      $dbHashedPassword = $row['password'];
 
-      echo "<p>provided pass $password | server pass = $dbHashedPassword </p>";
-      $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
-      echo "<p>provided pass hashed is : $passwordHashed</p>";
-      if (password_verify($dbHashedPassword, $password)) {
-          echo 'Password is valid!';
-      } else {
-          echo 'Invalid password.';
+      //getting hashed password
+      $dbHashedPassword = $row['password']; 
+
+      //verifying password is valid
+      if ( password_verify($cleanpass, $dbHashedPassword) ) 
+      {
+          // echo '<p>staff Password is valid!</p>';//testing
+          return 1;
+      } 
+      else 
+      {
+          // echo '<p> staff Invalid password.</p>';//testing
+          return -1;
       }
-
-
-      // if ( password_verify($password, $dbHashedPassword) ) 
-      // {
-      //     echo '<p>staff Password is valid!</p>';//testing
-      //     return 1;
-      // } 
-      // else 
-      // {
-      //     echo '<p> staff Invalid password.</p>';//testing
-      //     return -1;
-      // }
     }//eo-staff look up
 
     //freeing vars
     $query = null;
     $result = null;
+    $row =  null;
     $rowResult = null;
     $dbHashedPassword = null;
 
     //employer account look up
-    $query = "SELECT * FROM registered_employer WHERE username='".$username."' or email='".$email."'";
+    $query = "SELECT password FROM registered_employer WHERE username='".$username."' or email='".$email."'";
     
-    $result = mysqli_query($dbConnection, $query);
-    $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-    $rowResult = array_filter($row);
+    $result     = mysqli_query($dbConnection, $query);
+    $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+    $rowResult  = array_filter($row);
     
     if( $rowResult )
     {
       // print_r($row);//testing
       $dbHashedPassword = $row['password'];
 
-      if ( password_verify($password, $dbHashedPassword) ) 
+      if ( password_verify($cleanpass, $dbHashedPassword) ) 
       {
-          echo '<p>employer Password is valid!</p>';//testing
+          // echo '<p>employer Password is valid!</p>';//testing
           return 2;
       } else {
-          echo '<p>employer Invalid password.</p>';//testing
+          // echo '<p>employer Invalid password.</p>';//testing
           return -2;
       }
     }//eo-employer look up
 
-    echo "<p>no account found</p>";
+    // echo "<p>no account found</p>";
     return -3; //no account found
           
 }//eom

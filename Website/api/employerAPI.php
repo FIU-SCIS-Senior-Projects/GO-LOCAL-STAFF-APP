@@ -32,21 +32,32 @@
           }
           else
           {
-            print_r($row);
+            // print_r($row);
             // echo "<p>employer is NOT unique</p>";
             return -1;
           }
     }//eom
 
     /* register a staff 
+      returns 1 successfully register
       returns 0 database not responding 
+      returns -1 unsuccessfully register
     */
     function registerEmployer($username, $email, $password)
     {
           $dbConnection = connectToDB();
+          if(!$dbConnection)
+          {
+//            echo "Unable to connect to MySQL.".PHP_EOL;
+            return 0;
+          }
 
-          //hash password for security
-          $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
+          //cleaning data
+          $cleanPassword  = mysqli_real_escape_string($dbConnection, $password);
+
+          //hashing password
+          $options= array('cost' => 10);
+          $passwordHashed = password_hash($cleanPassword, PASSWORD_BCRYPT, $options);
 
           //prepare query
           $query = "INSERT INTO registered_employer (username, password, email)
@@ -54,8 +65,12 @@
 
           //perform query
           $result = mysqli_query($dbConnection, $query);
-          echo "<p>".$result."</p>";
-          return $result;
+          if($result)
+          {
+          // echo "<p>".$result."</p>";
+            return 1;
+          }
+          return -1;
 
     }//eom
 
@@ -123,12 +138,18 @@
       $lname            = $employerInfo["lastName"];//
       $usernameProvided = $employerInfo["username"];//
       $emailProvided    = $employerInfo["email"];//
-      $pasword          = $employerInfo["password"];//
+      $password         = $employerInfo["password"];//
       $phone            = $employerInfo["phone"];//
+
+      //cleaning data
       $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
       $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
       $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
-      $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
+      $cleanPassword  = mysqli_real_escape_string($dbConnection, $password);
+
+      //hashing password
+      $options= array('cost' => 10);
+      $passwordHashed = password_hash($cleanPassword, PASSWORD_BCRYPT, $options);
 
       $query = "INSERT INTO registered_employer ( username, password, email, hashEmail, firstName, middleInitial, lastName, phone)
             VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$phone."')";
