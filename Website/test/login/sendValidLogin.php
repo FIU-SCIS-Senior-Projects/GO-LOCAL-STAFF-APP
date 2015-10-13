@@ -9,8 +9,8 @@ $ch = curl_init($url_sendLogin);
 
     //valid staff user
     $jsonData = array(
-        'username' => 'luoandre29',
-        'email' => 'luoandre29@outlook.com',
+        'emailOrUsername' => 'luoandre29',
+        // 'email' => 'luoandre29@outlook.com',
         'password' => '0987654321',
     );
 

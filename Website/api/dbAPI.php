@@ -24,7 +24,7 @@ function closeDB($link)
           -2  employer account found  - invalid credentials 
           -3  no user found           - employer or staff
   */
-function loginRegisteredUser($username, $email , $password )
+function loginRegisteredUser($emailOrUsername, $password )
 {
     $dbConnection = connectToDB();
     if(!$dbConnection)
@@ -34,8 +34,7 @@ function loginRegisteredUser($username, $email , $password )
     }
 
     //staff account lookup
-    $query = "SELECT password FROM registered_staff WHERE username='".$username."' or email='".$email."'";
-    
+    $query = "SELECT password FROM registered_staff WHERE username='".$emailOrUsername."' or email='".$emailOrUsername."'";
     $result     = mysqli_query($dbConnection, $query);
 
     //cleaning provided password
@@ -72,7 +71,7 @@ function loginRegisteredUser($username, $email , $password )
     $dbHashedPassword = null;
 
     //employer account look up
-    $query = "SELECT password FROM registered_employer WHERE username='".$username."' or email='".$email."'";
+    $query = "SELECT password FROM registered_employer WHERE username='".$emailOrUsername."' or email='".$emailOrUsername."'";
     
     $result     = mysqli_query($dbConnection, $query);
     $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );

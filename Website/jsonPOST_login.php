@@ -45,13 +45,12 @@
       }
       else  //valid json values found
       { 
-    require 'API.php';/* adding API */
+           require 'API.php';/* adding API */
           
-          $username = $decoded['username'];
-          $email    = $decoded['email'];
-          $password = $decoded['password'];
+          $emailOrUsername    = $decoded['emailOrUsername'];
+          $password           = $decoded['password'];
           //check if valid user and return type of user
-          $typeUser = loginRegisteredUser($username, $email, $password);
+          $typeUser = loginRegisteredUser($emailOrUsername, $password);
           if($typeUser == 1) //valid staff user
           {
             $responseArray = array(

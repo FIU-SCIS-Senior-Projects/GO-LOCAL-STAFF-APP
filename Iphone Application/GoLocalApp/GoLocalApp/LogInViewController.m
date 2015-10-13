@@ -226,7 +226,7 @@
         //creating initial list
         NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
         
-        finalList[@"username"]     = self.username.text;
+        finalList[@"emailOrUsername"]     = self.username.text;
         finalList[@"password"]     = self.password.text;
         
         return finalList;

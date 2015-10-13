@@ -9,8 +9,8 @@ $ch = curl_init($url_sendLogin);
 /*The JSON data */
     //valid invalid staff user w/ WRONG password
     $jsonData = array(
-        'username' => 'luoandre29',
-        'email'    => 'luoandre29@yahoo.com',
+        'emailOrUsername' => 'luoandre29',
+        // 'emailOrUsername'    => 'luoandre29@yahoo.com',
         'password' => 'password'
     );
  
