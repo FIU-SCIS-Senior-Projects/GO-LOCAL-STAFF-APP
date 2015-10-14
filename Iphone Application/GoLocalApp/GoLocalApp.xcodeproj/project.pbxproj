@@ -38,7 +38,6 @@
 		DEC6532E1BB25B73001A8655 /* StaffDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC6532D1BB25B73001A8655 /* StaffDatabase.m */; };
 		DEC653321BB39930001A8655 /* RegisteredStaff.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC653311BB3992F001A8655 /* RegisteredStaff.m */; };
 		DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DED49C461B97CA0A0091B986 /* ForgotPasswordViewController.m */; };
-		DEE6B8471B9942BF00912541 /* TRASHStaffRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8461B9942BF00912541 /* TRASHStaffRegistration4ViewController.m */; };
 		DEE6B84A1B9942CA00912541 /* StaffRegistration5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B8491B9942CA00912541 /* StaffRegistration5ViewController.m */; };
 		DEE6B84D1B9942DA00912541 /* StaffRegistration6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B84C1B9942DA00912541 /* StaffRegistration6ViewController.m */; };
 		DEE6B8501B9942E500912541 /* StaffRegistration7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE6B84F1B9942E500912541 /* StaffRegistration7ViewController.m */; };
@@ -120,8 +119,6 @@
 		DED49C451B97CA0A0091B986 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		DED49C461B97CA0A0091B986 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		DEE6B8421B9941C200912541 /* StaffRegistration2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration2ViewController.h; sourceTree = "<group>"; };
-		DEE6B8451B9942BF00912541 /* TRASHStaffRegistration4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRASHStaffRegistration4ViewController.h; sourceTree = "<group>"; };
-		DEE6B8461B9942BF00912541 /* TRASHStaffRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRASHStaffRegistration4ViewController.m; sourceTree = "<group>"; };
 		DEE6B8481B9942CA00912541 /* StaffRegistration5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration5ViewController.h; sourceTree = "<group>"; };
 		DEE6B8491B9942CA00912541 /* StaffRegistration5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration5ViewController.m; sourceTree = "<group>"; };
 		DEE6B84B1B9942DA00912541 /* StaffRegistration6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration6ViewController.h; sourceTree = "<group>"; };
@@ -301,18 +298,8 @@
 				DE8444A81B9F75060085DA73 /* StaffRegistration13ViewController.m */,
 				DE8444AD1B9FAB570085DA73 /* StaffRegistration14ViewController.h */,
 				DE8444AE1B9FAB570085DA73 /* StaffRegistration14ViewController.m */,
-				DE8C2E621BA9EE8200AA0BB6 /* TRASH */,
 			);
 			name = "Staff Registration";
-			sourceTree = "<group>";
-		};
-		DE8C2E621BA9EE8200AA0BB6 /* TRASH */ = {
-			isa = PBXGroup;
-			children = (
-				DEE6B8451B9942BF00912541 /* TRASHStaffRegistration4ViewController.h */,
-				DEE6B8461B9942BF00912541 /* TRASHStaffRegistration4ViewController.m */,
-			);
-			name = TRASH;
 			sourceTree = "<group>";
 		};
 		DEC653271BB25A81001A8655 /* CoreData */ = {
@@ -512,7 +499,6 @@
 				DE4AC3F61BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m in Sources */,
 				DE6722BA1B968CC600599039 /* GoLocalApp.xcdatamodeld in Sources */,
 				DE0452DC1BB53944008D747C /* StaffRegistration4ViewController.m in Sources */,
-				DEE6B8471B9942BF00912541 /* TRASHStaffRegistration4ViewController.m in Sources */,
 				DEE6B84A1B9942CA00912541 /* StaffRegistration5ViewController.m in Sources */,
 				DE6722BD1B968CC600599039 /* LogInViewController.m in Sources */,
 				DE6722E91B968D9F00599039 /* StaffRegistration0ViewController.m in Sources */,

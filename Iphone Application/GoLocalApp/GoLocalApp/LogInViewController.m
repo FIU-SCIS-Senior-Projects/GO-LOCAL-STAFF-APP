@@ -7,6 +7,8 @@
 //
 
 #import "LogInViewController.h"
+#import "StaffHomeViewController.h"
+#import "EmployerHomeViewController.h"
 
 @interface LogInViewController ()
 
@@ -42,6 +44,22 @@
 }//eom
 
 
+/* preparing the data to sent to the next view controller */
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"staffHome"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        StaffHomeViewController *controller = (StaffHomeViewController *) navigationController.topViewController;
+        controller.username = username.text;
+    }
+    else if([segue.identifier isEqualToString:@"employerHome"])
+    {
+        UINavigationController *navigationController = [segue destinationViewController];
+        EmployerHomeViewController *controller = (EmployerHomeViewController *) navigationController.topViewController;
+        controller.username = username.text;
+    }
+
+}//eom
+
 /******** helper functions ********/
     /* create UIAlert*/
     -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
@@ -75,6 +93,8 @@
         }
         else if(textField == self.password){
             [self.password resignFirstResponder];
+            
+            [self sendDataLoginDataToServer];//submitting log in
         }
         
         return YES;
@@ -83,61 +103,46 @@
 
 /******** Log in  functions ********/
 
-/*
-    process Server Responce
- */
--(void) processServerResponce:(NSDictionary *) responce
-{
-    //    NSLog(@"[1] responce: %@", responce);
-    
-    NSDictionary * userResults = [responce objectForKey:@"results"];
-    int responceType = [[userResults objectForKey:@"responseType"] intValue];
-    NSDictionary * responceMessage = [userResults objectForKey:@"message"];
-    NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
-    
-    NSLog(@"[1] results is %@", userResults);
-    NSLog(@"[1] responceType is %d", responceType);
-    if(responceType > 0) //responce was good
-    {
-
-    }
-    else //invalid response
-    {
-        //notifying user code was accepted
-        [self showAlert:@"SMS Authentication" withMessage:message and:@"Okay"];
-    }
-    
     /*
-     
-     
-    Log in user in the database
-     return 1 - staff
-     return 2 - employer
-     return -1 - not valid user
-    
-     int loginResults = [self LogInUser];
-     NSLog(@"results are %d", loginResults);
-     if(loginResults > 0)
-     {
-     if(loginResults == 1)
-     {
-     [self performSegueWithIdentifier:@"staffHome" sender:self];
-     }
-     else if(loginResults == 2)
-     {
-     [self performSegueWithIdentifier:@"employerHome" sender:self];
-     }
-     
-     }
-     else
-     {
-     [self showAlert:@"Unable to signin" withMessage: @"login credentials invalid" and:@"Okay"];
-     }
+        process Server Responce
      */
-}//eom
+    -(void) processServerResponce:(NSDictionary *) responce
+    {
+        //    NSLog(@"[1] responce: %@", responce);
+        
+        NSDictionary * userResults = [responce objectForKey:@"results"];
+        int usertype = [[userResults objectForKey:@"usertype"] intValue];
+        NSDictionary * responceMessage = [userResults objectForKey:@"message"];
+        NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
+        
+        NSLog(@"[1] results is %@", userResults);
+        NSLog(@"[1] usertype is %d", usertype);
+        
+        /*
+         return 1 - staff
+         return 2 - employer
+         return 0 - DB not responding
+         */
+        if(usertype == 1) //staff user
+        {
+            [self performSegueWithIdentifier:@"staffHome" sender:self];
+        }
+        else if(usertype == 2) //employer user
+        {
+            [self performSegueWithIdentifier:@"employerHome" sender:self];
+        }
+        else if(usertype == 0) //employer user
+        {
+            //notifying user code was accepted
+            [self showAlert:@"Log In" withMessage:@"We Apologize but our system is currently down" and:@"Okay"];
+        }
+        else //invalid response
+        {
+            //notifying user code was accepted
+            [self showAlert:@"Log In" withMessage:message and:@"Okay"];
+        }
 
-
-
+    }//eom
 
 /***************** JSON POST functions *******************/
 
