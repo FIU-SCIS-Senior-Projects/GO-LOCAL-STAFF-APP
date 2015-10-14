@@ -107,9 +107,10 @@
 
   /* registers staff user info 
       returns:
-        1   successfully register
+        1   registered staff ID
         0   database not responding
         -1  Unable to register user
+        -2 Unable to retrieve staff ID
         -10 invalid registration type
     */
   function registerStaffUser($staffInfo)
@@ -120,6 +121,13 @@
         //echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
+
+        //checking for invalid type 
+       if( ($registrationType != "Staff") && ($registrationType != "Employer") )
+       {
+          return -10;
+       }
+
 
       //these fields were already saved
       $username                       = $registrationData['username'];
@@ -249,6 +257,24 @@
                 SET address='".$code."',city='".$code."',zipcode='".$code."',state='".$code."',gender='".$code."',languages='".$code."',typeDL='".$code."',ethnicity='".$code."',ethnicityCode='".$code."',weight='".$code."',hairColor='".$code."',eyeColor='".$code."',shirtSize='".$code."',chestSize='".$code."',waistSize='".$code."',hipSize='".$code."',dressSize='".$code."',shoeSize='".$code."',piercings='".$code."',desiredHourlyRate='".$code."',desiredWeeklyRate='".$code."',ssnOrEin='".$code."',businessName='".$code."',travel='".$code."',insurance='".$code."',bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'
                 WHERE phone='".$phone."'";
 
+
+      $result = mysqli_query($dbConnection, $query);
+      if($result)
+      {
+        $staffID  = $dbConnection->insert_id;
+        if( isset($staffID) )
+        {
+          //echo "<p>staff saved with id $staffID</p>";
+          return $staffID; 
+        }
+        else
+        {
+         // echo "Unable to retrieve staff ID";
+          return -2;
+        }
+      }
+
+      return -1
   }//eom
 
 ?>

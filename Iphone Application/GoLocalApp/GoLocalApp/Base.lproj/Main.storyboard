@@ -2578,7 +2578,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-cs-Eoj">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-cs-Eoj">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Waist Size" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Qgf-ZU-IFu">
@@ -3514,7 +3514,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="nu9-1Z-zcc" kind="unwind" unwindAction="unwoundStaff:" id="2tN-1j-4Y2"/>
+                                            <action selector="termsAgreed:" destination="dRJ-S1-vC0" eventType="touchUpInside" id="oZz-wt-sFd"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3530,12 +3530,12 @@
                         <outlet property="scrollView" destination="wZg-m4-FAb" id="Tvf-DL-XnI"/>
                         <outlet property="submitButton" destination="Blb-XV-g1r" id="zaX-kZ-yLe"/>
                         <outlet property="termsAndAgreements" destination="ltn-Rq-lwr" id="zlY-WT-2xZ"/>
+                        <segue destination="UyE-d8-gHR" kind="modal" id="WX3-1d-AYr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hcq-eJ-Pye" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="nu9-1Z-zcc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6359" y="807"/>
+            <point key="canvasLocation" x="1349" y="1801"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6fd-Ve-xwt">
@@ -3654,6 +3654,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UyE-d8-gHR" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="q67-MT-PW5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Il-k2-rvb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -4877,13 +4878,14 @@
         <image name="right" width="38" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oLy-nP-Mii"/>
         <segue reference="nZf-Td-I8t"/>
-        <segue reference="rWo-zr-UJa"/>
+        <segue reference="oLy-nP-Mii"/>
+        <segue reference="WX3-1d-AYr"/>
+        <segue reference="FiL-5A-Rck"/>
         <segue reference="PvY-b9-rPG"/>
+        <segue reference="rWo-zr-UJa"/>
         <segue reference="15W-7m-6hR"/>
         <segue reference="C35-z2-Umt"/>
         <segue reference="8IJ-5T-D0O"/>
-        <segue reference="FiL-5A-Rck"/>
     </inferredMetricsTieBreakers>
 </document>

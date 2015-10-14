@@ -12,16 +12,13 @@
 @interface StaffRegistration14ViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextView *termsAndAgreements;
-
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (weak, nonatomic) IBOutlet UISwitch *agreeTermsSwitch;
-- (IBAction)agreeTermsValueChanged:(id)sender;
-
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
-
-
 @property (strong, nonatomic) RegisteredStaff *registeredStaff;
 
+- (IBAction)agreeTermsValueChanged:(id)sender;
+
+- (IBAction)termsAgreed:(UIButton *)sender;
 
 @end

@@ -295,97 +295,99 @@
         }
     }//eom
 
-    /* processing server response about the phone number
-     part 1 of SMS Authentication
-     */
-    -(void) phoneNumberServerResponce:(NSDictionary *) responce
-    {
-        //    NSLog(@"[1] responce: %@", responce);
-        
-        NSDictionary * userResults = [responce objectForKey:@"results"];
-        int responceType = [[userResults objectForKey:@"responseType"] intValue];
-        NSDictionary * responceMessage = [userResults objectForKey:@"message"];
-        NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
-        
-        NSLog(@"[1] results is %@", userResults);
-        NSLog(@"[1] responceType is %d", responceType);
-        if(responceType > 0) //responce was good
-        {
-            self->userID = [userResults objectForKey:@"userID"];
-            //sms part 1
-            if(userID)
-            {
-                NSLog(@"[1] userID ID is %@  (which means we are ready for part 2)", userID);
-                
-                //            //hiding submit phone number button
-                //            [submitPhoneNumber setHidden:YES];
-            }
-            //sms part 2
-            else
-            {
-                [self.verificationCode resignFirstResponder];   //resign verififcation code
-                
-                //notifying user code was accepted
-                [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];
-                
-                [self scrollVievEditingFinished:cellphone];     //moving scroll view so user can see submit button on bottom
-                
-                //showing submit
-                [submitButton setHidden:NO];
-            }
-        }
-        else //invalid response
-        {
-            //notifying user code was accepted
-            [self showAlert:@"SMS Authentication" withMessage:message and:@"Okay"];
-        }
-    }//eom
 
 /***************** JSON POST functions *******************/
 
+            /*
+             processing server response about the phone number
+             part 1 of SMS Authentication
+             */
+            -(void) phoneNumberServerResponce:(NSDictionary *) responce
+            {
+                //    NSLog(@"[1] responce: %@", responce);
+                
+                NSDictionary * userResults = [responce objectForKey:@"results"];
+                int responceType = [[userResults objectForKey:@"responseType"] intValue];
+                NSDictionary * responceMessage = [userResults objectForKey:@"message"];
+                NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
+                
+                NSLog(@"[1] results is %@", userResults);
+                NSLog(@"[1] responceType is %d", responceType);
+                if(responceType > 0) //responce was good
+                {
+                    self->userID = [userResults objectForKey:@"userID"];
+                    //sms part 1
+                    if(userID)
+                    {
+                        NSLog(@"[1] userID ID is %@  (which means we are ready for part 2)", userID);
+                        
+                        //            //hiding submit phone number button
+                        //            [submitPhoneNumber setHidden:YES];
+                    }
+                    //sms part 2
+                    else
+                    {
+                        [self.verificationCode resignFirstResponder];   //resign verififcation code
+                        
+                        //notifying user code was accepted
+                        [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];
+                        
+                        [self scrollVievEditingFinished:cellphone];     //moving scroll view so user can see submit button on bottom
+                        
+                        //showing submit
+                        [submitButton setHidden:NO];
+                    }
+                }
+                else //invalid response
+                {
+                    //notifying user code was accepted
+                    [self showAlert:@"SMS Authentication" withMessage:message and:@"Okay"];
+                }
+            }//eom
 
-        /* responce from server */
-        - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-        {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            
-            NSLog(@" responce: %@", httpResponse.description);
-            
-//            NSInteger statusCode = httpResponse.statusCode;
-//            NSLog(@" status Code: %ld", (long)statusCode);
-            
-            //    NSString *string = [NSString stringWithFormat:@"%ld", (long)statusCode];
-            
-        }//eo-action
+            /* responce from server */
+            - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+            {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                
+                NSLog(@" responce: %@", httpResponse.description);
+                
+    //            NSInteger statusCode = httpResponse.statusCode;
+    //            NSLog(@" status Code: %ld", (long)statusCode);
+                
+                //    NSString *string = [NSString stringWithFormat:@"%ld", (long)statusCode];
+                
+            }//eo-action
 
 
-    /* data received from server */
-    - (void)connection:(NSURLConnection *)connection didReceiveData:(nonnull NSData *)data
-    {
-        
-        NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//        NSLog(@"[1] from server replied: %@",rawExhibits);
-        
-//        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//        NSLog(@"[2] responce from server %@",dataResponce);
-//        
-//        // Get JSON objects into initial array
-//        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
-//        NSLog(@"[3] responce from server %@",rawExhibits2);
+            /* data received from server */
+            - (void)connection:(NSURLConnection *)connection didReceiveData:(nonnull NSData *)data
+            {
+                
+                NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        //        NSLog(@"[1] from server replied: %@",rawExhibits);
+                
+        //        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //        NSLog(@"[2] responce from server %@",dataResponce);
+        //        
+        //        // Get JSON objects into initial array
+        //        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+        //        NSLog(@"[3] responce from server %@",rawExhibits2);
 
-            //processing responce
-            [self phoneNumberServerResponce:rawExhibits];
-        
-//        }
-    }//eom
+                    //processing responce
+                    [self phoneNumberServerResponce:rawExhibits];
+                
+        //        }
+            }//eom
 
-/*
- - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
- {
- data = [[NSMutableData alloc] init];
- NSLog(@"Data Data , %@", data);
- }
- */
+        /*
+         - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+         {
+         data = [[NSMutableData alloc] init];
+         NSLog(@"Data Data , %@", data);
+         }
+         */
+
         /* error occurred sending data to server */
         -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
         {
@@ -438,8 +440,10 @@
         }//eo-action
 
 
-        /* prepares the data that will be sent to server in
-         part 1 of SMS Authentication */
+        /* 
+         prepares the data that will be sent to server in
+         part 1 of SMS Authentication 
+         */
         -(NSMutableDictionary *) preparePhotoNumberData
         {
             //creating initial list
@@ -464,7 +468,8 @@
         }//eom
 
 
-        /* SMS Authentication, part 2 :
+        /* 
+         SMS Authentication, part 2 :
             sends:
                     registrationType = Staff;
                     code = 8297;
@@ -501,8 +506,10 @@
         }//eo-action
 
 
-        /* prepares the data that will be sent to server in 
-            part 2 of SMS Authentication */
+        /* 
+         prepares the data that will be sent to server in
+            part 2 of SMS Authentication 
+         */
         -(NSMutableDictionary *) prepareVerificationNumberData
         {
             //creating initial list

@@ -106,7 +106,6 @@
 		DE8444A81B9F75060085DA73 /* StaffRegistration13ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration13ViewController.m; sourceTree = "<group>"; };
 		DE8444AD1B9FAB570085DA73 /* StaffRegistration14ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration14ViewController.h; sourceTree = "<group>"; };
 		DE8444AE1B9FAB570085DA73 /* StaffRegistration14ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration14ViewController.m; sourceTree = "<group>"; };
-		DE8444E91B9FE94E0085DA73 /* notes.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = notes.playground; sourceTree = "<group>"; };
 		DE8C2E5A1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration2ViewController.m; sourceTree = "<group>"; };
 		DE8C2E5C1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration3ViewController.h; sourceTree = "<group>"; };
 		DE8C2E5D1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration3ViewController.m; sourceTree = "<group>"; };
@@ -179,7 +178,6 @@
 				DEC653291BB25AA4001A8655 /* View */,
 				DEC6532A1BB25AE9001A8655 /* Controllers */,
 				DEC6532F1BB398F2001A8655 /* Models */,
-				DE8444E91B9FE94E0085DA73 /* notes.playground */,
 				DE6722B11B968CC600599039 /* Supporting Files */,
 			);
 			path = GoLocalApp;
