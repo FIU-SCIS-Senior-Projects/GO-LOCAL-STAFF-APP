@@ -47,9 +47,9 @@
       { 
          require 'API.php';/* adding API */
 
-         $registrationType = $decoded['registration_type'];
+         $registrationType = $decoded['registrationType'];
 
-          $registrationResults   = registerUser($registrationType, $decoded);
+          $registrationResults = registerUser($registrationType, $decoded);
           if($registrationResults > 0 )
           {
             $responseArray = array(
@@ -64,7 +64,7 @@
             "responseType"    => $registrationResults,
             );
           }
-          else if($registrationResults == -1 )
+          else if( ($registrationResults == -1) || ($registrationResults == -2) )
           {
             $responseArray = array(
             "message" => "unable to register user",
@@ -86,7 +86,7 @@
         -1  Unable to register user
         -10 invalid registration type
       */
-        $response['results'] = $decoded;
+        $response['results'] = $responseArray;
 
       }//eo valid-json
     }//eo valid-data

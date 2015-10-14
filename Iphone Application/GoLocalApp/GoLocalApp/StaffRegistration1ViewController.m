@@ -16,6 +16,7 @@
 {
     // registered user ID on server
     NSString * userID;
+    int userIDProvided;
 //    BOOL waitingOnVerificationResponce;
     
     //labels
@@ -327,7 +328,10 @@
                     //sms part 2
                     else
                     {
-                        [self.verificationCode resignFirstResponder];   //resign verififcation code
+                        userIDProvided = responceType;
+                        [registeredStaff setStaffID:responceType];
+                        
+                        [self.verificationCode resignFirstResponder];   //resign verification code
                         
                         //notifying user code was accepted
                         [self showAlert:@"SMS Authentication" withMessage:@"Verification Code Accepted!" and:@"Okay"];

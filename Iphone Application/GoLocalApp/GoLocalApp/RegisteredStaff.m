@@ -72,6 +72,12 @@
   
 }//eom
 
+
+-(void) setStaffID:(int) staffIDProvided
+{
+    StaffID = staffIDProvided;
+}//eom
+
     //view controller 0
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName
 {
@@ -355,6 +361,12 @@
     
     return NO;
 }//eom
+
+
+-(NSString *) getStaffID
+{
+   return [NSString stringWithFormat:@"%d",StaffID];
+}
 
 -(NSString *) getAccountType
 {

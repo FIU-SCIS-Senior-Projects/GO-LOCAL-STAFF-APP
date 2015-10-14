@@ -11,6 +11,7 @@
 @interface RegisteredStaff : NSObject
 {
     NSString *accountType;
+    int StaffID;
     
     //view controller 0
     NSString *firstName;
@@ -104,6 +105,7 @@
 -(BOOL) isCateringCompany;
 -(BOOL) isOtherServices;
 -(BOOL) isMale;
+-(NSString *) getStaffID;
 -(NSString *) getAccountType;
 -(NSString *) getFirstName;
 -(NSString *) getMiddleName;
@@ -157,6 +159,8 @@
 
 
 /**  set methods **/
+-(void) setStaffID:(int) staffIDProvided;
+
     //controller 0
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName;
 -(void) setNickname:(NSString *) nicknameProvided;

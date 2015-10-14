@@ -230,6 +230,7 @@
             NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
             
             finalList[@"registrationType"]     = [registeredStaff getAccountType];
+            finalList[@"staffID"]              = [registeredStaff getStaffID];
             
             //adding view controller 0 info
             finalList[@"firstName"]     = [registeredStaff getFirstName];

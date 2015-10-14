@@ -2,82 +2,12 @@
  
 include '../urlsettings.php';
 
- 
-// //Initiate cURL.
+//Initiate cURL.
 $ch = curl_init($url_sendMaleRegistration);
  
-// //The JSON data.
-// $jsonData = array(
-//     'registrationType' => 'staff',
-//     'firstName' => 'Luis',
-//     'middleName' => 'Andres',
-//     'lastName' => 'Castillo',
-//     'nickname' => 'Lu',
-//     'username' => 'Luoandre29',
-//     'email' => 'luoandre29@hotmail.com',
-//     'password' => 'password123',
-//     'cellphone' => '3056099250',
-//     'address' => '2710 W 64 PL',
-//     'city' => 'Miami',
-//     'state' => 'FL',
-//     'djSelected' => '1',
-//     'liveBandSelected' => '0',
-//     'djSelected' => '0',
-//     'cateringCompanySelected' => '0',
-//     'otherServices' => '0',
-//     'djDescription' => 'djDescription',
-//     'djWebsite' => 'url',
-//     'djSocialMedia' => 'MyPassword',
-//     'djDescription' => 'Description',
-//     'djWebsite' => 'url',
-//     'djSocialMedia' => 'social media',
-//     'liveBandDescription' => 'Description',
-//     'liveBandWebsite' => 'url',
-//     'liveBandSocialMedia' => 'social media',
-//     'cateringCompanyDescription' => 'Description',
-//     'cateringCompanyWebsite' => 'url',
-//     'cateringCompanySocialMedia' => 'social media',
-//     'otherServicesDescription' => 'Description',
-//     'otherServicesBandWebsite' => 'url',
-//     'otherServicesBandSocialMedia' => 'social media',
-//     'dob' => '11/29/87',
-//     'gender' => 'male',
-//     'languages' => 'english,spanish',
-//     'ethnicity' => '3',
-//     'typeOfLicense' => '0',
-//     'height' => '5.4',
-//     'weight' => '150',
-//     'hairColor' => 'black',
-//     'eyeColor' => 'brown',
-//     'pantSize' => '30',
-//     'shoeSize' => '7',
-//     'tshirtSize' => 'M',
-//     'desiredHourlyRate' => '25',
-//     'desiredWeeklyRate' => '2500',
-//     'tattoos' => '0',
-//     'piercings' => '0',
-//     'chestSize' => 'null',
-//     'waistSize' => 'null',
-//     'dressSize' => 'null',
-//     'ssn' => '67988433',
-//     'ein' => 'null',
-//     'citiesWillingToWork' => 'Miami, Kendall',
-//     'travel' => '1',
-//     'professionalInsurance' => '0',
-//     'directDepositDesired' => '1',
-//     'DirectDepositRoutingNumber' => '777899231',
-//     'DirectDepositAccountNumber' => '998763229938',
-//     'isModel' => '0',
-//     'isBrandAmbassador' => '0',
-//     'isFlyerDistributor' => '0',
-//     'isFieldMarketingManager' => '0',
-//     'isDancer' => '0',
-//     'iswaiterOrWaitress' => '0',
-//     'isProductionAssistant' => '0',
-//     'isSalesExecutive' => '1'
-// );
- 
 $jsonData = array (
+
+    'staffID' => '1',
     'registrationType' => 'Staff',
     'firstName' => 'Luis',
     'middleName' => 'a', 
@@ -94,7 +24,7 @@ $jsonData = array (
     'zipcode' => '33016',
     'ethnicity' => 'Latino or Hispanic American',
     'ethnicityCode' => '2',
-    'languages' => 'English Spanish ',
+    'languages' => 'English Spanish Italian',
     'experience' => 
     array (
     ),
