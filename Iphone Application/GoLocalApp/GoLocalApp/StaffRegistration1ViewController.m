@@ -94,7 +94,8 @@
 }//eom
 
 /* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     if([segue.identifier isEqualToString:@"goToStaffRegister2"]){
         StaffRegistration2ViewController *controller = (StaffRegistration2ViewController *)segue.destinationViewController;
         
@@ -204,18 +205,6 @@
 
 /******** SMS Authentication ********/
 
-    /* sending verification code to server */
-    - (IBAction)verifyCodeSubmitted:(id)sender
-    {
-        //verify
-        BOOL results = [self verifyVerificationCodeEnter ];
-        if(results)
-        {
-            //sending info to server
-            [self sendDataVerificationNumberToServer];
-        }
-        
-    }//eom
 
     -(BOOL) verifyPhoneNumberDataEnter
     {
@@ -243,6 +232,28 @@
         }
         
         return 1;
+    }//eom
+
+    /* */
+    - (IBAction)phoneNumberSubmitted:(id)sender
+    {
+        //verify
+        BOOL results = [self verifyPhoneNumberDataEnter ];
+        if(results)
+        {
+            //sending info to server
+            [self sendDataPhoneNumberToServer];
+            
+            //displaying instruction message
+            [self showAlert:@"Registration Field" withMessage:@"A verification code has been sent to your cellphone, Please enter the verification code" and:@"Okay"];
+            
+            //displaying verification fields
+            [verificationCodeIntroMessage setHidden:NO];
+            [verificationCodeLabel setHidden:NO];
+            [verificationAsterisk setHidden:NO];
+            [verificationCode setHidden:NO];
+            [verifyCodeButton setHidden:NO];
+        }
     }//eom
 
     -(BOOL) verifyVerificationCodeEnter
@@ -274,27 +285,19 @@
         return 1;
     }//eom
 
-    /* */
-    - (IBAction)phoneNumberSubmitted:(id)sender
+    /* sending verification code to server */
+    - (IBAction)verifyCodeSubmitted:(id)sender
     {
         //verify
-        BOOL results = [self verifyPhoneNumberDataEnter ];
+        BOOL results = [self verifyVerificationCodeEnter ];
         if(results)
         {
             //sending info to server
-            [self sendDataPhoneNumberToServer];
-            
-            //displaying instruction message
-            [self showAlert:@"Registration Field" withMessage:@"A verification code has been sent to your cellphone, Please enter the verification code" and:@"Okay"];
-            
-            //displaying verification fields
-            [verificationCodeIntroMessage setHidden:NO];
-            [verificationCodeLabel setHidden:NO];
-            [verificationAsterisk setHidden:NO];
-            [verificationCode setHidden:NO];
-            [verifyCodeButton setHidden:NO];
+            [self sendDataVerificationNumberToServer];
         }
+        
     }//eom
+
 
 
 /***************** JSON POST functions *******************/

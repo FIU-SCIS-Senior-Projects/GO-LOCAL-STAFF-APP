@@ -74,7 +74,10 @@ CREATE TABLE `registered_employer` (
   `phoneValidated` int(11) DEFAULT NULL,
   `insurance` int(11) NOT NULL,
   `insuranceDocuments` varchar(255) NOT NULL,
-  `termsAndAgreements` varchar(255) NOT NULL
+  `termsAndAgreements` varchar(255) NOT NULL,
+  `accountLocked` BOOLEAN DEFAULT NULL,
+  `forgotPasswordCode` int(11) DEFAULT NULL,
+  `forgotPasswordRequests` int(5) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -132,7 +135,10 @@ CREATE TABLE `registered_staff` (
   `bankRouting` varchar(30) NOT NULL,
   `accountNumber` varchar(30) NOT NULL,
   `resume` varchar(30) NOT NULL,
-  `TermsAndAgreements` varchar(255) NOT NULL
+  `TermsAndAgreements` varchar(255) NOT NULL,
+  `accountLocked` BOOLEAN DEFAULT NULL,
+  `forgotPasswordCode` int(11) DEFAULT NULL,
+  `forgotPasswordRequests` int(5) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

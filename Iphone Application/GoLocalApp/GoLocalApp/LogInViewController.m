@@ -60,7 +60,10 @@
 
 }//eom
 
-/******** helper functions ********/
+
+/********************************/
+    //MARK: helper functions
+
     /* create UIAlert*/
     -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
     {
@@ -75,7 +78,8 @@
     }//eom
 
 
-/******** textfields  functions ********/
+/********************************/
+    //MARK: textfields functions
 
     /* dimmisses UITextField as soon the background is touched */
     -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -101,7 +105,8 @@
     }//eom
 
 
-/******** Log in  functions ********/
+/********************************/
+    //MARK: Log in  functions
 
     /*
         process Server Responce
@@ -119,22 +124,40 @@
         NSLog(@"[1] usertype is %d", usertype);
         
         /*
-         return 1 - staff
-         return 2 - employer
-         return 0 - DB not responding
+         return 1       - staff
+         return 2       - employer
+         return 0       - DB not responding
+         return -1 -2   - valid user with INCORRECT Credentials
+         return -3      - no user found
+         return -4      - account locked
          */
-        if(usertype == 1) //staff user
-        {
-            [self performSegueWithIdentifier:@"staffHome" sender:self];
-        }
-        else if(usertype == 2) //employer user
+        if(usertype == 2) //employer user
         {
             [self performSegueWithIdentifier:@"employerHome" sender:self];
         }
-        else if(usertype == 0) //employer user
+        else if(usertype == 1) //staff user
+        {
+            [self performSegueWithIdentifier:@"staffHome" sender:self];
+        }
+        else if(usertype == 0)//db issues
         {
             //notifying user code was accepted
             [self showAlert:@"Log In" withMessage:@"We Apologize but our system is currently down" and:@"Okay"];
+        }
+        else if( (usertype == -1) || (usertype == -2))//no user found
+        {
+            //notifying user code was accepted
+            [self showAlert:@"Log In" withMessage:@"Invalid credentials" and:@"Okay"];
+        }
+        else if(usertype == -3)//no user found
+        {
+            //notifying user code was accepted
+            [self showAlert:@"Log In" withMessage:@"No account found with the provided credentials" and:@"Okay"];
+        }
+        else if(usertype == -4)//account locked
+        {
+            //notifying user code was accepted
+            [self showAlert:@"Log In" withMessage:@"Account locked" and:@"Okay"];
         }
         else //invalid response
         {
@@ -144,8 +167,8 @@
 
     }//eom
 
-/***************** JSON POST functions *******************/
-
+/************************************/
+    //MARK: JSON POST functions
 
     /* responce from server */
     - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response

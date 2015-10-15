@@ -51,17 +51,24 @@
           $password           = $decoded['password'];
           //check if valid user and return type of user
           $typeUser = loginRegisteredUser($emailOrUsername, $password);
-          if($typeUser == 1) //valid staff user
+          if($typeUser == 2)//valid employer user
+          {
+              $responseArray = array(
+                "message"   => "employer user",
+                "usertype"  => $typeUser,
+              );
+          }
+          else if($typeUser == 1) //valid staff user
           {
             $responseArray = array(
                 "message" => "staff user",
                 "usertype"    => $typeUser,
               );
           }
-          else if($typeUser == 2)//valid employer user
+          else if($typeUser == 0) //database not responding
           {
               $responseArray = array(
-                "message"   => "employer user",
+                "message"   => "database not responding",
                 "usertype"  => $typeUser,
               );
           }
@@ -79,10 +86,10 @@
                 "usertype"  => $typeUser,
               );
           }
-          else if($typeUser == 0) //database not responding
+          else if($typeUser == -4) //account locked
           {
               $responseArray = array(
-                "message"   => "database not responding",
+                "message"   => "Account locked",
                 "usertype"  => $typeUser,
               );
           }

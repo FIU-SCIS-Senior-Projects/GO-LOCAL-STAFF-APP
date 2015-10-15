@@ -1,5 +1,5 @@
 array (
-  'registrationType' => 'Staff',
+  'registrationType' => 'Employer',
   'userID' => '1',
   'code' => '4140',
   'phone' => '3056099250',
