@@ -1,6 +1,6 @@
 <?php
 
-$localTesting = false;
+$localTesting = true;
 $testingStaffUser = true;
 
 $urlBody = '';

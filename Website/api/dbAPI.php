@@ -269,7 +269,12 @@ function sendSMSForgotPasswordCode($userData)
       // echo "<p>currentCarrier: $currentCarrier | current address: $currentAddress | mail result: $emailResult</p>";  
     }//eofl
 
-    return $userID;
+    $list = array
+    (
+      "userID" => $userID,
+      "tableName"  =>  $tableName
+    );
+    return $list;
 }//eom
 
 
