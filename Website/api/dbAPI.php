@@ -198,7 +198,8 @@ function sendSMSForgotPasswordCode($userData)
     $phone                  = $userData['phone'];
     $forgotPasswordRequests = $userData['forgotPasswordRequests'] + 1;
     $accountLocked          = $userData['accountLocked'];
-
+    $userKey    = "";
+    $userID     = "";
     //checking if account is locked
     if($accountLocked)
     {
@@ -272,7 +273,7 @@ function sendSMSForgotPasswordCode($userData)
     $list = array
     (
       "userID" => $userID,
-      "tableName"  =>  $tableName
+      "userKey"  =>  $userKey
     );
     return $list;
 }//eom

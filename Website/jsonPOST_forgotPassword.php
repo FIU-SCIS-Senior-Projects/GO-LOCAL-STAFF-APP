@@ -49,15 +49,6 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
 
       $peopleID;
       $responseArray;
-      $phone            = $decoded["phone"];
-
-      /*
-    finalList[@"userID"]        = self->userID;
-        finalList[@"code"]          = self.verificationCodeTextField.text;
-        finalList[@"newPassword"]   = self.passwordProvidedTextField.text;
-       
-*/
-
 
       //check if user exist with phone number provided
       $userExist  = UserWithPhoneProvidedExist($phone);
@@ -159,10 +150,10 @@ $encoded = json_encode($response);
 
 /* saving incoming file */
       // Write the contents back to the file
-$filename = 'test/sms/SMSDataResponse.json';
+$filename = 'test/forgotPassword/forgotPasswordResponce.json';
 file_put_contents($filename, var_export($encoded, true));
 
-$filename = 'test/sms/SMSDataincoming.json';
+$filename = 'test/forgotPassword/forgotPasswordIncoming.json';
 file_put_contents($filename, var_export($decoded, true));
 
 
