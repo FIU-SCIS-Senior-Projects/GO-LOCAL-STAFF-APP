@@ -46,6 +46,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="vUR-Rx-49Y" kind="modal" identifier="goToForgotPassword" id="Pzh-mb-6Qs"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MxU-Ub-9hM">
                                 <rect key="frame" x="197" y="283" width="55" height="30"/>
@@ -144,7 +147,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3P-la-BLS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="18" y="1882"/>
+            <point key="canvasLocation" x="-16" y="1913"/>
         </scene>
         <!--Employer Home-->
         <scene sceneID="794-ko-BqC">
@@ -247,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LnY-Ga-gET" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="835" y="1801"/>
+            <point key="canvasLocation" x="1291" y="1913"/>
         </scene>
         <!--Forgot Password View Controller-->
         <scene sceneID="1l5-q4-Csa">
@@ -271,6 +274,9 @@
                                         <state key="normal" title="X">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="vXZ-lx-hvc" kind="modal" identifier="cancelReturnToLoginScreen" id="WQy-CD-dut"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzQ-pg-jAz">
                                         <rect key="frame" x="99" y="149" width="201" height="30"/>
@@ -404,7 +410,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QhD-JO-BZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="490" y="-461"/>
+            <point key="canvasLocation" x="438" y="1122"/>
         </scene>
         <!--Pre Registration View Controller-->
         <scene sceneID="l8E-B5-kCL">
@@ -2685,7 +2691,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-cs-Eoj">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-cs-Eoj">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Waist Size" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Qgf-ZU-IFu">
@@ -3642,7 +3648,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hcq-eJ-Pye" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1349" y="1801"/>
+            <point key="canvasLocation" x="5978" y="1745"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6fd-Ve-xwt">
@@ -3773,7 +3779,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WmO-sf-e1k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="827" y="1113"/>
+            <point key="canvasLocation" x="1291" y="1129"/>
         </scene>
         <!--Staff Registration1 View Controller-->
         <scene sceneID="wJo-u2-gby">
@@ -4986,10 +4992,11 @@
     <inferredMetricsTieBreakers>
         <segue reference="PvY-b9-rPG"/>
         <segue reference="rWo-zr-UJa"/>
-        <segue reference="WX3-1d-AYr"/>
-        <segue reference="FiL-5A-Rck"/>
+        <segue reference="NcF-mS-PqX"/>
+        <segue reference="WQy-CD-dut"/>
         <segue reference="8IJ-5T-D0O"/>
         <segue reference="15W-7m-6hR"/>
         <segue reference="C35-z2-Umt"/>
+        <segue reference="FiL-5A-Rck"/>
     </inferredMetricsTieBreakers>
 </document>

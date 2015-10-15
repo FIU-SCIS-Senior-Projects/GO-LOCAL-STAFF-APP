@@ -1,7 +1,7 @@
 <?php
 
-$localTesting = true;
-$testingStaffUser = false;
+$localTesting = false;
+$testingStaffUser = true;
 
 $urlBody = '';
 if($localTesting)
