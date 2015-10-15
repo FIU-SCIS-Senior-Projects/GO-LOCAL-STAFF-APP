@@ -108,6 +108,14 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
         return YES;
     }//eom
 
+    /* uitextfield is about to be edit*/
+    - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+    {
+        //moving scrollview up to textfield
+        [self scrollViewAdaptToStartEditingTextField:textField];
+        return YES;
+    }//eom
+
 
 /********************************/
     //MARK: reset password SMS Part 1
@@ -302,9 +310,8 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
                 {
                     NSLog(@"[1] userID ID is %@  (which means we are ready for part 2)", userID);
                 }
-                
             }
-            else if( (responseType == 0) || (responseType == -2) || (responseType == -4) )
+            else if( (responseType == 0) || (responseType == -2) || (responseType == -5) )
             {
                 //notifying user code was accepted
                 [self showAlert:@"Log In" withMessage:@"We Apologize but our system is currently down" and:@"Okay"];
