@@ -57,12 +57,13 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
       {
           //sending user SMS code
           $smsSendResults = sendSMSForgotPasswordCode($userExist);
-          if($smsSendResults > 0)
+          if($smsSendResults)
           {
             $responseArray = [ 
             "message" => "phone number code successfully sent",
             "responseType" => "1",
-            "userID" => $smsSendResults,
+            "userID" => $smsSendResults['userID'],
+            "tableName" => $smsSendResults['tableName'],
             "part" => "1"
             ];
           }
