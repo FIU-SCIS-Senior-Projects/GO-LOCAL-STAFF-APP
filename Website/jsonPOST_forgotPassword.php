@@ -50,87 +50,38 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
       $peopleID;
       $responseArray;
 
-      //check if user exist with phone number provided
-      $userExist  = UserWithPhoneProvidedExist($phone);
-      if($userExist)
+      //update reset password
+      $resetPasswordResults  = forgotPassword($decoded);
+      if($resetPasswordResults == 1)
       {
-          //sending user SMS code
-          $smsSendResults = sendSMSForgotPasswordCode($userExist);
-          if($smsSendResults > 0)
-          {
-            $responseArray = [ 
-            "message" => "phone number code successfully sent",
-            "responseType" => "1",
-            "userID" => $smsSendResults,
-            "part" => "1"
-            ];
-          }
-          else if($smsSendResults == 0)
-          {
-            $responseArray = [
-            "message" => "database not responding",
-            "responseType" => $smsSendResults,
-            "part" => "1"
-            ];
-          }
-          else if($smsSendResults == -2)
-          {
-            $responseArray = [
-            "message" => "Unable to send sms code",
-            "responseType" => $smsSendResults,
-            "part" => "1"
-            ];
-          }
-          else if($smsSendResults == -3)
-          {
-            $responseArray = [
-            "message" => "account is locked",
-            "responseType" => $smsSendResults,
-            "part" => "1"
-            ];
-          }
-          else if($smsSendResults == -4)
-          {
-            $responseArray = [
-            "message" => "the maximum number of attempts for reset password has been exceeded",
-            "responseType" => $smsSendResults,
-            "part" => "1"
-            ];
-          }          
-          else if($smsSendResults == -5)
-          {
-            $responseArray = [
-            "message" => "Unable to store changes to Database",
-            "responseType" => $smsSendResults,
-            "part" => "1"
-            ];
-          }
+        $responseArray = [
+        "message" => "successfully changed password",
+        "responseType" => $resetPasswordResults,
+        "part" => "2"
+        ];
       }
-      else if($userExist == 0)
+      else if($resetPasswordResults == 0)
       {
         $responseArray = [
         "message" => "database not responding",
-        "responseType" => $userExist,
-        "part" => "1"
+        "responseType" => $resetPasswordResults,
+        "part" => "2"
         ];
       }
-      else if($userExist == -1)
+      else if( ($resetPasswordResults == -1) || ($resetPasswordResults == -2) )
       {
         $responseArray = [
-        "message" => "No Username or Email exist with the information provided",
-        "responseType" => $userExist,
-        "part" => "1"
+        "message" => "Unable to store changes to Database",
+        "responseType" => $resetPasswordResults,
+        "part" => "2"
         ];
       }   
         /* 
           reponse returns the following:
-              1   phone number code successfully sent
+              1   successfully changed password
               0   database not responding
-              -1  No Username or Email exist with the information provided 
-              -2  Unable to send sms code
-              -3  account is locked
-              -4  the maximum number of attempts for reset password has been exceeded
-              -5  Unable to store changes to Database
+              -1  Unable to store changes to Database 
+              -2  Unknown error happen
         */
         $response['results'] = $responseArray; //sending reply
 

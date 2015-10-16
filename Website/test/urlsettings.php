@@ -24,9 +24,6 @@ else
   $url_sendMaleRegistration     = $urlBody.'jsonPOST_registration.php';
   $url_sendLogin                = $urlBody.'jsonPOST_login.php';
   $url_sendSMSforgotPassword    = $urlBody.'jsonPOST_smsForgotPassword.php';
-
-
-  
   $url_sendforgotPassword       = $urlBody.'jsonPOST_forgotPassword.php';
 
 ?>

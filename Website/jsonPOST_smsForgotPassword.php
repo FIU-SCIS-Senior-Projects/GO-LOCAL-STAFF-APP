@@ -81,31 +81,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
           else if($smsSendResults == -2)
           {
             $responseArray = [
-            "message" => "Unable to send sms code",
-            "responseType" => $smsSendResults,
-            "part" => "1"
-            ];
-          }
-          else if($smsSendResults == -3)
-          {
-            $responseArray = [
-            "message" => "account is locked",
-            "responseType" => $smsSendResults,
-            "part" => "1"
-            ];
-          }
-          else if($smsSendResults == -4)
-          {
-            $responseArray = [
-            "message" => "the maximum number of attempts for reset password has been exceeded",
-            "responseType" => $smsSendResults,
-            "part" => "1"
-            ];
-          }          
-          else if($smsSendResults == -5)
-          {
-            $responseArray = [
-            "message" => "Unable to store changes to Database",
+            "message" => "Unable to save changes to Database",
             "responseType" => $smsSendResults,
             "part" => "1"
             ];
@@ -132,10 +108,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
               1   phone number code successfully sent
               0   database not responding
               -1  No Username or Email exist with the information provided 
-              -2  Unable to send sms code
-              -3  account is locked
-              -4  the maximum number of attempts for reset password has been exceeded
-              -5  Unable to store changes to Database
+              -2  Unable to save changes to Database
         */
         $response['results'] = $responseArray; //sending reply
 
@@ -158,7 +131,7 @@ $encoded = json_encode($response);
 $filename = 'test/forgotPassword/smsforgotPasswordResponce.json';
 file_put_contents($filename, var_export($encoded, true));
 
-$filename = 'test/forgotPassword/smsforgotPasswordincoming.json';
+$filename = 'test/forgotPassword/smsforgotPasswordIncoming.json';
 file_put_contents($filename, var_export($decoded, true));
 
 

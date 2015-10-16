@@ -12,6 +12,7 @@
 {
     int userIDProvided;
     NSString * userID;
+    NSString * userKey;
 }
 
 @end
@@ -285,33 +286,33 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
         NSDictionary * responceMessage = [userResults objectForKey:@"message"];
         NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
         
-        NSLog(@"[1] results is %@", userResults);
-        NSLog(@"[1] responseType is %d", responseType);
-        NSLog(@"[1] part is %d", part);
-        
-        /*
-         reponse returns the following:
-             1   phone number code successfully sent
-             0   database not responding
-             -1  No Username or Email exist with the information provided
-             -2  Unable to send sms code
-             -3  account is locked
-             -4  the maximum number of attempts for reset password has been exceeded
-             -5  Unable to store changes to Database
-         */
+        NSLog(@"results is %@", userResults);
+        NSLog(@"responseType is %d", responseType);
+        NSLog(@"part is %d", part);
         
         //part 1 responce
         if(part == 1)
         {
+            /*
+             reponse returns the following:
+                 1   phone number code successfully sent
+                 0   database not responding
+                 -1  No Username or Email exist with the information provided
+                 -2  Unable to send sms code
+                 -3  account is locked
+                 -4  the maximum number of attempts for reset password has been exceeded
+                 -5  Unable to store changes to Database
+             */
             if(responseType == 1) // phone number code successfully sent
             {
-                self->userID = [userResults objectForKey:@"userID"];
+                self->userID    = [userResults objectForKey:@"userID"];
+                self->userKey   = [userResults objectForKey:@"userKey"];
                 if(userID)
                 {
-                    NSLog(@"[1] userID ID is %@  (which means we are ready for part 2)", userID);
+                    NSLog(@"userID ID is %@ and userKey = %@  (which means we are ready for part 2)", userID, userKey);
                 }
             }
-            else if( (responseType == 0) || (responseType == -2) || (responseType == -5) )
+            else if( (responseType == 0) || (responseType == -2) )
             {
                 //notifying user code was accepted
                 [self showAlert:@"Log In" withMessage:@"We Apologize but our system is currently down" and:@"Okay"];
@@ -321,26 +322,34 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
                 //notifying user code was accepted
                 [self showAlert:@"Log In" withMessage:@"Invalid credentials" and:@"Okay"];
             }
-            else if(responseType == -3)//no user found
-            {
-                //notifying user code was accepted
-                [self showAlert:@"Log In" withMessage:@"No account found with the provided credentials" and:@"Okay"];
-            }
-            else if(responseType == -4)//account locked
-            {
-                //notifying user code was accepted
-                [self showAlert:@"Log In" withMessage:@"Account locked" and:@"Okay"];
-            }
-            else //invalid response
-            {
-                //notifying user code was accepted
-                [self showAlert:@"Log In" withMessage:message and:@"Okay"];
-            }
         }
         //part 2 responce
         else if(part == 2)
         {
-        
+            /*
+             reponse returns the following:
+                 1   successfully changed password
+                 0   database not responding
+                 -1  Unable to store changes to Database
+                 -2  Unknown error happen
+            */
+            
+            if(responseType == 1) // successfully changed password
+            {
+                
+                //notifying user password was changed
+                NSString * messageToDisplay = @"Password Successfully Updated!";
+                [self showAlert:@"SMS Authentication" withMessage:messageToDisplay and:@"Okay"];
+                
+                //moving to log in controller
+                [self performSegueWithIdentifier:@"cancelReturnToLoginScreen" sender:self];
+                
+            }
+            else if( (responseType == 0) || (responseType == -1) || (responseType == -2) )
+            {
+                //notifying user code was accepted
+                [self showAlert:@"Log In" withMessage:@"We Apologize but our system is currently down" and:@"Okay"];
+            }
         }
         //invalid response
         else
@@ -441,6 +450,7 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
         NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
         
         finalList[@"userID"]        = self->userID;
+        finalList[@"userKey"]       = self->userKey;
         finalList[@"code"]          = self.verificationCodeTextField.text;
         finalList[@"newPassword"]   = self.passwordProvidedTextField.text;
         
@@ -467,13 +477,13 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
         NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         NSLog(@"[1] from server replied: %@",rawExhibits);
         
-        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"[2] responce from server %@",dataResponce);
-        
-        // Get JSON objects into initial array
-        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
-        NSLog(@"[3] responce from server %@",rawExhibits2);
-        
+//        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"[2] responce from server %@",dataResponce);
+//        
+//        // Get JSON objects into initial array
+//        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+//        NSLog(@"[3] responce from server %@",rawExhibits2);
+//        
         //processing responce
         [self processServerResponce:rawExhibits];
     }//eom

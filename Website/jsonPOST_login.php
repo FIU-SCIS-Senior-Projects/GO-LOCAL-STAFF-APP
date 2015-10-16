@@ -72,10 +72,17 @@
                 "usertype"  => $typeUser,
               );
           }
-          else if( ($typeUser == -1) || ($typeUser == -2)  )//valid user with INCORRECT Credentials
+          else if($typeUser == -1) //invalid credentials
           {
               $responseArray = array(
                 "message"   => "invalid credentials",
+                "usertype"  => $typeUser,
+              );
+          }
+          else if($typeUser == -2) //Account locked
+          {
+              $responseArray = array(
+                "message"   => "Account locked",
                 "usertype"  => $typeUser,
               );
           }
@@ -86,20 +93,15 @@
                 "usertype"  => $typeUser,
               );
           }
-          else if($typeUser == -4) //account locked
-          {
-              $responseArray = array(
-                "message"   => "Account locked",
-                "usertype"  => $typeUser,
-              );
-          }
+
           /* 
             reponse returns the following:
-                2   valid employer user
-                1   valid staff user
-                0   database not responding
-                -2  valid user with INCORRECT Credentials
-                -3  no registered user found
+              2   employer account found  - valid credentials provided
+              1   staff account found     - valid credentials provided
+              0   database not responding
+              -1  account found           - invalid credentials 
+              -2  account locked           
+              -3  no user found        
           */
           $response['results'] = $responseArray; //sending reply
 

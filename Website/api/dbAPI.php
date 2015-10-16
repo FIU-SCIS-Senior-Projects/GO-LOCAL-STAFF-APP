@@ -23,9 +23,9 @@
           2   employer account found  - valid credentials provided
           1   staff account found     - valid credentials provided
           0   database not responding
-          -1  staff account found     - invalid credentials 
-          -2  employer account found  - invalid credentials 
-          -3  no user found           - employer or staff
+          -1  account found           - invalid credentials 
+          -2  account locked           
+          -3  no user found        
   */
   function loginRegisteredUser($emailOrUsername, $password )
   {
@@ -37,7 +37,8 @@
       }
 
       //staff account lookup
-      $query = "SELECT password,accountLocked FROM registered_staff WHERE username='".$emailOrUsername."' or email='".$emailOrUsername."'";
+      $tableName  = "registered_staff";
+      $query      = "SELECT password,accountLocked,loginRequests,staffID FROM ".$tableName." WHERE username='".$emailOrUsername."' or email='".$emailOrUsername."'";
       $result     = mysqli_query($dbConnection, $query);
 
       //cleaning provided password
@@ -45,11 +46,12 @@
 
       $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
       $rowResult  = array_filter($row);
-      
+
+      // echo "<p>row:</p>";
+      // print_r($row);//testing
+
       if( $rowResult )
       {                
-        // print_r($row);//testing
-
         //getting hashed password
         $dbHashedPassword = $row['password'];
 
@@ -57,32 +59,47 @@
         if ( password_verify($cleanpass, $dbHashedPassword) ) 
         {
             //check if account is locked
-            $staffAccountLocked    = $row['accountLocked']; 
+            $userKey                = 'staffID';
+            $userID                 = $row[$userKey];
+            $staffAccountLocked     = $row['accountLocked']; 
+            $loginRequests          = $row['loginRequests'] + 1;
+
             if($staffAccountLocked)
             {
-              // echo '<p>staff account is LOCKED!</p>';//testing
-              return -4;
+              return -2;
             }
 
-            // echo '<p>staff Password is valid!</p>';//testing
+            //checking if account NEEDS to be locked
+            if($loginRequests > 4)
+            {
+              lockedUserAccount($dbConnection,$tableName,$userKey, $userID, $loginRequests);
+              return -2;
+            }
+
+            //updating login count
+            updateLoginAttempts($dbConnection,$tableName,$loginRequests,$userKey,$userID);
+      
             return 1;
         } 
         else 
         {
-            // echo '<p> staff Invalid password.</p>';//testing
             return -1;
         }
       }//eo-staff look up
 
       //freeing vars
       $query = null;
+      $query2 = null;
       $result = null;
       $row =  null;
       $rowResult = null;
       $dbHashedPassword = null;
+      $loginRequests = null;
+      $tableName    = null;
 
       //employer account look up
-      $query = "SELECT password,accountLocked FROM registered_employer WHERE username='".$emailOrUsername."' or email='".$emailOrUsername."'";
+      $tableName  = "registered_employer";
+      $query = "SELECT password,accountLocked,loginRequests,employerID FROM ".$tableName." WHERE username='".$emailOrUsername."' or email='".$emailOrUsername."'";
       
       $result     = mysqli_query($dbConnection, $query);
       $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
@@ -90,22 +107,40 @@
       
       if( $rowResult )
       {
+        // echo "<p>row:</p>";
         // print_r($row);//testing
+
         $dbHashedPassword = $row['password']; 
 
         if ( password_verify($cleanpass, $dbHashedPassword) ) 
         {
             //check if account is locked
-            $employerAccountLocked    = $row['accountLocked'];
+            $userKey                  = 'employerID';
+            $userID                   = $row[$userKey];
+            $employerAccountLocked    = $row['accountLocked']; 
+            $loginRequests            = $row['loginRequests'] + 1;
+
             if($employerAccountLocked)
             {
               // echo '<p>employer account is LOCKED!</p>';//testing
-              return -4;
+              return -2;
             }
 
+            //checking if account NEEDS to be locked
+            if($loginRequests > 4)
+            {
+              lockedUserAccount($dbConnection, $tableName, $userKey, $userID);
+              return -2;
+            }
+
+            //updating login count
+            updateLoginAttempts($dbConnection,$tableName,$loginRequests,$userKey,$userID);
+           
             // echo '<p>employer Password is valid!</p>';//testing
             return 2;
-        } else {
+        }
+        else 
+        {
             // echo '<p>employer Invalid password.</p>';//testing
             return -2;
         }
@@ -116,6 +151,18 @@
             
   }//eom
 
+/**/
+function updateLoginAttempts($dbConnection,$tableName,$loginRequests, $userKey , $userID  )
+{
+    //updating login count
+    $tableName  = "registered_staff";
+    $query = "UPDATE ".$tableName."
+              SET loginRequests='".$loginRequests."'
+              WHERE $userKey='".$userID."'";
+    // echo "query: $query";
+    $result = mysqli_query( $dbConnection, $query );
+    // echo "result $result"; 
+}//eom
 
 
 /******************* FORGOT PASSWORD (RESET PASSWORD) ********************************/
@@ -176,10 +223,7 @@ function UserWithPhoneProvidedExist( $phone )
   returns 
     userID   sms code for 'forgot password' successfully sent
     0   unable to connect to DB
-    -2  Unable to send forgot password sms code
-    -3  account locked
-    -4  account has been locked, maximum password resets attempt reached
-    -5  Unable to save changes to Database
+    -2  Unable to save changes to Database
       
 */
 function sendSMSForgotPasswordCode($userData)
@@ -196,15 +240,9 @@ function sendSMSForgotPasswordCode($userData)
     $staffType              = $userData['staffID'];
     $employerType           = $userData['employerID'];
     $phone                  = $userData['phone'];
-    $forgotPasswordRequests = $userData['forgotPasswordRequests'] + 1;
-    $accountLocked          = $userData['accountLocked'];
+    $forgotPasswordRequests = $rowResult['forgotPasswordRequests'] + 1;
     $userKey    = "";
     $userID     = "";
-    //checking if account is locked
-    if($accountLocked)
-    {
-      return -3;
-    }
     
     //checking which type of user it is
     if($staffType)
@@ -220,27 +258,19 @@ function sendSMSForgotPasswordCode($userData)
       $userID     = $employerType;
     }
 
-    //checking if account NEEDS to be locked
-    if($forgotPasswordRequests > 4)
-    {
-      lockedUserAccount($dbConnection, $tableName, $userKey, $userID, $forgotPasswordRequests);
-      return -4;
-    }
-    
     //creating random number
     $code                   = mt_rand(1000, 9999);
     $forgotPasswordCode     = $code;
-
 
     $query = "UPDATE $tableName
               SET forgotPasswordRequests='".$forgotPasswordRequests."', forgotPasswordCode = '".$forgotPasswordCode."'
               WHERE $userKey='".$userID."'";
 
-    $result = mysqli_query( $dbConnection, $query );
+    $result = mysqli_query($dbConnection, $query);
     if(!$result)
     {
       // echo "Unable to store changes to Database";
-      return -5;
+      return -2;
     }  
 
     //preparing text message info
@@ -280,42 +310,94 @@ function sendSMSForgotPasswordCode($userData)
 
 
   /* 
-    
+    resets user password
+
+    reponse returns the following:
+              1   successfully changed password
+              0   database not responding
+              -1  Unable to store changes to Database 
+              -2  Unknown error happen
+              
+
+    incoming data:
+        code = 4205;
+        newPassword = biglu2987;
+        userID = 2;
+        userKey = staffID;
   */
   function forgotPassword($userData)
   {
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+       // echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
 
-      $userID           = $userData["userID"];
-      $code             = $userData["code"];
-      $newPassword      = $userData["newPassword"];
+      $code                   = $userData["code"];
+      $newPassword            = $userData["newPassword"];
+      $userID                 = $userData["userID"];
+      $userKey                = $userData["userKey"];
 
+      //hashing password
+      $options= array('cost' => 10);
+      $passwordHashed = password_hash($newPassword, PASSWORD_BCRYPT, $options);
+
+      //checking which type of user it is
+      if($userKey == 'staffID')
+      {
+        $tableName = "registered_staff";
+      }
+      else if($userKey == 'employerID')
+      {
+        $tableName  = "registered_employer";
+      }
+
+      $query = "UPDATE $tableName
+                SET password='".$passwordHashed."', forgotPasswordRequests = '0', forgotPasswordCode = '0'
+                WHERE $userKey='".$userID."'";
+
+      $result = mysqli_query($dbConnection,$query);
+      if($result)
+      {
+        // echo "<p>successfully changed password</p>";
+        return 1;
+      }  
+      else
+      {
+        // echo "<p>Unable to store changes to Database</p>";
+        return -1;
+      }
+
+      // echo "<p> Unknown error happen </p>";
+      return -2;
   }//eom
 
 
 /*************** LOCKING/ UNLOCKING USER ACCOUNT ********************************/
 
-/* locks user account */
-function lockedUserAccount($dbConnection, $tableName, $userKey, $userID, $forgotPasswordRequests)
-{
-     $query = "UPDATE $tableName
-              SET forgotPasswordRequests ='".$forgotPasswordRequests."', accountLocked = '1'
-              WHERE $userKey='".$userID."'";
+  /* locks user account */
+  function lockedUserAccount($dbConnection, $tableName, $userKey, $userID)
+  {
+       $query = "UPDATE $tableName
+                SET `accountLocked` = 1 
+                WHERE $userKey='".$userID."'";
+      echo "query: $query";
+      $result = mysqli_query( $dbConnection, $query );
+      return $result;
+  }//eom
 
-    $result = mysqli_query( $dbConnection, $query );
-    return $result;
-}//eom
 
+  /* unlocks user account */
+  function unlockedAccount($dbConnection, $tableName, $userKey, $userID)
+  {
+      $query = "UPDATE `$tableName`
+                SET `accountLocked` = 0, `loginRequests` = 0
+                WHERE `$userKey` = '".$userID."'";
 
-/* unlocks user account */
-function unlockedAccount($dbConnection, $tableName, $userKey, $userID)
-{
-    $query = "UPDATE `$tableName`
-              SET `accountLocked` = 0, `forgotPasswordRequests` = 0
-              WHERE `$userKey` = '".$userID."'";
-
-    $result = mysqli_query( $dbConnection, $query );
-    return $result;
-}//eom
+      $result = mysqli_query( $dbConnection, $query );
+      return $result;
+  }//eom
 
 
 

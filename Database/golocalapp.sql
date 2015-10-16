@@ -77,7 +77,8 @@ CREATE TABLE `registered_employer` (
   `termsAndAgreements` varchar(255) NOT NULL,
   `accountLocked` BOOLEAN DEFAULT NULL,
   `forgotPasswordCode` int(11) DEFAULT NULL,
-  `forgotPasswordRequests` int(5) DEFAULT '0'
+  `forgotPasswordRequests` int(5) DEFAULT '0',
+  `loginRequests` int(5) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -138,7 +139,8 @@ CREATE TABLE `registered_staff` (
   `TermsAndAgreements` varchar(255) NOT NULL,
   `accountLocked` BOOLEAN DEFAULT NULL,
   `forgotPasswordCode` int(11) DEFAULT NULL,
-  `forgotPasswordRequests` int(5) DEFAULT '0'
+  `forgotPasswordRequests` int(5) DEFAULT '0',
+  `loginRequests` int(5) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
