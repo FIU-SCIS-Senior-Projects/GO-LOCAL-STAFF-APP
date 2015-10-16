@@ -342,7 +342,7 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
                 [self showAlert:@"SMS Authentication" withMessage:messageToDisplay and:@"Okay"];
                 
                 //moving to log in controller
-                [self performSegueWithIdentifier:@"cancelReturnToLoginScreen" sender:self];
+                [self performSegueWithIdentifier:@"returnToLoginScreen" sender:self];
                 
             }
             else if( (responseType == 0) || (responseType == -1) || (responseType == -2) )
