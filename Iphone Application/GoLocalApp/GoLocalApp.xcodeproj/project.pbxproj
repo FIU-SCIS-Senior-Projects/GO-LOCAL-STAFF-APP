@@ -13,7 +13,6 @@
 		DE4AC3F01BB75FA50071D7E2 /* EmployerRegistration0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3EF1BB75FA50071D7E2 /* EmployerRegistration0ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC3F31BB75FD90071D7E2 /* EmployerRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3F21BB75FD90071D7E2 /* EmployerRegistration2ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC3F61BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3F51BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m */; settings = {ASSET_TAGS = (); }; };
-		DE4AC3F91BB760770071D7E2 /* EmployerRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3F81BB760770071D7E2 /* EmployerRegistration4ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC3FC1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3FB1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC3FF1BB760A40071D7E2 /* EmployerRegistration6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3FE1BB760A40071D7E2 /* EmployerRegistration6ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC4021BB761620071D7E2 /* RegisteredEmployer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC4011BB761620071D7E2 /* RegisteredEmployer.m */; settings = {ASSET_TAGS = (); }; };
@@ -70,8 +69,6 @@
 		DE4AC3F21BB75FD90071D7E2 /* EmployerRegistration2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration2ViewController.m; sourceTree = "<group>"; };
 		DE4AC3F41BB75FFD0071D7E2 /* EmployerRegistration3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration3ViewController.h; sourceTree = "<group>"; };
 		DE4AC3F51BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration3ViewController.m; sourceTree = "<group>"; };
-		DE4AC3F71BB760770071D7E2 /* EmployerRegistration4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration4ViewController.h; sourceTree = "<group>"; };
-		DE4AC3F81BB760770071D7E2 /* EmployerRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration4ViewController.m; sourceTree = "<group>"; };
 		DE4AC3FA1BB7608E0071D7E2 /* EmployerRegistration5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration5ViewController.h; sourceTree = "<group>"; };
 		DE4AC3FB1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration5ViewController.m; sourceTree = "<group>"; };
 		DE4AC3FD1BB760A40071D7E2 /* EmployerRegistration6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration6ViewController.h; sourceTree = "<group>"; };
@@ -260,8 +257,6 @@
 				DE4AC3F21BB75FD90071D7E2 /* EmployerRegistration2ViewController.m */,
 				DE4AC3F41BB75FFD0071D7E2 /* EmployerRegistration3ViewController.h */,
 				DE4AC3F51BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m */,
-				DE4AC3F71BB760770071D7E2 /* EmployerRegistration4ViewController.h */,
-				DE4AC3F81BB760770071D7E2 /* EmployerRegistration4ViewController.m */,
 				DE4AC3FA1BB7608E0071D7E2 /* EmployerRegistration5ViewController.h */,
 				DE4AC3FB1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m */,
 				DE4AC3FD1BB760A40071D7E2 /* EmployerRegistration6ViewController.h */,
@@ -425,7 +420,7 @@
 				TargetAttributes = {
 					DE6722AD1B968CC600599039 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 225L9WJRG8;
+						DevelopmentTeam = 7QZKGWVGQY;
 					};
 					DE6722C91B968CC600599039 = {
 						CreatedOnToolsVersion = 6.3;
@@ -505,7 +500,6 @@
 				DEE6B84D1B9942DA00912541 /* StaffRegistration6ViewController.m in Sources */,
 				DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */,
 				DE8C2E5E1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m in Sources */,
-				DE4AC3F91BB760770071D7E2 /* EmployerRegistration4ViewController.m in Sources */,
 				DE4AC3FF1BB760A40071D7E2 /* EmployerRegistration6ViewController.m in Sources */,
 				DE8444AF1B9FAB570085DA73 /* StaffRegistration14ViewController.m in Sources */,
 				DEF0BAD11B9EB2FA001C6D84 /* StaffRegistration12ViewController.m in Sources */,
