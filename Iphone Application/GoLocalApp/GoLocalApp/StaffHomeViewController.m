@@ -13,10 +13,17 @@
 @end
 
 @implementation StaffHomeViewController
+@synthesize username;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"Username %@", username);
 }
 
 - (void)didReceiveMemoryWarning {

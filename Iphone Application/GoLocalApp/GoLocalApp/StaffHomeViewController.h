@@ -10,4 +10,7 @@
 
 @interface StaffHomeViewController : UIViewController
 
+@property (nonatomic) NSString *username;
+@property (nonatomic) int staffID;
+
 @end

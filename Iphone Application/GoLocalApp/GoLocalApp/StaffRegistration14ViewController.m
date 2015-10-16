@@ -8,6 +8,7 @@
 
 #import "StaffRegistration14ViewController.h"
 #import "StaffDatabase.h"
+#import "StaffHomeViewController.h"
 
 #import "RegisteredStaff.h" //needed for staff registration
 
@@ -18,6 +19,7 @@
     
     UIImage * selfiePhoto;
     UIImage * bodyPhoto;
+    int staffID;
 }
 @end
 
@@ -34,7 +36,16 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [registeredStaff printUserData];//testing
-    
+}//eom
+
+/* preparing the data to sent to the next view controller */
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"staffRegistered"])
+    {
+        UINavigationController *navigationController = [segue destinationViewController];
+        StaffHomeViewController *controller = (StaffHomeViewController *) navigationController.topViewController;
+        controller.staffID = staffID;
+    }
 }//eom
 
 
@@ -75,7 +86,6 @@
         {
             //since user to terms, display 'submit registration' button
             self.submitButton.hidden = NO;
-            [self sendDataToServer];
         }
     }
     else
@@ -85,6 +95,11 @@
     
 }//eo-action
 
+
+- (IBAction)termsAgreed:(UIButton *)sender
+{
+     [self sendDataToServer];
+}//eom
 
 /* create UIAlert*/
 -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
@@ -100,11 +115,47 @@
 }//eom
 
 /***************** JSON POST functions *******************/
+
+        /* 
+         processing server responce
+         */
+        -(void) processingServerResponce:(NSDictionary *) responce
+        {
+            //    NSLog(@"[1] responce: %@", responce);
+            
+            NSDictionary * userResults = [responce objectForKey:@"results"];
+            int responceType = [[userResults objectForKey:@"responseType"] intValue];
+            NSDictionary * responceMessage = [userResults objectForKey:@"message"];
+            NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
+            
+            NSLog(@"[1] results is %@", userResults);
+            NSLog(@"[1] responceType is %d", responceType);
+            if(responceType > 0) //responce was good
+            {
+                //notifying user code was accepted
+                [self showAlert:@"Registration" withMessage:@"Successfully registered" and:@"Okay"];
+//                self->staffID = [NSString stringWithFormat:@"%d", responceType];
+                self->staffID = responceType;
+                
+                [self performSegueWithIdentifier:@"staffRegistered" sender:self];
+            }
+            else if(responceType == 0) //employer user
+            {
+                //notifying user code was accepted
+                [self showAlert:@"Registration" withMessage:@"We Apologize but our system is currently down" and:@"Okay"];
+            }
+            else //invalid response
+            {
+                //notifying user code was accepted
+                [self showAlert:@"Registration" withMessage:message and:@"Okay"];
+            }
+        }//eom
+
+
         /* sends data to server */
         -(void)sendDataToServer
         {
                 NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_registration.php";//hard coding website
-            
             
                 /*** preparing data to be sent ***/
                 NSMutableDictionary * staffInfo = [self prepareData];
@@ -146,9 +197,21 @@
         }//eo-action
 
         /* data received from server */
-        - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)theData{
-            NSString *dataResponce = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
-            NSLog(@" responce from server %@",dataResponce);
+        - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+        {
+            
+            NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            //        NSLog(@"[1] from server replied: %@",rawExhibits);
+            
+            //        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            //        NSLog(@"[2] responce from server %@",dataResponce);
+            //
+            //        // Get JSON objects into initial array
+            //        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+            //        NSLog(@"[3] responce from server %@",rawExhibits2);
+            
+            //processing responce
+            [self processingServerResponce:rawExhibits];
         }
 
         /* error occurred sending data to server */
@@ -158,14 +221,16 @@
         }//eom
 
 
-
-        /*prepare staff data to json*/
+        /*
+         prepare staff data to json
+         */
         -(NSMutableDictionary *) prepareData
         {
             //creating initial list
             NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
             
             finalList[@"registrationType"]     = [registeredStaff getAccountType];
+            finalList[@"staffID"]              = [registeredStaff getStaffID];
             
             //adding view controller 0 info
             finalList[@"firstName"]     = [registeredStaff getFirstName];
@@ -336,48 +401,5 @@
             
         }//eom
 
- 
- //    NSError *error;
- //    NSData *postdata = [NSJSONSerialization dataWithJSONObject:req options:0 error:&error];
-
- 
- 
-//    //example 1
-//    NSMutableDictionary *req =[NSMutableDictionary  dictionaryWithObjectsAndKeys:@"feed/http://feeds.feedburner.com/design-milk", @"id", nil];
-//    req[@"title"] = @"Design Milk";
-//
-//    NSLog(@" NSMutableDictionary = %@", req);
-//
-//    NSDictionary *itemToAdd = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                               @"user/category/test", @"id", @"test", @"label", nil];
-//
-//    NSMutableArray *listToAdd = [[NSMutableArray alloc] init];
-//    [listToAdd addObject:itemToAdd];
-//
-//    [req setObject:listToAdd forKey:@"categories"];
-//
-//    NSLog(@" final is %@", req);
-//
-//
-//    //example 2
-//    NSMutableDictionary *json= [[NSMutableDictionary alloc] init];
-//    [json setObject:@"4992" forKey:@"cat_id"];
-//    [json setObject:@"Toshiba" forKey:@"brand"];
-//    //create weight object
-//    NSMutableDictionary *weight= [[NSMutableDictionary alloc] init];
-//    [weight setObject:@"1000000" forKey:@"gte"];
-//    [weight setObject:@"1500000" forKey:@"lt"];
-//    //attach the object
-//    [json setObject:weight forKey:@"weight"];
-//    //create sitedetails objects
-//    NSMutableDictionary *sitedetails= [[NSMutableDictionary alloc] init];
-//    [sitedetails setObject:@"newegg.com" forKey:@"name"];
-//    //create latestoffers objects
-//    NSMutableDictionary *latestoffers= [[NSMutableDictionary alloc] init];
-//    [latestoffers setObject:@"USD" forKey:@"currency"];
-//    //new dictionary for price
-//    [sitedetails setObject:latestoffers forKey:@"latestoffers"];
-//    [json setObject:sitedetails forKey:@"sitedetails"];
-//    NSLog(@"%@",json);
 
 @end

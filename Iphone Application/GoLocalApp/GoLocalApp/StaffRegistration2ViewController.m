@@ -430,7 +430,9 @@
         return 30.0;
     }
 
-    - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+    - (NSString *)pickerView:(UIPickerView *)pickerView
+                 titleForRow:(NSInteger)row
+                forComponent:(NSInteger)component
     {
         //language options
         if( ( pickerView == nativeLanguagePickerView) ||

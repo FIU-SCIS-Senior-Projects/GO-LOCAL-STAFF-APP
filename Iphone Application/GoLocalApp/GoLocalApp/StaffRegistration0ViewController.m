@@ -572,13 +572,13 @@
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);
             [scrollView setContentOffset:point animated:YES];
-        }
+        }//eom
 
         - (void) scrollVievEditingFinished:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, 0);
             [scrollView setContentOffset:point animated:YES];
-        }
+        }//eom
 
 
 

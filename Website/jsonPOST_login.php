@@ -44,62 +44,64 @@
         );
       }
       else  //valid json values found
-      {
-          require 'API.php';/* adding API */
+      { 
+           require 'API.php';/* adding API */
           
-          $username = $decoded['username'];
-          $email    = $decoded['email'];
-          $password = $decoded['password'];
-
+          $emailOrUsername    = $decoded['emailOrUsername'];
+          $password           = $decoded['password'];
           //check if valid user and return type of user
-          $typeUser = loginRegisteredUser($username, $email, $password);
-          if($typeUser == 1) //valid staff user
-          {
-            $responseArray = array(
-                "message" => "staff user",
-                "usertype"    => "1",
-              );
-          }
-          else if($typeUser == 2)//valid employer user
+          $typeUser = loginRegisteredUser($emailOrUsername, $password);
+          if($typeUser == 2)//valid employer user
           {
               $responseArray = array(
                 "message"   => "employer user",
-                "usertype"  => "2",
+                "usertype"  => $typeUser,
               );
-
           }
-          else if( ($typeUser == -1) || ($typeUser == -2)  )//valid user with INCORRECT Credentials
+          else if($typeUser == 1) //valid staff user
           {
-              $responseArray = array(
-                "message"   => "invalid credentials",
-                "usertype"  => "-1",
+            $responseArray = array(
+                "message" => "staff user",
+                "usertype"    => $typeUser,
               );
-
-          }
-          else if($typeUser == -3) //no registered user found
-          {
-              $responseArray = array(
-                "message"   => "no registered user found",
-                "usertype"  => "-3",
-              );
-
           }
           else if($typeUser == 0) //database not responding
           {
               $responseArray = array(
                 "message"   => "database not responding",
-                "usertype"  => "0",
+                "usertype"  => $typeUser,
               );
-
+          }
+          else if($typeUser == -1) //invalid credentials
+          {
+              $responseArray = array(
+                "message"   => "invalid credentials",
+                "usertype"  => $typeUser,
+              );
+          }
+          else if($typeUser == -2) //Account locked
+          {
+              $responseArray = array(
+                "message"   => "Account locked",
+                "usertype"  => $typeUser,
+              );
+          }
+          else if($typeUser == -3) //no registered user found
+          {
+              $responseArray = array(
+                "message"   => "no registered user found",
+                "usertype"  => $typeUser,
+              );
           }
 
           /* 
             reponse returns the following:
-                2   valid employer user
-                1   valid staff user
-                0   database not responding
-                -2  valid user with INCORRECT Credentials
-                -3  no registered user found
+              2   employer account found  - valid credentials provided
+              1   staff account found     - valid credentials provided
+              0   database not responding
+              -1  account found           - invalid credentials 
+              -2  account locked           
+              -3  no user found        
           */
           $response['results'] = $responseArray; //sending reply
 
@@ -117,12 +119,13 @@
   //responding back to sender
   $encoded = json_encode($response);
 
-        /* saving incoming file */
+
+      /* saving incoming file */
         // Write the contents back to the file
-        $filename = 'test/LoginDataResponse.json';
+        $filename = 'test/login/LoginDataResponse.json';
         file_put_contents($filename, var_export($encoded, true));
 
-        $filename = 'test/LoginDataIncoming.json';
+        $filename = 'test/login/LoginIncomingData.json';
         file_put_contents($filename, var_export($decoded, true));
 
 

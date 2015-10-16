@@ -1,34 +1,31 @@
 <?php  
 
-
-include 'urlsettings.php';
-
+include '../urlsettings.php';
 
 //Initiate cURL.
-$ch = curl_init($url_sendSMSCode);
+$ch = curl_init($url_sendforgotPassword);
 
 if($testingStaffUser)
 {
     //valid staff user
     $jsonData = [
-      "registrationType"  => "Staff",
+      "code" => "1325",
+      "newPassword" => "0987654321",
       "userID" => "1",
-      "code" => "4140",
-      "phone" => "3056099250"
+      "userKey" => "staffID"
       ];
 }
 else
 {
     //valid employer user
     $jsonData = [
-      "registrationType"  => "Employer",
-      "userID" => "1",
-      "code" => "4140",
-      "phone" => "3056099250"
+      "code" => "4205",
+      "newPassword" => "biglu2987",
+      "userID" => "2",
+      "userKey" => "employerID"
       ];
 }
 
- 
 //Encode the array into JSON.
 $jsonDataEncoded = json_encode($jsonData);
  

@@ -67,13 +67,19 @@
       $nickname         = $staffInfo["nickName"];//
       $usernameProvided = $staffInfo["username"];//
       $emailProvided    = $staffInfo["email"];//
-      $pasword          = $staffInfo["password"];//
+      $password         = $staffInfo["password"];//
       $dob              = $staffInfo["dob"];//
       $phone            = $staffInfo["phone"];//
+
+      //Cleaning data (prevent SQL injections)
       $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
       $email          = mysqli_real_escape_string($dbConnection, $emailProvided);
       $hashCodeEmail  = mysqli_real_escape_string($dbConnection, md5( rand(0, 1000) ));
-      $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
+      $cleanPassword  = mysqli_real_escape_string($dbConnection, $password);
+
+      //hashing password
+      $options= array('cost' => 10);
+      $passwordHashed = password_hash($cleanPassword, PASSWORD_BCRYPT, $options);
 
       $query = "INSERT INTO registered_staff ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, phone, dateOfBirth)
             VALUES ( '".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$phone."', '".$dob."')";
@@ -101,21 +107,25 @@
 
   /* registers staff user info 
       returns:
-        1   successfully register
+        1   successfully registered
         0   database not responding
         -1  Unable to register user
+        -2 Unable to retrieve staff ID
         -10 invalid registration type
     */
-  function registerStaffUser($staffInfo)
+  function registerStaffUser($registrationData)
   {
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-        //echo "Unable to connect to MySQL.".PHP_EOL;
+        // echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
+
       //these fields were already saved
+
+      $staffID                        = $registrationData['staffID'];
       $username                       = $registrationData['username'];
       $firstName                      = $registrationData['firstName'];
       $middleName                     = $registrationData['middleName'];
@@ -123,7 +133,7 @@
       $nickname                       = $registrationData['nickname'];
       $email                          = $registrationData['email'];
       $password                       = $registrationData['password'];
-      $phone                          = $registrationData['phone'];
+      $phone                          = $registrationData['cellphone'];
       $dob                            = $registrationData['dob'];
 
       //gathering fields to save
@@ -148,6 +158,13 @@
         $waistSize                      = $registrationData['waistSize'];
         $hipSize                        = $registrationData['hipSize'];
         $dressSize                      = $registrationData['dressSize'];
+      }
+      else
+      {
+        $chestSize                      = " ";
+        $waistSize                      = " ";
+        $hipSize                        = " ";
+        $dressSize                      = " ";
       }
 
       $pantSize                       = $registrationData['pantSize'];
@@ -223,26 +240,35 @@
       // $otherServicesBandWebsite       = $registrationData['otherServicesBandWebsite'];//
       // $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
       
-/*
-  `staffID` int(11) NOT NULL,  //PRIMARY KEY
-  
+      /*
+      `staffID` int(11) NOT NULL,  //PRIMARY KEY
+      `staffType` int(11) NOT NULL,
+      `pictures` varchar(30) NOT NULL,
+      `insuranceDocuments` varchar(30) NOT NULL,
+      `resume` varchar(30) NOT NULL,
+      `TermsAndAgreements` varchar(255) NOT NULL
+      */
+      $part1 = "address='".$address."',city='".$city."',zipcode='".$zipcode."',state='".$state."',gender='".$gender."',languages='".$languages."',";
+      $part2 = "typeDL='".$typeOfLicense."',ethnicity='".$ethnicity."',ethnicityCode='".$ethnicityCode."',weight='".$weight."',hairColor='".$hairColor."',";
+      $part3 = "eyeColor='".$eyeColor."',shirtSize='".$tshirtSize."',chestSize='".$chestSize."',waistSize='".$waistSize."',hipSize='".$hipSize."',";
+      $part4 = "dressSize='".$dressSize."',pantSize='".$pantSize."',shoeSize='".$shoeSize."',piercings='".$piercings."',";
+      $part5 = "desiredHourlyRate='".$desiredHourlyRate."',desiredWeeklyRate='".$desiredWeeklyRate."',ssnOrEin='".$ssnOrEin."',businessName='".$business_name."',";
+      $part6 = "travel='".$travel."',insurance='".$hasProfessionalInsurance."',";
+      $part7 = "bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'";
 
-  `staffType` int(11) NOT NULL,
-  
-
-
-  `pictures` varchar(30) NOT NULL,
-
-
-  `insuranceDocuments` varchar(30) NOT NULL,
-  `resume` varchar(30) NOT NULL,
-  `TermsAndAgreements` varchar(255) NOT NULL
-  */
 
       $query = "UPDATE registered_staff
-                SET address='".$code."',city='".$code."',zipcode='".$code."',state='".$code."',gender='".$code."',languages='".$code."',typeDL='".$code."',ethnicity='".$code."',ethnicityCode='".$code."',weight='".$code."',hairColor='".$code."',eyeColor='".$code."',shirtSize='".$code."',chestSize='".$code."',waistSize='".$code."',hipSize='".$code."',dressSize='".$code."',shoeSize='".$code."',piercings='".$code."',desiredHourlyRate='".$code."',desiredWeeklyRate='".$code."',ssnOrEin='".$code."',businessName='".$code."',travel='".$code."',insurance='".$code."',bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'
-                WHERE phone='".$phone."'";
+                SET $part1 $part2 $part3 $part4 $part5 $part6 $part7
+                WHERE phone='".$phone."' and staffID = '".$staffID."'";
 
+                echo "<p>".$query."</p>";
+      $result = mysqli_query($dbConnection, $query);
+      if($result)
+      {
+        return 1;
+      }
+
+      return -1;
   }//eom
 
 ?>

@@ -10,4 +10,7 @@
 
 @interface EmployerHomeViewController : UIViewController
 
+@property (nonatomic) NSString *username;
+
+
 @end
