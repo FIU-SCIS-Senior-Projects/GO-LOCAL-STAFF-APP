@@ -356,7 +356,7 @@ function sendSMSForgotPasswordCode($userData)
       $query = "UPDATE $tableName
                 SET password='".$passwordHashed."', forgotPasswordRequests = '0', forgotPasswordCode = '0',`accountLocked` = 0, `loginRequests` = 0
                 WHERE $userKey='".$userID."'";
-
+      // echo $query;
       $result = mysqli_query($dbConnection,$query);
       if($result)
       {

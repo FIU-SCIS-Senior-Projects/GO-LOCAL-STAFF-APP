@@ -9,9 +9,9 @@ if($testingStaffUser)
 {
     //valid staff user
     $jsonData = [
-      "code" => "1325",
-      "newPassword" => "0987654321",
-      "userID" => "1",
+      "code" => "5603",
+      "newPassword" => "2987Andres",
+      "userID" => "5",
       "userKey" => "staffID"
       ];
 }
