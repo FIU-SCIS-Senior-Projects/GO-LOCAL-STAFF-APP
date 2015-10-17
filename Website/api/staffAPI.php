@@ -27,7 +27,7 @@
         return 0;
       }
 
-      //gettting all registered staff
+      //getting all registered staff
       $query = "SELECT * FROM registered_staff";
       $result = mysqli_query($dbConnection, $query);
 
@@ -269,6 +269,38 @@
       }
 
       return -1;
+  }//eom
+
+
+  
+  /* 
+    reponse returns the following:
+      userdata   successfully retrieved information
+      0   database not responding
+      -1  error retriving information
+  */
+  function searchTalent($inData)
+  {
+    // print_r($inData);
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+        // echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
+
+
+
+      //gettting all registered staff
+      $query = "SELECT * 
+                FROM registered_staff";
+      $result = mysqli_query($dbConnection, $query);
+      if($result)
+      {
+        return $result;
+      }
+
+    return -1;
   }//eom
 
 ?>

@@ -126,7 +126,7 @@
 
 -(NSString *) getEmployerID
 {
-    return EmployerID;
+    return [NSString stringWithFormat:@"%d",EmployerID];
 }
 
 -(NSString *) getFirstName

@@ -12,5 +12,6 @@
 
 @property (nonatomic) NSString *username;
 
+- (IBAction)searchTalent:(id)sender;
 
 @end

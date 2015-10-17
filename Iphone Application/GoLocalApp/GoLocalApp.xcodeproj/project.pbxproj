@@ -29,6 +29,8 @@
 		DE6722E61B968D8700599039 /* PreRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722E51B968D8700599039 /* PreRegistrationViewController.m */; };
 		DE6722E91B968D9F00599039 /* StaffRegistration0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722E81B968D9F00599039 /* StaffRegistration0ViewController.m */; };
 		DE6722EC1B968DB900599039 /* EmployerRegistration1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722EB1B968DB900599039 /* EmployerRegistration1ViewController.m */; };
+		DE7BB00E1BD2A806002E3A52 /* SearchTalentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7BB00C1BD2A806002E3A52 /* SearchTalentViewController.m */; settings = {ASSET_TAGS = (); }; };
+		DE7BB00F1BD2A806002E3A52 /* SearchTalentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE7BB00D1BD2A806002E3A52 /* SearchTalentViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		DE8444A91B9F75060085DA73 /* StaffRegistration13ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8444A81B9F75060085DA73 /* StaffRegistration13ViewController.m */; };
 		DE8444AF1B9FAB570085DA73 /* StaffRegistration14ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8444AE1B9FAB570085DA73 /* StaffRegistration14ViewController.m */; };
 		DE8C2E5B1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C2E5A1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m */; };
@@ -99,6 +101,9 @@
 		DE6722E81B968D9F00599039 /* StaffRegistration0ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration0ViewController.m; sourceTree = "<group>"; };
 		DE6722EA1B968DB900599039 /* EmployerRegistration1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration1ViewController.h; sourceTree = "<group>"; };
 		DE6722EB1B968DB900599039 /* EmployerRegistration1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration1ViewController.m; sourceTree = "<group>"; };
+		DE7BB00B1BD2A806002E3A52 /* SearchTalentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTalentViewController.h; sourceTree = "<group>"; };
+		DE7BB00C1BD2A806002E3A52 /* SearchTalentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTalentViewController.m; sourceTree = "<group>"; };
+		DE7BB00D1BD2A806002E3A52 /* SearchTalentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTalentViewController.xib; sourceTree = "<group>"; };
 		DE8444A71B9F75060085DA73 /* StaffRegistration13ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration13ViewController.h; sourceTree = "<group>"; };
 		DE8444A81B9F75060085DA73 /* StaffRegistration13ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration13ViewController.m; sourceTree = "<group>"; };
 		DE8444AD1B9FAB570085DA73 /* StaffRegistration14ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration14ViewController.h; sourceTree = "<group>"; };
@@ -172,9 +177,10 @@
 			children = (
 				DEC653281BB25A94001A8655 /* Application */,
 				DEC653271BB25A81001A8655 /* CoreData */,
-				DEC653291BB25AA4001A8655 /* View */,
 				DEC6532A1BB25AE9001A8655 /* Controllers */,
+				DE7BB0101BD2A828002E3A52 /* Images */,
 				DEC6532F1BB398F2001A8655 /* Models */,
+				DEC653291BB25AA4001A8655 /* View */,
 				DE6722B11B968CC600599039 /* Supporting Files */,
 			);
 			path = GoLocalApp;
@@ -231,6 +237,7 @@
 			children = (
 				DE6722DD1B968D4500599039 /* EmployerHomeViewController.h */,
 				DE6722DE1B968D4500599039 /* EmployerHomeViewController.m */,
+				DE7BB00A1BD2A7DE002E3A52 /* Search Talent */,
 			);
 			name = "Employer Home";
 			sourceTree = "<group>";
@@ -295,6 +302,23 @@
 			name = "Staff Registration";
 			sourceTree = "<group>";
 		};
+		DE7BB00A1BD2A7DE002E3A52 /* Search Talent */ = {
+			isa = PBXGroup;
+			children = (
+				DE7BB00B1BD2A806002E3A52 /* SearchTalentViewController.h */,
+				DE7BB00C1BD2A806002E3A52 /* SearchTalentViewController.m */,
+			);
+			name = "Search Talent";
+			sourceTree = "<group>";
+		};
+		DE7BB0101BD2A828002E3A52 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DE6722C11B968CC600599039 /* Images.xcassets */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		DEC653271BB25A81001A8655 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,9 +341,9 @@
 		DEC653291BB25AA4001A8655 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DE6722BE1B968CC600599039 /* Main.storyboard */,
-				DE6722C11B968CC600599039 /* Images.xcassets */,
 				DE6722C31B968CC600599039 /* LaunchScreen.xib */,
+				DE6722BE1B968CC600599039 /* Main.storyboard */,
+				DE7BB00D1BD2A806002E3A52 /* SearchTalentViewController.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -420,7 +444,7 @@
 				TargetAttributes = {
 					DE6722AD1B968CC600599039 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 7QZKGWVGQY;
+						DevelopmentTeam = 225L9WJRG8;
 					};
 					DE6722C91B968CC600599039 = {
 						CreatedOnToolsVersion = 6.3;
@@ -452,6 +476,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE7BB00F1BD2A806002E3A52 /* SearchTalentViewController.xib in Resources */,
 				DE6722C01B968CC600599039 /* Main.storyboard in Resources */,
 				DE6722C51B968CC600599039 /* LaunchScreen.xib in Resources */,
 				DE6722C21B968CC600599039 /* Images.xcassets in Resources */,
@@ -496,6 +521,7 @@
 				DE6722BD1B968CC600599039 /* LogInViewController.m in Sources */,
 				DE6722E91B968D9F00599039 /* StaffRegistration0ViewController.m in Sources */,
 				DEF0BAB91B9D56C8001C6D84 /* StaffRegistration8ViewController.m in Sources */,
+				DE7BB00E1BD2A806002E3A52 /* SearchTalentViewController.m in Sources */,
 				DE8444A91B9F75060085DA73 /* StaffRegistration13ViewController.m in Sources */,
 				DEE6B84D1B9942DA00912541 /* StaffRegistration6ViewController.m in Sources */,
 				DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */,

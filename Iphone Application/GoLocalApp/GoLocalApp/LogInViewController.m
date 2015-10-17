@@ -141,23 +141,20 @@
         }
         else if(usertype == 0)//db issues
         {
-            //notifying user code was accepted
             [self showAlert:@"Log In" withMessage:@"We Apologize but our system is currently down" and:@"Okay"];
         }
-        else if( (usertype == -1) || (usertype == -2))//no user found
+        else if(usertype == -1)//invalid credentials
+        {
+            [self showAlert:@"Log In" withMessage:@"Invalid credentials" and:@"Okay"];
+        }
+        else if(usertype == -2)//account locked
         {
             //notifying user code was accepted
-            [self showAlert:@"Log In" withMessage:@"Invalid credentials" and:@"Okay"];
+            [self showAlert:@"Log In" withMessage:@"Account locked, please reset your password" and:@"Okay"];
         }
         else if(usertype == -3)//no user found
         {
-            //notifying user code was accepted
             [self showAlert:@"Log In" withMessage:@"No account found with the provided credentials" and:@"Okay"];
-        }
-        else if(usertype == -4)//account locked
-        {
-            //notifying user code was accepted
-            [self showAlert:@"Log In" withMessage:@"Account locked" and:@"Okay"];
         }
         else //invalid response
         {

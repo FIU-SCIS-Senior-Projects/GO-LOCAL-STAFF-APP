@@ -7,6 +7,7 @@
 //
 
 #import "EmployerHomeViewController.h"
+#import "SearchTalentViewController.h"
 
 @interface EmployerHomeViewController ()
 
@@ -26,6 +27,23 @@
     NSLog(@"Username %@", username);
 }
 
+/* search talent requested, moving to talent request view */
+- (IBAction)searchTalent:(id)sender
+{
+    NSLog(@"inside action");
+    
+    SearchTalentViewController * SearchTalentView = [[SearchTalentViewController alloc] init];
+    
+    //hiding the nav bar of the next view
+//    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
+    //pushing controller to navigation controller
+    [self.navigationController pushViewController:SearchTalentView animated:YES];
+
+}//eo-action
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -33,13 +51,15 @@
 }
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end
