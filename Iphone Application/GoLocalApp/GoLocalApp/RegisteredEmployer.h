@@ -12,6 +12,7 @@
 {
     
     NSString *accountType;
+    int EmployerID;
     
     //view controller 0
     NSString *firstName;
@@ -40,6 +41,7 @@
 
 //accessors
 -(NSString *) getAccountType;
+-(NSString *) getEmployerID;
 -(NSString *) getFirstName;
 -(NSString *) getMiddleName;
 -(NSString *) getLastName;
@@ -56,6 +58,7 @@
 -(BOOL) hasInsurance;
 
 //mutators
+-(void) setEmployerID:(int) employerIDProvided;
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName;
 -(void) setEmail:(NSString *) emailProvided;
 -(void) setUserName:(NSString *) usernameProvided;

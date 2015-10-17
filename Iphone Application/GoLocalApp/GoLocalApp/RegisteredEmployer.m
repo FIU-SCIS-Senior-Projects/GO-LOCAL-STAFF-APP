@@ -42,6 +42,13 @@
 }
 
 //mutators
+
+
+-(void) setEmployerID:(int) employerIDProvided
+{
+    EmployerID  =   employerIDProvided;
+}
+
     //view controller 0
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName
 {
@@ -115,6 +122,12 @@
 {
     return accountType;
 }//eom
+
+
+-(NSString *) getEmployerID
+{
+    return EmployerID;
+}
 
 -(NSString *) getFirstName
 {

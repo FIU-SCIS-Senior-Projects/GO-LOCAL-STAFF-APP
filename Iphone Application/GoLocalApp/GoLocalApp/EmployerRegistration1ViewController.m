@@ -14,6 +14,7 @@
 @interface EmployerRegistration1ViewController ()
 {
     NSString * userID;
+    int userIDProvided;
 }
 
 @end
@@ -316,6 +317,10 @@
             //sms part 2
             else
             {
+                
+                userIDProvided = responceType;
+                [registeredEmployer setEmployerID:responceType];
+                
                 [self.verificationCodeField resignFirstResponder];   //resign verififcation code
                 
                 //notifying user code was accepted

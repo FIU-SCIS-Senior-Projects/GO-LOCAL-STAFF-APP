@@ -134,6 +134,7 @@
 {
     NSMutableDictionary *list = [[NSMutableDictionary alloc] init];
     
+    list[@"employerID"] = [registeredEmployer getEmployerID];
     list[@"employerName"] = [registeredEmployer getEmployerName];
     list[@"typeOfEmployer"] = [registeredEmployer getTypeOfEmployer];
     list[@"address"] = [registeredEmployer getAddress];
@@ -346,46 +347,46 @@
 
 /******** textfields  functions********/
 
-/* dimisses UITextField as soon the return key is pressed */
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-//    if(textField == self.address){
-//        [self.address resignFirstResponder];
-//        [self.city becomeFirstResponder];
-//    }
-//    
-    
-    [self scrollViewAdaptToStartEditingTextField:textField];//moving scrollview
-    
-    return YES;
-}//eom
+    /* dimisses UITextField as soon the return key is pressed */
+    -(BOOL)textFieldShouldReturn:(UITextField *)textField {
+        
+    //    if(textField == self.address){
+    //        [self.address resignFirstResponder];
+    //        [self.city becomeFirstResponder];
+    //    }
+    //    
+        
+        [self scrollViewAdaptToStartEditingTextField:textField];//moving scrollview
+        
+        return YES;
+    }//eom
 
 
-/* uitextfield is about to be edit*/
-- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
-{
-    [self scrollViewAdaptToStartEditingTextField:textField];
-    return YES;
-}
-
-/* shows and hides the label above the textfield depending if the textfield is blank or filled */
-- (IBAction)textFieldValuesChanged:(UITextField *)sender {
-    
-    int labelID = (int)sender.tag;
-    
-    if(labelID == 6)//state
+    /* uitextfield is about to be edit*/
+    - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
     {
-        if(self.stateField.text.length == 0)
-        {
-            [self->stateLabel setHidden:YES];
-        }
-        else
-        {
-            [self->stateLabel setHidden:NO];
-        }
+        [self scrollViewAdaptToStartEditingTextField:textField];
+        return YES;
     }
 
-}//eoa
+    /* shows and hides the label above the textfield depending if the textfield is blank or filled */
+    - (IBAction)textFieldValuesChanged:(UITextField *)sender {
+        
+        int labelID = (int)sender.tag;
+        
+        if(labelID == 6)//state
+        {
+            if(self.stateField.text.length == 0)
+            {
+                [self->stateLabel setHidden:YES];
+            }
+            else
+            {
+                [self->stateLabel setHidden:NO];
+            }
+        }
+
+    }//eoa
 
 /********* scrollview functions **********/
     - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
