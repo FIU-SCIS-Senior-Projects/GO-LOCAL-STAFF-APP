@@ -31,6 +31,7 @@
 		DE6722EC1B968DB900599039 /* EmployerRegistration1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722EB1B968DB900599039 /* EmployerRegistration1ViewController.m */; };
 		DE7BB00E1BD2A806002E3A52 /* SearchTalentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7BB00C1BD2A806002E3A52 /* SearchTalentViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE7BB00F1BD2A806002E3A52 /* SearchTalentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE7BB00D1BD2A806002E3A52 /* SearchTalentViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		DE7BB0131BD4043E002E3A52 /* ColorWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE7BB0121BD4043E002E3A52 /* ColorWheel.m */; settings = {ASSET_TAGS = (); }; };
 		DE8444A91B9F75060085DA73 /* StaffRegistration13ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8444A81B9F75060085DA73 /* StaffRegistration13ViewController.m */; };
 		DE8444AF1B9FAB570085DA73 /* StaffRegistration14ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8444AE1B9FAB570085DA73 /* StaffRegistration14ViewController.m */; };
 		DE8C2E5B1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C2E5A1BA9B81200AA0BB6 /* StaffRegistration2ViewController.m */; };
@@ -104,6 +105,8 @@
 		DE7BB00B1BD2A806002E3A52 /* SearchTalentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTalentViewController.h; sourceTree = "<group>"; };
 		DE7BB00C1BD2A806002E3A52 /* SearchTalentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTalentViewController.m; sourceTree = "<group>"; };
 		DE7BB00D1BD2A806002E3A52 /* SearchTalentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTalentViewController.xib; sourceTree = "<group>"; };
+		DE7BB0111BD4043E002E3A52 /* ColorWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorWheel.h; sourceTree = "<group>"; };
+		DE7BB0121BD4043E002E3A52 /* ColorWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorWheel.m; sourceTree = "<group>"; };
 		DE8444A71B9F75060085DA73 /* StaffRegistration13ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration13ViewController.h; sourceTree = "<group>"; };
 		DE8444A81B9F75060085DA73 /* StaffRegistration13ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration13ViewController.m; sourceTree = "<group>"; };
 		DE8444AD1B9FAB570085DA73 /* StaffRegistration14ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration14ViewController.h; sourceTree = "<group>"; };
@@ -367,6 +370,8 @@
 				DEC653311BB3992F001A8655 /* RegisteredStaff.m */,
 				DE4AC4001BB761620071D7E2 /* RegisteredEmployer.h */,
 				DE4AC4011BB761620071D7E2 /* RegisteredEmployer.m */,
+				DE7BB0111BD4043E002E3A52 /* ColorWheel.h */,
+				DE7BB0121BD4043E002E3A52 /* ColorWheel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -506,6 +511,7 @@
 				DE8C2E611BA9E16600AA0BB6 /* StaffRegistration10ViewController.m in Sources */,
 				DE4AC3FC1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m in Sources */,
 				DEC6532E1BB25B73001A8655 /* StaffDatabase.m in Sources */,
+				DE7BB0131BD4043E002E3A52 /* ColorWheel.m in Sources */,
 				DEC653321BB39930001A8655 /* RegisteredStaff.m in Sources */,
 				DE4AC4021BB761620071D7E2 /* RegisteredEmployer.m in Sources */,
 				DE6722EC1B968DB900599039 /* EmployerRegistration1ViewController.m in Sources */,

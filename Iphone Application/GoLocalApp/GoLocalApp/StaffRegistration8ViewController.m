@@ -625,6 +625,7 @@
         {
             //setting up options for UIpicker
             heightFeetOptions = [[NSArray alloc]initWithObjects:@"",
+                                                             @"2'",
                                                              @"3'",
                                                              @"4'",
                                                              @"5'",

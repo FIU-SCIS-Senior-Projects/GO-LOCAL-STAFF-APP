@@ -8,6 +8,7 @@
 
 #import "EmployerHomeViewController.h"
 #import "SearchTalentViewController.h"
+#import "ColorWheel.h"
 
 @interface EmployerHomeViewController ()
 
@@ -19,19 +20,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self updateBackgroundRandomColor];
 }
 
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    
     NSLog(@"Username %@", username);
 }
+
+
+/* updates background with a random color */
+-(void)updateBackgroundRandomColor
+{
+    ColorWheel * color = [[ColorWheel alloc]init];
+    self.view.backgroundColor = [color randomColor];
+}//eom
+
+
 
 /* search talent requested, moving to talent request view */
 - (IBAction)searchTalent:(id)sender
 {
-    NSLog(@"inside action");
-    
     SearchTalentViewController * SearchTalentView = [[SearchTalentViewController alloc] init];
     
     //hiding the nav bar of the next view
@@ -45,7 +57,8 @@
 
 
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
