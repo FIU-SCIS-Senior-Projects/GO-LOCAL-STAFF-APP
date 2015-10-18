@@ -7,6 +7,18 @@ $ch = curl_init($url_sendEmployerRegistration);
  
 /*The JSON data */
 
+
+/*
+ address = "1 Microsoft Way";
+    city = Redmond;
+    employerID = 1;
+    employerName = "Microsoft Corp.";
+    hasInsurance = 1;
+    registrationType = Employer;
+    state = WA;
+    typeOfEmployer = "Software Maker";
+    zipCode = 99999;
+*/
     //valid staff user
     $jsonData = array(
     	'registrationType' => 'Employer',

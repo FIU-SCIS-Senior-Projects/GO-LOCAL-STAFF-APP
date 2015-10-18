@@ -311,15 +311,20 @@
             {
                 NSLog(@"[1] userID ID is %@  (which means we are ready for part 2)", userID);
                 
+                
+                
+                userIDProvided = responceType;
+                [registeredEmployer setEmployerID:userID];
+                
                 //            //hiding submit phone number button
                 //            [submitPhoneNumber setHidden:YES];
             }
             //sms part 2
             else
             {
-                
-                userIDProvided = responceType;
-                [registeredEmployer setEmployerID:responceType];
+//                
+//                userIDProvided = responceType;
+//                [registeredEmployer setEmployerID:responceType];
                 
                 [self.verificationCodeField resignFirstResponder];   //resign verififcation code
                 

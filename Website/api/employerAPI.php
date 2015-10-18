@@ -137,7 +137,7 @@
                 SET $part1, $part2
                 WHERE employerID = '".$employerID."'";
 
-                echo "<p>".$query."</p>";
+                //echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {

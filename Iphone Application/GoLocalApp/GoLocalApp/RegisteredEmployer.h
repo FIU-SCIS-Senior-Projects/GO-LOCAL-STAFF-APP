@@ -58,7 +58,7 @@
 -(BOOL) hasInsurance;
 
 //mutators
--(void) setEmployerID:(int) employerIDProvided;
+-(void) setEmployerID:(NSString *) employerIDProvided;
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName;
 -(void) setEmail:(NSString *) emailProvided;
 -(void) setUserName:(NSString *) usernameProvided;

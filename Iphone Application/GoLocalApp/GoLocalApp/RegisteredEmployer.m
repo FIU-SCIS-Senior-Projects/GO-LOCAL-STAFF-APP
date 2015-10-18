@@ -44,9 +44,9 @@
 //mutators
 
 
--(void) setEmployerID:(int) employerIDProvided
+-(void) setEmployerID:(NSString *) employerIDProvided
 {
-    EmployerID  =   employerIDProvided;
+    EmployerID  =   [employerIDProvided intValue];
 }
 
     //view controller 0

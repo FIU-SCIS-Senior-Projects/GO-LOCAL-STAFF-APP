@@ -158,7 +158,10 @@
     NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_registration.php";//hard coding website
     
     NSMutableDictionary *list = [self prepareDataToSend];
-    
+    NSLog(@"");
+    NSLog(@" about to send the following data: %@", list);
+    NSLog(@"");
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:serverAddress]];
     
     [request setHTTPMethod:@"POST"];
