@@ -1,0 +1,11 @@
+array (
+  'registrationType' => 'Employer',
+  'employerID' => '1',
+  'employerName' => 'Microsoft',
+  'typeOfEmployer' => 'Software',
+  'address' => '1 Microsoft Way',
+  'city' => 'Redmond',
+  'state' => 'Washington',
+  'zipCode' => '98052',
+  'hasInsurance' => '1',
+)

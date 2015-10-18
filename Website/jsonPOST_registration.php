@@ -50,6 +50,7 @@
          $registrationType = $decoded['registrationType'];
 
           $registrationResults = registerUser($registrationType, $decoded);
+
           if($registrationResults > 0 )
           {
             $responseArray = array(

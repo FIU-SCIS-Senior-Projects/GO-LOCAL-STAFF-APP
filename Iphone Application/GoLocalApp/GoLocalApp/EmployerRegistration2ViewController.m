@@ -134,6 +134,8 @@
 {
     NSMutableDictionary *list = [[NSMutableDictionary alloc] init];
     
+    
+    list[@"registrationType"] = [registeredEmployer getAccountType];
     list[@"employerID"] = [registeredEmployer getEmployerID];
     list[@"employerName"] = [registeredEmployer getEmployerName];
     list[@"typeOfEmployer"] = [registeredEmployer getTypeOfEmployer];

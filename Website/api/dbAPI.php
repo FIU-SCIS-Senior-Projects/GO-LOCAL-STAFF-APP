@@ -657,7 +657,7 @@ function sendSMSForgotPasswordCode($userData)
     }
     else if( $registrationType == "Employer" )
     {
-      $employerResults = registerEmployerUser($userInfo);
+      $employerResults = registerEmployer($userInfo);
       return $employerResults;
     }
     else 

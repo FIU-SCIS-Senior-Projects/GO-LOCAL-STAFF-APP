@@ -55,102 +55,48 @@
 
       //these fields were already saved
 
-      $staffID                        = $registrationData['staffID'];
-      $username                       = $registrationData['username'];
-      $firstName                      = $registrationData['firstName'];
-      $middleName                     = $registrationData['middleName'];
-      $lastName                       = $registrationData['lastName'];
-      $nickname                       = $registrationData['nickname'];
-      $email                          = $registrationData['email'];
-      $password                       = $registrationData['password'];
-      $phone                          = $registrationData['cellphone'];
-      $dob                            = $registrationData['dob'];
+      $employerID                     = $registrationData['employerID'];
 
       //gathering fields to save
       $address                        = $registrationData['address'];
       $city                           = $registrationData['city'];
       $state                          = $registrationData['state'];
-      $zipcode                        = $registrationData['zipcode'];
-      $ethnicity                      = $registrationData['ethnicity'];
-      $ethnicityCode                  = $registrationData['ethnicityCode'];
-      $languages                      = $registrationData['languages'];
-      $tshirtSize                     = $registrationData['tshirtSize'];
-      $tattoos                        = $registrationData['tattoos'];
-      $eyeColor                       = $registrationData['eyeColor'];
-      $hairColor                      = $registrationData['hairColor'];
-      $piercings                      = $registrationData['piercings'];     
-      $height                         = $registrationData['height'];
-      $weight                         = $registrationData['weight'];
-      $gender                         = $registrationData['genderType'];//0 female | 1 male
-      if($gender == 0) //females only
-      {
-        $chestSize                      = $registrationData['chestSize'];
-        $waistSize                      = $registrationData['waistSize'];
-        $hipSize                        = $registrationData['hipSize'];
-        $dressSize                      = $registrationData['dressSize'];
-      }
-      else
-      {
-        $chestSize                      = " ";
-        $waistSize                      = " ";
-        $hipSize                        = " ";
-        $dressSize                      = " ";
-      }
+      $zipCode                        = $registrationData['zipCode'];
+      $employerName                   = $registrationData['employerName'];
+      $typeOfEmployer                 = $registrationData['typeOfEmployer'];
 
-      $pantSize                       = $registrationData['pantSize'];
-      $shoeSize                       = $registrationData['shoeSize'];
+      // $travel                            = $registrationData['travelPercentage'];
+      // $Incorporated                      = $registrationData['Incorporated'];
+      // if($Incorporated)
+      // {
+      //   $ssnOrEin                        = $registrationData['ein'];
+      //   $business_name                   = $registrationData['business_name'];
+      // }
+      // else
+      // {
+      //   $ssnOrEin                        = $registrationData['ssn'];
+      //   $business_name                   = " ";
+      // }
 
-      $hasCommercialLicense           = $registrationData['commercialLicense']; 
-      $hasDriverLicense               = $registrationData['driverLicense']; 
-      if( $hasCommercialLicense == 0 && $hasDriverLicense == 0 )
-      {
-        $typeOfLicense = -1; //no license
-      }
-      else if( $hasCommercialLicense == 1 && $hasDriverLicense == 0 )
-      {
-        $typeOfLicense = 1; //commercial License
-      }
-      else if( $hasCommercialLicense == 1 && $hasDriverLicense == 1 )
-      {
-        $typeOfLicense = 1; //commercial License
-      }
-      else if( $hasCommercialLicense == 0 && $hasDriverLicense == 1 )
-      {
-        $typeOfLicense = 0; //regular driver License
-      }
+      $hasInsurance          = $registrationData['hasInsurance'];
 
-      $travel                            = $registrationData['travelPercentage'];
-      $Incorporated                      = $registrationData['Incorporated'];
-      if($Incorporated)
-      {
-        $ssnOrEin                        = $registrationData['ein'];
-        $business_name                   = $registrationData['business_name'];
-      }
-      else
-      {
-        $ssnOrEin                        = $registrationData['ssn'];
-        $business_name                   = " ";
-      }
+      // $desiredHourlyRate                = $registrationData['desiredHourlyRate'];
+      // $desiredWeeklyRate                = $registrationData['desiredWeeklyRate'];
 
-      $hasProfessionalInsurance          = $registrationData['ProfessionalInsurance'];
+      // $DirectDeposit                    = $registrationData['DirectDeposit'];
+      // if($DirectDeposit)
+      // {
+      //   $DirectDepositRoutingNumber     = $registrationData['DirectDepositRoutingNumber'];
+      //   $DirectDepositAccountNumber     = $registrationData['DirectDepositAccountNumber'];
+      // }
+      // else
+      // {
+      //   $DirectDepositRoutingNumber     = " ";
+      //   $DirectDepositAccountNumber     = " ";
+      // }
 
-      $desiredHourlyRate                = $registrationData['desiredHourlyRate'];
-      $desiredWeeklyRate                = $registrationData['desiredWeeklyRate'];
-
-      $DirectDeposit                    = $registrationData['DirectDeposit'];
-      if($DirectDeposit)
-      {
-        $DirectDepositRoutingNumber     = $registrationData['DirectDepositRoutingNumber'];
-        $DirectDepositAccountNumber     = $registrationData['DirectDepositAccountNumber'];
-      }
-      else
-      {
-        $DirectDepositRoutingNumber     = " ";
-        $DirectDepositAccountNumber     = " ";
-      }
-
-      //experiences
-      $experience                      = $registrationData['experience'];//???????
+      // //experiences
+      // $experience                      = $registrationData['experience'];//???????
 
 
       // $djSelected                     = $registrationData['djSelected'];//
@@ -178,18 +124,18 @@
       `resume` varchar(30) NOT NULL,
       `TermsAndAgreements` varchar(255) NOT NULL
       */
-      $part1 = "address='".$address."',city='".$city."',zipcode='".$zipcode."',state='".$state."',gender='".$gender."',languages='".$languages."',";
-      $part2 = "typeDL='".$typeOfLicense."',ethnicity='".$ethnicity."',ethnicityCode='".$ethnicityCode."',weight='".$weight."',hairColor='".$hairColor."',";
-      $part3 = "eyeColor='".$eyeColor."',shirtSize='".$tshirtSize."',chestSize='".$chestSize."',waistSize='".$waistSize."',hipSize='".$hipSize."',";
-      $part4 = "dressSize='".$dressSize."',pantSize='".$pantSize."',shoeSize='".$shoeSize."',piercings='".$piercings."',";
-      $part5 = "desiredHourlyRate='".$desiredHourlyRate."',desiredWeeklyRate='".$desiredWeeklyRate."',ssnOrEin='".$ssnOrEin."',businessName='".$business_name."',";
-      $part6 = "travel='".$travel."',insurance='".$hasProfessionalInsurance."',";
-      $part7 = "bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'";
+      $part1 = "address='".$address."',city='".$city."',zipcode='".$zipCode."',state='".$state."'";
+      $part2 = "employerName='".$employerName."',typeOfEmployer='".$typeOfEmployer."',insurance='".$hasInsurance."'";
+      // $part3 = "eyeColor='".$eyeColor."',shirtSize='".$tshirtSize."',chestSize='".$chestSize."',waistSize='".$waistSize."',hipSize='".$hipSize."',";
+      // $part4 = "dressSize='".$dressSize."',pantSize='".$pantSize."',shoeSize='".$shoeSize."',piercings='".$piercings."',";
+      // $part5 = "desiredHourlyRate='".$desiredHourlyRate."',desiredWeeklyRate='".$desiredWeeklyRate."',ssnOrEin='".$ssnOrEin."',businessName='".$business_name."',";
+      // $part6 = "travel='".$travel."',insurance='".$hasProfessionalInsurance."',";
+      // $part7 = "bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'";
 
 
-      $query = "UPDATE registered_staff
-                SET $part1 $part2 $part3 $part4 $part5 $part6 $part7
-                WHERE phone='".$phone."' and staffID = '".$staffID."'";
+      $query = "UPDATE registered_employer
+                SET $part1, $part2
+                WHERE employerID = '".$employerID."'";
 
                 echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
