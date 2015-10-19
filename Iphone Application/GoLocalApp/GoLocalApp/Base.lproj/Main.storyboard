@@ -203,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Mg-d2-CYm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857" y="-2433"/>
+            <point key="canvasLocation" x="2429" y="-2433"/>
         </scene>
         <!--Account Settings-->
         <scene sceneID="Xfx-bL-k0r">
@@ -249,7 +249,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ms-cU-bho">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ms-cU-bho">
                                 <rect key="frame" x="244" y="64" width="56" height="38"/>
                                 <animations/>
                                 <constraints>
@@ -586,7 +586,7 @@
                                     <segue destination="30W-8p-hYi" kind="push" identifier="goToStaffRegister1" id="gHP-ZC-DG8"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="What are you looking for?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juA-5L-h0P">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What are you looking for?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juA-5L-h0P">
                                 <rect key="frame" x="36" y="90" width="248" height="46"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="20"/>
@@ -3814,13 +3814,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="05t-HG-hFP">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="05t-HG-hFP">
                                 <rect key="frame" x="29" y="114" width="275" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eaQ-MG-Gd6">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eaQ-MG-Gd6">
                                 <rect key="frame" x="29" y="164" width="275" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3838,7 +3838,7 @@
                                     <action selector="submitLogIn:" destination="fdu-7z-nDn" eventType="touchUpInside" id="meA-wC-SZb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEq-nO-cML">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEq-nO-cML">
                                 <rect key="frame" x="41" y="210" width="119" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
@@ -3849,7 +3849,7 @@
                                     <action selector="forgotPasswordRequest:" destination="fdu-7z-nDn" eventType="touchUpInside" id="PJQ-TW-3Ae"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnd-Pn-TRV">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnd-Pn-TRV">
                                 <rect key="frame" x="203" y="210" width="55" height="30"/>
                                 <animations/>
                                 <constraints>
@@ -4728,115 +4728,12 @@
                     <connections>
                         <outlet property="registrationButton" destination="jwf-pS-SmL" id="HXB-lW-uep"/>
                         <outlet property="termsSwitch" destination="e9O-HU-ukI" id="QTa-EX-Lrg"/>
-                        <segue destination="ls2-Rq-oGX" kind="push" identifier="goToEmployerRegister5" id="25d-4m-A2G"/>
+                        <segue destination="qFG-7T-Gga" kind="push" identifier="goToEmployerHome" id="4eA-Xc-SVq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LdQ-od-owC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3551" y="-1350"/>
-        </scene>
-        <!--Employer Registration5 View Controller-->
-        <scene sceneID="9Nt-MR-ont">
-            <objects>
-                <viewController id="ls2-Rq-oGX" customClass="EmployerRegistration5ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OHb-i9-3MG"/>
-                        <viewControllerLayoutGuide type="bottom" id="MBM-bG-gtI"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4PW-bP-823">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H1S-b8-CML">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5or-5Y-UNZ">
-                                        <rect key="frame" x="118" y="458" width="85" height="54"/>
-                                        <animations/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="85" id="0k4-lc-Fvl"/>
-                                            <constraint firstAttribute="height" constant="54" id="sWA-TK-Ype"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" image="right">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="submit:" destination="30W-8p-hYi" eventType="touchUpInside" id="VYc-jI-vew"/>
-                                            <action selector="submit:" destination="ls2-Rq-oGX" eventType="touchUpInside" id="nZh-Ys-qwA"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <animations/>
-                                <connections>
-                                    <outlet property="delegate" destination="ls2-Rq-oGX" id="uo0-5N-2Da"/>
-                                </connections>
-                            </scrollView>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" red="0.22878658897607096" green="0.56852972399076329" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="NiC-HX-w96"/>
-                    <connections>
-                        <outlet property="scrollView" destination="H1S-b8-CML" id="8gc-EW-sBe"/>
-                        <segue destination="TCR-4b-LWr" kind="push" identifier="goToEmployerRegister6" id="ybL-gR-LM2"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e9d-hw-X3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4489" y="-1350"/>
-        </scene>
-        <!--Employer Registration6 View Controller-->
-        <scene sceneID="ouU-1t-z8H">
-            <objects>
-                <viewController id="TCR-4b-LWr" customClass="EmployerRegistration6ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="QrT-H1-xre"/>
-                        <viewControllerLayoutGuide type="bottom" id="0zQ-QB-r2s"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="JB2-jh-aOM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hxw-FW-53G">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLj-Kn-754">
-                                        <rect key="frame" x="118" y="458" width="85" height="54"/>
-                                        <animations/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="54" id="AkI-Sn-4kH"/>
-                                            <constraint firstAttribute="width" constant="85" id="QOm-i2-vkn"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" image="right">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="submit:" destination="TCR-4b-LWr" eventType="touchUpInside" id="hfq-9a-ndG"/>
-                                            <action selector="submit:" destination="30W-8p-hYi" eventType="touchUpInside" id="hv1-Lj-lFg"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <animations/>
-                                <connections>
-                                    <outlet property="delegate" destination="TCR-4b-LWr" id="EoA-TU-pkW"/>
-                                </connections>
-                            </scrollView>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" red="0.41336330358909246" green="0.66686630300271832" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="bAh-X1-ezA"/>
-                    <connections>
-                        <outlet property="scrollView" destination="hxw-FW-53G" id="t7a-uv-z9B"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SmR-7T-9St" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4917" y="-1350"/>
         </scene>
     </scenes>
     <resources>
@@ -4845,13 +4742,14 @@
         <image name="search@1x" width="51" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lfn-U7-v2S"/>
-        <segue reference="ILI-8L-N8y"/>
-        <segue reference="15W-7m-6hR"/>
-        <segue reference="C35-z2-Umt"/>
-        <segue reference="8IJ-5T-D0O"/>
         <segue reference="FiL-5A-Rck"/>
+        <segue reference="ILI-8L-N8y"/>
+        <segue reference="Lfn-U7-v2S"/>
         <segue reference="NcF-mS-PqX"/>
         <segue reference="rWo-zr-UJa"/>
+        <segue reference="4eA-Xc-SVq"/>
+        <segue reference="8IJ-5T-D0O"/>
+        <segue reference="15W-7m-6hR"/>
+        <segue reference="C35-z2-Umt"/>
     </inferredMetricsTieBreakers>
 </document>

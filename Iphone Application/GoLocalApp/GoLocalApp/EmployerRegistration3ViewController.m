@@ -7,6 +7,7 @@
 //
 
 #import "EmployerRegistration3ViewController.h"
+#import "EmployerHomeViewController.h" //Needed for segue
 
 #import "RegisteredEmployer.h" //Needed to access the model
 
@@ -37,7 +38,20 @@
 -(IBAction)submit:(id)sender
 {
     [self sendData];
+    [self performSegueWithIdentifier:@"goToEmployerHome" sender:self];
 }
+
+#pragma mark - helper methods
+
+/* preparing the data to sent to the next view controller */
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"goToEmployerHome"]){
+        EmployerHomeViewController *controller = (EmployerHomeViewController *)segue.destinationViewController;
+        
+        controller.registeredEmployer = registeredEmployer;
+    }
+}//eom
 
 -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
 {
@@ -51,6 +65,7 @@
     [alert show];//display alert
 }//eom
 
+#pragma mark - JSON methods
 
 /****** JSON Methods *******/
 
@@ -113,7 +128,8 @@
     NSLog(@"[1] responceType is %d", responceType);
     if(responceType > 0) //responce was good
     {
-        
+        //notifying user that registration was successful
+        [self showAlert:@"Success" withMessage:@"Registration was successful" and:@"Okay"];
     }
     else //invalid response
     {

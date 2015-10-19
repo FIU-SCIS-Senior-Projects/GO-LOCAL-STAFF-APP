@@ -7,9 +7,7 @@
 //
 
 #import "EmployerRegistration0ViewController.h"
-
 #import "EmployerRegistration1ViewController.h" //need this for the prepare for segue!!
-
 
 #import "RegisteredEmployer.h" //needed this to use the registration model
 
@@ -46,6 +44,7 @@
     
 }//eom
 
+#pragma mark - verifying data
 
 /* verifying the required input fileds */
 - (BOOL)verifyDataEnter
@@ -188,6 +187,7 @@
     }
 }//eom
 
+#pragma mark - helper methods
 
 /* preparing the data to sent to the next view controller */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -234,6 +234,8 @@
         - (void)dismissKeyboard:(UITapGestureRecognizer *)recognizer {
             [self.view endEditing:YES];
         }
+
+#pragma mark - textfield methods
 
 /******** textfields  functions********/
 
@@ -393,6 +395,7 @@
             return YES;
         }//eom
 
+#pragma mark - scrolllview methods
 
 /********* scrollview functions **********/
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField

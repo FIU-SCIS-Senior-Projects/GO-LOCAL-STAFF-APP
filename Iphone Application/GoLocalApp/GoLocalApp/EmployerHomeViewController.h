@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RegisteredEmployer.h"
 
 @interface EmployerHomeViewController : UIViewController
 
+@property (strong, nonatomic) RegisteredEmployer *registeredEmployer;
 @property (nonatomic) NSString *username;
 
 - (IBAction)searchTalent:(id)sender;

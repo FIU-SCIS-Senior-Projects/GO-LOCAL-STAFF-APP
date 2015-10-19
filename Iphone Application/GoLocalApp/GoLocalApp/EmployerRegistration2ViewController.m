@@ -48,6 +48,8 @@
     
 }//eom
 
+#pragma mark - UI methods
+
 -(void)setUpTapGesture
 {
     //to dismiss keyboard when a tap is done outside the textfield
@@ -61,6 +63,8 @@
 {
     [self.view endEditing:YES];
 }
+
+#pragma mark - verifying data
 
 /* verifying the required input fileds */
 - (BOOL)verifyDataEnter
@@ -99,6 +103,8 @@
     }
 }
 
+#pragma mark - helper methods
+
 
 /* preparing the data to sent to the next view controller */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -123,6 +129,8 @@
     [alert show];//display alert
 }//eom
 
+
+#pragma mark - picker methods
 
 /****** UIPicker Methods ********/
 
@@ -200,7 +208,7 @@
 
     }//wom
 
-    #pragma mark - UIPickerView Delegate
+#pragma mark - UIPickerView Delegate
     - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
     {
         return 30.0;
@@ -236,6 +244,8 @@
         }
      
     }//eom
+
+#pragma mark - textfields methods
 
 
 /******** textfields  functions********/
@@ -280,6 +290,8 @@
         }
 
     }//eoa
+
+#pragma mark - scrollview methods
 
 /********* scrollview functions **********/
     - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField

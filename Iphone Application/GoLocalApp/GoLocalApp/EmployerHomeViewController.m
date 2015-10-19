@@ -9,6 +9,7 @@
 #import "EmployerHomeViewController.h"
 #import "SearchTalentViewController.h"
 #import "ColorWheel.h"
+#import "RegisteredEmployer.h"
 
 @interface EmployerHomeViewController ()
 

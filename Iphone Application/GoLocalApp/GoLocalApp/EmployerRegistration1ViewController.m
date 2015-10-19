@@ -39,6 +39,8 @@
     
 }//eom
 
+#pragma mark - verifying data
+
 /* verifying input fields
  */
 - (BOOL)verifyDataEnter
@@ -87,6 +89,8 @@
 
 }
 
+#pragma mark - helper methods
+
 /* preparing the data to sent to the next view controller */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"goToEmployerRegister2"]){
@@ -125,6 +129,8 @@
     - (void)dismissKeyboard:(UITapGestureRecognizer *)recognizer {
         [self.view endEditing:YES];
     }
+
+#pragma mark - textfields methods
 
 /******** textfields  functions********/
 
@@ -181,6 +187,8 @@
     }
 }//eoa
 
+#pragma mark - scrollview methods
+
 /********* scrollview functions **********/
 - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
 {
@@ -194,6 +202,7 @@
     [scrollView setContentOffset:point animated:YES];
 }
 
+#pragma mark - sms authentication methods
 
 /******** SMS Authentication ********/
 
@@ -343,6 +352,8 @@
             [self showAlert:@"SMS Authentication" withMessage:message and:@"Okay"];
         }
     }//eom
+
+#pragma mark - JSON methods
 
 /***************** JSON POST functions *******************/
 
