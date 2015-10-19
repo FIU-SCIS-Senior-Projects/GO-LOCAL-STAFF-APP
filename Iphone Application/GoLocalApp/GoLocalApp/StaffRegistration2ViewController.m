@@ -63,188 +63,193 @@
 
 }//eom
 
-- (IBAction)genderValueChanged:(UIButton *)sender
-{
-    int genderValue = (int) sender.tag;
-    
-    if(genderValue == 0)//  0 - female
+#pragma mark -
+    - (IBAction)genderValueChanged:(UIButton *)sender
     {
-        //enabling female button
-        femaleButton.layer.borderColor = [UIColor blackColor].CGColor;
-        femaleButton.layer.borderWidth = 4.5f;
-        femaleButton.layer.cornerRadius = 10.0f;
+        int genderValue = (int) sender.tag;
         
-        //disabling male button
-        maleButton.layer.borderColor = [UIColor blackColor].CGColor;
-        maleButton.layer.borderWidth = 0.0f;
-        maleButton.layer.cornerRadius = 0.0f;
-        
-        self->gender = 0;
-        self->genderSelected = TRUE;
-    }
-    else if(genderValue == 1) //  1 - male
-    {
-        //enabling male button
-        maleButton.layer.borderColor = [UIColor blackColor].CGColor;
-        maleButton.layer.borderWidth = 4.5f;
-        maleButton.layer.cornerRadius = 10.0f;
-        
-        //disabling female button
-        femaleButton.layer.borderColor = [UIColor blackColor].CGColor;
-        femaleButton.layer.borderWidth = 0.0f;
-        femaleButton.layer.cornerRadius = 0.0f;
-        
-        self->gender = 1;
-        self->genderSelected = TRUE;
-    }
-}//EOA
-
-/* verifying input fields
- */
-- (BOOL)verifyDataEnter
-{
-    //checking for valid input
-    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
-    NSString * testing;
-    NSString *trimmedString;
-
-    
-        testing = self.address.text;
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:address]; //take scroll to textfield so user can see their error
-            self.address.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter your address" and:@"Okay"];
-            return 0;
-        }
-        else if( self.address.text.length < 5)
+        if(genderValue == 0)//  0 - female
         {
-            [self scrollVievEditingFinished:address]; //take scroll to textfield so user can see their error
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete address" and:@"Okay"];
-            return 0;
+            //enabling female button
+            femaleButton.layer.borderColor = [UIColor blackColor].CGColor;
+            femaleButton.layer.borderWidth = 4.5f;
+            femaleButton.layer.cornerRadius = 10.0f;
+            
+            //disabling male button
+            maleButton.layer.borderColor = [UIColor blackColor].CGColor;
+            maleButton.layer.borderWidth = 0.0f;
+            maleButton.layer.cornerRadius = 0.0f;
+            
+            self->gender = 0;
+            self->genderSelected = TRUE;
         }
-
-        testing = self.city.text;
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:city]; //take scroll to textfield so user can see their error
-            self.city.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter the city of your address" and:@"Okay"];
-            return 0;
-        }
-        else if( self.city.text.length < 2)
+        else if(genderValue == 1) //  1 - male
         {
-            [self scrollVievEditingFinished:city]; //take scroll to textfield so user can see their error
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter city" and:@"Okay"];
-            return 0;
+            //enabling male button
+            maleButton.layer.borderColor = [UIColor blackColor].CGColor;
+            maleButton.layer.borderWidth = 4.5f;
+            maleButton.layer.cornerRadius = 10.0f;
+            
+            //disabling female button
+            femaleButton.layer.borderColor = [UIColor blackColor].CGColor;
+            femaleButton.layer.borderWidth = 0.0f;
+            femaleButton.layer.cornerRadius = 0.0f;
+            
+            self->gender = 1;
+            self->genderSelected = TRUE;
         }
+    }//EOA
 
-  
-        testing = self.zipcode.text;
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:zipcode]; //take scroll to textfield so user can see their error
-            self.zipcode.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter the zipcode of your address" and:@"Okay"];
-            return 0;
-        }
-        else if( self.zipcode.text.length < 5)
+#pragma mark - verify data enter
+    /* verifying input fields
+     */
+    - (BOOL)verifyDataEnter
+    {
+        //checking for valid input
+        NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+        NSString * testing;
+        NSString *trimmedString;
+
+        
+            testing = self.address.text;
+            trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+            if ([trimmedString isEqualToString:@""]) {
+                [self scrollVievEditingFinished:address]; //take scroll to textfield so user can see their error
+                self.address.text =@""; //clearing field
+                // it's empty or contains only white spaces
+                [self showAlert:@"Registration Field" withMessage:@"Please enter your address" and:@"Okay"];
+                return 0;
+            }
+            else if( self.address.text.length < 5)
+            {
+                [self scrollVievEditingFinished:address]; //take scroll to textfield so user can see their error
+                // it's empty or contains only white spaces
+                [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete address" and:@"Okay"];
+                return 0;
+            }
+
+            testing = self.city.text;
+            trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+            if ([trimmedString isEqualToString:@""]) {
+                [self scrollVievEditingFinished:city]; //take scroll to textfield so user can see their error
+                self.city.text =@""; //clearing field
+                // it's empty or contains only white spaces
+                [self showAlert:@"Registration Field" withMessage:@"Please enter the city of your address" and:@"Okay"];
+                return 0;
+            }
+            else if( self.city.text.length < 2)
+            {
+                [self scrollVievEditingFinished:city]; //take scroll to textfield so user can see their error
+                // it's empty or contains only white spaces
+                [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter city" and:@"Okay"];
+                return 0;
+            }
+
+      
+            testing = self.zipcode.text;
+            trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+            if ([trimmedString isEqualToString:@""]) {
+                [self scrollVievEditingFinished:zipcode]; //take scroll to textfield so user can see their error
+                self.zipcode.text =@""; //clearing field
+                // it's empty or contains only white spaces
+                [self showAlert:@"Registration Field" withMessage:@"Please enter the zipcode of your address" and:@"Okay"];
+                return 0;
+            }
+            else if( self.zipcode.text.length < 5)
+            {
+                [self scrollVievEditingFinished:zipcode]; //take scroll to textfield so user can see their error
+                // it's empty or contains only white spaces
+                [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete zipcode" and:@"Okay"];
+                return 0;
+            }
+
+            testing = self.state.text;
+            trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+            if ([trimmedString isEqualToString:@""]) {
+                [self scrollVievEditingFinished:state]; //take scroll to textfield so user can see their error
+                self.state.text =@""; //clearing field
+                // it's empty or contains only white spaces
+                [self showAlert:@"Registration Field" withMessage:@"Please enter the state of your address" and:@"Okay"];
+                return 0;
+            }
+        
+            //building completeAddress
+            self->completeAddress = [self.address.text stringByAppendingFormat:@" %@ %@ %@", self.city.text,self.state.text , self.zipcode.text];
+        
+             //   NSLog(@"complete address is %@", self->completeAddress);
+        
+            //gender
+            if ( self->genderSelected  == FALSE) {
+                [self showAlert:@"Registration Field" withMessage:@"Please select a gender" and:@"Okay"];
+                return 0;
+
+            }
+
+            //languages
+            testing = self.nativeLanguage.text;
+            trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+            if ([trimmedString isEqualToString:@""]) {
+                [self scrollVievEditingFinished:nativeLanguage]; //take scroll to textfield so user can see their error
+                self.nativeLanguage.text =@""; //clearing field
+                // it's empty or contains only white spaces
+                [self showAlert:@"Registration Field" withMessage:@"Please enter of your native Language" and:@"Okay"];
+                return 0;
+            }
+
+            //building languages
+            self->languages = [self.nativeLanguage.text stringByAppendingFormat:@" %@ %@", self.secondLanguage.text, self.thirdLanguage.text];
+            
+               NSLog(@"languages are %@", self->languages);
+        
+            //updating values
+            [registeredStaff setAddress:self->completeAddress withCity:self.city.text withZipcode:self.zipcode.text andState:self.state.text];
+            [registeredStaff setGender:self->gender];
+            [registeredStaff setLanguages:self->languages];
+        
+        return 1;
+    }//eom
+
+
+#pragma mark - sending data
+    /* */
+    - (IBAction)submitForm:(id)sender {
+        bool result = [self verifyDataEnter];
+        if(result)
         {
-            [self scrollVievEditingFinished:zipcode]; //take scroll to textfield so user can see their error
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete zipcode" and:@"Okay"];
-            return 0;
+            [self performSegueWithIdentifier:@"goToStaffRegister3" sender:self];
         }
+        else
+        {
+            NSLog(@"missing some/all required fields on staffRegistration2");
+        }
+    }//eom
 
-        testing = self.state.text;
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:state]; //take scroll to textfield so user can see their error
-            self.state.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter the state of your address" and:@"Okay"];
-            return 0;
-        }
-    
-        //building completeAddress
-        self->completeAddress = [self.address.text stringByAppendingFormat:@" %@ %@ %@", self.city.text,self.state.text , self.zipcode.text];
-    
-         //   NSLog(@"complete address is %@", self->completeAddress);
-    
-        //gender
-        if ( self->genderSelected  == FALSE) {
-            [self showAlert:@"Registration Field" withMessage:@"Please select a gender" and:@"Okay"];
-            return 0;
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+        if([segue.identifier isEqualToString:@"goToStaffRegister3"]){
+            StaffRegistration3ViewController *controller = (StaffRegistration3ViewController *)segue.destinationViewController;
+            
+            controller.registeredStaff = registeredStaff;
 
         }
+    }//eom
 
-        //languages
-        testing = self.nativeLanguage.text;
-        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-        if ([trimmedString isEqualToString:@""]) {
-            [self scrollVievEditingFinished:nativeLanguage]; //take scroll to textfield so user can see their error
-            self.nativeLanguage.text =@""; //clearing field
-            // it's empty or contains only white spaces
-            [self showAlert:@"Registration Field" withMessage:@"Please enter of your native Language" and:@"Okay"];
-            return 0;
-        }
 
-        //building languages
-        self->languages = [self.nativeLanguage.text stringByAppendingFormat:@" %@ %@", self.secondLanguage.text, self.thirdLanguage.text];
-        
-           NSLog(@"languages are %@", self->languages);
-    
-        //updating values
-        [registeredStaff setAddress:self->completeAddress withCity:self.city.text withZipcode:self.zipcode.text andState:self.state.text];
-        [registeredStaff setGender:self->gender];
-        [registeredStaff setLanguages:self->languages];
-    
-    return 1;
-}//eom
-
-/* */
-- (IBAction)submitForm:(id)sender {
-    bool result = [self verifyDataEnter];
-    if(result)
+#pragma mark - helper method
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
     {
-        [self performSegueWithIdentifier:@"goToStaffRegister3" sender:self];
-    }
-    else
-    {
-        NSLog(@"missing some/all required fields on staffRegistration2");
-    }
-}//eom
 
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"goToStaffRegister3"]){
-        StaffRegistration3ViewController *controller = (StaffRegistration3ViewController *)segue.destinationViewController;
-        
-        controller.registeredStaff = registeredStaff;
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
 
-    }
-}//eom
-
-
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
-
-/********* tap gestures functions *******/
+#pragma mark - tap gestures functions
         /*sets up taps gesture*/
         -(void)setUpTapGesture
         {
@@ -259,8 +264,7 @@
             [self.view endEditing:YES];
         }
 
-
-/****** UIPicker Methods ********/
+#pragma mark - UIPicker Methods
 
     /* creates the picker for state selection*/
     -(void) createPickerForState
@@ -520,8 +524,7 @@
         }
     }//eom
 
-
-/******** textfields  functions********/
+#pragma mark - textfields  functions
 
         /* dimisses UITextField as soon the return key is pressed */
         -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -592,7 +595,7 @@
         }
     }//eoa
 
-/********* scrollview functions **********/
+#pragma mark - scrollview functions
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);

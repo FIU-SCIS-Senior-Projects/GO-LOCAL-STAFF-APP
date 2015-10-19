@@ -49,246 +49,251 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
     [self setUpTapGesture];
 }//eom
 
-/* verifying the required input fileds */
-- (BOOL)verifyDataEnter
-{
-        //checking for valid input
-        NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
-        NSString * testing;
-        NSString *trimmedString ;
-    
-        if(self.incorporatedSwitch.on)
-        {
-            NSLog(@"checking for Incorporated");
-            
-            testing = self.einTextField.text;
-            trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-            if ([trimmedString isEqualToString:@""]) {
-                [self scrollVievEditingFinished:self.einTextField]; //take scroll to textfield so user can see their error
-                self.einTextField.text =@""; //clearing field
-                // it's empty or contains only white spaces
-                [self showAlert:@"Registration Field" withMessage:@"Please enter your Employer identification Number" and:@"Okay"];
-                return 0;
-            }
-            
-            testing = self.businessNameTextField.text;
-            trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-            if ([trimmedString isEqualToString:@""]) {
-                [self scrollVievEditingFinished:self.businessNameTextField]; //take scroll to textfield so user can see their error
-                self.businessNameTextField.text =@""; //clearing field
-                // it's empty or contains only white spaces
-                [self showAlert:@"Registration Field" withMessage:@"Please enter your Business Name" and:@"Okay"];
-                return 0;
-            }
+#pragma mark - sending data
+    /* verifying the required input fileds */
+    - (BOOL)verifyDataEnter
+    {
+            //checking for valid input
+            NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+            NSString * testing;
+            NSString *trimmedString ;
+        
+            if(self.incorporatedSwitch.on)
+            {
+                NSLog(@"checking for Incorporated");
+                
+                testing = self.einTextField.text;
+                trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+                if ([trimmedString isEqualToString:@""]) {
+                    [self scrollVievEditingFinished:self.einTextField]; //take scroll to textfield so user can see their error
+                    self.einTextField.text =@""; //clearing field
+                    // it's empty or contains only white spaces
+                    [self showAlert:@"Registration Field" withMessage:@"Please enter your Employer identification Number" and:@"Okay"];
+                    return 0;
+                }
+                
+                testing = self.businessNameTextField.text;
+                trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+                if ([trimmedString isEqualToString:@""]) {
+                    [self scrollVievEditingFinished:self.businessNameTextField]; //take scroll to textfield so user can see their error
+                    self.businessNameTextField.text =@""; //clearing field
+                    // it's empty or contains only white spaces
+                    [self showAlert:@"Registration Field" withMessage:@"Please enter your Business Name" and:@"Okay"];
+                    return 0;
+                }
 
+            }
+            else
+            {
+                NSLog(@"checking for NOT Incorporated");
+                
+                testing = self.ssnTextField.text;
+                trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+                if ([trimmedString isEqualToString:@""]) {
+                    [self scrollVievEditingFinished:self.ssnTextField]; //take scroll to textfield so user can see their error
+                    self.ssnTextField.text =@""; //clearing field
+                    // it's empty or contains only white spaces
+                    [self showAlert:@"Registration Field" withMessage:@"Please enter your Social Security Number " and:@"Okay"];
+                    return 0;
+                }
+
+            }
+        
+        //updating values
+        [registeredStaff setProfessionalInsurance:self.hasProfessionalInsuranceSwitch.on];
+        [registeredStaff setIncorporatedInfo:self.incorporatedSwitch.on ssn:self.ssnTextField.text ein:self.einTextField.text businessName:self.businessNameTextField.text];
+        [registeredStaff setWageRate:self.desiredHourlyRateTextField.text orDesiredWeeklyRate:self.desiredWeeklyRateTextField.text];
+        [registeredStaff setTravelPercentage:self->travelDesired];
+     
+        return 1;
+    }
+
+#pragma mark - sending data
+    /* submmitting form */
+    - (IBAction)submitForm:(id)sender
+    {
+        //verifying the data enter
+        bool result = [self verifyDataEnter];
+        if(result)
+        {
+            //    moving to the next controller
+            [self performSegueWithIdentifier:@"goToStaffRegister11" sender:self];
         }
         else
         {
-            NSLog(@"checking for NOT Incorporated");
-            
-            testing = self.ssnTextField.text;
-            trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-            if ([trimmedString isEqualToString:@""]) {
-                [self scrollVievEditingFinished:self.ssnTextField]; //take scroll to textfield so user can see their error
-                self.ssnTextField.text =@""; //clearing field
-                // it's empty or contains only white spaces
-                [self showAlert:@"Registration Field" withMessage:@"Please enter your Social Security Number " and:@"Okay"];
-                return 0;
-            }
-
+            NSLog(@"missing some/all required fields staffRegistration10");
         }
-    
-    //updating values
-    [registeredStaff setProfessionalInsurance:self.hasProfessionalInsuranceSwitch.on];
-    [registeredStaff setIncorporatedInfo:self.incorporatedSwitch.on ssn:self.ssnTextField.text ein:self.einTextField.text businessName:self.businessNameTextField.text];
-    [registeredStaff setWageRate:self.desiredHourlyRateTextField.text orDesiredWeeklyRate:self.desiredWeeklyRateTextField.text];
-    [registeredStaff setTravelPercentage:self->travelDesired];
- 
-    return 1;
-}
+    }//eoa
 
-/* submmitting form */
-- (IBAction)submitForm:(id)sender
-{
-    //verifying the data enter
-    bool result = [self verifyDataEnter];
-    if(result)
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+        if([segue.identifier isEqualToString:@"goToStaffRegister11"]){
+            StaffRegistration11ViewController *controller = (StaffRegistration11ViewController *)segue.destinationViewController;
+            
+            controller.registeredStaff = registeredStaff;
+            
+        }
+        
+    }//eom
+
+
+#pragma mark - incorporated functions
+    /* shows/hides the incorporated values depending on the switch selection */
+    - (IBAction)incorporatedValueChanged:(UISwitch *)sender
     {
-        //    moving to the next controller
-        [self performSegueWithIdentifier:@"goToStaffRegister11" sender:self];
-    }
-    else
+        if(self.incorporatedSwitch.on)
+        {
+            //hiding textfields
+            [self.ssnTextField setHidden:YES];
+            
+            //hiding labels
+            [self->ssnLabel setHidden:YES];
+            [self->ssnAsteriskLabel setHidden:YES];
+            
+            //displaying textfields
+            [self.einTextField setHidden:NO];
+            [self.businessNameTextField setHidden:NO];
+            
+            //displaying labels
+            [self->businessNameLabel setHidden:NO];
+            [self->employerIdentificationNumberLabel setHidden:NO];
+            [self->einAsteriskLabel setHidden:NO];
+            [self->businessNameAsteriskLabel setHidden:NO];
+        }
+        else
+        {
+            //hiding textfields
+            [self.einTextField setHidden:YES];
+            [self.businessNameTextField setHidden:YES];
+            
+           
+            //hiding labels
+            [self->employerIdentificationNumberLabel setHidden:YES];
+            [self->businessNameLabel setHidden:YES];
+            [self->einAsteriskLabel setHidden:YES];
+            [self->businessNameAsteriskLabel setHidden:YES];
+            
+            //displaying textfields
+            [self.ssnTextField setHidden:NO];
+            
+            //displaying labels
+            [self->ssnLabel setHidden:NO];
+            [self->ssnAsteriskLabel setHidden:NO];
+        }
+    }//eo-action
+
+#pragma mark - travel functions
+    /* updates the select of desired travel percentages and disables all other travel percentage buttons */
+    - (IBAction)travelPercentValueChanged:(UIButton *)sender
     {
-        NSLog(@"missing some/all required fields staffRegistration10");
-    }
-}//eoa
-
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"goToStaffRegister11"]){
-        StaffRegistration11ViewController *controller = (StaffRegistration11ViewController *)segue.destinationViewController;
+        int travelValue = (int) sender.tag;
         
-        controller.registeredStaff = registeredStaff;
-        
-    }
-    
-}//eom
+        if(travelValue == 25)//  25% travel
+        {
+            //enabling 25% button
+            self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel25percentButton.layer.borderWidth = 4.5f;
+            self.travel25percentButton.layer.cornerRadius = 10.0f;
+            
+            //disabling all travel percentages buttons
+            self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel50percentButton.layer.borderWidth = 0.0f;
+            self.travel50percentButton.layer.cornerRadius = 0.0f;
+            
+            self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel75percentButton.layer.borderWidth = 0.0f;
+            self.travel75percentButton.layer.cornerRadius = 0.0f;
+           
+            self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel100percentButton.layer.borderWidth = 0.0f;
+            self.travel100percentButton.layer.cornerRadius = 0.0f;
+            
+            self->travelDesired = @"25";
+        }
+        else if(travelValue == 50) // 50% travel
+        {
+            //enabling 50% button
+            self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel50percentButton.layer.borderWidth = 4.5f;
+            self.travel50percentButton.layer.cornerRadius = 10.0f;
+            
+            //disabling all travel percentages buttons
+            self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel25percentButton.layer.borderWidth = 0.0f;
+            self.travel25percentButton.layer.cornerRadius = 0.0f;
+            
+            self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel75percentButton.layer.borderWidth = 0.0f;
+            self.travel75percentButton.layer.cornerRadius = 0.0f;
+            
+            self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel100percentButton.layer.borderWidth = 0.0f;
+            self.travel100percentButton.layer.cornerRadius = 0.0f;
+            
+            self->travelDesired = @"50";
+        }
+        else if(travelValue == 75) // 75% travel
+        {
+            //enabling 75% button
+            self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel75percentButton.layer.borderWidth = 4.5f;
+            self.travel75percentButton.layer.cornerRadius = 10.0f;
+            
+            //disabling all travel percentages buttons
+            self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel25percentButton.layer.borderWidth = 0.0f;
+            self.travel25percentButton.layer.cornerRadius = 0.0f;
+            
+            self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel50percentButton.layer.borderWidth = 0.0f;
+            self.travel50percentButton.layer.cornerRadius = 0.0f;
+            
+            self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel100percentButton.layer.borderWidth = 0.0f;
+            self.travel100percentButton.layer.cornerRadius = 0.0f;
+            
+            self->travelDesired = @"75";
+        }
+        else if(travelValue == 100) // 100% travel
+        {
+            //enabling 100% button
+            self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel100percentButton.layer.borderWidth = 4.5f;
+            self.travel100percentButton.layer.cornerRadius = 10.0f;
+            
+            //disabling all travel percentages buttons
+            self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel25percentButton.layer.borderWidth = 0.0f;
+            self.travel25percentButton.layer.cornerRadius = 0.0f;
+            
+            self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel50percentButton.layer.borderWidth = 0.0f;
+            self.travel50percentButton.layer.cornerRadius = 0.0f;
+            
+            self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+            self.travel75percentButton.layer.borderWidth = 0.0f;
+            self.travel75percentButton.layer.cornerRadius = 0.0f;
+            
+            self->travelDesired = @"100";
+        }
+    }//eo-action
 
+#pragma mark - helper functions
 
-
-/* shows/hides the incorporated values depending on the switch selection */
-- (IBAction)incorporatedValueChanged:(UISwitch *)sender
-{
-    if(self.incorporatedSwitch.on)
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
     {
-        //hiding textfields
-        [self.ssnTextField setHidden:YES];
-        
-        //hiding labels
-        [self->ssnLabel setHidden:YES];
-        [self->ssnAsteriskLabel setHidden:YES];
-        
-        //displaying textfields
-        [self.einTextField setHidden:NO];
-        [self.businessNameTextField setHidden:NO];
-        
-        //displaying labels
-        [self->businessNameLabel setHidden:NO];
-        [self->employerIdentificationNumberLabel setHidden:NO];
-        [self->einAsteriskLabel setHidden:NO];
-        [self->businessNameAsteriskLabel setHidden:NO];
-    }
-    else
-    {
-        //hiding textfields
-        [self.einTextField setHidden:YES];
-        [self.businessNameTextField setHidden:YES];
-        
-       
-        //hiding labels
-        [self->employerIdentificationNumberLabel setHidden:YES];
-        [self->businessNameLabel setHidden:YES];
-        [self->einAsteriskLabel setHidden:YES];
-        [self->businessNameAsteriskLabel setHidden:YES];
-        
-        //displaying textfields
-        [self.ssnTextField setHidden:NO];
-        
-        //displaying labels
-        [self->ssnLabel setHidden:NO];
-        [self->ssnAsteriskLabel setHidden:NO];
-    }
-}//eo-action
 
-/* updates the select of desired travel percentages and disables all other travel percentage buttons */
-- (IBAction)travelPercentValueChanged:(UIButton *)sender
-{
-    int travelValue = (int) sender.tag;
-    
-    if(travelValue == 25)//  25% travel
-    {
-        //enabling 25% button
-        self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel25percentButton.layer.borderWidth = 4.5f;
-        self.travel25percentButton.layer.cornerRadius = 10.0f;
-        
-        //disabling all travel percentages buttons
-        self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel50percentButton.layer.borderWidth = 0.0f;
-        self.travel50percentButton.layer.cornerRadius = 0.0f;
-        
-        self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel75percentButton.layer.borderWidth = 0.0f;
-        self.travel75percentButton.layer.cornerRadius = 0.0f;
-       
-        self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel100percentButton.layer.borderWidth = 0.0f;
-        self.travel100percentButton.layer.cornerRadius = 0.0f;
-        
-        self->travelDesired = @"25";
-    }
-    else if(travelValue == 50) // 50% travel
-    {
-        //enabling 50% button
-        self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel50percentButton.layer.borderWidth = 4.5f;
-        self.travel50percentButton.layer.cornerRadius = 10.0f;
-        
-        //disabling all travel percentages buttons
-        self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel25percentButton.layer.borderWidth = 0.0f;
-        self.travel25percentButton.layer.cornerRadius = 0.0f;
-        
-        self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel75percentButton.layer.borderWidth = 0.0f;
-        self.travel75percentButton.layer.cornerRadius = 0.0f;
-        
-        self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel100percentButton.layer.borderWidth = 0.0f;
-        self.travel100percentButton.layer.cornerRadius = 0.0f;
-        
-        self->travelDesired = @"50";
-    }
-    else if(travelValue == 75) // 75% travel
-    {
-        //enabling 75% button
-        self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel75percentButton.layer.borderWidth = 4.5f;
-        self.travel75percentButton.layer.cornerRadius = 10.0f;
-        
-        //disabling all travel percentages buttons
-        self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel25percentButton.layer.borderWidth = 0.0f;
-        self.travel25percentButton.layer.cornerRadius = 0.0f;
-        
-        self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel50percentButton.layer.borderWidth = 0.0f;
-        self.travel50percentButton.layer.cornerRadius = 0.0f;
-        
-        self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel100percentButton.layer.borderWidth = 0.0f;
-        self.travel100percentButton.layer.cornerRadius = 0.0f;
-        
-        self->travelDesired = @"75";
-    }
-    else if(travelValue == 100) // 100% travel
-    {
-        //enabling 100% button
-        self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel100percentButton.layer.borderWidth = 4.5f;
-        self.travel100percentButton.layer.cornerRadius = 10.0f;
-        
-        //disabling all travel percentages buttons
-        self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel25percentButton.layer.borderWidth = 0.0f;
-        self.travel25percentButton.layer.cornerRadius = 0.0f;
-        
-        self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel50percentButton.layer.borderWidth = 0.0f;
-        self.travel50percentButton.layer.cornerRadius = 0.0f;
-        
-        self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-        self.travel75percentButton.layer.borderWidth = 0.0f;
-        self.travel75percentButton.layer.cornerRadius = 0.0f;
-        
-        self->travelDesired = @"100";
-    }
-}//eo-action
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
 
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
-
-/********* tap gestures functions *******/
+#pragma mark - tap gestures functions
         /*sets up taps gesture*/
         -(void)setUpTapGesture
         {
@@ -303,8 +308,7 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
             [self.view endEditing:YES];
         }
 
-
-/******** textfields  functions********/
+#pragma mark - textfields  functions
 
         /* dimisses UITextField as soon the return key is pressed */
         -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -338,7 +342,7 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
             return YES;
         }
 
-/********* scrollview functions **********/
+#pragma mark - scrollview functions
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);

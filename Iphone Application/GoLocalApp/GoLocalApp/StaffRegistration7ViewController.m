@@ -38,92 +38,96 @@ otherServicesDescription, otherServicesWebsite, otherServicesSocialMedia, costOf
     
 }//eom
 
-/* verify required fields */
-- (BOOL)verifyDataEnter
-{
-    BOOL otherServicesDescriptionFilled        = false;
-    BOOL otherServicesWebsiteFilled            = false;
-    BOOL otherServicesSocialMediaFilled        = false;
-    
-    if(otherServicesDescription.hasText){
-        otherServicesDescriptionFilled = true;
-    }
-    else {
-        [self showAlert:@"Registration Field" withMessage:@"Missing the description field" and:@"Okay"];
-        return 0;
-    }
-    
-    if(otherServicesWebsite.hasText){
-        otherServicesWebsiteFilled = true;
-    }
-    else {
-        [self showAlert:@"Registration Field" withMessage:@"Missing the website field" and:@"Okay"];
-        return 0;
-    }
-    
-    if(otherServicesSocialMedia.hasText){
-        otherServicesSocialMediaFilled = true;
-    }
-    else {
-        [self showAlert:@"Registration Field" withMessage:@"Missing the social media field" and:@"Okay"];
-        return 0;
-    }
-        
-    //updating values
-    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          self.otherServicesDescription.text, @"description",
-                          self.otherServicesWebsite.text, @"website",
-                          self.otherServicesSocialMedia.text, @"socialMedia",
-                          self.costOfServiceTextField.text, @"costOfService",
-                          nil];
-    
-    NSMutableArray *service = [[NSMutableArray alloc] init];
-    [service addObject:info];
-    [registeredStaff setOtherServicesInfo:service];
-
-    
-    return 1;
-}//eom
-
-/*submitting form*/
-- (IBAction)submitForm:(id)sender
-{
-    bool results = [self verifyDataEnter];
-    if( results)
+#pragma mark - verify data
+    /* verify required fields */
+    - (BOOL)verifyDataEnter
     {
-        [self determineWhereToGo];
-    }
-}//eom
-
--(void)determineWhereToGo
-{
-    //skipping to staff registration 10 controller
-    [self performSegueWithIdentifier:@"otherServicesToStaffRegistration10" sender:self];
-}//eom
-
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.identifier isEqualToString:@"otherServicesToStaffRegistration10"]){
-        StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
+        BOOL otherServicesDescriptionFilled        = false;
+        BOOL otherServicesWebsiteFilled            = false;
+        BOOL otherServicesSocialMediaFilled        = false;
         
-       controller.registeredStaff = registeredStaff;
-    }
-}//eom
+        if(otherServicesDescription.hasText){
+            otherServicesDescriptionFilled = true;
+        }
+        else {
+            [self showAlert:@"Registration Field" withMessage:@"Missing the description field" and:@"Okay"];
+            return 0;
+        }
+        
+        if(otherServicesWebsite.hasText){
+            otherServicesWebsiteFilled = true;
+        }
+        else {
+            [self showAlert:@"Registration Field" withMessage:@"Missing the website field" and:@"Okay"];
+            return 0;
+        }
+        
+        if(otherServicesSocialMedia.hasText){
+            otherServicesSocialMediaFilled = true;
+        }
+        else {
+            [self showAlert:@"Registration Field" withMessage:@"Missing the social media field" and:@"Okay"];
+            return 0;
+        }
+            
+        //updating values
+        NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:
+                              self.otherServicesDescription.text, @"description",
+                              self.otherServicesWebsite.text, @"website",
+                              self.otherServicesSocialMedia.text, @"socialMedia",
+                              self.costOfServiceTextField.text, @"costOfService",
+                              nil];
+        
+        NSMutableArray *service = [[NSMutableArray alloc] init];
+        [service addObject:info];
+        [registeredStaff setOtherServicesInfo:service];
 
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-    
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
-/********* tap gestures functions *******/
+        
+        return 1;
+    }//eom
+
+#pragma mark - sending data
+    /*submitting form*/
+    - (IBAction)submitForm:(id)sender
+    {
+        bool results = [self verifyDataEnter];
+        if( results)
+        {
+            [self determineWhereToGo];
+        }
+    }//eom
+
+    -(void)determineWhereToGo
+    {
+        //skipping to staff registration 10 controller
+        [self performSegueWithIdentifier:@"otherServicesToStaffRegistration10" sender:self];
+    }//eom
+
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+    {
+        if([segue.identifier isEqualToString:@"otherServicesToStaffRegistration10"]){
+            StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
+            
+           controller.registeredStaff = registeredStaff;
+        }
+    }//eom
+
+#pragma mark - helper functions
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
+    {
+        
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
+
+#pragma mark - tap gestures functions
         /*sets up taps gesture*/
         -(void)setUpTapGesture
         {
@@ -138,7 +142,7 @@ otherServicesDescription, otherServicesWebsite, otherServicesSocialMedia, costOf
             [self.view endEditing:YES];
         }//eom
 
-/******** textfields  functions********/
+#pragma mark - textfields  functions
 
         /* shows and hides the label above the textfield depending if the textfield is blank or filled */
         - (IBAction)textFieldValuesChanged:(UITextField *)sender
@@ -190,7 +194,7 @@ otherServicesDescription, otherServicesWebsite, otherServicesSocialMedia, costOf
             return YES;
         }//eom
 
-/********* scrollview functions **********/
+#pragma mark - scrollview functions
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);

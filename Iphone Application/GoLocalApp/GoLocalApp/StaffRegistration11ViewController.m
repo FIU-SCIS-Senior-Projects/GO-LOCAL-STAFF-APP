@@ -72,76 +72,80 @@ notRequireForRegistrationLabel, headshotImageView;
 }//eom
 
 
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-    
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
-
-
-/* verifying the required input fileds */
-- (BOOL)verifyDataEnter
-{
-    
-    //checking a image was selected
-    if(self->imageSelected == NULL)
+#pragma mark - helper functions
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
     {
-        NSLog(@"NO IMAGE WAS SELECTED");
         
-        //the only users allow not have a selfie photo
-        if( !(self->djSelected) &&
-           !(self->liveBandSelected) &&
-           !(self->cateringCompanySelected) &&
-           !(self->otherServicesSelected)
-          )
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
+
+
+#pragma mark -  verify data
+    /* verifying the required input fileds */
+    - (BOOL)verifyDataEnter
+    {
+        
+        //checking a image was selected
+        if(self->imageSelected == NULL)
         {
+            NSLog(@"NO IMAGE WAS SELECTED");
             
-            [self showAlert:@"Registration Field" withMessage:@"Please take a Selfie or select a existing selfie (Headshot)  Image" and:@"Okay"];
-            
-            return 0;
+            //the only users allow not have a selfie photo
+            if( !(self->djSelected) &&
+               !(self->liveBandSelected) &&
+               !(self->cateringCompanySelected) &&
+               !(self->otherServicesSelected)
+              )
+            {
+                
+                [self showAlert:@"Registration Field" withMessage:@"Please take a Selfie or select a existing selfie (Headshot)  Image" and:@"Okay"];
+                
+                return 0;
+            }
         }
-    }
-    else
-    {
-        //save Image To Core Data
-        [staffDB saveSelfieImage:self->imageSelected];
-    }
-   
-    return 1;
-}//eom
+        else
+        {
+            //save Image To Core Data
+            [staffDB saveSelfieImage:self->imageSelected];
+        }
+       
+        return 1;
+    }//eom
 
 
-- (IBAction)submitForm:(id)sender
-{
-    //verifying the data enter
-    bool result = [self verifyDataEnter];
-    if(result)
+#pragma mark - sending data
+    - (IBAction)submitForm:(id)sender
     {
-        [self performSegueWithIdentifier:@"goToStaffRegister12" sender:self];
-    }
-    else
-    {
-        NSLog(@"missing some/all required fields Staff Register12");
-    }
-}//eoa
+        //verifying the data enter
+        bool result = [self verifyDataEnter];
+        if(result)
+        {
+            [self performSegueWithIdentifier:@"goToStaffRegister12" sender:self];
+        }
+        else
+        {
+            NSLog(@"missing some/all required fields Staff Register12");
+        }
+    }//eoa
 
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.identifier isEqualToString:@"goToStaffRegister12"]){
-        StaffRegistration12ViewController *controller = (StaffRegistration12ViewController *)segue.destinationViewController;
-  
-         controller.registeredStaff = registeredStaff;
-    }
-}//eom
-/********* photo functions ******/
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+    {
+        if([segue.identifier isEqualToString:@"goToStaffRegister12"]){
+            StaffRegistration12ViewController *controller = (StaffRegistration12ViewController *)segue.destinationViewController;
+      
+             controller.registeredStaff = registeredStaff;
+        }
+    }//eom
+
+#pragma mark - photo functions
 
     - (IBAction)takePhoto:(id)sender
     {
@@ -165,7 +169,7 @@ notRequireForRegistrationLabel, headshotImageView;
         [self presentViewController:picker animated:YES completion:NULL];
     }//eo-action
 
-    #pragma mark - Image Picker Controller delegate methods
+#pragma mark - Image Picker Controller delegate methods
     - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
         
         UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
