@@ -45,31 +45,32 @@
       }
       else  //valid json values found
       { 
-          // require 'API.php'; //adding API 
-          //
-          // //check if valid user and return type of user
-          // $userSearchResult = searchTalent($decoded);
-          // if($userSearchResult) //valid staff user
-          // {
-          //   $responseArray = array(
-          //       "message" => "successfully retrieved information",
-          //       "data"    => $userSearchResult,
-          //     );
-          // }
-          // else if($userSearchResult == 0) //database not responding
-          // {
-          //     $responseArray = array(
-          //       "message"   => "database not responding",
-          //       "data"  => $userSearchResult,
-          //     );
-          // }
-          // else if($userSearchResult == -1) //error retrieving information
-          // {
-          //     $responseArray = array(
-          //       "message"   => "error retrieving information",
-          //       "data"  => $userSearchResult,
-          //     );
-          // }
+          require 'API.php'; //adding API 
+          
+          //check if valid user and return type of user
+          $userSearchResult = searchTalent($decoded);
+          if($userSearchResult) //valid staff user
+          {
+            $responseArray = array(
+                "message" => "successfully retrieved information",
+                "responseType" => "1",
+                "data" =>  $userSearchResult,
+              );
+          }
+          else if($userSearchResult == 0) //database not responding
+          {
+              $responseArray = array(
+                "message"   => "database not responding",
+                "responseType"  => $userSearchResult,
+              );
+          }
+          else if($userSearchResult == -1) //error retrieving information
+          {
+              $responseArray = array(
+                "message"   => "error retrieving information",
+                "responseType"  => $userSearchResult,
+              );
+          }
 
           // /* 
           //   reponse returns the following:
@@ -77,10 +78,7 @@
           //     0   database not responding
           //     -1  error retrieving information
           // */
-          // $response['results'] = $responseArray; //sending reply
-
-
-           $response['results'] = $decoded;
+          $response['results'] = $responseArray; //sending reply
 
       }//eo valid-json
     }//eo valid-data

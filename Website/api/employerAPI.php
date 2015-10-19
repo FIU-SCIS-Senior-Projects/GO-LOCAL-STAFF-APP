@@ -38,7 +38,7 @@
           }
     }//eom
 
-    /* register a staff 
+    /* register a employer 
       returns 1 successfully register
       returns 0 database not responding 
       returns -1 unsuccessfully register
@@ -52,9 +52,7 @@
         return 0;
       }
 
-
       //these fields were already saved
-
       $employerID                     = $registrationData['employerID'];
 
       //gathering fields to save
@@ -65,79 +63,17 @@
       $employerName                   = $registrationData['employerName'];
       $typeOfEmployer                 = $registrationData['typeOfEmployer'];
 
-      // $travel                            = $registrationData['travelPercentage'];
-      // $Incorporated                      = $registrationData['Incorporated'];
-      // if($Incorporated)
-      // {
-      //   $ssnOrEin                        = $registrationData['ein'];
-      //   $business_name                   = $registrationData['business_name'];
-      // }
-      // else
-      // {
-      //   $ssnOrEin                        = $registrationData['ssn'];
-      //   $business_name                   = " ";
-      // }
-
-      $hasInsurance          = $registrationData['hasInsurance'];
-
-      // $desiredHourlyRate                = $registrationData['desiredHourlyRate'];
-      // $desiredWeeklyRate                = $registrationData['desiredWeeklyRate'];
-
-      // $DirectDeposit                    = $registrationData['DirectDeposit'];
-      // if($DirectDeposit)
-      // {
-      //   $DirectDepositRoutingNumber     = $registrationData['DirectDepositRoutingNumber'];
-      //   $DirectDepositAccountNumber     = $registrationData['DirectDepositAccountNumber'];
-      // }
-      // else
-      // {
-      //   $DirectDepositRoutingNumber     = " ";
-      //   $DirectDepositAccountNumber     = " ";
-      // }
-
-      // //experiences
-      // $experience                      = $registrationData['experience'];//???????
-
-
-      // $djSelected                     = $registrationData['djSelected'];//
-      // $liveBandSelected               = $registrationData['liveBandSelected'];//
-      // $cateringCompanySelected        = $registrationData['cateringCompanySelected'];//
-      // $otherServices                  = $registrationData['otherServices'];//
-      // $djDescription                  = $registrationData['djDescription'];//
-      // $djWebsite                      = $registrationData['djWebsite'];//
-      // $djSocialMedia                  = $registrationData['djSocialMedia'];//
-      // $liveBandDescription            = $registrationData['liveBandDescription'];//
-      // $liveBandWebsite                = $registrationData['liveBandWebsite'];//
-      // $liveBandSocialMedia            = $registrationData['liveBandSocialMedia'];//
-      // $cateringCompanyDescription     = $registrationData['cateringCompanyDescription'];//
-      // $cateringCompanyWebsite         = $registrationData['cateringCompanyWebsite'];//
-      // $cateringCompanySocialMedia     = $registrationData['cateringCompanySocialMedia'];//
-      // $otherServicesDescription       = $registrationData['otherServicesDescription'];//
-      // $otherServicesBandWebsite       = $registrationData['otherServicesBandWebsite'];//
-      // $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
-      
-      /*
-      `staffID` int(11) NOT NULL,  //PRIMARY KEY
-      `staffType` int(11) NOT NULL,
-      `pictures` varchar(30) NOT NULL,
-      `insuranceDocuments` varchar(30) NOT NULL,
-      `resume` varchar(30) NOT NULL,
-      `TermsAndAgreements` varchar(255) NOT NULL
-      */
+      $hasInsurance                   = $registrationData['hasInsurance'];
+ 
       $part1 = "address='".$address."',city='".$city."',zipcode='".$zipCode."',state='".$state."'";
       $part2 = "employerName='".$employerName."',typeOfEmployer='".$typeOfEmployer."',insurance='".$hasInsurance."'";
-      // $part3 = "eyeColor='".$eyeColor."',shirtSize='".$tshirtSize."',chestSize='".$chestSize."',waistSize='".$waistSize."',hipSize='".$hipSize."',";
-      // $part4 = "dressSize='".$dressSize."',pantSize='".$pantSize."',shoeSize='".$shoeSize."',piercings='".$piercings."',";
-      // $part5 = "desiredHourlyRate='".$desiredHourlyRate."',desiredWeeklyRate='".$desiredWeeklyRate."',ssnOrEin='".$ssnOrEin."',businessName='".$business_name."',";
-      // $part6 = "travel='".$travel."',insurance='".$hasProfessionalInsurance."',";
-      // $part7 = "bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'";
 
 
       $query = "UPDATE registered_employer
                 SET $part1, $part2
                 WHERE employerID = '".$employerID."'";
 
-                //echo "<p>".$query."</p>";
+      //echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {
@@ -245,6 +181,7 @@
 
      // echo "Unable to store staff credentials";  
       return -2;
-      
   }//eom
+
+
 ?>

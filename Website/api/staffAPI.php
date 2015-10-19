@@ -273,32 +273,76 @@
 
 
   
-  /* 
-    reponse returns the following:
-      userdata   successfully retrieved information
-      0   database not responding
-      -1  error retriving information
-  */
-  function searchTalent($inData)
+  /*
+  Searchs staff based on the below, 
+  returns the following:
+       staffResults   an array of all the users that fit the search criteria
+        0             database not responding
+        -1            no data found
+
+
+  sample input:
+
+  ageFrom = 18;
+    ageTo = Any;
+    email = "luoandre29@outlook.com";
+    ethnicities =     (
+        "Latino or Hispanic American",
+        "South Asian or Indian American",
+        "Middle Eastern or Arab American"
+    );
+    eyeColor = Any;
+    gender = Male;
+    hairColor = Black;
+    hasPhoto = Yes;
+    hasPiercings = No;
+    hasTattoos = Either;
+    hasWebsite = Either;
+    height = "5'3\"";
+    heightCondition = "At most";
+    languages =     (
+        English,
+        Spanish,
+        Italian
+    );
+    miles = 10;
+    name = "Luis Castillo";
+    phone = 3056099250;
+    talents =     (
+        "Catering Company",
+        Dancer,
+        DJ
+    );
+    weight = 130;
+    weightCondition = atleast;
+    willingToTravel = No;
+    zipcode = 33016;
+  */  
+  function searchTalent($searchCriteria)
   {
-    // print_r($inData);
-      $dbConnection = connectToDB();
-      if(!$dbConnection)
+    $finalList = array();
+
+    $dbConnection = connectToDB();
+    if(!$dbConnection)
+    {
+      // echo "Unable to connect to MySQL.".PHP_EOL;
+      return 0;
+    }
+
+    $query = "SELECT * 
+              FROM registered_staff";
+
+    $result     = mysqli_query($dbConnection, $query);
+    $totalRows  = mysqli_num_rows($result);
+    if($totalRows > 0)
+    {
+      while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
       {
-        // echo "Unable to connect to MySQL.".PHP_EOL;
-        return 0;
+        array_push($finalList, $row);
       }
 
-
-
-      //gettting all registered staff
-      $query = "SELECT * 
-                FROM registered_staff";
-      $result = mysqli_query($dbConnection, $query);
-      if($result)
-      {
-        return $result;
-      }
+      return $finalList;
+    }
 
     return -1;
   }//eom

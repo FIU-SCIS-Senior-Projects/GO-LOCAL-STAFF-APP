@@ -1,0 +1,39 @@
+array (
+  'ageFrom' => '18',
+  'ageTo' => 'Any',
+  'email' => 'luoandre29@outlook.com',
+  'ethnicities' => 
+  array (
+    0 => 'Latino or Hispanic American',
+    1 => 'South Asian or Indian American',
+    2 => 'Middle Eastern or Arab American',
+  ),
+  'eyeColor' => 'Any',
+  'gender' => 'Male',
+  'hairColor' => 'Black',
+  'hasPhoto' => 'Yes',
+  'hasPiercings' => 'No',
+  'hasTattoos' => 'Either',
+  'hasWebsite' => 'Either',
+  'height' => '5\'3"',
+  'heightCondition' => 'At most',
+  'languages' => 
+  array (
+    0 => 'English',
+    1 => 'Spanish',
+    2 => 'Italian',
+  ),
+  'miles' => '10',
+  'name' => 'Luis Castillo',
+  'phone' => '3056099250',
+  'talents' => 
+  array (
+    0 => 'Catering Company',
+    1 => 'Dancer',
+    2 => 'DJ',
+  ),
+  'weight' => '130',
+  'weightCondition' => 'atleast',
+  'willingToTravel' => 'No',
+  'zipcode' => '33016',
+)
