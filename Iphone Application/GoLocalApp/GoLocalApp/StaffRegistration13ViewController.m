@@ -35,97 +35,100 @@ wantsDirectDeposit, DirectDepositRoutingNumber, DirectDepositAccountNumber;
     [registeredStaff printUserData];//testing
 }//eom
 
-/* */
-- (IBAction)directDepositSelectionChanged:(id)sender
-{
-//    if(!self.wantsDirectDeposit.on){
-//        [self showAlert:@"Registration Field" withMessage:@"Our Apologies but at the moment we only support direct deposit. More options and features coming soon!" and:@"Okay"];
-//        [self.wantsDirectDeposit setOn:true];
-//    }
-}//eo-action
 
-
-/* verifying the required input fileds */
-- (BOOL)verifyDataEnter
-{
-    //checking for valid input
-    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
-    NSString * testing;
-    NSString *trimmedString;
-
-    //checking direct deposit fields are NOT empty
-        if(self.wantsDirectDeposit.on)
-        {
-                testing = self.DirectDepositRoutingNumber.text;
-                trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-                if ([trimmedString isEqualToString:@""]) {
-                    [self scrollVievEditingFinished:DirectDepositRoutingNumber]; //take scroll to textfield so user can see their error
-                    self.DirectDepositRoutingNumber.text =@""; //clearing field
-                    // it's empty or contains only white spaces
-                    [self showAlert:@"Registration Field" withMessage:@"Missing the 'Routing Number' field" and:@"Okay"];
-                    return 0;
-                }
-
-                testing = self.DirectDepositAccountNumber.text;
-                trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-                if ([trimmedString isEqualToString:@""]) {
-                    self.DirectDepositAccountNumber.text =@""; //clearing field
-                    // it's empty or contains only white spaces
-                    [self showAlert:@"Registration Field" withMessage:@"Missing the 'Account Number' field" and:@"Okay"];
-                    return 0;
-                }
-            
-            //updating values
-            
-            [registeredStaff setDirectDeposit:self.wantsDirectDeposit.on withRouting:self.DirectDepositRoutingNumber.text andWithAccountNumber:self.DirectDepositAccountNumber.text];
-            
-        }//eo-direct deposit
-    
-    return 1;
-}
-
-
-- (IBAction)submitForm:(id)sender
-{
-    //verifying the data enter
-    bool result = [self verifyDataEnter];
-    if(result)
+#pragma mark - direct deposit functions
+    /* */
+    - (IBAction)directDepositSelectionChanged:(id)sender
     {
-        [self performSegueWithIdentifier:@"goToStaffRegister14" sender:self];
-    }
-    else
+    //    if(!self.wantsDirectDeposit.on){
+    //        [self showAlert:@"Registration Field" withMessage:@"Our Apologies but at the moment we only support direct deposit. More options and features coming soon!" and:@"Okay"];
+    //        [self.wantsDirectDeposit setOn:true];
+    //    }
+    }//eo-action
+
+#pragma mark - verify data
+
+    /* verifying the required input fileds */
+    - (BOOL)verifyDataEnter
     {
-        NSLog(@"missing some/all required fields StaffRegister 13 ");
-    }
-    
-}//eo-action
+        //checking for valid input
+        NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+        NSString * testing;
+        NSString *trimmedString;
 
+        //checking direct deposit fields are NOT empty
+            if(self.wantsDirectDeposit.on)
+            {
+                    testing = self.DirectDepositRoutingNumber.text;
+                    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+                    if ([trimmedString isEqualToString:@""]) {
+                        [self scrollVievEditingFinished:DirectDepositRoutingNumber]; //take scroll to textfield so user can see their error
+                        self.DirectDepositRoutingNumber.text =@""; //clearing field
+                        // it's empty or contains only white spaces
+                        [self showAlert:@"Registration Field" withMessage:@"Missing the 'Routing Number' field" and:@"Okay"];
+                        return 0;
+                    }
 
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"goToStaffRegister14"]){
-        StaffRegistration14ViewController *controller = (StaffRegistration14ViewController *)segue.destinationViewController;
+                    testing = self.DirectDepositAccountNumber.text;
+                    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+                    if ([trimmedString isEqualToString:@""]) {
+                        self.DirectDepositAccountNumber.text =@""; //clearing field
+                        // it's empty or contains only white spaces
+                        [self showAlert:@"Registration Field" withMessage:@"Missing the 'Account Number' field" and:@"Okay"];
+                        return 0;
+                    }
+                
+                //updating values
+                
+                [registeredStaff setDirectDeposit:self.wantsDirectDeposit.on withRouting:self.DirectDepositRoutingNumber.text andWithAccountNumber:self.DirectDepositAccountNumber.text];
+                
+            }//eo-direct deposit
         
-        controller.registeredStaff = registeredStaff;
+        return 1;
     }
-}//eom
+
+#pragma mark - sending data
+    - (IBAction)submitForm:(id)sender
+    {
+        //verifying the data enter
+        bool result = [self verifyDataEnter];
+        if(result)
+        {
+            [self performSegueWithIdentifier:@"goToStaffRegister14" sender:self];
+        }
+        else
+        {
+            NSLog(@"missing some/all required fields StaffRegister 13 ");
+        }
+        
+    }//eo-action
 
 
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-    
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+        if([segue.identifier isEqualToString:@"goToStaffRegister14"]){
+            StaffRegistration14ViewController *controller = (StaffRegistration14ViewController *)segue.destinationViewController;
+            
+            controller.registeredStaff = registeredStaff;
+        }
+    }//eom
+
+#pragma mark - helper functions
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
+    {
+        
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
 
 
-/********* tap gestures functions *******/
+#pragma mark - tap gestures functions
         /*sets up taps gesture*/
         -(void)setUpTapGesture
         {
@@ -140,8 +143,7 @@ wantsDirectDeposit, DirectDepositRoutingNumber, DirectDepositAccountNumber;
             [self.view endEditing:YES];
         }
 
-
-/******** textfields  functions********/
+#pragma mark - textfields  functions
 
         /* dimisses UITextField as soon the return key is pressed */
         -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -165,7 +167,7 @@ wantsDirectDeposit, DirectDepositRoutingNumber, DirectDepositAccountNumber;
             return YES;
         }
 
-/********* scrollview functions **********/
+#pragma mark - scrollview functions
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);

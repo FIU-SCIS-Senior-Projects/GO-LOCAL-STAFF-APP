@@ -41,104 +41,108 @@ chestSize, waistSize, hipsSize, dressSize;
 }//eom
 
 
-/* verifying the required input fileds */
-- (BOOL)verifyDataEnter
-{
-    //checking for valid input
-    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
-    NSString * testing;
-    NSString *trimmedString;
-    
-    testing = self.chestSize.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:chestSize]; //take scroll to textfield so user can see their error
-        chestSize.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your chest size" and:@"Okay"];
-        return 0;
-    }
-    
-    testing = self.waistSize.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:waistSize]; //take scroll to textfield so user can see their error
-        waistSize.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your waist size" and:@"Okay"];
-        return 0;
-    }
-    
-    
-    testing = self.hipsSize.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:hipsSize]; //take scroll to textfield so user can see their error
-        hipsSize.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your hips size" and:@"Okay"];
-        return 0;
-    }
-    
-    testing = self.dressSize.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:dressSize]; //take scroll to textfield so user can see their error
-        dressSize.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your dress size" and:@"Okay"];
-        return 0;
-    }
-    
-    //updating values
-    [registeredStaff setChest:self.chestSize.text];
-    [registeredStaff setWaist:self.waistSize.text];
-    [registeredStaff setHipSize: self.hipsSize.text];
-    [registeredStaff setDressSize:self.dressSize.text];
+#pragma mark - verify data
+    /* verifying the required input fileds */
+    - (BOOL)verifyDataEnter
+    {
+        //checking for valid input
+        NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+        NSString * testing;
+        NSString *trimmedString;
         
-    return 1;
-}//eom
-
-/* submmitting form */
-- (IBAction)submitForm:(id)sender
-{
-    //verifying the data enter
-    bool result = [self verifyDataEnter];
-    if(result)
-    {
-        [self performSegueWithIdentifier:@"goToStaffRegister10a" sender:self];
-    }
-    else
-    {
-        NSLog(@"missing some/all required fields for staffRegistration9");
-    }
-    
-}//eom
-
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-        if([segue.identifier isEqualToString:@"goToStaffRegister10a"]){
-            StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
-    
-           controller.registeredStaff = registeredStaff;
+        testing = self.chestSize.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:chestSize]; //take scroll to textfield so user can see their error
+            chestSize.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your chest size" and:@"Okay"];
+            return 0;
         }
-}//eom
+        
+        testing = self.waistSize.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:waistSize]; //take scroll to textfield so user can see their error
+            waistSize.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your waist size" and:@"Okay"];
+            return 0;
+        }
+        
+        
+        testing = self.hipsSize.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:hipsSize]; //take scroll to textfield so user can see their error
+            hipsSize.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your hips size" and:@"Okay"];
+            return 0;
+        }
+        
+        testing = self.dressSize.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:dressSize]; //take scroll to textfield so user can see their error
+            dressSize.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your dress size" and:@"Okay"];
+            return 0;
+        }
+        
+        //updating values
+        [registeredStaff setChest:self.chestSize.text];
+        [registeredStaff setWaist:self.waistSize.text];
+        [registeredStaff setHipSize: self.hipsSize.text];
+        [registeredStaff setDressSize:self.dressSize.text];
+            
+        return 1;
+    }//eom
+
+#pragma mark - sending data
+
+    /* submmitting form */
+    - (IBAction)submitForm:(id)sender
+    {
+        //verifying the data enter
+        bool result = [self verifyDataEnter];
+        if(result)
+        {
+            [self performSegueWithIdentifier:@"goToStaffRegister10a" sender:self];
+        }
+        else
+        {
+            NSLog(@"missing some/all required fields for staffRegistration9");
+        }
+        
+    }//eom
+
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+            if([segue.identifier isEqualToString:@"goToStaffRegister10a"]){
+                StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
+        
+               controller.registeredStaff = registeredStaff;
+            }
+    }//eom
 
 
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-    
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
+#pragma mark - helper methods
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
+    {
+        
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
 
-/********* tap gestures functions *******/
+#pragma mark - tap gestures functions
         /*sets up taps gesture*/
         -(void)setUpTapGesture
         {
@@ -154,8 +158,7 @@ chestSize, waistSize, hipsSize, dressSize;
         }
 
 
-
-/******** textfields  functions********/
+#pragma mark - textfields  functions
         /* shows/hides textfield depending if they are filled or empty*/
         - (IBAction)textFieldValueChanged:(id)sender {
             
@@ -232,8 +235,7 @@ chestSize, waistSize, hipsSize, dressSize;
             return YES;
         }
 
-
-/********* scrollview functions **********/
+#pragma mark - scrollview functions
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);

@@ -48,65 +48,68 @@ bodyImageView;
     
 }//eom
 
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-    
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
 
-
-/* verifying the required input fields */
-- (BOOL)verifyDataEnter
-{
-    //checking a image was selected
-    if(self->imageSelected == NULL)
+#pragma mark - helper functions
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
     {
-        NSLog(@"NO IMAGE WAS SELECTED");
-    }
-    else
-    {
-        //saving photo on database
-        BOOL imageSavedResults = [staffDB saveBodyImage:self->imageSelected];
-        NSLog(@"body image succesfully saved? %d", imageSavedResults);
-    }
-    
-    return 1;
-}//eom
-
-
-- (IBAction)submitForm:(id)sender
-{
-    //verifying the data enter
-    bool result = [self verifyDataEnter];
-    if(result)
-    {
-        [self performSegueWithIdentifier:@"goToStaffRegister13" sender:self];
-    }
-    else
-    {
-        NSLog(@"missing some/all required fields");
-    }
-    
-}
-
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"goToStaffRegister13"])
-    {
-        StaffRegistration13ViewController *controller = (StaffRegistration13ViewController *)segue.destinationViewController;
         
-         controller.registeredStaff = registeredStaff;
-    }
-}//eom
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
 
-/********* photo functions ******/
+#pragma mark - verify data
+    /* verifying the required input fields */
+    - (BOOL)verifyDataEnter
+    {
+        //checking a image was selected
+        if(self->imageSelected == NULL)
+        {
+            NSLog(@"NO IMAGE WAS SELECTED");
+        }
+        else
+        {
+            //saving photo on database
+            BOOL imageSavedResults = [staffDB saveBodyImage:self->imageSelected];
+            NSLog(@"body image succesfully saved? %d", imageSavedResults);
+        }
+        
+        return 1;
+    }//eom
+
+#pragma mark -sending data
+
+    - (IBAction)submitForm:(id)sender
+    {
+        //verifying the data enter
+        bool result = [self verifyDataEnter];
+        if(result)
+        {
+            [self performSegueWithIdentifier:@"goToStaffRegister13" sender:self];
+        }
+        else
+        {
+            NSLog(@"missing some/all required fields");
+        }
+        
+    }
+
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+        if([segue.identifier isEqualToString:@"goToStaffRegister13"])
+        {
+            StaffRegistration13ViewController *controller = (StaffRegistration13ViewController *)segue.destinationViewController;
+            
+             controller.registeredStaff = registeredStaff;
+        }
+    }//eom
+
+#pragma mark - photo functions
 
     - (IBAction)takePhoto:(id)sender {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -128,7 +131,7 @@ bodyImageView;
         [self presentViewController:picker animated:YES completion:NULL];
     }//eo-action
 
-    #pragma mark - Image Picker Controller delegate methods
+#pragma mark - Image Picker Controller delegate methods
     - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
         
         UIImage *chosenImage = info[UIImagePickerControllerEditedImage];

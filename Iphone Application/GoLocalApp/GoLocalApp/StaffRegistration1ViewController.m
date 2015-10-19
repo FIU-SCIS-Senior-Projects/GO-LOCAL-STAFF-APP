@@ -49,63 +49,64 @@
     
 }//eom
 
-/* verifying input fields
- */
-- (BOOL)verifyDataEnter
-{
-    //checking for valid input
-    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
-    NSString * testing;
-    NSString *trimmedString;
-    
-    testing = self.cellphone.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
-        self.cellphone.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your cellphone number" and:@"Okay"];
-        return 0;
-    }
-    else if( self.cellphone.text.length < 10)
+#pragma mark - verify Data Enter
+    /* verifying input fields
+     */
+    - (BOOL)verifyDataEnter
     {
-        [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete cellphone number" and:@"Okay"];
-        return 0;
-    }
-    
-    //updating values
-    [registeredStaff setCellphone:self.cellphone.text];
-    
-     return 1;
-}//eom
-
-- (IBAction)submitForm:(id)sender {
-    bool result = [self verifyDataEnter];
-    if(result)
-    {
-        [self performSegueWithIdentifier:@"goToStaffRegister2" sender:self];
-    }
-    else
-    {
-        NSLog(@"missing some/all required fields on staffRegistration1");
-    }
-}//eom
-
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.identifier isEqualToString:@"goToStaffRegister2"]){
-        StaffRegistration2ViewController *controller = (StaffRegistration2ViewController *)segue.destinationViewController;
+        //checking for valid input
+        NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+        NSString * testing;
+        NSString *trimmedString;
         
-        controller.registeredStaff = registeredStaff;
+        testing = self.cellphone.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
+            self.cellphone.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your cellphone number" and:@"Okay"];
+            return 0;
+        }
+        else if( self.cellphone.text.length < 10)
+        {
+            [self scrollVievEditingFinished:cellphone]; //take scroll to textfield so user can see their error
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please make sure to enter your complete cellphone number" and:@"Okay"];
+            return 0;
+        }
         
-    }
-}//eom
+        //updating values
+        [registeredStaff setCellphone:self.cellphone.text];
+        
+         return 1;
+    }//eom
 
+#pragma mark - sending data
+    - (IBAction)submitForm:(id)sender {
+        bool result = [self verifyDataEnter];
+        if(result)
+        {
+            [self performSegueWithIdentifier:@"goToStaffRegister2" sender:self];
+        }
+        else
+        {
+            NSLog(@"missing some/all required fields on staffRegistration1");
+        }
+    }//eom
 
-/********* helper functions *******/
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+    {
+        if([segue.identifier isEqualToString:@"goToStaffRegister2"]){
+            StaffRegistration2ViewController *controller = (StaffRegistration2ViewController *)segue.destinationViewController;
+            
+            controller.registeredStaff = registeredStaff;
+            
+        }
+    }//eom
+
+#pragma mark - helper functions
     /* create UIAlert*/
     -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
     {
@@ -119,7 +120,7 @@
         [alert show];//display alert
     }//eom
 
-/********* tap gestures functions *******/
+#pragma mark - tap gestures functions
         /*sets up taps gesture*/
         -(void)setUpTapGesture
         {
@@ -134,8 +135,7 @@
             [self.view endEditing:YES];
         }
 
-
-/******** textfields  functions********/
+#pragma mark - textfields  functions
 
         /* dimisses UITextField as soon the return key is pressed */
         -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -189,7 +189,7 @@
             }
         }//eoa
 
-/********* scrollview functions **********/
+#pragma mark - scrollview functions
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);
@@ -202,9 +202,7 @@
             [scrollView setContentOffset:point animated:YES];
         }
 
-
-/******** SMS Authentication ********/
-
+#pragma mark - SMS Authentication
 
     -(BOOL) verifyPhoneNumberDataEnter
     {
@@ -299,8 +297,7 @@
     }//eom
 
 
-
-/***************** JSON POST functions *******************/
+#pragma mark - JSON POST functions
 
             /*
              processing server response about the phone number

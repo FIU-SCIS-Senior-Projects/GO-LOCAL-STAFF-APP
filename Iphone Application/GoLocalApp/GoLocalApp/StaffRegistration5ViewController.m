@@ -44,121 +44,124 @@ liveBandDescription, liveBandWebsite, liveBandSocialMedia, costOfServiceTextFiel
     
 }//eom
 
-
-/* verify required fields */
-- (BOOL)verifyDataEnter
-{
-    BOOL liveBandDescriptionFilled        = false;
-    BOOL liveBandWebsiteFilled            = false;
-    BOOL liveBandSocialMediaFilled        = false;
-    
-    if(liveBandDescription.hasText){
-        liveBandDescriptionFilled = true;
-    }
-    else {
-        [self showAlert:@"Registration Field" withMessage:@"Missing the description field" and:@"Okay"];
-        return 0;
-    }
-    
-    if(liveBandWebsite.hasText){
-        liveBandWebsiteFilled = true;
-    }
-    else {
-        [self showAlert:@"Registration Field" withMessage:@"Missing the website field" and:@"Okay"];
-        return 0;
-    }
-    
-    if(liveBandSocialMedia.hasText){
-        liveBandSocialMediaFilled = true;
-    }
-    else {
-        [self showAlert:@"Registration Field" withMessage:@"Missing the social media field" and:@"Okay"];
-        return 0;
-    }
-    
-    //updating values
-    NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:
-                            self.liveBandDescription.text, @"description",
-                            self.liveBandWebsite.text, @"website",
-                            self.liveBandSocialMedia.text, @"socialMedia",
-                            self.costOfServiceTextField.text, @"costOfService",
-                            nil];
-    
-    NSMutableArray *service = [[NSMutableArray alloc] init];
-    [service addObject:info];
-    [registeredStaff setLiveBandInfo:service];
-    
-
-    return 1;
-}//eom
-
-/*submitting form*/
-- (IBAction)submitForm:(id)sender {
-    bool results = [self verifyDataEnter];
-    if( results)
+#pragma mark - verify data
+    /* verify required fields */
+    - (BOOL)verifyDataEnter
     {
-        [self determineWhereToGo];
-    }
-}//eom
+        BOOL liveBandDescriptionFilled        = false;
+        BOOL liveBandWebsiteFilled            = false;
+        BOOL liveBandSocialMediaFilled        = false;
+        
+        if(liveBandDescription.hasText){
+            liveBandDescriptionFilled = true;
+        }
+        else {
+            [self showAlert:@"Registration Field" withMessage:@"Missing the description field" and:@"Okay"];
+            return 0;
+        }
+        
+        if(liveBandWebsite.hasText){
+            liveBandWebsiteFilled = true;
+        }
+        else {
+            [self showAlert:@"Registration Field" withMessage:@"Missing the website field" and:@"Okay"];
+            return 0;
+        }
+        
+        if(liveBandSocialMedia.hasText){
+            liveBandSocialMediaFilled = true;
+        }
+        else {
+            [self showAlert:@"Registration Field" withMessage:@"Missing the social media field" and:@"Okay"];
+            return 0;
+        }
+        
+        //updating values
+        NSDictionary *info = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                self.liveBandDescription.text, @"description",
+                                self.liveBandWebsite.text, @"website",
+                                self.liveBandSocialMedia.text, @"socialMedia",
+                                self.costOfServiceTextField.text, @"costOfService",
+                                nil];
+        
+        NSMutableArray *service = [[NSMutableArray alloc] init];
+        [service addObject:info];
+        [registeredStaff setLiveBandInfo:service];
+        
+
+        return 1;
+    }//eom
+
+#pragma mark - sending data
+    /*submitting form*/
+    - (IBAction)submitForm:(id)sender {
+        bool results = [self verifyDataEnter];
+        if( results)
+        {
+            [self determineWhereToGo];
+        }
+    }//eom
 
 
-/* */
--(void)determineWhereToGo
-{
-    
-    //catering company
-    if( [registeredStaff isCateringCompany] )
+    /* */
+    -(void)determineWhereToGo
     {
-        //skipping to catering company controller
-        [self performSegueWithIdentifier:@"liveBandToCateringCompany" sender:self];
-    }
-    //other services
-    else if( [registeredStaff isOtherServices])
-    {
-        //skipping to Other services controller
-        [self performSegueWithIdentifier:@"liveBandToOtherServices" sender:self];
-    }
-    else
-    {
-        //skipping to staff registration 11 controller
-        [self performSegueWithIdentifier:@"liveBandToStaffRegistration10" sender:self];
-    }
-    
-}//eom
+        
+        //catering company
+        if( [registeredStaff isCateringCompany] )
+        {
+            //skipping to catering company controller
+            [self performSegueWithIdentifier:@"liveBandToCateringCompany" sender:self];
+        }
+        //other services
+        else if( [registeredStaff isOtherServices])
+        {
+            //skipping to Other services controller
+            [self performSegueWithIdentifier:@"liveBandToOtherServices" sender:self];
+        }
+        else
+        {
+            //skipping to staff registration 11 controller
+            [self performSegueWithIdentifier:@"liveBandToStaffRegistration10" sender:self];
+        }
+        
+    }//eom
 
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"liveBandToCateringCompany"]){
-        StaffRegistration6ViewController *controller = (StaffRegistration6ViewController *)segue.destinationViewController;
-        
-        controller.registeredStaff = registeredStaff;
-    }
-    else if([segue.identifier isEqualToString:@"liveBandToOtherServices"]){
-        StaffRegistration7ViewController *controller = (StaffRegistration7ViewController *)segue.destinationViewController;
-        
-         controller.registeredStaff = registeredStaff;
-        
-    }
-    else if([segue.identifier isEqualToString:@"liveBandToStaffRegistration10"]){
-        StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
-        
-         controller.registeredStaff = registeredStaff;
-    }
-}//eom
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+        if([segue.identifier isEqualToString:@"liveBandToCateringCompany"]){
+            StaffRegistration6ViewController *controller = (StaffRegistration6ViewController *)segue.destinationViewController;
+            
+            controller.registeredStaff = registeredStaff;
+        }
+        else if([segue.identifier isEqualToString:@"liveBandToOtherServices"]){
+            StaffRegistration7ViewController *controller = (StaffRegistration7ViewController *)segue.destinationViewController;
+            
+             controller.registeredStaff = registeredStaff;
+            
+        }
+        else if([segue.identifier isEqualToString:@"liveBandToStaffRegistration10"]){
+            StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
+            
+             controller.registeredStaff = registeredStaff;
+        }
+    }//eom
 
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-    
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
-/********* tap gestures functions *******/
+#pragma mark - helper functions
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
+    {
+        
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
+
+#pragma mark - tap gestures functions
         /*sets up taps gesture*/
         -(void)setUpTapGesture
         {
@@ -173,7 +176,7 @@ liveBandDescription, liveBandWebsite, liveBandSocialMedia, costOfServiceTextFiel
             [self.view endEditing:YES];
         }//eom
 
-/******** textfields  functions********/
+#pragma mark - textfields  functions
 
         /* shows and hides the label above the textfield depending if the textfield is blank or filled */
         - (IBAction)textFieldValuesChanged:(UITextField *)sender
@@ -226,7 +229,7 @@ liveBandDescription, liveBandWebsite, liveBandSocialMedia, costOfServiceTextFiel
             return YES;
         }//eom
 
-/********* scrollview functions **********/
+#pragma mark - scrollview functions
         - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
         {
             CGPoint point = CGPointMake(0, textField.frame.origin.y - 3 * textField.frame.size.height);

@@ -38,83 +38,89 @@
     [registeredStaff printUserData];//testing
 }//eom
 
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"staffRegistered"])
-    {
-        UINavigationController *navigationController = [segue destinationViewController];
-        StaffHomeViewController *controller = (StaffHomeViewController *) navigationController.topViewController;
-        controller.staffID = staffID;
-    }
-}//eom
 
-
-/* verifying the required input fileds */
-- (BOOL)verifyDataEnter
-{
-    
-    if(!self.agreeTermsSwitch.on)
+#pragma mark - verify data
+    /* verifying the required input fileds */
+    - (BOOL)verifyDataEnter
     {
-        [self showAlert:@"Registration Field" withMessage:@"Please read and agree to terms" and:@"Okay"];
-        return 0;
-    }
-    
-    //getting images from coredata
-    UIImage * selfieImageResult = [staffDB getSelfiePhoto];
-    if(selfieImageResult)
-    {
-        self->selfiePhoto = selfieImageResult;
-    }
-    UIImage * bodyImageResult = [staffDB getSelfiePhoto];
-    if(bodyImageResult)
-    {
-        self->bodyPhoto = bodyImageResult;
-    }
-    
-    return 1;
-}//eom
-
-
-/* terms and agreements */
-- (IBAction)agreeTermsValueChanged:(id)sender
-{
-    
-    if(self.agreeTermsSwitch.on)
-    {
-        bool result = [self verifyDataEnter];
-        if(result)
+        
+        if(!self.agreeTermsSwitch.on)
         {
-            //since user to terms, display 'submit registration' button
-            self.submitButton.hidden = NO;
+            [self showAlert:@"Registration Field" withMessage:@"Please read and agree to terms" and:@"Okay"];
+            return 0;
         }
-    }
-    else
+        
+        //getting images from coredata
+        UIImage * selfieImageResult = [staffDB getSelfiePhoto];
+        if(selfieImageResult)
+        {
+            self->selfiePhoto = selfieImageResult;
+        }
+        UIImage * bodyImageResult = [staffDB getSelfiePhoto];
+        if(bodyImageResult)
+        {
+            self->bodyPhoto = bodyImageResult;
+        }
+        
+        return 1;
+    }//eom
+
+
+#pragma mark - terms and agreements
+    /* terms and agreements */
+    - (IBAction)agreeTermsValueChanged:(id)sender
     {
-        self.submitButton.hidden = YES;
-    }
-    
-}//eo-action
+        
+        if(self.agreeTermsSwitch.on)
+        {
+            bool result = [self verifyDataEnter];
+            if(result)
+            {
+                //since user to terms, display 'submit registration' button
+                self.submitButton.hidden = NO;
+            }
+        }
+        else
+        {
+            self.submitButton.hidden = YES;
+        }
+        
+    }//eo-action
 
 
-- (IBAction)termsAgreed:(UIButton *)sender
-{
-     [self sendDataToServer];
-}//eom
+#pragma mark - sending data
+    - (IBAction)termsAgreed:(UIButton *)sender
+    {
+         [self sendDataToServer];
+    }//eom
 
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-    
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+    {
+        if([segue.identifier isEqualToString:@"staffRegistered"])
+        {
+            UINavigationController *navigationController = [segue destinationViewController];
+            StaffHomeViewController *controller = (StaffHomeViewController *) navigationController.topViewController;
+            controller.staffID = staffID;
+        }
+    }//eom
 
-/***************** JSON POST functions *******************/
+
+#pragma mark - helper functions
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
+    {
+        
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
+
+#pragma mark - JSON POST functions
 
         /* 
          processing server responce

@@ -13,12 +13,14 @@
 {
     //arrays
     NSArray *genderOptions;
-    NSArray *ageOptions;
+    NSArray *ageFromOptions;
+    NSArray *ageToOptions;
     NSArray *hairColorOptions;
     NSArray *eyeColorOptions;
     NSArray *heightFeetOptions;
     NSArray *heightInchesOptions;
     NSArray *conditionsOptions;
+    NSArray *milesOptions;
     
     NSArray *hasButtonOptions;
     NSMutableArray *hasButtonCurrentStatus;
@@ -28,20 +30,27 @@
     
     NSArray * talents;
     NSMutableArray *talentsSelected;
-
+    
+    NSArray * languages;
+    NSMutableArray *languagesSelected;
+    
+    NSArray * willingToTravelOptions;
+    NSMutableArray *willingToTravelStatus;
+    
     //pickers
     UIPickerView * genderPickerView;
-    UIPickerView * agePickerView;
+    UIPickerView * ageFromPickerView;
+    UIPickerView * ageToPickerView;
     UIPickerView * hairColorPickerView;
     UIPickerView * eyeColorPickerView;
     UIPickerView * heightPickerView;
     UIPickerView * weightConditionsPickerView;
     UIPickerView * heightConditionsPickerView;
+    UIPickerView * milesPickerView;
     
     //
     NSString * heightFeet;
     NSString * heightInches;
-    
 }
 
 
@@ -51,9 +60,12 @@
 
 @synthesize nameTextField,emailTextField,cellphoneTextField;
 @synthesize hasPhotoButton, hasPiercingsButton, hasTattoosButton, hasWebsiteButton;
-@synthesize genderTextField,ageTextField,weightConditionTextField,weightTextField,heightConditionTextField,heightTextField,hairColorTextField,eyeColorTextField;
+@synthesize genderTextField,ageFromTextField,ageToTextField,weightConditionTextField,weightTextField,heightConditionTextField,heightTextField,hairColorTextField,eyeColorTextField;
 @synthesize ethnicitiesButtons;
-@synthesize TalentButtons;
+@synthesize talentButtons;
+@synthesize languagesButtons;
+@synthesize milesTextField, willingToTravelButton;
+
 @synthesize scrollView;
 
 
@@ -62,17 +74,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self updateBackgroundRandomColor];
+    [self updateBackgroundRandomColor];
     [self setUpTapGesture];
     [self setUpAllPickers];
     [self setUpHasButtonOptionsAndInitialStatus];
     [self setUpEthnicityButtons];
     [self setUpTalentButtons];
+    [self setUpLanguagesButtons];
+    [self setUpWillingToTravelButton];
 }//EOM
 
 
 
-#pragma mark - buttons functions
+#pragma mark - buttons functions (hasPhoto, HasWebsite, hasTattoos, hasPiercings)
 
 /* 
  handles the following buttons:
@@ -191,7 +205,7 @@
     }//eom
 
 
-#pragma mark - picker functions (gender, age, weight, height, hair & eye color)
+#pragma mark - picker functions (gender, age, weight, height, hair & eye color, miles)
     -(void)setUpAllPickers
     {
         //gender
@@ -202,12 +216,20 @@
                          nil];
 
         //age
-        [self setUpAge];
-        ageOptions = [[NSArray alloc] initWithObjects:@"Any",
+        [self setUpAgeFrom];
+        ageFromOptions = [[NSArray alloc] initWithObjects:
                           @"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",
                           @"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",
                           @"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45+",
                          nil];
+        
+        [self setUpAgeTo];
+        ageToOptions = [[NSArray alloc] initWithObjects:@"Any",
+                      @"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",
+                      @"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",
+                      @"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45+",
+                      nil];
+
 
         //hair color
         [self setUpHairColor];
@@ -270,7 +292,17 @@
                              @"atleast",
                              @"Any",
                              nil];
-
+        
+        //miles
+        [self setUpMiles];
+        milesOptions = [[NSArray alloc]initWithObjects:@"",
+                        @"5",
+                        @"10",
+                        @"15",
+                        @"25",
+                        @"50",
+                        @"100+",
+                        nil];
     }//eom
 
     /*sets up the gender textfield with picker */
@@ -317,18 +349,18 @@
 
 
     /*sets up the gender textfield with picker */
-    -(void)setUpAge
+    -(void)setUpAgeFrom
     {
         // create a UIPicker view as a custom keyboard view
-        agePickerView = [[UIPickerView alloc] init];
-        [agePickerView sizeToFit];
-        agePickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-        agePickerView.delegate = self;
-        agePickerView.dataSource = self;
-        agePickerView.showsSelectionIndicator = YES;
+        ageFromPickerView = [[UIPickerView alloc] init];
+        [ageFromPickerView sizeToFit];
+        ageFromPickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+        ageFromPickerView.delegate = self;
+        ageFromPickerView.dataSource = self;
+        ageFromPickerView.showsSelectionIndicator = YES;
         
         //updating keyboard as picker
-        self.ageTextField.inputView = agePickerView;
+        self.ageFromTextField.inputView = ageFromPickerView;
         
         // creating toolbar for 'Cancel' and 'Done' actions
         UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
@@ -355,7 +387,49 @@
         
         
         // Plug the keyboardDoneButtonView into the text field.
-        self.ageTextField.inputAccessoryView = keyboardDoneButtonView;
+        self.ageFromTextField.inputAccessoryView = keyboardDoneButtonView;
+    }//eom
+
+    /*sets up the gender textfield with picker */
+    -(void)setUpAgeTo
+    {
+        // create a UIPicker view as a custom keyboard view
+        ageToPickerView = [[UIPickerView alloc] init];
+        [ageToPickerView sizeToFit];
+        ageToPickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+        ageToPickerView.delegate = self;
+        ageToPickerView.dataSource = self;
+        ageToPickerView.showsSelectionIndicator = YES;
+        
+        //updating keyboard as picker
+        self.ageToTextField.inputView = ageToPickerView;
+        
+        // creating toolbar for 'Cancel' and 'Done' actions
+        UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+        keyboardDoneButtonView.barStyle = UIBarStyleBlack;
+        keyboardDoneButtonView.translucent = YES;
+        keyboardDoneButtonView.tintColor = nil;
+        [keyboardDoneButtonView sizeToFit];
+        
+        //creating empty UIBarItem to force first item to the right
+        UIBarButtonItem* empty1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        
+        //creating 'Done' UIBarItem to be the exit point for the picker
+        UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(cancelClicked:)];
+        
+        //creating 'Done' UIBarItem to be the exit point for the picker
+        UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                      action:@selector(doneClicked:)] ;
+        //adding UIBarItems to the Keyboard/Picker
+        [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
+        
+        
+        // Plug the keyboardDoneButtonView into the text field.
+        self.ageToTextField.inputAccessoryView = keyboardDoneButtonView;
     }//eom
 
     /* creates the picker for hair color selection*/
@@ -574,6 +648,47 @@
         self.heightConditionTextField.inputAccessoryView = keyboardDoneButtonView;
     }//eom
 
+    /*sets up the gender textfield with picker */
+    -(void)setUpMiles
+    {
+        // create a UIPicker view as a custom keyboard view
+        milesPickerView = [[UIPickerView alloc] init];
+        [milesPickerView sizeToFit];
+        milesPickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+        milesPickerView.delegate = self;
+        milesPickerView.dataSource = self;
+        milesPickerView.showsSelectionIndicator = YES;
+        
+        //updating keyboard as uipicker
+        self.milesTextField.inputView = milesPickerView;
+        
+        // creating toolbar for 'Cancel' and 'Done' actions
+        UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+        keyboardDoneButtonView.barStyle = UIBarStyleBlack;
+        keyboardDoneButtonView.translucent = YES;
+        keyboardDoneButtonView.tintColor = nil;
+        [keyboardDoneButtonView sizeToFit];
+        
+        //creating empty UIBarItem to force first item to the right
+        UIBarButtonItem* empty1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        
+        //creating 'Done' UIBarItem to be the exit point for the picker
+        UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(cancelClicked:)];
+        
+        //creating 'Done' UIBarItem to be the exit point for the picker
+        UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                       style:UIBarButtonItemStyleBordered target:self
+                                                                      action:@selector(doneClicked:)] ;
+        //adding UIBarItems to the Keyboard/Picker
+        [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
+        
+        
+        // Plug the keyboardDoneButtonView into the text field.
+        self.milesTextField.inputAccessoryView = keyboardDoneButtonView;
+    }//eom
 
 
     //process the data after the user click done on the uipicker
@@ -581,13 +696,14 @@
     - (void)doneClicked:(id)sender
     {
         [self.genderTextField resignFirstResponder];
-        [self.ageTextField resignFirstResponder];
+        [self.ageFromTextField resignFirstResponder];
+        [self.ageToTextField resignFirstResponder];
         [self.hairColorTextField resignFirstResponder];
         [self.eyeColorTextField resignFirstResponder];
         [self.heightTextField resignFirstResponder];
         [self.weightConditionTextField resignFirstResponder];
         [self.heightConditionTextField resignFirstResponder];
-        
+        [self.milesTextField resignFirstResponder];
     }//eom
 
     //process the date selected after the user click cancel
@@ -595,13 +711,14 @@
     - (void)cancelClicked:(id)sender
     {
         [self.genderTextField resignFirstResponder];
-        [self.ageTextField resignFirstResponder];
+        [self.ageFromTextField resignFirstResponder];
+        [self.ageToTextField resignFirstResponder];
         [self.hairColorTextField resignFirstResponder];
         [self.eyeColorTextField resignFirstResponder];
         [self.heightTextField resignFirstResponder];
         [self.weightConditionTextField resignFirstResponder];
         [self.heightConditionTextField resignFirstResponder];
-        
+        [self.milesTextField resignFirstResponder];
     }//eom
 
 
@@ -622,9 +739,13 @@
     - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
     {
         //age
-        if(pickerView == agePickerView)
+        if(pickerView == ageFromPickerView)
         {
-            return [ageOptions count];
+            return [ageFromOptions count];
+        }
+        else if(pickerView == ageToPickerView)
+        {
+            return [ageToOptions count];
         }
         //hair color
         else if(pickerView == hairColorPickerView)
@@ -658,6 +779,11 @@
         {
             return [conditionsOptions count];
         }
+        //miles
+        else if(pickerView == milesPickerView)
+        {
+            return [milesOptions count];
+        }
         
         //gender
         return [genderOptions count];
@@ -672,9 +798,13 @@
     - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
     {
         //age
-        if(pickerView == agePickerView)
+        if(pickerView == ageFromPickerView)
         {
-            return [ageOptions objectAtIndex:row];
+            return [ageFromOptions objectAtIndex:row];
+        }
+        else if(pickerView == ageToPickerView)
+        {
+            return [ageToOptions objectAtIndex:row];
         }
         //hair color
         else if(pickerView == hairColorPickerView)
@@ -708,14 +838,21 @@
         {
             return [conditionsOptions objectAtIndex:row];
         }
-
+        //miles
+        else if(pickerView == milesPickerView)
+        {
+            return [milesOptions objectAtIndex:row];
+        }
+  
         
         //gender
         return [genderOptions objectAtIndex:row];
     }//eom
 
 //If the user chooses from the pickerview, it calls this function;
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+- (void)pickerView:(UIPickerView *)pickerView
+      didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component
 {
     //gender
     if(pickerView == genderPickerView)
@@ -724,10 +861,15 @@
         self->genderTextField.text = [genderOptions objectAtIndex:row];
     }
     //age
-    else if(pickerView == agePickerView)
+    else if(pickerView == ageFromPickerView)
     {
         //updating values
-        self.ageTextField.text = [ageOptions objectAtIndex:row];
+        self.ageFromTextField.text = [ageFromOptions objectAtIndex:row];
+    }
+    else if(pickerView == ageToPickerView)
+    {
+        //updating values
+        self.ageToTextField.text = [ageToOptions objectAtIndex:row];
     }
     //hair color
     else if(pickerView == hairColorPickerView)
@@ -769,218 +911,365 @@
         //updating values
         self.heightConditionTextField.text = [conditionsOptions objectAtIndex:row];
     }
-
+    //miles
+    else if(pickerView == milesPickerView)
+    {
+        //updating values
+        self.milesTextField.text = [milesOptions objectAtIndex:row];
+    }
+    
 }//eom
 
 #pragma mark - ethnicity functions
 
-/* updates the selection status of the current button pressed */
-- (IBAction)ethnicityButtonValuesChanged:(UIButton *)sender
-{
-    
-    NSLog(@"");
-    NSLog(@" ethnicitiesSelected BEFORE: %@", ethnicitiesSelected.debugDescription);
-    
-    int buttonID = (int)sender.tag;
-    if( (buttonID > -1) && (buttonID < 10)  )
+    /* updates the selection status of the current button pressed */
+    - (IBAction)ethnicityButtonValuesChanged:(UIButton *)sender
     {
-        //get current status
-        BOOL currEnthnicitySelected = [[ethnicitiesSelected objectAtIndex:buttonID] boolValue];
-        
-        //calculating new status
-        if(currEnthnicitySelected)
+        int buttonID = (int)sender.tag;
+        if( (buttonID > -1) && (buttonID < 10)  )
         {
-            currEnthnicitySelected = false;
-        }
-        else if(currEnthnicitySelected == FALSE)
-        {
-            currEnthnicitySelected = true;
-        }
-        
-        //if any unselected all other choices
-        if(  (buttonID == 0) && (currEnthnicitySelected == TRUE) )
-        {
-            //update Any button selection
-            [ethnicitiesSelected replaceObjectAtIndex:0 withObject: [NSNumber numberWithBool:YES]];
+            //get current status
+            BOOL currEnthnicitySelected = [[ethnicitiesSelected objectAtIndex:buttonID] boolValue];
             
-            //reflecting changes of selection on ANY button
-            sender.layer.borderColor = [UIColor blackColor].CGColor;
-            
-            //diselect all other buttons
-            for(int iter = 1; iter < [ethnicitiesButtons count]; iter++)
+            //calculating new status
+            if(currEnthnicitySelected)
             {
-                //current button
-                UIButton * currButton = [ethnicitiesButtons objectAtIndex:iter];
+                currEnthnicitySelected = false;
+            }
+            else if(currEnthnicitySelected == FALSE)
+            {
+                currEnthnicitySelected = true;
+            }
+            
+            //if any unselected all other choices
+            if(  (buttonID == 0) && (currEnthnicitySelected == TRUE) )
+            {
+                //update Any button selection
+                [ethnicitiesSelected replaceObjectAtIndex:0 withObject: [NSNumber numberWithBool:YES]];
+                
+                //reflecting changes of selection on ANY button
+                sender.layer.borderColor = [UIColor blackColor].CGColor;
+                
+                //diselect all other buttons
+                for(int iter = 1; iter < [ethnicitiesButtons count]; iter++)
+                {
+                    //current button
+                    UIButton * currButton = [ethnicitiesButtons objectAtIndex:iter];
+                    
+                    //reflect diselection on curr button color
+                    currButton.layer.borderColor = [UIColor clearColor].CGColor;
+                    
+                    //update curr button selection
+                    [ethnicitiesSelected replaceObjectAtIndex:iter withObject: [NSNumber numberWithBool:NO]];
+                    
+                }//eofl
+            }
+            else
+            {
+                
+                //diselect ANY button
+                UIButton * firstButton = [ethnicitiesButtons objectAtIndex:0];
                 
                 //reflect diselection on curr button color
-                currButton.layer.borderColor = [UIColor clearColor].CGColor;
+                firstButton.layer.borderColor = [UIColor clearColor].CGColor;
                 
                 //update curr button selection
-                [ethnicitiesSelected replaceObjectAtIndex:iter withObject: [NSNumber numberWithBool:NO]];
-                
-            }//eofl
-        }
-        else
-        {
-            
-            //diselect ANY button
-            UIButton * firstButton = [ethnicitiesButtons objectAtIndex:0];
-            
-            //reflect diselection on curr button color
-            firstButton.layer.borderColor = [UIColor clearColor].CGColor;
-            
-            //update curr button selection
-            [ethnicitiesSelected replaceObjectAtIndex:0 withObject: [NSNumber numberWithBool:NO]];
+                [ethnicitiesSelected replaceObjectAtIndex:0 withObject: [NSNumber numberWithBool:NO]];
 
+                
+                //current button
+                UIButton * currButton = [ethnicitiesButtons objectAtIndex:buttonID];
+                
+                if(currEnthnicitySelected == TRUE)
+                {
+                    //reflect diselection on curr button color
+                    currButton.layer.borderColor = [UIColor blackColor].CGColor;
+                    
+                    //update curr button selection
+                    [ethnicitiesSelected replaceObjectAtIndex:buttonID withObject: [NSNumber numberWithBool:YES]];
+                    
+                }
+                else if(currEnthnicitySelected == FALSE)
+                {
+                    //reflect diselection on curr button color
+                    currButton.layer.borderColor = [UIColor clearColor].CGColor;
+                    
+                    //update curr button selection
+                    [ethnicitiesSelected replaceObjectAtIndex:buttonID withObject: [NSNumber numberWithBool:NO]];
+                }
+            }
+            
+        }//eo-valid buttons
+    }//eo-action
+
+    /* set up Ethnicity Buttons status */
+    -(void)setUpEthnicityButtons
+    {
+        ethnicities = [ [NSArray alloc] initWithObjects:
+                                       @"Any",
+                                       @"Non-Hispanic White or Euro-American",
+                                       @"Black, Afro-Caribbean, or African American",
+                                       @"Latino or Hispanic American",
+                                       @"East Asian or Asian American",
+                                       @"South Asian or Indian American",
+                                       @"Middle Eastern or Arab American",
+                                       @"Native American or Alaskan Native",
+                                       @"Other",
+                                       nil];
+        
+        //setting all index as NOT pressed
+        ethnicitiesSelected = [[NSMutableArray alloc] initWithObjects:
+                               [NSNumber numberWithBool:YES],   //index 0
+                               [NSNumber numberWithBool:NO],   //index 1
+                               [NSNumber numberWithBool:NO],   //index 2
+                               [NSNumber numberWithBool:NO],   //index 3
+                               [NSNumber numberWithBool:NO],   //index 4
+                               [NSNumber numberWithBool:NO],   //index 5
+                               [NSNumber numberWithBool:NO],   //index 6
+                               [NSNumber numberWithBool:NO],   //index 7
+                               [NSNumber numberWithBool:NO],   //index 8
+                               nil];
+
+        //updating all buttons to reflect their status
+        [self updateEthnicitiesButtonValue];
+
+    }//eom
+
+    /* updates the visual colors of all buttons based on their current selection */
+    -(void)updateEthnicitiesButtonValue
+    {
+        //diselect all other buttons
+        int totalButtons = (int)[ethnicitiesButtons count];
+        for(int iter = 0; iter < totalButtons; iter++)
+        {
+            //current button
+            UIButton * currButton = [ethnicitiesButtons objectAtIndex:iter];
+            currButton.layer.borderWidth = 4.5f;
+            currButton.layer.cornerRadius = 10.0f;
+            
+            //get current status
+            int currEthnicitySelected = [[ethnicitiesSelected objectAtIndex:iter] boolValue];
+            if(currEthnicitySelected)
+            {
+                //reflect diselection on curr button color
+                currButton.layer.borderColor = [UIColor blackColor].CGColor;
+            }
+            else
+            {
+                //reflect diselection on curr button color
+                currButton.layer.borderColor = [UIColor clearColor].CGColor;
+            }
+        }//eofl
+
+    }//eom
+
+
+
+#pragma mark - talent functions
+
+    /* updates the selection status of the current button pressed */
+    - (IBAction)talentButtonValuesChanged:(UIButton *)sender
+    {
+        int buttonID = (int)sender.tag;
+        if( (buttonID > -1) && (buttonID < 12)  )
+        {
+            //get current status
+            BOOL currTalentSelect = [[talentsSelected objectAtIndex:buttonID] boolValue];
+            
+            //updating new selection
+            if(currTalentSelect)
+            {
+                currTalentSelect = FALSE;
+            }
+            else if(currTalentSelect == FALSE)
+            {
+                currTalentSelect = TRUE;
+            }
             
             //current button
-            UIButton * currButton = [ethnicitiesButtons objectAtIndex:buttonID];
+            UIButton * currButton = [talentButtons objectAtIndex:buttonID];
             
-            if(currEnthnicitySelected == TRUE)
+            if(currTalentSelect == TRUE)
             {
                 //reflect diselection on curr button color
                 currButton.layer.borderColor = [UIColor blackColor].CGColor;
                 
                 //update curr button selection
-                [ethnicitiesSelected replaceObjectAtIndex:buttonID withObject: [NSNumber numberWithBool:YES]];
+                [talentsSelected replaceObjectAtIndex:buttonID withObject: [NSNumber numberWithBool:YES]];
                 
             }
-            else if(currEnthnicitySelected == FALSE)
+            else if(currTalentSelect == FALSE)
             {
                 //reflect diselection on curr button color
                 currButton.layer.borderColor = [UIColor clearColor].CGColor;
                 
                 //update curr button selection
-                [ethnicitiesSelected replaceObjectAtIndex:buttonID withObject: [NSNumber numberWithBool:NO]];
+                [talentsSelected replaceObjectAtIndex:buttonID withObject: [NSNumber numberWithBool:NO]];
             }
+        }//eo-valid buttons
+    }//eom
+
+
+    /* set up Talent Buttons status */
+    -(void) setUpTalentButtons
+    {
+        talents = [ [NSArray alloc] initWithObjects:
+                       @"Brand Ambassador",
+                       @"Catering Company",
+                       @"Dancer",
+                       @"DJ",
+                       @"Field Marketing Manager",
+                       @"Flyer Distributor",
+                       @"Live Band",
+                       @"Model",
+                       @"Production Assistant",
+                       @"Sales Executive",
+                       @"Waiter/Waitress",
+                       @"Other",
+                       nil];
+        
+        //setting all index as NOT pressed
+        talentsSelected = [[NSMutableArray alloc] initWithObjects:
+                               [NSNumber numberWithBool:NO],   //index 0
+                               [NSNumber numberWithBool:NO],   //index 1
+                               [NSNumber numberWithBool:NO],   //index 2
+                               [NSNumber numberWithBool:NO],   //index 3
+                               [NSNumber numberWithBool:NO],   //index 4
+                               [NSNumber numberWithBool:NO],   //index 5
+                               [NSNumber numberWithBool:NO],   //index 6
+                               [NSNumber numberWithBool:NO],   //index 7
+                               [NSNumber numberWithBool:NO],   //index 8
+                               [NSNumber numberWithBool:NO],   //index 9
+                               [NSNumber numberWithBool:NO],   //index 10
+                               [NSNumber numberWithBool:NO],   //index 11
+                               nil];
+
+        //update all talent buttons
+        [self updateAllTalentButtons];
+    }//eom
+
+    /* updates the visual colors of all buttons based on their current selection */
+    -(void)updateAllTalentButtons
+    {
+        //diselect all other buttons
+        int totalButtons = (int)[talentButtons count];
+        for(int iter = 0; iter < totalButtons; iter++)
+        {
+            //current button
+            UIButton * currButton = [talentButtons objectAtIndex:iter];
+            currButton.layer.borderWidth = 4.5f;
+            currButton.layer.cornerRadius = 10.0f;
+            
+            //get current status
+            int currTalentSelected = [[talentsSelected objectAtIndex:iter] boolValue];
+            if(currTalentSelected)
+            {
+                //reflect diselection on curr button color
+                currButton.layer.borderColor = [UIColor blackColor].CGColor;
+            }
+            else
+            {
+                //reflect diselection on curr button color
+                currButton.layer.borderColor = [UIColor clearColor].CGColor;
+            }
+        }//eofl
+
+    }//eom
+
+#pragma mark - languages functions
+
+/* updates the selection status of the current button pressed */
+- (IBAction)languagesButtonsValueChanged:(UIButton *)sender
+{
+
+    int buttonID = (int)sender.tag;
+    if( (buttonID > -1) && (buttonID < 10)  )
+    {
+        //get current status
+        BOOL currTalentSelect = [[languagesSelected objectAtIndex:buttonID] boolValue];
+        
+        //updating new selection
+        if(currTalentSelect)
+        {
+            currTalentSelect = FALSE;
+        }
+        else if(currTalentSelect == FALSE)
+        {
+            currTalentSelect = TRUE;
         }
         
-    }//eo-valid buttons
-
-    
-    NSLog(@"");
-    NSLog(@" ethnicitiesSelected AFTER: %@", ethnicitiesSelected.debugDescription);
-    NSLog(@"");
-    NSLog(@"");
-}//eo-action
-
-/* set up Ethnicity Buttons status */
--(void)setUpEthnicityButtons
-{
-    ethnicities = [ [NSArray alloc] initWithObjects:
-                                   @"Any",
-                                   @"Non-Hispanic White or Euro-American",
-                                   @"Black, Afro-Caribbean, or African American",
-                                   @"Latino or Hispanic American",
-                                   @"East Asian or Asian American",
-                                   @"South Asian or Indian American",
-                                   @"Middle Eastern or Arab American",
-                                   @"Native American or Alaskan Native",
-                                   @"Other",
-                                   nil];
-    
-    //setting all index as NOT pressed
-    ethnicitiesSelected = [[NSMutableArray alloc] initWithObjects:
-                           [NSNumber numberWithBool:YES],   //index 0
-                           [NSNumber numberWithBool:NO],   //index 1
-                           [NSNumber numberWithBool:NO],   //index 2
-                           [NSNumber numberWithBool:NO],   //index 3
-                           [NSNumber numberWithBool:NO],   //index 4
-                           [NSNumber numberWithBool:NO],   //index 5
-                           [NSNumber numberWithBool:NO],   //index 6
-                           [NSNumber numberWithBool:NO],   //index 7
-                           [NSNumber numberWithBool:NO],   //index 8
-                           nil];
-
-    //updating all buttons to reflect their status
-    [self updateEthnicitiesButtonValue];
-
-}//eom
-
-/* updates the visual colors of all buttons based on their current selection */
--(void)updateEthnicitiesButtonValue
-{
-    //diselect all other buttons
-    for(int iter = 0; iter < [ethnicitiesButtons count]; iter++)
-    {
         //current button
-        UIButton * currButton = [ethnicitiesButtons objectAtIndex:iter];
-        currButton.layer.borderWidth = 4.5f;
-        currButton.layer.cornerRadius = 10.0f;
+        UIButton * currButton = [languagesButtons objectAtIndex:buttonID];
         
-        //get current status
-        int currEthnicitySelected = [[ethnicitiesSelected objectAtIndex:iter] boolValue];
-        if(currEthnicitySelected)
+        if(currTalentSelect == TRUE)
         {
             //reflect diselection on curr button color
             currButton.layer.borderColor = [UIColor blackColor].CGColor;
+            
+            //update curr button selection
+            [languagesSelected replaceObjectAtIndex:buttonID withObject: [NSNumber numberWithBool:YES]];
+            
         }
-        else
+        else if(currTalentSelect == FALSE)
         {
             //reflect diselection on curr button color
             currButton.layer.borderColor = [UIColor clearColor].CGColor;
+            
+            //update curr button selection
+            [languagesSelected replaceObjectAtIndex:buttonID withObject: [NSNumber numberWithBool:NO]];
         }
-    }//eofl
-
+    }//eo-valid buttons
 }//eom
 
 
-
-#pragma mark - talent functions
-- (IBAction)talentButtonValuesChanged:(UIButton *)sender
+/* set up Talent Buttons status */
+-(void) setUpLanguagesButtons
 {
-
-    
-}//eom
-
--(void) setUpTalentButtons
-{
-    talents = [ [NSArray alloc] initWithObjects:
-                   @"Brand Ambassador",
-                   @"Catering Company",
-                   @"Dancer",
-                   @"DJ",
-                   @"Field Marketing Manager",
-                   @"Flyer Distributor",
-                   @"Live Band",
-                   @"Model",
-                   @"Production Assistant",
-                   @"Sales Executive",
-                   @"Other",
-                   nil];
+    languages = [ [NSArray alloc] initWithObjects:
+               @"English",
+               @"Spanish",
+               @"Arabic",
+               @"French",
+               @"German",
+               @"Italian",
+               @"Japanese",
+               @"Madarin",
+               @"Portuguese",
+               @"Russian",
+               nil];
     
     //setting all index as NOT pressed
-    talentsSelected = [[NSMutableArray alloc] initWithObjects:
-                           [NSNumber numberWithBool:NO],   //index 0
-                           [NSNumber numberWithBool:NO],   //index 1
-                           [NSNumber numberWithBool:NO],   //index 2
-                           [NSNumber numberWithBool:NO],   //index 3
-                           [NSNumber numberWithBool:NO],   //index 4
-                           [NSNumber numberWithBool:NO],   //index 5
-                           [NSNumber numberWithBool:NO],   //index 6
-                           [NSNumber numberWithBool:NO],   //index 7
-                           [NSNumber numberWithBool:NO],   //index 8
-                           [NSNumber numberWithBool:NO],   //index 9
-                           [NSNumber numberWithBool:NO],   //index 10
-                           nil];
-
+    languagesSelected = [[NSMutableArray alloc] initWithObjects:
+                       [NSNumber numberWithBool:YES],  //index 0
+                       [NSNumber numberWithBool:NO],   //index 1
+                       [NSNumber numberWithBool:NO],   //index 2
+                       [NSNumber numberWithBool:NO],   //index 3
+                       [NSNumber numberWithBool:NO],   //index 4
+                       [NSNumber numberWithBool:NO],   //index 5
+                       [NSNumber numberWithBool:NO],   //index 6
+                       [NSNumber numberWithBool:NO],   //index 7
+                       [NSNumber numberWithBool:NO],   //index 8
+                       [NSNumber numberWithBool:NO],   //index 9
+                         nil];
+    
     //update all talent buttons
-    [self updateAllTalentButtons];
+    [self updateAllLanguagesButtons];
 }//eom
 
 /* updates the visual colors of all buttons based on their current selection */
--(void)updateAllTalentButtons
+-(void)updateAllLanguagesButtons
 {
     //diselect all other buttons
-    for(int iter = 0; iter < [TalentButtons count]; iter++)
+    int totalButtons = (int)[languagesButtons count];
+    for(int iter = 0; iter < totalButtons; iter++)
     {
         //current button
-        UIButton * currButton = [TalentButtons objectAtIndex:iter];
+        UIButton * currButton = [languagesButtons objectAtIndex:iter];
         currButton.layer.borderWidth = 4.5f;
         currButton.layer.cornerRadius = 10.0f;
         
         //get current status
-        int currTalentSelected = [[talentsSelected objectAtIndex:iter] boolValue];
+        int currTalentSelected = [[languagesSelected objectAtIndex:iter] boolValue];
         if(currTalentSelected)
         {
             //reflect diselection on curr button color
@@ -992,10 +1281,73 @@
             currButton.layer.borderColor = [UIColor clearColor].CGColor;
         }
     }//eofl
-
+    
 }//eom
 
-#pragma mark - languages functions
+#pragma mark - willing to travel functions
+- (IBAction)willingToTravelValueChanged:(UIButton *)sender
+{
+    
+    int buttonID = (int)sender.tag;
+    if( buttonID == 0 )
+    {
+        //get current status
+        NSString * currentStatus = [willingToTravelStatus objectAtIndex:buttonID];
+        int currentStatusInt    = [currentStatus intValue];
+        
+        //calculate new status
+        currentStatusInt++;
+        int newStatus = currentStatusInt;
+        if(newStatus > 2)
+        {
+            newStatus = 0;
+        }
+        
+        //get the new status text representation
+        NSString * newTextStatus = [willingToTravelOptions objectAtIndex:newStatus];
+        
+        //update button reflecting the new status
+        if(newStatus == 0)//MAYBE
+        {
+            [sender setTitle:newTextStatus forState:UIControlStateNormal];
+//            sender.layer.borderColor = [UIColor blackColor].CGColor;
+//            [sender setBackgroundColor: [UIColor clearColor] ];
+        }
+        else if(newStatus == 1)//YES
+        {
+            [sender setTitle:newTextStatus forState:UIControlStateNormal];
+//            sender.layer.borderColor = [UIColor greenColor].CGColor;
+//            [sender setBackgroundColor: [UIColor greenColor] ];
+        }
+        else if(newStatus == 2)//NO
+        {
+            [sender setTitle:newTextStatus forState:UIControlStateNormal];
+//            sender.layer.borderColor = [UIColor redColor].CGColor;
+//            [sender setBackgroundColor: [UIColor redColor] ];
+        }
+
+        //save the new status for future changes
+        NSString * newStatusAsString = [NSString stringWithFormat:@"%d",newStatus];
+        [willingToTravelStatus replaceObjectAtIndex:buttonID withObject:newStatusAsString];
+        
+    }//eo-valid options
+    
+}//eom
+
+-(void)setUpWillingToTravelButton
+{
+    willingToTravelOptions = [[NSArray alloc]initWithObjects:
+                        @"Maybe",
+                        @"Yes",
+                        @"No",
+                        nil];
+
+    willingToTravelStatus = [[NSMutableArray alloc] initWithObjects:@"0", nil];
+    
+    willingToTravelButton.layer.borderColor = [UIColor blackColor].CGColor;
+    willingToTravelButton.layer.borderWidth = 4.5f;
+    willingToTravelButton.layer.cornerRadius = 10.0f;
+}//eom
 
 
 #pragma mark - helper functions
@@ -1048,25 +1400,5 @@
         [scrollView setContentOffset:point animated:YES];
     }//eom
 
-
-
-
-#pragma mark -
-
-    - (void)didReceiveMemoryWarning
-    {
-        [super didReceiveMemoryWarning];
-        // Dispose of any resources that can be recreated.
-    }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

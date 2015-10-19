@@ -23,7 +23,8 @@
 
 //PICKERS
 @property (weak, nonatomic) IBOutlet UITextField *genderTextField;
-@property (weak, nonatomic) IBOutlet UITextField *ageTextField;
+@property (weak, nonatomic) IBOutlet UITextField *ageFromTextField;
+@property (weak, nonatomic) IBOutlet UITextField *ageToTextField;
 @property (weak, nonatomic) IBOutlet UITextField *weightConditionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *weightTextField;
 @property (weak, nonatomic) IBOutlet UITextField *heightConditionTextField;
@@ -33,19 +34,22 @@
 
 - (IBAction)buttonsValueChanged:(UIButton *)sender;
 
-
 //Ethnicities
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ethnicitiesButtons;
-
 - (IBAction)ethnicityButtonValuesChanged:(UIButton *)sender;
 
-
 //Talent
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *TalentButtons;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *talentButtons;
 - (IBAction)talentButtonValuesChanged:(UIButton *)sender;
 
+//Languages
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *languagesButtons;
+- (IBAction)languagesButtonsValueChanged:(UIButton *)sender;
 
-
+//miles/travel
+@property (weak, nonatomic) IBOutlet UITextField *milesTextField;
+@property (weak, nonatomic) IBOutlet UIButton *willingToTravelButton;
+- (IBAction)willingToTravelValueChanged:(UIButton *)sender;
 
 
 

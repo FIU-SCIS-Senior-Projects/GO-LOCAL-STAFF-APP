@@ -84,229 +84,237 @@
 }//eom
 
 
-/* verifying the required input fileds */
-- (BOOL)verifyDataEnter
-{
-    //driver license
-    if(self.validDriverLicenseSwitch.on)
-    {
-        self->hasDriverLicense = YES;
-    }
-    else
-    {
-        self->hasDriverLicense = NO;
-    }
-    
-    //commercial license
-    if(self.validCommercialDriverLicenseSwitch.on)
-    {
-        self->hasCommercialLicense = YES;
-    }
-    else
-    {
-        self->hasDriverLicense = NO;
-    }
-    
-    //tattoos
-    if(self.hasTattoosSwitch.on)
-    {
-        self->hasTattos = YES;
-    }
-    else
-    {
-        self->hasTattos = NO;
-    }
-    
-    
-    //piercings
-    if(self.hasPiercingsSwitch.on)
-    {
-        self->hasPiercings = YES;
-    }
-    else
-    {
-        self->hasPiercings = NO;
-    }
-    
-    //checking for valid input
-    NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
-    NSString * testing;
-    NSString *trimmedString;
+#pragma mark - verify data
 
-    //ethnicity
-    testing = self.ethnicityTextField.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:self.ethnicityTextField]; //take scroll to textfield so user can see their error
-        self.ethnicityTextField.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please select your ethnicity" and:@"Okay"];
-        return 0;
-    }
-    
-    //height
-    testing = self.heightTextField.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:self.heightTextField]; //take scroll to textfield so user can see their error
-        self.heightTextField.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your height" and:@"Okay"];
-        return 0;
-    }
-    
-    //weight
-    testing = self.weightTextField.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:self.weightTextField]; //take scroll to textfield so user can see their error
-        self.weightTextField.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your weight" and:@"Okay"];
-        return 0;
-    }
-    else if( (self.weightTextField.text.length > 3) || (self.weightTextField.text.length < 2) )
+    /* verifying the required input fileds */
+    - (BOOL)verifyDataEnter
     {
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your weight" and:@"Okay"];
-        return 0;
-    }
-    
-    //hair color
-    testing = self.hairColorTextField.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:self.hairColorTextField]; //take scroll to textfield so user can see their error
-        self.hairColorTextField.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please select your hair color" and:@"Okay"];
-        return 0;
-    }
-    
-    //eye color
-    testing = self.eyeColorTextField.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:self.eyeColorTextField]; //take scroll to textfield so user can see their error
-        self.eyeColorTextField.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please select your eye color" and:@"Okay"];
-        return 0;
-    }
-
-    //pant size
-    testing = self.pantSizeTextField.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:self.pantSizeTextField]; //take scroll to textfield so user can see their error
-        self.pantSizeTextField.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your pant size" and:@"Okay"];
-        return 0;
-    }
-    
-    //shoe size
-    testing = self.shoeSizeTextField.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:self.shoeSizeTextField]; //take scroll to textfield so user can see their error
-        self.shoeSizeTextField.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your shoe size" and:@"Okay"];
-        return 0;
-    }
-    else if( (self.shoeSizeTextField.text.length > 3))
-    {
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your shoe size" and:@"Okay"];
-        return 0;
-    }
-    
-    //tshirt size
-    testing = self.tshirtSizeTextField.text;
-    trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
-    if ([trimmedString isEqualToString:@""]) {
-        [self scrollVievEditingFinished:self.tshirtSizeTextField]; //take scroll to textfield so user can see their error
-        self.tshirtSizeTextField.text =@""; //clearing field
-        // it's empty or contains only white spaces
-        [self showAlert:@"Registration Field" withMessage:@"Please enter your tshirt size" and:@"Okay"];
-        return 0;
-    }
-    
-    //updating values
-    [registeredStaff setLicenseInfo:self->hasDriverLicense hasCommercialLicense:self->hasCommercialLicense];
-    [registeredStaff setTattoos:self->hasTattos];
-    [registeredStaff setPiercings:self->hasPiercings];
-    [registeredStaff setEthnicity:self.ethnicityTextField.text withCode:self->ethinicityCode];
-    [registeredStaff setHeight:self.heightTextField.text];
-    [registeredStaff setWeight:self.weightTextField.text];
-    [registeredStaff setHairColor:self.hairColorTextField.text];
-    [registeredStaff setEyeColor:self.eyeColorTextField.text];
-    [registeredStaff setPantSize:self.pantSizeTextField.text];
-    [registeredStaff setShoeSize:self.shoeSizeTextField.text];
-    [registeredStaff setTshirtSize:self.tshirtSizeTextField.text];
-    
-    return 1;
-}//eom
-
-/* submmitting form */
-- (IBAction)submitForm:(id)sender
-{
-        //verifying the data enter
-        bool result = [self verifyDataEnter];
-        if(result)
+        //driver license
+        if(self.validDriverLicenseSwitch.on)
         {
-            //    moving to the next controller
-            [self routeToProperController];
+            self->hasDriverLicense = YES;
         }
         else
         {
-            NSLog(@"missing some/all required fields staffRegistration8");
+            self->hasDriverLicense = NO;
         }
-}//eom
-
-
-
-/* route to proper controllers */
--(void) routeToProperController
-{
-    if(self->male) //males are skipping females question
-    {
-        [self performSegueWithIdentifier:@"goToStaffRegister10" sender:self];
-    }
-    else
-    {
-        [self performSegueWithIdentifier:@"goToStaffRegister9" sender:self];//females only
-    }
-
-}//eom
-
-/* preparing the data to sent to the next view controller */
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"goToStaffRegister9"]){
-        StaffRegistration9ViewController *controller = (StaffRegistration9ViewController *)segue.destinationViewController;
-        controller.registeredStaff = registeredStaff;
         
-    }
-    else if([segue.identifier isEqualToString:@"goToStaffRegister10"]){
-        StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
+        //commercial license
+        if(self.validCommercialDriverLicenseSwitch.on)
+        {
+            self->hasCommercialLicense = YES;
+        }
+        else
+        {
+            self->hasDriverLicense = NO;
+        }
+        
+        //tattoos
+        if(self.hasTattoosSwitch.on)
+        {
+            self->hasTattos = YES;
+        }
+        else
+        {
+            self->hasTattos = NO;
+        }
+        
+        
+        //piercings
+        if(self.hasPiercingsSwitch.on)
+        {
+            self->hasPiercings = YES;
+        }
+        else
+        {
+            self->hasPiercings = NO;
+        }
+        
+        //checking for valid input
+        NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+        NSString * testing;
+        NSString *trimmedString;
 
-         controller.registeredStaff = registeredStaff;
-    }
-}//eom
+        //ethnicity
+        testing = self.ethnicityTextField.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:self.ethnicityTextField]; //take scroll to textfield so user can see their error
+            self.ethnicityTextField.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please select your ethnicity" and:@"Okay"];
+            return 0;
+        }
+        
+        //height
+        testing = self.heightTextField.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:self.heightTextField]; //take scroll to textfield so user can see their error
+            self.heightTextField.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your height" and:@"Okay"];
+            return 0;
+        }
+        
+        //weight
+        testing = self.weightTextField.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:self.weightTextField]; //take scroll to textfield so user can see their error
+            self.weightTextField.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your weight" and:@"Okay"];
+            return 0;
+        }
+        else if( (self.weightTextField.text.length > 3) || (self.weightTextField.text.length < 2) )
+        {
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your weight" and:@"Okay"];
+            return 0;
+        }
+        
+        //hair color
+        testing = self.hairColorTextField.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:self.hairColorTextField]; //take scroll to textfield so user can see their error
+            self.hairColorTextField.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please select your hair color" and:@"Okay"];
+            return 0;
+        }
+        
+        //eye color
+        testing = self.eyeColorTextField.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:self.eyeColorTextField]; //take scroll to textfield so user can see their error
+            self.eyeColorTextField.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please select your eye color" and:@"Okay"];
+            return 0;
+        }
 
-/* create UIAlert*/
--(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
-{
-    //creating UIAlert
-    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelTitle
-                                          otherButtonTitles: nil];
-    [alert show];//display alert
-}//eom
+        //pant size
+        testing = self.pantSizeTextField.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:self.pantSizeTextField]; //take scroll to textfield so user can see their error
+            self.pantSizeTextField.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your pant size" and:@"Okay"];
+            return 0;
+        }
+        
+        //shoe size
+        testing = self.shoeSizeTextField.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:self.shoeSizeTextField]; //take scroll to textfield so user can see their error
+            self.shoeSizeTextField.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your shoe size" and:@"Okay"];
+            return 0;
+        }
+        else if( (self.shoeSizeTextField.text.length > 3))
+        {
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your shoe size" and:@"Okay"];
+            return 0;
+        }
+        
+        //tshirt size
+        testing = self.tshirtSizeTextField.text;
+        trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+        if ([trimmedString isEqualToString:@""]) {
+            [self scrollVievEditingFinished:self.tshirtSizeTextField]; //take scroll to textfield so user can see their error
+            self.tshirtSizeTextField.text =@""; //clearing field
+            // it's empty or contains only white spaces
+            [self showAlert:@"Registration Field" withMessage:@"Please enter your tshirt size" and:@"Okay"];
+            return 0;
+        }
+        
+        //updating values
+        [registeredStaff setLicenseInfo:self->hasDriverLicense hasCommercialLicense:self->hasCommercialLicense];
+        [registeredStaff setTattoos:self->hasTattos];
+        [registeredStaff setPiercings:self->hasPiercings];
+        [registeredStaff setEthnicity:self.ethnicityTextField.text withCode:self->ethinicityCode];
+        [registeredStaff setHeight:self.heightTextField.text];
+        [registeredStaff setWeight:self.weightTextField.text];
+        [registeredStaff setHairColor:self.hairColorTextField.text];
+        [registeredStaff setEyeColor:self.eyeColorTextField.text];
+        [registeredStaff setPantSize:self.pantSizeTextField.text];
+        [registeredStaff setShoeSize:self.shoeSizeTextField.text];
+        [registeredStaff setTshirtSize:self.tshirtSizeTextField.text];
+        
+        return 1;
+    }//eom
 
 
-/********* tap gestures functions *******/
+
+#pragma mark - sending data
+    /* submmitting form */
+    - (IBAction)submitForm:(id)sender
+    {
+            //verifying the data enter
+            bool result = [self verifyDataEnter];
+            if(result)
+            {
+                //    moving to the next controller
+                [self routeToProperController];
+            }
+            else
+            {
+                NSLog(@"missing some/all required fields staffRegistration8");
+            }
+    }//eom
+
+
+
+    /* route to proper controllers */
+    -(void) routeToProperController
+    {
+        if(self->male) //males are skipping females question
+        {
+            [self performSegueWithIdentifier:@"goToStaffRegister10" sender:self];
+        }
+        else
+        {
+            [self performSegueWithIdentifier:@"goToStaffRegister9" sender:self];//females only
+        }
+
+    }//eom
+
+    /* preparing the data to sent to the next view controller */
+    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+        if([segue.identifier isEqualToString:@"goToStaffRegister9"]){
+            StaffRegistration9ViewController *controller = (StaffRegistration9ViewController *)segue.destinationViewController;
+            controller.registeredStaff = registeredStaff;
+            
+        }
+        else if([segue.identifier isEqualToString:@"goToStaffRegister10"]){
+            StaffRegistration10ViewController *controller = (StaffRegistration10ViewController *)segue.destinationViewController;
+
+             controller.registeredStaff = registeredStaff;
+        }
+    }//eom
+
+
+#pragma mark - helper methods
+    /* create UIAlert*/
+    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
+    {
+        //creating UIAlert
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancelTitle
+                                              otherButtonTitles: nil];
+        [alert show];//display alert
+    }//eom
+
+
+
+#pragma mark - tap gestures functions
     /*sets up taps gesture*/
     -(void)setUpTapGesture
     {
@@ -322,7 +330,8 @@
     }
 
 
-/****** UIPicker Methods ********/
+#pragma mark - UIPicker Methods
+
 
         /* creates the picker for Ethnicity selection*/
         -(void) createEthnicityPicker
@@ -762,7 +771,7 @@
             
         }//wom
 
-        #pragma mark - UIPickerView Delegate
+#pragma mark - UIPickerView Delegate
         - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
         {
             return 30.0;
@@ -914,8 +923,7 @@
                 }
         }//eom
 
-/******** textfields  functions********/
-
+#pragma mark - textfields  functions
 
     /* shows/hides textfield depending if they are filled or empty*/
     - (IBAction)textFieldValueChanged:(id)sender {
@@ -983,8 +991,7 @@
 
 
 
-
-/********* scrollview functions **********/
+#pragma mark - scrollview functions
 
 
     - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
