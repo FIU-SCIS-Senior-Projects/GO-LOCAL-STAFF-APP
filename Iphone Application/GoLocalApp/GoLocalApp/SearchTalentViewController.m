@@ -64,7 +64,8 @@
 @synthesize ethnicitiesButtons;
 @synthesize talentButtons;
 @synthesize languagesButtons;
-@synthesize milesTextField, willingToTravelButton;
+@synthesize milesTextField,milesZipcodeTextField;
+@synthesize willingToTravelButton;
 
 @synthesize scrollView;
 
@@ -1006,7 +1007,7 @@
     -(void)setUpEthnicityButtons
     {
         ethnicities = [ [NSArray alloc] initWithObjects:
-                                       @"Any",
+                                       @"All",
                                        @"Non-Hispanic White or Euro-American",
                                        @"Black, Afro-Caribbean, or African American",
                                        @"Latino or Hispanic American",
@@ -1387,6 +1388,15 @@
     }//eom
 
 
+    /* validating email */
+    - (BOOL) validateEmail: (NSString *) candidate {
+        NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+        NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+        //  return 0;
+        return [emailTest evaluateWithObject:candidate];
+    }
+
+
 #pragma mark - scrollview functions
     - (void) scrollViewAdaptToStartEditingTextField:(UITextField*)textField
     {
@@ -1399,6 +1409,363 @@
         CGPoint point = CGPointMake(0, 0);
         [scrollView setContentOffset:point animated:YES];
     }//eom
+
+#pragma mark - verify data
+    -(bool)verifyData
+    {
+        //checking for valid input
+        NSCharacterSet *charSet = [NSCharacterSet whitespaceCharacterSet];
+        NSString * testing;
+        NSString *trimmedString;
+        
+        //email
+        if(emailTextField.text.length > 0)
+        {
+            /* making sure email has the correct format*/
+            bool emailQuality = [self validateEmail:emailTextField.text];
+            if(emailQuality == false)
+            {
+                [self scrollVievEditingFinished:emailTextField]; //take scroll to textfield so user can see their error
+                [self showAlert:@"Search Talent" withMessage:@"Email is not in the correct format." and:@"Okay"];
+                return false;
+            }
+        }
+        
+        //cellphone
+        if(cellphoneTextField.text.length > 0)
+        {
+            if( self.cellphoneTextField.text.length < 10)
+            {
+                //take scroll to textfield so user can see their error
+                [self scrollVievEditingFinished:milesZipcodeTextField];
+                // it's empty or contains only white spaces
+                [self showAlert:@"Search Talent" withMessage:@"Please make sure to enter a complete phone number" and:@"Okay"];
+                return false;
+            }
+        }
+        
+        //miles
+        if(milesTextField.text.length > 0)
+        {
+            testing = self.milesZipcodeTextField.text;
+            trimmedString = [testing stringByTrimmingCharactersInSet:charSet];
+            if ([trimmedString isEqualToString:@""])
+            {
+                //take scroll to textfield so user can see their error
+                [self scrollVievEditingFinished:milesZipcodeTextField];
+                // it's empty or contains only white spaces
+                [self showAlert:@"Search Talent" withMessage:@"Please enter a zipcode" and:@"Okay"];
+                return false;
+            }
+            else if( self.milesZipcodeTextField.text.length < 5)
+            {
+                //take scroll to textfield so user can see their error
+                [self scrollVievEditingFinished:milesZipcodeTextField];
+                // it's empty or contains only white spaces
+                [self showAlert:@"Search Talent" withMessage:@"Please make sure to enter a complete zipcode" and:@"Okay"];
+                return false;
+            }
+        }
+        
+        return true;
+    }//eom
+
+#pragma mark - sending data
+    - (IBAction)searchTalentRequested:(UIButton *)sender
+    {
+        bool response = [self verifyData];
+        if(response)
+        {
+            [self sendSearchDataToServer];
+        }
+    }//eom
+
+
+#pragma mark - JSON server response
+    /* processing server response */
+    -(void) processServerDataResponse:(NSDictionary *) responce
+    {
+        //    NSLog(@"[1] responce: %@", responce);
+        
+        NSDictionary * userResults = [responce objectForKey:@"results"];
+        int responceType = [[userResults objectForKey:@"responseType"] intValue];
+        NSDictionary * responceMessage = [userResults objectForKey:@"message"];
+        NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
+        
+        NSLog(@"[1] results is %@", userResults);
+        NSLog(@"[1] responceType is %d", responceType);
+        if(responceType > 0) //responce was good
+        {
+            
+        }
+        else if(responceType < 1) //invalid response
+        {
+            //notifying user code was accepted
+            NSString * messsageToDisplay = @"No Search results";
+            [self showAlert:@"Search Talent" withMessage:messsageToDisplay and:@"Okay"];
+        }
+    }//eom
+
+#pragma mark - JSON functions
+
+    /* sends search data to server */
+    -(void)sendSearchDataToServer
+    {
+        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_searchTalent.php";//hard coding website
+        
+        // preparing data to be sent
+        NSMutableDictionary * searchData = [self prepareServerData];
+        NSLog(@"");
+        NSLog(@" about to send the following data: %@", searchData);
+        NSLog(@"");
+        
+        //adding data to request
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+                                        initWithURL:[NSURL URLWithString:  serverAddress ]];
+        
+        [request setHTTPMethod:@"POST"]; //request type
+        
+        //sending data
+        NSError *error;
+        NSData *postdata = [NSJSONSerialization dataWithJSONObject:searchData options:0 error:&error];
+        
+        [request setHTTPBody:postdata];
+        
+//        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+//        NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+        
+        [NSURLConnection connectionWithRequest:request delegate:self];
+        
+    }//eo-action
+
+
+    /* prepares the data that will be sent to server */
+    -(NSMutableDictionary *) prepareServerData
+    {
+        //creating initial list
+        NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
+        
+        //name
+        if(nameTextField.text.length > 0 )
+        {
+            finalList[@"name"]       = nameTextField.text;
+        }
+        
+        //email
+        if(emailTextField.text.length > 0 )
+        {
+            finalList[@"email"]      = emailTextField.text;
+        }
+        
+        //phone
+        if(cellphoneTextField.text.length > 0 )
+        {
+            finalList[@"phone"]      = cellphoneTextField.text;
+        }
+        
+        //has photo
+        NSString * hasPhotoVal      = [hasButtonCurrentStatus objectAtIndex:0];         //getting current status
+        int hasPhotoInt             = [hasPhotoVal intValue];                           //converting status to int
+        NSString * hasPhoto         = [hasButtonOptions objectAtIndex:hasPhotoInt];     //getting status text representation
+        //
+        finalList[@"hasPhoto"]      = hasPhoto;
+        
+        //has website
+        NSString * hasWebsiteVal    = [hasButtonCurrentStatus objectAtIndex:1];         //getting current status
+        int hasWebsiteInt           = [hasWebsiteVal intValue];                         //converting status to int
+        NSString * hasWebsite       = [hasButtonOptions objectAtIndex:hasWebsiteInt];   //getting status text representation
+        //
+        finalList[@"hasWebsite"]    = hasWebsite;
+        
+        //has tattoos
+        NSString * hasTattoosVal    = [hasButtonCurrentStatus objectAtIndex:2];         //getting current status
+        int hasTattoosInt           = [hasTattoosVal intValue];                         //converting status to int
+        NSString * hasTattoos       = [hasButtonOptions objectAtIndex:hasTattoosInt];   //getting status text representation
+        //
+        finalList[@"hasTattoos"]    = hasTattoos;
+        
+        //has Piercings
+        NSString * hasPiercingsVal  = [hasButtonCurrentStatus objectAtIndex:3];         //getting current status
+        int hasPiercingsInt         = [hasPiercingsVal intValue];                       //converting status to int
+        NSString * hasPiercings     = [hasButtonOptions objectAtIndex:hasPiercingsInt]; //getting status text representation
+        //
+        finalList[@"hasPiercings"]  = hasPiercings;
+ 
+        //gender
+        if(genderTextField.text.length > 0 )
+        {
+            finalList[@"gender"]    = genderTextField.text;
+        }
+        
+        //age
+        if(ageFromTextField.text.length > 0 )
+        {
+            finalList[@"ageFrom"]   = ageFromTextField.text;
+        }
+        if(ageToTextField.text.length > 0 )
+        {
+            finalList[@"ageTo"]    = ageToTextField.text;
+        }
+        
+        //weight
+        if(weightConditionTextField.text.length > 0 )
+        {
+            finalList[@"weightCondition"]   = weightConditionTextField.text;
+        }
+        if(weightTextField.text.length > 0 )
+        {
+            finalList[@"weight"]            = weightTextField.text;
+        }
+
+        //height
+        if(heightConditionTextField.text.length > 0 )
+        {
+            finalList[@"heightCondition"]   = heightConditionTextField.text;
+        }
+        if(heightTextField.text.length > 0 )
+        {
+            finalList[@"height"]            = heightTextField.text;
+        }
+
+        //hair color
+        if(hairColorTextField.text.length > 0 )
+        {
+            finalList[@"hairColor"]            = hairColorTextField.text;
+        }
+        
+        //eye color
+        if(eyeColorTextField.text.length > 0 )
+        {
+            finalList[@"eyeColor"]            = eyeColorTextField.text;
+        }
+
+        
+        //ethnicities
+        NSMutableArray * ethnicitiesDesired = [[NSMutableArray alloc] init];
+        int totalEthnicities = (int)[ethnicitiesSelected count];
+        for(int iter = 0; iter < totalEthnicities; iter++)
+        {
+            //current ethnicity selection status
+            int currEthnicitySelected = [[ethnicitiesSelected objectAtIndex:iter] boolValue];
+            if(currEthnicitySelected)
+            {
+                //current ethnicity
+                NSString * currentEthnicity = [ethnicities objectAtIndex:iter];
+                
+                //adding ethnicity
+                [ethnicitiesDesired addObject:currentEthnicity];
+            }
+        }
+        //adding all ethnicities
+        if( [ethnicitiesDesired count] > 0)
+        {
+            finalList[@"ethnicities"] = ethnicitiesDesired;
+        }
+        
+        
+        //talents
+        NSMutableArray * talentsDesired = [[NSMutableArray alloc] init];
+        int totalTalents = (int)[talentsSelected count];
+        for(int iter = 0; iter < totalTalents; iter++)
+        {
+            //current talent selection status
+            int talentSelected = [[talentsSelected objectAtIndex:iter] boolValue];
+            if(talentSelected)
+            {
+                //current ethnicity
+                NSString * currentTalent = [talents objectAtIndex:iter];
+                
+                //adding ethnicity
+                [talentsDesired addObject:currentTalent];
+            }
+        }
+        //adding all talents
+        if( [talentsDesired count] > 0)
+        {
+            finalList[@"talents"] = talentsDesired;
+        }
+
+        //languages
+        NSMutableArray * languagesDesired = [[NSMutableArray alloc] init];
+        int totalLanguages = (int)[languagesSelected count];
+        for(int iter = 0; iter < totalLanguages; iter++)
+        {
+            //current language selection status
+            int languageSelected = [[languagesSelected objectAtIndex:iter] boolValue];
+            if(languageSelected)
+            {
+                //current languages
+                NSString * currentLanguage = [languages objectAtIndex:iter];
+                
+                //adding languages
+                [languagesDesired addObject:currentLanguage];
+            }
+        }
+        //adding all languages
+        if( [languagesDesired count] > 0)
+        {
+            finalList[@"languages"] = languagesDesired;
+        }
+        
+        
+        //miles
+        if( (milesTextField.text.length > 0) && (milesZipcodeTextField.text.length) )
+        {
+            finalList[@"miles"]     = milesTextField.text;
+            finalList[@"zipcode"]   = milesZipcodeTextField.text;
+        }
+  
+        //travel
+        NSString * willingToTravelVal        = [willingToTravelStatus objectAtIndex:0];
+        int willingToTravelInt               = [willingToTravelVal intValue];
+        NSString * willingToTravel           = [willingToTravelOptions objectAtIndex:willingToTravelInt];
+        //
+        finalList[@"willingToTravel"]        = willingToTravel;
+        
+        return finalList;
+    }//eom
+
+    /* error occurred sending data to server */
+    -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+    {
+        NSLog(@" Failed with error '%@'", error);
+    }//eom
+
+    /* data received from server */
+    - (void)connection:(NSURLConnection *)connection didReceiveData:(nonnull NSData *)data
+    {
+        
+        NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        NSLog(@"[1] from server replied: %@",rawExhibits);
+        
+        //        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //        NSLog(@"[2] responce from server %@",dataResponce);
+        //
+        //        // Get JSON objects into initial array
+        //        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+        //        NSLog(@"[3] responce from server %@",rawExhibits2);
+        
+        //processing responce
+        [self processServerDataResponse:rawExhibits];
+        
+    }//eom
+
+    /* responce from server */
+    - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+    {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        
+        NSLog(@" responce: %@", httpResponse.description);
+        
+    }//eo-action
+
+    /*
+     - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+     {
+     data = [[NSMutableData alloc] init];
+     NSLog(@"Data Data , %@", data);
+     }
+     */
 
 
 @end

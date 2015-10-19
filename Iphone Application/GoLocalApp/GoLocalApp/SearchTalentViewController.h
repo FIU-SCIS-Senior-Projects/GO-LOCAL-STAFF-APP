@@ -46,12 +46,17 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *languagesButtons;
 - (IBAction)languagesButtonsValueChanged:(UIButton *)sender;
 
-//miles/travel
+//miles
 @property (weak, nonatomic) IBOutlet UITextField *milesTextField;
+@property (weak, nonatomic) IBOutlet UITextField *milesZipcodeTextField;
+
+//travel
 @property (weak, nonatomic) IBOutlet UIButton *willingToTravelButton;
 - (IBAction)willingToTravelValueChanged:(UIButton *)sender;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *searchTalentButton;
+- (IBAction)searchTalentRequested:(UIButton *)sender;
 
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

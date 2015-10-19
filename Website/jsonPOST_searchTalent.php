@@ -45,39 +45,42 @@
       }
       else  //valid json values found
       { 
-           require 'API.php';/* adding API */
-          
-          //check if valid user and return type of user
-          $userSearchResult = searchTalent($decoded);
-          if($userSearchResult) //valid staff user
-          {
-            $responseArray = array(
-                "message" => "successfully retrieved information",
-                "data"    => $userSearchResult,
-              );
-          }
-          else if($userSearchResult == 0) //database not responding
-          {
-              $responseArray = array(
-                "message"   => "database not responding",
-                "data"  => $userSearchResult,
-              );
-          }
-          else if($userSearchResult == -1) //error retriving information
-          {
-              $responseArray = array(
-                "message"   => "error retriving information",
-                "data"  => $userSearchResult,
-              );
-          }
+          // require 'API.php'; //adding API 
+          //
+          // //check if valid user and return type of user
+          // $userSearchResult = searchTalent($decoded);
+          // if($userSearchResult) //valid staff user
+          // {
+          //   $responseArray = array(
+          //       "message" => "successfully retrieved information",
+          //       "data"    => $userSearchResult,
+          //     );
+          // }
+          // else if($userSearchResult == 0) //database not responding
+          // {
+          //     $responseArray = array(
+          //       "message"   => "database not responding",
+          //       "data"  => $userSearchResult,
+          //     );
+          // }
+          // else if($userSearchResult == -1) //error retrieving information
+          // {
+          //     $responseArray = array(
+          //       "message"   => "error retrieving information",
+          //       "data"  => $userSearchResult,
+          //     );
+          // }
 
-          /* 
-            reponse returns the following:
-              userdata   successfully retrieved information
-              0   database not responding
-              -1  error retriving information
-          */
-          $response['results'] = $responseArray; //sending reply
+          // /* 
+          //   reponse returns the following:
+          //     userdata   successfully retrieved information
+          //     0   database not responding
+          //     -1  error retrieving information
+          // */
+          // $response['results'] = $responseArray; //sending reply
+
+
+           $response['results'] = $decoded;
 
       }//eo valid-json
     }//eo valid-data
@@ -96,10 +99,10 @@
 
       /* saving incoming file */
         // Write the contents back to the file
-        $filename = 'test/login/LoginDataResponse.json';
+        $filename = 'test/searchTalent/searchTalentResponse.json';
         file_put_contents($filename, var_export($encoded, true));
 
-        $filename = 'test/login/LoginIncomingData.json';
+        $filename = 'test/searchTalent/searchTalentIncomingData.json';
         file_put_contents($filename, var_export($decoded, true));
 
 
