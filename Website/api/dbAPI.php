@@ -151,162 +151,162 @@
             
   }//eom
 
-/**/
-function updateLoginAttempts($dbConnection,$tableName,$loginRequests, $userKey , $userID  )
-{
-    //updating login count
-    $tableName  = "registered_staff";
-    $query = "UPDATE ".$tableName."
-              SET loginRequests='".$loginRequests."'
-              WHERE $userKey='".$userID."'";
-    // echo "query: $query";
-    $result = mysqli_query( $dbConnection, $query );
-    // echo "result $result"; 
-}//eom
+  /* updates (increments) the total login a user attempts to do */
+  function updateLoginAttempts($dbConnection,$tableName,$loginRequests, $userKey , $userID  )
+  {
+      //updating login count
+      $tableName  = "registered_staff";
+      $query = "UPDATE ".$tableName."
+                SET loginRequests='".$loginRequests."'
+                WHERE $userKey='".$userID."'";
+      // echo "query: $query";
+      $result = mysqli_query( $dbConnection, $query );
+      // echo "result $result"; 
+  }//eom
 
 
 /******************* FORGOT PASSWORD (RESET PASSWORD) ********************************/
 
 
-/* checks if the user provided exist in database
-  returns
-         userdata  username exist
-         0  database not responding
-        -1  username does not exist     
-*/
-function UserWithPhoneProvidedExist( $phone )
-{
-    $dbConnection = connectToDB();
-    if(!$dbConnection)
-    {
-  //    echo "Unable to connect to MySQL.".PHP_EOL;
-      return 0;
-    }
+  /* checks if the user provided exist in database
+    returns
+           userdata  username exist
+           0  database not responding
+          -1  username does not exist     
+  */
+  function UserWithPhoneProvidedExist( $phone )
+  {
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+       //echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
 
-   // making sure user is a unique registration
-    $query      = "SELECT staffID,phone,forgotPasswordRequests,accountLocked  FROM registered_staff WHERE phone='".$phone."'";
-    $result     = mysqli_query($dbConnection, $query);
-    $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-    $rowResult  = array_filter($row);
-    if (empty($rowResult))
-    {
-             // echo "<p>username and email is unique so far (NOT a registered_staff).....</p>";
-            $query      = "SELECT employerID,phone,forgotPasswordRequests,accountLocked FROM registered_employer WHERE phone='".$phone."'";
-            $result     = mysqli_query($dbConnection, $query);
-            $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-            $rowResult  = array_filter($row);
-            if (empty($rowResult))
-            {
-              // print_r($row);
-              // echo "<p> NO user exist with the information provided (registered_employer or registered_staff)</p>";
-              return -1;
-            }
-            else
-            {
-              // print_r($row);
-              // echo "<p> user exist with information provided, registered_employer</p>";
-              return $row;
-            }
-    }
-    else
-    {
-      // print_r($row);
-      // echo "<p> user exist with information provided, registered_staff</p>";
-      return $row;
-    }
-}//eom
+     // making sure user is a unique registration
+      $query      = "SELECT staffID,phone,forgotPasswordRequests,accountLocked  FROM registered_staff WHERE phone='".$phone."'";
+      $result     = mysqli_query($dbConnection, $query);
+      $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+      $rowResult  = array_filter($row);
+      if (empty($rowResult))
+      {
+               // echo "<p>username and email is unique so far (NOT a registered_staff).....</p>";
+              $query      = "SELECT employerID,phone,forgotPasswordRequests,accountLocked FROM registered_employer WHERE phone='".$phone."'";
+              $result     = mysqli_query($dbConnection, $query);
+              $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+              $rowResult  = array_filter($row);
+              if (empty($rowResult))
+              {
+                // print_r($row);
+                // echo "<p> NO user exist with the information provided (registered_employer or registered_staff)</p>";
+                return -1;
+              }
+              else
+              {
+                // print_r($row);
+                // echo "<p> user exist with information provided, registered_employer</p>";
+                return $row;
+              }
+      }
+      else
+      {
+        // print_r($row);
+        // echo "<p> user exist with information provided, registered_staff</p>";
+        return $row;
+      }
+  }//eom
 
 
-/*
-  send sms code for forgot password
+  /*
+    send sms code for forgot password
 
-  returns 
-    userID   sms code for 'forgot password' successfully sent
-    0   unable to connect to DB
-    -2  Unable to save changes to Database
+    returns 
+      userID   sms code for 'forgot password' successfully sent
+      0   unable to connect to DB
+      -2  Unable to save changes to Database
+        
+  */
+  function sendSMSForgotPasswordCode($userData)
+  {
+
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+       // echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
+
+      //getting user data
+      $staffType              = $userData['staffID'];
+      $employerType           = $userData['employerID'];
+      $phone                  = $userData['phone'];
+      $forgotPasswordRequests = $rowResult['forgotPasswordRequests'] + 1;
+      $userKey    = "";
+      $userID     = "";
       
-*/
-function sendSMSForgotPasswordCode($userData)
-{
+      //checking which type of user it is
+      if($staffType)
+      {
+        $tableName = "registered_staff";
+        $userKey   = "staffID";
+        $userID    = $staffType;
+      }
+      else if($employerType)
+      {
+        $tableName  = "registered_employer";
+        $userKey    = "employerID";
+        $userID     = $employerType;
+      }
 
-    $dbConnection = connectToDB();
-    if(!$dbConnection)
-    {
-     // echo "Unable to connect to MySQL.".PHP_EOL;
-      return 0;
-    }
+      //creating random number
+      $code                   = mt_rand(1000, 9999);
+      $forgotPasswordCode     = $code;
 
-    //getting user data
-    $staffType              = $userData['staffID'];
-    $employerType           = $userData['employerID'];
-    $phone                  = $userData['phone'];
-    $forgotPasswordRequests = $rowResult['forgotPasswordRequests'] + 1;
-    $userKey    = "";
-    $userID     = "";
-    
-    //checking which type of user it is
-    if($staffType)
-    {
-      $tableName = "registered_staff";
-      $userKey   = "staffID";
-      $userID    = $staffType;
-    }
-    else if($employerType)
-    {
-      $tableName  = "registered_employer";
-      $userKey    = "employerID";
-      $userID     = $employerType;
-    }
+      $query = "UPDATE $tableName
+                SET forgotPasswordRequests='".$forgotPasswordRequests."', forgotPasswordCode = '".$forgotPasswordCode."'
+                WHERE $userKey='".$userID."'";
 
-    //creating random number
-    $code                   = mt_rand(1000, 9999);
-    $forgotPasswordCode     = $code;
+      $result = mysqli_query($dbConnection, $query);
+      if(!$result)
+      {
+        // echo "Unable to store changes to Database";
+        return -2;
+      }  
 
-    $query = "UPDATE $tableName
-              SET forgotPasswordRequests='".$forgotPasswordRequests."', forgotPasswordCode = '".$forgotPasswordCode."'
-              WHERE $userKey='".$userID."'";
+      //preparing text message info
+      $subject  = "GoLocalApp password reset\r\n";
+      $message  = "code: $code\n";
 
-    $result = mysqli_query($dbConnection, $query);
-    if(!$result)
-    {
-      // echo "Unable to store changes to Database";
-      return -2;
-    }  
+      //list of carriers
+      $smsCarriers = [
+        "@mms.aiowireless.net",
+        "@text.att.net",
+        "@myboostmobile.com",
+        "@mms.cricketwireless.net",
+        "@mymetropcs.com",
+        "@pm.sprint.com",
+        "@vtext.com",
+        "@tmomail.net",
+        "@email.uscc.net",
+        "@vtext.com",
+      ];
 
-    //preparing text message info
-    $subject  = "GoLocalApp password reset\r\n";
-    $message  = "code: $code\n";
+      //sending sms code to user
+      for($iter = 0; $iter < count($smsCarriers); $iter++)
+      {
+        $currentCarrier = $smsCarriers[$iter];
+        $currentAddress = $phone.$currentCarrier;
+        $emailResult = mail( $currentAddress, $subject, $message );    
+        // echo "<p>currentCarrier: $currentCarrier | current address: $currentAddress | mail result: $emailResult</p>";  
+      }//eofl
 
-    //list of carriers
-    $smsCarriers = [
-      "@mms.aiowireless.net",
-      "@text.att.net",
-      "@myboostmobile.com",
-      "@mms.cricketwireless.net",
-      "@mymetropcs.com",
-      "@pm.sprint.com",
-      "@vtext.com",
-      "@tmomail.net",
-      "@email.uscc.net",
-      "@vtext.com",
-    ];
-
-    //sending sms code to user
-    for($iter = 0; $iter < count($smsCarriers); $iter++)
-    {
-      $currentCarrier = $smsCarriers[$iter];
-      $currentAddress = $phone.$currentCarrier;
-      $emailResult = mail( $currentAddress, $subject, $message );    
-      // echo "<p>currentCarrier: $currentCarrier | current address: $currentAddress | mail result: $emailResult</p>";  
-    }//eofl
-
-    $list = array
-    (
-      "userID" => $userID,
-      "userKey"  =>  $userKey
-    );
-    return $list;
-}//eom
+      $list = array
+      (
+        "userID" => $userID,
+        "userKey"  =>  $userKey
+      );
+      return $list;
+  }//eom
 
 
   /* 
@@ -379,10 +379,10 @@ function sendSMSForgotPasswordCode($userData)
   /* locks user account */
   function lockedUserAccount($dbConnection, $tableName, $userKey, $userID)
   {
-       $query = "UPDATE $tableName
+      $query = "UPDATE $tableName
                 SET `accountLocked` = 1 
                 WHERE $userKey='".$userID."'";
-      echo "query: $query";
+      // echo "query: $query";
       $result = mysqli_query( $dbConnection, $query );
       return $result;
   }//eom
@@ -415,7 +415,7 @@ function sendSMSForgotPasswordCode($userData)
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-    //    echo "Unable to connect to MySQL.".PHP_EOL;
+      // echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -713,9 +713,7 @@ function sendSMSForgotPasswordCode($userData)
 
 
 
-/****************************  ********************************/
-
-
+/**************************** NOT BEING USED NOW ********************************/
 
   /* sends an email to the user */
   function sendEmail( $username, $email, $userType, $hash )

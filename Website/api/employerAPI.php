@@ -2,6 +2,39 @@
 
 /************************** Employer methods **********************/
 
+    /* gets all staff*/
+    function getAllEmployers()
+    {
+
+      $finalList = array();
+
+      //connecting to db
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+        echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
+
+      //gettting all staff
+      $query = "SELECT * FROM registered_employer";
+      $result = mysqli_query($dbConnection, $query);
+
+      $totalRows = mysqli_num_rows($result);
+      if($totalRows > 0)
+      {
+        while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
+        {
+          array_push($finalList, $row);
+        }
+      }
+
+      return $finalList;
+    }//eom
+
+
+/************************** Registration methods **********************/
+
     /* checks the employer provided is unique - doesnt exist in database
     returns
              1  username is unique
@@ -13,7 +46,7 @@
           $dbConnection = connectToDB();
           if(!$dbConnection)
           {
-//            echo "Unable to connect to MySQL.".PHP_EOL;
+            //  echo "Unable to connect to MySQL.".PHP_EOL;
             return 0;
           }
 
@@ -83,49 +116,8 @@
       return -1;
     }//eom
 
-    /* emails employer */
-    function emailEmployer($email)
-    {
-        $to = $email;
-        $subject = "GoLocalApp email verification";
-        $message = "Thanks for signing up!";
-        $headers = "From:noreply@golocalpromos.com"."\r\n";
-        $result = mail( $to, $subject, $message, $headers );
-        echo $result;
-    }//eom
 
-    /* gets all staff*/
-    function getAllEmployers()
-    {
-
-      $finalList = array();
-
-      //connecting to db
-      $dbConnection = connectToDB();
-      if(!$dbConnection)
-      {
-        echo "Unable to connect to MySQL.".PHP_EOL;
-        return 0;
-      }
-
-      //gettting all staff
-      $query = "SELECT * FROM registered_employer";
-      $result = mysqli_query($dbConnection, $query);
-
-      $totalRows = mysqli_num_rows($result);
-      if($totalRows > 0)
-      {
-        while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
-        {
-          array_push($finalList, $row);
-        }
-      }
-
-      return $finalList;
-    }//eom
-
-
-     /*
+    /*
     Stores the credentials of user in the registered_staff table
     returns 
         staffID
@@ -133,12 +125,12 @@
         -2  Unable to store staff credentials
         -3  Unable to retrieve staffID
     */
-  function storeEmployerCredentials( $employerInfo )
+  function storeEmployerCredentials($employerInfo)
   {
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-  //      echo "Unable to connect to MySQL.".PHP_EOL;
+       // echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -182,6 +174,10 @@
      // echo "Unable to store staff credentials";  
       return -2;
   }//eom
+
+
+
+/************************** Operations methods **********************/
 
   /*
     Searches staff based on the below, 
@@ -259,5 +255,18 @@
     return -1;
   }//eom
 
+
+/**************************** NOT BEING USED NOW ********************************/
+  
+    /* emails employer */
+    function emailEmployer($email)
+    {
+        $to = $email;
+        $subject = "GoLocalApp email verification";
+        $message = "Thanks for signing up!";
+        $headers = "From:noreply@golocalpromos.com"."\r\n";
+        $result = mail( $to, $subject, $message, $headers );
+        echo $result;
+    }//eom
 
 ?>

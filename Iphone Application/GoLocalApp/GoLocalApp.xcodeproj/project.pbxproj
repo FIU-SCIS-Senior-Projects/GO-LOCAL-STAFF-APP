@@ -13,8 +13,6 @@
 		DE4AC3F01BB75FA50071D7E2 /* EmployerRegistration0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3EF1BB75FA50071D7E2 /* EmployerRegistration0ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC3F31BB75FD90071D7E2 /* EmployerRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3F21BB75FD90071D7E2 /* EmployerRegistration2ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC3F61BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3F51BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m */; settings = {ASSET_TAGS = (); }; };
-		DE4AC3FC1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3FB1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m */; settings = {ASSET_TAGS = (); }; };
-		DE4AC3FF1BB760A40071D7E2 /* EmployerRegistration6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3FE1BB760A40071D7E2 /* EmployerRegistration6ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC4021BB761620071D7E2 /* RegisteredEmployer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC4011BB761620071D7E2 /* RegisteredEmployer.m */; settings = {ASSET_TAGS = (); }; };
 		DE6722B41B968CC600599039 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B31B968CC600599039 /* main.m */; };
 		DE6722B71B968CC600599039 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B61B968CC600599039 /* AppDelegate.m */; };
@@ -72,10 +70,6 @@
 		DE4AC3F21BB75FD90071D7E2 /* EmployerRegistration2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration2ViewController.m; sourceTree = "<group>"; };
 		DE4AC3F41BB75FFD0071D7E2 /* EmployerRegistration3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration3ViewController.h; sourceTree = "<group>"; };
 		DE4AC3F51BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration3ViewController.m; sourceTree = "<group>"; };
-		DE4AC3FA1BB7608E0071D7E2 /* EmployerRegistration5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration5ViewController.h; sourceTree = "<group>"; };
-		DE4AC3FB1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration5ViewController.m; sourceTree = "<group>"; };
-		DE4AC3FD1BB760A40071D7E2 /* EmployerRegistration6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration6ViewController.h; sourceTree = "<group>"; };
-		DE4AC3FE1BB760A40071D7E2 /* EmployerRegistration6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration6ViewController.m; sourceTree = "<group>"; };
 		DE4AC4001BB761620071D7E2 /* RegisteredEmployer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredEmployer.h; sourceTree = "<group>"; };
 		DE4AC4011BB761620071D7E2 /* RegisteredEmployer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredEmployer.m; sourceTree = "<group>"; };
 		DE6722AE1B968CC600599039 /* GoLocalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoLocalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,10 +261,6 @@
 				DE4AC3F21BB75FD90071D7E2 /* EmployerRegistration2ViewController.m */,
 				DE4AC3F41BB75FFD0071D7E2 /* EmployerRegistration3ViewController.h */,
 				DE4AC3F51BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m */,
-				DE4AC3FA1BB7608E0071D7E2 /* EmployerRegistration5ViewController.h */,
-				DE4AC3FB1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m */,
-				DE4AC3FD1BB760A40071D7E2 /* EmployerRegistration6ViewController.h */,
-				DE4AC3FE1BB760A40071D7E2 /* EmployerRegistration6ViewController.m */,
 			);
 			name = "Employer Registration";
 			sourceTree = "<group>";
@@ -509,7 +499,6 @@
 				DE6722DF1B968D4500599039 /* EmployerHomeViewController.m in Sources */,
 				DE4AC3F31BB75FD90071D7E2 /* EmployerRegistration2ViewController.m in Sources */,
 				DE8C2E611BA9E16600AA0BB6 /* StaffRegistration10ViewController.m in Sources */,
-				DE4AC3FC1BB7608E0071D7E2 /* EmployerRegistration5ViewController.m in Sources */,
 				DEC6532E1BB25B73001A8655 /* StaffDatabase.m in Sources */,
 				DE7BB0131BD4043E002E3A52 /* ColorWheel.m in Sources */,
 				DEC653321BB39930001A8655 /* RegisteredStaff.m in Sources */,
@@ -532,7 +521,6 @@
 				DEE6B84D1B9942DA00912541 /* StaffRegistration6ViewController.m in Sources */,
 				DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */,
 				DE8C2E5E1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m in Sources */,
-				DE4AC3FF1BB760A40071D7E2 /* EmployerRegistration6ViewController.m in Sources */,
 				DE8444AF1B9FAB570085DA73 /* StaffRegistration14ViewController.m in Sources */,
 				DEF0BAD11B9EB2FA001C6D84 /* StaffRegistration12ViewController.m in Sources */,
 				DEE6B8501B9942E500912541 /* StaffRegistration7ViewController.m in Sources */,
