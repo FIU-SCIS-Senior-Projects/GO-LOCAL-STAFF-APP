@@ -45,9 +45,9 @@
       }
       else  //valid json values found
       { 
-         require 'API.php';/* adding API */
+          require 'API.php';/* adding API */
 
-         $registrationType = $decoded['registrationType'];
+          $registrationType = $decoded['registrationType'];
 
           $registrationResults = registerUser($registrationType, $decoded);
 
@@ -58,7 +58,7 @@
             "responseType"    => $registrationResults,
             );
           }
-         else if( $registrationResults == 0 )
+          else if( $registrationResults == 0 )
           {
             $responseArray = array(
             "message" => "database not responding",
@@ -80,14 +80,14 @@
             );
           }
 
-      /* 
-      reponse returns the following:
-        1   successfully register
-        0   database not responding
-        -1  Unable to register user
-        -10 invalid registration type
-      */
-        $response['results'] = $responseArray;
+          /* 
+          reponse returns the following:
+            1   successfully register
+            0   database not responding
+            -1  Unable to register user
+            -10 invalid registration type
+          */
+          $response['results'] = $responseArray;
 
       }//eo valid-json
     }//eo valid-data
