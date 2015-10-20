@@ -141,11 +141,24 @@
                 //notifying user code was accepted
                 [self showAlert:@"Registration" withMessage:@"Successfully registered" and:@"Okay"];
 //                self->staffID = [NSString stringWithFormat:@"%d", responceType];
+                
                 self->staffID = responceType;
                 
-                [self performSegueWithIdentifier:@"staffRegistered" sender:self];
+                //instiate navigation controller for staff home
+                UINavigationController *staffNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"employerNavigationController"];
+                
+                //updating transition
+                [staffNavController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+                
+                //passing data to employer navigation
+                StaffHomeViewController *homeStaffView = (StaffHomeViewController *)[staffNavController topViewController];
+                homeStaffView.staffID = staffID;
+                
+                //performing change
+                [self presentViewController:staffNavController animated:NO completion:nil];
+
             }
-            else if(responceType == 0) //employer user
+            else if(responceType == 0) //
             {
                 //notifying user code was accepted
                 [self showAlert:@"Registration" withMessage:@"We Apologize but our system is currently down" and:@"Okay"];
@@ -253,7 +266,7 @@
             NSLog(@"");
             
             //adding view controller 1 info
-            finalList[@"cellphone"]             = [registeredStaff getCellPhone];
+            finalList[@"phone"]             = [registeredStaff getCellPhone];
             
             
             NSLog(@"After view controller 1");

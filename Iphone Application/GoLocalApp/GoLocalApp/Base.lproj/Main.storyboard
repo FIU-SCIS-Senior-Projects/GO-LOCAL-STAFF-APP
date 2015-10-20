@@ -3775,12 +3775,11 @@
                         <outlet property="scrollView" destination="wZg-m4-FAb" id="Tvf-DL-XnI"/>
                         <outlet property="submitButton" destination="Blb-XV-g1r" id="zaX-kZ-yLe"/>
                         <outlet property="termsAndAgreements" destination="ltn-Rq-lwr" id="zlY-WT-2xZ"/>
-                        <segue destination="UyE-d8-gHR" kind="modal" id="WX3-1d-AYr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hcq-eJ-Pye" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5978" y="1745"/>
+            <point key="canvasLocation" x="6411" y="807"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6fd-Ve-xwt">
@@ -4750,7 +4749,6 @@
         <segue reference="FiL-5A-Rck"/>
         <segue reference="ILI-8L-N8y"/>
         <segue reference="Lfn-U7-v2S"/>
-        <segue reference="NcF-mS-PqX"/>
         <segue reference="rWo-zr-UJa"/>
         <segue reference="8IJ-5T-D0O"/>
         <segue reference="15W-7m-6hR"/>
