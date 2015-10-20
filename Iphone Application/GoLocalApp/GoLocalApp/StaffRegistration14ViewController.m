@@ -266,7 +266,7 @@
             NSLog(@"");
             
             //adding view controller 1 info
-            finalList[@"cellphone"]             = [registeredStaff getCellPhone];
+            finalList[@"phone"]             = [registeredStaff getCellPhone];
             
             
             NSLog(@"After view controller 1");
