@@ -2823,7 +2823,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-cs-Eoj">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJi-cs-Eoj">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Waist Size" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Qgf-ZU-IFu">
@@ -3785,7 +3785,7 @@
         <!--Navigation Controller-->
         <scene sceneID="6fd-Ve-xwt">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u16-nU-iiu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="employerNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="u16-nU-iiu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Znf-iT-e1Z"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lox-vk-H5v">
@@ -3800,7 +3800,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WJg-NV-DvM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1389" y="-2433"/>
+            <point key="canvasLocation" x="1425" y="-2463"/>
         </scene>
         <!--Switching Account Log In-->
         <scene sceneID="OFk-Ma-EDL">
@@ -4343,6 +4343,9 @@
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="qfe-lt-V8K" id="quf-OI-afo"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9L3-8a-jv4">
                                         <rect key="frame" x="17" y="51" width="15" height="21"/>
@@ -4394,6 +4397,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="qfe-lt-V8K" id="WAc-OC-GDG"/>
+                                        </connections>
                                     </textField>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyz-QL-4Bb">
                                         <rect key="frame" x="23" y="200" width="14" height="21"/>
@@ -4728,7 +4734,6 @@
                     <connections>
                         <outlet property="registrationButton" destination="jwf-pS-SmL" id="HXB-lW-uep"/>
                         <outlet property="termsSwitch" destination="e9O-HU-ukI" id="QTa-EX-Lrg"/>
-                        <segue destination="qFG-7T-Gga" kind="push" identifier="goToEmployerHome" id="4eA-Xc-SVq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LdQ-od-owC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4742,14 +4747,13 @@
         <image name="search@1x" width="51" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NcF-mS-PqX"/>
-        <segue reference="Lfn-U7-v2S"/>
+        <segue reference="FiL-5A-Rck"/>
         <segue reference="ILI-8L-N8y"/>
+        <segue reference="Lfn-U7-v2S"/>
+        <segue reference="NcF-mS-PqX"/>
+        <segue reference="rWo-zr-UJa"/>
+        <segue reference="8IJ-5T-D0O"/>
         <segue reference="15W-7m-6hR"/>
         <segue reference="C35-z2-Umt"/>
-        <segue reference="8IJ-5T-D0O"/>
-        <segue reference="FiL-5A-Rck"/>
-        <segue reference="Vrz-wN-6aY"/>
-        <segue reference="rWo-zr-UJa"/>
     </inferredMetricsTieBreakers>
 </document>

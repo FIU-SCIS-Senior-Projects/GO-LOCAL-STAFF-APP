@@ -40,7 +40,7 @@
 {
     //waitingOnVerificationResponce = FALSE;
     
-    [registeredEmployer printUserData];//testing
+//    [registeredEmployer printUserData];//testing
     
     [self setUpTapGesture];
     

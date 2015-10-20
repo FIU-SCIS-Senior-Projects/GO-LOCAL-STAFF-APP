@@ -340,6 +340,8 @@
                         
                         //showing submit
                         [submitButton setHidden:NO];
+                        
+                        [self performSegueWithIdentifier:@"goToStaffRegister2" sender:self];
                     }
                 }
                 else //invalid response

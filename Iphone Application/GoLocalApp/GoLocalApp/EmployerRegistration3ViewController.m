@@ -38,7 +38,7 @@
 -(IBAction)submit:(id)sender
 {
     [self sendData];
-    [self performSegueWithIdentifier:@"goToEmployerHome" sender:self];
+//    [self performSegueWithIdentifier:@"goToEmployerHome" sender:self];
 }
 
 #pragma mark - helper methods
@@ -46,11 +46,8 @@
 /* preparing the data to sent to the next view controller */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"goToEmployerHome"]){
-        EmployerHomeViewController *controller = (EmployerHomeViewController *)segue.destinationViewController;
-        
-        controller.registeredEmployer = registeredEmployer;
-    }
+
+
 }//eom
 
 -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
@@ -130,6 +127,19 @@
     {
         //notifying user that registration was successful
         [self showAlert:@"Success" withMessage:@"Registration was successful" and:@"Okay"];
+  
+        //instiate navigation controller for employer home
+        UINavigationController *employerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"employerNavigationController"];
+        
+        //updating transition
+        [employerNavController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        
+        //passing data to employer navigation
+//        EmployerHomeViewController *homeEmployerView = (EmployerHomeViewController *)[employerNavController topViewController];
+        
+        //performing change
+        [self presentViewController:employerNavController animated:NO completion:nil];
+     
     }
     else //invalid response
     {
