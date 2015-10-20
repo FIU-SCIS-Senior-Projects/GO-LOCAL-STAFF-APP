@@ -33,7 +33,7 @@
 {
     //waitingOnVerificationResponce = FALSE;
     
-    [registeredEmployer printUserData];//testing
+//    [registeredEmployer printUserData];//testing
     
     [self setUpTapGesture];
     
@@ -344,6 +344,9 @@
                 
                 //showing submit
                 [submitButton setHidden:NO];
+                
+                //moving to next controller
+                [self performSegueWithIdentifier:@"goToEmployerRegister2" sender:self];
             }
         }
         else //invalid response
