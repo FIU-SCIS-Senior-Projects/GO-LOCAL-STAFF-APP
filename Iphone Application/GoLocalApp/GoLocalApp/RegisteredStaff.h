@@ -159,7 +159,7 @@
 
 
 /**  set methods **/
--(void) setStaffID:(int) staffIDProvided;
+-(void) setStaffID:(NSString *) staffIDProvided;
 
     //controller 0
 -(void) setName:(NSString *)fName withMiddleInitial:(NSString *)middleInitial andLastName:(NSString *)lName;

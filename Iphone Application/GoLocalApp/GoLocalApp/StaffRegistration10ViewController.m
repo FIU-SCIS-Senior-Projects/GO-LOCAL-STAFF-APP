@@ -44,7 +44,7 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [registeredStaff printUserData];//testing
+//    [registeredStaff printUserData];//testing
     
     [self setUpTapGesture];
 }//eom

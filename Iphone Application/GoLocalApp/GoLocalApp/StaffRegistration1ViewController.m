@@ -77,7 +77,7 @@
         }
         
         //updating values
-        [registeredStaff setCellphone:self.cellphone.text];
+        [registeredStaff setCellphone:cellphone.text];
         
          return 1;
     }//eom
@@ -324,12 +324,13 @@
                         
                         //            //hiding submit phone number button
                         //            [submitPhoneNumber setHidden:YES];
+                        
+                        userIDProvided = responceType;
+                        [registeredStaff setStaffID:userID];
                     }
                     //sms part 2
                     else
                     {
-                        userIDProvided = responceType;
-                        [registeredStaff setStaffID:responceType];
                         
                         [self.verificationCode resignFirstResponder];   //resign verification code
                         

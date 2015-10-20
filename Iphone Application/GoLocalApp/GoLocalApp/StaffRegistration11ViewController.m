@@ -48,7 +48,7 @@ notRequireForRegistrationLabel, headshotImageView;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [registeredStaff printUserData];//testing
+//    [registeredStaff printUserData];//testing
     
     djSelected                =   [registeredStaff isDJ];
     liveBandSelected          =   [registeredStaff isLiveBand];

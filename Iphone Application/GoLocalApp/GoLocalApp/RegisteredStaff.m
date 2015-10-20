@@ -73,9 +73,9 @@
 }//eom
 
 
--(void) setStaffID:(int) staffIDProvided
+-(void) setStaffID:(NSString *) staffIDProvided
 {
-    StaffID = staffIDProvided;
+    StaffID = [staffIDProvided intValue];
 }//eom
 
     //view controller 0
