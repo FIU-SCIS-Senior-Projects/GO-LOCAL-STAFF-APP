@@ -2,16 +2,16 @@
 
 /************************** Staff methods **********************/
 
-    /* emails staff */
-    function emailStaff($email)
-    {
-      $email_address = $email;
-      $email_subject = "GoLocalApp email verification";
-      $email_body = "Thanks for signing up!";
-      $headers = "From: noreply@golocalpromos.com\n";
-      $headers .= "Reply-To: $email_address";
-      $result = mail( $email_address, $email_subject , $email_body , $headers );
-      return $result;
+/* emails staff */
+function emailStaff($email)
+{
+  $email_address = $email;
+  $email_subject = "GoLocalApp email verification";
+  $email_body = "Thanks for signing up!";
+  $headers = "From: noreply@golocalpromos.com\n";
+  $headers .= "Reply-To: $email_address";
+  $result = mail( $email_address, $email_subject , $email_body , $headers );
+  return $result;
     }//eom
 
     /* gets all staff*/
@@ -52,14 +52,14 @@
         -2  Unable to store staff credentials
         -3  Unable to retrieve staffID
     */
-  function storeStaffCredentials( $staffInfo )
-  {
-      $dbConnection = connectToDB();
-      if(!$dbConnection)
-      {
+        function storeStaffCredentials( $staffInfo )
+        {
+          $dbConnection = connectToDB();
+          if(!$dbConnection)
+          {
         //echo "Unable to connect to MySQL.".PHP_EOL;
-        return 0;
-      }
+            return 0;
+          }
 
       $fname            = $staffInfo["firstName"];//
       $middleInitial    = $staffInfo["middleName"];//
@@ -71,12 +71,17 @@
       $dob              = $staffInfo["dob"];//
       $phone            = $staffInfo["phone"];//
 
-      $newDOB = substr($dob, 6);
-      $newDOB = $newDOB."-".substr($dob, 0, 5);
-      $newDOB = date_create($newDOB);
-      $today = date_create("today");
+      $age = getAge($dob);
+      echo "age is ".$age;
+      // $newDOB = substr($dob, 6);
+      // $newDOB = $newDOB."-".substr($dob, 0, 5);
+      // $newDOB = date_create($newDOB);
+      // $today = date_create("today");
       
-      $age              = date_diff($dob, $today)->y;
+      // // $age              = date_diff($newDOB, $today)->format("%y");
+      // $age              = date_diff($newDOB, $today);
+      // $age              = $age->format('%y');
+      //  echo "<p> after age</p>";
 
       //Cleaning data (prevent SQL injections)
       $username       = mysqli_real_escape_string($dbConnection, $usernameProvided);
@@ -88,9 +93,11 @@
       $options= array('cost' => 10);
       $passwordHashed = password_hash($cleanPassword, PASSWORD_BCRYPT, $options);
 
+      echo "<p> before query</p>";
+      
       $query = "INSERT INTO registered_staff ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, phone, dateOfBirth, age)
-            VALUES ('".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$phone."', '".$dob."', '".$age."')";
-  
+      VALUES ('".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$phone."', '".$dob."', '".$age."')";
+      echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {
@@ -112,6 +119,22 @@
       
   }//eom
 
+
+  function getAge($dob)
+  {
+    echo "received '".$dob."'";
+    $newDOB = substr($dob, 6);
+    $newDOB = $newDOB."-".substr($dob, 0, 5);
+    $newDOB = date_create($newDOB);
+    $today = date_create("today");
+
+    $age   = date_diff($newDOB, $today);
+    $age   = $age->format("%y");
+
+
+    return $age;
+  }//eom
+
   /* registers staff user info 
       returns:
         1   successfully registered
@@ -120,44 +143,44 @@
         -2 Unable to retrieve staff ID
         -10 invalid registration type
     */
-  function registerStaffUser($registrationData)
-  {
-      $dbConnection = connectToDB();
-      if(!$dbConnection)
-      {
+        function registerStaffUser($registrationData)
+        {
+          $dbConnection = connectToDB();
+          if(!$dbConnection)
+          {
         // echo "Unable to connect to MySQL.".PHP_EOL;
-        return 0;
-      }
+            return 0;
+          }
 
 
       //these fields were already saved
 
-      $staffID                        = $registrationData['staffID'];
-      $username                       = $registrationData['username'];
-      $firstName                      = $registrationData['firstName'];
-      $middleName                     = $registrationData['middleName'];
-      $lastName                       = $registrationData['lastName'];
-      $nickname                       = $registrationData['nickname'];
-      $email                          = $registrationData['email'];
-      $password                       = $registrationData['password'];
-      $phone                          = $registrationData['cellphone'];
-      $dob                            = $registrationData['dob'];
+          $staffID                        = $registrationData['staffID'];
+          $username                       = $registrationData['username'];
+          $firstName                      = $registrationData['firstName'];
+          $middleName                     = $registrationData['middleName'];
+          $lastName                       = $registrationData['lastName'];
+          $nickname                       = $registrationData['nickname'];
+          $email                          = $registrationData['email'];
+          $password                       = $registrationData['password'];
+          $phone                          = $registrationData['cellphone'];
+          $dob                            = $registrationData['dob'];
 
       //gathering fields to save
-      $address                        = $registrationData['address'];
-      $city                           = $registrationData['city'];
-      $state                          = $registrationData['state'];
-      $zipcode                        = $registrationData['zipcode'];
-      $ethnicity                      = $registrationData['ethnicity'];
-      $ethnicityCode                  = $registrationData['ethnicityCode'];
-      $languages                      = $registrationData['languages'];
-      $tshirtSize                     = $registrationData['tshirtSize'];
-      $tattoos                        = $registrationData['tattoos'];
-      $eyeColor                       = $registrationData['eyeColor'];
-      $hairColor                      = $registrationData['hairColor'];
-      $piercings                      = $registrationData['piercings'];     
-      $height                         = $registrationData['height'];
-      $weight                         = $registrationData['weight'];
+          $address                        = $registrationData['address'];
+          $city                           = $registrationData['city'];
+          $state                          = $registrationData['state'];
+          $zipcode                        = $registrationData['zipcode'];
+          $ethnicity                      = $registrationData['ethnicity'];
+          $ethnicityCode                  = $registrationData['ethnicityCode'];
+          $languages                      = $registrationData['languages'];
+          $tshirtSize                     = $registrationData['tshirtSize'];
+          $tattoos                        = $registrationData['tattoos'];
+          $eyeColor                       = $registrationData['eyeColor'];
+          $hairColor                      = $registrationData['hairColor'];
+          $piercings                      = $registrationData['piercings'];     
+          $height                         = $registrationData['height'];
+          $weight                         = $registrationData['weight'];
       $gender                         = $registrationData['genderType'];//0 female | 1 male
       if($gender == 0) //females only
       {
@@ -265,10 +288,10 @@
 
 
       $query = "UPDATE registered_staff
-                SET $part1 $part2 $part3 $part4 $part5 $part6 $part7
-                WHERE phone='".$phone."' and staffID = '".$staffID."'";
+      SET $part1 $part2 $part3 $part4 $part5 $part6 $part7
+      WHERE phone='".$phone."' and staffID = '".$staffID."'";
 
-                echo "<p>".$query."</p>";
+      echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {
@@ -278,4 +301,4 @@
       return -1;
   }//eom
 
-?>
+  ?>

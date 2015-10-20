@@ -7,7 +7,7 @@ $ch = curl_init($url_sendMaleRegistration);
  
 $jsonData = array (
 
-    'staffID' => '1',
+    'staffID' => '7',
     'registrationType' => 'Staff',
     'firstName' => 'Luis',
     'middleName' => 'a', 

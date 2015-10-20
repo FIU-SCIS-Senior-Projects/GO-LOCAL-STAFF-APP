@@ -17,7 +17,7 @@ if($testingStaffUser)
       "email" => "luoandre29@outlook.com",
       "username" => "luoandre29",
       "password" => "0987654321",
-      "dob" => "11/29/1987",
+      "dob" => "11-29-1987",
       "phone" => "3056099250"
       ];
 }
