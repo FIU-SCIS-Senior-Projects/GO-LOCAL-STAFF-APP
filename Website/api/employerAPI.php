@@ -235,6 +235,212 @@
       return 0;
     }
 
+    /* 
+      hasPhoto
+      the options are: 
+      @"Either",
+      @"Yes",
+      @"No",
+    */
+
+    /* 
+      HasWebsite
+      the options are: 
+      @"Either",
+      @"Yes",
+      @"No",
+    */
+
+
+    /* 
+      hasTattoos
+      the options are: 
+      @"Either",
+      @"Yes",
+      @"No",
+    */
+
+
+    /* 
+      hasPiercings
+      the options are: 
+      @"Either",
+      @"Yes",
+      @"No",
+    */
+
+
+    /* 
+      gender
+      options:
+        @"Any",
+        @"Male",
+        @"Female",
+    */ 
+
+
+    /* 
+      age
+
+      options:
+      @"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",
+      @"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",
+      @"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45+",
+    */ 
+
+
+    /* 
+      weight
+
+      options:
+      @"Any",
+      @"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",
+      @"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",
+      @"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45+",
+
+      conditions:
+      @"At most",
+      @"equal",
+      @"atleast",
+      @"Any",
+    */ 
+
+    /* 
+      height
+
+      feet options:
+      2'
+      3'
+      4'
+      5'
+      6'
+      7'
+
+      inches options:
+      0"
+      1"
+      2"
+      3"
+      4"
+      5"
+      6"
+      7"
+      8"
+      9"
+
+      conditions:
+      @"At most",
+      @"equal",
+      @"atleast",
+      @"Any",
+    */ 
+
+
+    /* 
+      hair color
+
+      options:
+      @"Any",
+      @"Auburn",
+      @"Black",
+      @"Blonde",
+      @"Brown",
+      @"Grey",
+      @"Red",
+      @"White",
+      @"Other",
+    */ 
+
+
+    /* 
+      eye color
+
+      options:
+      @"Any",
+      @"Amber",
+      @"Blue",
+      @"Brown",
+      @"Gray",
+      @"Green",
+      @"Hazel",
+      @"Other",
+    */ 
+
+    /* 
+      miles
+
+      options:
+      @"5",
+      @"10",
+      @"15",
+      @"25",
+      @"50",
+      @"100+",
+    */ 
+
+
+      /*
+        ethnicity
+
+        options:
+        @"All",
+        @"Non-Hispanic White or Euro-American",
+        @"Black, Afro-Caribbean, or African American",
+        @"Latino or Hispanic American",
+        @"East Asian or Asian American",
+        @"South Asian or Indian American",
+        @"Middle Eastern or Arab American",
+        @"Native American or Alaskan Native",
+        @"Other",
+      */
+
+
+      /*
+        talents
+
+        options:
+        @"Brand Ambassador",
+        @"Catering Company",
+        @"Dancer",
+        @"DJ",
+        @"Field Marketing Manager",
+        @"Flyer Distributor",
+        @"Live Band",
+        @"Model",
+        @"Production Assistant",
+        @"Sales Executive",
+        @"Waiter/Waitress",
+        @"Other",
+      */
+
+
+      /*
+        languages:
+
+        options:
+
+        @"English",
+        @"Spanish",
+        @"Arabic",
+        @"French",
+        @"German",
+        @"Italian",
+        @"Japanese",
+        @"Madarin",
+        @"Portuguese",
+        @"Russian",
+      */
+
+
+      /*
+        willing to travel:
+
+        options:
+        @"Maybe",
+        @"Yes",
+        @"No",
+      */
+
     
 
     $query = "SELECT * 
