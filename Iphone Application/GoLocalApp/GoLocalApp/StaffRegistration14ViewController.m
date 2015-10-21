@@ -250,28 +250,28 @@
             
             finalList[@"registrationType"]     = [registeredStaff getAccountType];
             finalList[@"staffID"]              = [registeredStaff getStaffID];
+
+//            //adding view controller 0 info
+//            finalList[@"firstName"]     = [registeredStaff getFirstName];
+//            finalList[@"middleName"]    = [registeredStaff getMiddleName];
+//            finalList[@"lastName"]      = [registeredStaff getLastName];
+//            finalList[@"nickName"]      = [registeredStaff getNickName];
+//            finalList[@"email"]         = [registeredStaff getEmail];
+//            finalList[@"username"]      = [registeredStaff getUserName];
+//            finalList[@"password"]      = [registeredStaff getPassword];
+//            finalList[@"dob"]           = [registeredStaff getDateOfBirth];
+//            
+//            NSLog(@"After view controller 0");
+//            NSLog(@" %@", finalList);
+//            NSLog(@"");
             
-            //adding view controller 0 info
-            finalList[@"firstName"]     = [registeredStaff getFirstName];
-            finalList[@"middleName"]    = [registeredStaff getMiddleName];
-            finalList[@"lastName"]      = [registeredStaff getLastName];
-            finalList[@"nickName"]      = [registeredStaff getNickName];
-            finalList[@"email"]         = [registeredStaff getEmail];
-            finalList[@"username"]      = [registeredStaff getUserName];
-            finalList[@"password"]      = [registeredStaff getPassword];
-            finalList[@"dob"]           = [registeredStaff getDateOfBirth];
-            
-            NSLog(@"After view controller 0");
-            NSLog(@" %@", finalList);
-            NSLog(@"");
-            
-            //adding view controller 1 info
-            finalList[@"phone"]             = [registeredStaff getCellPhone];
-            
-            
-            NSLog(@"After view controller 1");
-            NSLog(@" %@", finalList);
-            NSLog(@"");
+//            //adding view controller 1 info
+//            finalList[@"phone"]             = [registeredStaff getCellPhone];
+//            
+//            
+//            NSLog(@"After view controller 1");
+//            NSLog(@" %@", finalList);
+//            NSLog(@"");
             
             
             //adding view controller 2 info
@@ -284,53 +284,53 @@
             finalList[@"languages"]             = [registeredStaff getLanguages];
             
             
-            NSLog(@"After view controller 2");
-            NSLog(@" %@", finalList);
-            NSLog(@"");
+//            NSLog(@"After view controller 2");
+//            NSLog(@" %@", finalList);
+//            NSLog(@"");
             
             //adding view controller 3 info
             
             finalList[@"experience"]                    = [registeredStaff getExperience];
             
-            NSLog(@"services are : %@ ", [registeredStaff getServices]);
+//            NSLog(@"services are : %@ ", [registeredStaff getServices]);
             if( [registeredStaff getServices].count > 0 )
             {
-                NSLog(@"services selected %@", [registeredStaff getServices]);
+//                NSLog(@"services selected %@", [registeredStaff getServices]);
                 
                 finalList[@"services"] = [registeredStaff getServices];
                 
                 if( [registeredStaff isDJ] )
                 {
-                    NSLog(@"DJ!!!!");
+//                    NSLog(@"DJ!!!!");
                     finalList[@"selectedDJ"]                = [NSString stringWithFormat:@"%d", [registeredStaff isDJ] ];
                     finalList[@"djInfo"]                    = [registeredStaff getDJInfo];
                 }
                 if( [registeredStaff isLiveBand] )
                 {
                     
-                    NSLog(@"Live Band");
+//                    NSLog(@"Live Band");
                     finalList[@"selectedLiveBand"]          = [NSString stringWithFormat:@"%d", [registeredStaff isLiveBand] ];
                     finalList[@"liveBandInfo"]              = [registeredStaff getLiveBandInfo];
                 }
                 if( [registeredStaff isCateringCompany] )
                 {
                     
-                    NSLog(@"Catering Company!!!");
+//                    NSLog(@"Catering Company!!!");
                     finalList[@"selectedCateringCompany"]   = [NSString stringWithFormat:@"%d", [registeredStaff isCateringCompany] ];
                     finalList[@"cateringCompanyInfo"]       = [registeredStaff getCateringCompanyInfo];
                 }
                 if( [registeredStaff isOtherServices] )
                 {
                     
-                    NSLog(@"Other Service!!!!");
+//                    NSLog(@"Other Service!!!!");
                     finalList[@"selectedOtherServices"]     = [NSString stringWithFormat:@"%d", [registeredStaff isOtherServices] ];
                     finalList[@"otherServicesInfo"]         = [registeredStaff getOtherServicesInfo];
                 }
                 
                 
-                NSLog(@"After view controller 3");
-                NSLog(@" %@", finalList);
-                NSLog(@"");
+//                NSLog(@"After view controller 3");
+//                NSLog(@" %@", finalList);
+//                NSLog(@"");
             }
             else
             {
@@ -364,9 +364,9 @@
                 finalList[@"tshirtSize"]            = [registeredStaff getTshirtSize];
                 
                 
-                NSLog(@"After view controller 8");
-                NSLog(@" %@", finalList);
-                NSLog(@"");
+//                NSLog(@"After view controller 8");
+//                NSLog(@" %@", finalList);
+//                NSLog(@"");
                 
                 //females only
                 if(![registeredStaff isMale])
@@ -377,9 +377,9 @@
                     finalList[@"hipsSize"]             = [registeredStaff getHipSize];
                     finalList[@"dressSize"]            = [registeredStaff getDressSize];
                     
-                    NSLog(@"After view controller 9");
-                    NSLog(@" %@", finalList);
-                    NSLog(@"");
+//                    NSLog(@"After view controller 9");
+//                    NSLog(@" %@", finalList);
+//                    NSLog(@"");
                 }
             }//eo male or female (NON-SERVICE TALENT)
             
@@ -402,9 +402,9 @@
             finalList[@"travelPercentage"]  = [registeredStaff getTravelPercentage];
             
             
-            NSLog(@"After view controller 10");
-            NSLog(@" %@", finalList);
-            NSLog(@"");
+//            NSLog(@"After view controller 10");
+//            NSLog(@" %@", finalList);
+//            NSLog(@"");
             
             //adding view controller 13 info
             finalList[@"DirectDeposit"]                 =  [NSString stringWithFormat:@"%d",[registeredStaff wantsDirectDeposit]];
@@ -412,9 +412,9 @@
             finalList[@"DirectDepositAccountNumber"]    = [registeredStaff getdirectDepositAccountNumber];
             
             
-            NSLog(@"After view controller 13");
-            NSLog(@" %@", finalList);
-            NSLog(@"");
+//            NSLog(@"After view controller 13");
+//            NSLog(@" %@", finalList);
+//            NSLog(@"");
             
             return finalList;
             

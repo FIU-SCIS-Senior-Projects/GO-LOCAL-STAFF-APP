@@ -99,7 +99,6 @@
     /* calculates the age of the staff user provided */
     function getAge($dob)
     {
-      echo "received '".$dob."'";
       $newDOB = substr($dob, 6);
       $newDOB = $newDOB."-".substr($dob, 0, 5);
       $newDOB = date_create($newDOB);
@@ -130,20 +129,10 @@
         return 0;
       }
 
-
-        //these fields were already saved
+      //these fields were already saved
       $staffID                        = $registrationData['staffID'];
-      $username                       = $registrationData['username'];
-      $firstName                      = $registrationData['firstName'];
-      $middleName                     = $registrationData['middleName'];
-      $lastName                       = $registrationData['lastName'];
-      $nickname                       = $registrationData['nickname'];
-      $email                          = $registrationData['email'];
-      $password                       = $registrationData['password'];
-      $phone                          = $registrationData['cellphone'];
-      $dob                            = $registrationData['dob'];
 
-        //gathering fields to save
+      //gathering fields to save
       $address                        = $registrationData['address'];
       $city                           = $registrationData['city'];
       $state                          = $registrationData['state'];
@@ -267,7 +256,7 @@
 
       $query = "UPDATE registered_staff
       SET $part1 $part2 $part3 $part4 $part5 $part6 $part7
-      WHERE phone='".$phone."' and staffID = '".$staffID."'";
+      WHERE staffID = '".$staffID."'";
 
       // echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
