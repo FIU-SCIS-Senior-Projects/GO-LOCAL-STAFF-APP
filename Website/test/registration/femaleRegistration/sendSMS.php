@@ -1,6 +1,6 @@
 <?php  
 
-include '../urlsettings.php';
+include '../../urlsettings.php';
 
 //Initiate cURL.
 $ch = curl_init($url_sendSMS);
@@ -9,17 +9,17 @@ if($testingStaffUser)
 {
       //valid staff user
     $jsonData = [
-      'registrationType' => 'Staff',
-      'firstName' => 'Stephanie',
-      'middleName' => '', 
-      'lastName' => 'Chediak',
-      'nickName' => 'Mustard',
-      'username' => 'Lovesteph97',
-      'password' => 'mnbvcxz',
-      'email' => 'Lovesteph97@aol.com',
-      'dob' => '10-19-1994',
-      'phone' => '2392486846',
-      ];
+    'dob' => '07-13-1979',
+    'email' => 'Asanz_19@hotmail.com',
+    'firstName' => 'Andrea',
+    'lastName' => 'Castillo',
+    'middleName' => '',
+    'nickName' => '',
+    'password' => 'mnbvcxz',
+    'phone' => '3057765855',
+    'registrationType' => 'Staff',
+    'username' => 'Asanz19',
+    ];
 }
 else
 {

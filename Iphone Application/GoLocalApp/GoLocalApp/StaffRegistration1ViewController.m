@@ -347,8 +347,16 @@
                 }
                 else //invalid response
                 {
-                    //notifying user code was accepted
-                    [self showAlert:@"SMS Authentication" withMessage:message and:@"Okay"];
+                    if(userResults)
+                    {
+                        //notifying user code was accepted
+                        [self showAlert:@"SMS Authentication" withMessage:message and:@"Okay"];
+                    }
+                    else
+                    {
+//                        NSString * msgToDisplay = @"";
+//                        [self showAlert:@"SMS Authentication" withMessage:msgToDisplay and:@"Okay"];
+                    }
                 }
             }//eom
 

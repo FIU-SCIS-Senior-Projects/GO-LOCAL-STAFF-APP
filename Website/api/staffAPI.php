@@ -269,7 +269,7 @@
       SET $part1 $part2 $part3 $part4 $part5 $part6 $part7
       WHERE phone='".$phone."' and staffID = '".$staffID."'";
 
-      echo "<p>".$query."</p>";
+      // echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {

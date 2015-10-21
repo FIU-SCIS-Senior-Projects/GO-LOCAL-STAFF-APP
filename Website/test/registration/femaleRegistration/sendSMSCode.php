@@ -1,7 +1,7 @@
 <?php  
 
 
-include '../urlsettings.php';
+include '../../urlsettings.php';
 
 
 //Initiate cURL.
@@ -12,9 +12,9 @@ if($testingStaffUser)
     //valid staff user
     $jsonData = [
       "registrationType"  => "Staff",
-      "userID" => "1",
-      "code" => "4140",
-      "phone" => "2392486846"
+      "userID" => "5",
+      "code" => "7607",
+      "phone" => "3057765855",
       ];
 }
 else
