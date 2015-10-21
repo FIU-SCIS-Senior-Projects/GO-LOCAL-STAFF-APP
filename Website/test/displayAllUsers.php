@@ -21,7 +21,7 @@
 
               $registerStaff = getAllStaff();
               $totalStaff = count($registerStaff);
-              
+              // print_r($registerStaff[0]);//testing
             ?>
 
             <h2>
@@ -193,6 +193,13 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td><b>gender</b></td>  
+                            <td>
+                                <?php 
+                                        echo $currentRow['age'];
+                                  ?> 
+                            </td> 
+                          </tr>
                             <td><b>gender</b></td>  
                             <td>
                                 <?php 
@@ -372,34 +379,18 @@
                             <td></td>         
                             <td><b>forgotPasswordCode</b></td>
                             <td><?php echo $currentRow['forgotPasswordCode']; ?> </td> 
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>             
-                            <td><b>forgotPasswordRequests</b></td>
-                            <td><?php echo $currentRow['forgotPasswordRequests']; ?> </td> 
                           </tr>
                             <tr>   
-                            <td><b>loginPasswordRequests</b></td> 
-                            <td><?php echo $currentRow['loginPasswordRequests']; ?> </td> 
+                            <td><b>loginRequests</b></td> 
+                            <td><?php echo $currentRow['loginRequests']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>         
-                      <!--       <td><b>forgotPasswordCode</b></td>
-                            <td><?php //echo $currentRow['forgotPasswordCode']; ?> </td> 
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>             
+                            <td></td>  
                             <td><b>forgotPasswordRequests</b></td>
-                            <td><?php //echo $currentRow['forgotPasswordRequests']; ?> </td> --> 
+                            <td><?php echo $currentRow['forgotPasswordRequests']; ?> </td> 
                           </tr>
                         </tbody>
                         </table>
@@ -421,6 +412,7 @@
             <?php
               $registerEmployers = getAllEmployers();
               $totalEmployers = count($registerEmployers);
+              // print_r($registerEmployers[0]);//testing
             ?>
             <h2>
                 Registered Employer
@@ -596,34 +588,18 @@
                             <td></td>         
                             <td><b>forgotPasswordCode</b></td>
                             <td><?php echo $currentRow['forgotPasswordCode']; ?> </td> 
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>             
-                            <td><b>forgotPasswordRequests</b></td>
-                            <td><?php echo $currentRow['forgotPasswordRequests']; ?> </td> 
                           </tr>
                            <tr>   
-                            <td><b>loginPasswordRequests</b></td> 
-                            <td><?php echo $currentRow['loginPasswordRequests']; ?> </td> 
+                            <td><b>loginRequests</b></td> 
+                            <td><?php echo $currentRow['loginRequests']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>         
-                      <!--       <td><b>forgotPasswordCode</b></td>
-                            <td><?php //echo $currentRow['forgotPasswordCode']; ?> </td> 
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>             
                             <td><b>forgotPasswordRequests</b></td>
-                            <td><?php //echo $currentRow['forgotPasswordRequests']; ?> </td> --> 
+                            <td><?php echo $currentRow['forgotPasswordRequests']; ?> </td> 
                           </tr>
 
                         </tbody>
