@@ -235,6 +235,8 @@
       return 0;
     }
 
+    $whereClause = "";
+
     /* 
       hasPhoto
       the options are: 
@@ -242,15 +244,28 @@
       @"Yes",
       @"No",
     */
+    if( !empty($searchCriteria["hasPhoto"]) )
+    {
+      if( strcasecmp($searchCriteria["hasPhoto"], "either") )
+      {
+        $whereClause.= "hasPhoto='".$searchCriteria[$hasPhoto]."' AND ";
+      }
+    }
 
     /* 
-      HasWebsite
-      the options are: 
+      hasWebsite
+      the options are:
       @"Either",
       @"Yes",
       @"No",
     */
-
+    if( !empty($searchCriteria["hasWebsite"]) )
+    {
+      if( strcasecmp($searchCriteria["hasWebsite"], "either") )
+      {
+        $whereClause.= "hasWebsite='".$searchCriteria["hasWebsite"]."' AND ";
+      }
+    }
 
     /* 
       hasTattoos
@@ -259,7 +274,13 @@
       @"Yes",
       @"No",
     */
-
+    if( !empty($searchCriteria["hasTattoos"]) )
+    {
+      if( strcasecmp($searchCriteria["hasTattoos"], "either") )
+      {
+        $whereClause.= "hasTattoos='".$searchCriteria["hasTattoos"]."' AND ";
+      }
+    }
 
     /* 
       hasPiercings
@@ -268,7 +289,13 @@
       @"Yes",
       @"No",
     */
-
+    if( !empty($searchCriteria["hasPiercings"]) )
+    {
+      if( strcasecmp($searchCriteria["hasPiercings"], "either") )
+      {
+        $whereClause.= "hasPiercings='".$searchCriteria["hasPiercings"]."' AND ";
+      }
+    }
 
     /* 
       gender
@@ -276,8 +303,14 @@
         @"Any",
         @"Male",
         @"Female",
-    */ 
-
+    */
+    if( !empty($searchCriteria["gender"]) )
+    {
+      if( strcasecmp($searchCriteria["gender"], "any") )
+      {
+        $whereClause.= "gender='".$searchCriteria["gender"]."' AND ";
+      }
+    }
 
     /* 
       age
@@ -286,8 +319,22 @@
       @"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",
       @"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",
       @"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45+",
-    */ 
+    */
+    if( !empty($searchCriteria["ageFrom"]) )
+    {
+      // ageFrom = 18;
+      // ageTo = Any;
 
+      if( !empty($searchCriteria["ageTo"]) )
+      {
+        $whereClause.= "age>='".$searchCriteria["ageFrom"]."' AND age<='".$searchCriteria["ageTo"]."' AND ";
+      }
+      else
+      {
+        $whereClause.= "age='".$searchCriteria["ageFrom"]."' AND ";
+      }
+
+    }
 
     /* 
       weight
@@ -299,11 +346,29 @@
       @"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45+",
 
       conditions:
-      @"At most",
+      @"at most",
       @"equal",
       @"atleast",
-      @"Any",
-    */ 
+      @"any",
+    */
+    if( !empty($searchCriteria[""]) )
+    {
+      if( !empty($searchCriteria["weightCondition"]) )
+      {
+        if( !strcasecmp($searchCriteria["weightCondition", "at most") )
+        {
+          $whereClause.= "weight<='".$searchCriteria["weight"]."' AND ";
+        }
+        elseif ( !strcasecmp($searchCriteria["weightCondition", "equal") )
+        {
+          $whereClause.= "weight='".$searchCriteria["weight"]."' AND ";
+        }
+        elseif ( !strcasecmp($searchCriteria["weightCondition"], "at least") ) 
+        {
+          $whereClause.= "weight>='".$searchCriteria["weight"]."'";
+        }
+      }
+    }
 
     /* 
       height
@@ -474,5 +539,8 @@
         $result = mail( $to, $subject, $message, $headers );
         echo $result;
     }//eom
+
+
+/*************** Helper Methods ***************************/
 
 ?>
