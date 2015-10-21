@@ -363,9 +363,9 @@
                 finalList[@"tshirtSize"]            = [registeredStaff getTshirtSize];
                 
                 
-//                NSLog(@"After view controller 8");
-//                NSLog(@" %@", finalList);
-//                NSLog(@"");
+                NSLog(@"After view controller 8");
+                NSLog(@" %@", finalList);
+                NSLog(@"");
                 
                 //females only
                 if(![registeredStaff isMale])

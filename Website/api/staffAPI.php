@@ -173,6 +173,10 @@
       {
         $typeOfLicense = -1; //no license
       }
+      else if( $hasCommercialLicense == 0 && $hasDriverLicense == 1 )
+      {
+        $typeOfLicense = 0; //regular driver License
+      }
       else if( $hasCommercialLicense == 1 && $hasDriverLicense == 0 )
       {
         $typeOfLicense = 1; //commercial License
@@ -180,10 +184,6 @@
       else if( $hasCommercialLicense == 1 && $hasDriverLicense == 1 )
       {
         $typeOfLicense = 1; //commercial License
-      }
-      else if( $hasCommercialLicense == 0 && $hasDriverLicense == 1 )
-      {
-        $typeOfLicense = 0; //regular driver License
       }
 
       $travel                            = $registrationData['travelPercentage'];

@@ -21,10 +21,6 @@
     //updating values
     NSString * heightFeet;      //temp
     NSString * heightInches;    //temp
-    BOOL hasDriverLicense;
-    BOOL hasCommercialLicense;
-    BOOL hasTattos;
-    BOOL hasPiercings;
     
     //arrays
     NSArray *ethnicityOptions;
@@ -58,7 +54,8 @@
 @implementation StaffRegistration8ViewController
 
 @synthesize scrollView, registeredStaff,
-    validDriverLicenseSwitch, validCommercialDriverLicenseSwitch, hasTattoosSwitch, hasPiercingsSwitch, ethnicityTextField, heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSizeTextField, shoeSizeTextField, tshirtSizeTextField;
+    validDriverLicenseSwitch, validCommercialDriverLicenseSwitch, hasTattoosSwitch, hasPiercingsSwitch, ethnicityTextField,
+heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSizeTextField, shoeSizeTextField, tshirtSizeTextField;
 
 
 - (void)viewDidLoad {
@@ -89,45 +86,35 @@
     /* verifying the required input fileds */
     - (BOOL)verifyDataEnter
     {
+        
+        BOOL hasDriverLicense       =   FALSE;
+        BOOL hasCommercialLicense   =   FALSE;
+        BOOL hasTattoos             =   FALSE;
+        BOOL hasPiercings           =   FALSE;
+        
+        
         //driver license
         if(self.validDriverLicenseSwitch.on)
         {
-            self->hasDriverLicense = YES;
+            hasDriverLicense = TRUE;
         }
-        else
-        {
-            self->hasDriverLicense = NO;
-        }
-        
+
         //commercial license
         if(self.validCommercialDriverLicenseSwitch.on)
         {
-            self->hasCommercialLicense = YES;
-        }
-        else
-        {
-            self->hasDriverLicense = NO;
+            hasCommercialLicense = TRUE;
         }
         
         //tattoos
         if(self.hasTattoosSwitch.on)
         {
-            self->hasTattos = YES;
+            hasTattoos = TRUE;
         }
-        else
-        {
-            self->hasTattos = NO;
-        }
-        
         
         //piercings
         if(self.hasPiercingsSwitch.on)
         {
-            self->hasPiercings = YES;
-        }
-        else
-        {
-            self->hasPiercings = NO;
+            hasPiercings = TRUE;
         }
         
         //checking for valid input
@@ -234,9 +221,10 @@
         }
         
         //updating values
-        [registeredStaff setLicenseInfo:self->hasDriverLicense hasCommercialLicense:self->hasCommercialLicense];
-        [registeredStaff setTattoos:self->hasTattos];
-        [registeredStaff setPiercings:self->hasPiercings];
+        [registeredStaff setDriverLicense:hasDriverLicense];
+        [registeredStaff setCommercialLicense:hasCommercialLicense];
+        [registeredStaff setTattoos:hasTattoos];
+        [registeredStaff setPiercings:hasPiercings];
         [registeredStaff setEthnicity:self.ethnicityTextField.text withCode:self->ethinicityCode];
         [registeredStaff setHeight:self.heightTextField.text];
         [registeredStaff setWeight:self.weightTextField.text];

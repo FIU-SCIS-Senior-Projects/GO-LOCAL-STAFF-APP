@@ -47,6 +47,7 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
 //    [registeredStaff printUserData];//testing
     
     [self setUpTapGesture];
+    [self setUpTravelButtons];
 }//eom
 
 #pragma mark - sending data
@@ -188,25 +189,29 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
     {
         int travelValue = (int) sender.tag;
         
-        if(travelValue == 25)//  25% travel
+        if(travelValue == 0)//  0% travel
+        {
+            //enabling 25% button
+            self.travel0percentButton.layer.borderColor     = [UIColor blackColor].CGColor;
+            
+            //disabling all travel percentages buttons
+            self.travel25percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel50percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel75percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel100percentButton.layer.borderColor   = [UIColor clearColor].CGColor;
+            
+            self->travelDesired = @"0";
+        }
+        else if(travelValue == 25)//  25% travel
         {
             //enabling 25% button
             self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel25percentButton.layer.borderWidth = 4.5f;
-            self.travel25percentButton.layer.cornerRadius = 10.0f;
             
             //disabling all travel percentages buttons
-            self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel50percentButton.layer.borderWidth = 0.0f;
-            self.travel50percentButton.layer.cornerRadius = 0.0f;
-            
-            self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel75percentButton.layer.borderWidth = 0.0f;
-            self.travel75percentButton.layer.cornerRadius = 0.0f;
-           
-            self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel100percentButton.layer.borderWidth = 0.0f;
-            self.travel100percentButton.layer.cornerRadius = 0.0f;
+            self.travel0percentButton.layer.borderColor     = [UIColor clearColor].CGColor;
+            self.travel50percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel75percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel100percentButton.layer.borderColor   = [UIColor clearColor].CGColor;
             
             self->travelDesired = @"25";
         }
@@ -214,21 +219,12 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
         {
             //enabling 50% button
             self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel50percentButton.layer.borderWidth = 4.5f;
-            self.travel50percentButton.layer.cornerRadius = 10.0f;
             
             //disabling all travel percentages buttons
-            self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel25percentButton.layer.borderWidth = 0.0f;
-            self.travel25percentButton.layer.cornerRadius = 0.0f;
-            
-            self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel75percentButton.layer.borderWidth = 0.0f;
-            self.travel75percentButton.layer.cornerRadius = 0.0f;
-            
-            self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel100percentButton.layer.borderWidth = 0.0f;
-            self.travel100percentButton.layer.cornerRadius = 0.0f;
+            self.travel0percentButton.layer.borderColor     = [UIColor clearColor].CGColor;
+            self.travel25percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel75percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel100percentButton.layer.borderColor   = [UIColor clearColor].CGColor;
             
             self->travelDesired = @"50";
         }
@@ -236,21 +232,12 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
         {
             //enabling 75% button
             self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel75percentButton.layer.borderWidth = 4.5f;
-            self.travel75percentButton.layer.cornerRadius = 10.0f;
             
             //disabling all travel percentages buttons
-            self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel25percentButton.layer.borderWidth = 0.0f;
-            self.travel25percentButton.layer.cornerRadius = 0.0f;
-            
-            self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel50percentButton.layer.borderWidth = 0.0f;
-            self.travel50percentButton.layer.cornerRadius = 0.0f;
-            
-            self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel100percentButton.layer.borderWidth = 0.0f;
-            self.travel100percentButton.layer.cornerRadius = 0.0f;
+            self.travel0percentButton.layer.borderColor     = [UIColor clearColor].CGColor;
+            self.travel25percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel50percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel100percentButton.layer.borderColor   = [UIColor clearColor].CGColor;
             
             self->travelDesired = @"75";
         }
@@ -258,25 +245,45 @@ travel100percentButton, hasProfessionalInsuranceSwitch, incorporatedSwitch, ssnT
         {
             //enabling 100% button
             self.travel100percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel100percentButton.layer.borderWidth = 4.5f;
-            self.travel100percentButton.layer.cornerRadius = 10.0f;
             
             //disabling all travel percentages buttons
-            self.travel25percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel25percentButton.layer.borderWidth = 0.0f;
-            self.travel25percentButton.layer.cornerRadius = 0.0f;
-            
-            self.travel50percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel50percentButton.layer.borderWidth = 0.0f;
-            self.travel50percentButton.layer.cornerRadius = 0.0f;
-            
-            self.travel75percentButton.layer.borderColor = [UIColor blackColor].CGColor;
-            self.travel75percentButton.layer.borderWidth = 0.0f;
-            self.travel75percentButton.layer.cornerRadius = 0.0f;
+            self.travel0percentButton.layer.borderColor     = [UIColor clearColor].CGColor;
+            self.travel25percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel50percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
+            self.travel75percentButton.layer.borderColor    = [UIColor clearColor].CGColor;
             
             self->travelDesired = @"100";
         }
     }//eo-action
+
+/* setups visually all the travel buttons to clear */
+-(void)setUpTravelButtons
+{
+    //0%
+    self.travel0percentButton.layer.borderColor = [UIColor blackColor].CGColor;
+    self.travel0percentButton.layer.borderWidth = 4.5f;
+    self.travel0percentButton.layer.cornerRadius = 10.0f;
+
+    //25%
+    self.travel25percentButton.layer.borderColor = [UIColor clearColor].CGColor;
+    self.travel25percentButton.layer.borderWidth = 4.5f;
+    self.travel25percentButton.layer.cornerRadius = 10.0f;
+
+    //50%
+    self.travel50percentButton.layer.borderColor = [UIColor clearColor].CGColor;
+    self.travel50percentButton.layer.borderWidth = 4.5f;
+    self.travel50percentButton.layer.cornerRadius = 10.0f;
+
+    //75%
+    self.travel75percentButton.layer.borderColor = [UIColor clearColor].CGColor;
+    self.travel75percentButton.layer.borderWidth = 4.5f;
+    self.travel75percentButton.layer.cornerRadius = 10.0f;
+
+    //100%
+    self.travel100percentButton.layer.borderColor = [UIColor clearColor].CGColor;
+    self.travel100percentButton.layer.borderWidth = 4.5f;
+    self.travel100percentButton.layer.cornerRadius = 10.0f;
+}//eom
 
 #pragma mark - helper functions
 

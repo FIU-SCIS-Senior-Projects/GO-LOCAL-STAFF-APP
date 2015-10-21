@@ -189,7 +189,8 @@
 -(void) setOtherServicesInfo:(NSMutableArray *) information;
 
     //controller 8
--(void) setLicenseInfo:(BOOL) driverLicense hasCommercialLicense:(BOOL) commercialLicense;
+-(void) setDriverLicense:(BOOL)  userHasDriverLicense;
+-(void) setCommercialLicense:(BOOL)  userHasCommercialLicense;
 -(void) setTattoos:(BOOL) tattoosSelected;
 -(void) setPiercings:(BOOL) piercingsSelected;
 -(void) setEthnicity:(NSString *) ethnicitySelected withCode:(NSString *) ethnicityCodeProvided;

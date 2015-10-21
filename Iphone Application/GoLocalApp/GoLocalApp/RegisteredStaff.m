@@ -47,7 +47,8 @@
     [self setLiveBandInfo:temp];
     [self setCateringCompanyInfo:temp];
     [self setOtherServicesInfo:temp];
-    [self setLicenseInfo:FALSE hasCommercialLicense:FALSE];
+    [self setDriverLicense:FALSE];
+    [self setCommercialLicense:FALSE];
     [self setTattoos:FALSE];
     [self setPiercings:FALSE];
     [self setEthnicity:@" " withCode:@" "];
@@ -196,14 +197,16 @@
     
 }//eom
 
-    //view controller 8
--(void) setLicenseInfo:(BOOL) driverLicense hasCommercialLicense:(BOOL) commercialLicense
+//view controller 8
+-(void) setDriverLicense:(BOOL)  userHasDriverLicense
 {
-    hasDriverLicense        =  driverLicense;
-    hasCommercialLicense    =   commercialLicense;
-    
+    hasDriverLicense        =  userHasDriverLicense;
 }//eom
 
+-(void) setCommercialLicense:(BOOL)  userHasCommercialLicense
+{
+    hasCommercialLicense    =  userHasCommercialLicense;
+}//eom
 
 -(void) setTattoos:(BOOL) tattoosSelected
 {
