@@ -410,8 +410,8 @@
             <hr>
             <p></p>
             <?php
-              $registerEmployers = getAllEmployers();
-              $totalEmployers = count($registerEmployers);
+              // $registerEmployers = getAllEmployers();
+              // $totalEmployers = count($registerEmployers);
               // print_r($registerEmployers[0]);//testing
             ?>
             <h2>
@@ -428,11 +428,11 @@
 
              <?php
 
-                //iterating thru all staff
-                for( $iter = 0; $iter < $totalEmployers; $iter++ )
-                {
-                  $currentRow = $registerEmployers[$iter];
-                  $employerID = $currentRow['employerID'];
+                // //iterating thru all staff
+                // for( $iter = 0; $iter < $totalEmployers; $iter++ )
+                // {
+                //   $currentRow = $registerEmployers[$iter];
+                //   $employerID = $currentRow['employerID'];
               ?>
                   <tr>
                     <td> 
@@ -607,7 +607,7 @@
                     </td>
                     </tr>
               <?php
-                }//eofl
+                // }//eofl
               ?>
             </table>
 
