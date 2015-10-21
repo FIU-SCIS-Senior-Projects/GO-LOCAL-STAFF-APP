@@ -146,6 +146,7 @@
       $hairColor                      = $registrationData['hairColor'];
       $piercings                      = $registrationData['piercings'];     
       $height                         = $registrationData['height'];
+     
       $weight                         = $registrationData['weight'];
 
       $gender                         = $registrationData['genderType'];//0 female | 1 male
@@ -238,7 +239,7 @@
       // $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
       
       /*
-      `staffID` int(11) NOT NULL,  //PRIMARY KEY
+      missing these fields:
       `staffType` int(11) NOT NULL,
       `pictures` varchar(30) NOT NULL,
       `insuranceDocuments` varchar(30) NOT NULL,
@@ -246,13 +247,12 @@
       `TermsAndAgreements` varchar(255) NOT NULL
       */
       $part1 = "address='".$address."',city='".$city."',zipcode='".$zipcode."',state='".$state."',gender='".$gender."',languages='".$languages."',";
-      $part2 = "typeDL='".$typeOfLicense."',ethnicity='".$ethnicity."',ethnicityCode='".$ethnicityCode."',weight='".$weight."',hairColor='".$hairColor."',";
+      $part2 = 'typeDL="'.$typeOfLicense.'",ethnicity="'.$ethnicity.'",ethnicityCode="'.$ethnicityCode.'", height="'.$height.'" ,weight="'.$weight.'",hairColor="'.$hairColor.'",';
       $part3 = "eyeColor='".$eyeColor."',shirtSize='".$tshirtSize."',chestSize='".$chestSize."',waistSize='".$waistSize."',hipSize='".$hipSize."',";
       $part4 = "dressSize='".$dressSize."',pantSize='".$pantSize."',shoeSize='".$shoeSize."',piercings='".$piercings."',";
       $part5 = "desiredHourlyRate='".$desiredHourlyRate."',desiredWeeklyRate='".$desiredWeeklyRate."',ssnOrEin='".$ssnOrEin."',businessName='".$business_name."',";
       $part6 = "travel='".$travel."',insurance='".$hasProfessionalInsurance."',";
       $part7 = "bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'";
-
 
       $query = "UPDATE registered_staff
       SET $part1 $part2 $part3 $part4 $part5 $part6 $part7
