@@ -145,7 +145,7 @@
                 self->staffID = responceType;
                 
                 //instiate navigation controller for staff home
-                UINavigationController *staffNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"employerNavigationController"];
+                UINavigationController *staffNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"staffNavigationController"];
                 
                 //updating transition
                 [staffNavController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
@@ -276,8 +276,8 @@
             
             //adding view controller 2 info
             finalList[@"address"]               = [registeredStaff getAddress];
-            finalList[@"city"]               = [registeredStaff getAddressCity];
-            finalList[@"state"]               = [registeredStaff getAddressState];
+            finalList[@"city"]                  = [registeredStaff getAddressCity];
+            finalList[@"state"]                 = [registeredStaff getAddressState];
             finalList[@"zipcode"]               = [registeredStaff getAddressZipcode];
             finalList[@"gender"]                = [registeredStaff getGender];
             finalList[@"genderType"]            = [NSString stringWithFormat:@"%d", [registeredStaff isMale]];

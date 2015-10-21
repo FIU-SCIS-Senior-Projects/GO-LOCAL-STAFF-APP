@@ -251,6 +251,10 @@
             [verificationAsterisk setHidden:NO];
             [verificationCode setHidden:NO];
             [verifyCodeButton setHidden:NO];
+            
+            //moving on to the next textfield
+            [cellphone resignFirstResponder];
+            [verificationCode becomeFirstResponder];
         }
     }//eom
 
