@@ -57,48 +57,14 @@
     [self setUpTapGesture];
     [self createPickerForState];
     [self createPickerForLanguages];
+    [self setUpGenderButtons];
     genderSelected = FALSE;
     
 //    [registeredStaff printUserData];
 
 }//eom
 
-#pragma mark -
-    - (IBAction)genderValueChanged:(UIButton *)sender
-    {
-        int genderValue = (int) sender.tag;
-        
-        if(genderValue == 0)//  0 - female
-        {
-            //enabling female button
-            femaleButton.layer.borderColor = [UIColor blackColor].CGColor;
-            femaleButton.layer.borderWidth = 4.5f;
-            femaleButton.layer.cornerRadius = 10.0f;
-            
-            //disabling male button
-            maleButton.layer.borderColor = [UIColor blackColor].CGColor;
-            maleButton.layer.borderWidth = 0.0f;
-            maleButton.layer.cornerRadius = 0.0f;
-            
-            self->gender = 0;
-            self->genderSelected = TRUE;
-        }
-        else if(genderValue == 1) //  1 - male
-        {
-            //enabling male button
-            maleButton.layer.borderColor = [UIColor blackColor].CGColor;
-            maleButton.layer.borderWidth = 4.5f;
-            maleButton.layer.cornerRadius = 10.0f;
-            
-            //disabling female button
-            femaleButton.layer.borderColor = [UIColor blackColor].CGColor;
-            femaleButton.layer.borderWidth = 0.0f;
-            femaleButton.layer.cornerRadius = 0.0f;
-            
-            self->gender = 1;
-            self->genderSelected = TRUE;
-        }
-    }//EOA
+
 
 #pragma mark - verify data enter
     /* verifying input fields
@@ -247,6 +213,50 @@
                                               cancelButtonTitle:cancelTitle
                                               otherButtonTitles: nil];
         [alert show];//display alert
+    }//eom
+
+#pragma mark - gender buttons
+    - (IBAction)genderValueChanged:(UIButton *)sender
+    {
+        int genderValue = (int) sender.tag;
+        
+        if(genderValue == 0)//  0 - female
+        {
+            //enabling female button
+            femaleButton.layer.borderColor = [UIColor blackColor].CGColor;
+            
+            //disabling male button
+            maleButton.layer.borderColor = [UIColor clearColor].CGColor;
+            
+            self->gender = 0;
+            self->genderSelected = TRUE;
+        }
+        else if(genderValue == 1) //  1 - male
+        {
+            //enabling male button
+            maleButton.layer.borderColor = [UIColor blackColor].CGColor;
+            
+            //disabling female button
+            femaleButton.layer.borderColor = [UIColor clearColor].CGColor;
+            
+            self->gender = 1;
+            self->genderSelected = TRUE;
+        }
+    }//EOA
+
+    /* setups gender buttons */
+    -(void)setUpGenderButtons
+    {
+        //male
+        self.maleButton.layer.borderColor = [UIColor clearColor].CGColor;
+        self.maleButton.layer.borderWidth = 4.5f;
+        self.maleButton.layer.cornerRadius = 10.0f;
+
+        //female
+        self.femaleButton.layer.borderColor = [UIColor clearColor].CGColor;
+        self.femaleButton.layer.borderWidth = 4.5f;
+        self.femaleButton.layer.cornerRadius = 10.0f;
+
     }//eom
 
 #pragma mark - tap gestures functions

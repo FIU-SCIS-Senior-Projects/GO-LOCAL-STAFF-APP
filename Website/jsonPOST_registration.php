@@ -55,7 +55,8 @@
           {
             $responseArray = array(
             "message" => "user successfully registered",
-            "responseType"    => $registrationResults,
+            "responseType"    => 1,
+            "userID" => $registrationResults
             );
           }
           else if( $registrationResults == 0 )

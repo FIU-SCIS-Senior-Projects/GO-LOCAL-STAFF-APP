@@ -64,12 +64,12 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
       {
         //saving user initial information
         $userID = storeUserCredentials( $registrationType, $decoded );
-        echo "<p> userID: $userID</p>";//testing
+        // echo "<p> userID: $userID</p>";//testing
         if($userID > 0)
         {
         //authenticating phone number
           $phoneResult = authenticateUserPhoneNumber($registrationType, $userID, $phone );
-        echo "<p> authentication results $phoneResult</p>";//testing
+        // echo "<p> authentication results $phoneResult</p>";//testing
           if($phoneResult > 0)
           {
             $responseArray = [ 

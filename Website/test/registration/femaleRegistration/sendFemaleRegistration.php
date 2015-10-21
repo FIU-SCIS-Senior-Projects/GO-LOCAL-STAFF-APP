@@ -12,7 +12,7 @@ $ch = curl_init($url_sendFemaleRegistration);
     );
 
   $jsonData = array (
-    'staffID' => '1',
+    'staffID' => '9',
     'DirectDeposit' => '0',
     'DirectDepositAccountNumber' => ' ',
     'DirectDepositRoutingNumber' => ' ',
@@ -42,7 +42,6 @@ $ch = curl_init($url_sendFemaleRegistration);
     'registrationType' => 'Staff',
     'shoeSize' => '7.5',
     'ssn' => '65472514',
-    'staffID' => '0',
     'state' => 'FL',
     'travelPercentage' => '25',
     'tshirtSize' => 'S',

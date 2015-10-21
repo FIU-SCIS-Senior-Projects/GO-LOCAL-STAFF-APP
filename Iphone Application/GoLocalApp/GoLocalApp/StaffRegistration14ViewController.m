@@ -19,7 +19,6 @@
     
     UIImage * selfiePhoto;
     UIImage * bodyPhoto;
-    int staffID;
 }
 @end
 
@@ -97,12 +96,12 @@
     /* preparing the data to sent to the next view controller */
     -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
     {
-        if([segue.identifier isEqualToString:@"staffRegistered"])
-        {
-            UINavigationController *navigationController = [segue destinationViewController];
-            StaffHomeViewController *controller = (StaffHomeViewController *) navigationController.topViewController;
-            controller.staffID = staffID;
-        }
+//        if([segue.identifier isEqualToString:@"staffRegistered"])
+//        {
+//            UINavigationController *navigationController = [segue destinationViewController];
+//            StaffHomeViewController *controller = (StaffHomeViewController *) navigationController.topViewController;
+//            controller.staffID = staffID;
+//        }
     }//eom
 
 
@@ -140,11 +139,11 @@
             {
                 //notifying user code was accepted
                 [self showAlert:@"Registration" withMessage:@"Successfully registered" and:@"Okay"];
-//                self->staffID = [NSString stringWithFormat:@"%d", responceType];
+              
+                NSDictionary * userIDInt = [userResults objectForKey:@"userID"];
+                NSString * userID = [NSString stringWithFormat:@"%@", userIDInt];
                 
-                self->staffID = responceType;
-                
-                //instiate navigation controller for staff home
+                //instantiate navigation controller for staff home
                 UINavigationController *staffNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"staffNavigationController"];
                 
                 //updating transition
@@ -152,8 +151,8 @@
                 
                 //passing data to employer navigation
                 StaffHomeViewController *homeStaffView = (StaffHomeViewController *)[staffNavController topViewController];
-                homeStaffView.staffID = staffID;
-                
+                homeStaffView.staffID = [userID intValue];
+
                 //performing change
                 [self presentViewController:staffNavController animated:NO completion:nil];
 
@@ -364,9 +363,9 @@
                 finalList[@"tshirtSize"]            = [registeredStaff getTshirtSize];
                 
                 
-//                NSLog(@"After view controller 8");
-//                NSLog(@" %@", finalList);
-//                NSLog(@"");
+                NSLog(@"After view controller 8");
+                NSLog(@" %@", finalList);
+                NSLog(@"");
                 
                 //females only
                 if(![registeredStaff isMale])

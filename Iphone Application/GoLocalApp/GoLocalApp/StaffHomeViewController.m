@@ -13,7 +13,7 @@
 @end
 
 @implementation StaffHomeViewController
-@synthesize username;
+@synthesize username, staffID;
 
 
 - (void)viewDidLoad {
@@ -24,8 +24,15 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     NSLog(@"Username %@", username);
-}
+    
+    NSLog(@"staffID %d", staffID);
+}//eo
 
+
+
+
+
+#pragma mark -
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

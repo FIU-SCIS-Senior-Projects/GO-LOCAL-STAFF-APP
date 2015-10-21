@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *desiredHourlyRateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *desiredWeeklyRateTextField;
 
+@property (weak, nonatomic) IBOutlet UIButton *travel0percentButton;
 @property (weak, nonatomic) IBOutlet UIButton *travel25percentButton;
 @property (weak, nonatomic) IBOutlet UIButton *travel50percentButton;
 @property (weak, nonatomic) IBOutlet UIButton *travel75percentButton;
