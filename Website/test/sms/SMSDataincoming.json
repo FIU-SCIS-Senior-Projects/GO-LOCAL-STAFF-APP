@@ -1,0 +1,12 @@
+array (
+  'dob' => '07-13-1979',
+  'email' => 'Asanz_19@hotmail.com',
+  'firstName' => 'Andrea',
+  'lastName' => 'Castillo',
+  'middleName' => '',
+  'nickName' => '',
+  'password' => 'mnbvcxz',
+  'phone' => '3057765855',
+  'registrationType' => 'Staff',
+  'username' => 'Asanz19',
+)

@@ -11,7 +11,7 @@
         <!--Log In View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="LogInViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="LogInViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="buZ-sd-A2G"/>
                         <viewControllerLayoutGuide type="bottom" id="nEa-zU-nrG"/>
@@ -123,7 +123,7 @@
         <!--Account Settings-->
         <scene sceneID="uLn-i2-1M6">
             <objects>
-                <viewController id="yYF-6D-Ozw" sceneMemberID="viewController">
+                <viewController id="yYF-6D-Ozw" customClass="StaffAccountSettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HjV-RH-vf8"/>
                         <viewControllerLayoutGuide type="bottom" id="xDM-WK-2KH"/>
@@ -133,13 +133,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akm-Au-UEh">
-                                <rect key="frame" x="22" y="72" width="195" height="30"/>
+                                <rect key="frame" x="20" y="100" width="195" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Switch to Employer Account">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="fdu-7z-nDn" kind="push" id="rWo-zr-UJa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ca1-SV-dF7">
+                                <rect key="frame" x="20" y="64" width="195" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Sign out">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signOut:" destination="yYF-6D-Ozw" eventType="touchUpInside" id="f8A-u2-Iwa"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -208,7 +220,7 @@
         <!--Account Settings-->
         <scene sceneID="Xfx-bL-k0r">
             <objects>
-                <viewController id="JE6-r6-Ncf" sceneMemberID="viewController">
+                <viewController id="JE6-r6-Ncf" customClass="EmployerAccountSettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HYk-Ou-MAq"/>
                         <viewControllerLayoutGuide type="bottom" id="Jbg-kA-kRX"/>
@@ -217,10 +229,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="54a-a1-bAl">
-                                <rect key="frame" x="16" y="72" width="162" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Le3-BB-46j">
+                                <rect key="frame" x="20" y="72" width="76" height="30"/>
                                 <animations/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <state key="normal" title="Sign out">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signOut:" destination="yYF-6D-Ozw" eventType="touchUpInside" id="Bzr-2M-Ufd"/>
+                                    <action selector="signOut:" destination="JE6-r6-Ncf" eventType="touchUpInside" id="JRg-Y5-tWT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="54a-a1-bAl">
+                                <rect key="frame" x="122" y="72" width="162" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <state key="normal" title="Switch to Staff Account">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -4746,12 +4773,12 @@
         <image name="search@1x" width="51" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FiL-5A-Rck"/>
         <segue reference="ILI-8L-N8y"/>
         <segue reference="Lfn-U7-v2S"/>
-        <segue reference="rWo-zr-UJa"/>
-        <segue reference="8IJ-5T-D0O"/>
+        <segue reference="R0t-NR-kC7"/>
         <segue reference="15W-7m-6hR"/>
         <segue reference="C35-z2-Umt"/>
+        <segue reference="8IJ-5T-D0O"/>
+        <segue reference="FiL-5A-Rck"/>
     </inferredMetricsTieBreakers>
 </document>

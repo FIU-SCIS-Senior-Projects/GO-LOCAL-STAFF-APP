@@ -10,6 +10,8 @@
 		DE0452D91BB51251008D747C /* StaffRegistration1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0452D81BB51251008D747C /* StaffRegistration1ViewController.m */; };
 		DE0452DC1BB53944008D747C /* StaffRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0452DB1BB53944008D747C /* StaffRegistration4ViewController.m */; };
 		DE1D82E11BA33469005671DB /* ToggleAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */; };
+		DE493F361BD72A7B005DC462 /* StaffAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE493F351BD72A7B005DC462 /* StaffAccountSettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		DE493F3A1BD72A9D005DC462 /* EmployerAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE493F391BD72A9D005DC462 /* EmployerAccountSettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC3F01BB75FA50071D7E2 /* EmployerRegistration0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3EF1BB75FA50071D7E2 /* EmployerRegistration0ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC3F31BB75FD90071D7E2 /* EmployerRegistration2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3F21BB75FD90071D7E2 /* EmployerRegistration2ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		DE4AC3F61BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3F51BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -64,6 +66,10 @@
 		DE0452DB1BB53944008D747C /* StaffRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration4ViewController.m; sourceTree = "<group>"; };
 		DE1D82DF1BA33469005671DB /* ToggleAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleAccountViewController.h; sourceTree = "<group>"; };
 		DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleAccountViewController.m; sourceTree = "<group>"; };
+		DE493F341BD72A7B005DC462 /* StaffAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffAccountSettingsViewController.h; sourceTree = "<group>"; };
+		DE493F351BD72A7B005DC462 /* StaffAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffAccountSettingsViewController.m; sourceTree = "<group>"; };
+		DE493F381BD72A9D005DC462 /* EmployerAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerAccountSettingsViewController.h; sourceTree = "<group>"; };
+		DE493F391BD72A9D005DC462 /* EmployerAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerAccountSettingsViewController.m; sourceTree = "<group>"; };
 		DE4AC3EE1BB75FA50071D7E2 /* EmployerRegistration0ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration0ViewController.h; sourceTree = "<group>"; };
 		DE4AC3EF1BB75FA50071D7E2 /* EmployerRegistration0ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerRegistration0ViewController.m; sourceTree = "<group>"; };
 		DE4AC3F11BB75FD90071D7E2 /* EmployerRegistration2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerRegistration2ViewController.h; sourceTree = "<group>"; };
@@ -151,6 +157,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE493F331BD72A42005DC462 /* Account Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DE493F341BD72A7B005DC462 /* StaffAccountSettingsViewController.h */,
+				DE493F351BD72A7B005DC462 /* StaffAccountSettingsViewController.m */,
+			);
+			name = "Account Settings";
+			sourceTree = "<group>";
+		};
+		DE493F371BD72A83005DC462 /* Account Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DE493F381BD72A9D005DC462 /* EmployerAccountSettingsViewController.h */,
+				DE493F391BD72A9D005DC462 /* EmployerAccountSettingsViewController.m */,
+			);
+			name = "Account Settings";
+			sourceTree = "<group>";
+		};
 		DE6722A51B968CC600599039 = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +247,7 @@
 		DE6722DB1B968D1B00599039 /* Staff Home */ = {
 			isa = PBXGroup;
 			children = (
+				DE493F331BD72A42005DC462 /* Account Settings */,
 				DE6722E01B968D5500599039 /* StaffHomeViewController.h */,
 				DE6722E11B968D5500599039 /* StaffHomeViewController.m */,
 			);
@@ -232,6 +257,7 @@
 		DE6722DC1B968D2A00599039 /* Employer Home */ = {
 			isa = PBXGroup;
 			children = (
+				DE493F371BD72A83005DC462 /* Account Settings */,
 				DE6722DD1B968D4500599039 /* EmployerHomeViewController.h */,
 				DE6722DE1B968D4500599039 /* EmployerHomeViewController.m */,
 				DE7BB00A1BD2A7DE002E3A52 /* Search Talent */,
@@ -508,6 +534,7 @@
 				DE6722B71B968CC600599039 /* AppDelegate.m in Sources */,
 				DE6722E21B968D5500599039 /* StaffHomeViewController.m in Sources */,
 				DE0452D91BB51251008D747C /* StaffRegistration1ViewController.m in Sources */,
+				DE493F361BD72A7B005DC462 /* StaffAccountSettingsViewController.m in Sources */,
 				DE6722E61B968D8700599039 /* PreRegistrationViewController.m in Sources */,
 				DE4AC3F61BB75FFD0071D7E2 /* EmployerRegistration3ViewController.m in Sources */,
 				DE6722BA1B968CC600599039 /* GoLocalApp.xcdatamodeld in Sources */,
@@ -518,6 +545,7 @@
 				DEF0BAB91B9D56C8001C6D84 /* StaffRegistration8ViewController.m in Sources */,
 				DE7BB00E1BD2A806002E3A52 /* SearchTalentViewController.m in Sources */,
 				DE8444A91B9F75060085DA73 /* StaffRegistration13ViewController.m in Sources */,
+				DE493F3A1BD72A9D005DC462 /* EmployerAccountSettingsViewController.m in Sources */,
 				DEE6B84D1B9942DA00912541 /* StaffRegistration6ViewController.m in Sources */,
 				DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */,
 				DE8C2E5E1BA9BB2C00AA0BB6 /* StaffRegistration3ViewController.m in Sources */,
