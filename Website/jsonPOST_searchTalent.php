@@ -97,10 +97,10 @@
 
       /* saving incoming file */
         // Write the contents back to the file
-        $filename = 'test/searchTalent/searchTalentResponse.json';
+        $filename = 'test/searchTalentResponse.json';
         file_put_contents($filename, var_export($encoded, true));
 
-        $filename = 'test/searchTalent/searchTalentIncomingData.json';
+        $filename = 'test/searchTalentIncomingData.json';
         file_put_contents($filename, var_export($decoded, true));
 
 

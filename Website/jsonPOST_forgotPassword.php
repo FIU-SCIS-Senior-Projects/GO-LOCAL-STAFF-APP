@@ -101,10 +101,10 @@ $encoded = json_encode($response);
 
 /* saving incoming file */
       // Write the contents back to the file
-$filename = 'test/forgotPassword/forgotPasswordResponce.json';
+$filename = 'test/forgotPasswordResponce.json';
 file_put_contents($filename, var_export($encoded, true));
 
-$filename = 'test/forgotPassword/forgotPasswordIncoming.json';
+$filename = 'test/forgotPasswordIncoming.json';
 file_put_contents($filename, var_export($decoded, true));
 
 

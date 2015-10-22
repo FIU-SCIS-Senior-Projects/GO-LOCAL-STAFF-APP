@@ -146,7 +146,9 @@
       $hairColor                      = $registrationData['hairColor'];
       $piercings                      = $registrationData['piercings'];     
       $height                         = $registrationData['height'];
-     
+
+      $height = prepareHeightValueForDBStorage($height);
+
       $weight                         = $registrationData['weight'];
 
       $gender                         = $registrationData['genderType'];//0 female | 1 male
@@ -266,6 +268,28 @@
       }
 
       return -1;
+  }//eom
+
+  /* 
+  prepares the height for db storage 
+    by adding the char \ in front of ' and " 
+    example:
+      input   5' 6"
+      output  5\' 6\"
+   */
+  function prepareHeightValueForDBStorage($heightProvided)
+  {
+      //seperating height values
+      $heightSplit  = explode(" ", $heightProvided);
+      $heightFeet   = $heightSplit[0];
+      $heightInches = $heightSplit[1];
+
+      $heightFeet   = str_replace("'","\'", $heightFeet);
+      $heightInches = str_replace('"', '\"', $heightInches);
+
+      $newheight     = $heightFeet.$heightInches;
+
+    return $newheight;
   }//eom
 
 /**************************** NOT BEING USED NOW ********************************/

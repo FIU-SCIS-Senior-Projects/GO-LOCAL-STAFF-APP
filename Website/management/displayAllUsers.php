@@ -668,11 +668,11 @@
                         {
                             // clearing all jsons files
                             echo "<pre>removing all test files</pre>";
-                            $command = "rm ./*/*.json";
+                            $command = "rm ../test/*.json";
                             $result = shell_exec($command);                             
 
                             //displaying all files
-                            $command = "ls ./*/*";
+                            $command = "ls ../*/*";
                             $result = shell_exec($command);                             
                             echo "<pre>$result</pre>";
                         }

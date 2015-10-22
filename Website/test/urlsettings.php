@@ -29,5 +29,6 @@ else
   $url_sendforgotPassword       = $urlBody.'jsonPOST_forgotPassword.php';
   $url_sendEmployerRegistration = $urlBody.'jsonPOST_registration.php';
   $url_sendSearchTalent         = $urlBody.'jsonPOST_searchTalent.php';
+  $url_sendGetTermsAgreements   = $urlBody.'jsonPOST_getTermsAgreements.php';
 
 ?>

@@ -45,63 +45,39 @@
       }
       else  //valid json values found
       { 
-           require 'API.php';/* adding API */
+          require 'API.php';/* adding API */
           
-          $emailOrUsername    = $decoded['emailOrUsername'];
-          $password           = $decoded['password'];
-          //check if valid user and return type of user
-          $typeUser = loginRegisteredUser($emailOrUsername, $password);
-          if($typeUser == 2)//valid employer user
+          $registrationType     = $decoded['registrationType'];
+          $registrationResults  = retrieveTermsAgreement($registrationType);
+          if($registrationResults)
           {
-              $responseArray = array(
-                "message"   => "employer user",
-                "usertype"  => $typeUser,
-              );
+            $responseArray  = array(
+            "message"       => "user successfully registered",
+            "responseType"  => 1,
+            "agreement"     => $registrationResults
+            );
           }
-          else if($typeUser == 1) //valid staff user
+          else if($registrationResults == 0)
           {
-            $responseArray = array(
-                "message" => "staff user",
-                "usertype"    => $typeUser,
-              );
+            $responseArray  = array(
+            "message"       => "database not responding",
+            "responseType"  => $registrationResults,
+            );
           }
-          else if($typeUser == 0) //database not responding
+          else if($registrationResults < 0)
           {
-              $responseArray = array(
-                "message"   => "database not responding",
-                "usertype"  => $typeUser,
-              );
+            $responseArray  = array(
+            "message"       => "unable to retrieve agreements",
+            "responseType"  => $registrationResults,
+            );
           }
-          else if($typeUser == -1) //invalid credentials
-          {
-              $responseArray = array(
-                "message"   => "invalid credentials",
-                "usertype"  => $typeUser,
-              );
-          }
-          else if($typeUser == -2) //Account locked
-          {
-              $responseArray = array(
-                "message"   => "Account locked",
-                "usertype"  => $typeUser,
-              );
-          }
-          else if($typeUser == -3) //no registered user found
-          {
-              $responseArray = array(
-                "message"   => "no registered user found",
-                "usertype"  => $typeUser,
-              );
-          }
+
 
           /* 
             reponse returns the following:
-              2   employer account found  - valid credentials provided
-              1   staff account found     - valid credentials provided
+              1   agreement successfully restored
               0   database not responding
-              -1  account found           - invalid credentials 
-              -2  account locked           
-              -3  no user found        
+              -1  unable to retrieve agreements           
           */
           $response['results'] = $responseArray; //sending reply
 
@@ -122,10 +98,10 @@
 
       /* saving incoming file */
         // Write the contents back to the file
-        $filename = 'test/LoginDataResponse.json';
+        $filename = 'test/getTermsAgreementsResponse.json';
         file_put_contents($filename, var_export($encoded, true));
 
-        $filename = 'test/LoginIncomingData.json';
+        $filename = 'test/getTermsAgreementsIncomingData.json';
         file_put_contents($filename, var_export($decoded, true));
 
 
