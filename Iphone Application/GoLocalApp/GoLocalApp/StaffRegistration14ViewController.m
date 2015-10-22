@@ -16,7 +16,7 @@
 {
 
     StaffDatabase *staffDB;
-    
+    BOOL aggrementRetrieved;
     UIImage * selfiePhoto;
     UIImage * bodyPhoto;
 }
@@ -24,7 +24,7 @@
 
 @implementation StaffRegistration14ViewController
 
-@synthesize scrollView, registeredStaff;
+@synthesize scrollView, registeredStaff, termsAndAgreements;
 
 
 - (void)viewDidLoad {
@@ -34,7 +34,8 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [registeredStaff printUserData];//testing
+    [self getTermsAndAGreementsFromDB];
+//    [registeredStaff printUserData];//testing
 }//eom
 
 
@@ -86,6 +87,46 @@
         
     }//eo-action
 
+    /* gets the terms and agreements from DB  */
+    -(void)getTermsAndAGreementsFromDB
+    {
+        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_getTermsAgreements.php";//hard coding website
+        
+        /*** preparing data to be sent ***/
+        NSMutableDictionary * staffInfo = [self prepareAgreementData];
+        NSLog(@"");
+        NSLog(@" about to send the following data: %@", staffInfo);
+        NSLog(@"");
+        
+        /*** Sending data ***/
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+                                        initWithURL:[NSURL URLWithString:  serverAddress ]];
+        
+        [request setHTTPMethod:@"POST"]; //request type
+        
+        //sending data
+        NSError *error;
+        NSData *postdata = [NSJSONSerialization dataWithJSONObject:staffInfo options:0 error:&error];
+        
+        [request setHTTPBody:postdata];
+        
+       // NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+       // NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+        
+        [NSURLConnection connectionWithRequest:request delegate:self];
+    }//eom
+
+
+    /* prepares the aggreement data */
+    -(NSMutableDictionary *) prepareAgreementData
+    {
+        //creating initial list
+        NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
+        
+        finalList[@"registrationType"]  = [registeredStaff getAccountType];
+
+        return finalList;
+    }//eom
 
 #pragma mark - sending data
     - (IBAction)termsAgreed:(UIButton *)sender
@@ -128,44 +169,54 @@
         {
             //    NSLog(@"[1] responce: %@", responce);
             
-            NSDictionary * userResults = [responce objectForKey:@"results"];
-            int responceType = [[userResults objectForKey:@"responseType"] intValue];
-            NSDictionary * responceMessage = [userResults objectForKey:@"message"];
-            NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
+            NSDictionary * userResults      = [responce objectForKey:@"results"];
+            int responceType                = [[userResults objectForKey:@"responseType"] intValue];
             
             NSLog(@"[1] results is %@", userResults);
             NSLog(@"[1] responceType is %d", responceType);
             if(responceType > 0) //responce was good
             {
-                //notifying user code was accepted
-                [self showAlert:@"Registration" withMessage:@"Successfully registered" and:@"Okay"];
-              
+                
+                //message
+             //   NSDictionary * responceMessage  = [userResults objectForKey:@"message"];
+             //   NSString * message              = [NSString stringWithFormat:@"%@", responceMessage];
+                
+                //agreement
+                NSDictionary * agreementMessage = [userResults objectForKey:@"agreement"];
+                NSString * agreeement           = [NSString stringWithFormat:@"%@", agreementMessage];
+                
+                //userID
                 NSDictionary * userIDInt = [userResults objectForKey:@"userID"];
                 NSString * userID = [NSString stringWithFormat:@"%@", userIDInt];
                 
-                //instantiate navigation controller for staff home
-                UINavigationController *staffNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"staffNavigationController"];
-                
-                //updating transition
-                [staffNavController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-                
-                //passing data to employer navigation
-                StaffHomeViewController *homeStaffView = (StaffHomeViewController *)[staffNavController topViewController];
-                homeStaffView.staffID = [userID intValue];
-
-                //performing change
-                [self presentViewController:staffNavController animated:NO completion:nil];
-
+                //agreement
+                if(responceType == 2)
+                {
+                    self.termsAndAgreements.text = agreeement;
+                }
+                else if(responceType == 1)
+                {
+                    //notifying user code was accepted
+                    [self showAlert:@"Registration" withMessage:@"Successfully registered" and:@"Okay"];
+                    
+                    //instantiate navigation controller for staff home
+                    UINavigationController *staffNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"staffNavigationController"];
+                    
+                    //updating transition
+                    [staffNavController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+                    
+                    //passing data to employer navigation
+                    StaffHomeViewController *homeStaffView = (StaffHomeViewController *)[staffNavController topViewController];
+                    homeStaffView.staffID = [userID intValue];
+                    
+                    //performing change
+                    [self presentViewController:staffNavController animated:NO completion:nil];
+                }
             }
-            else if(responceType == 0) //
+            else
             {
                 //notifying user code was accepted
                 [self showAlert:@"Registration" withMessage:@"We Apologize but our system is currently down" and:@"Okay"];
-            }
-            else //invalid response
-            {
-                //notifying user code was accepted
-                [self showAlert:@"Registration" withMessage:message and:@"Okay"];
             }
         }//eom
 
@@ -219,14 +270,14 @@
         {
             
             NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-            //        NSLog(@"[1] from server replied: %@",rawExhibits);
-            
-            //        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            //        NSLog(@"[2] responce from server %@",dataResponce);
-            //
-            //        // Get JSON objects into initial array
-            //        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
-            //        NSLog(@"[3] responce from server %@",rawExhibits2);
+//            NSLog(@"[1] from server replied: %@",rawExhibits);
+//    
+//            NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSLog(@"[2] responce from server %@",dataResponce);
+//    
+//            // Get JSON objects into initial array
+//            NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+//            NSLog(@"[3] responce from server %@",rawExhibits2);
             
             //processing responce
             [self processingServerResponce:rawExhibits];
@@ -363,9 +414,9 @@
                 finalList[@"tshirtSize"]            = [registeredStaff getTshirtSize];
                 
                 
-                NSLog(@"After view controller 8");
-                NSLog(@" %@", finalList);
-                NSLog(@"");
+//                NSLog(@"After view controller 8");
+//                NSLog(@" %@", finalList);
+//                NSLog(@"");
                 
                 //females only
                 if(![registeredStaff isMale])

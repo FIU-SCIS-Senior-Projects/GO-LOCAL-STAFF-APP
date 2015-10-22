@@ -621,7 +621,7 @@ heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSiz
         -(void) createHeightPicker
         {
             //setting up options for UIpicker
-            heightFeetOptions = [[NSArray alloc]initWithObjects:@"",
+            heightFeetOptions = [[NSArray alloc]initWithObjects:
                                                              @"2'",
                                                              @"3'",
                                                              @"4'",
@@ -631,7 +631,7 @@ heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSiz
                                                              nil];
 
             //setting up options for UIpicker
-            heightInchesOptions = [[NSArray alloc]initWithObjects:@"",
+            heightInchesOptions = [[NSArray alloc]initWithObjects:
                                                                 @"0\"",
                                                                 @"1\"",
                                                                 @"2\"",
@@ -833,7 +833,8 @@ heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSiz
                    heightInches = [heightInchesOptions objectAtIndex:row];
                 }
                 
-                self.heightTextField.text = [heightFeet stringByAppendingFormat:@"%@",heightInches];
+                //piece together the feet and inches
+                self.heightTextField.text = [heightFeet stringByAppendingFormat:@" %@",heightInches];
                 
                 //updating hidden label
                 if(self.heightTextField.text.length == 0)
