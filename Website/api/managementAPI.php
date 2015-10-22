@@ -46,7 +46,7 @@ function retrieveTermsAgreement($userType)
   $dbConnection = connectToDB();
   if(!$dbConnection)
   {
-      //echo "Unable to connect to MySQL.".PHP_EOL;
+      // echo "Unable to connect to MySQL.".PHP_EOL;
     return 0;
   }
 
@@ -69,13 +69,14 @@ function retrieveTermsAgreement($userType)
   $query = "SELECT $key
             FROM management";
 
+  // echo "<p>query: $query</p>";
   $result             = mysqli_query($dbConnection, $query);
   $row                = mysqli_fetch_array( $result, MYSQLI_ASSOC );
   $agreementResults   = array_filter($row);
 
   if($agreementResults)
   {
-    return $agreementResults;
+    return $agreementResults[$key];
   }  
 
   return -1;
