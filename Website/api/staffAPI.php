@@ -247,7 +247,7 @@
       `TermsAndAgreements` varchar(255) NOT NULL
       */
       $part1 = "address='".$address."',city='".$city."',zipcode='".$zipcode."',state='".$state."',gender='".$gender."',languages='".$languages."',";
-      $part2 = 'typeDL="'.$typeOfLicense.'",ethnicity="'.$ethnicity.'",ethnicityCode="'.$ethnicityCode.'", height="'.$height.'" ,weight="'.$weight.'",hairColor="'.$hairColor.'",';
+      $part2 = "typeDL='".$typeOfLicense."',ethnicity='".$ethnicity."',ethnicityCode='".$ethnicityCode."', height='".$height."' ,weight='".$weight."',hairColor='".$hairColor."',";
       $part3 = "eyeColor='".$eyeColor."',shirtSize='".$tshirtSize."',chestSize='".$chestSize."',waistSize='".$waistSize."',hipSize='".$hipSize."',";
       $part4 = "dressSize='".$dressSize."',pantSize='".$pantSize."',shoeSize='".$shoeSize."',piercings='".$piercings."',";
       $part5 = "desiredHourlyRate='".$desiredHourlyRate."',desiredWeeklyRate='".$desiredWeeklyRate."',ssnOrEin='".$ssnOrEin."',businessName='".$business_name."',";
