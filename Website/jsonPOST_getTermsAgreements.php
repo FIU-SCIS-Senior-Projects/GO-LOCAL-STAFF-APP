@@ -53,7 +53,7 @@
           {
             $responseArray  = array(
             "message"       => "user successfully registered",
-            "responseType"  => 1,
+            "responseType"  => 2,
             "agreement"     => $registrationResults
             );
           }
