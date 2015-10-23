@@ -143,7 +143,7 @@
     }
 }//eom
 
--(void) setLanguages:(NSString *) languagesProvided
+-(void) setLanguages:(NSMutableArray *) languagesProvided
 {
     languages = languagesProvided;
 }//eom
@@ -449,7 +449,7 @@
     return gender;
 }//eom
 
--(NSString *) getLanguages
+-(NSMutableArray *) getLanguages
 {
     return languages;
 }//eom

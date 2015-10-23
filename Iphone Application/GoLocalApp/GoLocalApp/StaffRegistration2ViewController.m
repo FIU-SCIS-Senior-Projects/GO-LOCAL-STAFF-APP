@@ -44,7 +44,10 @@
 @implementation StaffRegistration2ViewController
 
 
-@synthesize scrollView, address, city, zipcode, state, nativeLanguage, secondLanguage, thirdLanguage, nativeSelected, secondSelected, thirdSelected, maleButton, femaleButton, registeredStaff;
+@synthesize scrollView, address, city, zipcode, state,
+nativeLanguage, secondLanguage, thirdLanguage,
+nativeSelected, secondSelected, thirdSelected,
+maleButton, femaleButton, registeredStaff;
 
 
 - (void)viewDidLoad {
@@ -162,15 +165,16 @@
                 return 0;
             }
 
-            //building languages
-            self->languages = [self.nativeLanguage.text stringByAppendingFormat:@" %@ %@", self.secondLanguage.text, self.thirdLanguage.text];
-            
-               NSLog(@"languages are %@", self->languages);
+            //creating list of languages
+            NSMutableArray * languagesList = [[NSMutableArray alloc] init];
+            [languagesList addObject: self.nativeLanguage.text];
+            [languagesList addObject: self.secondLanguage.text];
+            [languagesList addObject: self.thirdLanguage.text];
         
             //updating values
             [registeredStaff setAddress:self->completeAddress withCity:self.city.text withZipcode:self.zipcode.text andState:self.state.text];
             [registeredStaff setGender:self->gender];
-            [registeredStaff setLanguages:self->languages];
+            [registeredStaff setLanguages:languagesList];
         
         return 1;
     }//eom

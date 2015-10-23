@@ -53,7 +53,7 @@ $ch = curl_init($url_sendMaleRegistration);
 // );
 
 $jsonData = array (
-  'staffID' => '1',
+  'staffID' => '21',
   'commercialLicense' => '0',
   'weight' => '150',
   'zipcode' => '33016',
@@ -86,7 +86,12 @@ $jsonData = array (
     1 => 'Sales Executive',
   ),
   'desiredHourlyRate' => '20',
-  'languages' => 'English Spanish ',
+  'languages' => 
+  array (
+    0 => 'English',
+    1 => 'Spanish',
+    2 => '',
+  ),
   'address' => '2710 W 64 PL Miami FL 33016',
   'ethnicityCode' => '3',
 );

@@ -31,7 +31,7 @@
     NSString *addressZipcode;
     bool genderType; //0-female | 1 -male
     NSString *gender;
-    NSString *languages;
+    NSMutableArray *languages;
 
     //view controller 3
     NSMutableArray * staffTypeExperience;
@@ -121,7 +121,7 @@
 -(NSString *) getAddressZipcode;
 -(NSString *) getAddressState;
 -(NSString *) getGender;
--(NSString *) getLanguages;
+-(NSMutableArray *) getLanguages;
 -(NSMutableArray *) getExperience;
 -(NSMutableArray *) getServices;
 -(NSMutableArray *) getDJInfo;
@@ -175,7 +175,7 @@
     //controller 2
 -(void) setAddress:(NSString *) address withCity:(NSString*)cityReceived withZipcode:(NSString*)zipcodeReceived andState:(NSString *)stateReceived;
 -(void) setGender:(bool) genderProvided;
--(void) setLanguages:(NSString *) languagesProvided;
+-(void) setLanguages:(NSMutableArray *) languagesProvided;
 
     //controller 3
 -(void) setExperience:(NSMutableArray *) experienceProvided;

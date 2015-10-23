@@ -213,16 +213,27 @@
                                       }
                                   ?> 
                             </td> 
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>           
-                            <td><b>languages</b></td>  
-                            <td><?php echo $currentRow['languages']; ?> </td> 
-                            <td></td>
                           </tr>
+                            <tr>        
+                            <td><b>nativeLanguage</b></td>
+                            <td><?php echo $currentRow['nativeLanguage']; ?> </td> 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>            
+                            <td><b>secondLanguage</b></td>  
+                            <td><?php echo $currentRow['secondLanguage']; ?> </td> 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>            
+                            <td><b>thirdLanguage</b></td>  
+                            <td><?php echo $currentRow['thirdLanguage']; ?> </td>
+                          </tr> 
                           <tr>        
                             <td><b>typeDL</b></td>
                             <td><?php echo $currentRow['typeDL']; ?> </td> 
@@ -234,6 +245,14 @@
                             <td></td>            
                             <td><b>ethnicity</b></td>  
                             <td><?php echo $currentRow['ethnicity']; ?> </td> 
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>            
+                            <td><b>ethnicityCode</b></td>  
+                            <td><?php echo $currentRow['ethnicityCode']; ?> </td>
                           </tr> 
                           <tr>      
                             <td><b>height</b></td> 

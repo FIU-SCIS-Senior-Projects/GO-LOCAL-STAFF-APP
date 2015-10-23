@@ -13,6 +13,16 @@ SET time_zone = "+00:00";
 --
 -- Database: `golocalapp`
 --
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `management`
+--
+
+CREATE TABLE `management` (
+  `staffAgreement` varchar(21844) DEFAULT NULL,
+  `employerAgreement` varchar(21844) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -74,7 +84,6 @@ CREATE TABLE `registered_employer` (
   `phoneValidated` int(11) DEFAULT NULL,
   `insurance` int(11) NOT NULL,
   `insuranceDocuments` varchar(255) NOT NULL,
-  `termsAndAgreements` varchar(255) NOT NULL,
   `accountLocked` BOOLEAN DEFAULT NULL,
   `forgotPasswordCode` int(11) DEFAULT NULL,
   `forgotPasswordRequests` int(5) DEFAULT '0',
@@ -137,7 +146,6 @@ CREATE TABLE `registered_staff` (
   `bankRouting` varchar(30) NOT NULL,
   `accountNumber` varchar(30) NOT NULL,
   `resume` varchar(30) NOT NULL,
-  `TermsAndAgreements` varchar(255) NOT NULL,
   `accountLocked` BOOLEAN DEFAULT NULL,
   `forgotPasswordCode` int(11) DEFAULT NULL,
   `forgotPasswordRequests` int(5) DEFAULT '0',
@@ -189,9 +197,6 @@ ALTER TABLE `registered_staff`
 ALTER TABLE `staff_type`
   ADD PRIMARY KEY (`staffID`);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
 --
 -- AUTO_INCREMENT for table `registered_employer`

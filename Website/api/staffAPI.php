@@ -140,6 +140,15 @@
       $ethnicity                      = $registrationData['ethnicity'];
       $ethnicityCode                  = $registrationData['ethnicityCode'];
       $languages                      = $registrationData['languages'];
+      
+      //preparing language values for DB
+      if( count($languages) == 3 )
+      {
+        $nativeLanguage                 = $languages[0];
+        $secondLanguage                 = $languages[1];
+        $thirdLanguage                  = $languages[2];
+      }
+      
       $tshirtSize                     = $registrationData['tshirtSize'];
       $tattoos                        = $registrationData['tattoos'];
       $eyeColor                       = $registrationData['eyeColor'];
@@ -147,6 +156,7 @@
       $piercings                      = $registrationData['piercings'];     
       $height                         = $registrationData['height'];
 
+      //preparing height value for DB
       $height = prepareHeightValueForDBStorage($height);
 
       $weight                         = $registrationData['weight'];
@@ -161,10 +171,10 @@
       }
       else
       {
-        $chestSize                      = " ";
-        $waistSize                      = " ";
-        $hipSize                        = " ";
-        $dressSize                      = " ";
+        $chestSize                      = "";
+        $waistSize                      = "";
+        $hipSize                        = "";
+        $dressSize                      = "";
       }
 
       $pantSize                       = $registrationData['pantSize'];
@@ -199,7 +209,7 @@
       else
       {
         $ssnOrEin                        = $registrationData['ssn'];
-        $business_name                   = " ";
+        $business_name                   = "";
       }
 
       $hasProfessionalInsurance          = $registrationData['ProfessionalInsurance'];
@@ -215,8 +225,8 @@
       }
       else
       {
-        $DirectDepositRoutingNumber     = " ";
-        $DirectDepositAccountNumber     = " ";
+        $DirectDepositRoutingNumber     = "";
+        $DirectDepositAccountNumber     = "";
       }
 
       //experiences
@@ -248,17 +258,19 @@
       `resume` varchar(30) NOT NULL,
       `TermsAndAgreements` varchar(255) NOT NULL
       */
-      $part1 = "address='".$address."',city='".$city."',zipcode='".$zipcode."',state='".$state."',gender='".$gender."',languages='".$languages."',";
-      $part2 = "typeDL='".$typeOfLicense."',ethnicity='".$ethnicity."',ethnicityCode='".$ethnicityCode."', height='".$height."' ,weight='".$weight."',hairColor='".$hairColor."',";
-      $part3 = "eyeColor='".$eyeColor."',shirtSize='".$tshirtSize."',chestSize='".$chestSize."',waistSize='".$waistSize."',hipSize='".$hipSize."',";
-      $part4 = "dressSize='".$dressSize."',pantSize='".$pantSize."',shoeSize='".$shoeSize."',piercings='".$piercings."',";
-      $part5 = "desiredHourlyRate='".$desiredHourlyRate."',desiredWeeklyRate='".$desiredWeeklyRate."',ssnOrEin='".$ssnOrEin."',businessName='".$business_name."',";
-      $part6 = "travel='".$travel."',insurance='".$hasProfessionalInsurance."',";
-      $part7 = "bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'";
+      $part1 = "address='".$address."',city='".$city."',zipcode='".$zipcode."',state='".$state."',";
+      $part2 = "gender='".$gender."', nativeLanguage='".$nativeLanguage."', secondLanguage='".$secondLanguage."', thirdLanguage='".$thirdLanguage."',";
+      $part3 = "typeDL='".$typeOfLicense."',ethnicity='".$ethnicity."',ethnicityCode='".$ethnicityCode."',";
+      $part4 = "height='".$height."' ,weight='".$weight."',hairColor='".$hairColor."',";
+      $part5 = "eyeColor='".$eyeColor."',shirtSize='".$tshirtSize."',chestSize='".$chestSize."',waistSize='".$waistSize."',hipSize='".$hipSize."',";
+      $part6 = "dressSize='".$dressSize."',pantSize='".$pantSize."',shoeSize='".$shoeSize."',piercings='".$piercings."',";
+      $part7 = "desiredHourlyRate='".$desiredHourlyRate."',desiredWeeklyRate='".$desiredWeeklyRate."',ssnOrEin='".$ssnOrEin."',businessName='".$business_name."',";
+      $part8 = "travel='".$travel."',insurance='".$hasProfessionalInsurance."',";
+      $part9 = "bankRouting='".$DirectDepositRoutingNumber."',accountNumber='".$DirectDepositAccountNumber."'";
 
       $query = "UPDATE registered_staff
-      SET $part1 $part2 $part3 $part4 $part5 $part6 $part7
-      WHERE staffID = '".$staffID."'";
+                SET $part1 $part2 $part3 $part4 $part5 $part6 $part7 $part8 $part9
+                WHERE staffID = '".$staffID."'";
 
       // echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
