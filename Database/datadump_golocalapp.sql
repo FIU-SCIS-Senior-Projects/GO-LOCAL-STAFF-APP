@@ -97,12 +97,12 @@ CREATE TABLE `registered_employer` (
 --
 
 CREATE TABLE `registered_staff` (
+  `staffID` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `hashEmail` varchar(255) DEFAULT NULL,
   `emailValidated` int(11) DEFAULT '0',
-  `staffID` int(11) NOT NULL,
   `staffType` int(11) NOT NULL,
   `firstName` varchar(30) NOT NULL,
   `middleInitial` varchar(30) NOT NULL,
