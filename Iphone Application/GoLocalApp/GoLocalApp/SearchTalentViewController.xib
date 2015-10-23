@@ -826,7 +826,7 @@
                                 <action selector="willingToTravelValueChanged:" destination="-1" eventType="touchUpInside" id="RWw-Rs-Sn0"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFq-Ip-3aZ">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFq-Ip-3aZ">
                             <rect key="frame" x="137" y="1871" width="51" height="51"/>
                             <animations/>
                             <state key="normal" image="search@1x"/>

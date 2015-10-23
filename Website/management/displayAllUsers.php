@@ -433,9 +433,9 @@
               // $totalEmployers = count($registerEmployers);
               // print_r($registerEmployers[0]);//testing
             ?>
-            <h2>
+          <!--     <h2>
                 Registered Employer
-                <?php echo "[$totalEmployers]"; ?>
+                <?php //echo "[$totalEmployers]"; ?>
             </h2>
             <table class="table table-striped">
               <tr>
@@ -455,29 +455,28 @@
               ?>
                   <tr>
                     <td> 
-                      <?php print '<div id="registeredEmployerCollapse_'.$employerID.'">'; ?>
-                      <?php print '<a class="btn btn-primary" href="#registeredEmployer'.$employerID.'" data-toggle="collapse">'; ?> 
-                          <?php echo $employerID; ?> 
+                      <?php //print '<div id="registeredEmployerCollapse_'.$employerID.'">'; ?>
+                      <?php //print '<a class="btn btn-primary" href="#registeredEmployer'.$employerID.'" data-toggle="collapse">'; ?> 
+                          <?php //echo $employerID; ?> 
                         </a>
                       </div>
                     </td>
                     <td>  
                       <label class="radio-inline">
-                        <?php print '<input type="radio"  name="employer" value ="'.$employerID.'">'; ?>
+                        <?php //print '<input type="radio"  name="employer" value ="'.$employerID.'">'; ?>
                       </label>
                     </td>                
-                    <td> <?php echo $currentRow['username']; ?> </td> 
-                    <td> <?php echo $currentRow['email']; ?> </td>
+                    <td> <?php //echo $currentRow['username']; ?> </td> 
+                    <td> <?php //echo $currentRow['email']; ?> </td>
                     </tr>
-                    <!-- rest of registered user data goes below: -->
                     <tr>
                    <td>
-                        <?php print '<div id="registeredEmployer'.$employerID.'" class="collapse">'; ?> 
+                        <?php //print '<div id="registeredEmployer'.$employerID.'" class="collapse">'; ?> 
                         <table class="table table-condensed" align="center">
                         <tbody>
                          <tr>
                             <td><b>employerName</b></td> 
-                            <td> <?php echo $currentRow['employerName']; ?> </td>  
+                            <td> <?php //echo $currentRow['employerName']; ?> </td>  
                             <td></td>
                             <td></td>
                             <td></td>
@@ -485,7 +484,7 @@
                             <td></td>
                             <td></td>
                             <td><b>username</b></td> 
-                            <td> <?php echo $currentRow['username']; ?> </td>
+                            <td> <?php //echo $currentRow['username']; ?> </td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -493,11 +492,11 @@
                             <td></td>
                             <td></td>
                             <td><b>password</b></td> 
-                            <td> <?php echo $currentRow['password']; ?> </td>   
+                            <td> <?php //echo $currentRow['password']; ?> </td>   
                           </tr>
                            <tr>
                             <td><b>email</b></td> 
-                            <td> <?php echo $currentRow['email']; ?> </td> 
+                            <td> <?php //echo $currentRow['email']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
@@ -505,7 +504,7 @@
                             <td></td>
                             <td></td>
                             <td><b>emailValidated</b></td> 
-                            <td> <?php echo $currentRow['emailValidated']; ?> </td>
+                            <td> <?php //echo $currentRow['emailValidated']; ?> </td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -513,11 +512,11 @@
                             <td></td>
                             <td></td>
                             <td><b>hashEmail</b></td> 
-                            <td> <?php echo $currentRow['hashEmail']; ?> </td>    
+                            <td> <?php //echo $currentRow['hashEmail']; ?> </td>    
                           </tr>
                           <tr>                        
                             <td><b>firstName</b></td> 
-                            <td> <?php echo $currentRow['firstName']; ?> </td> 
+                            <td> <?php //echo $currentRow['firstName']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
@@ -525,7 +524,7 @@
                             <td></td>
                             <td></td>                         
                             <td><b>middleInitial</b></td>      
-                            <td> <?php echo $currentRow['middleInitial']; ?> </td> 
+                            <td> <?php //echo $currentRow['middleInitial']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
@@ -533,20 +532,20 @@
                             <td></td>
                             <td></td> 
                             <td><b>lastName</b></td>           
-                            <td> <?php echo $currentRow['lastName']; ?> </td> 
+                            <td> <?php //echo $currentRow['lastName']; ?> </td> 
                           </tr>
                           <tr>
                             <td><b>typeOfEmployer</b></td>           
-                            <td> <?php echo $currentRow['typeOfEmployer']; ?> </td>
+                            <td> <?php //echo $currentRow['typeOfEmployer']; ?> </td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td> 
-                          <!-- <td><b>email</b></td>               -->
+                            <td><b>email</b></td>              
                             <td><b>address</b></td>            
-                            <td> <?php echo $currentRow['address']; ?> </td> 
+                            <td> <?php //echo $currentRow['address']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
@@ -554,7 +553,7 @@
                             <td></td>
                             <td></td>
                             <td><b>city</b></td>            
-                            <td> <?php echo $currentRow['city']; ?> </td> 
+                            <td> <?php //echo $currentRow['city']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
@@ -562,15 +561,15 @@
                             <td></td>
                             <td></td>
                             <td><b>state</b></td>              
-                            <td> <?php echo $currentRow['state']; ?> </td> 
+                            <td> <?php //echo $currentRow['state']; ?> </td> 
                             <td></td>
                             <td><b>zipcode</b></td>              
-                            <td> <?php echo $currentRow['zipcode']; ?> </td> 
+                            <td> <?php //echo $currentRow['zipcode']; ?> </td> 
                             <td></td>
                           </tr>
                           <tr>
                              <td><b>phone</b></td>          
-                            <td><?php echo $currentRow['phone']; ?> </td> 
+                            <td><?php //echo $currentRow['phone']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
@@ -578,7 +577,7 @@
                             <td></td>
                             <td></td> 
                             <td><b>phoneCode</b></td>          
-                            <td><?php echo $currentRow['phoneCode']; ?> </td> 
+                            <td><?php //echo $currentRow['phoneCode']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
@@ -586,19 +585,19 @@
                             <td></td>
                             <td></td>                        
                             <td><b>phoneValidated</b></td>  
-                            <td><?php echo $currentRow['phoneValidated']; ?> </td>
+                            <td><?php //echo $currentRow['phoneValidated']; ?> </td>
                            </tr>    
                           <tr>                             
                             <td><b>insurance</b></td> 
-                            <td><?php echo $currentRow['insurance']; ?> </td> 
+                            <td><?php //echo $currentRow['insurance']; ?> </td> 
                           </tr>                      
                           <tr>                             
                             <td><b>insuranceDocuments</b></td> 
-                            <td><?php echo $currentRow['insuranceDocuments']; ?> </td> 
+                            <td><?php //echo $currentRow['insuranceDocuments']; ?> </td> 
                           </tr>
                           <tr>   
                             <td><b>accountLocked</b></td> 
-                            <td><?php echo $currentRow['accountLocked']; ?> </td> 
+                            <td><?php //echo $currentRow['accountLocked']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
@@ -606,11 +605,11 @@
                             <td></td>
                             <td></td>         
                             <td><b>forgotPasswordCode</b></td>
-                            <td><?php echo $currentRow['forgotPasswordCode']; ?> </td> 
+                            <td><?php //echo $currentRow['forgotPasswordCode']; ?> </td> 
                           </tr>
                            <tr>   
                             <td><b>loginRequests</b></td> 
-                            <td><?php echo $currentRow['loginRequests']; ?> </td> 
+                            <td><?php //echo $currentRow['loginRequests']; ?> </td> 
                             <td></td>
                             <td></td>
                             <td></td>
@@ -618,22 +617,23 @@
                             <td></td>
                             <td></td>         
                             <td><b>forgotPasswordRequests</b></td>
-                            <td><?php echo $currentRow['forgotPasswordRequests']; ?> </td> 
+                            <td><?php //echo $currentRow['forgotPasswordRequests']; ?> </td> 
                           </tr>
 
                         </tbody>
                         </table>
                     </td>
-                    </tr>
+                    </tr> -->
               <?php
                 // }//eofl
               ?>
-            </table>
+            <!-- </table> 
 
               <button type="submit" class="btn btn-danger" aria-label="Left Align">
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"> 
                   </span>
                 </button>
+                -->
 
         </div>
         <div class="col-md-1"></div>

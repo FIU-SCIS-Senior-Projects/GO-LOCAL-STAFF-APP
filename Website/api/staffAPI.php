@@ -229,34 +229,12 @@
         $DirectDepositAccountNumber     = "";
       }
 
-      //experiences
-      $experience                      = $registrationData['experience'];//???????
-
-
-      // $djSelected                     = $registrationData['djSelected'];//
-      // $liveBandSelected               = $registrationData['liveBandSelected'];//
-      // $cateringCompanySelected        = $registrationData['cateringCompanySelected'];//
-      // $otherServices                  = $registrationData['otherServices'];//
-      // $djDescription                  = $registrationData['djDescription'];//
-      // $djWebsite                      = $registrationData['djWebsite'];//
-      // $djSocialMedia                  = $registrationData['djSocialMedia'];//
-      // $liveBandDescription            = $registrationData['liveBandDescription'];//
-      // $liveBandWebsite                = $registrationData['liveBandWebsite'];//
-      // $liveBandSocialMedia            = $registrationData['liveBandSocialMedia'];//
-      // $cateringCompanyDescription     = $registrationData['cateringCompanyDescription'];//
-      // $cateringCompanyWebsite         = $registrationData['cateringCompanyWebsite'];//
-      // $cateringCompanySocialMedia     = $registrationData['cateringCompanySocialMedia'];//
-      // $otherServicesDescription       = $registrationData['otherServicesDescription'];//
-      // $otherServicesBandWebsite       = $registrationData['otherServicesBandWebsite'];//
-      // $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
-      
       /*
       missing these fields:
       `staffType` int(11) NOT NULL,
       `pictures` varchar(30) NOT NULL,
       `insuranceDocuments` varchar(30) NOT NULL,
-      `resume` varchar(30) NOT NULL,
-      `TermsAndAgreements` varchar(255) NOT NULL
+      `resume` varchar(30) NOT NULL
       */
       $part1 = "address='".$address."',city='".$city."',zipcode='".$zipcode."',state='".$state."',";
       $part2 = "gender='".$gender."', nativeLanguage='".$nativeLanguage."', secondLanguage='".$secondLanguage."', thirdLanguage='".$thirdLanguage."',";
@@ -276,6 +254,72 @@
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {
+        //services
+        $services = array (
+          0 => 'Catering Company',
+          1 => 'Sales Executive',
+          2 => 'Live Band',
+          3 => 'Other',
+        );
+
+        //Type of experiences
+        $typeOfExperiences = array (
+          0   => 'Brand Ambassador',
+          1   => 'Catering Company',
+          2   => 'Dancer',
+          3   => 'DJ',
+          4   => 'Field Marketing Manager',
+          5   => 'Flyer Distributor',
+          6   => 'Live Band',
+          7   => 'Model',
+          8   => 'Production Assistant',
+          9   => 'Sales Executive',
+          10  => 'Waiter/Waitress',
+          11  => 'Other',
+        );
+
+        //experiences
+        $experience                      = $registrationData['experience'];//
+        print_r($experience);
+        //staffID
+
+        $totalExperiences = count($experience);
+        for($iter = 0; $iter < $totalExperiences; $iter++)
+        {
+          
+          $currJobTitle = $experience[$iter];
+          
+          //find which staff type is
+          $staffTypeID    = "";
+
+          //is the current job title a service?
+          $description    = "";
+          $website        = "";
+          $socialMedia    = "";
+
+          // $djSelected                     = $registrationData['djSelected'];//
+          // $liveBandSelected               = $registrationData['liveBandSelected'];//
+          // $cateringCompanySelected        = $registrationData['cateringCompanySelected'];//
+          // $otherServices                  = $registrationData['otherServices'];//
+          // $djDescription                  = $registrationData['djDescription'];//
+          // $djWebsite                      = $registrationData['djWebsite'];//
+          // $djSocialMedia                  = $registrationData['djSocialMedia'];//
+          // $liveBandDescription            = $registrationData['liveBandDescription'];//
+          // $liveBandWebsite                = $registrationData['liveBandWebsite'];//
+          // $liveBandSocialMedia            = $registrationData['liveBandSocialMedia'];//
+          // $cateringCompanyDescription     = $registrationData['cateringCompanyDescription'];//
+          // $cateringCompanyWebsite         = $registrationData['cateringCompanyWebsite'];//
+          // $cateringCompanySocialMedia     = $registrationData['cateringCompanySocialMedia'];//
+          // $otherServicesDescription       = $registrationData['otherServicesDescription'];//
+          // $otherServicesBandWebsite       = $registrationData['otherServicesBandWebsite'];//
+          // $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
+
+          $talentQuery = "INSERT INTO staff_type (staffTypeID, staffID, jobTitle, description, website, socialMedia)
+                                          VALUES ('".$staffTypeID."','".$staffID."','".$currJobTitle."','".$description."','".$website."','".$socialMedia."',)";
+
+        }
+
+
         return 1;
       }
 
