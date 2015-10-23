@@ -596,7 +596,7 @@
 
               //Code verified, updating table
               $query = "UPDATE $tableName
-                    SET phoneValidated='1'
+                    SET phoneValidated='1' , phonecode= ''
                     WHERE phone='".$phone."'
                     AND phonecode='".$code."'";
 

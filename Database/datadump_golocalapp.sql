@@ -162,7 +162,7 @@ CREATE TABLE `registered_staff` (
 
 CREATE TABLE `staff_type` (
   `staffID`               int(11) NOT NULL DEFAULT '0',
-  `BrandAmbassador`       int(11) NOT NULL DEFAULT '0',
+  `brandAmbassador`       int(11) NOT NULL DEFAULT '0',
   `dancer`                int(11) NOT NULL DEFAULT '0',
   `fieldMarketingManager` int(11) NOT NULL DEFAULT '0',
   `flyerDistributor`      int(11) NOT NULL DEFAULT '0',
