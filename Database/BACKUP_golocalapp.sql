@@ -97,12 +97,12 @@ CREATE TABLE `registered_employer` (
 --
 
 CREATE TABLE `registered_staff` (
+  `staffID` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `hashEmail` varchar(255) DEFAULT NULL,
   `emailValidated` int(11) DEFAULT '0',
-  `staffID` int(11) NOT NULL,
   `staffType` int(11) NOT NULL,
   `firstName` varchar(30) NOT NULL,
   `middleInitial` varchar(30) NOT NULL,
@@ -161,11 +161,31 @@ CREATE TABLE `registered_staff` (
 --
 
 CREATE TABLE `staff_type` (
-  `staffID` int(11) NOT NULL,
-  `jobTitle` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `website` varchar(30) NOT NULL,
-  `socialMedia` varchar(255) NOT NULL
+  `staffID`               int(11) NOT NULL DEFAULT '0',
+  `BrandAmbassador`       int(11) NOT NULL DEFAULT '0',
+  `dancer`                int(11) NOT NULL DEFAULT '0',
+  `fieldMarketingManager` int(11) NOT NULL DEFAULT '0',
+  `flyerDistributor`      int(11) NOT NULL DEFAULT '0',
+  `model`                 int(11) NOT NULL DEFAULT '0',
+  `productionAssistant`   int(11) NOT NULL DEFAULT '0',
+  `salesExecutive`        int(11) NOT NULL DEFAULT '0',
+  `waiterWaitress`        int(11) NOT NULL DEFAULT '0',
+  `dJ`                    int(11) NOT NULL DEFAULT '0',
+  `dJDescription`         int(11) NOT NULL DEFAULT '0',
+  `dJWebsite`             int(11) NOT NULL DEFAULT '0',
+  `dJSocialMedia`         int(11) NOT NULL DEFAULT '0',
+  `cateringCompany`       int(11) NOT NULL DEFAULT '0',
+  `cateringCompanyDescription` int(11) NOT NULL DEFAULT '0',
+  `cateringCompanyWebsite`     int(11) NOT NULL DEFAULT '0',
+  `cateringCompanySocialMedia` int(11) NOT NULL DEFAULT '0',
+  `liveBand`              int(11) NOT NULL DEFAULT '0',
+  `liveBandDescription`   int(11) NOT NULL DEFAULT '0',
+  `liveBandWebsite`       int(11) NOT NULL DEFAULT '0',
+  `liveBandSocialMedia`   int(11) NOT NULL DEFAULT '0',
+  `other`                 int(11) NOT NULL DEFAULT '0',
+  `otherDescription`      int(11) NOT NULL DEFAULT '0',
+  `otherwebsite`          int(11) NOT NULL DEFAULT '0',
+  `othersocialMedia`      int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
