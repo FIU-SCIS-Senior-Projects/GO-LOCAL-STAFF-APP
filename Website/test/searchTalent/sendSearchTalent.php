@@ -24,29 +24,26 @@ $ch = curl_init($url_sendSearchTalent);
   $jsonData = [
     'ageFrom' => "18",
     'ageTo' => "Any",
-    //'email' => "luoandre29@outlook.com",
-    'ethnicities' => $ethnicities,
+    // 'ethnicities' => $ethnicities,
     'eyeColor' => "Any",
-    'gender' => "Male",
+    'gender' => "Either",
     'hairColor' => "Black",
     'hasPhoto' => "Yes",
     'hasPiercings' => "No",
     'hasTattoos' => "Either",
     'hasWebsite' => "Either",
-    'height' => "5'3\"",
-    'heightCondition' => "At most",
-    'languages' => $languages,
-    'miles' => "10",
-    // 'name' => "Luis Castillo",
-    // 'phone' => "3056099250",
-    'talents' => array(
-      "Catering Company",
-      "Dancer",
-      "DJ"
-    ),
-    'weight' => "130",
-    'weightCondition' => "at least",
-    'willingToTravel' => "No",
+    // 'height' => "5'3\"",
+    // 'heightCondition' => "At most",
+    // 'languages' => $languages,
+    // 'miles' => "10",
+    // 'talents' => array(
+    //   "Catering Company",
+    //   "Dancer",
+    //   "DJ"
+    // ),
+    // 'weight' => "130",
+    // 'weightCondition' => "at least",
+    'willingToTravel' => "yes",
     // 'zipcode' => "33016" 
     ];
 

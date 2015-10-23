@@ -279,7 +279,7 @@
       if( strcasecmp($searchCriteria["hasTattoos"], "either") )
       {
         $value = ( !strcasecmp($searchCriteria["hasTattoos"], "yes") ? "1" : "0" );
-        $whereClause.= "tattoos='".$value."' AND ";
+        $whereClause.= " AND tattoos='".$value."'";
       }
     }    
 
@@ -295,7 +295,7 @@
       if( strcasecmp($searchCriteria["hasPiercings"], "either") )
       {
         $value = ( !strcasecmp($searchCriteria["hasPiercings"], "yes") ? "1" : "0" );
-        $whereClause.= "piercings='".$value."' AND ";
+        $whereClause.= "piercings='".$value."'";
       }
     }    
 
@@ -310,10 +310,10 @@
     */
     if( !empty($searchCriteria["gender"]) )
     {
-      if( strcasecmp($searchCriteria["gender"], "any") )
+      if( strcasecmp($searchCriteria["gender"], "either") )
       {
         $value = ( !strcasecmp($searchCriteria["gender"], "male") ? "1" : "0" );
-        $whereClause.= "gender='".$value."' AND ";
+        $whereClause.= " AND gender='".$value."'";
       }
     }
 
@@ -332,12 +332,12 @@
 
       if( strcasecmp($searchCriteria["ageFrom"], "any") )
       {
-        $whereClause.= "age>='".$searchCriteria["ageFrom"]."' AND "; 
+        $whereClause.= " AND age>='".$searchCriteria["ageFrom"]."'"; 
       }
 
       if( strcasecmp($searchCriteria["ageTo"], "any") )
       {
-        $whereClause.= "age<='".$searchCriteria["ageTo"]."' AND ";
+        $whereClause.= " AND age<='".$searchCriteria["ageTo"]."'";
       }
 
     }
@@ -363,15 +363,15 @@
       {
         if( !strcasecmp($searchCriteria["weightCondition"], "at most") )
         {
-          $whereClause.= "weight<='".$searchCriteria["weight"]."' AND ";
+          $whereClause.= " AND weight<='".$searchCriteria["weight"]."'";
         }
         elseif ( !strcasecmp($searchCriteria["weightCondition"], "equal") )
         {
-          $whereClause.= "weight='".$searchCriteria["weight"]."' AND ";
+          $whereClause.= " AND weight='".$searchCriteria["weight"]."'";
         }
         elseif ( !strcasecmp($searchCriteria["weightCondition"], "at least") ) 
         {
-          $whereClause.= "weight>='".$searchCriteria["weight"]."' AND ";
+          $whereClause.= " AND weight>='".$searchCriteria["weight"]."'";
         }
       }
     }
@@ -422,15 +422,15 @@
 
       if( !strcasecmp($searchCriteria["heightCondition"], "at most") )
       {
-        $whereClause.= "height<='".$height."' AND ";
+        $whereClause.= " AND height<='".$height."'";
       }
       elseif( !strcasecmp($searchCriteria["heightCondition"], "at least") )
       {
-        $whereClause.= "height>='".$height."' AND ";
+        $whereClause.= " AND height>='".$height."'";
       }
       elseif( !strcasecmp($searchCriteria["heightCondition"], "equal") )
       {
-        $whereClause.= "height='".$height."' AND ";
+        $whereClause.= " AND height='".$height."'";
       }
     }
 
@@ -452,7 +452,7 @@
     {
       if( strcasecmp($searchCriteria["hairColor"], "any") )
       {
-        $whereClause.= "hairColor='".$searchCriteria["hairColor"]."' AND ";
+        $whereClause.= " AND hairColor='".$searchCriteria["hairColor"]."'";
       }
     }
 
@@ -473,7 +473,7 @@
     {
       if( strcasecmp($searchCriteria["eyeColor"], "any") )
       {
-        $whereClause.= "eyeColor='".$searchCriteria["eyeColor"]."' AND ";
+        $whereClause.= " AND eyeColor='".$searchCriteria["eyeColor"]."'";
       }
     }
 
@@ -516,20 +516,20 @@
       {
         if( $ethnicityCount == 1 )
         {
-          $whereClause.= "ethnicity='".$searchCriteria."' AND ";
+          $whereClause.= " AND ethnicity='".$searchCriteria."'";
         }
         else
         {
           //There is more than one ethnicity on the array
 
-          $whereClause.= "( ";
+          $whereClause.= " AND ( ";
 
           for($i = 0; $i < $ethnicityCount - 1; $i++) 
           {
             $whereClause.= "ethnicity='".$searchCriteria["ethnicities"][$i]."' OR ";
           }
 
-          $whereClause.= "ethnicity='".$searchCriteria["ethnicities"][$ethnicityCount - 1]."' ) AND ";
+          $whereClause.= "ethnicity='".$searchCriteria["ethnicities"][$ethnicityCount - 1]."' )";
         }
 
       }
@@ -557,18 +557,17 @@
     {
       if( !empty($searchCriteria["languages"][0]) )
       {
-        $whereClause.= "nativeLanguage='".$searchCriteria["languages"][0]."' AND ";
+        $whereClause.= " AND nativeLanguage='".$searchCriteria["languages"][0]."'";
       }
       if( !empty($searchCriteria["languages"][1]) )
       {
-        $whereClause.= "secondLanguage='".$searchCriteria["languages"][1]."' AND ";
+        $whereClause.= " AND secondLanguage='".$searchCriteria["languages"][1]."'";
       }
       if( !empty($searchCriteria["languages"][2]) )
       {
-        $whereClause.= "thirdLanguage='".$searchCriteria["languages"][2]."' AND ";
+        $whereClause.= " AND thirdLanguage='".$searchCriteria["languages"][2]."'";
       }
     }
-
     /*
       willing to travel:
 
@@ -576,10 +575,23 @@
       @"Maybe",
       @"Yes",
       @"No",
-    */
+    */ 
     if( !empty($searchCriteria["willingToTravel"]) )
     {
-      $whereClause.= "travel='".$searchCriteria["willingToTravel"]."' AND ";
+      $value = ( !strcasecmp($searchCriteria["willingToTravel"], "yes") ? "1" : "0" );
+
+      if( $value > 0 )
+      {
+        $whereClause.= " AND travel>'".$value."'";
+
+      }
+      else
+      {
+        $whereClause.= " AND travel='".$value."'";
+
+      }
+      
+
     }
 
     /*
@@ -607,11 +619,11 @@
       {
         $talent = changeNameFormat($searchCriteria["talents"][0]);
 
-        $whereClause.= $talent."='1'";
+        $whereClause.= " AND ".$talent."='1'";
       }
       else
       {
-        $whereClause.= "(";
+        $whereClause.= " AND (";
 
         for ($i = 0; $i < $talentsCount - 1; $i++)
         { 
@@ -642,12 +654,12 @@
               ON registered_staff.staffID=staff_type.staffID
               WHERE $whereClause";
 
-    echo $query;
+    //echo $query;
 
     $result     = mysqli_query($dbConnection, $query);
     $totalRows  = mysqli_num_rows($result);
 
-    echo "Total number of rows in the result: ".$totalRows."<br>";
+    //echo "Total number of rows in the result: ".$totalRows."<br>";
     if($totalRows > 0)
     {
       while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
