@@ -396,7 +396,6 @@
 
 #pragma mark - textfields  functions
 
-
 //        /* dimmisses UITextField as soon the background is touched - this will not work with UiScrollview*/
 //        -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 //        {
