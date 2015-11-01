@@ -688,6 +688,67 @@
     }//eom
 
 
+    /* 
+       array (
+        'hasTattoos' => 'Either',
+        'languages' => 
+        array (
+          0 => 'English',
+        ),
+        'hasPhoto' => 'Either',
+        'eyeColor' => 'Any',
+        'ageTo' => 'Any',
+        'ethnicities' => 
+        array (
+          0 => 'All',
+        ),
+        'hairColor' => 'Any',
+        'ageFrom' => 'Any',
+        'hasWebsite' => 'Either',
+        'hasPiercings' => 'Either',
+        'gender' => 'Any',
+        'willingToTravel' => 'Maybe',
+      )
+    */
+    function TESTsearchTalent()
+    {
+
+      $finalList = array();
+
+      $dbConnection = connectToDB();
+      if(!$dbConnection)
+      {
+       // echo "Unable to connect to MySQL.".PHP_EOL;
+        return 0;
+      }
+
+      $query = "SELECT *
+                FROM registered_staff
+                JOIN staff_type
+                ON registered_staff.staffID = staff_type.staffID";
+
+      // echo $query;
+
+      $result     = mysqli_query($dbConnection, $query);
+      $totalRows  = mysqli_num_rows($result);
+
+      // echo "<p>total rows in results:$totalRows</p>";
+
+      //echo "Total number of rows in the result: ".$totalRows."<br>";
+      if($totalRows > 0)
+      {
+        while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
+        {
+          array_push($finalList, $row);
+        }//eowl
+
+        return $finalList;
+      }
+
+      return -1;
+    }//eom
+
+
 /*************** Helper Methods ***************************/
 
 //takes out the spaces and replaces the first cahracter
