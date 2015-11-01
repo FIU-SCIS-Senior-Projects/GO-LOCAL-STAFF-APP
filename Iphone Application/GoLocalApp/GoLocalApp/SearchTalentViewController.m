@@ -8,6 +8,7 @@
 
 #import "SearchTalentViewController.h"
 #import "ColorWheel.h"
+#import "StaffSearchResultTableViewController.h"
 
 @interface SearchTalentViewController ()
 {
@@ -85,7 +86,15 @@
     [self setUpWillingToTravelButton];
 }//EOM
 
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+//    NSDictionary * testing = [[NSDictionary alloc] init];
+//    [testing setValue:@"" forKey:@"0"];
+//    
+//    [self goToSearchResults:testing];
+    
+}//eom
 
 #pragma mark - buttons functions (hasPhoto, HasWebsite, hasTattoos, hasPiercings)
 
@@ -1485,22 +1494,49 @@
     }//eom
 
 
+#pragma mark - Go to Search Results
+
+    /*  goes to the search results view */
+    -(void)goToSearchResults:(NSDictionary *)searchResults
+    {
+        
+        NSArray * data = [searchResults allValues];
+        
+         StaffSearchResultTableViewController  * SearchTalentResultsView = [[StaffSearchResultTableViewController alloc] init];
+        
+        SearchTalentResultsView.listOptions  = data;
+        
+         //hiding the nav bar of the next view
+         //    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+         
+         //pushing controller to navigation controller
+         [self.navigationController pushViewController:SearchTalentResultsView animated:YES];
+    }//eom
+
 #pragma mark - JSON server response
     /* processing server response */
     -(void) processServerDataResponse:(NSDictionary *) responce
     {
         //    NSLog(@"[1] responce: %@", responce);
         
-        NSDictionary * userResults = [responce objectForKey:@"results"];
-        int responceType = [[userResults objectForKey:@"responseType"] intValue];
-        NSDictionary * responceMessage = [userResults objectForKey:@"message"];
-        NSString * message = [NSString stringWithFormat:@"%@", responceMessage];
+        NSDictionary * userResults      = [responce objectForKey:@"results"];
         
-        NSLog(@"[1] results is %@", userResults);
-        NSLog(@"[1] responceType is %d", responceType);
+        int responceType                = [[userResults objectForKey:@"responseType"] intValue];
+        
+        //message
+        NSDictionary * responceMessage  = [userResults objectForKey:@"message"];
+        NSString * message              = [NSString stringWithFormat:@"%@", responceMessage];
+        
+        NSLog(@"results is %@", userResults);
+        NSLog(@"responceType is %d", responceType);
         if(responceType > 0) //responce was good
         {
-            
+            //data
+            NSDictionary * responceData  = [userResults objectForKey:@"data"];
+         
+            NSLog(@"data is %@", responceData);
+            //go to search results view
+            [self goToSearchResults:responceData];
         }
         else if(responceType < 1) //invalid response
         {
@@ -1742,12 +1778,12 @@
         NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         NSLog(@"[1] from server replied: %@",rawExhibits);
         
-        //        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        //        NSLog(@"[2] responce from server %@",dataResponce);
-        //
-        //        // Get JSON objects into initial array
-        //        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
-        //        NSLog(@"[3] responce from server %@",rawExhibits2);
+        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"[2] responce from server %@",dataResponce);
+
+        // Get JSON objects into initial array
+        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+        NSLog(@"[3] responce from server %@",rawExhibits2);
         
         //processing responce
         [self processServerDataResponse:rawExhibits];
