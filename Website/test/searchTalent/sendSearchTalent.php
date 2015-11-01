@@ -62,6 +62,7 @@ $ch = curl_init($url_sendSearchTalent);
 
   $jsonData = [
   "ageFrom" => "Any",
+  "ageTo" => "Any",
   ];
 
 //Encode the array into JSON.
