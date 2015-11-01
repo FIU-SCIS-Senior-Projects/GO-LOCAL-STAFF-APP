@@ -659,12 +659,12 @@
       $query.= " $whereClause";
     }
 
-    echo $query."<br>";
+    //echo $query."<br>";
 
     $result     = mysqli_query($dbConnection, $query);
     $totalRows  = mysqli_num_rows($result);
 
-    echo "Total number of rows in the result: ".$totalRows."<br>";
+    //echo "Total number of rows in the result: ".$totalRows."<br>";
     if($totalRows > 0)
     {
       while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
