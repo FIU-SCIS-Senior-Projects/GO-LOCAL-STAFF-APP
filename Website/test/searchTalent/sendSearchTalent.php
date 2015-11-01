@@ -47,17 +47,21 @@ $ch = curl_init($url_sendSearchTalent);
   //   // 'zipcode' => "33016" 
   //   ];
 
+  // $jsonData = [
+  // 'ageFrom' => '18',
+  // 'ageTo' => 'Any',
+  // 'eyeColor' => 'Any',
+  // 'gender' => 'Either',
+  // 'hairColor' => 'Black',
+  // 'hasPhoto' => 'Yes',
+  // 'hasPiercings' => 'No',
+  // 'hasTattoos' => 'Either',
+  // 'hasWebsite' => 'Either',
+  // 'willingToTravel' => 'yes',
+  // ];
+
   $jsonData = [
-  'ageFrom' => '18',
-  'ageTo' => 'Any',
-  'eyeColor' => 'Any',
-  'gender' => 'Either',
-  'hairColor' => 'Black',
-  'hasPhoto' => 'Yes',
-  'hasPiercings' => 'No',
-  'hasTattoos' => 'Either',
-  'hasWebsite' => 'Either',
-  'willingToTravel' => 'yes',
+  "ageFrom" => "Any",
   ];
 
 //Encode the array into JSON.
