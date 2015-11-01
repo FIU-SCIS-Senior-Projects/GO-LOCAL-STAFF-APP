@@ -722,7 +722,7 @@
         return 0;
       }
 
-      $query = "SELECT *
+      $query = "SELECT username,firstName,middleInitial,lastName,zipcode,gender,age
                 FROM registered_staff
                 JOIN staff_type
                 ON registered_staff.staffID = staff_type.staffID";
