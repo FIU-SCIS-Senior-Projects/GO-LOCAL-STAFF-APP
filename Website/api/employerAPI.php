@@ -651,15 +651,20 @@
     $query = "SELECT firstName, middleInitial, lastName
               FROM registered_staff
               JOIN staff_type
-              ON registered_staff.staffID=staff_type.staffID
-              WHERE $whereClause";
+              ON registered_staff.staffID=staff_type.staffID";
+              //WHERE $whereClause";
 
-    echo $query."<br>";
+    if( !strlen($whereClause) )
+    {
+      $query.= " $whereClause";
+    }
+
+    //echo $query."<br>";
 
     $result     = mysqli_query($dbConnection, $query);
     $totalRows  = mysqli_num_rows($result);
 
-    echo "Total number of rows in the result: ".$totalRows."<br>";
+    //echo "Total number of rows in the result: ".$totalRows."<br>";
     if($totalRows > 0)
     {
       while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
