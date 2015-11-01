@@ -193,7 +193,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><b>gender</b></td>  
+                            <td><b>age</b></td>  
                             <td>
                                 <?php 
                                         echo $currentRow['age'];
