@@ -1,1 +1,1 @@
-'{"results":{"message":"successfully retrieved information","responseType":"1","data":[{"firstName":"Stephanie","middleInitial":"","lastName":"Chediak"},{"firstName":"Emily","middleInitial":"","lastName":"Amay"},{"firstName":"Maria","middleInitial":"","lastName":"Clara"}]}}'
+'{"results":{"message":"error retrieving information","responseType":-1}}'
