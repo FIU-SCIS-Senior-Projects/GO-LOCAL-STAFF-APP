@@ -1,0 +1,12 @@
+array (
+  'ageFrom' => '18',
+  'ageTo' => 'Any',
+  'eyeColor' => 'Any',
+  'gender' => 'Either',
+  'hairColor' => 'Black',
+  'hasPhoto' => 'Yes',
+  'hasPiercings' => 'No',
+  'hasTattoos' => 'Either',
+  'hasWebsite' => 'Either',
+  'willingToTravel' => 'yes',
+)
