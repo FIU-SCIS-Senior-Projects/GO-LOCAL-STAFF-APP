@@ -1,20 +1,12 @@
 array (
-  'hasTattoos' => 'Either',
-  'languages' => 
-  array (
-    0 => 'English',
-  ),
-  'hasPhoto' => 'Either',
-  'eyeColor' => 'Any',
+  'ageFrom' => '18',
   'ageTo' => 'Any',
-  'ethnicities' => 
-  array (
-    0 => 'All',
-  ),
-  'hairColor' => 'Any',
-  'ageFrom' => 'Any',
+  'eyeColor' => 'Any',
+  'gender' => 'Either',
+  'hairColor' => 'Black',
+  'hasPhoto' => 'Yes',
+  'hasPiercings' => 'No',
+  'hasTattoos' => 'Either',
   'hasWebsite' => 'Either',
-  'hasPiercings' => 'Either',
-  'gender' => 'Any',
-  'willingToTravel' => 'Maybe',
+  'willingToTravel' => 'yes',
 )

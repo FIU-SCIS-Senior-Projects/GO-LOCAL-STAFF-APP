@@ -21,31 +21,44 @@ $ch = curl_init($url_sendSearchTalent);
 
 
 
+  // $jsonData = [
+  //   'ageFrom' => "18",
+  //   'ageTo' => "Any",
+  //   // 'ethnicities' => $ethnicities,
+  //   'eyeColor' => "Any",
+  //   'gender' => "Either",
+  //   'hairColor' => "Black",
+  //   'hasPhoto' => "Yes",
+  //   'hasPiercings' => "No",
+  //   'hasTattoos' => "Either",
+  //   'hasWebsite' => "Either",
+  //   // 'height' => "5'3\"",
+  //   // 'heightCondition' => "At most",
+  //   // 'languages' => $languages,
+  //   // 'miles' => "10",
+  //   // 'talents' => array(
+  //   //   "Catering Company",
+  //   //   "Dancer",
+  //   //   "DJ"
+  //   // ),
+  //   // 'weight' => "130",
+  //   // 'weightCondition' => "at least",
+  //   'willingToTravel' => "yes",
+  //   // 'zipcode' => "33016" 
+  //   ];
+
   $jsonData = [
-    'ageFrom' => "18",
-    'ageTo' => "Any",
-    // 'ethnicities' => $ethnicities,
-    'eyeColor' => "Any",
-    'gender' => "Either",
-    'hairColor' => "Black",
-    'hasPhoto' => "Yes",
-    'hasPiercings' => "No",
-    'hasTattoos' => "Either",
-    'hasWebsite' => "Either",
-    // 'height' => "5'3\"",
-    // 'heightCondition' => "At most",
-    // 'languages' => $languages,
-    // 'miles' => "10",
-    // 'talents' => array(
-    //   "Catering Company",
-    //   "Dancer",
-    //   "DJ"
-    // ),
-    // 'weight' => "130",
-    // 'weightCondition' => "at least",
-    'willingToTravel' => "yes",
-    // 'zipcode' => "33016" 
-    ];
+  'ageFrom' => '18',
+  'ageTo' => 'Any',
+  'eyeColor' => 'Any',
+  'gender' => 'Either',
+  'hairColor' => 'Black',
+  'hasPhoto' => 'Yes',
+  'hasPiercings' => 'No',
+  'hasTattoos' => 'Either',
+  'hasWebsite' => 'Either',
+  'willingToTravel' => 'yes',
+  ];
 
 //Encode the array into JSON.
 $jsonDataEncoded = json_encode($jsonData);
