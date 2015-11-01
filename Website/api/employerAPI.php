@@ -654,7 +654,7 @@
               ON registered_staff.staffID=staff_type.staffID
               WHERE $whereClause";
 
-    echo $query;
+    echo $query."<br>";
 
     $result     = mysqli_query($dbConnection, $query);
     $totalRows  = mysqli_num_rows($result);
