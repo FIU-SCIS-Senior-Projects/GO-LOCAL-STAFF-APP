@@ -49,7 +49,7 @@
           
           //check if valid user and return type of user
           $userSearchResult = searchTalent($decoded);
-          if($userSearchResult) //valid staff user
+          if($userSearchResult > 0) //valid staff user
           {
             $responseArray = array(
                 "message" => "successfully retrieved information",
@@ -72,12 +72,12 @@
               );
           }
 
-          // /* 
-          //   reponse returns the following:
-          //     userdata   successfully retrieved information
-          //     0   database not responding
-          //     -1  error retrieving information
-          // */
+          /* 
+            reponse returns the following:
+              userdata   successfully retrieved information
+              0   database not responding
+              -1  error retrieving information
+          */
           $response['results'] = $responseArray; //sending reply
 
       }//eo valid-json

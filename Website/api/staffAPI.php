@@ -254,50 +254,146 @@
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {
-        //services
-        $services = array (
-          0 => 'Catering Company',
-          1 => 'Sales Executive',
-          2 => 'Live Band',
-          3 => 'Other',
-        );
+        // //services
+        // $services = array (
+        //   0 => 'Catering Company',
+        //   1 => 'Sales Executive',
+        //   2 => 'Live Band',
+        //   3 => 'Other',
+        // );
 
-        //Type of experiences
-        $typeOfExperiences = array (
-          0   => 'Brand Ambassador',
-          1   => 'Catering Company',
-          2   => 'Dancer',
-          3   => 'DJ',
-          4   => 'Field Marketing Manager',
-          5   => 'Flyer Distributor',
-          6   => 'Live Band',
-          7   => 'Model',
-          8   => 'Production Assistant',
-          9   => 'Sales Executive',
-          10  => 'Waiter/Waitress',
-          11  => 'Other',
-        );
+        // //Type of experiences
+        // $typeOfExperiences = array (
+        //   0   => 'Brand Ambassador',
+        //   1   => 'Catering Company',
+        //   2   => 'Dancer',
+        //   3   => 'DJ',
+        //   4   => 'Field Marketing Manager',
+        //   5   => 'Flyer Distributor',
+        //   6   => 'Live Band',
+        //   7   => 'Model',
+        //   8   => 'Production Assistant',
+        //   9   => 'Sales Executive',
+        //   10  => 'Waiter/Waitress',
+        //   11  => 'Other',
+        // );
 
-        //experiences
-        $experience                      = $registrationData['experience'];//
-        print_r($experience);
-        //staffID
+        /*
+          Incoming Data:
+            'experience' => 
+              array (
+                0 => 'Model',
+                1 => 'Sales Executive',
+              ),
 
-        $totalExperiences = count($experience);
-        for($iter = 0; $iter < $totalExperiences; $iter++)
-        {
-          
-          $currJobTitle = $experience[$iter];
-          
-          //find which staff type is
-          $staffTypeID    = "";
+        */
 
-          //is the current job title a service?
-          $description    = "";
-          $website        = "";
-          $socialMedia    = "";
+        /*
+        DB Keys
+            `` int(11) NOT NULL DEFAULT '0',
+            ``      int(11) NOT NULL DEFAULT '0',
+            ``                 int(11) NOT NULL DEFAULT '0',
+            ``   int(11) NOT NULL DEFAULT '0',
+            ``        int(11) NOT NULL DEFAULT '0',
+            ``        int(11) NOT NULL DEFAULT '0',
+        */
+          $brandAmbassador        = 0;
+          $dancer                 = 0;
+          $fieldMarketingManager  = 0;
+          $flyerDistributor       = 0;
+          $model                  = 0;
+          $productionAssistant    = 0;
+          $salesExecutive         = 0;
+          $waiterWaitress         = 0;
 
-          // $djSelected                     = $registrationData['djSelected'];//
+          //experiences
+          $experience                      = $registrationData['experience'];//
+          $totalTalents = count($experience);
+          for($iter = 0; $iter < $totalTalents; $iter++)
+          {
+            //current talent
+            $currTalent = $experience[$iter];
+
+            echo "<p>$currTalent</p>";
+            //removing incoming data whitespace
+            $currTalent = str_ireplace(" ", "", $currTalent);
+            echo "<p>after update: $currTalent</p>";
+
+
+            if (strcasecmp($currTalent, "BrandAmbassador") == 0) 
+            {
+                $brandAmbassador = 1;
+            }
+            if (strcasecmp($currTalent, "dancer") == 0) 
+            {
+                $dancer = 1;
+            }
+            if (strcasecmp($currTalent, "fieldMarketingManager") == 0) 
+            {
+                $fieldMarketingManager = 1;
+            }
+            if (strcasecmp($currTalent, "flyerDistributor") == 0) 
+            {
+                $flyerDistributor = 1;
+            }
+            if (strcasecmp($currTalent, "model") == 0) 
+            {
+                $model = 1;
+            }
+            if (strcasecmp($currTalent, "productionAssistant") == 0) 
+            {
+                $productionAssistant = 1;
+            }
+            if (strcasecmp($currTalent, "salesExecutive") == 0) 
+            {
+                $salesExecutive = 1;
+            }
+            if (strcasecmp($currTalent, "waiter/Waitress") == 0) 
+            {
+                $waiterWaitress = 1;
+            }
+          }//eofl
+    
+
+          $mainPart               = "('".$staffID."', '".$brandAmbassador."', '".$dancer."', '".$fieldMarketingManager."', '".$flyerDistributor."', '".$model."', '".$productionAssistant."', '".$salesExecutive."', '".$waiterWaitress."',";
+          // $djPart               = "`dJ`, `dJDescription`, `dJWebsite`, `dJSocialMedia`,";
+          // $cateringCompanyPart  = "`cateringCompany`, `cateringCompanyDescription`, `cateringCompanyWebsite`, `cateringCompanySocialMedia`,";
+          // $liveBandPart         = "`liveBand`, `liveBandDescription`, `liveBandWebsite`, `liveBandSocialMedia`,";
+          // $otherPart            = "`other`, `otherDescription`, `otherwebsite`, `othersocialMedia`)";
+
+          $djPart               = " '', '', '', '',";
+          $cateringCompanyPart  = " '', '', '', '',";
+          $liveBandPart         = " '', '', '', '',";
+          $otherPart            = " '', '', '', '')";
+
+          $talentQuery = "INSERT INTO `staff_type`(`staffID`, `BrandAmbassador`, `dancer`, `fieldMarketingManager`, `flyerDistributor`, `model`, `productionAssistant`, `salesExecutive`, `waiterWaitress`, `dJ`, `dJDescription`, `dJWebsite`, `dJSocialMedia`, `cateringCompany`, `cateringCompanyDescription`, `cateringCompanyWebsite`, `cateringCompanySocialMedia`, `liveBand`, `liveBandDescription`, `liveBandWebsite`, `liveBandSocialMedia`, `other`, `otherDescription`, `otherwebsite`, `othersocialMedia`) 
+          VALUES ".$mainPart." ".$djPart." ".$cateringCompanyPart." ".$liveBandPart." ".$otherPart;
+          echo "<p>$talentQuery</p>";
+        
+
+   /*
+        DB Keys
+
+            `dJ`                    int(11) NOT NULL DEFAULT '0',
+            `dJDescription`         int(11) NOT NULL DEFAULT '0',
+            `dJWebsite`             int(11) NOT NULL DEFAULT '0',
+            `dJSocialMedia`         int(11) NOT NULL DEFAULT '0',
+            `cateringCompany`       int(11) NOT NULL DEFAULT '0',
+            `cateringCompanyDescription` int(11) NOT NULL DEFAULT '0',
+            `cateringCompanyWebsite`     int(11) NOT NULL DEFAULT '0',
+            `cateringCompanySocialMedia` int(11) NOT NULL DEFAULT '0',
+            `liveBand`              int(11) NOT NULL DEFAULT '0',
+            `liveBandDescription`   int(11) NOT NULL DEFAULT '0',
+            `liveBandWebsite`       int(11) NOT NULL DEFAULT '0',
+            `liveBandSocialMedia`   int(11) NOT NULL DEFAULT '0',
+            `other`                 int(11) NOT NULL DEFAULT '0',
+            `otherDescription`      int(11) NOT NULL DEFAULT '0',
+            `otherwebsite`          int(11) NOT NULL DEFAULT '0',
+            `othersocialMedia`      int(11) NOT NULL DEFAULT '0'
+
+        */
+
+       // $djSelected                     = $registrationData['djSelected'];//
           // $liveBandSelected               = $registrationData['liveBandSelected'];//
           // $cateringCompanySelected        = $registrationData['cateringCompanySelected'];//
           // $otherServices                  = $registrationData['otherServices'];//
@@ -313,12 +409,6 @@
           // $otherServicesDescription       = $registrationData['otherServicesDescription'];//
           // $otherServicesBandWebsite       = $registrationData['otherServicesBandWebsite'];//
           // $otherServicesBandSocialMedia   = $registrationData['otherServicesBandSocialMedia'];
-
-          $talentQuery = "INSERT INTO staff_type (staffTypeID, staffID, jobTitle, description, website, socialMedia)
-                                          VALUES ('".$staffTypeID."','".$staffID."','".$currJobTitle."','".$description."','".$website."','".$socialMedia."',)";
-
-        }
-
 
         return 1;
       }
