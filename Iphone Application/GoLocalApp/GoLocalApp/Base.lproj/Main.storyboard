@@ -231,10 +231,47 @@
             </objects>
             <point key="canvasLocation" x="1857" y="-2463"/>
         </scene>
+        <!--Filter Staff Search Result View Controller-->
+        <scene sceneID="Dlk-km-bRb">
+            <objects>
+                <viewController storyboardIdentifier="filterStaffSearchResult" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UBv-AE-9hw" customClass="filterStaffSearchResultViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mPa-7B-nmS"/>
+                        <viewControllerLayoutGuide type="bottom" id="3hS-Mj-EGL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dHg-p5-vrt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HT5-lu-UGs">
+                                <rect key="frame" x="26" y="54" width="274" height="138"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="HT5-lu-UGs" secondAttribute="trailing" constant="4" id="1eX-jI-ZT6"/>
+                            <constraint firstItem="HT5-lu-UGs" firstAttribute="top" secondItem="mPa-7B-nmS" secondAttribute="bottom" constant="34" id="3YU-TP-vlJ"/>
+                            <constraint firstItem="HT5-lu-UGs" firstAttribute="leading" secondItem="dHg-p5-vrt" secondAttribute="leadingMargin" constant="10" id="C4g-yV-Hae"/>
+                            <constraint firstItem="3hS-Mj-EGL" firstAttribute="top" secondItem="HT5-lu-UGs" secondAttribute="bottom" constant="376" id="qJo-Se-vHt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="wAP-C2-ghm" kind="push" identifier="GoTostaffSearchResults" id="YET-Ui-WcE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y6n-gD-tcx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2307" y="-2463"/>
+        </scene>
         <!--Staff Search Result Table View Controller-->
         <scene sceneID="ZNP-Zj-7sh">
             <objects>
-                <tableViewController id="wAP-C2-ghm" customClass="StaffSearchResultTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="staffSearchResult" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wAP-C2-ghm" customClass="StaffSearchResultTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" id="zKr-lR-WsH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -304,10 +341,11 @@
                             <outlet property="delegate" destination="wAP-C2-ghm" id="hFF-Al-wIt"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="gXx-Tg-e5k"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DwI-px-eIB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2243" y="-2466"/>
+            <point key="canvasLocation" x="2673" y="-2463"/>
         </scene>
         <!--Staff Search Result Profile View Controller-->
         <scene sceneID="6uo-YZ-q03">
@@ -394,7 +432,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eRA-H3-2B7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2661" y="-2466"/>
+            <point key="canvasLocation" x="3020" y="-2463"/>
         </scene>
         <!--Account Settings-->
         <scene sceneID="Xfx-bL-k0r">

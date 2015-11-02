@@ -12,7 +12,7 @@
 
 
 
-@property (nonatomic) NSArray * listOptions;
+@property (nonatomic) NSMutableArray * listOptions;
 
 
 @end

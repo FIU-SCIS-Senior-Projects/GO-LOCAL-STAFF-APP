@@ -8,7 +8,7 @@
 
 #import "SearchTalentViewController.h"
 #import "ColorWheel.h"
-#import "StaffSearchResultTableViewController.h"
+#import "filterStaffSearchResultViewController.h"
 
 @interface SearchTalentViewController ()
 {
@@ -1499,33 +1499,46 @@
     /*  goes to the search results view */
     -(void)goToSearchResults:(NSDictionary *)searchResults
     {
+        //preparing data to be sent to next view controller
+            NSMutableArray * list = [[NSMutableArray alloc]init];
+            
+            //populating staff search data into NSMutableArray
+            for( id currStaff in searchResults )
+            {
+                [list addObject:currStaff];
+            }//eofl
+            
+            //   NSLog(@"data has been updated to %@", list);//testing
         
-        NSArray * data = [searchResults allValues];
         
-         StaffSearchResultTableViewController  * SearchTalentResultsView = [[StaffSearchResultTableViewController alloc] init];
+        //going to next controller
+            //creating storyboard
+            NSString *storyboardName = @"Main";
+            UIStoryboard *newStoryboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+            
+            //creating controller thats in storyboard
+            NSString *controllerID   = @"filterStaffSearchResult";
+            filterStaffSearchResultViewController *SearchTalentResultsView = (filterStaffSearchResultViewController *)[newStoryboard instantiateViewControllerWithIdentifier:controllerID];
+            
+            SearchTalentResultsView.listOptions  = list;
         
-        SearchTalentResultsView.listOptions  = data;
-        
-         //hiding the nav bar of the next view
-         //    [[self navigationController] setNavigationBarHidden:YES animated:YES];
-         
-         //pushing controller to navigation controller
-         [self.navigationController pushViewController:SearchTalentResultsView animated:YES];
+        [self.navigationController pushViewController:SearchTalentResultsView animated:YES];
+     
     }//eom
 
 #pragma mark - JSON server response
     /* processing server response */
     -(void) processServerDataResponse:(NSDictionary *) responce
     {
-        //    NSLog(@"[1] responce: %@", responce);
+        //    NSLog(@"responce: %@", responce);
         
         NSDictionary * userResults      = [responce objectForKey:@"results"];
         
         int responceType                = [[userResults objectForKey:@"responseType"] intValue];
         
         //message
-        NSDictionary * responceMessage  = [userResults objectForKey:@"message"];
-        NSString * message              = [NSString stringWithFormat:@"%@", responceMessage];
+//        NSDictionary * responceMessage  = [userResults objectForKey:@"message"];
+//        NSString * message              = [NSString stringWithFormat:@"%@", responceMessage];
         
         NSLog(@"results is %@", userResults);
         NSLog(@"responceType is %d", responceType);
@@ -1534,9 +1547,21 @@
             //data
             NSDictionary * responceData  = [userResults objectForKey:@"data"];
          
-            NSLog(@"data is %@", responceData);
-            //go to search results view
-            [self goToSearchResults:responceData];
+            int totalStaffFound = (int)responceData.count;
+            
+            NSLog(@"total staff found %d", totalStaffFound);
+            if(totalStaffFound > 0)
+            {
+//                NSLog(@"data is %@", responceData);
+                //go to search results view
+                [self goToSearchResults:responceData];
+            }
+            else
+            {
+                //notifying user code was accepted
+                NSString * messsageToDisplay = @"No Search results";
+                [self showAlert:@"Search Talent" withMessage:messsageToDisplay and:@"Okay"];
+            }
         }
         else if(responceType < 1) //invalid response
         {
@@ -1551,7 +1576,9 @@
     /* sends search data to server */
     -(void)sendSearchDataToServer
     {
-        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_searchTalent.php";//hard coding website
+        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_searchTalent.php";
+        
+//        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_TESTsearchTalent.php";
         
         // preparing data to be sent
         NSMutableDictionary * searchData = [self prepareServerData];
@@ -1774,16 +1801,15 @@
     /* data received from server */
     - (void)connection:(NSURLConnection *)connection didReceiveData:(nonnull NSData *)data
     {
-        
         NSDictionary * rawExhibits = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        NSLog(@"[1] from server replied: %@",rawExhibits);
-        
-        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"[2] responce from server %@",dataResponce);
-
-        // Get JSON objects into initial array
-        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
-        NSLog(@"[3] responce from server %@",rawExhibits2);
+//        NSLog(@"[1] from server replied: %@",rawExhibits);
+//        
+//        NSString *dataResponce = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"[2] responce from server %@",dataResponce);
+//
+//        // Get JSON objects into initial array
+//        NSArray *rawExhibits2 = (NSArray *)[NSJSONSerialization JSONObjectWithData:[dataResponce dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
+//        NSLog(@"[3] responce from server %@",rawExhibits2);
         
         //processing responce
         [self processServerDataResponse:rawExhibits];
