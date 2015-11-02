@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StaffSearchResultProfileViewController : UIViewController
+@interface StaffSearchResultProfileViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate, UIAlertViewDelegate>
 
 
 @property (strong, nonatomic) NSDictionary *talentDetail;

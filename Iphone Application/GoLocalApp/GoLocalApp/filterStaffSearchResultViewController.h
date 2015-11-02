@@ -14,10 +14,9 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *totalStaff;
 
+@property (weak, nonatomic) IBOutlet UITextField *sortByTextFields;
 
-
-
-
+@property (weak, nonatomic) IBOutlet UITextField *orderByTextFields;
 
 - (IBAction)showResults:(UIButton *)sender;
 

@@ -12,8 +12,8 @@ if($testingStaffUser)
     //valid staff user
     $jsonData = [
       "registrationType"  => "Staff",
-      "userID" => "25",
-      "code" => "7274",
+      "userID" => "11",
+      "code" => "1739",
       "phone" => "3056099250"
       ];
 }

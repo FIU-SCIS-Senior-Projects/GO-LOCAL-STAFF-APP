@@ -20,17 +20,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-}
-
+}//eo-view
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [self updateUSerInfo];
-}
+}//eo-view
+
 #pragma mark -
 -(void)updateUSerInfo
 {
-    
     NSLog(@"curr staff selected %@", talentDetail.debugDescription);//testing
 
     //name
@@ -41,8 +40,6 @@
     self.talentName.text = [NSString stringWithFormat:@"%@ %@ %@",firstName,middleName,lastName];
     
 }//eom
-
-
 
 #pragma mark -
 

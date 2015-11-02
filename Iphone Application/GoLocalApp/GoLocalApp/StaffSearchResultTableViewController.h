@@ -10,9 +10,10 @@
 
 @interface StaffSearchResultTableViewController : UITableViewController
 
-
-
 @property (nonatomic) NSMutableArray * listOptions;
+
+@property (nonatomic) NSString * sortBy;
+@property (nonatomic) NSString * orderBy;
 
 
 @end

@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StaffSearchResultTableViewCell : UITableViewCell<UITextFieldDelegate>
+@interface StaffSearchResultTableViewCell : UITableViewCell
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *image;
-
 
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 
