@@ -13,6 +13,8 @@
 @end
 
 @implementation StaffSearchResultProfileViewController
+@synthesize talentDetail;
+@synthesize talentName,talentProfession, talentDetailImageView;
 
 - (void)viewDidLoad
 {
@@ -23,10 +25,22 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-
+    [self updateUSerInfo];
 }
 #pragma mark -
+-(void)updateUSerInfo
+{
+    
+    NSLog(@"curr staff selected %@", talentDetail.debugDescription);//testing
 
+    //name
+    NSString * firstName        = [talentDetail objectForKey:@"firstName"];
+    NSString * middleName       = [talentDetail objectForKey:@"middleInitial"];
+    NSString * lastName         = [talentDetail objectForKey:@"lastName"];
+    
+    self.talentName.text = [NSString stringWithFormat:@"%@ %@ %@",firstName,middleName,lastName];
+    
+}//eom
 
 
 

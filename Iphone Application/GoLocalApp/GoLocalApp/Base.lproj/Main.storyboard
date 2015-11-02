@@ -243,10 +243,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HT5-lu-UGs">
-                                <rect key="frame" x="26" y="54" width="274" height="138"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Staff" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HT5-lu-UGs">
+                                <rect key="frame" x="20" y="33" width="274" height="32"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="VeM-l2-F2L"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLZ-Tw-PkG">
+                                <rect key="frame" x="71" y="495" width="193" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <state key="normal" title="Show Results">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="showResults:" destination="UBv-AE-9hw" eventType="touchUpInside" id="ao6-uD-0yF"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pg6-cT-1CB">
+                                <rect key="frame" x="20" y="103" width="171" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="UBv-AE-9hw" id="SO9-fp-Ns2"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxO-ic-Odf">
+                                <rect key="frame" x="20" y="81" width="171" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="171" id="7lu-xo-TQL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tsl-md-ueJ">
+                                <rect key="frame" x="20" y="183" width="171" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="UBv-AE-9hw" id="sZj-sC-iJV"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPP-im-ndl">
+                                <rect key="frame" x="20" y="161" width="171" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -254,13 +303,27 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="HT5-lu-UGs" secondAttribute="trailing" constant="4" id="1eX-jI-ZT6"/>
-                            <constraint firstItem="HT5-lu-UGs" firstAttribute="top" secondItem="mPa-7B-nmS" secondAttribute="bottom" constant="34" id="3YU-TP-vlJ"/>
-                            <constraint firstItem="HT5-lu-UGs" firstAttribute="leading" secondItem="dHg-p5-vrt" secondAttribute="leadingMargin" constant="10" id="C4g-yV-Hae"/>
-                            <constraint firstItem="3hS-Mj-EGL" firstAttribute="top" secondItem="HT5-lu-UGs" secondAttribute="bottom" constant="376" id="qJo-Se-vHt"/>
+                            <constraint firstItem="3hS-Mj-EGL" firstAttribute="top" secondItem="YLZ-Tw-PkG" secondAttribute="bottom" constant="43" id="1EX-Mg-73l"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YLZ-Tw-PkG" secondAttribute="trailing" constant="40" id="2bR-JC-fMa"/>
+                            <constraint firstItem="pg6-cT-1CB" firstAttribute="trailing" secondItem="nxO-ic-Odf" secondAttribute="trailing" id="4fm-hm-IPQ"/>
+                            <constraint firstItem="pg6-cT-1CB" firstAttribute="top" secondItem="nxO-ic-Odf" secondAttribute="bottom" constant="1" id="AgD-iw-fUQ"/>
+                            <constraint firstItem="Tsl-md-ueJ" firstAttribute="leading" secondItem="hPP-im-ndl" secondAttribute="leading" id="G1t-Ux-fxB"/>
+                            <constraint firstItem="Tsl-md-ueJ" firstAttribute="trailing" secondItem="hPP-im-ndl" secondAttribute="trailing" id="IRy-xY-AzV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HT5-lu-UGs" secondAttribute="trailing" constant="10" id="MUH-CC-0BG"/>
+                            <constraint firstItem="YLZ-Tw-PkG" firstAttribute="leading" secondItem="dHg-p5-vrt" secondAttribute="leadingMargin" constant="55" id="TPK-cO-DKc"/>
+                            <constraint firstItem="HT5-lu-UGs" firstAttribute="leading" secondItem="dHg-p5-vrt" secondAttribute="leadingMargin" constant="4" id="ZbW-80-jV2"/>
+                            <constraint firstItem="nxO-ic-Odf" firstAttribute="top" secondItem="HT5-lu-UGs" secondAttribute="bottom" constant="16" id="a08-tl-Yeg"/>
+                            <constraint firstItem="hPP-im-ndl" firstAttribute="leading" secondItem="pg6-cT-1CB" secondAttribute="leading" id="cvQ-bD-U0e"/>
+                            <constraint firstItem="hPP-im-ndl" firstAttribute="trailing" secondItem="pg6-cT-1CB" secondAttribute="trailing" id="hUy-Yf-etI"/>
+                            <constraint firstItem="pg6-cT-1CB" firstAttribute="leading" secondItem="nxO-ic-Odf" secondAttribute="leading" id="hhk-dn-bgX"/>
+                            <constraint firstItem="HT5-lu-UGs" firstAttribute="top" secondItem="mPa-7B-nmS" secondAttribute="bottom" constant="13" id="oDs-Dg-iZ2"/>
+                            <constraint firstItem="hPP-im-ndl" firstAttribute="top" secondItem="pg6-cT-1CB" secondAttribute="bottom" constant="28" id="rb7-ui-CrP"/>
+                            <constraint firstItem="nxO-ic-Odf" firstAttribute="leading" secondItem="HT5-lu-UGs" secondAttribute="leading" id="rw3-jU-0M6"/>
+                            <constraint firstItem="Tsl-md-ueJ" firstAttribute="top" secondItem="hPP-im-ndl" secondAttribute="bottom" constant="1" id="zRF-I4-P6W"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="totalStaff" destination="HT5-lu-UGs" id="a98-KB-Xvy"/>
                         <segue destination="wAP-C2-ghm" kind="push" identifier="GoTostaffSearchResults" id="YET-Ui-WcE"/>
                     </connections>
                 </viewController>

@@ -8,8 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface filterStaffSearchResultViewController : UIViewController
+@interface filterStaffSearchResultViewController : UIViewController<UITextFieldDelegate>
 
 @property (nonatomic) NSMutableArray * listOptions;
+
+@property (weak, nonatomic) IBOutlet UILabel *totalStaff;
+
+
+
+
+
+
+- (IBAction)showResults:(UIButton *)sender;
+
+
 
 @end

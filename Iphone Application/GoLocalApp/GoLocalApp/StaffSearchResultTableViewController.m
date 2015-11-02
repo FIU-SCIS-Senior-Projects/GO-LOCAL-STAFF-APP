@@ -51,7 +51,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     return listOptions.count;
 }//eom
 
@@ -62,6 +61,20 @@
     
     //curr row
     int row = (int)indexPath.row;
+    
+    //name
+    NSDictionary * currPerson   = listOptions[row];
+    NSString * firstName        = [currPerson objectForKey:@"firstName"];
+    NSString * middleName       = [currPerson objectForKey:@"middleInitial"];
+    NSString * lastName         = [currPerson objectForKey:@"lastName"];
+    
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@ %@", firstName, middleName, lastName];
+    
+
+    //    cell.distanceLabel.text
+    //    cell.professionLabel.text
+    
+    
 
     return cell;
 }//eom
@@ -116,7 +129,11 @@
         //curr row
         int row = (int)myIndexPath.row;
         
-        detailView.talentDetail = listOptions[row];
+        //current staff
+        NSDictionary * currPerson   = listOptions[row];
+        
+        //passing all the information about the current staff selected
+        detailView.talentDetail = currPerson;
     }
 }//eom
 

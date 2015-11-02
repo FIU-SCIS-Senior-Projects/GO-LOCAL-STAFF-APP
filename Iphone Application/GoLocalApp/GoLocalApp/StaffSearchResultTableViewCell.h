@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StaffSearchResultTableViewCell : UITableViewCell
+@interface StaffSearchResultTableViewCell : UITableViewCell<UITextFieldDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *professionLabel;
 
 
