@@ -33,11 +33,9 @@
     NSLog(@"curr staff selected %@", talentDetail.debugDescription);//testing
 
     //name
-    NSString * firstName        = [talentDetail objectForKey:@"firstName"];
-    NSString * middleName       = [talentDetail objectForKey:@"middleInitial"];
-    NSString * lastName         = [talentDetail objectForKey:@"lastName"];
+    NSString * fullname        = [talentDetail objectForKey:@"name"];
     
-    self.talentName.text = [NSString stringWithFormat:@"%@ %@ %@",firstName,middleName,lastName];
+    self.talentName.text = fullname;
     
 }//eom
 

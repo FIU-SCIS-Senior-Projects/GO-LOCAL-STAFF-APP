@@ -64,11 +64,9 @@
     
     //name
     NSDictionary * currPerson   = listOptions[row];
-    NSString * firstName        = [currPerson objectForKey:@"firstName"];
-    NSString * middleName       = [currPerson objectForKey:@"middleInitial"];
-    NSString * lastName         = [currPerson objectForKey:@"lastName"];
+    NSString * fullname        = [currPerson objectForKey:@"name"];
     
-    cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@ %@", firstName, middleName, lastName];
+    cell.nameLabel.text = fullname;
     
 
     //    cell.distanceLabel.text

@@ -52,7 +52,7 @@
 #pragma mark - receive pass data
 -(void)receivePassData
 {
-//    NSLog(@"%@", listOptions);//testing
+    NSLog(@"%@", listOptions);//testing
     
     self.totalStaff.text = [NSString stringWithFormat: @"%lu Total Staffs", (unsigned long)listOptions.count];
 }//eom
@@ -98,6 +98,10 @@
 /*  */
 -(bool)prepareSearchCriteriaFinalData
 {
+    
+    NSString * sortBy   = self.sortByTextFields.text;
+    NSString * orderBy  = self.orderByTextFields.text;
+    
     
     return TRUE;
 }//eom

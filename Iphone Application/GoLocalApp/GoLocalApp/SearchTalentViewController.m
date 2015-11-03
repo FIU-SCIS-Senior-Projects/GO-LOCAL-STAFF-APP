@@ -1505,7 +1505,41 @@
             //populating staff search data into NSMutableArray
             for( id currStaff in searchResults )
             {
-                [list addObject:currStaff];
+                
+                //creating
+                NSMutableDictionary * currentStaff = [currStaff mutableCopy];
+                
+                //getting name
+                NSString *fname = [currentStaff objectForKey:@"firstName"];
+                NSString *mname = [currentStaff objectForKey:@"middleInitial"];
+                NSString *lname = [currentStaff objectForKey:@"lastName"];
+                
+                
+                
+                
+                //full name created
+                NSString *fullname;
+                
+                
+                if(mname.length > 0)
+                {
+                    fullname = [NSString stringWithFormat:@"%@ %@ %@",fname,mname,lname];
+                }
+                else
+                {
+                    fullname = [NSString stringWithFormat:@"%@ %@",fname,lname];
+                }
+                
+                
+                //removing name from list
+                [currentStaff removeObjectForKey:@"firstName"];
+                [currentStaff removeObjectForKey:@"middleInitial"];
+                [currentStaff removeObjectForKey:@"lastName"];
+                
+                //adding full name to list
+                [currentStaff setObject:fullname forKey:@"name"];
+                
+                [list addObject:currentStaff];
             }//eofl
             
             //   NSLog(@"data has been updated to %@", list);//testing
