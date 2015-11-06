@@ -115,8 +115,8 @@
     [self setUpSortBy];
     sortByOptions = [[NSArray alloc]
                      initWithObjects:@"Name",
-                                     @"Profession",
-                                     @"Distance",
+                                     @"Age",
+                                     @"Gender",
                                      nil];
     
     //order by
@@ -124,7 +124,6 @@
     orderByOptions = [[NSArray alloc]
                      initWithObjects:@"Ascending",
                                      @"Descending",
-                                     @"Random",
                                      nil];
 }//eom
 
