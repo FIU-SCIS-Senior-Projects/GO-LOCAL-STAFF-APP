@@ -178,6 +178,14 @@
                             <td></td> 
                            </tr>    
                           <tr>                             
+                            <td><b>imageName</b></td> 
+                            <td><?php echo $currentRow['imageName'] ?> </td> 
+                             <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>                              
                             <td><b>website</b></td> 
                             <td><?php echo $currentRow['website']; ?> </td> 
                              <td></td>

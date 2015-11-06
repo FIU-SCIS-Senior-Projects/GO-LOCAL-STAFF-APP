@@ -11,10 +11,6 @@
 @interface EmployerAccountSettingsViewController : UIViewController
 
 
-
-
-
-
 - (IBAction)signOut:(UIButton *)sender;
 
 @end
