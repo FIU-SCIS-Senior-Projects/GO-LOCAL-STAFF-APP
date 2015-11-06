@@ -115,7 +115,6 @@ CREATE TABLE `registered_staff` (
   `phone` varchar(15) NOT NULL,
   `phoneCode` int(11) DEFAULT NULL,
   `phoneValidated` int(11) DEFAULT NULL,
-  `pictures` varchar(30) NOT NULL,
   `dateOfBirth` varchar(10) NOT NULL,
   `age` int(11) NOT NULL,
   `gender` int(11) NOT NULL,
