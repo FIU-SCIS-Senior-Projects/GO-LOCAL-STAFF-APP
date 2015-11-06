@@ -76,6 +76,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
         {
           $responseArray = [
             "message" => "successfully retrieved staff information",
+            "responseType" => 1,
             "data" => $staffSearchResults,
             ];
         }
