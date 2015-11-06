@@ -648,11 +648,10 @@
     // AND (dancer='1' OR model='1')
     // */
 
-    $query = "SELECT firstName, middleInitial, lastName, gender, age
+    $query = "SELECT registered_staff.staffID, firstName, middleInitial, lastName, gender, age
               FROM registered_staff
               JOIN staff_type
               ON registered_staff.staffID=staff_type.staffID";
-              //WHERE $whereClause";
 
     if( !strlen($whereClause) )
     {
