@@ -22,4 +22,19 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)favoriteButton:(UIButton *)sender
+{
+    if( sender.selected == YES )
+    {
+        [sender setImage:[UIImage imageNamed:@"heart_off"] forState:UIControlStateSelected];
+        [sender setSelected:NO];
+    }
+    else if( sender.selected == NO )
+    {
+        [sender setImage:[UIImage imageNamed:@"heart_on"] forState:UIControlStateSelected];
+        
+        [sender setSelected:YES];
+    }
+}
+
 @end

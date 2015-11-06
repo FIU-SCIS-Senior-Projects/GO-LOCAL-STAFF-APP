@@ -64,14 +64,28 @@
     
     //name
     NSDictionary * currPerson   = listOptions[row];
-    NSString * fullname        = [currPerson objectForKey:@"name"];
+    NSString * firstName        = [currPerson objectForKey:@"firstName"];
+    NSString * middleInitial    = [currPerson objectForKey:@"middleInitial"];
+    NSString * lastName         = [currPerson objectForKey:@"lastName"];
+    NSString * age              = [currPerson objectForKey:@"age"];
     
-    cell.nameLabel.text = fullname;
+    NSString * name             = [firstName stringByAppendingString:@" "];
+    name             = [name stringByAppendingString:middleInitial];
     
-
-    //    cell.distanceLabel.text
-    //    cell.professionLabel.text
+    cell.nameLabel.text = name;
+    cell.lastNameLabel.text = lastName;
+    cell.ageLabel.text = age;
     
+    NSString *gender = [currPerson objectForKey:@"gender"];
+    
+    if( [gender isEqualToString:@"0"] )
+    {
+        [cell.gender setImage:[UIImage imageNamed:@"femaleA"]];
+    }
+    else
+    {
+        [cell.gender setImage:[UIImage imageNamed:@"maleA"]];
+    }
     
 
     return cell;
