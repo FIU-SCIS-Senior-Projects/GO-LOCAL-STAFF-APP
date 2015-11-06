@@ -32,6 +32,7 @@
               <tr>
                 <th>ID</th>
                 <th></th>
+                <th></th>
                 <th>Username</th> 
                 <th>Email</th> 
               </tr>
@@ -57,6 +58,12 @@
                       <label class="radio-inline">
                         <?php print '<input type="radio"  name="staff" value ="'.$peopleID.'">'; ?>
                       </label>
+                    </td>
+                    <!-- user image -->
+                    <td> 
+                        <img src="../uploads/<?php echo $currentRow['imageName']; ?>" 
+                             alt="<?php echo $currentRow['imageName']; ?>" 
+                             style="width:170px;height:150px;">
                     </td>
                     <td> <?php echo $currentRow['username']; ?> </td> 
                     <td> <?php echo $currentRow['email']; ?> </td>

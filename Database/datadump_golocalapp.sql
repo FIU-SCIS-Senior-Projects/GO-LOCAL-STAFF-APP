@@ -151,7 +151,8 @@ CREATE TABLE `registered_staff` (
   `accountLocked` BOOLEAN DEFAULT NULL,
   `forgotPasswordCode` int(11) DEFAULT NULL,
   `forgotPasswordRequests` int(5) DEFAULT '0',
-  `loginRequests` int(5) DEFAULT '0'
+  `loginRequests` int(5) DEFAULT '0',
+  `imageName` varchar(70) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
