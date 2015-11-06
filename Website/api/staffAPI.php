@@ -438,6 +438,37 @@
     return $newheight;
   }//eom
 
+  /* gets the staff information for the search staff detail view 
+    returns:
+    staff data      successfully retrieved staff information
+    0               database not responding
+    -1              unable to retrieved staff information
+   */
+  function getSearchStaffDetail($userID)
+  {
+    $dbConnection = connectToDB();
+    if(!$dbConnection)
+    {
+        //echo "Unable to connect to MySQL.".PHP_EOL;
+      return 0;
+    }
+
+      $query = "SELECT *
+                FROM registered_staff
+                WHERE staffID = '".$userID."'";
+      $result = mysqli_query($dbConnection, $query);
+
+      $totalRows = mysqli_num_rows($result);
+      if($totalRows > 0)
+      {
+        $registeredStaffResults = mysqli_fetch_array( $result, MYSQLI_ASSOC );
+        return $registeredStaffResults;
+      }
+
+      return -1;
+  }//eom
+
+
 /**************************** NOT BEING USED NOW ********************************/
 
   /* emails staff */
