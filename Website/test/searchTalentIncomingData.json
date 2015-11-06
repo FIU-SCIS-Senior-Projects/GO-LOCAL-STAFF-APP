@@ -1,4 +1,20 @@
 array (
-  'ageFrom' => 'Any',
+  'hasTattoos' => 'Either',
+  'languages' => 
+  array (
+    0 => 'English',
+  ),
+  'hasPhoto' => 'Either',
+  'eyeColor' => 'Any',
   'ageTo' => 'Any',
+  'ethnicities' => 
+  array (
+    0 => 'All',
+  ),
+  'hairColor' => 'Any',
+  'ageFrom' => 'Any',
+  'hasWebsite' => 'Either',
+  'hasPiercings' => 'Either',
+  'gender' => 'Any',
+  'willingToTravel' => 'Maybe',
 )

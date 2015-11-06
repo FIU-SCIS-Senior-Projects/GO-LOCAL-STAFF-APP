@@ -3,7 +3,7 @@
 include '../urlsettings.php';
 
 //Initiate cURL.
-$ch = curl_init($url_sendTESTSearchTalent);
+$ch = curl_init($url_sendSearchTalent);
         
   //dependant arrays
 
