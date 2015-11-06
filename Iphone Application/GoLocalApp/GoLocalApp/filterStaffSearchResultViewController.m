@@ -34,11 +34,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-}//eo-view
-
-/* */
--(void)viewDidAppear:(BOOL)animated
-{
+    
     //updating labels based on data received
     [self receivePassData];
     
@@ -47,6 +43,13 @@
     
     //setting initial choices
     [self prepareSearchCriteriaInitialData];
+    
+}//eo-view
+
+/* */
+-(void)viewDidAppear:(BOOL)animated
+{
+
 }//eo-view
 
 #pragma mark - receive pass data
@@ -98,13 +101,189 @@
 /*  */
 -(bool)prepareSearchCriteriaFinalData
 {
-    
+    //sort selections
     NSString * sortBy   = self.sortByTextFields.text;
     NSString * orderBy  = self.orderByTextFields.text;
     
+    BOOL ascending = true;
     
+    //check if descending order
+    if( [orderBy isEqualToString:@"Descending"])
+    {
+        ascending = false;
+    }
+
+    
+    //Sorting
+    if( [sortBy isEqualToString:@"Name"]   )
+    {
+        if(ascending)
+        {
+            [self sortNameAscending];
+        }
+        else
+        {
+            [self sortNameDescending];
+        }
+    }
+    else if( [sortBy isEqualToString:@"Age"])
+    {
+        if(ascending)
+        {
+            [self sortAgeAscending];
+        }
+        else
+        {
+            [self sortAgeDescending];
+        }
+    }
+    else if( [sortBy isEqualToString:@"Gender"])
+    {
+        if(ascending)
+        {
+            [self sortGenderAscending];
+        }
+        else
+        {
+            [self sortGenderDescending];
+        }
+    }
+    
+    NSLog(@"sort outcome: %@", listOptions);//testing
+
     return TRUE;
 }//eom
+
+//  MARK:   Sorting Functions
+
+    /* sorts the results in ascending order by their Name */
+    -(void)sortNameAscending
+    {
+        int inner = 0;
+        for(int outer = 1; outer < listOptions.count; outer++)
+        {
+            //curr dict
+            NSDictionary * currDict = listOptions[outer];
+          
+            for(inner = outer; (inner > 0)
+                && ([ [currDict objectForKey:@"firstName"] caseInsensitiveCompare:( [listOptions[inner-1] objectForKey:@"firstName"])
+                     ] < 0 ) ; inner--)
+            {
+                listOptions[inner] = listOptions[inner-1];
+            }//eo-inner fl
+            
+            listOptions[inner] = currDict;
+
+        }//eo-outer fl
+    }//eom
+
+    /* sorts the results in descending order by their Name */
+    -(void)sortNameDescending
+    {
+        int inner = 0;
+        for(int outer = 1; outer < listOptions.count; outer++)
+        {
+            //curr dict
+            NSDictionary * currDict = listOptions[outer];
+            
+            for(inner = outer; (inner > 0)
+                && ([ [currDict objectForKey:@"firstName"] caseInsensitiveCompare:( [listOptions[inner-1] objectForKey:@"firstName"])
+                     ] > 0 ) ; inner--)
+            {
+                listOptions[inner] = listOptions[inner-1];
+            }//eo-inner fl
+            
+            listOptions[inner] = currDict;
+            
+        }//eo-outer fl
+    }//eom
+
+    /* sorts the results in ascending order by their Age */
+    -(void)sortAgeAscending
+    {
+        int inner = 0;
+        for(int outer = 1; outer < listOptions.count; outer++)
+        {
+            //curr dict
+            NSDictionary * currDict = listOptions[outer];
+            
+            for(inner = outer; (inner > 0)
+                &&
+                ( (int)[[currDict objectForKey:@"age"] integerValue]
+                <= (int)[[listOptions[inner-1] objectForKey:@"age"] integerValue] ) ; inner--)
+            {
+                listOptions[inner] = listOptions[inner-1];
+            }//eo-inner fl
+            
+            listOptions[inner] = currDict;
+        }//eo-outer fl
+    }//eom
+
+    /* sorts the results in descending order by their Age */
+    -(void)sortAgeDescending
+    {
+        int inner = 0;
+        for(int outer = 1; outer < listOptions.count; outer++)
+        {
+            //curr dict
+            NSDictionary * currDict = listOptions[outer];
+            
+            for(inner = outer; (inner > 0)
+                &&
+                ( (int)[[currDict objectForKey:@"age"] integerValue]
+                 >= (int)[[listOptions[inner-1] objectForKey:@"age"] integerValue] ) ; inner--)
+            {
+                listOptions[inner] = listOptions[inner-1];
+            }//eo-inner fl
+            
+            listOptions[inner] = currDict;
+            
+        }//eo-outer fl
+    }//eom
+
+    /* sorts the results in ascending order by their Gender */
+    -(void)sortGenderAscending
+    {
+        int inner = 0;
+        for(int outer = 1; outer < listOptions.count; outer++)
+        {
+            //curr dict
+            NSDictionary * currDict = listOptions[outer];
+            
+            for(inner = outer; (inner > 0)
+                &&
+                ( (int)[[currDict objectForKey:@"gender"] integerValue]
+                 <= (int)[[listOptions[inner-1] objectForKey:@"gender"] integerValue] ) ; inner--)
+            {
+                listOptions[inner] = listOptions[inner-1];
+            }//eo-inner fl
+            
+            listOptions[inner] = currDict;
+        }//eo-outer fl
+    }//eom
+
+
+    /* sorts the results in descending order by their Gender */
+    -(void)sortGenderDescending
+    {
+        int inner = 0;
+        for(int outer = 1; outer < listOptions.count; outer++)
+        {
+            //curr dict
+            NSDictionary * currDict = listOptions[outer];
+            
+            for(inner = outer; (inner > 0)
+                &&
+                ( (int)[[currDict objectForKey:@"gender"] integerValue]
+                 >= (int)[[listOptions[inner-1] objectForKey:@"gender"] integerValue] ) ; inner--)
+            {
+                listOptions[inner] = listOptions[inner-1];
+            }//eo-inner fl
+            
+            listOptions[inner] = currDict;
+            
+        }//eo-outer fl
+    }//eom
 
 
 #pragma mark - Pickers
