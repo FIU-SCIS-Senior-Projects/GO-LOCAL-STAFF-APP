@@ -648,7 +648,7 @@
     // AND (dancer='1' OR model='1')
     // */
 
-    $query = "SELECT registered_staff.staffID, firstName, middleInitial, lastName, gender, age
+    $query = "SELECT registered_staff.staffID, firstName, middleInitial, lastName, gender, age, imageName
               FROM registered_staff
               JOIN staff_type
               ON registered_staff.staffID=staff_type.staffID";
