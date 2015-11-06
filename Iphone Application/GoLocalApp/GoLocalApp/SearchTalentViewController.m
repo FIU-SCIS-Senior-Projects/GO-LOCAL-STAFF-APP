@@ -1607,9 +1607,8 @@
     /* sends search data to server */
     -(void)sendSearchDataToServer
     {
-        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_searchTalent.php";
+        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_searchTalent.php";
         
-//        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_TESTsearchTalent.php";
         
         // preparing data to be sent
         NSMutableDictionary * searchData = [self prepareServerData];

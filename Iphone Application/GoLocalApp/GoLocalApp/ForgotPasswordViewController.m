@@ -368,7 +368,7 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
     /*  sends data to server */
     -(void)sendDataPhoneNumberToServer
     {
-        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_smsForgotPassword.php";//hard coding website
+        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_smsForgotPassword.php";//hard coding website
         
         
         /*** preparing data to be sent ***/
@@ -415,7 +415,7 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
     /*  sends data to server */
     -(void)sendFinalDataToServer
     {
-        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_forgotPassword.php";//hard coding website
+        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_forgotPassword.php";//hard coding website
         
         
         /*** preparing data to be sent ***/

@@ -145,7 +145,7 @@
         NSDictionary * currPerson   = listOptions[row];
         
         //passing all the information about the current staff selected
-        detailView.talentDetail = currPerson;
+        detailView.staffDetail = currPerson;
     }
 }//eom
 

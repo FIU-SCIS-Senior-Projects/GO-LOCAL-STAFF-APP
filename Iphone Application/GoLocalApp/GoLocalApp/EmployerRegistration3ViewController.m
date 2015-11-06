@@ -93,7 +93,7 @@
 //Sends data of employer to the server
 -(void) sendData
 {
-    NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_registration.php";//hard coding website
+    NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_registration.php";//hard coding website
     
     NSMutableDictionary *list = [self prepareDataToSend];
     NSLog(@"");

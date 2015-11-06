@@ -90,7 +90,7 @@
     /* gets the terms and agreements from DB  */
     -(void)getTermsAndAGreementsFromDB
     {
-        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_getTermsAgreements.php";//hard coding website
+        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_getTermsAgreements.php";//hard coding website
         
         /*** preparing data to be sent ***/
         NSMutableDictionary * staffInfo = [self prepareAgreementData];
@@ -224,7 +224,7 @@
         /* sends data to server */
         -(void)sendDataToServer
         {
-                NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_registration.php";//hard coding website
+                NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_registration.php";//hard coding website
             
                 /*** preparing data to be sent ***/
                 NSMutableDictionary * staffInfo = [self prepareData];

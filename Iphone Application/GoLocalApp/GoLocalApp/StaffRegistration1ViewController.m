@@ -430,7 +430,7 @@
          */
         -(void)sendDataPhoneNumberToServer
         {
-            NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_sms.php";//hard coding website
+            NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_sms.php";//hard coding website
             
             
             /*** preparing data to be sent ***/
@@ -496,7 +496,7 @@
          */
         -(void)sendDataVerificationNumberToServer
         {
-            NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_smsCode.php";//hard coding website
+            NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_smsCode.php";//hard coding website
             
             
             /*** preparing data to be sent ***/

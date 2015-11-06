@@ -215,7 +215,7 @@
      */
     -(void)sendDataLoginDataToServer
     {
-        NSString *serverAddress = @"http://45.55.208.175/Website/jsonPOST_login.php";
+        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_login.php";
         
         /*** preparing data to be sent ***/
         NSMutableDictionary * logInfo = [self prepareLogInData];
