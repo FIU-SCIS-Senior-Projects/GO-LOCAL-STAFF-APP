@@ -15,7 +15,7 @@ if($localTesting)
 }
 else
 {
-  $urlBody = 'http://45.55.208.175/Website/';
+  $urlBody = 'http://192.241.186.107/Website/';
 }
 
   //testing links
