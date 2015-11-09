@@ -11,6 +11,7 @@
 @interface StaffSearchResultTableViewController : UITableViewController
 
 @property (nonatomic) NSMutableArray * listOptions;
+@property (nonatomic) NSMutableArray *profileImages;
 
 @property (nonatomic) NSString * sortBy;
 @property (nonatomic) NSString * orderBy;

@@ -25,7 +25,7 @@
 
 @synthesize listOptions;
 @synthesize totalStaff;
-@synthesize sortByTextFields,orderByTextFields;
+@synthesize sortByTextFields, orderByTextFields;
 
 
 #pragma mark - views

@@ -16,7 +16,7 @@
 
 @implementation StaffSearchResultTableViewController
 
-@synthesize listOptions;
+@synthesize listOptions, profileImages;
 
 
 - (void)viewDidLoad
@@ -29,7 +29,24 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    profileImages = [[NSMutableArray alloc] init];
     
+    for( int i = 0; i < listOptions.count; i++ )
+    {
+        NSDictionary *temp = listOptions[i];
+        
+        NSString *imageName = [temp objectForKey:@"imageName"];
+        
+        //NSLog(@"Getting image for: %@", imageName);
+        
+        [profileImages addObject:[self getImage:imageName]];
+        
+        //profileImages[i] = [self getImage:imageName];
+        
+        //profileImages[i] = [self getImage:[temp objectForKey:@"imageName"]];
+    }
+    
+//    NSLog(@"Size of the array: %lu", (unsigned long)profileImages.count);
     
     
 }//eo-view
@@ -87,8 +104,41 @@
         [cell.gender setImage:[UIImage imageNamed:@"maleA"]];
     }
     
+    [cell.image setImage:profileImages[row]];
+    
+    //NSString *imageName = [currPerson objectForKey:@"imageName"];
+    //NSLog(@"The image name is: %@", imageName);
+    
+    //[self getImage:[currPerson objectForKey:@"imageName"] :cell.image];
+    
 
     return cell;
+}//eom
+
+-(UIImage *)getImage: (NSString *)imageName
+{
+    NSString * serverPhotoAddress = @"http://192.241.186.107/Website/uploads/";
+    
+    serverPhotoAddress = [serverPhotoAddress stringByAppendingString:imageName];
+    
+    UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:serverPhotoAddress]]];
+    
+    //NSLog(@"Description: %@", img.description);
+    
+    return img;
+    
+//    [image setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:serverPhotoAddress]]]];
+    
+}//eom
+
+-(void)getImage: (NSString *)imageName : (UIImageView *)image
+{
+    NSString * serverPhotoAddress = @"http://192.241.186.107/Website/uploads/";
+    
+    serverPhotoAddress = [serverPhotoAddress stringByAppendingString:imageName];
+    
+    [image setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:serverPhotoAddress]]]];
+    
 }//eom
 
 
