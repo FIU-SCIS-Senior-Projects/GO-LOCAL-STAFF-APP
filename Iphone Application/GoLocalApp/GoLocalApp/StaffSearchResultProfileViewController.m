@@ -33,7 +33,13 @@
 //    NSLog(@"curr staff selected %@", talentDetail.debugDescription);//testing
 //
 //    //name
-//    NSString * fullname        = [talentDetail objectForKey:@"name"];
+    //NSString * fullname        = [staffDetail objectForKey:@"name"];
+    //nameLabel.text = fullname;
+    //NSLog(@"NAME: %@", fullname);
+    
+    //NSString * ethnicity       = [staffDetail objectForKey:@"ethnicity"];
+    //ethnicityLabel.text        = ethnicity;
+    //NSLog(@"ETHNICITY: %@", ethnicity);
     
 }//eom
 
@@ -75,6 +81,7 @@
 /* processing server response */
 -(void) processServerDataResponse:(NSDictionary *) responce
 {
+    NSLog(@"INSIDE RESPONCE");
     //    NSLog(@"responce: %@", responce);
     
     NSDictionary * userResults      = [responce objectForKey:@"results"];
@@ -92,25 +99,29 @@
         //data
         NSDictionary * responceData  = [userResults objectForKey:@"data"];
         
-        nameLabel.text = [responceData objectForKey:@"firstName"];
-        middleInitialLabel.text = [responceData objectForKey:@"middleInitial"];
-        lastNameLabel.text = [responceData objectForKey:@"lastName"];
+        NSLog(@"**************************************************");
         
-        NSString *gender = [responceData objectForKey:@"gender"];
-        genderLabel.text = ([gender isEqualToString:@"0"]) ? @"Female" : @"Male";
+        NSLog(@"NAME: %@", [responceData objectForKey:@"name"]);
         
-        NSString *languages = [responceData objectForKey:@"nativelanguage"];
-        
-        languages = [languages stringByAppendingString:[responceData objectForKey:@"secondLanguage"]];
-        
-        languages = [languages stringByAppendingString:[responceData objectForKey:@"thirdLanguage"]];
-        
-        weightLabel.text = [responceData objectForKey:@"weight"];
-        heightLabel.text = [responceData objectForKey:@"height"];
-        eyeColorLabel.text = [responceData objectForKey:@"eyeColor"];
-        hairColorLabel.text = [responceData objectForKey:@"hairColor"];
-        
-        [self getImage:[responceData objectForKey:@"imageName"]];
+//        nameLabel.text = [responceData objectForKey:@"firstName"];
+//        middleInitialLabel.text = [responceData objectForKey:@"middleInitial"];
+//        lastNameLabel.text = [responceData objectForKey:@"lastName"];
+//        
+//        NSString *gender = [responceData objectForKey:@"gender"];
+//        genderLabel.text = ([gender isEqualToString:@"0"]) ? @"Female" : @"Male";
+//        
+//        NSString *languages = [responceData objectForKey:@"nativelanguage"];
+//        
+//        languages = [languages stringByAppendingString:[responceData objectForKey:@"secondLanguage"]];
+//        
+//        languages = [languages stringByAppendingString:[responceData objectForKey:@"thirdLanguage"]];
+//        
+//        weightLabel.text = [responceData objectForKey:@"weight"];
+//        heightLabel.text = [responceData objectForKey:@"height"];
+//        eyeColorLabel.text = [responceData objectForKey:@"eyeColor"];
+//        hairColorLabel.text = [responceData objectForKey:@"hairColor"];
+//        
+//        [self getImage:[responceData objectForKey:@"imageName"]];
         
     }
     else if(responceType < 1) //invalid response
@@ -127,6 +138,7 @@
 /* sends search data to server */
 -(void)sendSearchDataToServer
 {
+    NSLog(@"SENDING SEARCH DATA TO SERVER");
     NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_getSearchStaffDetail.php";
     
     // preparing data to be sent
