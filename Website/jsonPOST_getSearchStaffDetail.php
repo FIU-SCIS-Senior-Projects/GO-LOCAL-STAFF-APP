@@ -48,7 +48,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
         require 'API.php';/* adding API */
 
         $responseArray;
-        $userID           = $decoded["userID"];
+        $userID           = $decoded["staffID"];
 
         $staffSearchResults = getSearchStaffDetail($userID);
        
