@@ -194,7 +194,14 @@
         //current staff
         NSDictionary * currPerson   = listOptions[row];
         
-        //NSLog(@"NAME: %@", [currPerson objectForKey:@"name"]);
+//        NSLog(@"Count of currPerson: %lu", (unsigned long)[currPerson count]);
+//        
+//        for( id item in currPerson )
+//        {
+//            NSLog(@"%@", item);
+//        }
+        
+//        NSLog(@"NAME: %@", [currPerson objectForKey:@"firstName"]);
         
         //passing all the information about the current staff selected
         detailView.staffDetail = currPerson;

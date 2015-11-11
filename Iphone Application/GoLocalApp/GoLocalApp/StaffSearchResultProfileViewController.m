@@ -24,22 +24,21 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self updateUSerInfo];
+    [self sendSearchDataToServer];
+    
 }//eo-view
 
 #pragma mark -
--(void)updateUSerInfo
+-(void)updateUSerInfo: (NSDictionary *) currentUser
 {
-//    NSLog(@"curr staff selected %@", talentDetail.debugDescription);//testing
-//
-//    //name
-    //NSString * fullname        = [staffDetail objectForKey:@"name"];
-    //nameLabel.text = fullname;
-    //NSLog(@"NAME: %@", fullname);
     
-    //NSString * ethnicity       = [staffDetail objectForKey:@"ethnicity"];
-    //ethnicityLabel.text        = ethnicity;
-    //NSLog(@"ETHNICITY: %@", ethnicity);
+    nameLabel.text              = [currentUser objectForKey:@"firstName"];
+    middleInitialLabel.text     = [currentUser objectForKey:@"middleInitial"];
+    lastNameLabel.text          = [currentUser objectForKey:@"lastName"];
+    
+    [self getImage:[currentUser objectForKey:@"imageName"]];
+    
+
     
 }//eom
 
@@ -101,7 +100,7 @@
         
         NSLog(@"**************************************************");
         
-        NSLog(@"NAME: %@", [responceData objectForKey:@"name"]);
+        NSLog(@"NAME: %@", [responceData objectForKey:@"firstName"]);
         
 //        nameLabel.text = [responceData objectForKey:@"firstName"];
 //        middleInitialLabel.text = [responceData objectForKey:@"middleInitial"];
@@ -122,6 +121,8 @@
 //        hairColorLabel.text = [responceData objectForKey:@"hairColor"];
 //        
 //        [self getImage:[responceData objectForKey:@"imageName"]];
+        
+        [self updateUSerInfo:responceData];
         
     }
     else if(responceType < 1) //invalid response
