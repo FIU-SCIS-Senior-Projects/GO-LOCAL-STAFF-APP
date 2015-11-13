@@ -17,4 +17,13 @@
 @property (nonatomic) NSString * orderBy;
 
 
+- (IBAction)goToMapMode:(UIBarButtonItem *)sender;
+
+
+
+
+
+
+
+
 @end

@@ -10,6 +10,9 @@
 		DE0452D91BB51251008D747C /* StaffRegistration1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0452D81BB51251008D747C /* StaffRegistration1ViewController.m */; };
 		DE0452DC1BB53944008D747C /* StaffRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0452DB1BB53944008D747C /* StaffRegistration4ViewController.m */; };
 		DE1D82E11BA33469005671DB /* ToggleAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */; };
+		DE39410A1BF5991800511799 /* EmployerMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3941091BF5991800511799 /* EmployerMapViewController.m */; };
+		DE39410C1BF59BBC00511799 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE39410B1BF59BBB00511799 /* MapKit.framework */; };
+		DE39410F1BF59D1200511799 /* StaffMapPIN.m in Sources */ = {isa = PBXBuildFile; fileRef = DE39410E1BF59D1200511799 /* StaffMapPIN.m */; };
 		DE493F361BD72A7B005DC462 /* StaffAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE493F351BD72A7B005DC462 /* StaffAccountSettingsViewController.m */; };
 		DE493F3A1BD72A9D005DC462 /* EmployerAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE493F391BD72A9D005DC462 /* EmployerAccountSettingsViewController.m */; };
 		DE4AC3F01BB75FA50071D7E2 /* EmployerRegistration0ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4AC3EF1BB75FA50071D7E2 /* EmployerRegistration0ViewController.m */; };
@@ -70,6 +73,11 @@
 		DE0452DB1BB53944008D747C /* StaffRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration4ViewController.m; sourceTree = "<group>"; };
 		DE1D82DF1BA33469005671DB /* ToggleAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleAccountViewController.h; sourceTree = "<group>"; };
 		DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleAccountViewController.m; sourceTree = "<group>"; };
+		DE3941081BF5991700511799 /* EmployerMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerMapViewController.h; sourceTree = "<group>"; };
+		DE3941091BF5991800511799 /* EmployerMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployerMapViewController.m; sourceTree = "<group>"; };
+		DE39410B1BF59BBB00511799 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		DE39410D1BF59D1200511799 /* StaffMapPIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffMapPIN.h; sourceTree = "<group>"; };
+		DE39410E1BF59D1200511799 /* StaffMapPIN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffMapPIN.m; sourceTree = "<group>"; };
 		DE493F341BD72A7B005DC462 /* StaffAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffAccountSettingsViewController.h; sourceTree = "<group>"; };
 		DE493F351BD72A7B005DC462 /* StaffAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffAccountSettingsViewController.m; sourceTree = "<group>"; };
 		DE493F381BD72A9D005DC462 /* EmployerAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerAccountSettingsViewController.h; sourceTree = "<group>"; };
@@ -156,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE39410C1BF59BBC00511799 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +178,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE3941061BF598DC00511799 /* MapMode */ = {
+			isa = PBXGroup;
+			children = (
+				DE3941081BF5991700511799 /* EmployerMapViewController.h */,
+				DE3941091BF5991800511799 /* EmployerMapViewController.m */,
+			);
+			name = MapMode;
+			sourceTree = "<group>";
+		};
+		DE3941071BF598E500511799 /* ListMode */ = {
+			isa = PBXGroup;
+			children = (
+				DE53D2CC1BE5252500F13E11 /* StaffSearchResultTableViewController.h */,
+				DE53D2CD1BE5252500F13E11 /* StaffSearchResultTableViewController.m */,
+				DE53D2CF1BE5254600F13E11 /* StaffSearchResultTableViewCell.h */,
+				DE53D2D01BE5254600F13E11 /* StaffSearchResultTableViewCell.m */,
+				DE53D2D21BE5257700F13E11 /* StaffSearchResultProfileViewController.h */,
+				DE53D2D31BE5257700F13E11 /* StaffSearchResultProfileViewController.m */,
+			);
+			name = ListMode;
+			sourceTree = "<group>";
+		};
 		DE493F331BD72A42005DC462 /* Account Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +221,7 @@
 		DE6722A51B968CC600599039 = {
 			isa = PBXGroup;
 			children = (
+				DE39410B1BF59BBB00511799 /* MapKit.framework */,
 				DE6722B01B968CC600599039 /* GoLocalApp */,
 				DE6722CD1B968CC600599039 /* GoLocalAppTests */,
 				DE6722AF1B968CC600599039 /* Products */,
@@ -340,12 +372,8 @@
 				DE7BB00C1BD2A806002E3A52 /* SearchTalentViewController.m */,
 				DE53D2D51BE6C55C00F13E11 /* filterStaffSearchResultViewController.h */,
 				DE53D2D61BE6C55C00F13E11 /* filterStaffSearchResultViewController.m */,
-				DE53D2CC1BE5252500F13E11 /* StaffSearchResultTableViewController.h */,
-				DE53D2CD1BE5252500F13E11 /* StaffSearchResultTableViewController.m */,
-				DE53D2CF1BE5254600F13E11 /* StaffSearchResultTableViewCell.h */,
-				DE53D2D01BE5254600F13E11 /* StaffSearchResultTableViewCell.m */,
-				DE53D2D21BE5257700F13E11 /* StaffSearchResultProfileViewController.h */,
-				DE53D2D31BE5257700F13E11 /* StaffSearchResultProfileViewController.m */,
+				DE3941071BF598E500511799 /* ListMode */,
+				DE3941061BF598DC00511799 /* MapMode */,
 			);
 			name = "Search Talent";
 			sourceTree = "<group>";
@@ -408,6 +436,8 @@
 				DE4AC4011BB761620071D7E2 /* RegisteredEmployer.m */,
 				DE7BB0111BD4043E002E3A52 /* ColorWheel.h */,
 				DE7BB0121BD4043E002E3A52 /* ColorWheel.m */,
+				DE39410D1BF59D1200511799 /* StaffMapPIN.h */,
+				DE39410E1BF59D1200511799 /* StaffMapPIN.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -486,6 +516,11 @@
 					DE6722AD1B968CC600599039 = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = 225L9WJRG8;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					DE6722C91B968CC600599039 = {
 						CreatedOnToolsVersion = 6.3;
@@ -542,6 +577,7 @@
 				DE4AC3F01BB75FA50071D7E2 /* EmployerRegistration0ViewController.m in Sources */,
 				DE1D82E11BA33469005671DB /* ToggleAccountViewController.m in Sources */,
 				DEF0BACD1B9E5051001C6D84 /* StaffRegistration11ViewController.m in Sources */,
+				DE39410A1BF5991800511799 /* EmployerMapViewController.m in Sources */,
 				DE6722DF1B968D4500599039 /* EmployerHomeViewController.m in Sources */,
 				DE4AC3F31BB75FD90071D7E2 /* EmployerRegistration2ViewController.m in Sources */,
 				DE8C2E611BA9E16600AA0BB6 /* StaffRegistration10ViewController.m in Sources */,
@@ -554,6 +590,7 @@
 				DE6722B71B968CC600599039 /* AppDelegate.m in Sources */,
 				DE53D2D41BE5257700F13E11 /* StaffSearchResultProfileViewController.m in Sources */,
 				DE6722E21B968D5500599039 /* StaffHomeViewController.m in Sources */,
+				DE39410F1BF59D1200511799 /* StaffMapPIN.m in Sources */,
 				DE0452D91BB51251008D747C /* StaffRegistration1ViewController.m in Sources */,
 				DE493F361BD72A7B005DC462 /* StaffAccountSettingsViewController.m in Sources */,
 				DE6722E61B968D8700599039 /* PreRegistrationViewController.m in Sources */,
@@ -706,6 +743,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GoLocalApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FIU.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -720,6 +758,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GoLocalApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FIU.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

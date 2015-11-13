@@ -9,6 +9,7 @@
 #import "StaffSearchResultTableViewController.h"
 #import "StaffSearchResultTableViewCell.h"
 #import "StaffSearchResultProfileViewController.h"
+#import "EmployerMapViewController.h"
 
 @interface StaffSearchResultTableViewController ()
 
@@ -206,14 +207,33 @@
         //passing all the information about the current staff selected
         detailView.staffDetail = currPerson;
     }
+    else if( [[segue identifier] isEqualToString:@"goToStaffSearchMap"]  )
+    {
+        EmployerMapViewController *mapView = [segue destinationViewController];
+        
+        mapView.staffDetail = listOptions;
+    }
 }//eom
 
-#pragma mark - 
+
+/* */
+- (IBAction)goToMapMode:(UIBarButtonItem *)sender
+{
+    [self performSegueWithIdentifier:@"goToStaffSearchMap" sender:self];
+}//eo-action
+
+
+#pragma mark -
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }//eom
+
+
+
+
+
 
 @end
