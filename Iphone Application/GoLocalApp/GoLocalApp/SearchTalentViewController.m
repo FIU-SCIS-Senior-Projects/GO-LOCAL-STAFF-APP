@@ -63,7 +63,7 @@
 
 @implementation SearchTalentViewController
 
-@synthesize nameTextField,emailTextField,cellphoneTextField;
+@synthesize activityIndicator;
 @synthesize hasPhotoButton, hasPiercingsButton, hasTattoosButton, hasWebsiteButton;
 @synthesize genderTextField,ageFromTextField,ageToTextField,weightConditionTextField,weightTextField,heightConditionTextField,heightTextField,hairColorTextField,eyeColorTextField;
 @synthesize ethnicitiesButtons;
@@ -92,13 +92,22 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    
 //    NSDictionary * testing = [[NSDictionary alloc] init];
 //    [testing setValue:@"" forKey:@"0"];
 //    
 //    [self goToSearchResults:testing];
     
 }//eom
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [activityIndicator setHidden:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [activityIndicator stopAnimating];
+}
 
 #pragma mark - buttons functions (hasPhoto, HasWebsite, hasTattoos, hasPiercings)
 
@@ -200,23 +209,23 @@
     }
 
     /* dimisses UITextField as soon the return key is pressed */
-    -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-        
-        if(textField == self.nameTextField){
-            [self.nameTextField resignFirstResponder];
-            [self.emailTextField becomeFirstResponder];
-        }
-        else if(textField == self.emailTextField)
-        {
-            [self.emailTextField resignFirstResponder];
-            [self.cellphoneTextField becomeFirstResponder];
-        }
-        else if(textField == self.cellphoneTextField){
-            [self.cellphoneTextField resignFirstResponder];
-        }
-        
-        return YES;
-    }//eom
+//    -(BOOL)textFieldShouldReturn:(UITextField *)textField {
+//        
+//        if(textField == self.nameTextField){
+//            [self.nameTextField resignFirstResponder];
+//            [self.emailTextField becomeFirstResponder];
+//        }
+//        else if(textField == self.emailTextField)
+//        {
+//            [self.emailTextField resignFirstResponder];
+//            [self.cellphoneTextField becomeFirstResponder];
+//        }
+//        else if(textField == self.cellphoneTextField){
+//            [self.cellphoneTextField resignFirstResponder];
+//        }
+//        
+//        return YES;
+//    }//eom
 
 
 #pragma mark - picker functions (gender, age, weight, height, hair & eye color, miles)
@@ -1436,30 +1445,30 @@
         NSString *trimmedString;
         
         //email
-        if(emailTextField.text.length > 0)
-        {
-            /* making sure email has the correct format*/
-            bool emailQuality = [self validateEmail:emailTextField.text];
-            if(emailQuality == false)
-            {
-                [self scrollVievEditingFinished:emailTextField]; //take scroll to textfield so user can see their error
-                [self showAlert:@"Search Talent" withMessage:@"Email is not in the correct format." and:@"Okay"];
-                return false;
-            }
-        }
+//        if(emailTextField.text.length > 0)
+//        {
+//            /* making sure email has the correct format*/
+//            bool emailQuality = [self validateEmail:emailTextField.text];
+//            if(emailQuality == false)
+//            {
+//                [self scrollVievEditingFinished:emailTextField]; //take scroll to textfield so user can see their error
+//                [self showAlert:@"Search Talent" withMessage:@"Email is not in the correct format." and:@"Okay"];
+//                return false;
+//            }
+//        }
         
         //cellphone
-        if(cellphoneTextField.text.length > 0)
-        {
-            if( self.cellphoneTextField.text.length < 10)
-            {
-                //take scroll to textfield so user can see their error
-                [self scrollVievEditingFinished:milesZipcodeTextField];
-                // it's empty or contains only white spaces
-                [self showAlert:@"Search Talent" withMessage:@"Please make sure to enter a complete phone number" and:@"Okay"];
-                return false;
-            }
-        }
+//        if(cellphoneTextField.text.length > 0)
+//        {
+//            if( self.cellphoneTextField.text.length < 10)
+//            {
+//                //take scroll to textfield so user can see their error
+//                [self scrollVievEditingFinished:milesZipcodeTextField];
+//                // it's empty or contains only white spaces
+//                [self showAlert:@"Search Talent" withMessage:@"Please make sure to enter a complete phone number" and:@"Okay"];
+//                return false;
+//            }
+//        }
         
         //miles
         if(milesTextField.text.length > 0)
@@ -1493,6 +1502,8 @@
         bool response = [self verifyData];
         if(response)
         {
+            [activityIndicator setHidden:NO];
+            [activityIndicator startAnimating];
             [self sendSearchDataToServer];
         }
     }//eom
@@ -1625,22 +1636,22 @@
         NSMutableDictionary * finalList = [[NSMutableDictionary alloc] init];
         
         //name
-        if(nameTextField.text.length > 0 )
-        {
-            finalList[@"name"]       = nameTextField.text;
-        }
-        
-        //email
-        if(emailTextField.text.length > 0 )
-        {
-            finalList[@"email"]      = emailTextField.text;
-        }
-        
-        //phone
-        if(cellphoneTextField.text.length > 0 )
-        {
-            finalList[@"phone"]      = cellphoneTextField.text;
-        }
+//        if(nameTextField.text.length > 0 )
+//        {
+//            finalList[@"name"]       = nameTextField.text;
+//        }
+//        
+//        //email
+//        if(emailTextField.text.length > 0 )
+//        {
+//            finalList[@"email"]      = emailTextField.text;
+//        }
+//        
+//        //phone
+//        if(cellphoneTextField.text.length > 0 )
+//        {
+//            finalList[@"phone"]      = cellphoneTextField.text;
+//        }
         
         //has photo
         NSString * hasPhotoVal      = [hasButtonCurrentStatus objectAtIndex:0];         //getting current status

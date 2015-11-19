@@ -24,17 +24,59 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self sendSearchDataToServer];
+    //[self sendSearchDataToServer];
     
 }//eo-view
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self sendSearchDataToServer];
+}
 
 #pragma mark -
 -(void)updateUSerInfo: (NSDictionary *) currentUser
 {
-    
     nameLabel.text              = [currentUser objectForKey:@"firstName"];
+    [nameLabel sizeToFit];
     middleInitialLabel.text     = [currentUser objectForKey:@"middleInitial"];
+    [middleInitialLabel sizeToFit];
     lastNameLabel.text          = [currentUser objectForKey:@"lastName"];
+    [lastNameLabel sizeToFit];
+    ageLabel.text               = [currentUser objectForKey:@"age"];
+    ethnicityLabel.text         = [currentUser objectForKey:@"ethnicity"];
+    NSString *weight            = [currentUser objectForKey:@"weight"];
+    weightLabel.text            = [weight stringByAppendingString:@" lbs"];
+    heightLabel.text            = [currentUser objectForKey:@"height"];
+    eyeColorLabel.text          = [currentUser objectForKey:@"eyeColor"];
+    hairColorLabel.text         = [currentUser objectForKey:@"hairColor"];
+    
+    NSString *gender            = [currentUser objectForKey:@"gender"];
+    
+    if( [gender isEqualToString:@"0"] )
+        genderLabel.text = @"Female";
+    else
+        genderLabel.text = @"Male";
+    
+    NSString *languages         = [currentUser objectForKey:@"nativeLanguage"];
+    
+    NSString *tempLanguage      = [currentUser objectForKey:@"secondLanguage"];
+    
+    if( [tempLanguage length] != 0 )
+    {
+        languages               = [languages stringByAppendingString:@", "];
+        languages               = [languages stringByAppendingString:tempLanguage];
+    }
+    
+    tempLanguage                = [currentUser objectForKey:@"thirdLanguage"];
+    
+    if( [tempLanguage length] != 0 )
+    {
+        languages               = [languages stringByAppendingString:@", "];
+        languages               = [languages stringByAppendingString:tempLanguage];
+    }
+    
+    languagesLabel.text         = languages;
+    [languagesLabel sizeToFit];
     
     [self getImage:[currentUser objectForKey:@"imageName"]];
     

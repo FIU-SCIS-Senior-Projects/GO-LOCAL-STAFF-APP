@@ -37,7 +37,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // display an Edit button in the navigation bar for this view controller.
-    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     profileImages = [[NSMutableArray alloc] init];
     
@@ -160,25 +160,27 @@
     return cell;
 }//eom
 
-/*
+
 // Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        [listOptions removeObjectAtIndex:indexPath.row];
+        [profileImages removeObjectAtIndex:indexPath.row];
+        
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
-*/
 
 /*
 // Override to support rearranging the table view.
@@ -319,15 +321,18 @@
     {
         //curr dict
         NSDictionary * currDict = listOptions[outer];
+        UIImage *currImg        = profileImages[outer];
         
         for(inner = outer; (inner > 0)
             && ([ [currDict objectForKey:@"firstName"] caseInsensitiveCompare:( [listOptions[inner-1] objectForKey:@"firstName"])
                  ] < 0 ) ; inner--)
         {
             listOptions[inner] = listOptions[inner-1];
+            profileImages[inner] = profileImages[inner-1];
         }//eo-inner fl
         
         listOptions[inner] = currDict;
+        profileImages[inner] = currImg;
         
     }//eo-outer fl
 }//eom
@@ -340,15 +345,18 @@
     {
         //curr dict
         NSDictionary * currDict = listOptions[outer];
+        UIImage *currImg        = profileImages[outer];
         
         for(inner = outer; (inner > 0)
             && ([ [currDict objectForKey:@"firstName"] caseInsensitiveCompare:( [listOptions[inner-1] objectForKey:@"firstName"])
                  ] > 0 ) ; inner--)
         {
             listOptions[inner] = listOptions[inner-1];
+            profileImages[inner] = profileImages[inner-1];
         }//eo-inner fl
         
         listOptions[inner] = currDict;
+        profileImages[inner] = currImg;
         
     }//eo-outer fl
 }//eom
@@ -361,6 +369,7 @@
     {
         //curr dict
         NSDictionary * currDict = listOptions[outer];
+        UIImage *currImg        = profileImages[outer];
         
         for(inner = outer; (inner > 0)
             &&
@@ -368,9 +377,11 @@
              <= (int)[[listOptions[inner-1] objectForKey:@"age"] integerValue] ) ; inner--)
         {
             listOptions[inner] = listOptions[inner-1];
+            profileImages[inner] = profileImages[inner-1];
         }//eo-inner fl
         
         listOptions[inner] = currDict;
+        profileImages[inner] = currImg;
     }//eo-outer fl
 }//eom
 
@@ -382,6 +393,7 @@
     {
         //curr dict
         NSDictionary * currDict = listOptions[outer];
+        UIImage *currImg        = profileImages[outer];
         
         for(inner = outer; (inner > 0)
             &&
@@ -389,9 +401,11 @@
              >= (int)[[listOptions[inner-1] objectForKey:@"age"] integerValue] ) ; inner--)
         {
             listOptions[inner] = listOptions[inner-1];
+            profileImages[inner] = profileImages[inner-1];
         }//eo-inner fl
         
         listOptions[inner] = currDict;
+        profileImages[inner] = currImg;
         
     }//eo-outer fl
 }//eom
@@ -404,6 +418,7 @@
     {
         //curr dict
         NSDictionary * currDict = listOptions[outer];
+        UIImage *currImg        = profileImages[outer];
         
         for(inner = outer; (inner > 0)
             &&
@@ -411,9 +426,11 @@
              <= (int)[[listOptions[inner-1] objectForKey:@"gender"] integerValue] ) ; inner--)
         {
             listOptions[inner] = listOptions[inner-1];
+            profileImages[inner] = profileImages[inner-1];
         }//eo-inner fl
         
         listOptions[inner] = currDict;
+        profileImages[inner] = currImg;
     }//eo-outer fl
 }//eom
 
@@ -426,6 +443,7 @@
     {
         //curr dict
         NSDictionary * currDict = listOptions[outer];
+        UIImage *currImg        = profileImages[outer];
         
         for(inner = outer; (inner > 0)
             &&
@@ -433,9 +451,11 @@
              >= (int)[[listOptions[inner-1] objectForKey:@"gender"] integerValue] ) ; inner--)
         {
             listOptions[inner] = listOptions[inner-1];
+            profileImages[inner] = profileImages[inner-1];
         }//eo-inner fl
         
         listOptions[inner] = currDict;
+        profileImages[inner] = currImg;
         
     }//eo-outer fl
 }//eom

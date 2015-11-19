@@ -10,10 +10,9 @@
 
 @interface SearchTalentViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate, UIAlertViewDelegate>
 
-//TEXTFIELDS
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UITextField *cellphoneTextField;
+//ACTIVITY INDICATOR
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 
 //BUTTONS
 @property (weak, nonatomic) IBOutlet UIButton *hasPhotoButton;
