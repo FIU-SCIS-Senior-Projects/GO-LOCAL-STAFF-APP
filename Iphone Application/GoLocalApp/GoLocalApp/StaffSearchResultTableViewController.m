@@ -554,6 +554,8 @@
     
     [self prepareSearchCriteriaFinalData];
     
+    [self.tableView reloadData];
+    
 }//eom
 
 
