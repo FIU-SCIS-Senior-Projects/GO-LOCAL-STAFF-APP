@@ -8,7 +8,11 @@
 
 #import "SearchTalentViewController.h"
 #import "ColorWheel.h"
-#import "filterStaffSearchResultViewController.h"
+
+
+#import "StaffSearchResultTableViewController.h"
+
+//#import "filterStaffSearchResultViewController.h"
 
 @interface SearchTalentViewController ()
 {
@@ -1521,8 +1525,13 @@
             UIStoryboard *newStoryboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
             
             //creating controller thats in storyboard
-            NSString *controllerID   = @"filterStaffSearchResult";
-            filterStaffSearchResultViewController *SearchTalentResultsView = (filterStaffSearchResultViewController *)[newStoryboard instantiateViewControllerWithIdentifier:controllerID];
+        
+        NSString *controllerID   = @"staffSearchResult";
+        StaffSearchResultTableViewController *SearchTalentResultsView = (StaffSearchResultTableViewController *)[newStoryboard instantiateViewControllerWithIdentifier:controllerID];
+        
+        
+        //    NSString *controllerID   = @"filterStaffSearchResult";
+        //    filterStaffSearchResultViewController *SearchTalentResultsView = (filterStaffSearchResultViewController *)[newStoryboard instantiateViewControllerWithIdentifier:controllerID];
             
             SearchTalentResultsView.listOptions  = list;
         

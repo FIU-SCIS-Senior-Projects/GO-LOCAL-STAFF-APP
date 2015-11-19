@@ -22,7 +22,6 @@
 		DE53D2CE1BE5252500F13E11 /* StaffSearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D2CD1BE5252500F13E11 /* StaffSearchResultTableViewController.m */; };
 		DE53D2D11BE5254600F13E11 /* StaffSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D2D01BE5254600F13E11 /* StaffSearchResultTableViewCell.m */; };
 		DE53D2D41BE5257700F13E11 /* StaffSearchResultProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D2D31BE5257700F13E11 /* StaffSearchResultProfileViewController.m */; };
-		DE53D2D71BE6C55C00F13E11 /* filterStaffSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D2D61BE6C55C00F13E11 /* filterStaffSearchResultViewController.m */; };
 		DE6722B41B968CC600599039 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B31B968CC600599039 /* main.m */; };
 		DE6722B71B968CC600599039 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B61B968CC600599039 /* AppDelegate.m */; };
 		DE6722BA1B968CC600599039 /* GoLocalApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B81B968CC600599039 /* GoLocalApp.xcdatamodeld */; };
@@ -96,8 +95,6 @@
 		DE53D2D01BE5254600F13E11 /* StaffSearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffSearchResultTableViewCell.m; sourceTree = "<group>"; };
 		DE53D2D21BE5257700F13E11 /* StaffSearchResultProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffSearchResultProfileViewController.h; sourceTree = "<group>"; };
 		DE53D2D31BE5257700F13E11 /* StaffSearchResultProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffSearchResultProfileViewController.m; sourceTree = "<group>"; };
-		DE53D2D51BE6C55C00F13E11 /* filterStaffSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filterStaffSearchResultViewController.h; sourceTree = "<group>"; };
-		DE53D2D61BE6C55C00F13E11 /* filterStaffSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = filterStaffSearchResultViewController.m; sourceTree = "<group>"; };
 		DE6722AE1B968CC600599039 /* GoLocalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoLocalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE6722B21B968CC600599039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE6722B31B968CC600599039 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -370,8 +367,6 @@
 			children = (
 				DE7BB00B1BD2A806002E3A52 /* SearchTalentViewController.h */,
 				DE7BB00C1BD2A806002E3A52 /* SearchTalentViewController.m */,
-				DE53D2D51BE6C55C00F13E11 /* filterStaffSearchResultViewController.h */,
-				DE53D2D61BE6C55C00F13E11 /* filterStaffSearchResultViewController.m */,
 				DE3941071BF598E500511799 /* ListMode */,
 				DE3941061BF598DC00511799 /* MapMode */,
 			);
@@ -605,7 +600,6 @@
 				DE53D2CE1BE5252500F13E11 /* StaffSearchResultTableViewController.m in Sources */,
 				DE7BB00E1BD2A806002E3A52 /* SearchTalentViewController.m in Sources */,
 				DE8444A91B9F75060085DA73 /* StaffRegistration13ViewController.m in Sources */,
-				DE53D2D71BE6C55C00F13E11 /* filterStaffSearchResultViewController.m in Sources */,
 				DE493F3A1BD72A9D005DC462 /* EmployerAccountSettingsViewController.m in Sources */,
 				DEE6B84D1B9942DA00912541 /* StaffRegistration6ViewController.m in Sources */,
 				DED49C471B97CA0A0091B986 /* ForgotPasswordViewController.m in Sources */,
@@ -692,7 +686,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -729,7 +723,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -743,7 +737,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GoLocalApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FIU.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -758,7 +752,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GoLocalApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "FIU.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

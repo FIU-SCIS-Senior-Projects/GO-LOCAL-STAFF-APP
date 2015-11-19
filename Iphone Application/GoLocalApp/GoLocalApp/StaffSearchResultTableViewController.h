@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StaffSearchResultTableViewController : UITableViewController
+@interface StaffSearchResultTableViewController : UITableViewController<UITextFieldDelegate>
 
 @property (nonatomic) NSMutableArray * listOptions;
 @property (nonatomic) NSMutableArray *profileImages;
@@ -19,6 +19,9 @@
 
 - (IBAction)goToMapMode:(UIBarButtonItem *)sender;
 
+//Filter Options
+@property (weak, nonatomic) IBOutlet UITextField *sortByTextFields;
+@property (weak, nonatomic) IBOutlet UITextField *orderByTextFields;
 
 
 

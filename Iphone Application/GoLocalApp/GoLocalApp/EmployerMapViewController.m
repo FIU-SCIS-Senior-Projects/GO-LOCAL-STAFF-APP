@@ -22,6 +22,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //hiding navigation controller
+    [self.navigationController setNavigationBarHidden:YES];
+    
     [self setUpMap];
     
 }//eo-view
@@ -31,6 +34,13 @@
 {
 
 }//eo-view
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    //showing navigation controller
+    [self.navigationController setNavigationBarHidden:NO];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -55,7 +65,7 @@
     [locationManager requestAlwaysAuthorization];
     
     [self updateTheUsersCurrentLocation];
-//    [self UpdateMapRegion:userCurrentLocation];
+    [self UpdateMapRegion:userCurrentLocation];
 //    [self addAnnotationInMap:userCurrentLocation];
     
 
@@ -65,7 +75,9 @@
 - (IBAction)goToListMode:(UIBarButtonItem *)sender
 {
     //moving to the previous controller
-    [self performSegueWithIdentifier:@"goToStaffSearchList" sender:self];    
+   // [self performSegueWithIdentifier:@"goToStaffSearchList" sender:self];
+    
+    [self.navigationController popViewControllerAnimated:TRUE];
 }//eo-action
 
 /* */
@@ -103,6 +115,84 @@
     //stop updating the user current location
     [locationManager stopUpdatingLocation];
 }//eom
+
+
+/* */
+-(void)UpdateMapRegion:(CLLocationCoordinate2D)userLocation
+{
+    //    NSLog( @"location latitude: %f",userLocation.latitude);
+    //    NSLog( @"location longitude: %f",userLocation.longitude);
+    
+    //creating the region based on the current location
+    MKCoordinateRegion region   = {{0.0, 0.0}, {0.0, 0.0}};
+    region.center.latitude      = userLocation.latitude;
+    region.center.longitude     = userLocation.longitude;
+    region.span.latitudeDelta   = 0.02f;
+    region.span.longitudeDelta  = 0.02f;
+    
+    //updating map region based on the users location provided
+    [self.myMapView setRegion:region animated:YES];
+    
+}//eom
+
+/* */
+-(void)updateMapZoomAccordingToLocation:(CLLocationCoordinate2D)locationProvided
+{
+    [self.myMapView setCenterCoordinate:locationProvided animated:YES];
+}//eom
+
+
+/* */
+-(void)addAnnotationInMap:(CLLocationCoordinate2D)locationProvided
+{
+    //    NSLog( @"location latitude: %f",locationProvided.latitude);
+    //    NSLog( @"location longitude: %f",locationProvided.longitude);
+    
+    //latitude and longitude of the location provided
+    CLLocationDegrees locationLatitude  = locationProvided.latitude;
+    CLLocationDegrees locationLongitude = locationProvided.longitude;
+    
+    CLLocation * selectedLocation       =  [[CLLocation alloc]
+                                            initWithLatitude:locationLatitude
+                                            longitude:locationLongitude];
+    
+    //getting placemark of the location provided
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:selectedLocation
+                   completionHandler:^(NSArray *placemarks,
+                                       NSError *error)
+     {
+         if(placemarks.count)
+         {
+//             CLPlacemark *placemark = [placemarks objectAtIndex:0];
+//             
+//             //            NSLog(@"placemark: %@",placemark); //full placemark
+//             
+//             //address only from placemark
+//             NSDictionary *Addressdictionary = [ placemark addressDictionary];
+//             
+//             NSLog(@"Addressdictionary: %@",Addressdictionary);//address info
+//             
+//             NSString *street        =  [Addressdictionary valueForKey:@"Street"];
+//             NSString *city          = [Addressdictionary valueForKey:@"City"];
+//             NSString *state         = [Addressdictionary valueForKey:@"State"];
+//             NSString *zipcode       = [Addressdictionary valueForKey:@"ZIP"];
+//             NSString *title         = [Addressdictionary valueForKey:@"SubLocality"];
+//             NSString *fullAddress   = [NSString stringWithFormat:@"%@ %@ %@ %@",street,city,state,zipcode];
+//             
+//             //creating Map pin
+//             MapPIN *myAnnotation    = [[MapPIN alloc] init];
+//             myAnnotation.title      = title;
+//             myAnnotation.subtitle   = fullAddress;
+//             myAnnotation.coordinate = locationProvided;
+//             
+//             //adding annotation to map
+//             [self.myMapView addAnnotation:myAnnotation];
+         }
+     }];
+    
+}//eom
+
 
 
 #pragma mark - Navigation
