@@ -186,31 +186,28 @@
       $query      = "SELECT staffID,phone,forgotPasswordRequests,accountLocked  FROM registered_staff WHERE phone='".$phone."'";
       $result     = mysqli_query($dbConnection, $query);
       $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-      $rowResult  = array_filter($row);
-      if (empty($rowResult))
+      if (empty($row))
       {
               
               $query      = "SELECT employerID,phone,forgotPasswordRequests,accountLocked FROM registered_employer WHERE phone='".$phone."'";
               $result     = mysqli_query($dbConnection, $query);
               $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-              $rowResult  = array_filter($row);
-              if (empty($rowResult))
+              if (empty($row))
               {
-                print_r($row);
-                echo "<p> NO user exist with the information provided (registered_employer or registered_staff)</p>";
+                //echo "<p> NO user exist with the information provided (registered_employer or registered_staff)</p>";
                 return -1;
               }
               else
               {
-                print_r($row);
-                echo "<p> user exist with information provided, registered_employer</p>";
+                //print_r($row);
+                //echo "<p> user exist with information provided, registered_employer</p>";
                 return $row;
               }
       }
       else
       {
-        // print_r($row);
-        // echo "<p> user exist with information provided, registered_staff</p>";
+        //print_r($row);
+        //echo "<p> user exist with information provided, registered_staff</p>";
         return $row;
       }
   }//eom
@@ -239,7 +236,7 @@
       $staffType              = $userData['staffID'];
       $employerType           = $userData['employerID'];
       $phone                  = $userData['phone'];
-      $forgotPasswordRequests = $rowResult['forgotPasswordRequests'] + 1;
+      $forgotPasswordRequests = $userData['forgotPasswordRequests'] + 1;
       $userKey    = "";
       $userID     = "";
       
