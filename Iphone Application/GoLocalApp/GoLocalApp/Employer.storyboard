@@ -40,7 +40,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="searchTalent:" destination="fBv-cb-vuR" eventType="touchUpInside" id="X7R-WA-f06"/>
+                                    <segue destination="bOx-Xc-Dbw" kind="push" identifier="searchTalent" id="E27-sl-Rcv"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -58,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UYU-tB-SFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2031" y="-2463"/>
+            <point key="canvasLocation" x="1992" y="-2462"/>
         </scene>
         <!--Employer Map View Controller-->
         <scene sceneID="pZO-Rc-MgS">
@@ -144,6 +144,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vdj-g5-D6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3182" y="-3237"/>
+        </scene>
+        <!--Search Talent Holder View Controller-->
+        <scene sceneID="Nyl-Nd-qIO">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WhC-O5-ctx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="bOx-Xc-Dbw" customClass="SearchTalentHolderViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="keQ-P5-p2h"/>
+                        <viewControllerLayoutGuide type="bottom" id="tUr-2N-J8R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NGa-gj-fU6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nlp-f5-hl1">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nlp-f5-hl1" firstAttribute="bottom" secondItem="tUr-2N-J8R" secondAttribute="top" id="KZH-tB-kv7"/>
+                            <constraint firstItem="nlp-f5-hl1" firstAttribute="top" secondItem="keQ-P5-p2h" secondAttribute="bottom" id="QD7-MX-PHQ"/>
+                            <constraint firstItem="nlp-f5-hl1" firstAttribute="leading" secondItem="NGa-gj-fU6" secondAttribute="leading" id="THu-jq-Psw"/>
+                            <constraint firstAttribute="trailing" secondItem="nlp-f5-hl1" secondAttribute="trailing" id="fTJ-0f-3g3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="V6a-RW-ba5"/>
+                    <connections>
+                        <outlet property="searchView" destination="nlp-f5-hl1" id="0OT-BT-SML"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2381" y="-2462"/>
         </scene>
         <!--Staff Search Result-->
         <scene sceneID="004-1P-qqy">
@@ -302,7 +338,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3or-Mh-dOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2673" y="-2463"/>
+            <point key="canvasLocation" x="2754" y="-2463"/>
         </scene>
         <!--Staff Search Result Profile View Controller-->
         <scene sceneID="Kis-dW-vSp">
@@ -528,7 +564,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YsV-KN-wbM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2031" y="-1743"/>
+            <point key="canvasLocation" x="1992" y="-1743"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wY2-R1-6j2">

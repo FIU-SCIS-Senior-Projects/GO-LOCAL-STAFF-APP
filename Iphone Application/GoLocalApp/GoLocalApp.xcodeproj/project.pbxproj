@@ -27,6 +27,7 @@
 		DE53D2CE1BE5252500F13E11 /* StaffSearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D2CD1BE5252500F13E11 /* StaffSearchResultTableViewController.m */; };
 		DE53D2D11BE5254600F13E11 /* StaffSearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D2D01BE5254600F13E11 /* StaffSearchResultTableViewCell.m */; };
 		DE53D2D41BE5257700F13E11 /* StaffSearchResultProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D2D31BE5257700F13E11 /* StaffSearchResultProfileViewController.m */; };
+		DE6312771C10D0ED008BFA38 /* SearchTalentHolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6312761C10D0ED008BFA38 /* SearchTalentHolderViewController.m */; };
 		DE6722B41B968CC600599039 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B31B968CC600599039 /* main.m */; };
 		DE6722B71B968CC600599039 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B61B968CC600599039 /* AppDelegate.m */; };
 		DE6722BA1B968CC600599039 /* GoLocalApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE6722B81B968CC600599039 /* GoLocalApp.xcdatamodeld */; };
@@ -106,6 +107,8 @@
 		DE53D2D01BE5254600F13E11 /* StaffSearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffSearchResultTableViewCell.m; sourceTree = "<group>"; };
 		DE53D2D21BE5257700F13E11 /* StaffSearchResultProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffSearchResultProfileViewController.h; sourceTree = "<group>"; };
 		DE53D2D31BE5257700F13E11 /* StaffSearchResultProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffSearchResultProfileViewController.m; sourceTree = "<group>"; };
+		DE6312751C10D0ED008BFA38 /* SearchTalentHolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTalentHolderViewController.h; sourceTree = "<group>"; };
+		DE6312761C10D0ED008BFA38 /* SearchTalentHolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTalentHolderViewController.m; sourceTree = "<group>"; };
 		DE6722AE1B968CC600599039 /* GoLocalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoLocalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE6722B21B968CC600599039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE6722B31B968CC600599039 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -376,6 +379,8 @@
 		DE7BB00A1BD2A7DE002E3A52 /* Search Talent */ = {
 			isa = PBXGroup;
 			children = (
+				DE6312751C10D0ED008BFA38 /* SearchTalentHolderViewController.h */,
+				DE6312761C10D0ED008BFA38 /* SearchTalentHolderViewController.m */,
 				DE7BB00B1BD2A806002E3A52 /* SearchTalentViewController.h */,
 				DE7BB00C1BD2A806002E3A52 /* SearchTalentViewController.m */,
 				DE3941071BF598E500511799 /* ListMode */,
@@ -601,6 +606,7 @@
 				DEC6532E1BB25B73001A8655 /* StaffDatabase.m in Sources */,
 				DE7BB0131BD4043E002E3A52 /* ColorWheel.m in Sources */,
 				DEC653321BB39930001A8655 /* RegisteredStaff.m in Sources */,
+				DE6312771C10D0ED008BFA38 /* SearchTalentHolderViewController.m in Sources */,
 				DE4AC4021BB761620071D7E2 /* RegisteredEmployer.m in Sources */,
 				DE6722EC1B968DB900599039 /* EmployerRegistration1ViewController.m in Sources */,
 				DEF0BAC71B9E5025001C6D84 /* StaffRegistration9ViewController.m in Sources */,
