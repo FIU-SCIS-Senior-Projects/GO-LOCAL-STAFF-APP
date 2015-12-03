@@ -104,14 +104,5 @@ else
 //responding back to sender
 $encoded = json_encode($response);
 
-      /* saving incoming file */
-      // Write the contents back to the file
-      $filename = 'test/getSearchStaffDetailResponse.json';
-      file_put_contents($filename, var_export($encoded, true));
-
-      $filename = 'test/getSearchStaffDetailIncoming.json';
-      file_put_contents($filename, var_export($decoded, true));
-
-
 header  ('Content-type: application/json');
 exit  ($encoded);

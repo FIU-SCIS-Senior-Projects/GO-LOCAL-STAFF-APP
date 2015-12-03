@@ -96,14 +96,5 @@
   $encoded = json_encode($response);
 
 
-      /* saving incoming file */
-        // Write the contents back to the file
-        $filename = 'test/getTermsAgreementsResponse.json';
-        file_put_contents($filename, var_export($encoded, true));
-
-        $filename = 'test/getTermsAgreementsIncomingData.json';
-        file_put_contents($filename, var_export($decoded, true));
-
-
   header  ('Content-type: application/json');
   exit  ($encoded);

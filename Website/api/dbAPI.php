@@ -155,7 +155,6 @@
   function updateLoginAttempts($dbConnection,$tableName,$loginRequests, $userKey , $userID  )
   {
       //updating login count
-      $tableName  = "registered_staff";
       $query = "UPDATE ".$tableName."
                 SET loginRequests='".$loginRequests."'
                 WHERE $userKey='".$userID."'";
@@ -190,21 +189,21 @@
       $rowResult  = array_filter($row);
       if (empty($rowResult))
       {
-               // echo "<p>username and email is unique so far (NOT a registered_staff).....</p>";
+              
               $query      = "SELECT employerID,phone,forgotPasswordRequests,accountLocked FROM registered_employer WHERE phone='".$phone."'";
               $result     = mysqli_query($dbConnection, $query);
               $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
               $rowResult  = array_filter($row);
               if (empty($rowResult))
               {
-                // print_r($row);
-                // echo "<p> NO user exist with the information provided (registered_employer or registered_staff)</p>";
+                print_r($row);
+                echo "<p> NO user exist with the information provided (registered_employer or registered_staff)</p>";
                 return -1;
               }
               else
               {
-                // print_r($row);
-                // echo "<p> user exist with information provided, registered_employer</p>";
+                print_r($row);
+                echo "<p> user exist with information provided, registered_employer</p>";
                 return $row;
               }
       }
