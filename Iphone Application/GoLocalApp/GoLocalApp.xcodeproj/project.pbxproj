@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		DE0452D91BB51251008D747C /* StaffRegistration1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0452D81BB51251008D747C /* StaffRegistration1ViewController.m */; };
 		DE0452DC1BB53944008D747C /* StaffRegistration4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0452DB1BB53944008D747C /* StaffRegistration4ViewController.m */; };
+		DE158F2C1C0FBCD900DEE209 /* StaffRegistration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE158F2B1C0FBCD900DEE209 /* StaffRegistration.storyboard */; };
+		DE158F2E1C0FBCF200DEE209 /* EmployerRegistration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE158F2D1C0FBCF200DEE209 /* EmployerRegistration.storyboard */; };
+		DE158F301C0FC3C300DEE209 /* Employer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE158F2F1C0FC3C300DEE209 /* Employer.storyboard */; };
+		DE158F321C0FCA2200DEE209 /* Staff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE158F311C0FCA2200DEE209 /* Staff.storyboard */; };
+		DE158F351C0FEFFD00DEE209 /* ServerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = DE158F341C0FEFFD00DEE209 /* ServerAPI.m */; };
 		DE1D82E11BA33469005671DB /* ToggleAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */; };
 		DE39410A1BF5991800511799 /* EmployerMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3941091BF5991800511799 /* EmployerMapViewController.m */; };
 		DE39410C1BF59BBC00511799 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE39410B1BF59BBB00511799 /* MapKit.framework */; };
@@ -70,6 +75,12 @@
 		DE0452D81BB51251008D747C /* StaffRegistration1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration1ViewController.m; sourceTree = "<group>"; };
 		DE0452DA1BB53944008D747C /* StaffRegistration4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaffRegistration4ViewController.h; sourceTree = "<group>"; };
 		DE0452DB1BB53944008D747C /* StaffRegistration4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaffRegistration4ViewController.m; sourceTree = "<group>"; };
+		DE158F2B1C0FBCD900DEE209 /* StaffRegistration.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StaffRegistration.storyboard; sourceTree = "<group>"; };
+		DE158F2D1C0FBCF200DEE209 /* EmployerRegistration.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EmployerRegistration.storyboard; sourceTree = "<group>"; };
+		DE158F2F1C0FC3C300DEE209 /* Employer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Employer.storyboard; sourceTree = "<group>"; };
+		DE158F311C0FCA2200DEE209 /* Staff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Staff.storyboard; sourceTree = "<group>"; };
+		DE158F331C0FEFFD00DEE209 /* ServerAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerAPI.h; sourceTree = "<group>"; };
+		DE158F341C0FEFFD00DEE209 /* ServerAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerAPI.m; sourceTree = "<group>"; };
 		DE1D82DF1BA33469005671DB /* ToggleAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleAccountViewController.h; sourceTree = "<group>"; };
 		DE1D82E01BA33469005671DB /* ToggleAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleAccountViewController.m; sourceTree = "<group>"; };
 		DE3941081BF5991700511799 /* EmployerMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployerMapViewController.h; sourceTree = "<group>"; };
@@ -404,6 +415,10 @@
 			isa = PBXGroup;
 			children = (
 				DE6722BE1B968CC600599039 /* Main.storyboard */,
+				DE158F2B1C0FBCD900DEE209 /* StaffRegistration.storyboard */,
+				DE158F2D1C0FBCF200DEE209 /* EmployerRegistration.storyboard */,
+				DE158F311C0FCA2200DEE209 /* Staff.storyboard */,
+				DE158F2F1C0FC3C300DEE209 /* Employer.storyboard */,
 				DE7BB00D1BD2A806002E3A52 /* SearchTalentViewController.xib */,
 				DE6722C31B968CC600599039 /* LaunchScreen.xib */,
 			);
@@ -433,6 +448,8 @@
 				DE7BB0121BD4043E002E3A52 /* ColorWheel.m */,
 				DE39410D1BF59D1200511799 /* StaffMapPIN.h */,
 				DE39410E1BF59D1200511799 /* StaffMapPIN.m */,
+				DE158F331C0FEFFD00DEE209 /* ServerAPI.h */,
+				DE158F341C0FEFFD00DEE209 /* ServerAPI.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -549,8 +566,12 @@
 			files = (
 				DE7BB00F1BD2A806002E3A52 /* SearchTalentViewController.xib in Resources */,
 				DE6722C01B968CC600599039 /* Main.storyboard in Resources */,
+				DE158F2E1C0FBCF200DEE209 /* EmployerRegistration.storyboard in Resources */,
+				DE158F321C0FCA2200DEE209 /* Staff.storyboard in Resources */,
+				DE158F2C1C0FBCD900DEE209 /* StaffRegistration.storyboard in Resources */,
 				DE6722C51B968CC600599039 /* LaunchScreen.xib in Resources */,
 				DE6722C21B968CC600599039 /* Images.xcassets in Resources */,
+				DE158F301C0FC3C300DEE209 /* Employer.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,6 +593,7 @@
 				DE4AC3F01BB75FA50071D7E2 /* EmployerRegistration0ViewController.m in Sources */,
 				DE1D82E11BA33469005671DB /* ToggleAccountViewController.m in Sources */,
 				DEF0BACD1B9E5051001C6D84 /* StaffRegistration11ViewController.m in Sources */,
+				DE158F351C0FEFFD00DEE209 /* ServerAPI.m in Sources */,
 				DE39410A1BF5991800511799 /* EmployerMapViewController.m in Sources */,
 				DE6722DF1B968D4500599039 /* EmployerHomeViewController.m in Sources */,
 				DE4AC3F31BB75FD90071D7E2 /* EmployerRegistration2ViewController.m in Sources */,

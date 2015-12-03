@@ -5,20 +5,10 @@ include '../urlsettings.php';
 //Initiate cURL.
 $ch = curl_init($url_sendSMSforgotPassword);
 
-if($testingStaffUser)
-{
-    //valid staff user
     $jsonData = [
-      "phone" => "3056099250"
+      "phone" => "7863662269"
       ];
-}
-else
-{
-    //valid employer user
-    $jsonData = [
-      "phone" => "3056099250"
-      ];
-}
+
 
  
 //Encode the array into JSON.

@@ -11,6 +11,7 @@
 
 
 #import "RegisteredStaff.h" //needed for staff registration
+#import "ServerAPI.h"
 
 @interface StaffRegistration1ViewController ()
 {
@@ -25,6 +26,8 @@
     __weak IBOutlet UILabel *verificationAsterisk;
     __weak IBOutlet UILabel *verificationCodeIntroMessage;
     
+    ServerAPI * api;
+
 }
 
 @end
@@ -37,6 +40,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    api = [[ServerAPI alloc]init];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -430,8 +435,7 @@
          */
         -(void)sendDataPhoneNumberToServer
         {
-            NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_sms.php";//hard coding website
-            
+            NSString *serverAddress = api.registerUserVerifySMSPt1;
             
             /*** preparing data to be sent ***/
             NSMutableDictionary * staffInfo = [self preparePhotoNumberData];
@@ -496,8 +500,7 @@
          */
         -(void)sendDataVerificationNumberToServer
         {
-            NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_smsCode.php";//hard coding website
-            
+            NSString *serverAddress = api.forgotPasswordPt2;
             
             /*** preparing data to be sent ***/
             NSMutableDictionary * staffInfo = [self prepareVerificationNumberData];
