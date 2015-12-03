@@ -38,20 +38,27 @@
 
       //staff account lookup
       $tableName  = "registered_staff";
-      $query      = "SELECT password,accountLocked,loginRequests,staffID FROM ".$tableName." WHERE username='".$emailOrUsername."' or email='".$emailOrUsername."'";
+      $query      = "SELECT password,accountLocked,loginRequests,staffID 
+                    FROM ".$tableName." 
+                    WHERE username='".$emailOrUsername."' or email='".$emailOrUsername."'";
       $result     = mysqli_query($dbConnection, $query);
 
+      //echo "registered_staff query: ".$query;//testing
       //cleaning provided password
       $cleanpass  = mysqli_real_escape_string($dbConnection, $password);
 
       $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-      $rowResult  = array_filter($row);
 
-      // echo "<p>row:</p>";
-      // print_r($row);//testing
+      if( !empty($row) )
+      {            
 
-      if( $rowResult )
-      {                
+       $rowResult  = array_filter($row);
+
+        $userKey                = 'staffID';
+        $userID                 = $row[$userKey];
+        $staffAccountLocked     = $row['accountLocked']; 
+        $loginRequests          = $row['loginRequests'] + 1;
+
         //getting hashed password
         $dbHashedPassword = $row['password'];
 
@@ -59,11 +66,6 @@
         if ( password_verify($cleanpass, $dbHashedPassword) ) 
         {
             //check if account is locked
-            $userKey                = 'staffID';
-            $userID                 = $row[$userKey];
-            $staffAccountLocked     = $row['accountLocked']; 
-            $loginRequests          = $row['loginRequests'] + 1;
-
             if($staffAccountLocked)
             {
               return -2;
@@ -76,53 +78,57 @@
               return -2;
             }
 
-            //updating login count
+            //reset login count
+            $loginRequests = 0;
             updateLoginAttempts($dbConnection,$tableName,$loginRequests,$userKey,$userID);
       
             return 1;
         } 
         else 
         {
+             updateLoginAttempts($dbConnection,$tableName,$loginRequests,$userKey,$userID);
+      
             return -1;
         }
       }//eo-staff look up
 
       //freeing vars
-      $query = null;
-      $query2 = null;
-      $result = null;
-      $row =  null;
-      $rowResult = null;
+      $query            = null;
+      $query2           = null;
+      $result           = null;
+      $row              = null;
+      $rowResult        = null;
       $dbHashedPassword = null;
-      $loginRequests = null;
-      $tableName    = null;
+      $loginRequests    = null;
+      $tableName        = null;
 
       //employer account look up
       $tableName  = "registered_employer";
-      $query = "SELECT password,accountLocked,loginRequests,employerID FROM ".$tableName." WHERE username='".$emailOrUsername."' or email='".$emailOrUsername."'";
+      $query = "SELECT password,accountLocked,loginRequests,employerID 
+                FROM ".$tableName." 
+                WHERE username='".$emailOrUsername."' or email='".$emailOrUsername."'";
       
       $result     = mysqli_query($dbConnection, $query);
       $row        = mysqli_fetch_array( $result, MYSQLI_ASSOC );
-      $rowResult  = array_filter($row);
       
-      if( $rowResult )
-      {
-        // echo "<p>row:</p>";
-        // print_r($row);//testing
 
-        $dbHashedPassword = $row['password']; 
+      //echo "registered_employer query: ".$query;//testing
+      if( !empty($row) )
+      {
+         $rowResult  = array_filter($row);
+
+        $userKey                  = 'employerID';
+        $userID                   = $row[$userKey];
+        $employerAccountLocked    = $row['accountLocked']; 
+        $loginRequests            = $row['loginRequests'] + 1;
+        $dbHashedPassword         = $row['password']; 
 
         if ( password_verify($cleanpass, $dbHashedPassword) ) 
         {
             //check if account is locked
-            $userKey                  = 'employerID';
-            $userID                   = $row[$userKey];
-            $employerAccountLocked    = $row['accountLocked']; 
-            $loginRequests            = $row['loginRequests'] + 1;
-
             if($employerAccountLocked)
             {
-              // echo '<p>employer account is LOCKED!</p>';//testing
+              echo '<p>employer account is LOCKED!</p>';//testing
               return -2;
             }
 
@@ -133,20 +139,23 @@
               return -2;
             }
 
-            //updating login count
+            //reset login count
+             $loginRequests = 0;
             updateLoginAttempts($dbConnection,$tableName,$loginRequests,$userKey,$userID);
            
-            // echo '<p>employer Password is valid!</p>';//testing
+            echo '<p>employer Password is valid!</p>';//testing
             return 2;
         }
         else 
         {
-            // echo '<p>employer Invalid password.</p>';//testing
-            return -2;
+             updateLoginAttempts($dbConnection,$tableName,$loginRequests,$userKey,$userID);
+      
+            echo '<p>employer Invalid password.</p>';//testing
+            return -1;
         }
       }//eo-employer look up
 
-      // echo "<p>no account found</p>";
+       echo "<p>no account found</p>";
       return -3; //no account found
             
   }//eom
