@@ -262,31 +262,31 @@
         return -2;
       }  
 
-      //preparing text message info
-      $subject  = "GoLocalApp password reset\r\n";
-      $message  = "code: $code\n";
+      // //preparing text message info
+      // $subject  = "GoLocalApp password reset\r\n";
+      // $message  = "code: $code\n";
 
-      //list of carriers
-      $smsCarriers = [
-        "@mms.aiowireless.net",
-        "@text.att.net",
-        "@myboostmobile.com",
-        "@mms.cricketwireless.net",
-        "@mymetropcs.com",
-        "@pm.sprint.com",
-        "@vtext.com",
-        "@tmomail.net",
-        "@email.uscc.net",
-        "@vtext.com",
-      ];
+      // //list of carriers
+      // $smsCarriers = [
+      //   "@mms.aiowireless.net",
+      //   "@text.att.net",
+      //   "@myboostmobile.com",
+      //   "@mms.cricketwireless.net",
+      //   "@mymetropcs.com",
+      //   "@pm.sprint.com",
+      //   "@vtext.com",
+      //   "@tmomail.net",
+      //   "@email.uscc.net",
+      //   "@vtext.com",
+      // ];
 
-      //sending sms code to user
-      for($iter = 0; $iter < count($smsCarriers); $iter++)
-      {
-        $currentCarrier = $smsCarriers[$iter];
-        $currentAddress = $phone.$currentCarrier;
-        $emailResult = mail( $currentAddress, $subject, $message );    
-      }//eofl
+      // //sending sms code to user
+      // for($iter = 0; $iter < count($smsCarriers); $iter++)
+      // {
+      //   $currentCarrier = $smsCarriers[$iter];
+      //   $currentAddress = $phone.$currentCarrier;
+      //   $emailResult = mail( $currentAddress, $subject, $message );    
+      // }//eofl
 
       $list = array
       (
