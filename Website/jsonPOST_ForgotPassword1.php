@@ -104,6 +104,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
           }
       }
 
+
         /* 
           reponse returns the following:
               1   phone number code successfully sent
