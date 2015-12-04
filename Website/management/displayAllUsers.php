@@ -45,12 +45,9 @@
        </ul>
        <ul class="nav navbar-nav navbar-right">
          <li class="inactive">
-                <?php
-                    // remove all session variables
-                    session_unset();
-                    // destroy the session 
-                    session_destroy(); 
-                ?>
+            <script type="text/javascript">location.href = 'http://192.241.186.107/Website/management/managementLogout.php';
+            </script>
+
             <a href="http://192.241.186.107/Website/management/managementLogin.php">
                 Logout
                 <span class="sr-only">(current)

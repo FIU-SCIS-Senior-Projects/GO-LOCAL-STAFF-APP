@@ -91,6 +91,7 @@ function queryDB( $query )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
 	else
 	{
+		echo $query."<br>";
 		if( !$result = mysqli_query($db, $query) )
 			echo "Unable to query the databse";
 	}
@@ -280,7 +281,7 @@ function storePersonalDOB( $peopleID, $dob )
 	}
 }
 
-function AsendEmail( $username, $email, $userType, $hash )
+function sendEmail( $username, $email, $userType, $hash )
 {
 	$to = $email;
     $subject = "GoLocalApp email verification";
