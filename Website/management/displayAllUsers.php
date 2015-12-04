@@ -6,6 +6,7 @@
     {
 ?>
     <script type="text/javascript">location.href = 'http://192.241.186.107/Website/management/managementLogin.php';</script>
+    <!--<script type="text/javascript">location.href = 'http://localhost:8888/GO-LOCAL-STAFF-APP/Website/management/managementLogin.php';</script>-->
 <?php    
     }
 ?>
@@ -46,6 +47,7 @@
        <ul class="nav navbar-nav navbar-right">
          <li class="inactive">
             <a href="http://192.241.186.107/Website/management/managementLogout.php">
+            <!--<a href="http://localhost:8888/GO-LOCAL-STAFF-APP/Website/management/managementLogout.php">-->
                 Logout
                 <span class="sr-only">(current)
                 </span>

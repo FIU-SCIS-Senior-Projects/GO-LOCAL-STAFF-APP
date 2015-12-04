@@ -107,7 +107,8 @@
 
     <!--Redirect page-->
     <script type="text/javascript">location.href = 'http://192.241.186.107/Website/management/displayAllUsers.php';</script>
-  
+    <!--<script type="text/javascript">location.href = 'http://localhost:8888/GO-LOCAL-STAFF-APP/Website/management/displayAllUsers.php';</script>-->
+
   <?php
         // echo "<meta http-equiv='Location' content='http://localhost:8888/GO-LOCAL-STAFF-APP/Website/management/displayAllUsers.php'>";
 
