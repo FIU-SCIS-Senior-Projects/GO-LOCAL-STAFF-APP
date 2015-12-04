@@ -9,9 +9,12 @@
 #import "LogInViewController.h"
 #import "StaffHomeViewController.h"
 #import "EmployerHomeViewController.h"
+#import "ServerAPI.h"
 
 @interface LogInViewController ()
-
+{
+    ServerAPI * api;
+}
 @end
 
 @implementation LogInViewController
@@ -22,7 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+    api = [[ServerAPI alloc]init];
 }//eom
 
 -(void)viewDidAppear:(BOOL)animated
@@ -133,11 +136,11 @@
          */
         if(usertype == 2) //employer user
         {
-            [self performSegueWithIdentifier:@"employerHome" sender:self];
+            [self goToEmployerHome];
         }
         else if(usertype == 1) //staff user
         {
-            [self performSegueWithIdentifier:@"staffHome" sender:self];
+            [self goToStaffHome];
         }
         else if(usertype == 0)//db issues
         {
@@ -162,6 +165,44 @@
             [self showAlert:@"Log In" withMessage:message and:@"Okay"];
         }
 
+    }//eom
+
+    -(void) goToStaffHome
+    {
+        UIStoryboard * newSB = [UIStoryboard storyboardWithName:@"Staff" bundle:nil];
+    
+        //instantiate navigation controller for staff home
+        UINavigationController *staffNavController = [newSB instantiateViewControllerWithIdentifier:@"staffNavigationController"];
+        
+        //updating transition
+        [staffNavController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        
+        //passing data to employer navigation
+        //StaffHomeViewController *homeStaffView = (StaffHomeViewController *)[staffNavController topViewController];
+        //homeStaffView.staffID = [userID intValue];
+        
+        //performing change
+        [self presentViewController:staffNavController animated:NO completion:nil];
+        
+    }//eom
+
+    -(void) goToEmployerHome
+    {
+        UIStoryboard * newSB = [UIStoryboard storyboardWithName:@"Employer" bundle:nil];
+        
+        //instantiate navigation controller for staff home
+        UINavigationController *empNavController = [newSB instantiateViewControllerWithIdentifier:@"employerNavigationController"];
+        
+        //updating transition
+        [empNavController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        
+        //passing data to employer navigation
+        //StaffHomeViewController *homeStaffView = (StaffHomeViewController *)[staffNavController topViewController];
+        //homeStaffView.staffID = [userID intValue];
+        
+        //performing change
+        [self presentViewController:empNavController animated:NO completion:nil];
+        
     }//eom
 
 /************************************/
@@ -215,7 +256,7 @@
      */
     -(void)sendDataLoginDataToServer
     {
-        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_login.php";
+        NSString *serverAddress = api.login;
         
         /*** preparing data to be sent ***/
         NSMutableDictionary * logInfo = [self prepareLogInData];

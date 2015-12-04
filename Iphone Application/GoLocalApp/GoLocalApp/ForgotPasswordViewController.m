@@ -7,12 +7,13 @@
 //
 
 #import "ForgotPasswordViewController.h"
-
+#import "ServerAPI.h"
 @interface ForgotPasswordViewController ()
 {
     int userIDProvided;
     NSString * userID;
     NSString * userKey;
+    ServerAPI * api;
 }
 
 @end
@@ -25,6 +26,8 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    api = [[ServerAPI alloc]init];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -368,13 +371,13 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
     /*  sends data to server */
     -(void)sendDataPhoneNumberToServer
     {
-        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_smsForgotPassword.php";//hard coding website
-        
+        NSString *serverAddress = api.forgotPasswordPt1;
         
         /*** preparing data to be sent ***/
         NSMutableDictionary * staffInfo = [self preparePhotoNumberData];
         NSLog(@"");
         NSLog(@" about to send the following data: %@", staffInfo);
+        NSLog(@" to the url address: %@",serverAddress);
         NSLog(@"");
         
         /*** Sending data ***/
@@ -415,9 +418,8 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
     /*  sends data to server */
     -(void)sendFinalDataToServer
     {
-        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_forgotPassword.php";//hard coding website
-        
-        
+        NSString *serverAddress = api.forgotPasswordPt2;
+       
         /*** preparing data to be sent ***/
         NSMutableDictionary * staffInfo = [self prepareFinalData];
         NSLog(@"");

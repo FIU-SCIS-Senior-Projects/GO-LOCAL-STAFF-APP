@@ -1,6 +1,6 @@
 <?php
 
-$localTesting = true;
+$localTesting = false;
 $testingStaffUser = false;
 
 $urlBody = '';
@@ -21,14 +21,7 @@ else
   //testing links
   $url_sendSMS                  = $urlBody.'jsonPOST_sms.php';
   $url_sendSMSCode              = $urlBody.'jsonPOST_smsCode.php';
-  $url_sendMaleRegistration     = $urlBody.'jsonPOST_registration.php';
-  $url_sendFemaleRegistration   = $urlBody.'jsonPOST_registration.php';
-  $url_sendPhoto                = $urlBody.'jsonPOST_receivePhoto.php';
 
-  $url_sendLogin                = $urlBody.'jsonPOST_login.php';
-  $url_sendSMSforgotPassword    = $urlBody.'jsonPOST_smsForgotPassword.php';
-  $url_sendforgotPassword       = $urlBody.'jsonPOST_forgotPassword.php';
-  $url_sendEmployerRegistration = $urlBody.'jsonPOST_registration.php';
   $url_sendSearchTalent         = $urlBody.'jsonPOST_searchTalent.php';
   $url_getSearchStaffDetailView = $urlBody.'jsonPOST_getSearchStaffDetail.php';
 

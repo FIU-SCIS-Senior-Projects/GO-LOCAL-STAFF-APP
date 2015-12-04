@@ -53,7 +53,23 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
 
       //check if user exist with phone number provided
       $userExist  = UserWithPhoneProvidedExist($phone);
-      if($userExist)
+      if($userExist == 0)
+      {
+        $responseArray = [
+        "message" => "database not responding",
+        "responseType" => $userExist,
+        "part" => "1"
+        ];
+      }
+      else if($userExist == -1)
+      {
+        $responseArray = [
+        "message" => "No Username or Email exist with the information provided",
+        "responseType" => $userExist,
+        "part" => "1"
+        ];
+      }   
+      else if($userExist)
       {
           //sending user SMS code
           $smsSendResults = sendSMSForgotPasswordCode($userExist);
@@ -87,22 +103,8 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" )
             ];
           }
       }
-      else if($userExist == 0)
-      {
-        $responseArray = [
-        "message" => "database not responding",
-        "responseType" => $userExist,
-        "part" => "1"
-        ];
-      }
-      else if($userExist == -1)
-      {
-        $responseArray = [
-        "message" => "No Username or Email exist with the information provided",
-        "responseType" => $userExist,
-        "part" => "1"
-        ];
-      }   
+
+
         /* 
           reponse returns the following:
               1   phone number code successfully sent
@@ -125,14 +127,6 @@ else
 
 //responding back to sender
 $encoded = json_encode($response);
-
-/* saving incoming file */
-      // Write the contents back to the file
-$filename = 'test/smsforgotPasswordResponce.json';
-file_put_contents($filename, var_export($encoded, true));
-
-$filename = 'test/smsforgotPasswordIncoming.json';
-file_put_contents($filename, var_export($decoded, true));
 
 
 header  ('Content-type: application/json');

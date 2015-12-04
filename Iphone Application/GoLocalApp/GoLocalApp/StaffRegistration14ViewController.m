@@ -11,6 +11,7 @@
 #import "StaffHomeViewController.h"
 
 #import "RegisteredStaff.h" //needed for staff registration
+#import "ServerAPI.h"
 
 @interface StaffRegistration14ViewController ()
 {
@@ -19,6 +20,7 @@
     BOOL aggrementRetrieved;
     UIImage * selfiePhoto;
     UIImage * bodyPhoto;
+    ServerAPI * api;
 }
 @end
 
@@ -29,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    api = [[ServerAPI alloc]init];
 }//eom
 
 -(void)viewDidAppear:(BOOL)animated
@@ -90,7 +92,7 @@
     /* gets the terms and agreements from DB  */
     -(void)getTermsAndAGreementsFromDB
     {
-        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_getTermsAgreements.php";//hard coding website
+        NSString *serverAddress = api.termsAgreements;
         
         /*** preparing data to be sent ***/
         NSMutableDictionary * staffInfo = [self prepareAgreementData];
@@ -199,8 +201,10 @@
                     //notifying user code was accepted
                     [self showAlert:@"Registration" withMessage:@"Successfully registered" and:@"Okay"];
                     
+                    UIStoryboard * newSB = [UIStoryboard storyboardWithName:@"Staff" bundle:nil];
+                    
                     //instantiate navigation controller for staff home
-                    UINavigationController *staffNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"staffNavigationController"];
+                    UINavigationController *staffNavController = [newSB instantiateViewControllerWithIdentifier:@"staffNavigationController"];
                     
                     //updating transition
                     [staffNavController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
@@ -224,8 +228,8 @@
         /* sends data to server */
         -(void)sendDataToServer
         {
-                NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_registration.php";//hard coding website
-            
+                NSString *serverAddress = api.registration;
+
                 /*** preparing data to be sent ***/
                 NSMutableDictionary * staffInfo = [self prepareData];
                 NSLog(@"");

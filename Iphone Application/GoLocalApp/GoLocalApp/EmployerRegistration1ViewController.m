@@ -10,11 +10,13 @@
 #import "EmployerRegistration2ViewController.h"//need this for the prepare for segue!!
 
 #import "RegisteredEmployer.h"//needed this to use the registration model
+#import "ServerAPI.h"
 
 @interface EmployerRegistration1ViewController ()
 {
     NSString * userID;
     int userIDProvided;
+    ServerAPI * api;
 }
 
 @end
@@ -27,6 +29,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    api = [[ServerAPI alloc]init];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -429,8 +433,7 @@
      */
     -(void)sendDataPhoneNumberToServer
     {
-        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_sms.php";//hard coding website
-        
+        NSString *serverAddress = api.registerUserVerifySMSPt1;
         
         /*** preparing data to be sent ***/
         NSMutableDictionary * employerInfo = [self preparePhotoNumberData];
@@ -490,8 +493,7 @@
      */
     -(void)sendDataVerificationNumberToServer
     {
-        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_smsCode.php";//hard coding website
-        
+        NSString *serverAddress = api.registerUserVerifySMSPt2;
         
         /*** preparing data to be sent ***/
         NSMutableDictionary * employerInfo = [self prepareVerificationNumberData];

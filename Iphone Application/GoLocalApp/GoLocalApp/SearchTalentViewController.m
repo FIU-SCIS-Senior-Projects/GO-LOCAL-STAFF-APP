@@ -9,10 +9,7 @@
 #import "SearchTalentViewController.h"
 #import "ColorWheel.h"
 
-
 #import "StaffSearchResultTableViewController.h"
-
-//#import "filterStaffSearchResultViewController.h"
 
 @interface SearchTalentViewController ()
 {
@@ -56,6 +53,8 @@
     //
     NSString * heightFeet;
     NSString * heightInches;
+    
+    NSMutableArray *listToSend;
 }
 
 
@@ -1515,27 +1514,26 @@
     -(void)goToSearchResults:(NSDictionary *)searchResults
     {
         //preparing data to be sent to next view controller
-            NSMutableArray * list = [[NSMutableArray alloc]init];
+            listToSend = [[NSMutableArray alloc]init];
             
             //populating staff search data into NSMutableArray
             for( id currStaff in searchResults )
             {
-                
                 //creating
                 NSMutableDictionary * currentStaff = [currStaff mutableCopy];
                 
-                [list addObject:currentStaff];
+                [listToSend addObject:currentStaff];
             }//eofl
             
             //   NSLog(@"data has been updated to %@", list);//testing
         
         
         //going to next controller
-            //creating storyboard
-            NSString *storyboardName = @"Main";
-            UIStoryboard *newStoryboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
-            
-            //creating controller thats in storyboard
+        //creating storyboard
+        NSString *storyboardName = @"Employer";
+        UIStoryboard *newStoryboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+        
+        //creating controller thats in storyboard
         
         NSString *controllerID   = @"staffSearchResult";
         StaffSearchResultTableViewController *SearchTalentResultsView = (StaffSearchResultTableViewController *)[newStoryboard instantiateViewControllerWithIdentifier:controllerID];
@@ -1543,11 +1541,11 @@
         
         //    NSString *controllerID   = @"filterStaffSearchResult";
         //    filterStaffSearchResultViewController *SearchTalentResultsView = (filterStaffSearchResultViewController *)[newStoryboard instantiateViewControllerWithIdentifier:controllerID];
-            
-            SearchTalentResultsView.listOptions  = list;
+        
+        SearchTalentResultsView.listOptions  = listToSend;
         
         [self.navigationController pushViewController:SearchTalentResultsView animated:YES];
-     
+        
     }//eom
 
 #pragma mark - JSON server response
@@ -1856,5 +1854,16 @@
      }
      */
 
+
+    //MARK: Navigation
+
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+     if ([segue.identifier isEqualToString:@""])
+     {
+         
+     }
+     
+ }//eom
 
 @end

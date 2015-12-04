@@ -12,7 +12,6 @@ function retrieveAllTermsAgreement()
   $dbConnection = connectToDB();
   if(!$dbConnection)
   {
-      //echo "Unable to connect to MySQL.".PHP_EOL;
     return 0;
   }
 
@@ -46,7 +45,6 @@ function retrieveTermsAgreement($userType)
   $dbConnection = connectToDB();
   if(!$dbConnection)
   {
-      // echo "Unable to connect to MySQL.".PHP_EOL;
     return 0;
   }
 
@@ -69,7 +67,6 @@ function retrieveTermsAgreement($userType)
   $query = "SELECT $key
             FROM management";
 
-  // echo "<p>query: $query</p>";
   $result             = mysqli_query($dbConnection, $query);
   $row                = mysqli_fetch_array( $result, MYSQLI_ASSOC );
   $agreementResults   = array_filter($row);
@@ -94,21 +91,18 @@ function updateTermsAgreements($key, $updatedAgreement)
   $dbConnection = connectToDB();
   if(!$dbConnection)
   {
-      //echo "Unable to connect to MySQL.".PHP_EOL;
     return 0;
   }
 
   $query = "UPDATE management
             SET  $key = '".$updatedAgreement."'";
 
-  // echo "<p>$query</p>";
   $result = mysqli_query($dbConnection, $query);
   if($result)
   {
     return 1;
   } 
 
-  // echo "Unable to store changes to Database";
   return -1;
 
 }//eom

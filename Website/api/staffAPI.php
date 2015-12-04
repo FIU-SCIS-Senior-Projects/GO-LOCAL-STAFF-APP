@@ -11,7 +11,6 @@
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-      //  print "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -46,7 +45,6 @@
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-          //echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -75,24 +73,20 @@
       $query = "INSERT INTO registered_staff ( username, password, email, hashEmail, firstName, middleInitial, lastName, nickname, phone, dateOfBirth, age)
       VALUES ('".$username."', '".$passwordHashed."', '".$email."', '".$hashCodeEmail."' , '".$fname."', '".$middleInitial."', '".$lname."', '".$nickname."', '".$phone."', '".$dob."', '".$age."')";
       
-      // echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {
         $staffID  = $dbConnection->insert_id;
         if( isset($staffID) )
         {
-          //echo "<p>staff saved with id $staffID</p>";
           return $staffID; 
         }
         else
         {
-         // echo "Unable to retrieve staff ID";
           return -3;
         }
       }
 
-     // echo "Unable to store staff credentials";  
       return -2;  
     }//eom
 
@@ -125,7 +119,6 @@
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-        // echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -250,7 +243,6 @@
                 SET $part1 $part2 $part3 $part4 $part5 $part6 $part7 $part8 $part9
                 WHERE staffID = '".$staffID."'";
 
-      // echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {
@@ -314,10 +306,8 @@
             //current talent
             $currTalent = $experience[$iter];
 
-            echo "<p>$currTalent</p>";
             //removing incoming data whitespace
             $currTalent = str_ireplace(" ", "", $currTalent);
-            echo "<p>after update: $currTalent</p>";
 
 
             if (strcasecmp($currTalent, "BrandAmbassador") == 0) 
@@ -368,8 +358,7 @@
 
           $talentQuery = "INSERT INTO `staff_type`(`staffID`, `BrandAmbassador`, `dancer`, `fieldMarketingManager`, `flyerDistributor`, `model`, `productionAssistant`, `salesExecutive`, `waiterWaitress`, `dJ`, `dJDescription`, `dJWebsite`, `dJSocialMedia`, `cateringCompany`, `cateringCompanyDescription`, `cateringCompanyWebsite`, `cateringCompanySocialMedia`, `liveBand`, `liveBandDescription`, `liveBandWebsite`, `liveBandSocialMedia`, `other`, `otherDescription`, `otherwebsite`, `othersocialMedia`) 
           VALUES ".$mainPart." ".$djPart." ".$cateringCompanyPart." ".$liveBandPart." ".$otherPart;
-          echo "<p>$talentQuery</p>";
-        
+          
 
    /*
         DB Keys
@@ -449,7 +438,6 @@
     $dbConnection = connectToDB();
     if(!$dbConnection)
     {
-        //echo "Unable to connect to MySQL.".PHP_EOL;
       return 0;
     }
 

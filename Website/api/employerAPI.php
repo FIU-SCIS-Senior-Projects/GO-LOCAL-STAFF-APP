@@ -12,7 +12,6 @@
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-        echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -46,27 +45,21 @@
           $dbConnection = connectToDB();
           if(!$dbConnection)
           {
-            //  echo "Unable to connect to MySQL.".PHP_EOL;
             return 0;
           }
 
           //making sure user is a unique registration
           $query = "SELECT * from registered_employer WHERE username='".$username."' or email='".$email."'";
 
-          // echo "<p>".$query."</p>";
-
           $result = mysqli_query($dbConnection, $query);
           $row = mysqli_fetch_array( $result, MYSQLI_ASSOC );
           $rowResult = array_filter($row);
           if (empty($rowResult))
           {
-            // echo "<p>employer is unique</p>";
             return 1;
           }
           else
           {
-            // print_r($row);
-            // echo "<p>employer is NOT unique</p>";
             return -1;
           }
     }//eom
@@ -81,7 +74,6 @@
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-        // echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -106,7 +98,6 @@
                 SET $part1, $part2
                 WHERE employerID = '".$employerID."'";
 
-      //echo "<p>".$query."</p>";
       $result = mysqli_query($dbConnection, $query);
       if($result)
       {
@@ -130,7 +121,6 @@
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-       // echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -161,17 +151,14 @@
         $staffID  = $dbConnection->insert_id;
         if( isset($staffID) )
         {
-          //echo "<p>staff saved with id $staffID</p>";
           return $staffID; 
         }
         else
         {
-         // echo "Unable to retrieve staff ID";
           return -3;
         }
       }
-
-     // echo "Unable to store staff credentials";  
+ 
       return -2;
   }//eom
 
@@ -231,7 +218,6 @@
     $dbConnection = connectToDB();
     if(!$dbConnection)
     {
-      // echo "Unable to connect to MySQL.".PHP_EOL;
       return 0;
     }
 
@@ -658,12 +644,10 @@
       $query.= " $whereClause";
     }
 
-    //echo $query."<br>";
 
     $result     = mysqli_query($dbConnection, $query);
     $totalRows  = mysqli_num_rows($result);
 
-    //echo "Total number of rows in the result: ".$totalRows."<br>";
     if($totalRows > 0)
     {
       while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )
@@ -688,7 +672,7 @@
         $message = "Thanks for signing up!";
         $headers = "From:noreply@golocalpromos.com"."\r\n";
         $result = mail( $to, $subject, $message, $headers );
-        echo $result;
+        return $result;
     }//eom
 
 
@@ -722,7 +706,6 @@
       $dbConnection = connectToDB();
       if(!$dbConnection)
       {
-       // echo "Unable to connect to MySQL.".PHP_EOL;
         return 0;
       }
 
@@ -731,14 +714,10 @@
                 JOIN staff_type
                 ON registered_staff.staffID = staff_type.staffID";
 
-      // echo $query;
 
       $result     = mysqli_query($dbConnection, $query);
       $totalRows  = mysqli_num_rows($result);
 
-      // echo "<p>total rows in results:$totalRows</p>";
-
-      //echo "Total number of rows in the result: ".$totalRows."<br>";
       if($totalRows > 0)
       {
         while( $row = mysqli_fetch_array( $result, MYSQLI_ASSOC ) )

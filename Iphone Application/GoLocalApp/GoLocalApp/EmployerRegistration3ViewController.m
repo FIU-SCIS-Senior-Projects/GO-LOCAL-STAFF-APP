@@ -10,9 +10,13 @@
 #import "EmployerHomeViewController.h" //Needed for segue
 
 #import "RegisteredEmployer.h" //Needed to access the model
+#import "ServerAPI.h"
 
 @interface EmployerRegistration3ViewController ()
+{
+    ServerAPI * api;
 
+}
 @end
 
 @implementation EmployerRegistration3ViewController
@@ -22,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    api = [[ServerAPI alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,7 +98,7 @@
 //Sends data of employer to the server
 -(void) sendData
 {
-    NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_registration.php";//hard coding website
+    NSString *serverAddress = api.registration;
     
     NSMutableDictionary *list = [self prepareDataToSend];
     NSLog(@"");
@@ -127,9 +132,11 @@
     {
         //notifying user that registration was successful
         [self showAlert:@"Success" withMessage:@"Registration was successful" and:@"Okay"];
-  
+        
+        UIStoryboard * newSB = [UIStoryboard storyboardWithName:@"Employer" bundle:nil];
+        
         //instiate navigation controller for employer home
-        UINavigationController *employerNavController = [self.storyboard instantiateViewControllerWithIdentifier:@"employerNavigationController"];
+        UINavigationController *employerNavController = [newSB instantiateViewControllerWithIdentifier:@"employerNavigationController"];
         
         //updating transition
         [employerNavController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
