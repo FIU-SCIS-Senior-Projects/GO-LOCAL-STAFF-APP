@@ -64,7 +64,6 @@
 }//eom
 
 
-/********************************/
     //MARK: helper functions
 
     /* create UIAlert*/
@@ -81,7 +80,6 @@
     }//eom
 
 
-/********************************/
     //MARK: textfields functions
 
     /* dimmisses UITextField as soon the background is touched */
@@ -108,7 +106,6 @@
     }//eom
 
 
-/********************************/
     //MARK: Log in  functions
 
     /*
@@ -205,7 +202,7 @@
         
     }//eom
 
-/************************************/
+
     //MARK: JSON POST functions
 
     /* responce from server */

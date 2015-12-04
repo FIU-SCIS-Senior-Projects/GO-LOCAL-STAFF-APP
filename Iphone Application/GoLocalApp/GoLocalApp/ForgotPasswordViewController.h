@@ -32,4 +32,11 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+
+@property (nonatomic) BOOL hideReturnSignInButton;
+@property (weak, nonatomic) IBOutlet UIButton *returnToSignInPageButton;
+
+
+- (IBAction)returnToSignInPage:(UIButton *)sender;
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "PreRegistrationViewController.h"
+
 #import "EmployerRegistration0ViewController.h"
 #import "StaffRegistration0ViewController.h"
 
@@ -14,12 +15,25 @@
 
 @end
 
+
 @implementation PreRegistrationViewController
+
+@synthesize hideReturnSignInButton;
+@synthesize returnToSignButton;
+
+
+//MARK: View Loading
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-}
+    if(hideReturnSignInButton)
+    {
+        [returnToSignButton setHidden:true];
+    }//
+}//eo-view
+
+//MARK: Memory
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

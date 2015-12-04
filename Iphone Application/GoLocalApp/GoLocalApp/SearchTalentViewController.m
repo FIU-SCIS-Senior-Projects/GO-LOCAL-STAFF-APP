@@ -10,6 +10,7 @@
 #import "ColorWheel.h"
 
 #import "StaffSearchResultTableViewController.h"
+#import "ServerAPI.h"
 
 @interface SearchTalentViewController ()
 {
@@ -55,6 +56,8 @@
     NSString * heightInches;
     
     NSMutableArray *listToSend;
+    
+    ServerAPI * api;
 }
 
 
@@ -79,6 +82,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    api = [[ServerAPI alloc]init];
+    
     [self updateBackgroundRandomColor];
     [self setUpTapGesture];
     [self setUpAllPickers];
@@ -1598,8 +1604,7 @@
     /* sends search data to server */
     -(void)sendSearchDataToServer
     {
-        NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_searchTalent.php";
-        
+        NSString *serverAddress = api.searchTalent;
         
         // preparing data to be sent
         NSMutableDictionary * searchData = [self prepareServerData];

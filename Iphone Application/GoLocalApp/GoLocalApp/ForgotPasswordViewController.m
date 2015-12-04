@@ -22,19 +22,25 @@
 @synthesize phoneNumberTextfield, verificationCodeAsterisk, verificationCodeLabel, verificationCodeTextField,
 passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, confirmNewPasswordProvidedAsterisk, confirmNewPasswordProvidedLabel, confirmNewPasswordProvidedTextField, resetPassword, scrollView;
 
+@synthesize hideReturnSignInButton, returnToSignInPageButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     api = [[ServerAPI alloc]init];
-}
+    
+    if(hideReturnSignInButton)
+    {
+        [returnToSignInPageButton setHidden:true];
+    }//
+    
+}//eo-view
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [self setUpTapGesture];
-
-}//eom
+}//eo-view
 
 
 
@@ -496,4 +502,6 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
         NSLog(@" Failed with error '%@'", error);
     }//eom
 
+- (IBAction)returnToSignInPage:(UIButton *)sender {
+}
 @end

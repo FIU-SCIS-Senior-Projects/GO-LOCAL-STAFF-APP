@@ -23,19 +23,29 @@
  #pragma mark - Signed Out
 - (IBAction)signOut:(UIButton *)sender
 {
-    
-    
-    
-    
     [self changeViewControllerToLoginViewController];
     
 }//eo-action
 
+- (IBAction)switchToEmployerAccount:(id)sender
+{
+    UIStoryboard * newSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    //instantiate view controller
+    UIViewController *toggleAccountViewController = [newSB instantiateViewControllerWithIdentifier:@"toggleAccount"];
+    
+    [self.navigationController pushViewController:toggleAccountViewController animated:true];
+    
+}//eo-a
+
 /* leaves the current navigation view controller and goes to the main login in view */
 -(void)changeViewControllerToLoginViewController
 {
+    
+    UIStoryboard * newSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     //instantiate view controller
-    UIViewController *loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LogInViewController"];
+    UIViewController *loginViewController = [newSB instantiateViewControllerWithIdentifier:@"LogInViewController"];
     
     //updating transition
     [loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
@@ -46,13 +56,13 @@
 }//eom
 
 
- #pragma mark -
+ #pragma mark - Memory
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -60,5 +70,5 @@
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
  }
- */
+
 @end

@@ -13,4 +13,6 @@
 
 - (IBAction)signOut:(UIButton *)sender;
 
+- (IBAction)switchToStaffAccount:(id)sender;
+
 @end

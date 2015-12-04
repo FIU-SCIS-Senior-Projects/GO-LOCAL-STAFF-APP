@@ -8,8 +8,12 @@
 
 #import "StaffSearchResultProfileViewController.h"
 
-@interface StaffSearchResultProfileViewController ()
+#import "ServerAPI.h"
 
+@interface StaffSearchResultProfileViewController ()
+{
+    ServerAPI * api;
+}
 @end
 
 @implementation StaffSearchResultProfileViewController
@@ -30,6 +34,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    api = [[ServerAPI alloc]init];
     [self sendSearchDataToServer];
 }
 
@@ -109,7 +114,7 @@
 
 -(void)getImage: (NSString *)imageName
 {
-    NSString * serverPhotoAddress = @"http://192.241.186.107/Website/uploads/";
+    NSString * serverPhotoAddress = api.uploads;
     
     serverPhotoAddress = [serverPhotoAddress stringByAppendingString:imageName];
     
@@ -181,8 +186,8 @@
 /* sends search data to server */
 -(void)sendSearchDataToServer
 {
-    NSLog(@"SENDING SEARCH DATA TO SERVER");
-    NSString *serverAddress = @"http://192.241.186.107/Website/jsonPOST_getSearchStaffDetail.php";
+    
+    NSString *serverAddress = api.searchStaffDetail;
     
     // preparing data to be sent
     NSMutableDictionary * searchData = [self prepareServerData];

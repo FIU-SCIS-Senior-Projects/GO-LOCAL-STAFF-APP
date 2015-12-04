@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ToggleAccountViewController : UIViewController
+@interface ToggleAccountViewController : UIViewController<UIAlertViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 - (IBAction)forgotPasswordRequest:(id)sender;
 - (IBAction)signUpRequest:(id)sender;
 - (IBAction)submitLogIn:(id)sender;
+
 @end
