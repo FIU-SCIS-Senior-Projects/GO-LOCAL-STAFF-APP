@@ -10,4 +10,9 @@
 
 @interface PreRegistrationViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *returnToSignButton;
+
+@property (nonatomic) BOOL hideReturnSignInButton;
+
+
 @end

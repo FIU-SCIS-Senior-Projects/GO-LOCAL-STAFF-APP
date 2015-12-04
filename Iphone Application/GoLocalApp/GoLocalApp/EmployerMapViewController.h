@@ -14,6 +14,8 @@
 {
     CLLocationManager *locationManager;
     CLLocationCoordinate2D userCurrentLocation;
+    BOOL locationAuthorizationAlways;
+    BOOL locationAuthorizationWhenInUse;
 }
 
 @property (strong, nonatomic) NSMutableArray *staffDetail;
@@ -23,9 +25,6 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 - (IBAction)changeMapStyle:(id)sender;
-
-- (IBAction)locateMe:(id)sender;
-
 
 - (IBAction)goToListMode:(UIBarButtonItem *)sender;
 

@@ -15,6 +15,8 @@
 
 - (IBAction)signOut:(UIButton *)sender;
 
+- (IBAction)switchToEmployerAccount:(id)sender;
+
 
 
 @end

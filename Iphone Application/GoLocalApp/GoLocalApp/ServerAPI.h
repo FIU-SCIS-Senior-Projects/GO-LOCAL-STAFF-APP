@@ -18,7 +18,7 @@
 //shared Model
 +(ServerAPI *)sharedAPIModel;
 
-
+-(NSString *) uploads;
 -(NSString *) registerUserVerifySMSPt1;
 -(NSString *) registerUserVerifySMSPt2;
 -(NSString *) termsAgreements;

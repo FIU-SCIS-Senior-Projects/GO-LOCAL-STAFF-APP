@@ -29,12 +29,25 @@
     [self changeViewControllerToLoginViewController];
 }//eo-action
 
+- (IBAction)switchToStaffAccount:(id)sender {
+    
+    UIStoryboard * newSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    //instantiate view controller
+    UIViewController *toggleAccountViewController = [newSB instantiateViewControllerWithIdentifier:@"toggleAccount"];
+    
+    [self.navigationController pushViewController:toggleAccountViewController animated:true];
+    
+}//eo-a
+
 
 /* leaves the current navigation view controller and goes to the main login in view */
 -(void)changeViewControllerToLoginViewController
 {
+    UIStoryboard * newSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     //instantiate view controller
-    UIViewController *loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LogInViewController"];
+    UIViewController *loginViewController = [newSB instantiateViewControllerWithIdentifier:@"LogInViewController"];
     
     //updating transition
     [loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];

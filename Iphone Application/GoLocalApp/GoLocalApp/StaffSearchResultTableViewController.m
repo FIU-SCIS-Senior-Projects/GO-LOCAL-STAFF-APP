@@ -11,6 +11,8 @@
 #import "StaffSearchResultProfileViewController.h"
 #import "EmployerMapViewController.h"
 
+#import "ServerAPI.h"
+
 @interface StaffSearchResultTableViewController ()
 {
     //arrays
@@ -20,6 +22,8 @@
     //pickers
     UIPickerView * sortByPickerView;
     UIPickerView * orderByPickerView;
+    
+    ServerAPI * api;
 }
 @end
 
@@ -33,6 +37,7 @@
 {
     [super viewDidLoad];
     
+    api = [[ServerAPI alloc]init];
     // preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -79,7 +84,8 @@
 
 -(UIImage *)getImage: (NSString *)imageName
 {
-    NSString * serverPhotoAddress = @"http://192.241.186.107/Website/uploads/";
+    
+    NSString * serverPhotoAddress = api.uploads;
     
     serverPhotoAddress = [serverPhotoAddress stringByAppendingString:imageName];
     
@@ -95,7 +101,7 @@
 
 -(void)getImage: (NSString *)imageName : (UIImageView *)image
 {
-    NSString * serverPhotoAddress = @"http://192.241.186.107/Website/uploads/";
+    NSString * serverPhotoAddress = api.uploads;
     
     serverPhotoAddress = [serverPhotoAddress stringByAppendingString:imageName];
     

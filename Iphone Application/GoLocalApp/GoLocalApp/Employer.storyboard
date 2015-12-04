@@ -72,41 +72,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIk-w5-8gl">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <animations/>
-                                <items>
-                                    <barButtonItem id="MOM-zX-gq7"/>
-                                    <barButtonItem style="plain" id="6xE-yC-dan">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="6bq-fh-eH9">
-                                            <rect key="frame" x="18" y="7.5" width="150" height="29"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <animations/>
-                                            <segments>
-                                                <segment title="Standard"/>
-                                                <segment title="Hybrid"/>
-                                            </segments>
-                                            <connections>
-                                                <action selector="changeMapStyle:" destination="KQD-MA-9uo" eventType="valueChanged" id="dbE-dI-31k"/>
-                                            </connections>
-                                        </segmentedControl>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="jkl-tR-NVm"/>
-                                    <barButtonItem title="Locate Me" id="c0o-Cq-z1r">
-                                        <connections>
-                                            <action selector="locateMe:" destination="KQD-MA-9uo" id="Q9g-nc-reh"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eXB-35-zGB">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eXB-35-zGB">
                                 <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                                 <animations/>
                                 <connections>
                                     <outlet property="delegate" destination="KQD-MA-9uo" id="zqL-yu-swf"/>
                                 </connections>
                             </mapView>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U3D-4J-K5z">
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U3D-4J-K5z">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <animations/>
                                 <items>
@@ -119,21 +92,32 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GIk-w5-8gl">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <animations/>
+                                <items>
+                                    <barButtonItem id="MOM-zX-gq7"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="wBQ-dx-mr1"/>
+                                    <barButtonItem style="plain" id="6xE-yC-dan">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="6bq-fh-eH9">
+                                            <rect key="frame" x="85" y="7.5" width="150" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <segments>
+                                                <segment title="Standard"/>
+                                                <segment title="Hybrid"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="changeMapStyle:" destination="KQD-MA-9uo" eventType="valueChanged" id="dbE-dI-31k"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="aeu-4P-edw"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="U3D-4J-K5z" firstAttribute="leading" secondItem="yeL-zv-eVe" secondAttribute="leading" id="9Bp-lC-6i3"/>
-                            <constraint firstAttribute="trailing" secondItem="eXB-35-zGB" secondAttribute="trailing" id="9ol-ms-pqD"/>
-                            <constraint firstItem="eXB-35-zGB" firstAttribute="leading" secondItem="GIk-w5-8gl" secondAttribute="leading" id="B6Y-cy-vcv"/>
-                            <constraint firstItem="eXB-35-zGB" firstAttribute="trailing" secondItem="U3D-4J-K5z" secondAttribute="trailing" id="HJi-ZJ-YTm"/>
-                            <constraint firstItem="eXB-35-zGB" firstAttribute="leading" secondItem="U3D-4J-K5z" secondAttribute="leading" id="IzQ-rR-YPm"/>
-                            <constraint firstItem="eXB-35-zGB" firstAttribute="top" secondItem="U3D-4J-K5z" secondAttribute="bottom" id="JZ9-DF-byb"/>
-                            <constraint firstItem="GIk-w5-8gl" firstAttribute="trailing" secondItem="eXB-35-zGB" secondAttribute="trailing" id="Par-nw-NFb"/>
-                            <constraint firstItem="U3D-4J-K5z" firstAttribute="top" secondItem="Za8-nu-dZN" secondAttribute="bottom" id="Ppx-og-RYl"/>
-                            <constraint firstItem="GIk-w5-8gl" firstAttribute="top" secondItem="eXB-35-zGB" secondAttribute="bottom" id="cmg-SJ-WIr"/>
-                            <constraint firstItem="GIk-w5-8gl" firstAttribute="bottom" secondItem="36I-Ag-C2q" secondAttribute="top" id="zm6-CG-W8k"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MbQ-aj-IUd"/>
                     <connections>
@@ -143,12 +127,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vdj-g5-D6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3182" y="-3237"/>
+            <point key="canvasLocation" x="3182" y="-3188"/>
         </scene>
         <!--Search Talent Holder View Controller-->
         <scene sceneID="Nyl-Nd-qIO">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WhC-O5-ctx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="bOx-Xc-Dbw" customClass="SearchTalentHolderViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="keQ-P5-p2h"/>
@@ -178,6 +161,7 @@
                         <outlet property="searchView" destination="nlp-f5-hl1" id="0OT-BT-SML"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WhC-O5-ctx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2381" y="-2462"/>
         </scene>
@@ -235,7 +219,7 @@
                                 <rect key="frame" x="0.0" y="136" width="320" height="85"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mSS-NY-CaA" id="NgK-FX-Ekh">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="85"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="84.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAc-o5-ikh">
@@ -343,7 +327,7 @@
         <!--Staff Search Result Profile View Controller-->
         <scene sceneID="Kis-dW-vSp">
             <objects>
-                <viewController id="6Gm-8u-Elb" customClass="StaffSearchResultProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="staffSearchResultProfile" id="6Gm-8u-Elb" customClass="StaffSearchResultProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="J9x-lB-ZpB"/>
                         <viewControllerLayoutGuide type="bottom" id="eEq-bq-w9l"/>
@@ -553,7 +537,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="lt5-xO-RSc" kind="push" id="Lkk-AY-I26"/>
+                                    <action selector="switchToStaffAccount:" destination="6bo-Ww-uoe" eventType="touchUpInside" id="U5P-Iw-0Fr"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -590,95 +574,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q65-gO-ySy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1599" y="-2463"/>
-        </scene>
-        <!--Switching Account Log In-->
-        <scene sceneID="OH2-Wq-mmM">
-            <objects>
-                <viewController id="lt5-xO-RSc" customClass="ToggleAccountViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PGK-5X-Orh"/>
-                        <viewControllerLayoutGuide type="bottom" id="pwi-7j-Ztn"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0Vw-SV-cIS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vHN-pl-pTF">
-                                <rect key="frame" x="29" y="114" width="275" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rgb-Cw-rGh">
-                                <rect key="frame" x="29" y="164" width="275" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhS-qE-BQG">
-                                <rect key="frame" x="140" y="423" width="52" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Submit">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="submitLogIn:" destination="lt5-xO-RSc" eventType="touchUpInside" id="3fI-dK-aFD"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNQ-dv-ewN">
-                                <rect key="frame" x="41" y="210" width="119" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Forgot Password">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="forgotPasswordRequest:" destination="lt5-xO-RSc" eventType="touchUpInside" id="6gf-iW-3eR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmM-ik-edB">
-                                <rect key="frame" x="203" y="210" width="55" height="30"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="gwd-Np-seA"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Sign Up">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="signUpRequest:" destination="lt5-xO-RSc" eventType="touchUpInside" id="jVK-GM-Q6G"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="jhS-qE-BQG" firstAttribute="centerX" secondItem="Rgb-Cw-rGh" secondAttribute="centerX" id="1Tb-vM-f8w"/>
-                            <constraint firstItem="lNQ-dv-ewN" firstAttribute="top" secondItem="Rgb-Cw-rGh" secondAttribute="bottom" constant="16" id="2Iw-7B-IuP"/>
-                            <constraint firstItem="lNQ-dv-ewN" firstAttribute="leading" secondItem="0Vw-SV-cIS" secondAttribute="leadingMargin" constant="25" id="2a2-hZ-OY3"/>
-                            <constraint firstItem="pwi-7j-Ztn" firstAttribute="top" secondItem="jhS-qE-BQG" secondAttribute="bottom" constant="115" id="Bab-iH-EO4"/>
-                            <constraint firstItem="Rgb-Cw-rGh" firstAttribute="leading" secondItem="vHN-pl-pTF" secondAttribute="leading" id="Ch0-UG-w53"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="kmM-ik-edB" secondAttribute="trailing" constant="46" id="NQc-jh-x54"/>
-                            <constraint firstItem="vHN-pl-pTF" firstAttribute="trailing" secondItem="0Vw-SV-cIS" secondAttribute="trailingMargin" id="QGh-0Z-Ayj"/>
-                            <constraint firstItem="Rgb-Cw-rGh" firstAttribute="trailing" secondItem="vHN-pl-pTF" secondAttribute="trailing" id="UP7-y4-J9i"/>
-                            <constraint firstItem="vHN-pl-pTF" firstAttribute="top" secondItem="PGK-5X-Orh" secondAttribute="bottom" constant="50" id="j2V-0f-fUf"/>
-                            <constraint firstItem="vHN-pl-pTF" firstAttribute="leading" secondItem="0Vw-SV-cIS" secondAttribute="leadingMargin" constant="13" id="jB7-3c-shn"/>
-                            <constraint firstItem="Rgb-Cw-rGh" firstAttribute="top" secondItem="vHN-pl-pTF" secondAttribute="bottom" constant="20" id="nJ2-ag-sr2"/>
-                            <constraint firstItem="kmM-ik-edB" firstAttribute="leading" secondItem="lNQ-dv-ewN" secondAttribute="trailing" constant="43" id="r7h-qa-e6B"/>
-                            <constraint firstItem="kmM-ik-edB" firstAttribute="baseline" secondItem="lNQ-dv-ewN" secondAttribute="baseline" id="tma-U9-KhR"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Switching Account Log In" id="Das-p6-SQ8"/>
-                    <connections>
-                        <outlet property="password" destination="Rgb-Cw-rGh" id="Lc7-dz-OQu"/>
-                        <outlet property="username" destination="vHN-pl-pTF" id="buU-AS-xwD"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cgx-1E-5vu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2471" y="-1743"/>
         </scene>
     </scenes>
     <resources>

@@ -26,7 +26,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="oW3-9L-Bcg" kind="push" id="da2-QQ-W2q"/>
+                                    <action selector="switchToEmployerAccount:" destination="ofe-99-IWm" eventType="touchUpInside" id="32C-fa-mcA"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sa-jl-7O6">
