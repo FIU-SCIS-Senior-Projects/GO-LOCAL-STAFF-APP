@@ -5,7 +5,7 @@
     if( empty($_SESSION["active"]) )
     {
 ?>
-    <script type="text/javascript">location.href = 'http://localhost:8888/GO-LOCAL-STAFF-APP/Website/management/managementLogin.php';</script>
+    <script type="text/javascript">location.href = 'http://192.241.186.107/Website/management/managementLogin.php';</script>
 <?php    
     }
 ?>
@@ -51,7 +51,7 @@
                     // destroy the session 
                     session_destroy(); 
                 ?>
-            <a href="http://localhost:8888/GO-LOCAL-STAFF-APP/Website/management/managementLogin.php">
+            <a href="http://192.241.186.107/Website/management/managementLogin.php">
                 Logout
                 <span class="sr-only">(current)
                 </span>
