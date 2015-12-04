@@ -98,8 +98,18 @@ VALUES ('start of staff agreement from server Lorem ipsum dolor sit er elit lame
 UNLOCK TABLES;
 
 
+
+
+
+DROP TABLE IF EXISTS `management_login`;
+CREATE TABLE `management_login` (
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 --
--- Dumping data for table `management`
+-- Dumping data for table `management_login`
 --
 
 LOCK TABLES `management_login` WRITE;
