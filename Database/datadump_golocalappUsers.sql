@@ -97,6 +97,22 @@ VALUES ('start of staff agreement from server Lorem ipsum dolor sit er elit lame
 /*!40000 ALTER TABLE `management` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Dumping data for table `management`
+--
+
+LOCK TABLES `management_login` WRITE;
+/*!40000 ALTER TABLE `management_login` DISABLE KEYS */;
+
+INSERT INTO `management_login` (`username`, `password`) VALUES
+('eddieg', '$2y$10$tGVhOCA0LvztiO2qoA2eUeNYFwS7Mady3kKaGpJ3pDTijD4Gfpdya');
+
+/*!40000 ALTER TABLE `management_login` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
 --
 -- Table structure for table `registered_employer`
 --

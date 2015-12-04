@@ -68,12 +68,6 @@ CREATE TABLE `management_login` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `management_login`
---
-
-INSERT INTO `management_login` (`username`, `password`) VALUES
-('eddieg', '$2y$10$tGVhOCA0LvztiO2qoA2eUeNYFwS7Mady3kKaGpJ3pDTijD4Gfpdya');
 
 -- --------------------------------------------------------
 
@@ -238,6 +232,13 @@ ALTER TABLE `registered_staff`
 ALTER TABLE `staff_type`
   ADD PRIMARY KEY (`staffID`);
 
+--
+-- Indexes for table `staff_type`
+--
+
+ALTER TABLE `management_login`
+  ADD PRIMARY KEY (`username`);
+
 
 --
 -- AUTO_INCREMENT for table `registered_employer`
@@ -249,3 +250,4 @@ ALTER TABLE `registered_employer`
 --
 ALTER TABLE `registered_staff`
   MODIFY `staffID` int(11) NOT NULL AUTO_INCREMENT;
+
