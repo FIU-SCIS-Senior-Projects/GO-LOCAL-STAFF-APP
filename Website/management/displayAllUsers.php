@@ -1,3 +1,15 @@
+<?php
+    // Start the session
+    session_start();
+
+    if( empty($_SESSION["active"]) )
+    {
+?>
+    <script type="text/javascript">location.href = 'http://localhost:8888/GO-LOCAL-STAFF-APP/Website/management/managementLogin.php';</script>
+<?php    
+    }
+?>
+
 <html>
 <head>
 <!-- Adding BOOTSTRAP -->
@@ -6,6 +18,52 @@
 
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+
+  <nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+        <li class=active>
+          <a>Admin</a>
+        </li>
+      </ul>
+     <!-- HOME -->
+     <div class="navbar-header"> 
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar-collapse-1">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>
+        <!-- <a class="navbar-brand" href="http://smartdevelopercareersearch.mybluemix.net/">Home</a> -->
+     </div>
+
+     <div class="collapse navbar-collapse" id="navbar-collapse-1"> 
+        <ul class="nav navbar-nav navbar-left">
+         <li class="active">
+         </li>
+       </ul>
+       <ul class="nav navbar-nav navbar-right">
+         <li class="inactive">
+                <?php
+                    // remove all session variables
+                    session_unset();
+                    // destroy the session 
+                    session_destroy(); 
+                ?>
+            <a href="http://localhost:8888/GO-LOCAL-STAFF-APP/Website/management/managementLogin.php">
+                Logout
+                <span class="sr-only">(current)
+                </span>
+            </a>
+         </li>
+       </ul>
+     </div>
+   </div>
+ </nav>
+
+
+
 <head>
 <body>
     <form method ="POST" action="">
@@ -23,6 +81,16 @@
               $totalStaff = count($registerStaff);
               // print_r($registerStaff[0]);//testing
             ?>
+
+            <!--
+            <h2>
+                <button type="submit" class="btn btn-primary" aria-label="Left Align">
+                    Logout
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                    <a href="http://bing.com"></a>
+                </button>
+            </h2>
+            -->
 
             <h2>
             Registered Staff

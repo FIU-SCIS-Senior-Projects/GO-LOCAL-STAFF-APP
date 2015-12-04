@@ -85,7 +85,7 @@ function retrievePeopleID( $username )
 
 function queryDB( $query )
 {
-	$db = mysqli_connect( "locahot", "root", "fall2015", "golocalapp" );
+	$db = mysqli_connect( "localhost", "root", "fall2015", "golocalapp" );
 
 	if( mysqli_connect_errno() )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
@@ -280,7 +280,7 @@ function storePersonalDOB( $peopleID, $dob )
 	}
 }
 
-function sendEmail( $username, $email, $userType, $hash )
+function AsendEmail( $username, $email, $userType, $hash )
 {
 	$to = $email;
     $subject = "GoLocalApp email verification";

@@ -60,6 +60,24 @@ CREATE TABLE `jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `management_login`
+--
+
+CREATE TABLE `management_login` (
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `management_login`
+--
+
+INSERT INTO `management_login` (`username`, `password`) VALUES
+('eddieg', '$2y$10$tGVhOCA0LvztiO2qoA2eUeNYFwS7Mady3kKaGpJ3pDTijD4Gfpdya');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `registered_employer`
 --
 
