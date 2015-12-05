@@ -37,6 +37,10 @@
 {
     [super viewDidLoad];
     
+    NSLog(@"StaffSearchResultTableViewController");
+    
+    NSLog(@"listOptions %@",listOptions);
+    
     api = [[ServerAPI alloc]init];
     // preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -51,10 +55,15 @@
         NSDictionary *temp = listOptions[i];
         
         NSString *imageName = [temp objectForKey:@"imageName"];
-        
+        if (imageName.length > 0)
+        {
+            UIImage * currImage = [self getImage:imageName];
+            if (currImage != nil)
+            {
+                [profileImages addObject:currImage];
+            }
+        }
         //NSLog(@"Getting image for: %@", imageName);
-        
-        [profileImages addObject:[self getImage:imageName]];
         
         //profileImages[i] = [self getImage:imageName];
         
@@ -86,6 +95,8 @@
 {
     
     NSString * serverPhotoAddress = api.uploads;
+    
+    //NSLog(@"Server address %@", serverPhotoAddress);
     
     serverPhotoAddress = [serverPhotoAddress stringByAppendingString:imageName];
     

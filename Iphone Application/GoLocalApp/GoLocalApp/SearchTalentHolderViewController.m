@@ -25,7 +25,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    NSLog(@"inside SearchTalentHolderViewController");
     [self setupSearchView];
     
 }//eo-v

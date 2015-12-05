@@ -100,7 +100,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="wBQ-dx-mr1"/>
                                     <barButtonItem style="plain" id="6xE-yC-dan">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="6bq-fh-eH9">
-                                            <rect key="frame" x="85" y="7.5" width="150" height="29"/>
+                                            <rect key="frame" x="85" y="8" width="150" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <segments>
@@ -127,7 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vdj-g5-D6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3182" y="-3188"/>
+            <point key="canvasLocation" x="3202" y="-2875"/>
         </scene>
         <!--Search Talent Holder View Controller-->
         <scene sceneID="Nyl-Nd-qIO">
@@ -219,7 +219,7 @@
                                 <rect key="frame" x="0.0" y="136" width="320" height="85"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mSS-NY-CaA" id="NgK-FX-Ekh">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="84.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="84"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAc-o5-ikh">
@@ -502,7 +502,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQl-d8-5sg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3182" y="-2463"/>
+            <point key="canvasLocation" x="3202" y="-2212"/>
         </scene>
         <!--Account Settings-->
         <scene sceneID="YKu-2c-B3J">

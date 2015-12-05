@@ -17,17 +17,17 @@
     {
         NSString * serverBaseUrl = @"http://192.241.186.107/Website/";
         urlList = [[NSDictionary alloc] initWithObjectsAndKeys:
-                   [serverBaseUrl stringByAppendingString:@"jsonPOST_smsForgotPassword.php"]    ,@"forgotPassword_pt1",
-                   [serverBaseUrl stringByAppendingString:@"jsonPOST_forgotPassword.php"]       ,@"forgotPassword_pt2",
-                   [serverBaseUrl stringByAppendingString:@"jsonPOST_login.php"]                ,@"login",
-                   [serverBaseUrl stringByAppendingString:@"jsonPOST_getSearchStaffDetail.php"] ,@"searchStaffDetail",
-                   [serverBaseUrl stringByAppendingString:@"jsonPOST_registration.php"]         ,@"registration",
-                   [serverBaseUrl stringByAppendingString:@"jsonPOST_getTermsAgreements.php"]   ,@"termsAgreements",
-                   [serverBaseUrl stringByAppendingString:@"jsonPOST_searchTalent.php"]         ,@"searchTalent",
-                   [serverBaseUrl stringByAppendingString:@"jsonPOST_sms.php"]                  ,@"registerUserVerifySMS_pt1",
-                   [serverBaseUrl stringByAppendingString:@"jsonPOST_smsCode.php"]              ,@"registerUserVerifySMS_pt2",
-                 [serverBaseUrl stringByAppendingString:@"uploads/"]                            ,@"photos",
-                   nil];
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_smsForgotPassword.php"]    ,@"forgotPassword_pt1",
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_forgotPassword.php"]       ,@"forgotPassword_pt2",
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_login.php"]                ,@"login",
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_getSearchStaffDetail.php"] ,@"searchStaffDetail",
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_registration.php"]         ,@"registration",
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_getTermsAgreements.php"]   ,@"termsAgreements",
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_searchTalent.php"]         ,@"searchTalent",
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_sms.php"]                  ,@"registerUserVerifySMS_pt1",
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_smsCode.php"]              ,@"registerUserVerifySMS_pt2",
+     [serverBaseUrl stringByAppendingString:@"uploads/"]                            ,@"uploads",
+       nil];
         
         //NSLog(@" urlList has %@", urlList);
     }

@@ -1519,19 +1519,26 @@
     /*  goes to the search results view */
     -(void)goToSearchResults:(NSDictionary *)searchResults
     {
+        NSLog(@"inside goToSearchResults");
+        
         //preparing data to be sent to next view controller
             listToSend = [[NSMutableArray alloc]init];
             
             //populating staff search data into NSMutableArray
             for( id currStaff in searchResults )
             {
+                NSLog(@"%@", currStaff);
+                
                 //creating
                 NSMutableDictionary * currentStaff = [currStaff mutableCopy];
                 
-                [listToSend addObject:currentStaff];
+                if (currentStaff != nil)
+                {
+                    [listToSend addObject:currentStaff];
+                }
             }//eofl
             
-            //   NSLog(@"data has been updated to %@", list);//testing
+            NSLog(@"data has been updated to %@", listToSend);//testing
         
         
         //going to next controller
@@ -1542,11 +1549,15 @@
         //creating controller thats in storyboard
         
         NSString *controllerID   = @"staffSearchResult";
+        
         StaffSearchResultTableViewController *SearchTalentResultsView = (StaffSearchResultTableViewController *)[newStoryboard instantiateViewControllerWithIdentifier:controllerID];
         
         
         //    NSString *controllerID   = @"filterStaffSearchResult";
         //    filterStaffSearchResultViewController *SearchTalentResultsView = (filterStaffSearchResultViewController *)[newStoryboard instantiateViewControllerWithIdentifier:controllerID];
+        
+        NSLog(@"listToSend count:  %lu)", (unsigned long)listToSend.count);
+        
         
         SearchTalentResultsView.listOptions  = listToSend;
         
@@ -1610,7 +1621,8 @@
         NSMutableDictionary * searchData = [self prepareServerData];
         NSLog(@"");
         NSLog(@" about to send the following data: %@", searchData);
-        NSLog(@"");
+        NSLog(@" to address %@", serverAddress);
+        NSLog(@" ");
         
         //adding data to request
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
