@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredStaff;
 
-@interface StaffRegistration8ViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate, UIAlertViewDelegate>
+@interface StaffRegistration8ViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UISwitch *validDriverLicenseSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *validCommercialDriverLicenseSwitch;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredStaff;
 
-@interface StaffRegistration11ViewController : UIViewController<UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface StaffRegistration11ViewController : UIViewController< UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 

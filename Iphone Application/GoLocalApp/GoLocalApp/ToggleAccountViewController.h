@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ToggleAccountViewController : UIViewController<UIAlertViewDelegate, UITextFieldDelegate>
+@interface ToggleAccountViewController : UIViewController< UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;

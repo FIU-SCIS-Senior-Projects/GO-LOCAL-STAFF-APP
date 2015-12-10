@@ -5,7 +5,7 @@
     if( empty($_SESSION["active"]) )
     {
 ?>
-    <script type="text/javascript">location.href = 'http://192.241.186.107/Website/management/managementLogin.php';</script>
+    <script type="text/javascript">location.href = 'http://45.55.240.59/Website/management/managementLogin.php';</script>
     <!--<script type="text/javascript">location.href = 'http://localhost:8888/GO-LOCAL-STAFF-APP/Website/management/managementLogin.php';</script>-->
 <?php    
     }
@@ -46,7 +46,7 @@
        </ul>
        <ul class="nav navbar-nav navbar-right">
          <li class="inactive">
-            <a href="http://192.241.186.107/Website/management/managementLogout.php">
+            <a href="http://45.55.240.59/Website/management/managementLogout.php">
             <!--<a href="http://localhost:8888/GO-LOCAL-STAFF-APP/Website/management/managementLogout.php">-->
                 Logout
                 <span class="sr-only">(current)
@@ -738,76 +738,7 @@
       </div>
      <div class="col-md-1"></div>
     </div>
-
-
-
-    <div class="row">
-    <div class="col-md-1"></div>
-      <div class="col-md-10">
-        <?php 
-              $list = $_POST;
-              $totalDeleteRequest = count($list);
-             
-              //there is something to delete
-              if($totalDeleteRequest > 0)
-              {
-                ?>
-                  <div class="panel panel-danger">
-                  <div class="panel-heading">Delete Results</div>
-                    <div class="panel-body">
-                <?php
-                   $listKeys = array_keys($list);
-                    for($iter = 0; $iter < $totalDeleteRequest; $iter++)
-                    {
-                        $currentType = $listKeys[$iter];
-                        $currentID = $list[$currentType];
-
-                        if($currentType == 'clearAllJSONTestFiles')
-                        {
-                            // clearing all jsons files
-                            echo "<pre>removing all test files</pre>";
-                            $command = "rm ../test/*.json";
-                            $result = shell_exec($command);                             
-
-                            //displaying all files
-                            $command = "ls ../*/*";
-                            $result = shell_exec($command);                             
-                            echo "<pre>$result</pre>";
-                        }
-                        else if($currentType != "employer" || $currentType != "staff" )
-                        {
-                          $deleteResult = deleteRegisteredUser($currentID, $currentType);
-                          // echo "<p>delete result: $deleteResult</p>";
-                          if($deleteResult > 0)
-                          {
-                            echo "<p>Registered $currentType with ID#$currentID successfully delete</p>";
-                          }
-                          else
-                          {
-                            echo "<p>unable to delete the registered $currentType with ID#$currentID</p>";
-                          }
-                        }//eo
-                        
-
-                    }//eofl
-
-                ?>
-                  </div>
-                  <div class="panel-footer"></div>
-                </div>
-
-                <?php
-                    //refreshing page after a few seconds
-                    // print '<meta http-equiv="refresh" content="3">';
-              }//eo-delete request
-
-              //refreshing page every minute
-              print '<meta http-equiv="refresh" content="30">';
-
-        ?>
-      </div>
-      <div class="col-md-1"></div>
-      </div>
+   
 
     </form>
 </body>

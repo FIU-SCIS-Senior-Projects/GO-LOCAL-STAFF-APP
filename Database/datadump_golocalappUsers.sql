@@ -166,14 +166,14 @@ CREATE TABLE `registered_employer` (
 LOCK TABLES `registered_employer` WRITE;
 /*!40000 ALTER TABLE `registered_employer` DISABLE KEYS */;
 INSERT INTO `registered_employer` 
-VALUES (1,'doromas','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','doram002@fiu.edu','42998cf32d552343bc8e460416382dca',0,'Los Sicarios','Party Events','David','','Oramas','3000 NE 151st Street','North Miami','33181','FL','7863662269',1935,1,1,'',NULL,NULL,0,0),
-(2,'jbla','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','jorgblanc@gmail.com','63dc7ed1010d3c3b8269faf0ba7491d4',0,'','','Jorge','E','Blanco','','','','','3059155998',3935,1,0,'',NULL,NULL,0,0),
-(3,'asdf','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','asdf@gmail.com','006f52e9102a8d3be2fe5614f42ba989',0,'Asdf','Study','Alex','','Karpis','1101 Brickell Ave','Miami','33131','FL','7868799629',8501,1,0,'',NULL,NULL,0,0),
-(4,'dmc','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','dmcruz3@yahoo.com','8e296a067a37563370ded05f5a3bf3ec',0,'Dmc events','Aerospace Meetings','Dariel','','Moreno','158 E 13st','Hialeah','33010','FL','3058019960',1611,1,0,'',NULL,NULL,0,0),
+VALUES (1,'doromas','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','doram00211@fiu.edu','42998cf32d552343bc8e460416382dca',0,'Los Sicarios','Party Events','David','','Oramas','3000 NE 151st Street','North Miami','33181','FL','7863662269',1935,1,1,'',NULL,NULL,0,0),
+(2,'jbla','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','jorgblanc12@gmail.com','63dc7ed1010d3c3b8269faf0ba7491d4',0,'','','Jorge','E','Blanco','','','','','3059155998',3935,1,0,'',NULL,NULL,0,0),
+(3,'asdf','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','asdf12@gmail.com','006f52e9102a8d3be2fe5614f42ba989',0,'Asdf','Study','Alex','','Karpis','1101 Brickell Ave','Miami','33131','FL','7868799629',8501,1,0,'',NULL,NULL,0,0),
+(4,'dmc','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','dm1cruz23@yahoo.com','8e296a067a37563370ded05f5a3bf3ec',0,'Dmc events','Aerospace Meetings','Dariel','','Moreno','158 E 13st','Hialeah','33010','FL','3058019960',1611,1,0,'',NULL,NULL,0,0),
 (5,'Herniris','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','Herniris@me.com','15de21c670ae7c3f6f3f1f37029303c9',0,'Hern Events','Party','Iris','E','Hernandez','2710 W 64 PL','Miami','33016','FL','3059842956',9393,1,1,'',NULL,NULL,0,0),
-(6,'jeffLib','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','jlib001@fiu.edu','43fa7f58b7eac7ac872209342e62e8f1',0,'Colombian parties','Party Planner','Jeff','','Libreros','1930 SW 145th Ave','Miramar','33027','FL','9546000618',3299,1,0,'',NULL,NULL,0,0),
-(7,'kealp','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','kealp@yahoo.com','ed265bc903a5a097f61d3ec064d96d2e',0,'Karen Events','Utilities Planning','Karen','','Aguilar','4461 NW 4st','Coconut Creek','33066','FL','9542587866',6572,1,0,'',NULL,NULL,0,0),
-(8,'lchediak','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','lchediak@aol.com','f2fc990265c712c49d51a18a32b39f0c',0,'Great parties','Party Planner','Ligia','','Chediak','3760 18th Ave','Naples','34117','FL','7863554748',7661,1,1,'',NULL,NULL,0,0);
+(6,'jeffLib','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','jlib005@fiu.edu','43fa7f58b7eac7ac872209342e62e8f1',0,'Colombian parties','Party Planner','Jeff','','Libreros','1930 SW 145th Ave','Miramar','33027','FL','9546000618',3299,1,0,'',NULL,NULL,0,0),
+(7,'kealp','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','kealp5@yahoo.com','ed265bc903a5a097f61d3ec064d96d2e',0,'Karen Events','Utilities Planning','Karen','','Aguilar','4461 NW 4st','Coconut Creek','33066','FL','9542587866',6572,1,0,'',NULL,NULL,0,0),
+(8,'lchediak','$2y$10$6pATyjFeQGxb5RhD3J1imOq9DuV4NPAXP4cc9q7gjj880qm0EQTsa','lchediak23@aol.com','f2fc990265c712c49d51a18a32b39f0c',0,'Great parties','Party Planner','Ligia','','Chediak','3760 18th Ave','Naples','34117','FL','7863554748',7661,1,1,'',NULL,NULL,0,0);
 
 /*!40000 ALTER TABLE `registered_employer` ENABLE KEYS */;
 UNLOCK TABLES;

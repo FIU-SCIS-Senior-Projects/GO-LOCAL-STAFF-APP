@@ -133,13 +133,15 @@ chestSize, waistSize, hipsSize, dressSize;
     -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
     {
         
-        //creating UIAlert
-        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:cancelTitle
-                                              otherButtonTitles: nil];
-        [alert show];//display alert
+        //creating controller
+        UIAlertController * actionController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * defaultAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleDefault handler:nil];
+        
+        [actionController addAction:defaultAction];
+        
+        [self presentViewController:actionController animated:YES completion:nil];
+
     }//eom
 
 #pragma mark - tap gestures functions

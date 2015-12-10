@@ -67,16 +67,19 @@
     //MARK: helper functions
 
     /* create UIAlert*/
-    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
+    -(void) showAlert:(NSString*)title
+          withMessage:(NSString*)message
+                  and:(NSString*) cancelTitle
     {
+        //creating controller
+        UIAlertController * actionController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         
-        //creating UIAlert
-        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:cancelTitle
-                                              otherButtonTitles: nil];
-        [alert show];//display alert
+        UIAlertAction * defaultAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleDefault handler:nil];
+        
+        [actionController addAction:defaultAction];
+        
+        [self presentViewController:actionController animated:YES completion:nil];
+
     }//eom
 
 

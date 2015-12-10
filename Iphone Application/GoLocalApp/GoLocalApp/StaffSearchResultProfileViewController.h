@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StaffSearchResultProfileViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface StaffSearchResultProfileViewController : UIViewController<UITextFieldDelegate>
 
 @property (strong, nonatomic) NSDictionary *staffDetail;
 

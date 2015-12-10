@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredStaff;
 
-@interface StaffRegistration9ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface StaffRegistration9ViewController : UIViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *chestSize;
 @property (weak, nonatomic) IBOutlet UITextField *waistSize;

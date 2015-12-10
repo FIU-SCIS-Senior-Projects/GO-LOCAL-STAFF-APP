@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredStaff;
 
-@interface StaffRegistration1ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface StaffRegistration1ViewController : UIViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *cellphone;
 

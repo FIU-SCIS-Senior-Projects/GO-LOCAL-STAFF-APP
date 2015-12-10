@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredStaff;
 
-@interface StaffRegistration7ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate, UITextViewDelegate>
+@interface StaffRegistration7ViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *otherServicesDescription;
 @property (weak, nonatomic) IBOutlet UITextField *otherServicesWebsite;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredStaff;
 
-@interface StaffRegistration5ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate, UITextViewDelegate>
+@interface StaffRegistration5ViewController : UIViewController<UITextFieldDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *liveBandDescription;
 @property (weak, nonatomic) IBOutlet UITextField *liveBandWebsite;

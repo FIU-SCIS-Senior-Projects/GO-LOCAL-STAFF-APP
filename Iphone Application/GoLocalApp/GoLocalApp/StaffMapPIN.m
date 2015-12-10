@@ -11,7 +11,7 @@
 @implementation StaffMapPIN
 
 
-@synthesize coordinate, title, subtitle;
+@synthesize coordinate, title, subtitle, staffID;
 
 
 

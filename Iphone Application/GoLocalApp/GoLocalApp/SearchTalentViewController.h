@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchTalentViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate, UIAlertViewDelegate>
+@interface SearchTalentViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate>
 
 //ACTIVITY INDICATOR
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StaffRegistration0ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface StaffRegistration0ViewController : UIViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *firstName;
 @property (weak, nonatomic) IBOutlet UITextField *middleName;

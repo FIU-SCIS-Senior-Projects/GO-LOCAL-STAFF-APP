@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredEmployer; //need this for the model class
 
-@interface EmployerRegistration1ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface EmployerRegistration1ViewController : UIViewController<UITextFieldDelegate>
 
 
 @property (strong, nonatomic) RegisteredEmployer *registeredEmployer;

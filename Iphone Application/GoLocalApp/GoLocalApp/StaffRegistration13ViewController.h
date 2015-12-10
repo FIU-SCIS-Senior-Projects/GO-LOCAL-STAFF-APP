@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredStaff;
 
-@interface StaffRegistration13ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface StaffRegistration13ViewController : UIViewController<UITextFieldDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

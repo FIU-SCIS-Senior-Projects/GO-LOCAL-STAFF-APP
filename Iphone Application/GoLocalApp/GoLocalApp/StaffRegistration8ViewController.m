@@ -291,13 +291,16 @@ heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSiz
     /* create UIAlert*/
     -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
     {
-        //creating UIAlert
-        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:cancelTitle
-                                              otherButtonTitles: nil];
-        [alert show];//display alert
+
+        //creating controller
+        UIAlertController * actionController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * defaultAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleDefault handler:nil];
+        
+        [actionController addAction:defaultAction];
+        
+        [self presentViewController:actionController animated:YES completion:nil];
+
     }//eom
 
 
@@ -359,13 +362,13 @@ heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSiz
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                             style:UIBarButtonItemStyleBordered
+                                                                             style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(cancelClicked:)];
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                           style:UIBarButtonItemStyleBordered target:self
+                                                                           style:UIBarButtonItemStyleDone target:self
                                                                           action:@selector(doneClicked:)] ;
             //adding UIBarItems to the Keyboard/Picker
             [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
@@ -415,13 +418,13 @@ heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSiz
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                             style:UIBarButtonItemStyleBordered
+                                                                             style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(cancelClicked:)];
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                           style:UIBarButtonItemStyleBordered target:self
+                                                                           style:UIBarButtonItemStyleDone target:self
                                                                           action:@selector(doneClicked:)] ;
             //adding UIBarItems to the Keyboard/Picker
             [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
@@ -470,13 +473,13 @@ heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSiz
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                             style:UIBarButtonItemStyleBordered
+                                                                             style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(cancelClicked:)];
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                           style:UIBarButtonItemStyleBordered target:self
+                                                                           style:UIBarButtonItemStyleDone target:self
                                                                           action:@selector(doneClicked:)] ;
             //adding UIBarItems to the Keyboard/Picker
             [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];
@@ -545,13 +548,13 @@ heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSiz
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                             style:UIBarButtonItemStyleBordered
+                                                                             style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(cancelClicked:)];
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                           style:UIBarButtonItemStyleBordered target:self
+                                                                           style:UIBarButtonItemStyleDone target:self
                                                                           action:@selector(doneClicked:)];
             //adding UIBarItems to the Keyboard/Picker
             [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty, cancelButton, doneButton, nil]];
@@ -600,13 +603,13 @@ heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSiz
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                             style:UIBarButtonItemStyleBordered
+                                                                             style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(cancelClicked:)];
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                           style:UIBarButtonItemStyleBordered target:self
+                                                                           style:UIBarButtonItemStyleDone target:self
                                                                           action:@selector(doneClicked:)] ;
             //adding UIBarItems to the Keyboard/Picker
             [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty, cancelButton, doneButton, nil]];
@@ -667,13 +670,13 @@ heightTextField, weightTextField, hairColorTextField, eyeColorTextField, pantSiz
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                             style:UIBarButtonItemStyleBordered
+                                                                             style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(cancelClicked:)];
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                           style:UIBarButtonItemStyleBordered target:self
+                                                                           style:UIBarButtonItemStyleDone target:self
                                                                           action:@selector(doneClicked:)] ;
             //adding UIBarItems to the Keyboard/Picker
             [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty, cancelButton, doneButton, nil]];

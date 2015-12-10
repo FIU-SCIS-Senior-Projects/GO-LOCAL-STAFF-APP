@@ -260,14 +260,14 @@
         /* create UIAlert*/
         -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
         {
+            //creating controller
+            UIAlertController * actionController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
             
-            //creating UIAlert
-            UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                            delegate:self
-                                                   cancelButtonTitle:cancelTitle
-                                                   otherButtonTitles: nil];
-            [alert show];//display alert
+            UIAlertAction * defaultAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleDefault handler:nil];
+            
+            [actionController addAction:defaultAction];
+            
+            [self presentViewController:actionController animated:YES completion:nil];
         }//eom
 
 #pragma mark - tap gestures functions
@@ -320,16 +320,16 @@
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                           style:UIBarButtonItemStyleBordered
+                                                                           style:UIBarButtonItemStylePlain
                                                                           target:self
                                                                           action:@selector(cancelClicked:)];
             
             
             //creating 'Done' UIBarItem to be the exit point for the picker
             UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                style:UIBarButtonItemStyleBordered
+                                                                           style:UIBarButtonItemStyleDone
                                                                           target:self
-                                                                    action:@selector(doneClicked:)];
+                                                                          action:@selector(doneClicked:)];
             
             //adding UIBarItems to the Keyboard/DatePicker
             [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:empty1, cancelButton, doneButton, nil]];

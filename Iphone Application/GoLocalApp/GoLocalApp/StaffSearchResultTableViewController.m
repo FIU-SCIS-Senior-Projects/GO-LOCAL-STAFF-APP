@@ -505,8 +505,8 @@
     sortByPickerView = [[UIPickerView alloc] init];
     [sortByPickerView sizeToFit];
     sortByPickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    sortByPickerView.delegate = self;
-    sortByPickerView.dataSource = self;
+    //sortByPickerView.delegate = self;
+    //sortByPickerView.dataSource = self;
     sortByPickerView.showsSelectionIndicator = YES;
     
     //updating keyboard as uipicker
@@ -548,8 +548,8 @@
     orderByPickerView = [[UIPickerView alloc] init];
     [orderByPickerView sizeToFit];
     orderByPickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    orderByPickerView.delegate = self;
-    orderByPickerView.dataSource = self;
+    //orderByPickerView.delegate = self;
+    //orderByPickerView.dataSource = self;
     orderByPickerView.showsSelectionIndicator = YES;
     
     //updating keyboard as uipicker

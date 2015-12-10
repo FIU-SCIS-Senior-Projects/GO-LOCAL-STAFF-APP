@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredStaff;
 
-@interface StaffRegistration12ViewController : UIViewController<UIAlertViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface StaffRegistration12ViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *bodyImageView;
 

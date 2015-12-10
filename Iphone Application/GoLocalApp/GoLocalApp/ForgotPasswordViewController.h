@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ForgotPasswordViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface ForgotPasswordViewController : UIViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextfield;
 @property (weak, nonatomic) IBOutlet UIButton *startResetPasswordProcessButton;

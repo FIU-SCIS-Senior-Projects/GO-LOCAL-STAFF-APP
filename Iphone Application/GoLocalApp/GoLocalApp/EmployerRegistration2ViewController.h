@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredEmployer;
 
-@interface EmployerRegistration2ViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+@interface EmployerRegistration2ViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

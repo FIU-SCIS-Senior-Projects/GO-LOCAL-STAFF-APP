@@ -40,7 +40,6 @@
     [self setCellphone:@" "];
     [self setAddress:@" " withCity:@" " withZipcode:@" " andState:@" "];
     [self setGender:0];
-    [self setLanguages:@" "];
     [self setExperience:temp];
     [self setServicesSelected:FALSE liveBand:FALSE cateringCompany:FALSE otherServices:FALSE];
     [self setDJInfo:temp];

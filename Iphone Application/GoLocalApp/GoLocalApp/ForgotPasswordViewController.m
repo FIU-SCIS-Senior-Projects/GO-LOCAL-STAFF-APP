@@ -48,16 +48,25 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
     //MARK: helper functions
 
     /* create UIAlert*/
-    -(void) showAlert:(NSString*)title withMessage:(NSString*)message and:(NSString*) cancelTitle
+    -(void) showAlert:(NSString*)title
+          withMessage:(NSString*)message
+                  and:(NSString*) cancelTitle
     {
-        
-        //creating UIAlert
         UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
                                                         message:message
                                                        delegate:self
                                               cancelButtonTitle:cancelTitle
                                               otherButtonTitles: nil];
+        
         [alert show];//display alert
+//        //creating controller
+//        UIAlertController * actionController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        UIAlertAction * defaultAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleDefault handler:nil];
+//        
+//        [actionController addAction:defaultAction];
+//        
+//        [self presentViewController:actionController animated:YES completion:nil];
     }//eom
 
 /********************************/
@@ -351,7 +360,7 @@ passwordProvidedAsterisk, passwordProvidedLabel, passwordProvidedTextField, conf
                 [self showAlert:@"SMS Authentication" withMessage:messageToDisplay and:@"Okay"];
                 
                 //moving to log in controller
-                [self performSegueWithIdentifier:@"returnToLoginScreen" sender:self];
+                [self performSegueWithIdentifier:@"returnToSignInFromForgotPassword" sender:self];
                 
             }
             else if( (responseType == 0) || (responseType == -1) || (responseType == -2) )

@@ -15,10 +15,10 @@
     self = [super init];
     if (self)
     {
-        NSString * serverBaseUrl = @"http://192.241.186.107/Website/";
+        NSString * serverBaseUrl = @"http://45.55.240.59/Website/";
         urlList = [[NSDictionary alloc] initWithObjectsAndKeys:
-       [serverBaseUrl stringByAppendingString:@"jsonPOST_smsForgotPassword.php"]    ,@"forgotPassword_pt1",
-       [serverBaseUrl stringByAppendingString:@"jsonPOST_forgotPassword.php"]       ,@"forgotPassword_pt2",
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_forgotPassword1.php"]      ,@"forgotPassword_pt1",
+       [serverBaseUrl stringByAppendingString:@"jsonPOST_forgotPassword2.php"]      ,@"forgotPassword_pt2",
        [serverBaseUrl stringByAppendingString:@"jsonPOST_login.php"]                ,@"login",
        [serverBaseUrl stringByAppendingString:@"jsonPOST_getSearchStaffDetail.php"] ,@"searchStaffDetail",
        [serverBaseUrl stringByAppendingString:@"jsonPOST_registration.php"]         ,@"registration",

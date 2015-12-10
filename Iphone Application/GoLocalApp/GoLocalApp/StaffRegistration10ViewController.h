@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class RegisteredStaff;
 
-@interface StaffRegistration10ViewController : UIViewController<UITextFieldDelegate, UIAlertViewDelegate>
+@interface StaffRegistration10ViewController : UIViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UISwitch *incorporatedSwitch;
 

@@ -7,34 +7,34 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>BFB2FF54-963A-4E96-A57E-0D0124352655</string>
 	<key>IDESourceControlProjectName</key>
-	<string>GoLocalApp</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>26345E23D7A103E43EAC5054736FD3BF7D68FE35</key>
-		<string>https://github.com/FIU-SCIS-Senior-Projects/GO-LOCAL-STAFF-APP.git</string>
+		<key>71059008D5A7BEFB94875D2B64F6BC5041A20ED8</key>
+		<string>https://github.com/LuAndreCast/GoLocalAppTempRepo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Iphone Application/GoLocalApp/GoLocalApp.xcodeproj</string>
+	<string>Iphone Application/GoLocalApp/GoLocalApp.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>26345E23D7A103E43EAC5054736FD3BF7D68FE35</key>
+		<key>71059008D5A7BEFB94875D2B64F6BC5041A20ED8</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/FIU-SCIS-Senior-Projects/GO-LOCAL-STAFF-APP.git</string>
+	<string>https://github.com/LuAndreCast/GoLocalAppTempRepo.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>26345E23D7A103E43EAC5054736FD3BF7D68FE35</string>
+	<string>71059008D5A7BEFB94875D2B64F6BC5041A20ED8</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>26345E23D7A103E43EAC5054736FD3BF7D68FE35</string>
+			<string>71059008D5A7BEFB94875D2B64F6BC5041A20ED8</string>
 			<key>IDESourceControlWCCName</key>
-			<string>GO-LOCAL-STAFF-APP</string>
+			<string>GOLOCALTEMPREPO</string>
 		</dict>
 	</array>
 </dict>

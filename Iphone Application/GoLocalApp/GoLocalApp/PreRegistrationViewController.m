@@ -27,6 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.navigationController setNavigationBarHidden:true animated:false];
+    
     if(hideReturnSignInButton)
     {
         [returnToSignButton setHidden:true];
@@ -55,6 +58,8 @@
     
     EmployerRegistration0ViewController * newController = [newSB instantiateViewControllerWithIdentifier:@"employerRegistration"];
     
+    [self.navigationController setNavigationBarHidden:false animated:false];
+    
     [self.navigationController pushViewController:newController animated:true];
 }//eoa
 
@@ -64,6 +69,8 @@
     UIStoryboard * newSB = [UIStoryboard storyboardWithName:@"StaffRegistration" bundle:nil];
     
     StaffRegistration0ViewController * newController = [newSB instantiateViewControllerWithIdentifier:@"staffRegistration"];
+    
+    [self.navigationController setNavigationBarHidden:false animated:false];
     
     [self.navigationController pushViewController:newController animated:true];
     
