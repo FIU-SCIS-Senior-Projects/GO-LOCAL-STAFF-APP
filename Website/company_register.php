@@ -1,1 +1,0 @@
-<?php echo "Company Registration page"; ?>
