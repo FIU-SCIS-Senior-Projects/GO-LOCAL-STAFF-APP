@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="FaN-oS-CCm">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Account Settings-->
+        <scene sceneID="toG-9u-dC6">
+            <objects>
+                <viewController id="ofe-99-IWm" customClass="StaffAccountSettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AT6-hC-yRV"/>
+                        <viewControllerLayoutGuide type="bottom" id="M1P-ZC-9e1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sah-7e-tSA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jA1-1u-PwW">
+                                <rect key="frame" x="20" y="100" width="195" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Switch to Employer Account">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchToEmployerAccount:" destination="ofe-99-IWm" eventType="touchUpInside" id="32C-fa-mcA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sa-jl-7O6">
+                                <rect key="frame" x="20" y="64" width="195" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Sign out">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signOut:" destination="ofe-99-IWm" eventType="touchUpInside" id="gKk-S9-wLa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Account Settings" id="c8f-Ne-MlR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3MA-Mh-DcE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1440" y="2124"/>
+        </scene>
+        <!--Staff Home-->
+        <scene sceneID="OfN-Jn-dRA">
+            <objects>
+                <viewController id="wVR-O8-g1P" customClass="StaffHomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mdd-IW-KVL"/>
+                        <viewControllerLayoutGuide type="bottom" id="PRD-c4-wEW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="k06-O8-1fe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-FY-BCB">
+                                <rect key="frame" x="244" y="64" width="56" height="38"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="BRu-ei-SJE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" image="menu@1x">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ofe-99-IWm" kind="push" identifier="staffAccountSettings" id="i6J-CR-qoP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdX-gE-3Wb">
+                                <rect key="frame" x="20" y="120" width="215" height="51"/>
+                                <animations/>
+                                <state key="normal" title="Search Jobs" image="search@1x">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="PRD-c4-wEW" firstAttribute="top" secondItem="fM7-FY-BCB" secondAttribute="bottom" constant="466" id="AcD-yc-op9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fM7-FY-BCB" secondAttribute="trailing" constant="4" id="ErR-Mg-cG1"/>
+                            <constraint firstItem="fM7-FY-BCB" firstAttribute="top" secondItem="Mdd-IW-KVL" secondAttribute="bottom" id="Url-Vw-prw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Staff Home" id="6o6-vP-ybe"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JPY-OD-AcJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1440.5333333333333" y="1375.5066666666667"/>
+        </scene>
+        <!--Switching Account Log In-->
+        <scene sceneID="I30-2x-VJi">
+            <objects>
+                <viewController id="oW3-9L-Bcg" customClass="ToggleAccountViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8LS-eW-bFc"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lge-Pl-YCB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kEs-DD-1fc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="trj-tR-ePu">
+                                <rect key="frame" x="29" y="114" width="275" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A7P-PT-ozZ">
+                                <rect key="frame" x="29" y="164" width="275" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32o-F7-Q87">
+                                <rect key="frame" x="140" y="423" width="52" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitLogIn:" destination="oW3-9L-Bcg" eventType="touchUpInside" id="9we-rR-CqQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FK4-F9-v5F">
+                                <rect key="frame" x="41" y="210" width="119" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Forgot Password">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="forgotPasswordRequest:" destination="oW3-9L-Bcg" eventType="touchUpInside" id="I0R-qb-f3q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHJ-66-qqd">
+                                <rect key="frame" x="203" y="210" width="55" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="LEx-4Q-8ZC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signUpRequest:" destination="oW3-9L-Bcg" eventType="touchUpInside" id="PD1-K0-050"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FK4-F9-v5F" firstAttribute="top" secondItem="A7P-PT-ozZ" secondAttribute="bottom" constant="16" id="93x-nk-tuC"/>
+                            <constraint firstItem="trj-tR-ePu" firstAttribute="trailing" secondItem="kEs-DD-1fc" secondAttribute="trailingMargin" id="GYn-Wg-NZz"/>
+                            <constraint firstItem="trj-tR-ePu" firstAttribute="leading" secondItem="kEs-DD-1fc" secondAttribute="leadingMargin" constant="13" id="Ik4-3i-HXO"/>
+                            <constraint firstItem="A7P-PT-ozZ" firstAttribute="top" secondItem="trj-tR-ePu" secondAttribute="bottom" constant="20" id="Ips-pY-NaQ"/>
+                            <constraint firstItem="yHJ-66-qqd" firstAttribute="leading" secondItem="FK4-F9-v5F" secondAttribute="trailing" constant="43" id="aYH-wm-5js"/>
+                            <constraint firstItem="A7P-PT-ozZ" firstAttribute="leading" secondItem="trj-tR-ePu" secondAttribute="leading" id="gTI-n0-SNp"/>
+                            <constraint firstItem="yHJ-66-qqd" firstAttribute="baseline" secondItem="FK4-F9-v5F" secondAttribute="baseline" id="jtb-BB-D9u"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yHJ-66-qqd" secondAttribute="trailing" constant="46" id="lYc-X7-mOq"/>
+                            <constraint firstItem="FK4-F9-v5F" firstAttribute="leading" secondItem="kEs-DD-1fc" secondAttribute="leadingMargin" constant="25" id="mFC-ON-14H"/>
+                            <constraint firstItem="trj-tR-ePu" firstAttribute="top" secondItem="8LS-eW-bFc" secondAttribute="bottom" constant="50" id="mQO-dp-1Df"/>
+                            <constraint firstItem="A7P-PT-ozZ" firstAttribute="trailing" secondItem="trj-tR-ePu" secondAttribute="trailing" id="qq8-GM-iv2"/>
+                            <constraint firstItem="Lge-Pl-YCB" firstAttribute="top" secondItem="32o-F7-Q87" secondAttribute="bottom" constant="115" id="zEn-bF-E2p"/>
+                            <constraint firstItem="32o-F7-Q87" firstAttribute="centerX" secondItem="A7P-PT-ozZ" secondAttribute="centerX" id="zts-BX-92m"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Switching Account Log In" id="67V-sr-QQF"/>
+                    <connections>
+                        <outlet property="password" destination="A7P-PT-ozZ" id="eha-z0-aiO"/>
+                        <outlet property="username" destination="trj-tR-ePu" id="i5S-sQ-6LS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fc3-Uv-o6E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1849" y="2124"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Gzu-GN-zMK">
+            <objects>
+                <navigationController storyboardIdentifier="staffNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FaN-oS-CCm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="6tf-eT-Lb2"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gU0-Su-Jxs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wVR-O8-g1P" kind="relationship" relationship="rootViewController" id="qPa-XF-IDz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A5X-A0-66w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1049" y="1375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="menu@1x" width="42" height="26"/>
+        <image name="search@1x" width="51" height="51"/>
+    </resources>
+</document>
