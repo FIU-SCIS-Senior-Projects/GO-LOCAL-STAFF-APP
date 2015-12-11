@@ -133,7 +133,15 @@
     if(responceType > 0) //responce was good
     {
         //notifying user that registration was successful
-        [self showAlert:@"Success" withMessage:@"Registration was successful" and:@"Okay"];
+        //[self showAlert:@"Success" withMessage:@"Registration was successful" and:@"Okay"];
+        
+        UIAlertView * alert =[[UIAlertView alloc] initWithTitle:@"Registration"
+                        message:@"Successfully registered"
+                       delegate:self
+              cancelButtonTitle:@"Okay"
+              otherButtonTitles: nil];
+        
+        [alert show];//display alert
         
         UIStoryboard * newSB = [UIStoryboard storyboardWithName:@"Employer" bundle:nil];
         

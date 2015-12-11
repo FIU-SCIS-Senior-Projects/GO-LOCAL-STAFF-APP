@@ -91,7 +91,6 @@ function queryDB( $query )
 		echo "unable to connect to MySQL: ".mysqli_connect_error();
 	else
 	{
-		echo $query."<br>";
 		if( !$result = mysqli_query($db, $query) )
 			echo "Unable to query the databse";
 	}
